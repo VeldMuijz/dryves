@@ -5,60 +5,60 @@ import java.util.*;
 
 public class FormBean {
 
-    private String firstName;
-    private String lastName;
+    private String Voornaam;
+    private String Achternaam;
     private String email;
-    private String userName;
+    private String Gebruikersnaam;
     private String password1;
     private String password2;
-    private String zip;
+    private String Postcode;
     private String[] faveTech;
     private String notify;
     private Hashtable errors;
 
     public boolean validate() {
         boolean bool = true;
-        if (firstName.equals("")) {
-            errors.put("firstName", "Please enter your first name");
-            firstName = "";
+        if (Voornaam.equals("")) {
+            errors.put("Voornaam", "Typ hier uw voornaam");
+            Voornaam = "";
             bool = false;
         }
-        if (lastName.equals("")) {
-            errors.put("lastName", "Please enter your last name");
-            lastName = "";
+        if (Achternaam.equals("")) {
+            errors.put("Achternaam", "Typ hier uw achternaam");
+            Achternaam = "";
             bool = false;
         }
         if (email.equals("") || (email.indexOf('@') == -1)) {
-            errors.put("email", "Please enter a valid email address");
+            errors.put("email", "Typ een geldig e-mail adres");
             email = "";
             bool = false;
         }
-        if (userName.equals("")) {
-            errors.put("userName", "Please enter a username");
-            userName = "";
+        if (Gebruikersnaam.equals("")) {
+            errors.put("Gebruikersnaam", "Typ hier een gebruikersnaam");
+            Gebruikersnaam = "";
             bool = false;
         }
         if (password1.equals("")) {
-            errors.put("password1", "Please enter a valid password");
+            errors.put("password1", "Typ een geldig paswoord");
             password1 = "";
             bool = false;
         }
         if (!password1.equals("") && (password2.equals("")
                 || !password1.equals(password2))) {
-            errors.put("password2", "Please confirm your password");
+            errors.put("password2", "Bevestig uw wachtwoord");
             password2 = "";
             bool = false;
         }
-        if (zip.equals("") || zip.length() != 6) {
-            errors.put("zip", "Please enter a valid zip code");
-            zip = "";
+        if (Postcode.equals("") || Postcode.length() != 6) {
+            errors.put("Postcode", "Typ een geldige postcode");
+            Postcode = "";
             bool = false;
         } else {
             try {
-                int x = Integer.parseInt(zip);
+                int x = Integer.parseInt(Postcode);
             } catch (NumberFormatException e) {
-                errors.put("zip", "Please enter a valid zip code");
-                zip = "";
+                errors.put("Postcode", "Typ een geldige postcode");
+                Postcode = "";
                 bool = false;
             }
         }
@@ -71,24 +71,24 @@ public class FormBean {
     }
 
     public FormBean() {
-        firstName = "";
-        lastName = "";
+        Voornaam = "";
+        Achternaam = "";
         email = "";
-        userName = "";
+        Gebruikersnaam = "";
         password1 = "";
         password2 = "";
-        zip = "";
+        Postcode = "";
         faveTech = new String[]{"1"};
         notify = "";
         errors = new Hashtable();
     }
 
     public String getFirstName() {
-        return firstName;
+        return Voornaam;
     }
 
     public String getLastName() {
-        return lastName;
+        return Achternaam;
     }
 
     public String getEmail() {
@@ -96,7 +96,7 @@ public class FormBean {
     }
 
     public String getUserName() {
-        return userName;
+        return Gebruikersnaam;
     }
 
     public String getPassword1() {
@@ -108,7 +108,7 @@ public class FormBean {
     }
 
     public String getZip() {
-        return zip;
+        return Postcode;
     }
 
     public String getNotify() {
@@ -140,11 +140,11 @@ public class FormBean {
     }
 
     public void setFirstName(String fname) {
-        firstName = fname;
+        Voornaam = fname;
     }
 
     public void setLastName(String lname) {
-        lastName = lname;
+        Achternaam = lname;
     }
 
     public void setEmail(String eml) {
@@ -152,7 +152,7 @@ public class FormBean {
     }
 
     public void setUserName(String u) {
-        userName = u;
+        Gebruikersnaam = u;
     }
 
     public void setPassword1(String p1) {
@@ -164,7 +164,7 @@ public class FormBean {
     }
 
     public void setZip(String z) {
-        zip = z;
+        Postcode = z;
     }
 
     public void setFaveTech(String[] music) {

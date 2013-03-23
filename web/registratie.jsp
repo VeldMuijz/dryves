@@ -54,19 +54,19 @@ Schrijf je per direct in en word lid! Ontdek de vele voordelen die de Dryves com
             <center>
                 <table cellpadding=2 cellspacing=1 border="1" bgcolor="lightblue">
                     <th bgcolor="lightblue" colspan=2>
-                        <font size=5>User Registration</font>
+                        <font size=5>Registratie forumlier</font>
                         <br>
-                        <font size=2 color="red"><sup>*</sup> Required Fields</font>
+                        <font size=2 color="red"><sup>*</sup> Verplichte velden</font>
                     </th>
     <tr bgcolor="lightblue">
                         <td valign=top> 
-                            <b>First Name<sup>*</sup></b> 
+                            <b>Voornaam<sup>*</sup></b> 
                             <br>
-                            <input type="text" name="firstName" value="" size=20 maxlength=20></td>
+                            <input type="text" name="Voornaam" value="" size=20 maxlength=20></td>
                         <td  valign=top>
-                            <b>Last Name<sup>*</sup></b>
+                            <b>Achternaam<sup>*</sup></b>
                             <br>
-                            <input type="text" name="lastName" value="" size=15 maxlength=20></td>
+                            <input type="text" name="Achternaam" value="" size=15 maxlength=20></td>
                     </tr>
                     <tr bgcolor="lightblue">
                         <td valign=top>
@@ -75,44 +75,43 @@ Schrijf je per direct in en word lid! Ontdek de vele voordelen die de Dryves com
                             <input type="text" name="email" value="" size=25  maxlength=125>
                             <br></td>
                         <td  valign=top>
-                            <b>Zip Code<sup>*</sup></b> 
+                            <b>Postcode<sup>*</sup></b> 
                             <br>
-                            <input type="text" name="zip" value="" size=10  maxlength=8></td>
+                            <input type="text" name="Postcode" value="" size=10  maxlength=8></td>
                     </tr>
                     <tr bgcolor="lightblue">
                         <td valign=top colspan=2>
-                            <b>User Name<sup>*</sup></b>
+                            <b>Gebruikersnaam<sup>*</sup></b>
                             <br>
-                            <input type="text" name="userName" size=20 value=""  maxlength=10>
+                            <input type="text" name="Gebruikersnaam" size=20 value=""  maxlength=10>
                         </td>
                     </tr>
                     <tr bgcolor="lightblue">
                         <td valign=top>
-                            <b>Password<sup>*</sup></b> 
+                            <b>Wachtwoord<sup>*</sup></b> 
                             <br>
                             <input type="password" name="password1" size=10 value="" maxlength=10></td>
                         <td  valign=top>
-                            <b>Confirm Password<sup>*</sup></b>
+                            <b>Bevestig wachtwoord<sup>*</sup></b>
                             <br>
                             <input type="password" name="password2" size=10 value="" maxlength=10></td>
                     <br>
                     </tr>
                     <tr bgcolor="lightblue">
                         <td  valign=top colspan=2>
-                            <b>What Technology are you interested in?</b>
+                            <b>In welke regio zal er veel gebruik worden gemaakt van de Dryves?</b>
                             <br>
-                            <input type="checkbox" name="faveTech" value="Java">Java    
-                            <input type="checkbox" name="faveTech" value="JSP">JSP  
-                            <input type="checkbox" name="faveTech" value="Struts 1.1">Struts 1.1<br>
-                            <input type="checkbox" name="faveTech" value="Ajax">Ajax  
-                            <input type="checkbox" name="faveTech" value="Struts 2.0 ">Struts 2.0  
-                            <input type="checkbox" name="faveTech" value="Servlets">Servlets<br>
+                            <input type="checkbox" name="faveTech" value="Noord-Holland">Noord-Holland    
+                            <input type="checkbox" name="faveTech" value="Zuid-Holland">Zuid-Holland  
+                            <input type="checkbox" name="faveTech" value="Limburg">Limburg<br>
+                            <input type="checkbox" name="faveTech" value="Zeeland">Zeeland  
+                            <input type="checkbox" name="faveTech" value="Utrecht">Utrecht  
+                            <input type="checkbox" name="faveTech" value="Friesland">Friesland<br>
                         </td>
                     </tr>
                     <tr bgcolor="lightblue">
                         <td  valign=top colspan=2>
-                            <b>Would you like to receive e-mail notifications on our special 
-                                sales?</b>
+                            <b>Wil je op de hoogte gehouden worden van onze nieuwsbrief?</b>
                             <br>
                             <input type="radio" name="notify" value="Yes" checked>Yes 
 
