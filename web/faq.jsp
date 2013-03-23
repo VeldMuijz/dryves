@@ -106,97 +106,64 @@
         
         <div class="contentPanel">
             
-            <div class="pageContent">
+            <html lang="en">
 
-                <ul class="accordion">
-                    <li>
-                        <a href="#america">America</a>
+<head>
+    <meta charset="utf-8" />
+    <title>jQuery UI Accordion - Default functionality</title>
+    <link rel="stylesheet"
+    href="http://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" />
+    <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>
+    <link rel="stylesheet" href="/resources/demos/style.css" />
+    <script>
+        $(function() {
+            $("#menu").menu();
+            $("#accordion").accordion();
+        });
+    </script>
+</head>
 
-                        <ul>	
-                            <li>
-                                <a href="#america-newyork">New York</a>
-                                <div><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span></div>
-                            </li>
-                            <li>
-                                <a href="#america-sanfransisco">San Fransisco</a>
-                                <div><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span></div>
+<body>
+    <div id="accordion">
+         <h3>Hoe plan ik een rit?</h3>
 
-                            </li>
-                            <li>
-                                <a href="#america-washington">Washington</a>
-                                <div><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span></div>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-
-                        <a href="#antarctica">Antarctica</a>
-                        <div><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span></div>
-                    </li>
-                    <li>
-                        <a href="#afroeuasia">Afro-Eurasia</a>
-                        <ul>
-                            <li class="current">
-
-                                <a href="#afroeuasia-amsterdam">Amsterdam</a>
-                                <div><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span></div>
-                            </li>
-                            <li>
-                                <a href="#afroeuasia-paris">Paris</a>
-                                <div><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span></div>
-
-                            </li>
-                            <li>
-                                <a href="#afroeuasia-stockholm">Stockholm</a>
-                                <div><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span></div>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-
-                        <a href="#australia">Australia</a>
-                        <ul>
-                            <li>
-                                <a href="#australia-melbourne">Melbourne</a>
-                                <div><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span></div>
-                            </li>
-                            <li>
-
-                                <a href="#australia-perth">Perth</a>
-                                <div><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span></div>
-                            </li>
-                            <li>
-                                <a href="#australia-sydney">Sydney</a>
-                                <div><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span></div>
-                            </li>
-
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="http://www.google.com">Google</a>
-                    </li>
-                </ul>
-
-            </div>
+        <div>
+            
+            <p>
+                
+                
+               Een rit kan geplanned worden door op "Plan rit" te klikken
+                
+            </p>
+            
         </div>
+         <h3>Hoe zet ik een rit online?</h3>
 
-        <script src="dependencies/jquery-1.3.2.js" type="text/javascript" charset="utf-8"></script>
-        <script src="jquery.accordion.source.js" type="text/javascript" charset="utf-8"></script>
-        <script type="text/javascript">
-                // <![CDATA[
-			
-                $(document).ready(function () {
-                        $('ul').accordion();
-                });
-				
-                // ]]>
-        </script>
-
-
+        <div>
+            <p>Vanuit de pagina MyDryves kun je de ritte die ingevoerd zijn publiceren.</p>
         </div>
-        
+         <h3>Hoe verwijder ik een rit?</h3>
+
+        <div>
+            <p>Vanuit de pagina MyDryves kun je ritten selecteren en vervolgens op het knopje "verwijder rit" 
+                klikken om de rit te verwijderen.</p>
         </div>
- 
-        
-    </body>
-</html>
+         <h3>Hoe spreek ik een ontmoetingsplek af?</h3>
+        <div>
+            <p>Bij het aangaan van de rit kun je een persoonlijk bericht sturen naar de rit aanbieder
+                om een plaats overeen te komen.</p>
+        </div>
+         <h3>Hoe voeg ik herhalende ritten toe?</h3>
+        <div>
+            <p>uitleg hoe dit te bewerkstelligen.</p>
+        </div>
+         <h3>Hoe verleng ik mijn herhalende ritten?</h3>
+        <div>
+            <p>uitleg hoe dit te bewerkstelligen.</p>
+        </div>
+         <h3>Er worden geen ritten getoond, hoe kan dit?</h3>
+        <div>
+            <p>uitleg hoe dit mogelijk is.</p>
+        </div>
+</body>
