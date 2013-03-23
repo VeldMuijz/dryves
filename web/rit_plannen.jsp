@@ -44,7 +44,7 @@
 					center: amsterdam
 				};
 
-				map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+				map = new google.maps.Map(document.getElementById("mapcanvas"), mapOptions);
 				directionsDisplay.setMap(map);
 				google.maps.event.addListener(directionsDisplay, 'directions_changed', function() {
 					computeTotalDistance(directionsDisplay.directions);
@@ -92,7 +92,6 @@
 
 
         </script>
-	</script>
 
 </head>
 <body onload="initialize();">
@@ -120,11 +119,43 @@
 
         <div class="contentPanel">
 
-			<div id="map-canvas" style="width: 650px; height: 250px;"></div>
-			<div id="invoerveld" style ="width: 650px;">
-				Start adres: <input type="text" id="start" onchange="calcRoute();" style ="width: 350; float: right:">
-				Eind adres: <input type="text" id="end" onchange="calcRoute();" style ="width: 350; float: right:">
+			<div id="mapcanvas"></div>
 
+			<div id="invoerveld">
+				<form>
+
+					Start adres: <input type="text" id="start" onchange="calcRoute();" style ="width: 350; float: right:"><br />
+					Eind adres: <input type="text" id="end" onchange="calcRoute();" style ="width: 350; float: right:"><br />
+					Datum: <input type="text" id="datum"><br />
+					Aantal plaatsen: <select>	
+						<option value="1"> 1 </option>
+						<option value="1"> 2 </option> 
+						<option value="1"> 3 </option>
+						<option value="1"> 4 </option>
+						<option value="1"> 5 </option>
+					</select><br /> <br />
+					Herhaling <br /> <br />
+
+					<input type="checkbox" name="ma" value="ma"> Ma </input> 
+					<input type="checkbox" name="di" value="di"> Di </input> 
+					<input type="checkbox" name="wo" value="wo"> Wo </input> 
+					<input type="checkbox" name="do" value="do"> Do </input>
+					<input type="checkbox" name="vr" value="vr"> Vr </input>
+					<input type="checkbox" name="za" value="za"> Za </input>
+					<input type="checkbox" name="zo" value="zo"> Zo </input> <br /> <br />
+					Begindatum: <input type="date" id="begindatum"> 
+					Einddatum: <input type="date" id="einddatum"> 
+					
+					
+					<br /> <br />
+					Soort brandstof: <select>
+						<option value="benzine"> Benzine </option>
+						<option value="diesel"> Diesel </option>
+						<option value="gas/lpg"> Gas/LPG </option>						
+						<option value="electrisch"> Electrisch </option>
+						<option value="hybride"> Hybride </option>
+					</select>
+				</form>
 				<div style="float:right;"><strong><div id="total"> </div> Totaal aantal km </strong>
 				</div></div>
 
