@@ -47,7 +47,7 @@
         
         <div class="contentPanel">
             
-Schrijf je per direct in en word lid! Ontdek de vele voordelen die de Dryves community heeft. 
+Schrijf je per direct in en word lid! Ontdek de vele voordelen die de Dryves community te bieden heeft. 
 
 <br /><br />
 
