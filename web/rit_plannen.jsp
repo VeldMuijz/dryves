@@ -84,7 +84,7 @@
 				for (i = 0; i < myroute.legs.length; i++) {
 					total += myroute.legs[i].distance.value;
 				}
-				total = total / 1000.
+				total = total / 1000
 				document.getElementById("total").innerHTML = total + " km";
 			}
 
@@ -95,7 +95,7 @@
 	</script>
 
 </head>
-<body>
+<body onload="initialize();">
 
 	<div class="background">
 
@@ -120,7 +120,13 @@
 
         <div class="contentPanel">
 
+			<div id="map-canvas" style="width: 650px; height: 250px;"></div>
+			<div id="invoerveld" style ="width: 650px;">
+				Start adres: <input type="text" id="start" onchange="calcRoute();" style ="width: 350; float: right:">
+				Eind adres: <input type="text" id="end" onchange="calcRoute();" style ="width: 350; float: right:">
 
+				<div style="float:right;"><strong><div id="total"> </div> Totaal aantal km </strong>
+				</div></div>
 
         </div>
 
