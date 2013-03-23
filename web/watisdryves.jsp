@@ -29,9 +29,9 @@
         
         <div class="navigation">
             
-            <div style="float:right; margin-right: -1px;"><button>Login</button></div>
+            <div style="float:right; margin-right: -1px;"><button  onclick="window.location='login.jsp';">Login</button></div>
             
-        <button>Home</button><button>Wat is Dryves</button><button onclick="window.location='faq.jsp';">FAQ</button>
+        <button onclick="window.location='index.jsp';">Home</button></button><button>Wat is Dryves</button><button onclick="window.location='faq.jsp';">FAQ</button>
             
         </div>
         
