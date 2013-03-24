@@ -54,6 +54,7 @@ public class ControllerServlet extends HttpServlet {
 	}
 
 	// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+	// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
 	/**
 	 * Handles the HTTP
 	 * <code>GET</code> method.
@@ -66,7 +67,24 @@ public class ControllerServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		processRequest(request, response);
+		String userPath = request.getServletPath();
+
+		if (userPath.equals("/rit_plannen")) {
+			// TODO: Maak hier de rit request
+		} else if (userPath.equals("/login")) {
+			// TODO: maak hier de login request
+		} else if (userPath.equals("/registratie")) {
+			//TODO: maak hier de registratie request
+		}
+
+		String url = "/WEB-INF/view" + userPath + ".jsp";
+
+		try {
+			request.getRequestDispatcher(url).forward(request, response);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		//processRequest(request, response);
 	}
 
 	/**
@@ -81,16 +99,28 @@ public class ControllerServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		processRequest(request, response);
-	}
 
-	/**
-	 * Returns a short description of the servlet.
-	 *
-	 * @return a String containing servlet description
-	 */
-	@Override
-	public String getServletInfo() {
-		return "Short description";
-	}// </editor-fold>
+		String userPath = request.getServletPath();
+
+		// if addToCart action is called
+		if (userPath.equals("/rit_plannen")) {
+			//TODO: Sla rit op
+			// if updateCart action is called
+		} else if (userPath.equals("/registratie")) {
+			// TODO: Sla lid op
+		} else if (userPath.equals("/login")) {
+		}
+
+		String url = "/WEB-INF/view" + userPath + ".jsp";
+
+		try {
+			request.getRequestDispatcher(url).forward(request, response);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+
+
+
+		//processRequest(request, response);
+	}
 }
