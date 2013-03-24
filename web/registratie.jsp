@@ -99,7 +99,7 @@ Schrijf je per direct in en word lid! Ontdek de vele voordelen die de Dryves com
                     </tr>
                     <tr bgcolor="lightblue">
                         <td  valign=top colspan=2>
-                            <b>In welke regio zal er veel gebruik worden gemaakt van de Dryves?</b>
+                            <b>In welke regio zal er veel gebruik worden gemaakt van Dryves?</b>
                             <br>
                             <input type="checkbox" name="faveTech" value="Noord-Holland">Noord-Holland    
                             <input type="checkbox" name="faveTech" value="Zuid-Holland">Zuid-Holland  
@@ -111,11 +111,11 @@ Schrijf je per direct in en word lid! Ontdek de vele voordelen die de Dryves com
                     </tr>
                     <tr bgcolor="lightblue">
                         <td  valign=top colspan=2>
-                            <b>Wil je op de hoogte gehouden worden van onze nieuwsbrief?</b>
+                            <b>Wil je onze nieuwsbrief ontvangen?</b>
                             <br>
-                            <input type="radio" name="notify" value="Yes" checked>Yes 
+                            <input type="radio" name="notify" value="Ja" checked>Ja 
 
-                            <input type="radio" name="notify" value="No" > No 
+                            <input type="radio" name="notify" value="Nee" > Nee 
                             <br><br></td>
                     </tr>
                     <tr bgcolor="lightblue">

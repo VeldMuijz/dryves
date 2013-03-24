@@ -74,7 +74,7 @@
                     </tr>
                     <tr bgcolor="lightblue">
                         <td colspan=2 valign=top>
-                            <B>In welke regio zal er veel gebruik worden gemaakt van de Dryves?</B>
+                            <B>In welke regio zal er veel gebruik worden gemaakt van Dryves?</B>
                             <br>
                             <input type="checkbox" name="faveTech" value="Noord-Holland"
                                    <%=formHandler.isCbSelected("Noord-Holland")%>>Noord-Holland    
