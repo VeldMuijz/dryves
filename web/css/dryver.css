@@ -110,8 +110,13 @@ box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.1);
 padding: 10px;
     
 }
-
-
+	
+#mapcanvas {
+	width: 600px;
+	height:350px;
+	float: right;
+	
+}
 
 
 

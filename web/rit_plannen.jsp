@@ -22,9 +22,7 @@
 			};
 
 			var directionsDisplay = new google.maps.DirectionsRenderer(rendererOptions);
-			;
 			var directionsService = new google.maps.DirectionsService();
-			var directionsRoute = new google.maps.DirectionsRoute();
 			var map;
 
 			/**
@@ -50,6 +48,7 @@
 					computeTotalDistance(directionsDisplay.directions);
 				});
 				calcRoute();
+				//saveWaypoints();
 
 			}
 
@@ -65,6 +64,7 @@
 					destination: end,
 					travelMode: google.maps.TravelMode.DRIVING
 				};
+				
 				directionsService.route(request, function(result, status) {
 					if (status == google.maps.DirectionsStatus.OK) {
 						directionsDisplay.setDirections(result);
@@ -87,8 +87,24 @@
 				total = total / 1000
 				document.getElementById("total").innerHTML = total + " km";
 			}
-
-
+			
+			function saveWaypoints (){
+				var wparray=[], wp;
+				var data={};	
+				var routeLeg = directionsDisplay.directions.routes[1].legs[1];
+				data.start={'lat': routeLeg.start_location(), 'lng': routeLeg.start_location()};
+				data.end={'lat': routeLeg.end_location(), 'lng': routeLeg.end_location()};
+				waypoint = routeLeg.via.waypoints;
+				
+				for(var i=0; i<wparray.length; i++){
+					wparray[i] = [wp[i].lat(), wp[i].lng()]
+				};
+					
+				data.waypoints = wp;
+				console.log(wparray);			
+				
+			}
+			
 
 
         </script>
@@ -123,7 +139,7 @@
 
 			<div id="invoerveld">
 				<form>
-
+					<button onclick="saveWaypoints();"> klik</button>
 					Start adres: <input type="text" id="start" onchange="calcRoute();" style ="width: 350; float: right:"><br />
 					Eind adres: <input type="text" id="end" onchange="calcRoute();" style ="width: 350; float: right:"><br />
 					Datum: <input type="text" id="datum"><br />
