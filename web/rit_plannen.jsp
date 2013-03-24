@@ -48,7 +48,6 @@
 					computeTotalDistance(directionsDisplay.directions);
 				});
 				calcRoute();
-				//saveWaypoints();
 
 			}
 
@@ -70,7 +69,6 @@
 						directionsDisplay.setDirections(result);
 						console.log(result);
 						
-						//console.log(directionsDisplay.directions.routes[0].legs[0].via.waypoints());
 					}
 				});
 			}
@@ -88,6 +86,7 @@
 				}
 				total = total / 1000
 				document.getElementById("total").innerHTML = total + " km";
+				// bij verandering geef ook de begin en eindadres en de waypoints
 				document.getElementById("startadres").innerHTML =	(directionsDisplay.directions.routes[0].legs[0].start_address +
 				directionsDisplay.directions.routes[0].legs[0].end_address +
 				directionsDisplay.directions.routes[0].legs[0].via_waypoints+ 
