@@ -5,27 +5,27 @@ import java.util.*;
 
 public class FormBean {
 
-    private String voornaam;
-    private String achternaam;
+    private String firstName;
+    private String lastName;
     private String email;
-    private String gebruikersnaam;
+    private String userName;
     private String password1;
     private String password2;
-    private String postcode;
+    private String zip;
     private String[] faveTech;
     private String notify;
     private Hashtable errors;
 
     public boolean validate() {
         boolean bool = true;
-        if (voornaam.equals("")) {
+        if (firstName.equals("")) {
             errors.put("voornaam", "Typ hier uw voornaam");
-            voornaam = "";
+            firstName = "";
             bool = false;
         }
-        if (achternaam.equals("")) {
+        if (lastName.equals("")) {
             errors.put("achternaam", "Typ hier uw achternaam");
-            achternaam = "";
+            lastName = "";
             bool = false;
         }
         if (email.equals("") || (email.indexOf('@') == -1)) {
@@ -33,9 +33,9 @@ public class FormBean {
             email = "";
             bool = false;
         }
-        if (gebruikersnaam.equals("")) {
+        if (userName.equals("")) {
             errors.put("gebruikersnaam", "Typ hier een gebruikersnaam");
-            gebruikersnaam = "";
+            userName = "";
             bool = false;
         }
         if (password1.equals("")) {
@@ -49,17 +49,16 @@ public class FormBean {
             password2 = "";
             bool = false;
         }
-        if (postcode.equals("") || postcode.length() != 6) {
-            errors.put("postcode", "Typ een geldige postcode");
-            postcode = "";
+      if (zip.equals("") || zip.length() != 6) {
+            errors.put("zip", "Typ een geldige postcode");
+            zip = "";
             bool = false;
         } else {
             try {
-                int x;
-                x = Integer.parseInt(postcode);
+                int x = Integer.parseInt(zip);
             } catch (NumberFormatException e) {
-                errors.put("postcode", "Typ een geldige postcode");
-                postcode = "";
+                errors.put("zip", "Typ een geldige postcode");
+                zip = "";
                 bool = false;
             }
         }
@@ -72,24 +71,24 @@ public class FormBean {
     }
 
     public FormBean() {
-        voornaam = "";
-        achternaam = "";
+        firstName = "";
+        lastName = "";
         email = "";
-        gebruikersnaam = "";
+        userName = "";
         password1 = "";
         password2 = "";
-        postcode = "";
+        zip = "";
         faveTech = new String[]{"1"};
         notify = "";
         errors = new Hashtable();
     }
 
     public String getFirstName() {
-        return voornaam;
+        return firstName;
     }
 
     public String getLastName() {
-        return achternaam;
+        return lastName;
     }
 
     public String getEmail() {
@@ -97,7 +96,7 @@ public class FormBean {
     }
 
     public String getUserName() {
-        return gebruikersnaam;
+        return userName;
     }
 
     public String getPassword1() {
@@ -109,7 +108,7 @@ public class FormBean {
     }
 
     public String getZip() {
-        return postcode;
+        return zip;
     }
 
     public String getNotify() {
@@ -141,11 +140,11 @@ public class FormBean {
     }
 
     public void setFirstName(String fname) {
-        voornaam = fname;
+        firstName = fname;
     }
 
     public void setLastName(String lname) {
-        achternaam = lname;
+        lastName = lname;
     }
 
     public void setEmail(String eml) {
@@ -153,7 +152,7 @@ public class FormBean {
     }
 
     public void setUserName(String u) {
-        gebruikersnaam = u;
+        userName = u;
     }
 
     public void setPassword1(String p1) {
@@ -165,7 +164,7 @@ public class FormBean {
     }
 
     public void setZip(String z) {
-        postcode = z;
+        zip = z;
     }
 
     public void setFaveTech(String[] music) {

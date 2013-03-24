@@ -62,11 +62,11 @@ Schrijf je per direct in en word lid! Ontdek de vele voordelen die de Dryves com
                         <td valign=top> 
                             <b>Voornaam<sup>*</sup></b> 
                             <br>
-                            <input type="text" name="Voornaam" value="" size=20 maxlength=20></td>
+                            <input type="text" name="firstName" value="" size=20 maxlength=20></td>
                         <td  valign=top>
                             <b>Achternaam<sup>*</sup></b>
                             <br>
-                            <input type="text" name="Achternaam" value="" size=15 maxlength=20></td>
+                            <input type="text" name="lastName" value="" size=15 maxlength=20></td>
                     </tr>
                     <tr bgcolor="lightblue">
                         <td valign=top>
@@ -77,13 +77,13 @@ Schrijf je per direct in en word lid! Ontdek de vele voordelen die de Dryves com
                         <td  valign=top>
                             <b>Postcode<sup>*</sup></b> 
                             <br>
-                            <input type="text" name="Postcode" value="" size=10  maxlength=8></td>
+                            <input type="text" name="zip" value="" size=10  maxlength=8></td>
                     </tr>
                     <tr bgcolor="lightblue">
                         <td valign=top colspan=2>
                             <b>Gebruikersnaam<sup>*</sup></b>
                             <br>
-                            <input type="text" name="Gebruikersnaam" size=20 value=""  maxlength=10>
+                            <input type="text" name="userName" size=20 value=""  maxlength=10>
                         </td>
                     </tr>
                     <tr bgcolor="lightblue">

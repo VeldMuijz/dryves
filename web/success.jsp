@@ -9,7 +9,7 @@
             <font size=4>
             <tr bgcolor="lightblue">
                 <td valign=top> 
-                    <b>First Name</b> 
+                    <b>Voornaam</b> 
                     <br>
                     <jsp:getProperty name="formHandler" property="firstName"/>
                 </td>
@@ -26,9 +26,9 @@
                     <jsp:getProperty name="formHandler" property="email"/>
                     <br></td>
                 <td valign=top>
-                    <b>postcode</b> 
+                    <b>Postcode</b> 
                     <br>
-                    <jsp:getProperty name="formHandler" property="postcode"/>
+                    <jsp:getProperty name="formHandler" property="zip"/>
                 </td>
             </tr>
             <tr bgcolor="lightblue">
@@ -49,7 +49,7 @@
                         for (int i=0; i<faveTech.length; i++)  
                           out.println("<li>"+faveTech[i]);
                         out.println("</ul>");
-                      } else out.println("Nothing was selected");
+                      } else out.println("Er was niets geselecteerd");
                     %>
                 </td>
             </tr>

@@ -13,18 +13,18 @@
                         <td valign=top> 
                             <B>Voornaam<sup>*</sup></B> 
                             <br>
-                            <input type="text" name="Voornaam" 
+                            <input type="text" name="firstName" 
                                    value='<%=formHandler.getFirstName()%>' size=15 maxlength=20>
                             <br><font size=2 
-                                      color=red><%=formHandler.getErrorMsg("Voornaam")%></font>
+                                      color=red><%=formHandler.getErrorMsg("firstName")%></font>
                         </td>
                         <td  valign=top>
                             <B>Achternaam<sup>*</sup></B>
                             <br>
-                            <input type="text" name="Achternaam" 
+                            <input type="text" name="lastName" 
                                    value='<%=formHandler.getLastName()%>' size=15 maxlength=20>
                             <br><font size=2 
-                                      color=red><%=formHandler.getErrorMsg("Achternaam")%></font>
+                                      color=red><%=formHandler.getErrorMsg("lastName")%></font>
                         </td>
                     </tr>
                     <tr bgcolor="lightblue">
@@ -38,19 +38,19 @@
                         <td  valign=top>
                             <B>Postcode<sup>*</sup></B> 
                             <br>
-                            <input type="text" name="Postcode" value='<%=formHandler.getZip()%>' size=5  
+                            <input type="text" name="zip" value='<%=formHandler.getZip()%>' size=5  
                                    maxlength=6>
-                            <br><font size=2 color=red><%=formHandler.getErrorMsg("Postcode")%></font>
+                            <br><font size=2 color=red><%=formHandler.getErrorMsg("zip")%></font>
                         </td>
                     </tr>
                     <tr bgcolor="lightblue">
                         <td valign=top colspan=2> 
                             <B>Gebruikersnaam<sup>*</sup></B>
                             <br>
-                            <input type="text" name="Gebruikersnaam" size=10 
+                            <input type="text" name="userName" size=10 
                                    value='<%=formHandler.getUserName()%>'  maxlength=10>
                             <br><font size=2 
-                                      color=red><%=formHandler.getErrorMsg("Gebruikersnaam")%></font>
+                                      color=red><%=formHandler.getErrorMsg("userName")%></font>
                         </td>
                     </tr>
                     <tr bgcolor="lightblue">
