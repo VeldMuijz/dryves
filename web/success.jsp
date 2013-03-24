@@ -14,7 +14,7 @@
                     <jsp:getProperty name="formHandler" property="firstName"/>
                 </td>
                 <td valign=top>
-                    <b>Last Name</b>
+                    <b>Achternaam</b>
                     <br>
                     <jsp:getProperty name="formHandler" property="lastName"/>
                 </td>
@@ -26,14 +26,14 @@
                     <jsp:getProperty name="formHandler" property="email"/>
                     <br></td>
                 <td valign=top>
-                    <b>Zip Code</b> 
+                    <b>postcode</b> 
                     <br>
-                    <jsp:getProperty name="formHandler" property="zip"/>
+                    <jsp:getProperty name="formHandler" property="postcode"/>
                 </td>
             </tr>
             <tr bgcolor="lightblue">
                 <td valign=top colspan=2>
-                    <b>User Name</b>
+                    <b>Gebruikersnaam</b>
                     <br>
                     <jsp:getProperty name="formHandler" property="userName"/>
                 </td>

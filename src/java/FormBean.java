@@ -5,27 +5,27 @@ import java.util.*;
 
 public class FormBean {
 
-    private String voorNaam;
-    private String achterNaam;
+    private String voornaam;
+    private String achternaam;
     private String email;
-    private String gebruikersNaam;
+    private String gebruikersnaam;
     private String password1;
     private String password2;
-    private String postCode;
+    private String postcode;
     private String[] faveTech;
     private String notify;
     private Hashtable errors;
 
     public boolean validate() {
         boolean bool = true;
-        if (voorNaam.equals("")) {
+        if (voornaam.equals("")) {
             errors.put("voornaam", "Typ hier uw voornaam");
-            voorNaam = "";
+            voornaam = "";
             bool = false;
         }
-        if (achterNaam.equals("")) {
+        if (achternaam.equals("")) {
             errors.put("achternaam", "Typ hier uw achternaam");
-            achterNaam = "";
+            achternaam = "";
             bool = false;
         }
         if (email.equals("") || (email.indexOf('@') == -1)) {
@@ -33,9 +33,9 @@ public class FormBean {
             email = "";
             bool = false;
         }
-        if (gebruikersNaam.equals("")) {
+        if (gebruikersnaam.equals("")) {
             errors.put("gebruikersnaam", "Typ hier een gebruikersnaam");
-            gebruikersNaam = "";
+            gebruikersnaam = "";
             bool = false;
         }
         if (password1.equals("")) {
@@ -49,16 +49,17 @@ public class FormBean {
             password2 = "";
             bool = false;
         }
-        if (postCode.equals("") || postCode.length() != 6) {
+        if (postcode.equals("") || postcode.length() != 6) {
             errors.put("postcode", "Typ een geldige postcode");
-            postCode = "";
+            postcode = "";
             bool = false;
         } else {
             try {
-                int x = Integer.parseInt(postCode);
+                int x;
+                x = Integer.parseInt(postcode);
             } catch (NumberFormatException e) {
                 errors.put("postcode", "Typ een geldige postcode");
-                postCode = "";
+                postcode = "";
                 bool = false;
             }
         }
@@ -71,24 +72,24 @@ public class FormBean {
     }
 
     public FormBean() {
-        voorNaam = "";
-        achterNaam = "";
+        voornaam = "";
+        achternaam = "";
         email = "";
-        gebruikersNaam = "";
+        gebruikersnaam = "";
         password1 = "";
         password2 = "";
-        postCode = "";
+        postcode = "";
         faveTech = new String[]{"1"};
         notify = "";
         errors = new Hashtable();
     }
 
     public String getFirstName() {
-        return voorNaam;
+        return voornaam;
     }
 
     public String getLastName() {
-        return achterNaam;
+        return achternaam;
     }
 
     public String getEmail() {
@@ -96,7 +97,7 @@ public class FormBean {
     }
 
     public String getUserName() {
-        return gebruikersNaam;
+        return gebruikersnaam;
     }
 
     public String getPassword1() {
@@ -108,7 +109,7 @@ public class FormBean {
     }
 
     public String getZip() {
-        return postCode;
+        return postcode;
     }
 
     public String getNotify() {
@@ -140,11 +141,11 @@ public class FormBean {
     }
 
     public void setFirstName(String fname) {
-        voorNaam = fname;
+        voornaam = fname;
     }
 
     public void setLastName(String lname) {
-        achterNaam = lname;
+        achternaam = lname;
     }
 
     public void setEmail(String eml) {
@@ -152,7 +153,7 @@ public class FormBean {
     }
 
     public void setUserName(String u) {
-        gebruikersNaam = u;
+        gebruikersnaam = u;
     }
 
     public void setPassword1(String p1) {
@@ -164,7 +165,7 @@ public class FormBean {
     }
 
     public void setZip(String z) {
-        postCode = z;
+        postcode = z;
     }
 
     public void setFaveTech(String[] music) {
