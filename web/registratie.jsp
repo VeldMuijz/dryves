@@ -39,7 +39,7 @@
         
         <div class="navigation">
             
-            <div style="float:right; margin-right: -1px;"><button  onclick="window.location='login.jsp';">Login</button></div>
+            <div class="loginButton"><button  onclick="window.location='login.jsp';">Login</button></div>
             
             <button onclick="window.location='index.jsp';">Home</button><button onclick="window.location='watisdryves.jsp';">Wat is Dryves</button><button onclick="window.location='faq.jsp';">FAQ</button>
             
@@ -51,54 +51,62 @@ Schrijf je per direct in en word lid! Ontdek de vele voordelen die de Dryves com
 
 <br /><br />
             <form action="/dryves/proces.jsp" method=post>
-            <center>
-                <table cellpadding=2 cellspacing=1 border="1" bgcolor="lightblue">
-                    <th bgcolor="lightblue" colspan=2>
+            
+                <div class="regformheader">
                         <font size=5>Registratie forumlier</font>
                         <br>
                         <font size=2 color="red"><sup>*</sup> Verplichte velden</font>
-                    </th>
-    <tr bgcolor="lightblue">
-                        <td valign=top> 
+                </div>
+                
+                <div class="formInput"> 
                             <b>Voornaam<sup>*</sup></b> 
                             <br>
-                            <input type="text" name="firstName" value="" size=20 maxlength=20></td>
-                        <td  valign=top>
+                            <input type="text" name="firstName" value="" size=20 maxlength=20>
+                </div>
+                <div class="formInput">
                             <b>Achternaam<sup>*</sup></b>
                             <br>
-                            <input type="text" name="lastName" value="" size=15 maxlength=20></td>
-                    </tr>
-                    <tr bgcolor="lightblue">
-                        <td valign=top>
+                            <input type="text" name="lastName" value="" size=15 maxlength=20>
+                </div>
+                <div class="formInput">
+                            <b>Tussenvoegsel</b>
+                            <br>
+                            <input type="text" name="inSertion" value="" size=15 maxlength=20>
+                </div>
+                <div class="formInput">
                             <b>E-Mail<sup>*</sup></b> 
                             <br>
                             <input type="text" name="email" value="" size=25  maxlength=125>
-                            <br></td>
-                        <td  valign=top>
+                </div>
+                <div class="formInput">
+                            <b>Straatnaam<sup>*</sup></b>
+                            <br>
+                            <input type="text" name="street" value="" size=15 maxlength=20>
+                      
+                </div>
+                <div class="formInput">
                             <b>Postcode<sup>*</sup></b> 
                             <br>
-                            <input type="text" name="zip" value="" size=10  maxlength=8></td>
-                    </tr>
-                    <tr bgcolor="lightblue">
-                        <td valign=top colspan=2>
+                            <input type="text" name="zip" value="" size=10  maxlength=8>
+                </div>
+                <div class="formInput">
                             <b>Gebruikersnaam<sup>*</sup></b>
                             <br>
                             <input type="text" name="userName" size=20 value=""  maxlength=10>
-                        </td>
-                    </tr>
-                    <tr bgcolor="lightblue">
-                        <td valign=top>
+                </div>
+                <div class="formInput">
+                       
                             <b>Wachtwoord<sup>*</sup></b> 
                             <br>
-                            <input type="password" name="password1" size=10 value="" maxlength=10></td>
-                        <td  valign=top>
+                            <input type="password" name="password1" size=10 value="" maxlength=10>
+                </div>
+                <div class="formInput">
                             <b>Bevestig wachtwoord<sup>*</sup></b>
                             <br>
-                            <input type="password" name="password2" size=10 value="" maxlength=10></td>
-                    <br>
-                    </tr>
-                    <tr bgcolor="lightblue">
-                        <td  valign=top colspan=2>
+                            <input type="password" name="password2" size=10 value="" maxlength=10>
+                </div>
+                                     
+                <div class="formInputProv">
                             <b>In welke regio zal er veel gebruik worden gemaakt van Dryves?</b>
                             <br>
                             <input type="checkbox" name="faveTech" value="Noord-Holland">Noord-Holland    
@@ -107,25 +115,20 @@ Schrijf je per direct in en word lid! Ontdek de vele voordelen die de Dryves com
                             <input type="checkbox" name="faveTech" value="Zeeland">Zeeland  
                             <input type="checkbox" name="faveTech" value="Utrecht">Utrecht  
                             <input type="checkbox" name="faveTech" value="Friesland">Friesland<br>
-                        </td>
-                    </tr>
-                    <tr bgcolor="lightblue">
-                        <td  valign=top colspan=2>
+                </div>   
+                <div class="formInput">
                             <b>Wil je onze nieuwsbrief ontvangen?</b>
                             <br>
                             <input type="radio" name="notify" value="Ja" checked>Ja 
 
                             <input type="radio" name="notify" value="Nee" > Nee 
-                            <br><br></td>
-                    </tr>
-                    <tr bgcolor="lightblue">
-                        <td  align=center colspan=2>
+                </div>
+                <div class="formInput">
                             <input type="submit" value="Submit"> <input type="reset"  
                                                                         value="Reset">
-                        </td>
-                    </tr>
-                </table>
-            </center>
+                </div>
+                </div>
+          
         </form>
     </body>
 </html>
