@@ -110,30 +110,20 @@ box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.1);
 padding: 10px;
     
 }
-
-.regTable {
-    
-width: 100%;  
-background-color: antiquewhite;
-    
+	
+#mapcanvas {
+	width: 600px;
+	height:350px;
+	float: right;
+	
 }
 
-.loginButton {
-    float:right; margin-right: -1px;
+#invoerveldadres {
+	width: 100px;
+	float: left;
+	margin-left: 3px;
 }
 
-.formInput {
-display: block;
-width: 33%;
-height: 45px;
-overflow: auto;
-float: left;
-position: relative;
-
+#ritComboBox{
+	
 }
-
-.formInputProv {
-    display: none;
-}
-
-
