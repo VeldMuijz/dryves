@@ -127,3 +127,28 @@ padding: 10px;
 #ritComboBox{
 	
 }
+
+.regTable {
+    
+width: 100%;  
+background-color: antiquewhite;
+    
+}
+
+.loginButton {
+    float:right; margin-right: -1px;
+}
+
+.formInput {
+display: block;
+width: 33%;
+height: 45px;
+overflow: auto;
+float: left;
+position: relative;
+
+}
+
+.formInputProv {
+    display: none;
+}
