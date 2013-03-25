@@ -46,6 +46,7 @@
         </div>
         
         <div class="contentPanel">
+			<button onclick="window.location='rit_plannen.jsp';">Home</button>
             
 Dit is de homepage! 
 
