@@ -48,8 +48,7 @@
 					computeTotalDistance(directionsDisplay.directions);
 				});
 				calcRoute();
-				//saveWaypoints();
-
+				
 			}
 
 			/**
@@ -139,7 +138,7 @@
 
 			<div id="invoerveld">
 				<form>
-					<button onclick="saveWaypoints();"> klik</button>
+				
 					Start adres: <input type="text" id="start" onchange="calcRoute();" style ="width: 350; float: right:"><br />
 					Eind adres: <input type="text" id="end" onchange="calcRoute();" style ="width: 350; float: right:"><br />
 					Datum: <input type="text" id="datum"><br />
