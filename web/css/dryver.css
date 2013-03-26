@@ -125,6 +125,23 @@ padding: 10px;
 }
 
 #ritComboBox{
-	
+    
 }
 
+.loginButton {
+    float:right; margin-right: -1px;
+}
+
+.formInput {
+display: block;
+width: 33%;
+height: 45px;
+overflow: auto;
+float: left;
+position: relative;
+
+}
+
+.formInputProv {
+    display: none;
+}
