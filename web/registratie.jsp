@@ -122,27 +122,18 @@ Schrijf je per direct in en word lid! Ontdek de vele voordele die de Dryves comm
                             <br>
                             <input type="password" name="password2" size=10 value="" maxlength=10>
                 </div>
-                                     
-                <div class="formInputProv">
-                            <b>In welke regio zal er veel gebruik worden gemaakt van Dryves?</b>
-                            <br>
-                            <input type="checkbox" name="faveTech" value="Noord-Holland">Noord-Holland    
-                            <input type="checkbox" name="faveTech" value="Zuid-Holland">Zuid-Holland  
-                            <input type="checkbox" name="faveTech" value="Limburg">Limburg<br>
-                            <input type="checkbox" name="faveTech" value="Zeeland">Zeeland  
-                             
-                            <input type="checkbox" name="faveTech" value="Friesland">Friesland<br>
-                </div>   
+                
                 <div class="formInput">
                             <b>Geslacht?</b>
                             <br>
                             <input type="radio" name="notify" value="M" checked>M 
-
-                            <input type="radio" name="notify" value="V" > V
+                            <input type="radio" name="notify" value="V"> V
                 </div>
-                <div class="formInput">
-                            <input type="submit" value="Submit"> <input type="reset"  
-                                                                        value="Reset">
+                           <div <form action="" method="POST" onsubmit="return checkCheckBox(this)">
+                           Accepteer <a href="/dryves/voorwaarden.jsp">Voorwaarden:</a> <input type="radio" value="v" name="notify">
+                           
+                           <input type="submit" value="Aanmelden"> <input type="reset" value="Reset">
+                           </form>
                 </div>
                 </div>
           
