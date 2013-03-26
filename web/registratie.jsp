@@ -130,7 +130,7 @@ Schrijf je per direct in en word lid! Ontdek de vele voordele die de Dryves comm
                             <input type="checkbox" name="faveTech" value="Zuid-Holland">Zuid-Holland  
                             <input type="checkbox" name="faveTech" value="Limburg">Limburg<br>
                             <input type="checkbox" name="faveTech" value="Zeeland">Zeeland  
-                            <input type="checkbox" name="faveTech" value="Utrecht">Utrecht  
+                             
                             <input type="checkbox" name="faveTech" value="Friesland">Friesland<br>
                 </div>   
                 <div class="formInput">
