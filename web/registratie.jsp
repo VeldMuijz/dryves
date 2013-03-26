@@ -73,6 +73,13 @@ Schrijf je per direct in en word lid! Ontdek de vele voordelen die de Dryves com
                             <br>
                             <input type="text" name="insertion" value="" size=5 maxlength=20>
                 </div>
+                
+                <div class="formInput">
+                            <b>Rekening nummer<sup>*</sup></b> 
+                            <br>
+                            <input type="text" name="billingnumber" value="" size=10  maxlength=8>
+                </div>
+                
                 <div class="formInput">
                             <b>E-Mail<sup>*</sup></b> 
                             <br>
@@ -93,6 +100,7 @@ Schrijf je per direct in en word lid! Ontdek de vele voordelen die de Dryves com
                             <br>
                             <input type="text" name="zip" value="" size=10  maxlength=8>
                 </div>
+                
                 <div class="formInput">
                             <b>Stad<sup>*</sup></b>
                             <br>

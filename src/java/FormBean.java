@@ -14,6 +14,7 @@ public class FormBean {
     private String password2;
     private String street;
     private String zip;
+    private String billingnumber;
     private String homenumber;
     private String city;
     private String[] faveTech;
@@ -37,6 +38,21 @@ public class FormBean {
             insertion = "";
             bool = false;
         }
+                
+        if (billingnumber.equals("") || billingnumber.length() != 6) {
+            errors.put("billingnumber", "Typ een geldige rekening nummer");
+            billingnumber = "";
+            bool = false;
+        } else {
+            try {
+                int x = Integer.parseInt(billingnumber);
+            } catch (NumberFormatException e) {
+                errors.put("zip", "Typ een geldige postcode");
+                billingnumber = "";
+                bool = false;
+            }
+        }
+        
         if (email.equals("") || (email.indexOf('@') == -1)) {
             errors.put("email", "Typ een geldig e-mail adres");
             email = "";
@@ -89,8 +105,9 @@ public class FormBean {
             }
         }
         return bool;
-    }
+        }
 
+        
     public String getErrorMsg(String s) {
         String errorMsg = (String) errors.get(s.trim());
         return (errorMsg == null) ? "" : errorMsg;
@@ -107,6 +124,7 @@ public class FormBean {
         password2 = "";
         street = "";
         zip = "";
+        billingnumber = "";
         city = "";
         homenumber = "";
         faveTech = new String[]{"1"};
@@ -151,17 +169,17 @@ public class FormBean {
     public String getZip() {
         return zip;
     }
+        public String getBillingnumber() {
+        return billingnumber;
+    }
 
-    public String getity() {
+    public String getCity() {
         return city;
     }
 
     public String getNotify() {
         return notify;
-    }
 
-    public String getCity() {
-        return city;
     }
 
     public String[] getFaveTech() {
@@ -223,6 +241,9 @@ public class FormBean {
     }
     public void setZip(String z) {
         zip = z;
+            }
+    public void setBillingnumber(String b) {
+        billingnumber = b;
             }
     public void setCity(String c) {
         city = c;

@@ -61,7 +61,13 @@
                     <br>
                     <jsp:getProperty name="formHandler" property="lastName"/>
                 </div>
-
+                
+                <div class="formInput">
+                    <b>Rekening nummer</b> 
+                    <br>
+                    <jsp:getProperty name="formHandler" property="billingnumber"/>
+                </div>
+                
                 <div class="formInput">   
                     <b>Tussenvoegsel</b>
                     <br>

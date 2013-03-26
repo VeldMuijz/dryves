@@ -75,9 +75,17 @@
                                 <div class="formInput">
                                     <B>Tussenvoegsel<sup></sup></B>
                                     <br>
-                                    <input type="text" name="insertion" value='<%=formHandler.getInSertion()%>' 
+                                    <input type="text" name="insertion" value='<%=formHandler.getinsertion()%>' 
                                            size=5 maxlength=20>
                                     <font size=2 color=red><%=formHandler.getErrorMsg("insertion")%></font>
+                                </div>
+                                
+                                <div class="formInput">
+                                    <B>Rekening nummer<sup>*</sup></B> 
+                                    <br>
+                                    <input type="text" name="zip" value='<%=formHandler.getBillingnumber()%>' size=8  
+                                           maxlength=10>
+                                    <font size=2 color=red><%=formHandler.getErrorMsg("billingnumber")%></font>
                                 </div>
 
                                 <div class="formInput">
