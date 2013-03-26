@@ -7,11 +7,15 @@ public class FormBean {
 
     private String firstName;
     private String lastName;
+    private String insertion;
     private String email;
     private String userName;
     private String password1;
     private String password2;
+    private String street;
     private String zip;
+    private String homenumber;
+    private String city;
     private String[] faveTech;
     private String notify;
     private Hashtable errors;
@@ -26,6 +30,11 @@ public class FormBean {
         if (lastName.equals("")) {
             errors.put("achternaam", "Typ hier uw achternaam");
             lastName = "";
+            bool = false;
+                    }
+        if (insertion.equals("")) {
+            errors.put("tussenvoegsel", "Typ hier uw tussenvoegsel");
+            insertion = "";
             bool = false;
         }
         if (email.equals("") || (email.indexOf('@') == -1)) {
@@ -49,7 +58,24 @@ public class FormBean {
             password2 = "";
             bool = false;
         }
-      if (zip.equals("") || zip.length() != 6) {
+        if (street.equals("")) {
+            errors.put("straat", "Typ hier uw straatnaam");
+            street = "";
+            bool = false;
+        }
+              
+        if (homenumber.equals("")) {
+            errors.put("huisnummer", "Typ hier uw huisnummer");
+            homenumber = "";
+            bool = false;
+            
+        }
+        if (city.equals("")) {
+            errors.put("stad", "Typ hier de naam van uw woonplaats");
+            city = "";
+            bool = false;
+        }
+        if (zip.equals("") || zip.length() != 6) {
             errors.put("zip", "Typ een geldige postcode");
             zip = "";
             bool = false;
@@ -70,14 +96,19 @@ public class FormBean {
         return (errorMsg == null) ? "" : errorMsg;
     }
 
+
     public FormBean() {
         firstName = "";
         lastName = "";
+        insertion = "";
         email = "";
         userName = "";
         password1 = "";
         password2 = "";
+        street = "";
         zip = "";
+        city = "";
+        homenumber = "";
         faveTech = new String[]{"1"};
         notify = "";
         errors = new Hashtable();
@@ -89,6 +120,10 @@ public class FormBean {
 
     public String getLastName() {
         return lastName;
+    }
+
+    public String getinsertion() {
+        return insertion;
     }
 
     public String getEmail() {
@@ -106,13 +141,27 @@ public class FormBean {
     public String getPassword2() {
         return password2;
     }
+        public String getStreet() {
+        return street;
+            }
+        public String gethomenumber() {
+        return homenumber;
+    }
 
     public String getZip() {
         return zip;
     }
 
+    public String getity() {
+        return city;
+    }
+
     public String getNotify() {
         return notify;
+    }
+
+    public String getCity() {
+        return city;
     }
 
     public String[] getFaveTech() {
@@ -147,6 +196,10 @@ public class FormBean {
         lastName = lname;
     }
 
+    public void setinsertion(String i) {
+        insertion = i;
+    }
+
     public void setEmail(String eml) {
         email = eml;
     }
@@ -162,9 +215,17 @@ public class FormBean {
     public void setPassword2(String p2) {
         password2 = p2;
     }
-
+    public void setStreet(String strt) {
+        street = strt;
+           }
+    public void sethomenumber(String h) {
+        homenumber = h;
+    }
     public void setZip(String z) {
         zip = z;
+            }
+    public void setCity(String c) {
+        city = c;
     }
 
     public void setFaveTech(String[] music) {

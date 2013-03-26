@@ -58,7 +58,7 @@ Schrijf je per direct in en word lid! Ontdek de vele voordelen die de Dryves com
                         <font size=2 color="red"><sup>*</sup> Verplichte velden</font>
                 </div>
                 
-                <div class="formInput"> 
+                <div class="formInput">
                             <b>Voornaam<sup>*</sup></b> 
                             <br>
                             <input type="text" name="firstName" value="" size=20 maxlength=20>
@@ -69,9 +69,9 @@ Schrijf je per direct in en word lid! Ontdek de vele voordelen die de Dryves com
                             <input type="text" name="lastName" value="" size=15 maxlength=20>
                 </div>
                 <div class="formInput">
-                            <b>Tussenvoegsel</b>
+                            <b>Tussenvoegsel<sup></sup></b>
                             <br>
-                            <input type="text" name="inSertion" value="" size=15 maxlength=20>
+                            <input type="text" name="insertion" value="" size=5 maxlength=20>
                 </div>
                 <div class="formInput">
                             <b>E-Mail<sup>*</sup></b> 
@@ -81,13 +81,22 @@ Schrijf je per direct in en word lid! Ontdek de vele voordelen die de Dryves com
                 <div class="formInput">
                             <b>Straatnaam<sup>*</sup></b>
                             <br>
-                            <input type="text" name="street" value="" size=15 maxlength=20>
-                      
+                            <input type="text" name="street" value="" size=15 maxlength=20>            
+                </div>
+                <div class="formInput">
+                            <b>Huisnummer<sup>*</sup></b>
+                            <br>
+                            <input type="text" name="homenumber" value="" size=5 maxlength=10>            
                 </div>
                 <div class="formInput">
                             <b>Postcode<sup>*</sup></b> 
                             <br>
                             <input type="text" name="zip" value="" size=10  maxlength=8>
+                </div>
+                <div class="formInput">
+                            <b>Stad<sup>*</sup></b>
+                            <br>
+                            <input type="text" name="city" value="" size=15 maxlength=20>            
                 </div>
                 <div class="formInput">
                             <b>Gebruikersnaam<sup>*</sup></b>
@@ -117,11 +126,11 @@ Schrijf je per direct in en word lid! Ontdek de vele voordelen die de Dryves com
                             <input type="checkbox" name="faveTech" value="Friesland">Friesland<br>
                 </div>   
                 <div class="formInput">
-                            <b>Wil je onze nieuwsbrief ontvangen?</b>
+                            <b>Geslacht?</b>
                             <br>
-                            <input type="radio" name="notify" value="Ja" checked>Ja 
+                            <input type="radio" name="notify" value="M" checked>M 
 
-                            <input type="radio" name="notify" value="Nee" > Nee 
+                            <input type="radio" name="notify" value="V" > V
                 </div>
                 <div class="formInput">
                             <input type="submit" value="Submit"> <input type="reset"  
