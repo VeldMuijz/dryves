@@ -47,7 +47,7 @@
         
         <div class="contentPanel">
             
-Schrijf je per direct in en word lid! Ontdek de vele voordelen die de Dryves community te bieden heeft. 
+Schrijf je per direct in en word lid! Ontdek de vele voordele die de Dryves community te bieden heeft. 
 
 <br /><br />
             <form action="/dryves/proces.jsp" method=post>
