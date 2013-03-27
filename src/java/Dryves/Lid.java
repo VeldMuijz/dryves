@@ -19,6 +19,7 @@ public class Lid  implements java.io.Serializable {
      private String telnr;
      private Integer reknr;
      private String email;
+     private String wachtwoord;
      private int beoordeling;
      private String fotoUrl;
      private String tvoegsel;
@@ -27,7 +28,7 @@ public class Lid  implements java.io.Serializable {
     }
 
 	
-    public Lid(int lidnr, String vnaam, String anaam, char geslacht, String adres, String postcode, String stad, String email, int beoordeling, String fotoUrl) {
+    public Lid(int lidnr, String vnaam, String anaam, char geslacht, String adres, String postcode, String stad, String email, String wachtwoord, int beoordeling, String fotoUrl) {
         this.lidnr = lidnr;
         this.vnaam = vnaam;
         this.anaam = anaam;
@@ -36,10 +37,11 @@ public class Lid  implements java.io.Serializable {
         this.postcode = postcode;
         this.stad = stad;
         this.email = email;
+        this.wachtwoord = wachtwoord;
         this.beoordeling = beoordeling;
         this.fotoUrl = fotoUrl;
     }
-    public Lid(int lidnr, String vnaam, String anaam, char geslacht, String adres, String postcode, String stad, String telnr, Integer reknr, String email, int beoordeling, String fotoUrl, String tvoegsel) {
+    public Lid(int lidnr, String vnaam, String anaam, char geslacht, String adres, String postcode, String stad, String telnr, Integer reknr, String email, String wachtwoord, int beoordeling, String fotoUrl, String tvoegsel) {
        this.lidnr = lidnr;
        this.vnaam = vnaam;
        this.anaam = anaam;
@@ -50,6 +52,7 @@ public class Lid  implements java.io.Serializable {
        this.telnr = telnr;
        this.reknr = reknr;
        this.email = email;
+       this.wachtwoord = wachtwoord;
        this.beoordeling = beoordeling;
        this.fotoUrl = fotoUrl;
        this.tvoegsel = tvoegsel;
@@ -125,6 +128,15 @@ public class Lid  implements java.io.Serializable {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public String getWachtwoord() {
+        return wachtwoord;
+    }
+
+    public void setWachtwoord(String wachtwoord) {
+        this.wachtwoord = wachtwoord;
+    }
+    
     public int getBeoordeling() {
         return this.beoordeling;
     }

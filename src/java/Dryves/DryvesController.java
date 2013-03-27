@@ -18,6 +18,8 @@ public class DryvesController {
     
     int startId;
     int endId;
+    String email;
+    String wachtwoord;
     DataModel memberNames;
     DryvesHelper helper;
     private int recordCount = 1000;
@@ -39,6 +41,14 @@ public class DryvesController {
         this.startId = startId;
         this.endId = endId;
         
+    }
+    
+    public DryvesController(String email, String wachtwoord) {
+    
+        helper = new DryvesHelper();
+        this.email = email;
+        this.wachtwoord = wachtwoord;
+    
     }
     
 }

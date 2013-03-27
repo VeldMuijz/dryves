@@ -35,6 +35,9 @@
         <property name="email" type="string">
             <column name="email" length="20" not-null="true" />
         </property>
+        <property name="wachtwoord" type="string">
+            <column name="wachtwoord" length="20" not-null="true" />
+        </property>
         <property name="beoordeling" type="int">
             <column name="beoordeling" not-null="true" />
         </property>

@@ -43,4 +43,22 @@ public class DryvesHelper {
     }
     
     
+    public void loginGebruiker(String email, String wachtwoord) {
+    
+        
+        try {
+        
+                org.hibernate.Transaction tx = session.beginTransaction();
+                Query q = session.createQuery("From Lid where lidnr = ");
+        
+        } catch (Exception e) {
+        
+            e.printStackTrace();
+            
+        }
+        
+        
+    
+    }
+    
 }

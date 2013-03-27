@@ -4,6 +4,7 @@
     Author     : RickSpijker
 --%>
 
+<%@page import="Dryves.Lid"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -54,15 +55,15 @@ Dit is de login page!
 <table style="width:320px;">
     <tr>
         <td>
-            
+           Gebruikersnaam: 
         </td>
         <td>
-          <input type="text" id="userName" name="userName" key="username" />  
+          <input type="text" id="email" name="email" key="username" />  
         </td>
     </tr>
     <tr>
-        <td></td>
-        <td><input type="text" id="passWord" name="passWord" key="password" /></td>
+        <td>Wachtwoord:</td>
+        <td><input type="text" id="wachtwoord" name="wachtwoord" key="password" /></td>
     </tr>
     <tr>
         <td>
