@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 26-mrt-2013 21:03:06 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="Dryves.Lid" table="lid" schema="pdl6">
+        <id name="lidnr" type="int">
+            <column name="lidnr" />
+            <generator class="assigned" />
+        </id>
+        <property name="vnaam" type="string">
+            <column name="vnaam" length="20" not-null="true" />
+        </property>
+        <property name="anaam" type="string">
+            <column name="anaam" length="20" not-null="true" />
+        </property>
+        <property name="geslacht" type="char">
+            <column name="geslacht" length="1" not-null="true" />
+        </property>
+        <property name="adres" type="string">
+            <column name="adres" length="200" not-null="true" />
+        </property>
+        <property name="postcode" type="string">
+            <column name="postcode" length="6" not-null="true" />
+        </property>
+        <property name="stad" type="string">
+            <column name="stad" length="20" not-null="true" />
+        </property>
+        <property name="telnr" type="string">
+            <column name="telnr" length="11" />
+        </property>
+        <property name="reknr" type="java.lang.Integer">
+            <column name="reknr" />
+        </property>
+        <property name="email" type="string">
+            <column name="email" length="20" not-null="true" />
+        </property>
+        <property name="beoordeling" type="int">
+            <column name="beoordeling" not-null="true" />
+        </property>
+        <property name="fotoUrl" type="string">
+            <column name="foto_url" length="200" not-null="true" />
+        </property>
+        <property name="tvoegsel" type="string">
+            <column name="tvoegsel" length="10" />
+        </property>
+    </class>
+</hibernate-mapping>
