@@ -14,11 +14,6 @@
         <link type="text/css" rel="stylesheet" href="css/dryver.css"/>
 
         <script>
-
-
-
-
-
         </script>
 
 
@@ -49,118 +44,76 @@
             <div class="contentPanel"> 
 
 
-                <form action="/dryves/proces.jsp" method=post>
-                    <center>
-                        <form action="proces.jsp" method=post>
-                            <center>
-                                <div class="regformheader">
-                                    <font size=5>Registratie formulier</font>
-                                    <br>
-                                    <font size=2 color="red"><sup>*</sup> Verplichte velden </font>
-                                </div>
-                                <div class="formInput">
-                                    <B>Voornaam<sup>*</sup></B> 
-                                    <input type="text" name="vnaam" 
-                                           value='<%=formHandler.getVnaam()%>' size=15 maxlength=20>
-                                    <font size=2 
-                                          color=red><%=formHandler.getErrorMsg("vnaam")%></font>
-                                </div> 
-                                <div class="formInput">
-                                    <B>Achternaam<sup>*</sup></B>
-                                    <br>
-                                    <input type="text" name="anaam" 
-                                           value='<%=formHandler.getAnaam()%>' size=15 maxlength=20>
-                                    <font size=2 
-                                          color=red><%=formHandler.getErrorMsg("anaam")%></font>
-                                </div>
-                                <div class="formInput">
-                                    <B>Tussenvoegsel<sup></sup></B>
-                                    <br>
-                                    <input type="text" name="tvoegsel" value='<%=formHandler.getTvoegsel()%>' 
-                                           size=5 maxlength=20>
-                                    <font size=2 color=red><%=formHandler.getErrorMsg("tvoegsel")%></font>
-                                </div>
-                                
-                                <div class="formInput">
-                                    <B>Rekening nummer<sup>*</sup></B> 
-                                    <br>
-                                    <input type="text" name="reknr" value='<%=formHandler.getReknr()%>' size=8  
-                                           maxlength=10>
-                                    <font size=2 color=red><%=formHandler.getErrorMsg("reknr")%></font>
-                                </div>
+                <form action="proces.jsp" method=post>
+            
+                <table cellpadding=4 cellspacing=2 border=0>
+                    <th bgcolor="lightblue" colspan=2>
+                        <font size=5>Registratie formulier</font>
+                        <br>
+                        <font size=2 color="red"><sup>*</sup> Verplichte velden </font>
+                    </th>
+                    <tr bgcolor="lightblue">
+                        <td valign=top> 
+                            <B>Voornaam<sup>*</sup></B> 
+                            <br>
+                            <input type="text" name="voornaam" 
+                                   value='<%=formHandler.getVnaam()%>' size=15 maxlength=20>
+                            <br><font size=2 
+                                      color=red><%=formHandler.getErrorMsg("voornaam")%></font>
+                        </td>
+                        <td  valign=top>
+                            <B>Achternaam<sup>*</sup></B>
+                            <br>
+                            <input type="text" name="achternaam" 
+                                   value='<%=formHandler.getAnaam()%>' size=15 maxlength=20>
+                            <br><font size=2 
+                                      color=red><%=formHandler.getErrorMsg("achternaam")%></font>
+                        </td>
+                    </tr>
+                    <tr bgcolor="lightblue">
+                        <td valign=top>
+                            <B>E-Mail<sup>*</sup></B> 
+                            <br>
+                            <input type="text" name="email" value='<%=formHandler.getEmail()%>' 
+                                   size=25  maxlength=125>
+                            <br><font size=2 color=red><%=formHandler.getErrorMsg("email")%></font>
+                        </td>
+                        <td  valign=top>
+                            <B>Postcode<sup>*</sup></B> 
+                            <br>
+                            <input type="text" name="zip" value='<%=formHandler.getPostcode()%>' size=5  
+                                   maxlength=6>
+                            <br><font size=2 color=red><%=formHandler.getErrorMsg("postcode")%></font>
+                        </td>
+                    </tr>
 
-                                <div class="formInput">
-                                    <B>E-Mail<sup>*</sup></B> 
-                                    <br>
-                                    <input type="text" name="email" value='<%=formHandler.getEmail()%>' 
-                                           size=25  maxlength=125>
-                                    <font size=2 color=red><%=formHandler.getErrorMsg("email")%></font>
-                                </div>
-
-                                <div class="formInput">
-                                    <B>Adres<sup>*</sup></B> 
-                                    <br>
-                                    <input type="text" name="adres" value='<%=formHandler.getAdres()%>' size=15 maxlength=20>  
-                                    <font size=2 color=red><%=formHandler.getErrorMsg("adres")%></font>
-                                </div>
-                                
-                                <div class="formInput">
-                                    <B>Huisnummer<sup>*</sup></B> 
-                                    <br>
-                                    <input type="text" name="huisnummer" value='<%=formHandler.getHuisnummer()%>' size=5 maxlength=10>  
-                                    <font size=2 color=red><%=formHandler.getErrorMsg("homenumber")%></font>
-                                </div>
-
-                                <div class="formInput">
-                                    <B>Postcode<sup>*</sup></B> 
-                                    <br>
-                                    <input type="text" name="postcode" value='<%=formHandler.getPostcode()%>' size=5  
-                                           maxlength=6>
-                                    <font size=2 color=red><%=formHandler.getErrorMsg("postcode")%></font>
-                                </div>
-                                
-                                 <div class="formInput">
-                                    <B>Stad<sup>*</sup></B> 
-                                    <br>
-                                    <input type="text" name="stad" value='<%=formHandler.getStad()%>' size=15 maxlength=20>  
-                                    <font size=2 color=red><%=formHandler.getErrorMsg("stad")%></font>
-                                </div>
-
-                                <div class="formInput">
-                                    <B>Wachtwoord<sup>*</sup></B> 
-                                    <br>
-                                    <input type="password" name="wachtwoord" size=10 
-                                           value='<%=formHandler.getWachtwoord()%>'  maxlength=10> <font size=2 
-                                           color=red><%=formHandler.getErrorMsg("wachtwoord")%></font>
-                                </div>
-                                
-                                                 <div class="formInput">
-                                    <B>Wachtwoord<sup>*</sup></B> 
-                                    <br>
-                                    <input type="wachtwoord" name="wachtwoord" size=10 
-                                           value='<%=formHandler.getWachtwoord()%>'  maxlength=10> <font size=2 
-                                           color=red><%=formHandler.getErrorMsg("wachtwoord")%></font>
-                                </div>
-
-                                <div class="formInput">
-                                    <B>Bevestig wachtwoord<sup>*</sup></B>
-                                    <br>
-                                    <input type="wachtwoord2" name="wachtwoord2" size=10 
-                                           value='<%=formHandler.getWachtwoord2()%>'  maxlength=10>
-                                    <font size=2 
-                                          color=red><%=formHandler.getErrorMsg("wachtwoord2")%></font>
-                                </div>
-
-                                <div class="formInputProv">
-                                    <B>Geslacht?</B>
-                                    <br>
-                                    <input type="radio" name="notify" value="Ja" 
-                                           <%=formHandler.isRbSelected("Ja")%>>M       
-                                    <input type="radio" name="notify" value="Nee" 
-                                           <%=formHandler.isRbSelected("Nee")%>>V 
-                                </div>
-                                </div>
-                            </center>
-                        </form>
-                        </body>
-                        </html>
+                    <tr bgcolor="lightblue">
+                        <td valign=top>
+                            <B>Wachtwoord<sup>*</sup></B> 
+                            <br>
+                            <input type="wachtwoord" name="wachtoord" size=10 
+                                   value='<%=formHandler.getWachtwoord()%>'  maxlength=10>
+                            <br><font size=2 
+                                      color=red><%=formHandler.getErrorMsg("wachtwoord")%></font>
+                        </td>
+                        <td  valign=top>
+                            <B>Bevestig wachtwoord<sup>*</sup></B>
+                            <br>
+                            <input type="wachtwoord2" name="wachtwoord2" size=10 
+                                   value='<%=formHandler.getWachtwoord2()%>'  maxlength=10>
+                            <br><font size=2 
+                                      color=red><%=formHandler.getErrorMsg("wachtwoord2")%></font>
+                        </td>
+                    <br>
+                    </tr>
+                    <tr bgcolor="lightblue">
+                        <td colspan=2 align=center>
+                            <input type="submit" value="Submit"> <input type="reset"  
+                                                                        value="Reset">
+                        </td>
+                    </tr>
+                </table>
+            </center>
+        </form>
+    </body>
+</html>

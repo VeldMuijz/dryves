@@ -28,13 +28,14 @@ public class Lid  implements java.io.Serializable {
      private int beoordeling;
      private String fotoUrl;
      private String tvoegsel;
+     private String notify;
      private Hashtable errors;
 
     public Lid() {
     }
 
 	
-    public Lid(int lidnr, String vnaam, String anaam, char geslacht, String adres, String huisnummer, String reknr, String postcode, String stad, String email, String wachtwoord, String wachtwoord2, int beoordeling, String fotoUrl) {
+    public Lid(int lidnr, String vnaam, String anaam, char geslacht, String adres, String huisnummer, String reknr, String postcode, String stad, String email, String wachtwoord, String wachtwoord2, int beoordeling, String fotoUrl, String tvoegsel) {
         this.lidnr = lidnr;
         this.vnaam = vnaam;
         this.anaam = anaam;
@@ -49,6 +50,7 @@ public class Lid  implements java.io.Serializable {
         this.wachtwoord2 = wachtwoord2;
         this.beoordeling = beoordeling;
         this.fotoUrl = fotoUrl;
+        this.tvoegsel = tvoegsel;
     }
     public Lid(int lidnr, String vnaam, String anaam, char geslacht, String adres, String huisnummer, String postcode, String stad, String telnr, String reknr, String email, String wachtwoord, String wachtwoord2, int beoordeling, String fotoUrl, String tvoegsel) {
        this.lidnr = lidnr;
@@ -154,8 +156,10 @@ public class Lid  implements java.io.Serializable {
         String errorMsg = (String) errors.get(s.trim());
         return (errorMsg == null) ? "" : errorMsg;
     }
-        
-   
+         
+    public String isRbSelected(String s) {
+        return (notify.equals(s)) ? "checked" : "";   
+    }
     public int getLidnr() {
         return this.lidnr;
     }
@@ -268,9 +272,18 @@ public class Lid  implements java.io.Serializable {
     public void setTvoegsel(String tvoegsel) {
         this.tvoegsel = tvoegsel;
     }
+
+    public String getNotify() {
+        return notify;
+    }
+
+    public void setNotify(String n) {
+        notify = n;
+    }
     
     public void setErrors(String key, String msg) {
         errors.put(key, msg);
+        
 
 }
 
