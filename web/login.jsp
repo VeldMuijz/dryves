@@ -51,19 +51,19 @@
 Dit is de login page! 
 
 <br /><br />
-
+<form action="Login.do" method="post">
 <table style="width:320px;">
     <tr>
         <td>
            Gebruikersnaam: 
         </td>
         <td>
-          <input type="text" id="email" name="email" key="username" />  
+          <input type="text" id="email" name="email" key="email" />  
         </td>
     </tr>
     <tr>
         <td>Wachtwoord:</td>
-        <td><input type="text" id="wachtwoord" name="wachtwoord" key="password" /></td>
+        <td><input type="text" id="wachtwoord" name="wachtwoord" key="wachtwoord" /></td>
     </tr>
     <tr>
         <td>
@@ -78,7 +78,7 @@ Dit is de login page!
     </tr>
 </table>
 
-
+</form>
 
         </div>
         
