@@ -2,7 +2,7 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 26-mrt-2013 21:03:06 by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
-  <class name="dryves.Lid" schema="pdl6" table="lid">
+  <class name="Dryves.Lid" schema="pdl6" table="lid">
     <id name="lidnr" type="int">
       <column name="lidnr"/>
       <generator class="assigned"/>

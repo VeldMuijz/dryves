@@ -31,7 +31,7 @@ public class Login extends HttpServlet {
         String resultPage = "";
        
         
-        System.out.println(gebruiker + " " + wachtwoord);
+        System.out.println("Gebruikersnaam: " + gebruiker + " Wachtwoord: " + wachtwoord);
         
     }
     

@@ -2,7 +2,7 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 26-mrt-2013 21:03:06 by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
-  <class name="dryves.Configuratie" schema="pdl6" table="configuratie">
+  <class name="Dryves.Configuratie" schema="pdl6" table="configuratie">
     <id name="confnr" type="int">
       <column name="confnr"/>
       <generator class="assigned"/>
