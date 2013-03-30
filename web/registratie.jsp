@@ -68,6 +68,18 @@ Schrijf je per direct in en word lid! Ontdek de vele voordele die de Dryves comm
                             <br>
                             <input type="text" name="lastName" value="" size=15 maxlength=20>
                 </div>
+                
+                <div>
+               <b>Kies een foto:</b>
+               <INPUT NAME="file" TYPE="file">
+               </div>
+               <div>
+               <a colspan="2" align="center">
+               </div>
+               <div>
+               <td colspan="2" align="center"><input type="submit" value="Upload"> </td>
+               </div>
+                
                 <div class="formInput">
                             <b>Tussenvoegsel<sup></sup></b>
                             <br>
