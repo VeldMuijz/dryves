@@ -4,7 +4,7 @@
     Author     : RickSpijker
 --%>
 
-<%@page import="Dryves.Lid"%>
+<%@page import="Dryves.Login"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -58,12 +58,12 @@ Dit is de login page!
            Gebruikersnaam: 
         </td>
         <td>
-          <input type="text" id="email" name="email" key="email" />  
+          <input type="text" id="email" name="email"/>  
         </td>
     </tr>
     <tr>
         <td>Wachtwoord:</td>
-        <td><input type="text" id="wachtwoord" name="wachtwoord" key="wachtwoord" /></td>
+        <td><input type="text" id="wachtwoord" name="wachtwoord" /></td>
     </tr>
     <tr>
         <td>
@@ -72,7 +72,7 @@ Dit is de login page!
     </tr>
     <tr>
         <td>
-            <button type="submit" key="login" />Login</button>
+            <button type="submit" />Login</button>
         </td>
         <td></td>
     </tr>

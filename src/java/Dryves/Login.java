@@ -19,18 +19,19 @@ import javax.servlet.http.HttpSession;
  */
 public class Login extends HttpServlet {
     
+    @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         ResultSet rs = null;
         PreparedStatement pst = null;
         HttpSession session = request.getSession();
-        String userName = request.getParameter("email");
-        String passWord = request.getParameter("wachtwoord");
+        String gebruiker = request.getParameter("email");
+        String wachtwoord = request.getParameter("wachtwoord");
         session.setAttribute("error", null);
         String query = "SELECT id FROM resource WHERE username = ? AND password = ?" ;
         String resultPage = "";
        
         
-        System.out.println(userName + " " + passWord);
+        System.out.println(gebruiker + " " + wachtwoord);
         
     }
     
