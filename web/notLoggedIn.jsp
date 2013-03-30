@@ -4,7 +4,6 @@
     Author     : Vincent
 --%>
 
-<%@page import="Dryves.UserBean"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -13,13 +12,6 @@
         <title>JSP Page</title>
     </head>
     <body>
-        
-        
-        <% UserBean currentUser = (UserBean) (session.getAttribute("currentSessionUser"));%>
-
-        Welcome <%= currentUser.getFirstName() + " " + currentUser.getLastName() %>
-
-        
-        
+        <h1>U bent niet ingelogd, controleer uw gegevens of registreer hier!</h1>
     </body>
 </html>

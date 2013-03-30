@@ -51,7 +51,7 @@
 Dit is de login page! 
 
 <br /><br />
-<form action="Login.do" method="post">
+<form action="LoginServlet" method="get">
 <table style="width:320px;">
     <tr>
         <td>

@@ -9,13 +9,13 @@
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
     
-           <servlet>
+    <servlet>
         <servlet-name>Login</servlet-name>
         <servlet-class>Dryves.Login</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
-        <url-pattern>/Login.do</url-pattern>
+        <url-pattern>/LoginServlet</url-pattern>
     </servlet-mapping>
     
 </web-app>

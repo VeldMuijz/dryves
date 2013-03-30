@@ -4,14 +4,12 @@
  */
 package Dryves;
 
-import java.io.IOException;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.hibernate.Session;
 
 /**
  *
@@ -19,20 +17,40 @@ import javax.servlet.http.HttpSession;
  */
 public class Login extends HttpServlet {
     
-    @Override
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        ResultSet rs = null;
-        PreparedStatement pst = null;
-        HttpSession session = request.getSession();
-        String gebruiker = request.getParameter("email");
-        String wachtwoord = request.getParameter("wachtwoord");
-        session.setAttribute("error", null);
-        String query = "SELECT id FROM resource WHERE username = ? AND password = ?" ;
-        String resultPage = "";
-       
-        
-        System.out.println("Gebruikersnaam: " + gebruiker + " Wachtwoord: " + wachtwoord);
-        
-    }
+    Session session = null;
     
+    @Override
+    public void doGet(HttpServletRequest request, HttpServletResponse response) 
+                       throws ServletException, java.io.IOException {
+
+try
+{       
+
+     UserBean user = new UserBean();
+     user.setUserName(request.getParameter("email"));
+     user.setPassword(request.getParameter("wachtwoord"));
+
+     user = userdao.login(user);
+
+     if (user.isValid())
+     {
+
+          HttpSession session = request.getSession(true);       
+          session.setAttribute("currentSessionUser",user); 
+          response.sendRedirect("mijndryves.jsp"); //logged-in page             
+     }
+
+     else 
+          response.sendRedirect("notLoggedIn.jsp"); //error page 
+} 
+
+
+catch (Throwable theException)      
+{
+     System.out.println(theException); 
 }
+       }
+    }
+
+    
+
