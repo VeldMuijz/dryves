@@ -4,7 +4,8 @@
 <%! 
 
 %>
-<jsp:useBean id="formHandler" class="test.FormBean" scope="request">
+<%@page import="Dryves.Lid"%>
+<jsp:useBean id="formHandler" class="Dryves.Lid" scope="request">
     <jsp:setProperty name="formHandler" property="*"/>
 </jsp:useBean>
 <% 
