@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 26-mrt-2013 21:03:06 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="Dryves.Ontmoeting" schema="pdl6" table="ontmoeting">
+    <id name="ontmoetingnr" type="int">
+      <column name="ontmoetingnr"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="aankoopnr" type="int">
+      <column name="aankoopnr" not-null="true"/>
+    </property>
+    <property name="locatie" type="string">
+      <column length="200" name="locatie" not-null="true"/>
+    </property>
+    <property name="tijd" type="date">
+      <column length="13" name="tijd" not-null="true"/>
+    </property>
+  </class>
+</hibernate-mapping>

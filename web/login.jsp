@@ -4,6 +4,7 @@
     Author     : RickSpijker
 --%>
 
+<%@page import="Dryves.Login"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -50,19 +51,19 @@
 Dit is de login page! 
 
 <br /><br />
-
+<form action="LoginServlet" method="get">
 <table style="width:320px;">
     <tr>
         <td>
-            
+           Gebruikersnaam: 
         </td>
         <td>
-          <input type="text" id="userName" name="userName" key="username" />  
+          <input type="text" id="email" name="email"/>  
         </td>
     </tr>
     <tr>
-        <td></td>
-        <td><input type="text" id="passWord" name="passWord" key="password" /></td>
+        <td>Wachtwoord:</td>
+        <td><input type="text" id="wachtwoord" name="wachtwoord" /></td>
     </tr>
     <tr>
         <td>
@@ -71,13 +72,13 @@ Dit is de login page!
     </tr>
     <tr>
         <td>
-            <button type="submit" key="login" />Login</button>
+            <button type="submit" />Login</button>
         </td>
         <td></td>
     </tr>
 </table>
 
-
+</form>
 
         </div>
         
