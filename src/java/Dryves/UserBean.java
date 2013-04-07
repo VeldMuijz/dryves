@@ -10,12 +10,24 @@ package Dryves;
  */
 
 public class UserBean {
-
+    
       private String username;
       private String password;
       private String firstname;
       private String lastname;
       public boolean valid;
+      public boolean loggedIn = false;
+
+      
+      
+
+    public boolean isLoggedIn() {
+        return loggedIn;
+    }
+
+    public void setLoggedIn(boolean loggedIn) {
+        this.loggedIn = loggedIn;
+    }
 
 
       public String getFirstName() {

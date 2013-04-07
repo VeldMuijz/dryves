@@ -16,7 +16,7 @@
         
         <script>
             
-            
+        
             
             
             
@@ -62,13 +62,9 @@ Dit is de login page!
     
     UserBean user = new UserBean();
     
-    
-    if (!user.isValid())
+    if (user.loggedIn == false)
         
      {
-         
-         System.out.println("De gebruiker is niet gevalideert");
-         
          %>
      Het inloggen is niet gelukt, probeer het opnieuw.
     <br />
@@ -76,6 +72,7 @@ Dit is de login page!
      <%}
  %>
     
+
 
 
     <br /><br />
