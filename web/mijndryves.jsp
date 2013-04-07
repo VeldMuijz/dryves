@@ -35,112 +35,20 @@
 
 
             <div class="contentPanel">
-                <button onclick="window.location = 'mijndryves.jsp';">Mijn gegevens</button>
+                
+
+                
+                <button onclick="window.location = 'mijndryves_gegevens.jsp';">Mijn gegevens</button>
                 <button onclick="window.location = 'rit_plannen.jsp';">Mijn berichten</button>
                 <button onclick="window.location = 'rit_plannen.jsp';">Mijn ritten</button>
 
 
+        <% UserBean currentUser = (UserBean) (session.getAttribute("currentSessionUser"));%>
 
-
-
-
-
-                <br /><br />
-                <form action="/dryves/proces.jsp" method=post>
-
-
-
-                    <div class="regformheader">
-                        <font size=3>Persoonsgegevens</font> 
-                    </div>
-
-                    <div class="formInput">
-                        <b>Voornaam<sup>*</sup></b> 
-                        <br>
-                        <input type="text" name="firstName" value="" size=20 maxlength=20>
-                    </div>
-                    <div class="formInput">
-                        <b>Achternaam<sup>*</sup></b>
-                        <br>
-                        <input type="text" name="lastName" value="" size=15 maxlength=20>
-                    </div>
-                    <div class="formInput">
-                        <b>Tussenvoegsel<sup></sup></b>
-                        <br>
-                        <input type="text" name="insertion" value="" size=5 maxlength=20>
-                    </div>
-
-                    <div class="formInput">
-                        <b>Rekening nummer<sup>*</sup></b> 
-                        <br>
-                        <input type="text" name="billingnumber" value="" size=10  maxlength=8>
-                    </div>
-
-                    <div class="formInput">
-                        <b>E-Mail<sup>*</sup></b> 
-                        <br>
-                        <input type="text" name="email" value="" size=25  maxlength=125>
-                    </div>
-                    <div class="formInput">
-                        <b>Straatnaam<sup>*</sup></b>
-                        <br>
-                        <input type="text" name="street" value="" size=15 maxlength=20>            
-                    </div>
-                    <div class="formInput">
-                        <b>Huisnummer<sup>*</sup></b>
-                        <br>
-                        <input type="text" name="homenumber" value="" size=5 maxlength=10>            
-                    </div>
-                    <div class="formInput">
-                        <b>Postcode<sup>*</sup></b> 
-                        <br>
-                        <input type="text" name="zip" value="" size=10  maxlength=8>
-                    </div>
-
-                    <div class="formInput">
-                        <b>Stad<sup>*</sup></b>
-                        <br>
-                        <input type="text" name="city" value="" size=15 maxlength=20>            
-                    </div>
-                    <div class="formInput">
-                        <b>Gebruikersnaam<sup>*</sup></b>
-                        <br>
-                        <input type="text" name="userName" size=20 value=""  maxlength=10>
-                    </div>
-                    <div class="formInput">
-
-                        <b>Wachtwoord<sup>*</sup></b> 
-                        <br>
-                        <input type="password" name="password1" size=10 value="" maxlength=10>
-                    </div>
-                    <div class="formInput">
-                        <b>Bevestig wachtwoord<sup>*</sup></b>
-                        <br>
-                        <input type="password" name="password2" size=10 value="" maxlength=10>
-                    </div>
-
-                    <div class="formInput">
-                        <b>Geslacht</b>
-                        <br>
-                        <input type="radio" name="notify" value="M" checked>M 
-                        <input type="radio" name="notify" value="V"> V
-                    </div>
-
-
-                    <input type="submit" value="Wijzigen"> 
-
-
-
-
-                </form>
+        Welkom <%= currentUser.getFirstName() + " " + currentUser.getLastName() %>
 
             </div>
         </div>
-
-
-
-
-
 
 
 </body>
