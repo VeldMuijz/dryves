@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Date;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -22,11 +23,21 @@ public class RitDao {
 	  public static  Rit ritplannen(Rit bean){
 		  
 		  Statement stmt = null;
+	
 		  
+		  int lidNr = bean.getLidnr();
 		  String startpunt = bean.getStartpunt();
 		  String eindpunt = bean.getStartpunt();
+		  String waypoint = bean.getWaypoint();
+		  BigDecimal afstand = bean.getAfstand();
+		  BigDecimal prijs = bean.getPrijs();
+		  int gekocht = bean.getGekocht();
 		  Date datum = bean.getDatum();
-		 	  
+		  int zitplaatsen = bean.getZitplaatsen();
+		  int aangeboden = bean.getAangeboden();
+		  String brandstof = bean.getBrandstof();
+		  
+		  System.out.println("lidnr: " + lidNr);
 		  System.out.println("bean " + startpunt);
 		  System.out.println("bean " + eindpunt);
 		  System.out.println(datum);

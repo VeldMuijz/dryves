@@ -17,6 +17,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -70,10 +71,15 @@ public class RitPlannen extends HttpServlet {
 		//processRequest(request, response);
 
 		Rit rit = new Rit();
+		UserBean user = new UserBean();
 		
-		Date datum = null;
+		//HttpSession session = request.getSession(true);       
+          //session.setAttribute("currentSessionUser",user);
+		  
+		
 		
 		// Maak van de datum ipv een String een type Date
+		Date datum = null;
 		String stringDatum = request.getParameter("begindatum");
 		String stringTijd = request.getParameter("tijd");
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
@@ -89,7 +95,7 @@ public class RitPlannen extends HttpServlet {
 		System.out.println("Stringdatum: " + stringDatum);
 		 
 		
-		//rit.setLidnr(lid.getLidnr());
+		//rit.setLidnr(rit.getLidnr());
 		rit.setStartpunt(request.getParameter("start"));
 		rit.setEindpunt(request.getParameter("end"));
 		rit.setWaypoint(request.getParameter("waypoint"));
@@ -107,7 +113,11 @@ public class RitPlannen extends HttpServlet {
 		}
 		rit.setBrandstof(request.getParameter("soortBrandstof"));
 
-		
+			  	  
+		  
+		  
+		  
+		 //rit.setLidnr(user.getLidnr());
 		
 		rit = RitDao.ritplannen(rit);
 
