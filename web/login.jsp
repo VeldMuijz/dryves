@@ -4,6 +4,7 @@
     Author     : RickSpijker
 --%>
 
+<%@page import="Dryves.UserBean"%>
 <%@page import="Dryves.Login"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -50,7 +51,38 @@
             
 Dit is de login page! 
 
-<br /><br />
+<br />
+<br />
+
+
+
+<div id="showDiv">
+    
+    <%
+    
+    UserBean user = new UserBean();
+    
+    
+    if (!user.isValid())
+        
+     {
+         
+         System.out.println("De gebruiker is niet gevalideert");
+         
+         %>
+     Het inloggen is niet gelukt, probeer het opnieuw.
+    <br />
+    Bent u nog niet geregistreerd, klik hier.
+     <%}
+ %>
+    
+
+
+    <br /><br />
+    
+</div>
+
+
 <form action="LoginServlet" method="get">
 <table style="width:320px;">
     <tr>
@@ -58,12 +90,12 @@ Dit is de login page!
            Gebruikersnaam: 
         </td>
         <td>
-          <input type="text" id="email" name="email"/>  
+          <input type="text" id="email" name="email" style="width:205px;"/>  
         </td>
     </tr>
     <tr>
         <td>Wachtwoord:</td>
-        <td><input type="text" id="wachtwoord" name="wachtwoord" /></td>
+        <td><input type="text" id="wachtwoord" name="wachtwoord" style="width:205px;" /></td>
     </tr>
     <tr>
         <td>
@@ -72,9 +104,9 @@ Dit is de login page!
     </tr>
     <tr>
         <td>
-            <button type="submit" />Login</button>
+            
         </td>
-        <td></td>
+        <td><button type="submit" style="float:right;" />Login</button></td>
     </tr>
 </table>
 
