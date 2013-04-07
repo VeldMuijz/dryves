@@ -3,7 +3,8 @@
     Created on : 11-mrt-2013, 19:59:48
     Author     : RickSpijker
 --%>
-<jsp:useBean id="formHandler" class="test.FormBean" scope="request"/>
+<%@page import="Dryves.Lid"%>
+<jsp:useBean id="formHandler" class="Dryves.Lid" scope="request"/>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -53,25 +54,25 @@
                 <div class="formInput">
                     <b>Voornaam</b> 
                     <br>
-                    <jsp:getProperty name="formHandler" property="firstName"/>
+                    <jsp:getProperty name="formHandler" property="vnaam"/>
                 </div>
 
                 <div class="formInput">   
                     <b>Achternaam</b>
                     <br>
-                    <jsp:getProperty name="formHandler" property="lastName"/>
+                    <jsp:getProperty name="formHandler" property="anaam"/>
                 </div>
                 
                 <div class="formInput">
                     <b>Rekening nummer</b> 
                     <br>
-                    <jsp:getProperty name="formHandler" property="billingnumber"/>
+                    <jsp:getProperty name="formHandler" property="reknr"/>
                 </div>
                 
                 <div class="formInput">   
                     <b>Tussenvoegsel</b>
                     <br>
-                    <jsp:getProperty name="formHandler" property="insertion"/>
+                    <jsp:getProperty name="formHandler" property="tvoegsel"/>
                 </div>
 
                 <div class="formInput">
@@ -82,46 +83,25 @@
                 <div class="formInput">   
                     <b>Straat</b>
                     <br>
-                    <jsp:getProperty name="formHandler" property="street"/>
+                    <jsp:getProperty name="formHandler" property="adres"/>
                 </div>
                 
                 <div class="formInput">   
                     <b>Huisnummer</b>
                     <br>
-                    <jsp:getProperty name="formHandler" property="homenumber"/>
+                    <jsp:getProperty name="formHandler" property="huisnummer"/>
                 </div>
 
                 <div class="formInput">
                     <b>Postcode</b> 
                     <br>
-                    <jsp:getProperty name="formHandler" property="zip"/>
+                    <jsp:getProperty name="formHandler" property="postcode"/>
                 </div>
                 
                 <div class="formInput">   
                     <b>Stad</b>
                     <br>
-                    <jsp:getProperty name="formHandler" property="city"/>
-                </div>
-
-                <div class="formInput">
-                    <b>Gebruikersnaam</b>
-                    <jsp:getProperty name="formHandler" property="userName"/>
-                </div>
-
-                <div class="formInputProv">
-                    <b>In welke regio zal er veel gebruik worden gemaakt van Dryves?</b>
-                    <%
-                        String[] faveTech = formHandler.getFaveTech();
-                        if (!faveTech[0].equals("1")) {
-                            out.println("<ul>");
-                            for (int i = 0; i < faveTech.length; i++) {
-                                out.println("<li>" + faveTech[i]);
-                            }
-                            out.println("</ul>");
-                        } else {
-                            out.println("Er was niets geselecteerd");
-                        }
-                    %>
+                    <jsp:getProperty name="formHandler" property="stad"/>
                 </div>
 
                 <div class="formInput">

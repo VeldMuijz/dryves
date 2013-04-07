@@ -47,7 +47,7 @@ public class FormBean {
             try {
                 int x = Integer.parseInt(billingnumber);
             } catch (NumberFormatException e) {
-                errors.put("zip", "Typ een geldige postcode");
+                errors.put("billingnumber", "Typ een geldige rekening nummer");
                 billingnumber = "";
                 bool = false;
             }

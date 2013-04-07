@@ -60,7 +60,7 @@ public class UserBean {
 
       public void setValid(boolean newValid) {
          valid = newValid;
-    }   
+
 }
 
-
+}
