@@ -4,6 +4,7 @@
     Author     : Kees van Heuven
 --%>
 <%@page import="Dryves.Login"%>
+<jsp:useBean id="formHandler" class="Dryves.Lid" scope="request"/>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

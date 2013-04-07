@@ -3,6 +3,16 @@
     Created on : 11-mrt-2013, 19:59:48
     Author     : RickSpijker
 --%>
+
+package Dryves;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import org.hibernate.Session;
+
 <%@page import="Dryves.Lid"%>
 <jsp:useBean id="formHandler" class="Dryves.Lid" scope="request"/>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
