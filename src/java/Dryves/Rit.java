@@ -18,17 +18,17 @@ public class Rit  implements java.io.Serializable {
      private String waypoint;
      private BigDecimal afstand;
      private BigDecimal prijs;
-     private short gekocht;
+     private int gekocht;
      private Date datum;
-     private BigDecimal zitplaatsen;
+	 private int zitplaatsen;
      private String brandstof;
-     private short aangeboden;
+     private int aangeboden;
 
     public Rit() {
     }
 
 	
-    public Rit(long ritnr, int lidnr, String startpunt, String eindpunt, BigDecimal afstand, BigDecimal prijs, short gekocht, Date datum, BigDecimal zitplaatsen, short aangeboden) {
+    public Rit(long ritnr, int lidnr, String startpunt, String eindpunt, BigDecimal afstand, BigDecimal prijs, int gekocht, Date datum, int zitplaatsen, int aangeboden) {
         this.ritnr = ritnr;
         this.lidnr = lidnr;
         this.startpunt = startpunt;
@@ -40,7 +40,7 @@ public class Rit  implements java.io.Serializable {
         this.zitplaatsen = zitplaatsen;
         this.aangeboden = aangeboden;
     }
-    public Rit(long ritnr, int lidnr, String startpunt, String eindpunt, String waypoint, BigDecimal afstand, BigDecimal prijs, short gekocht, Date datum, BigDecimal zitplaatsen, String brandstof, short aangeboden) {
+    public Rit(long ritnr, int lidnr, String startpunt, String eindpunt, String waypoint, BigDecimal afstand, BigDecimal prijs, int gekocht, Date datum, int zitplaatsen, String brandstof, int aangeboden) {
        this.ritnr = ritnr;
        this.lidnr = lidnr;
        this.startpunt = startpunt;
@@ -104,11 +104,11 @@ public class Rit  implements java.io.Serializable {
     public void setPrijs(BigDecimal prijs) {
         this.prijs = prijs;
     }
-    public short getGekocht() {
+    public int getGekocht() {
         return this.gekocht;
     }
     
-    public void setGekocht(short gekocht) {
+    public void setGekocht(int gekocht) {
         this.gekocht = gekocht;
     }
     public Date getDatum() {
@@ -118,11 +118,11 @@ public class Rit  implements java.io.Serializable {
     public void setDatum(Date datum) {
         this.datum = datum;
     }
-    public BigDecimal getZitplaatsen() {
+    public int getZitplaatsen() {
         return this.zitplaatsen;
     }
     
-    public void setZitplaatsen(BigDecimal zitplaatsen) {
+    public void setZitplaatsen(int zitplaatsen) {
         this.zitplaatsen = zitplaatsen;
     }
     public String getBrandstof() {
@@ -132,11 +132,11 @@ public class Rit  implements java.io.Serializable {
     public void setBrandstof(String brandstof) {
         this.brandstof = brandstof;
     }
-    public short getAangeboden() {
+    public int getAangeboden() {
         return this.aangeboden;
     }
     
-    public void setAangeboden(short aangeboden) {
+    public void setAangeboden(int aangeboden) {
         this.aangeboden = aangeboden;
     }
 

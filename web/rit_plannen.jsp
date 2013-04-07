@@ -48,7 +48,7 @@
 					computeTotalDistance(directionsDisplay.directions);
 				});
 				calcRoute();
-				
+
 			}
 
 			/**
@@ -63,12 +63,12 @@
 					destination: end,
 					travelMode: google.maps.TravelMode.DRIVING
 				};
-				
+
 				directionsService.route(request, function(result, status) {
 					if (status == google.maps.DirectionsStatus.OK) {
 						directionsDisplay.setDirections(result);
 						console.log(result);
-						
+
 					}
 				});
 			}
@@ -87,22 +87,21 @@
 				total = total / 1000
 				document.getElementById("total").innerHTML = total + " km";
 				// bij verandering geef ook de begin en eindadres en de waypoints
-				document.getElementById("startadres").innerHTML =	(directionsDisplay.directions.routes[0].legs[0].start_address +
-				directionsDisplay.directions.routes[0].legs[0].end_address +
-				directionsDisplay.directions.routes[0].legs[0].via_waypoints+ 
-				directionsDisplay.directions.routes[0].legs[0].via_waypoints )
-				}
-			
-//			/**
-//			 * 
-//			 * @returns {undefined}
-//			 */
+				document.getElementById("startadres").innerHTML = (directionsDisplay.directions.routes[0].legs[0].start_address +
+						directionsDisplay.directions.routes[0].legs[0].end_address +
+						directionsDisplay.directions.routes[0].legs[0].via_waypoints +
+						directionsDisplay.directions.routes[0].legs[0].via_waypoints);
+
+
+			}
+
+
 //			function saveWaypoints(){
-				//var wparray=[],wp;
+			var wparray = [], wp;
 //				var route={}	
-				//var routeLeg = directionsDisplay.directions.routes[0].legs[0];
-				//route.start={'lat': directionsDisplay.start_location(), 'lng': directionsDisplay.start_location()}
-				//route.end={'lat': directionsDisplay.end_location(), 'lng': directionsDisplay.end_location()}
+			//var routeLeg = directionsDisplay.directions.routes[0].legs[0];
+			//route.start={'lat': directionsDisplay.start_location(), 'lng': directionsDisplay.start_location()}
+			//route.end={'lat': directionsDisplay.end_location(), 'lng': directionsDisplay.end_location()}
 //				wp = routeLeg.via.waypoints
 //				
 //				for(var i=0; i<wparray.length; i++){	
@@ -114,80 +113,89 @@
 //
 //			
 //			}
-			
+
 
 
         </script>
 
-</head>
-<body onload="initialize();">
+	</head>
+	<body onload="initialize();">
 
-	<div class="background">
+		<div class="background">
 
-		<img src="images/background1.jpg" />
+			<img src="images/background1.jpg" />
 
-	</div>
-
-	<div class="drvyesWrapper">
-
-		<div class="logo">    
-			<img src="images/Logo_Dryves.png" />
 		</div>
 
+		<div class="drvyesWrapper">
 
-        <div class="navigation">
+			<div class="logo">    
+				<img src="images/Logo_Dryves.png" />
+			</div>
 
-            <div style="float:right; margin-right: -1px;"><button  onclick="window.location = 'login.jsp';">Login</button></div>
 
-            <button onclick="window.location = 'index.jsp';">Home</button><button onclick="window.location = 'watisdryves.jsp';">Wat is Dryves</button><button>FAQ</button>
+			<div class="navigation">
 
-        </div>
+				<div style="float:right; margin-right: -1px;"><button  onclick="window.location = 'login.jsp';">Login</button></div>
 
-        <div class="contentPanel">
+				<button onclick="window.location = 'index.jsp';">Home</button><button onclick="window.location = 'watisdryves.jsp';">Wat is Dryves</button><button>FAQ</button>
 
-			<div id="mapcanvas"></div>
+			</div>
 
-			<div id="invoerveld">
-				<form>
-					Start adres: <div id ="invoerveldadres"><input type="text" id="start" onchange="calcRoute();" style ="width: 350; float: right:"><br />
-					Eind adres: <input type="text" id="end" onchange="calcRoute();" style ="width: 350; float: right:"><br />
-					Datum: <input type="text" id="datum"><br /></div> 
-					<div id="ritComboBox>"Aantal plaatsen: <select>	
-						<option value="1"> 1 </option>
-						<option value="1"> 2 </option> 
-						<option value="1"> 3 </option>
-						<option value="1"> 4 </option>
-						<option value="1"> 5 </option>
-					</select></div><br /> <br />
-					Herhaling <br /> <br />
+			<div class="contentPanel">
 
-					<div id="dagenCheckBox"><input type="checkbox" name="ma" value="ma"> Ma </input> 
-					<input type="checkbox" name="di" value="di"> Di </input> 
-					<input type="checkbox" name="wo" value="wo"> Wo </input> 
-					<input type="checkbox" name="do" value="do"> Do </input>
-					<input type="checkbox" name="vr" value="vr"> Vr </input>
-					<input type="checkbox" name="za" value="za"> Za </input>
-					<input type="checkbox" name="zo" value="zo"> Zo </input> <br /> <br /> </div>
-					<div id="invoervelden">Begindatum: <input type="date" id="begindatum"> 
-					Einddatum: <input type="date" id="einddatum"> </div>
-					
-					
-					<br /> <br />
-					<div id="ritComboBox">Soort brandstof: <select>
-						<option value="benzine"> Benzine </option>
-						<option value="diesel"> Diesel </option>
-						<option value="gas/lpg"> Gas/LPG </option>						
-						<option value="electrisch"> Electrisch </option>
-						<option value="hybride"> Hybride </option>
-					</select></div>
-				</form>
-				<div style="float:right;"><strong><div id="total"> </div> Totaal aantal km </strong>
-				</div></div>
-			<div id="startadres"> <br/> <br/> </div>
-				
-        </div>
+				<div id="mapcanvas"></div>
 
-	</div>
+				<div class="invoerveld">
+					<form action="RitPlannen" method="get">
+						<td>Start adres:</td> 
+						<td><div id ="invoerveldadres"><input type="text" id="start" name="start" onchange="calcRoute();" style ="width: 350; float: right:"></td><br />
+								<td>Eind adres:</td> 
+								<td><input type="text" id="end" name="end" onchange="calcRoute();" style ="width: 350; float: right:"> </td><br />		
 
-</body>
+								<div name ="aantalZitplaatsen">Aantal plaatsen: <select name="aantalZitplaatsen">	
+										<option value="1"> 1 </option>
+										<option value="1"> 2 </option> 
+										<option value="1"> 3 </option>
+										<option value="1"> 4 </option>
+										<option value="1"> 5 </option>
+									</select></div><br /> <br />
+
+								Herhaling <br /> <br />
+
+								<div id="dagenCheckBox"><input type="checkbox" name="ma" value="ma"> Ma </input> 
+									<input type="checkbox" name="di" value="di"> Di </input> 
+									<input type="checkbox" name="wo" value="wo"> Wo </input> 
+									<input type="checkbox" name="do" value="do"> Do </input>
+									<input type="checkbox" name="vr" value="vr"> Vr </input>
+									<input type="checkbox" name="za" value="za"> Za </input>
+									<input type="checkbox" name="zo" value="zo"> Zo </input> <br /> <br /> </div>
+
+								<div class="invoerveld">Begindatum: <input type="date" id="begindatum" name="begindatum"> 
+									Tijd: <input type="text" id="tijd" name="tijd"> 
+									Einddatum: <input type="date" id="einddatum"> </div>
+								<br /> <br />
+
+								<div id="ritComboBox">Soort brandstof: <select name="soortBrandstofo">
+										<option value="benzine"> Benzine </option>
+										<option value="diesel"> Diesel </option>
+										<option value="gas/lpg"> Gas/LPG </option>						
+										<option value="electrisch"> Electrisch </option>
+										<option value="hybride"> Hybride </option>
+									</select></div>
+
+								<div style="float:right;"><strong><div id="total"> </div> Totaal aantal km </strong>
+								</div>
+								<input type="checkbox" name="aanbieden">Direct aanbieden</input>
+								<button type="submit"> Klik </button>
+					</form>
+
+				</div>
+				<div id="startadres"> <br/> <br/> </div>
+
+			</div>
+
+		</div>
+
+	</body>
 </html>
