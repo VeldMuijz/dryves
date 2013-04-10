@@ -26,11 +26,11 @@ public class Login extends HttpServlet {
 try
 {       
 
-     UserBean user = new UserBean();
-     user.setUserName(request.getParameter("email"));
-     user.setPassword(request.getParameter("wachtwoord"));
+     Sessie user = new Sessie();
+     user.setEmail(request.getParameter("email"));
+     user.setWachtwoord(request.getParameter("wachtwoord"));
 
-     user = userdao.login(user);
+     user = SessieDao.login(user);
 
      if (user.isValid())
      {

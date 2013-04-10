@@ -4,7 +4,7 @@
     Author     : Vincent
 --%>
 
-<%@page import="Dryves.UserBean"%>
+<%@page import="Dryves.Sessie"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
