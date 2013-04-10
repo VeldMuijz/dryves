@@ -87,32 +87,41 @@
 				total = total / 1000
 				document.getElementById("total").innerHTML = total + " km";
 				// bij verandering geef ook de begin en eindadres en de waypoints
-				document.getElementById("startadres").innerHTML = (directionsDisplay.directions.routes[0].legs[0].start_address +
-						directionsDisplay.directions.routes[0].legs[0].end_address +
-						directionsDisplay.directions.routes[0].legs[0].via_waypoints +
-						directionsDisplay.directions.routes[0].legs[0].via_waypoints);
-
-
+				setRouteinfo();
+			}
+			
+			function setRouteinfo(){
+				var startaddress;
+				var endaddress;
+				var waypoints;
+				
+				startaddress = directionsDisplay.directions.routes[0].legs[0].start_address ;
+				endaddress = directionsDisplay.directions.routes[0].legs[0].end_address;
+				waypoints = directionsDisplay.directions.routes[0].legs[0].via_waypoints;
+				
+				document.getElementById("start").innerHTML.replace(document.getElementById(start), startaddress);
+				document.getElementById("end").innerHTML = endaddress;
+				document.getElementById("waypoints").innerHTML = waypoints;
+				
+				
 			}
 
-
-//			function saveWaypoints(){
+			function saveWaypoints(){
 			var wparray = [], wp;
-//				var route={}	
-			//var routeLeg = directionsDisplay.directions.routes[0].legs[0];
-			//route.start={'lat': directionsDisplay.start_location(), 'lng': directionsDisplay.start_location()}
-			//route.end={'lat': directionsDisplay.end_location(), 'lng': directionsDisplay.end_location()}
-//				wp = routeLeg.via.waypoints
-//				
-//				for(var i=0; i<wparray.length; i++){	
-//					wparray[i] = [wp[i].lat(),wp[i].lng()];
-//				}
-//					
-//				data.waypoints = wp;
-//				console.log(wp);	
-//
-//			
-//			}
+				var route={}	
+			var routeLeg = directionsDisplay.directions.routes[0].legs[0];
+			route.start={'lat': directionsDisplay.start_location, 'lng': directionsDisplay.start_location}
+			route.end={'lat': directionsDisplay.end_location, 'lng': directionsDisplay.end_location}
+				wp = routeLeg.via_waypoints
+				
+				for(var i=0; i<wparray.length; i++){	
+					wparray[i] = [wp[i].lat(),wp[i].lng()];
+				}
+				
+			   
+				//waypoints = wp;
+				console.log(wp);	
+			}
 
 
 
@@ -152,7 +161,9 @@
 						<td><div id ="invoerveldadres"><input type="text" id="start" name="start" onchange="calcRoute();" style ="width: 350; float: right:"></td><br />
 								<td>Eind adres:</td> 
 								<td><input type="text" id="end" name="end" onchange="calcRoute();" style ="width: 350; float: right:"> </td><br />		
-
+								<td>Tussenstations: </td>
+								<td><input  id ="waypoints" name ="waypoints"> </text>  </td> <br /> <br />
+								
 								<div name ="aantalZitplaatsen">Aantal plaatsen: <select name="aantalZitplaatsen">	
 										<option value="1"> 1 </option>
 										<option value="1"> 2 </option> 
@@ -176,7 +187,7 @@
 									Einddatum: <input type="date" id="einddatum"> </div>
 								<br /> <br />
 
-								<div id="ritComboBox">Soort brandstof: <select name="soortBrandstofo">
+								<div id="ritComboBox">Soort brandstof: <select id="soortBrandstof" name="soortBrandstof">
 										<option value="benzine"> Benzine </option>
 										<option value="diesel"> Diesel </option>
 										<option value="gas/lpg"> Gas/LPG </option>						
@@ -184,7 +195,7 @@
 										<option value="hybride"> Hybride </option>
 									</select></div>
 
-								<div style="float:right;"><strong><div id="total"> </div> Totaal aantal km </strong>
+								<div style="float:right;"><strong><div id="total" name="total"> </div> Totaal aantal km </strong>
 								</div>
 								<input type="checkbox" name="aanbieden">Direct aanbieden</input>
 								<button type="submit"> Klik </button>

@@ -92,13 +92,14 @@ public class RitPlannen extends HttpServlet {
 		}
 
 		System.out.println("Stringdatum: " + stringDatum);
-	
+		System.out.println("Haal alle gegevens op en zet ze in Rit");
 		rit.setLidnr(user.getLidnr());
 		rit.setStartpunt(request.getParameter("start"));
 		rit.setEindpunt(request.getParameter("end"));
-		rit.setWaypoint(request.getParameter("waypoint"));
-		//rit.setAfstand();
-		//rit.setPrijs();
+		rit.setWaypoint(request.getParameter("waypoints"));
+		rit.setAfstand(Double.parseDouble("45.5"));
+		double prijs = (rit.getAfstand() * 21); //TODO ophalen vanuit Configuratie
+		rit.setPrijs(prijs);
 		rit.setGekocht(0);
 		rit.setDatum(datum);
 		rit.setZitplaatsen(Integer.parseInt(request.getParameter("aantalZitplaatsen")));
@@ -110,8 +111,7 @@ public class RitPlannen extends HttpServlet {
 			rit.setAangeboden(0);
 		}
 		rit.setBrandstof(request.getParameter("soortBrandstof"));
-
-		System.out.println("Lidnr opgehaald uit sessie user.getlidnr():" + user.getLidnr());
+		System.out.println("total value: " + request.getParameter("total"));
 		rit = RitDao.ritplannen(rit);
 
 	}

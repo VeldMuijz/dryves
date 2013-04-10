@@ -2,7 +2,6 @@ package Dryves;
 // Generated 26-mrt-2013 21:03:05 by Hibernate Tools 3.2.1.GA
 
 
-import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -16,8 +15,8 @@ public class Rit  implements java.io.Serializable {
      private String startpunt;
      private String eindpunt;
      private String waypoint;
-     private BigDecimal afstand;
-     private BigDecimal prijs;
+     private double afstand;
+     private double prijs;
      private int gekocht;
      private Date datum;
 	 private int zitplaatsen;
@@ -28,7 +27,7 @@ public class Rit  implements java.io.Serializable {
     }
 
 	
-    public Rit(long ritnr, int lidnr, String startpunt, String eindpunt, BigDecimal afstand, BigDecimal prijs, int gekocht, Date datum, int zitplaatsen, int aangeboden) {
+    public Rit(long ritnr, int lidnr, String startpunt, String eindpunt, double afstand, double prijs, int gekocht, Date datum, int zitplaatsen, int aangeboden) {
         this.ritnr = ritnr;
         this.lidnr = lidnr;
         this.startpunt = startpunt;
@@ -40,7 +39,7 @@ public class Rit  implements java.io.Serializable {
         this.zitplaatsen = zitplaatsen;
         this.aangeboden = aangeboden;
     }
-    public Rit(long ritnr, int lidnr, String startpunt, String eindpunt, String waypoint, BigDecimal afstand, BigDecimal prijs, int gekocht, Date datum, int zitplaatsen, String brandstof, int aangeboden) {
+    public Rit(long ritnr, int lidnr, String startpunt, String eindpunt, String waypoint, double afstand, double prijs, int gekocht, Date datum, int zitplaatsen, String brandstof, int aangeboden) {
        this.ritnr = ritnr;
        this.lidnr = lidnr;
        this.startpunt = startpunt;
@@ -90,18 +89,18 @@ public class Rit  implements java.io.Serializable {
     public void setWaypoint(String waypoint) {
         this.waypoint = waypoint;
     }
-    public BigDecimal getAfstand() {
+    public double getAfstand() {
         return this.afstand;
     }
     
-    public void setAfstand(BigDecimal afstand) {
+    public void setAfstand(double afstand) {
         this.afstand = afstand;
     }
-    public BigDecimal getPrijs() {
+    public double getPrijs() {
         return this.prijs;
     }
     
-    public void setPrijs(BigDecimal prijs) {
+    public void setPrijs(double prijs) {
         this.prijs = prijs;
     }
     public int getGekocht() {
