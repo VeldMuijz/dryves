@@ -35,7 +35,7 @@ public class SessieDao
          String email = bean.getEmail();    
          String wachtwoord = bean.getWachtwoord();   
 
-         String zoekQuery = "select lid.vnaam, lid.anaam, lid.wachtwoord from Lid as lid where lid.email='" + email +"';";
+         String zoekQuery = "select lid.vnaam, lid.anaam, lid.wachtwoord, lid.lidnr from Lid as lid where lid.email='" + email +"';";
              
 
       // "System.out.println" prints in the console; Normally used to trace the process
@@ -74,8 +74,10 @@ public class SessieDao
             
             String vnaam = rs.getString(1);
             String anaam = rs.getString(2);
+			int lidnr = rs.getInt(4);
 
             System.out.println("Welkom! " + vnaam);
+			bean.setLidnr(lidnr);
             bean.setVnaam(vnaam);
             bean.setAnaam(anaam);
             bean.setValid(true);
