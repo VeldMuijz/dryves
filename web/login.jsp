@@ -62,16 +62,13 @@ Dit is de login page!
     
     UserBean user = new UserBean();
     
-    if (user.loggedIn == false)
+    if (user.valid == false)
         
      {
-         %>
-     Het inloggen is niet gelukt, probeer het opnieuw.
-    <br />
-    Bent u nog niet geregistreerd, klik hier.
-     <%}
- %>
-    
+     
+     
+            }
+    %>
 
 
 

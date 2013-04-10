@@ -41,7 +41,7 @@ try
      }
 
      else 
-          user.loggedIn=true;
+          user.valid=true;
           response.sendRedirect("login.jsp"); //error page 
 } 
 
