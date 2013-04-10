@@ -4,7 +4,7 @@
     Author     : RickSpijker
 --%>
 
-<%@page import="Dryves.UserBean"%>
+<%@page import="Dryves.Sessie"%>
 <%@page import="Dryves.Login"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -60,7 +60,7 @@ Dit is de login page!
     
     <%
     
-    UserBean user = new UserBean();
+    Sessie user = new Sessie();
     
     if (user.valid == false)
         

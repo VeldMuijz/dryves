@@ -43,9 +43,9 @@
                 <button onclick="window.location = 'rit_plannen.jsp';">Mijn ritten</button>
 
 
-        <% UserBean currentUser = (UserBean) (session.getAttribute("currentSessionUser"));%>
+        <% Sessie currentUser = (Sessie) (session.getAttribute("currentSessionUser"));%>
 
-        Welkom <%= currentUser.getFirstName() + " " + currentUser.getLastName() %>
+        Welkom <%= currentUser.getVnaam() + " " + currentUser.getAnaam() %>
 
             </div>
         </div>

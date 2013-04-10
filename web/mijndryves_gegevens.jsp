@@ -4,7 +4,7 @@
     Author     : Vincent
 --%>
 
-<%@page import="Dryves.UserBean"%>
+<%@page import="Dryves.Sessie"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -36,9 +36,9 @@
 
             <div class="contentPanel">
                 
-        <% UserBean currentUser = (UserBean) (session.getAttribute("currentSessionUser"));%>
+        <% Sessie currentUser = (Sessie) (session.getAttribute("currentSessionUser"));%>
 
-        Welkom <%= currentUser.getFirstName() + " " + currentUser.getLastName() %>
+        Welkom <%= currentUser.getVnaam() + " " + currentUser.getAnaam() %>
                 
                 <button onclick="window.location = 'mijndryves_gegevens.jsp';">Mijn gegevens</button>
                 <button onclick="window.location = 'rit_plannen.jsp';">Mijn berichten</button>
