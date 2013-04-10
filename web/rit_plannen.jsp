@@ -68,6 +68,7 @@
 					if (status == google.maps.DirectionsStatus.OK) {
 						directionsDisplay.setDirections(result);
 						console.log(result);
+						
 					}
 				});
 			}
@@ -85,24 +86,34 @@
 				}
 				total = total / 1000
 				document.getElementById("total").innerHTML = total + " km";
-			}
+				// bij verandering geef ook de begin en eindadres en de waypoints
+				document.getElementById("startadres").innerHTML =	(directionsDisplay.directions.routes[0].legs[0].start_address +
+				directionsDisplay.directions.routes[0].legs[0].end_address +
+				directionsDisplay.directions.routes[0].legs[0].via_waypoints+ 
+				directionsDisplay.directions.routes[0].legs[0].via_waypoints )
+				}
 			
-			function saveWaypoints (){
-				var wparray=[], wp;
-				var data={};	
-				var routeLeg = directionsDisplay.directions.routes[1].legs[1];
-				data.start={'lat': routeLeg.start_location(), 'lng': routeLeg.start_location()};
-				data.end={'lat': routeLeg.end_location(), 'lng': routeLeg.end_location()};
-				waypoint = routeLeg.via.waypoints;
-				
-				for(var i=0; i<wparray.length; i++){
-					wparray[i] = [wp[i].lat(), wp[i].lng()]
-				};
-					
-				data.waypoints = wp;
-				console.log(wparray);			
-				
-			}
+//			/**
+//			 * 
+//			 * @returns {undefined}
+//			 */
+//			function saveWaypoints(){
+				//var wparray=[],wp;
+//				var route={}	
+				//var routeLeg = directionsDisplay.directions.routes[0].legs[0];
+				//route.start={'lat': directionsDisplay.start_location(), 'lng': directionsDisplay.start_location()}
+				//route.end={'lat': directionsDisplay.end_location(), 'lng': directionsDisplay.end_location()}
+//				wp = routeLeg.via.waypoints
+//				
+//				for(var i=0; i<wparray.length; i++){	
+//					wparray[i] = [wp[i].lat(),wp[i].lng()];
+//				}
+//					
+//				data.waypoints = wp;
+//				console.log(wp);	
+//
+//			
+//			}
 			
 
 
@@ -172,7 +183,8 @@
 				</form>
 				<div style="float:right;"><strong><div id="total"> </div> Totaal aantal km </strong>
 				</div></div>
-
+			<div id="startadres"> <br/> <br/> </div>
+				
         </div>
 
 	</div>

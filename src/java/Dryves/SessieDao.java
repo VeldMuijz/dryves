@@ -19,7 +19,7 @@ package Dryves;
 
     
 
-public class userdao     
+public class SessieDao     
    
    {
       static Connection currentCon = null;
@@ -27,34 +27,34 @@ public class userdao
 
 
 
-      public static UserBean login(UserBean bean) {
+      public static Sessie login(Sessie bean) {
 
          //preparing some objects for connection 
          Statement stmt = null;    
 
-         String username = bean.getUsername();    
-         String password = bean.getPassword();   
+         String email = bean.getEmail();    
+         String wachtwoord = bean.getWachtwoord();   
 
-         String searchQuery = "select lid.vnaam, lid.anaam, lid.wachtwoord from Lid as lid where lid.email='" + username +"'";
+         String zoekQuery = "select lid.vnaam, lid.anaam, lid.wachtwoord from Lid as lid where lid.email='" + email +"';";
              
 
       // "System.out.println" prints in the console; Normally used to trace the process
-      System.out.println("Your user name is " + username);  
-      System.out.println("Your password is " + password);
-      System.out.println("Query: "+searchQuery);
+      System.out.println("Your user name is " + email);  
+      System.out.println("Your wachtwoord is " + wachtwoord);
+      System.out.println("Query: " + zoekQuery);
 
       try 
       {
          //connect to DB 
          currentCon = ConnectionManager.getConnection();
          stmt=currentCon.createStatement();
-         rs = stmt.executeQuery(searchQuery);           
+         rs = stmt.executeQuery(zoekQuery);           
          boolean more = rs.next();
 
          // if user does not exist set the isValid variable to false
          if (!more) 
          {
-            System.out.println("Sorry, you are not a registered user! Please sign up first");
+            System.out.println("Sorry, je bent niet geregistreerd. Registreer eerst alstublieft.");
             bean.setValid(false);
          } 
 
@@ -62,22 +62,22 @@ public class userdao
          else if (more) 
          { 
              
-            String passwordUser = rs.getString(3);
+            String wachtwoordUser = rs.getString(3);
             
-            System.out.println("Dit is het ww uit de DB: " + passwordUser);
+            System.out.println("Dit is het ww uit de DB: " + wachtwoordUser);
             
-            System.out.println("Dit is het ww van de JSP: " + password);
+            System.out.println("Dit is het ww van de JSP: " + wachtwoord);
             
-           if (password.equals(passwordUser)) {
+           if (wachtwoord.equals(wachtwoordUser)) {
             
             
             
-            String firstName = rs.getString(1);
-            String lastName = rs.getString(2);
+            String vnaam = rs.getString(1);
+            String anaam = rs.getString(2);
 
-            System.out.println("Welkom! " + firstName);
-            bean.setFirstName(firstName);
-            bean.setLastName(lastName);
+            System.out.println("Welkom! " + vnaam);
+            bean.setVnaam(vnaam);
+            bean.setAnaam(anaam);
             bean.setValid(true);
             
            }
