@@ -71,10 +71,10 @@ public class RitPlannen extends HttpServlet {
 		Rit rit = new Rit();
 		// Haal de huidige sessie op
 		HttpSession session = request.getSession();
-		// Maak in de sessi een object rit aan met naam sessieRit
+		// Maak in de sessie een object rit aan met naam sessieRit
 		session.setAttribute("sessieRit", rit);
 		//Haal de userbean (dit moet sessiebean worden) op uit de sessie
-		UserBean user = (UserBean) session.getAttribute("currentSessionUser");
+		Sessie user = (Sessie) session.getAttribute("currentSessionUser");
 
 
 		// Maak van de datum ipv een String een type Date
@@ -92,8 +92,7 @@ public class RitPlannen extends HttpServlet {
 		}
 
 		System.out.println("Stringdatum: " + stringDatum);
-
-
+	
 		rit.setLidnr(user.getLidnr());
 		rit.setStartpunt(request.getParameter("start"));
 		rit.setEindpunt(request.getParameter("end"));
@@ -113,7 +112,7 @@ public class RitPlannen extends HttpServlet {
 		rit.setBrandstof(request.getParameter("soortBrandstof"));
 
 		System.out.println("Lidnr opgehaald uit sessie user.getlidnr():" + user.getLidnr());
-		//rit = RitDao.ritplannen(rit);
+		rit = RitDao.ritplannen(rit);
 
 	}
 

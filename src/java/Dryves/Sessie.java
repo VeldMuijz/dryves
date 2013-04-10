@@ -25,7 +25,6 @@ public class Sessie {
 		this.lidnr = lidnr;
 	}
 
-	
 	public String getVnaam() {
 		return vnaam;
 	}

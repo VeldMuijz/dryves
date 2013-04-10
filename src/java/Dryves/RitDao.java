@@ -23,7 +23,8 @@ public class RitDao {
 	  public static  Rit ritplannen(Rit bean){
 		  
 		  Statement stmt = null;
-	
+		  
+		 
 		  
 		  int lidNr = bean.getLidnr();
 		  String startpunt = bean.getStartpunt();
@@ -37,7 +38,7 @@ public class RitDao {
 		  int aangeboden = bean.getAangeboden();
 		  String brandstof = bean.getBrandstof();
 		  
-		  System.out.println("lidnr: " + lidNr);
+		  System.out.println("lidnr uit de sessie rit: " + lidNr);
 		  System.out.println("bean " + startpunt);
 		  System.out.println("bean " + eindpunt);
 		  System.out.println(datum);

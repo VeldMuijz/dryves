@@ -19,11 +19,11 @@
     <property name="waypoint" type="string">
       <column length="600" name="waypoint"/>
     </property>
-    <property name="afstand" type="big_decimal">
-      <column name="afstand" not-null="true" precision="131089" scale="0"/>
+    <property name="afstand" type="double">
+      <column name="afstand" not-null="true" precision="2" scale="0"/>
     </property>
-    <property name="prijs" type="big_decimal">
-      <column name="prijs" not-null="true" precision="131089" scale="0"/>
+    <property name="prijs" type="double">
+      <column name="prijs" not-null="true" precision="2" scale="0"/>
     </property>
     <property name="gekocht" type="short">
       <column name="gekocht" not-null="true"/>
@@ -31,7 +31,7 @@
     <property name="datum" type="date">
       <column length="13" name="datum" not-null="true"/>
     </property>
-    <property name="zitplaatsen" type="big_decimal">
+    <property name="zitplaatsen" type="int">
       <column name="zitplaatsen" not-null="true" precision="131089" scale="0"/>
     </property>
     <property name="brandstof" type="string">
