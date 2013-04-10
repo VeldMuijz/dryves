@@ -41,7 +41,8 @@ try
      }
 
      else 
-          response.sendRedirect("notLoggedIn.jsp"); //error page 
+          user.valid=true;
+          response.sendRedirect("login.jsp"); //error page 
 } 
 
 
