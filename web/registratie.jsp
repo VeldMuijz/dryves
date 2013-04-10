@@ -1,15 +1,16 @@
 <%-- 
     Document   : index
     Created on : 24-mrt-2013, 19:59:48
-    Author     : Kees paardelul
+    Author     : Kees van Heuven
 --%>
-
+<%@page import="Dryves.Login"%>
+<jsp:useBean id="formHandler" class="Dryves.Lid" scope="request"/>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Dryves</title>
+        <title>Dryves reg</title>
         <link type="text/css" rel="stylesheet" href="css/dryver.css"/>
         
         <script>
@@ -61,23 +62,35 @@ Schrijf je per direct in en word lid! Ontdek de vele voordele die de Dryves comm
                 <div class="formInput">
                             <b>Voornaam<sup>*</sup></b> 
                             <br>
-                            <input type="text" name="firstName" value="" size=20 maxlength=20>
+                            <input type="text" name="vnaam" value="" size=20 maxlength=20>
                 </div>
                 <div class="formInput">
                             <b>Achternaam<sup>*</sup></b>
                             <br>
-                            <input type="text" name="lastName" value="" size=15 maxlength=20>
+                            <input type="text" name="anaam" value="" size=15 maxlength=20>
                 </div>
+                
+                <div>
+               <b>Kies een foto:</b>
+               <INPUT NAME="file" TYPE="file">
+               </div>
+               <div>
+               <a colspan="2" align="center">
+               </div>
+               <div>
+               <td colspan="2" align="center"><input type="submit" value="Upload"> </td>
+               </div>
+                
                 <div class="formInput">
                             <b>Tussenvoegsel<sup></sup></b>
                             <br>
-                            <input type="text" name="insertion" value="" size=5 maxlength=20>
+                            <input type="text" name="tvoegsel" value="" size=5 maxlength=20>
                 </div>
                 
                 <div class="formInput">
                             <b>Rekening nummer<sup>*</sup></b> 
                             <br>
-                            <input type="text" name="billingnumber" value="" size=10  maxlength=8>
+                            <input type="text" name="reknr" value="" size=10  maxlength=8>
                 </div>
                 
                 <div class="formInput">
@@ -88,7 +101,7 @@ Schrijf je per direct in en word lid! Ontdek de vele voordele die de Dryves comm
                 <div class="formInput">
                             <b>Straatnaam<sup>*</sup></b>
                             <br>
-                            <input type="text" name="street" value="" size=15 maxlength=20>            
+                            <input type="text" name="adres" value="" size=15 maxlength=20>            
                 </div>
                 <div class="formInput">
                             <b>Huisnummer<sup>*</sup></b>
@@ -98,19 +111,15 @@ Schrijf je per direct in en word lid! Ontdek de vele voordele die de Dryves comm
                 <div class="formInput">
                             <b>Postcode<sup>*</sup></b> 
                             <br>
-                            <input type="text" name="zip" value="" size=10  maxlength=8>
+                            <input type="text" name="postcode" value="" size=10  maxlength=8>
                 </div>
                 
                 <div class="formInput">
                             <b>Stad<sup>*</sup></b>
                             <br>
-                            <input type="text" name="city" value="" size=15 maxlength=20>            
+                            <input type="text" name="stad" value="" size=15 maxlength=20>            
                 </div>
-                <div class="formInput">
-                            <b>Gebruikersnaam<sup>*</sup></b>
-                            <br>
-                            <input type="text" name="userName" size=20 value=""  maxlength=10>
-                </div>
+
                 <div class="formInput">
                        
                             <b>Wachtwoord<sup>*</sup></b> 
