@@ -71,6 +71,7 @@
 
 					}
 				});
+			//	setRouteInfo();
 			}
 
 			/**
@@ -86,8 +87,7 @@
 				}
 				total = total / 1000
 				document.getElementById("total").innerHTML = total + " km";
-				// bij verandering geef ook de begin en eindadres en de waypoints
-				setRouteinfo();
+			//setRouteinfo();
 			}
 			
 			function setRouteinfo(){
@@ -99,7 +99,7 @@
 				endaddress = directionsDisplay.directions.routes[0].legs[0].end_address;
 				waypoints = directionsDisplay.directions.routes[0].legs[0].via_waypoints;
 				
-				document.getElementById("start").innerHTML.replace(document.getElementById(start), startaddress);
+				document.getElementById("start").innerHTML = startaddress;
 				document.getElementById("end").innerHTML = endaddress;
 				document.getElementById("waypoints").innerHTML = waypoints;
 				
@@ -122,8 +122,20 @@
 				//waypoints = wp;
 				console.log(wp);	
 			}
+			
+			function isChecked(blnchecked)
+    {
+    if(blnchecked)
+    {
+        document.getElementById("dagenCheckBox").style.display = "";
+    
+    }
+    else
+    {
+    document.getElementById("dagenCheckBox").style.display = "none";
+    }
 
-
+    }
 
         </script>
 
@@ -157,35 +169,35 @@
 
 				<div class="invoerveld">
 					<form action="RitPlannen" method="get">
-						<td>Start adres:</td> 
+						<td>Start adres:</td> <br/>
 						<td><div id ="invoerveldadres"><input type="text" id="start" name="start" onchange="calcRoute();" style ="width: 350; float: right:"></td><br />
-								<td>Eind adres:</td> 
-								<td><input type="text" id="end" name="end" onchange="calcRoute();" style ="width: 350; float: right:"> </td><br />		
-								<td>Tussenstations: </td>
-								<td><input  id ="waypoints" name ="waypoints"> </text>  </td> <br /> <br />
+								<td>Eind adres:</td> <br/>
+								<td><input type="text" id="end" name="end" onchange="calcRoute();" style ="width: 350; float: right:"> </td><br /> <br />		
+
+								<div class="invoerveld">Begindatum: <input type="date" id="begindatum" name="begindatum"> 
+									Tijd: <input type="text" id="tijd" name="tijd"> 
+									<input type="checkbox" id="herhaling" name="herhaling" checked="false" onclick="isChecked(this.checked);"> Herhaling <br /> <br />
+
+									<div id="dagenCheckBox" style="display: none;">
+									<td><input type="checkbox" name="ma" value="ma"> Ma </input> 
+									<input type="checkbox" name="di" value="di"> Di </input> 
+									<input type="checkbox" name="wo" value="wo"> Wo </input> </td>
+									<td><input type="checkbox" name="do" value="do"> Do </input>
+									<input type="checkbox" name="vr" value="vr"> Vr </input>
+									<input type="checkbox" name="za" value="za"> Za </input>
+									<input type="checkbox" name="zo" value="zo"> Zo </input></td> <br /> <br /> </div>
+									
+									Einddatum: <input type="date" id="einddatum"> </div>
+								<br /> <br />
 								
-								<div name ="aantalZitplaatsen">Aantal plaatsen: <select name="aantalZitplaatsen">	
+																
+								<div name ="aantalZitplaatsen">Aantal zitplaatsen (voor passagiers): <select name="aantalZitplaatsen">	
 										<option value="1"> 1 </option>
 										<option value="1"> 2 </option> 
 										<option value="1"> 3 </option>
 										<option value="1"> 4 </option>
 										<option value="1"> 5 </option>
 									</select></div><br /> <br />
-
-								Herhaling <br /> <br />
-
-								<div id="dagenCheckBox"><input type="checkbox" name="ma" value="ma"> Ma </input> 
-									<input type="checkbox" name="di" value="di"> Di </input> 
-									<input type="checkbox" name="wo" value="wo"> Wo </input> 
-									<input type="checkbox" name="do" value="do"> Do </input>
-									<input type="checkbox" name="vr" value="vr"> Vr </input>
-									<input type="checkbox" name="za" value="za"> Za </input>
-									<input type="checkbox" name="zo" value="zo"> Zo </input> <br /> <br /> </div>
-
-								<div class="invoerveld">Begindatum: <input type="date" id="begindatum" name="begindatum"> 
-									Tijd: <input type="text" id="tijd" name="tijd"> 
-									Einddatum: <input type="date" id="einddatum"> </div>
-								<br /> <br />
 
 								<div id="ritComboBox">Soort brandstof: <select id="soortBrandstof" name="soortBrandstof">
 										<option value="benzine"> Benzine </option>
