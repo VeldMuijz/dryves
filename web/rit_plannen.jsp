@@ -71,7 +71,7 @@
 
 					}
 				});
-					setRouteInfo();
+				setRouteInfo();
 			}
 
 			/**
@@ -87,24 +87,34 @@
 				}
 				total = total / 1000
 				document.getElementById("total").innerHTML = total + " km";
+				document.getElementById("hiddenafstand").value = total;
 				setRouteinfo();
 			}
 
 			function setRouteinfo() {
 				var startaddress;
-				var startaddress2;
 				var endaddress;
 				var waypoints;
-				
+
 
 				startaddress = directionsDisplay.directions.routes[0].legs[0].start_address;
-				startaddress2 = directionsDisplay.directions.routes[0].legs[0].start_address;
 				endaddress = directionsDisplay.directions.routes[0].legs[0].end_address;
 				waypoints = directionsDisplay.directions.routes[0].legs[0].via_waypoints;
-	
+				
+				//zet de waardes voor het overzicht
 				document.getElementById("startadres").innerHTML = startaddress;
+				document.getElementById("end").value = endaddress;
+				
+				//zet de waardes voor de invoervelden
 				document.getElementById("eindadres").innerHTML = endaddress;
-				document.getElementById("waypointS").innerHTML = waypoints;
+				document.getElementById("start").value = startaddress;
+				
+				//zet de waardes voor de verborgenvelden (gebruikt door servlet)
+				document.getElementById("hiddenstart").value = startaddress;
+				document.getElementById("hiddenend").value = endaddress;
+				document.getElementById("hiddenwaypoints").value = waypoints;
+
+
 
 			}
 
@@ -178,7 +188,7 @@
 						Begindatum:<br/> <input type="date" id="begindatum" name="begindatum"> <br/>
 						Tijd: <br/> <input type="text" id="tijd" name="tijd"> <br/><br/>
 						<td> Herhaling 
-							<input type="checkbox" id="herhaling" name="herhaling" checked="false" onclick="isChecked(this.checked);"></td>
+							<input type="checkbox" id="herhaling" name="herhaling" onclick="isChecked(this.checked);"></td>
 						<br/><br/>
 						<div id="dagenCheckBox" style="display: none;">
 							Selecteer hier uw herhaaldagen: <br/>
@@ -213,34 +223,38 @@
 									<option value="electrisch"> Electrisch </option>
 									<option value="hybride"> Hybride </option>
 								</select></td></table> <br/><br/>
-					
-					<input type="checkbox" name="aanbieden">Direct aanbieden</input>			
-					<button type="submit"> Klik </button>
-					
-					
+
+						<input type="checkbox" name="aanbieden">Direct aanbieden</input>			
+						<button type="submit"> Klik </button>
+
+						<input id="hiddenstart" name="hiddenstart" style="display: none;" ></input>
+						<input id="hiddenend" name="hiddenend" style="display: none;"></input>
+						<input id="hiddenwaypoints" name="hiddenwaypoints" style="display: none;"></input>
+						<input id="hiddenafstand" name="hiddenafstand" style="display: none;"></input>
+
 					</form>
-					
-						
+
+
 				</div>
-			
-			
-			<div class="mapcontent">
-				<div id="mapcanvas"></div>
-				<div id ="ritoverzicht"> 
-					<table>
-						<td><strong> Totale afstand: </strong> </br>
-							<div id="total" name="total"></div> </td> <br/>
-						
+
+
+				<div class="mapcontent">
+					<div id="mapcanvas"></div>
+					<div id ="ritoverzicht"> 
+						<table>
+							<td><strong> Totale afstand: </strong> </br>
+								<div id="total" name="total"></div> </td> <br/>
+
 							<td><strong>Startadres:</strong><br/>
 								<div id="startadres" name="startadres"></div></td>
-						
+
 							<td><strong>Eindadres:</strong> <br/>
 								<div id="eindadres" name="eindadres"></div></td>
-							
-					</table>
-					
-					
-				
+
+						</table>
+
+
+
 					</div> 
 				</div> 
 			</div>

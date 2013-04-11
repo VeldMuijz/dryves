@@ -95,11 +95,11 @@ public class RitPlannen extends HttpServlet {
 		System.out.println("Haal alle gegevens op en zet ze in Rit");
 		rit.setLidnr(user.getLidnr());
 		//TODO: Goede get parameters maken voor startpunt, eindpunt en waypoint
-		rit.setStartpunt(request.getParameter("hiddenStartadres"));
-		rit.setEindpunt(request.getParameter("hiddenEindadres"));
-		rit.setWaypoint(request.getParameter("waypoints"));
-		rit.setAfstand(Double.parseDouble("45.5"));
-		double prijs = (rit.getAfstand() * 21); //TODO ophalen vanuit Configuratie
+		rit.setStartpunt(request.getParameter("hiddenstart"));
+		rit.setEindpunt(request.getParameter("hiddenend"));
+		rit.setWaypoint(request.getParameter("hiddenwaypoints"));
+		rit.setAfstand(Double.parseDouble(request.getParameter("hiddenafstand")));
+		double prijs = (rit.getAfstand() * 0.21); //TODO ophalen vanuit Configuratie
 		rit.setPrijs(prijs);
 		rit.setGekocht(0);
 		rit.setDatum(datum);
