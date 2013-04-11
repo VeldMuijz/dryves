@@ -71,7 +71,7 @@
 
 					}
 				});
-			//	setRouteInfo();
+					setRouteInfo();
 			}
 
 			/**
@@ -87,55 +87,57 @@
 				}
 				total = total / 1000
 				document.getElementById("total").innerHTML = total + " km";
-			//setRouteinfo();
+				setRouteinfo();
 			}
-			
-			function setRouteinfo(){
+
+			function setRouteinfo() {
 				var startaddress;
+				var startaddress2;
 				var endaddress;
 				var waypoints;
 				
-				startaddress = directionsDisplay.directions.routes[0].legs[0].start_address ;
+
+				startaddress = directionsDisplay.directions.routes[0].legs[0].start_address;
+				startaddress2 = directionsDisplay.directions.routes[0].legs[0].start_address;
 				endaddress = directionsDisplay.directions.routes[0].legs[0].end_address;
 				waypoints = directionsDisplay.directions.routes[0].legs[0].via_waypoints;
-				
-				document.getElementById("start").innerHTML = startaddress;
-				document.getElementById("end").innerHTML = endaddress;
-				document.getElementById("waypoints").innerHTML = waypoints;
-				
-				
+	
+				document.getElementById("startadres").innerHTML = startaddress;
+				document.getElementById("eindadres").innerHTML = endaddress;
+				document.getElementById("waypointS").innerHTML = waypoints;
+
 			}
 
-			function saveWaypoints(){
-			var wparray = [], wp;
-				var route={}	
-			var routeLeg = directionsDisplay.directions.routes[0].legs[0];
-			route.start={'lat': directionsDisplay.start_location, 'lng': directionsDisplay.start_location}
-			route.end={'lat': directionsDisplay.end_location, 'lng': directionsDisplay.end_location}
+			function saveWaypoints() {
+				var wparray = [], wp;
+				var route = {}
+				var routeLeg = directionsDisplay.directions.routes[0].legs[0];
+				route.start = {'lat': directionsDisplay.start_location, 'lng': directionsDisplay.start_location}
+				route.end = {'lat': directionsDisplay.end_location, 'lng': directionsDisplay.end_location}
 				wp = routeLeg.via_waypoints
-				
-				for(var i=0; i<wparray.length; i++){	
-					wparray[i] = [wp[i].lat(),wp[i].lng()];
-				}
-				
-			   
-				//waypoints = wp;
-				console.log(wp);	
-			}
-			
-			function isChecked(blnchecked)
-    {
-    if(blnchecked)
-    {
-        document.getElementById("dagenCheckBox").style.display = "";
-    
-    }
-    else
-    {
-    document.getElementById("dagenCheckBox").style.display = "none";
-    }
 
-    }
+				for (var i = 0; i < wparray.length; i++) {
+					wparray[i] = [wp[i].lat(), wp[i].lng()];
+				}
+
+
+				//waypoints = wp;
+				console.log(wp);
+			}
+
+			function isChecked(blnchecked)
+			{
+				if (blnchecked)
+				{
+					document.getElementById("dagenCheckBox").style.display = "";
+
+				}
+				else
+				{
+					document.getElementById("dagenCheckBox").style.display = "none";
+				}
+
+			}
 
         </script>
 
@@ -165,57 +167,82 @@
 
 			<div class="contentPanel">
 
-				<div id="mapcanvas"></div>
 
 				<div class="invoerveld">
 					<form action="RitPlannen" method="get">
-						<td>Start adres:</td> <br/>
-						<td><div id ="invoerveldadres"><input type="text" id="start" name="start" onchange="calcRoute();" style ="width: 350; float: right:"></td><br />
-								<td>Eind adres:</td> <br/>
-								<td><input type="text" id="end" name="end" onchange="calcRoute();" style ="width: 350; float: right:"> </td><br /> <br />		
+						Start adres: <br/>
+						<input type="text" id="start" name="start" onchange="calcRoute();" style ="width: 350; float: right:"><br />
+						Eind adres: <br/>
+						<input type="text" id="end" name="end" onchange="calcRoute();" style ="width: 350; float: right:"> <br />	
 
-								<div class="invoerveld">Begindatum: <input type="date" id="begindatum" name="begindatum"> 
-									Tijd: <input type="text" id="tijd" name="tijd"> 
-									<input type="checkbox" id="herhaling" name="herhaling" checked="false" onclick="isChecked(this.checked);"> Herhaling <br /> <br />
+						Begindatum:<br/> <input type="date" id="begindatum" name="begindatum"> <br/>
+						Tijd: <br/> <input type="text" id="tijd" name="tijd"> <br/><br/>
+						<td> Herhaling 
+							<input type="checkbox" id="herhaling" name="herhaling" checked="false" onclick="isChecked(this.checked);"></td>
+						<br/><br/>
+						<div id="dagenCheckBox" style="display: none;">
+							Selecteer hier uw herhaaldagen: <br/>
+							<table>
+								<td><input type="checkbox" name="ma" value="ma"> Ma </input> </td>
+								<td><input type="checkbox" name="di" value="di"> Di </input> </td>
+								<td><input type="checkbox" name="wo" value="wo"> Wo </input> </td>
+								<td><input type="checkbox" name="do" value="do"> Do </input> </td>
+								<td><input type="checkbox" name="vr" value="vr"> Vr </input> </td>
+								<td><input type="checkbox" name="za" value="za"> Za </input> </td>
+								<td><input type="checkbox" name="zo" value="zo"> Zo </input> </td>
+							</table>
+							<br/>
+							Einddatum: <input type="date" id="einddatum"> </div>
 
-									<div id="dagenCheckBox" style="display: none;">
-									<td><input type="checkbox" name="ma" value="ma"> Ma </input> 
-									<input type="checkbox" name="di" value="di"> Di </input> 
-									<input type="checkbox" name="wo" value="wo"> Wo </input> </td>
-									<td><input type="checkbox" name="do" value="do"> Do </input>
-									<input type="checkbox" name="vr" value="vr"> Vr </input>
-									<input type="checkbox" name="za" value="za"> Za </input>
-									<input type="checkbox" name="zo" value="zo"> Zo </input></td> <br /> <br /> </div>
-									
-									Einddatum: <input type="date" id="einddatum"> </div>
-								<br /> <br />
-								
-																
-								<div name ="aantalZitplaatsen">Aantal zitplaatsen (voor passagiers): <select name="aantalZitplaatsen">	
-										<option value="1"> 1 </option>
-										<option value="1"> 2 </option> 
-										<option value="1"> 3 </option>
-										<option value="1"> 4 </option>
-										<option value="1"> 5 </option>
-									</select></div><br /> <br />
 
-								<div id="ritComboBox">Soort brandstof: <select id="soortBrandstof" name="soortBrandstof">
-										<option value="benzine"> Benzine </option>
-										<option value="diesel"> Diesel </option>
-										<option value="gas/lpg"> Gas/LPG </option>						
-										<option value="electrisch"> Electrisch </option>
-										<option value="hybride"> Hybride </option>
-									</select></div>
+						<br /> <br />
 
-								<div style="float:right;"><strong><div id="total" name="total"> </div> Totaal aantal km </strong>
-								</div>
-								<input type="checkbox" name="aanbieden">Direct aanbieden</input>
-								<button type="submit"> Klik </button>
+						Selecteer hier uw autogegevens die relevant zijn voor de rit: <br/>								
+						<table><td>Aantal zitplaatsen: <select name="aantalZitplaatsen">	
+									<option value="1"> 1 </option>
+									<option value="1"> 2 </option> 
+									<option value="1"> 3 </option>
+									<option value="1"> 4 </option>
+									<option value="1"> 5 </option>
+								</select></td>
+
+							<td>Soort brandstof: <select id="soortBrandstof" name="soortBrandstof">
+									<option value="benzine"> Benzine </option>
+									<option value="diesel"> Diesel </option>
+									<option value="gas/lpg"> Gas/LPG </option>						
+									<option value="electrisch"> Electrisch </option>
+									<option value="hybride"> Hybride </option>
+								</select></td></table> <br/><br/>
+					
+					<input type="checkbox" name="aanbieden">Direct aanbieden</input>			
+					<button type="submit"> Klik </button>
+					
+					
 					</form>
-
+					
+						
 				</div>
-				<div id="startadres"> <br/> <br/> </div>
-
+			
+			
+			<div class="mapcontent">
+				<div id="mapcanvas"></div>
+				<div id ="ritoverzicht"> 
+					<table>
+						<td><strong> Totale afstand: </strong> </br>
+							<div id="total" name="total"></div> </td> <br/>
+						
+							<td><strong>Startadres:</strong><br/>
+								<div id="startadres" name="startadres"></div></td>
+						
+							<td><strong>Eindadres:</strong> <br/>
+								<div id="eindadres" name="eindadres"></div></td>
+							
+					</table>
+					
+					
+				
+					</div> 
+				</div> 
 			</div>
 
 		</div>

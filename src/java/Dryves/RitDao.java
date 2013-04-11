@@ -28,7 +28,7 @@ public class RitDao {
 
 		int lidnr = bean.getLidnr();
 		String startpunt = bean.getStartpunt();
-		String eindpunt = bean.getStartpunt();
+		String eindpunt = bean.getEindpunt();
 		String waypoints = bean.getWaypoint();
 		Double afstand = bean.getAfstand();
 		Double prijs = bean.getPrijs();

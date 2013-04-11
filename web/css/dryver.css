@@ -112,13 +112,31 @@ button {
 
 }
 
+
+
+.mapcontent{
+	float: right;
+	top: 5px;
+	margin-right: 3px;
+	width: 633px;
+	position: static;
+	
+}
+
 #mapcanvas {
-    width: 600px;
-    height:350px;
+    width: 630px;
+    height: 350px;
     float: right;
 
 }
 
+.invoerveld{
+	width: 300px;
+	margin-left: 3px;
+	margin-top: 5px;
+	float: left;
+	
+}
 #invoerveldadres {
     width: 100px;
     float: left;
