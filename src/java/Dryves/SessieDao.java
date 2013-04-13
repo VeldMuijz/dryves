@@ -137,5 +137,9 @@ public class SessieDao
 return bean;
 
       } 
+
+    private static Locale toString(String locale) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
    }
 
