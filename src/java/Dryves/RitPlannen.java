@@ -71,26 +71,23 @@ public class RitPlannen extends HttpServlet {
 			throws ServletException, IOException {
 		// Instantieren van objecten
 		Rit rit = new Rit();
+		RitDao ritDao = new RitDao();
 		// Haal de huidige sessie op
 		HttpSession session = request.getSession();
-
-		RitDao ritDao = new RitDao();
 		// Maak in de sessie een object rit aan met naam sessieRit
 		session.setAttribute("sessieRit", rit);
 		//Haal de userbean (dit moet sessiebean worden) op uit de sessie
 		Sessie user = (Sessie) session.getAttribute("currentSessionUser");
 
-
-//		// Maak van de datum ipv een String een type Date
-		
-		Date datum = null;
+		//Bouw ingevoerde datum om naar een timestamp
+		Date datum;
 		String stringDatum = request.getParameter("begindatum");
 		String stringTijd = request.getParameter("tijd");
 
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
 		SimpleDateFormat timestampFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
-//		
+	
 		try {
 
 			datum = dateFormat.parse(stringDatum + " " + stringTijd);
@@ -103,7 +100,6 @@ public class RitPlannen extends HttpServlet {
 			Logger.getLogger(RitPlannen.class.getName()).log(Level.SEVERE, null, ex);
 		}
 
-		//System.out.println("Stringdatum: " + stringDatum);
 		System.out.println("Haal alle gegevens op en zet ze in Rit");
 		rit.setLidnr(user.getLidnr());
 		rit.setStartpunt(request.getParameter("hiddenstart"));
@@ -122,7 +118,8 @@ public class RitPlannen extends HttpServlet {
 			rit.setAangeboden(0);
 		}
 		rit.setBrandstof(request.getParameter("soortBrandstof"));
-		System.out.println("total value: " + request.getParameter("total"));
+
+		//voer de insert query uit om rit op te slaan
 		ritDao.ritplannen(rit);
 
 	}
