@@ -35,7 +35,7 @@ public class SessieDao
          String email = bean.getEmail();    
          String wachtwoord = bean.getWachtwoord();   
 
-         String zoekQuery = "select lid.vnaam, lid.anaam, lid.wachtwoord, lid.lidnr from Lid as lid where lid.email='" + email +"';";
+         String zoekQuery = "select lid.vnaam, lid.anaam, lid.wachtwoord, lid.lidnr, lid.langnotify from Lid as lid where lid.email='" + email +"';";
              
 
       // "System.out.println" prints in the console; Normally used to trace the process
@@ -61,12 +61,19 @@ public class SessieDao
          //if user exists set the isValid variable to true
          else if (more) 
          { 
-             
+            //Hieronder wordt het wachtwoord van de user opgehaald uit de database 
             String wachtwoordUser = rs.getString(3);
             
+            //Hieronder worden de wachtwoorden geprint in de console
             System.out.println("Dit is het ww uit de DB: " + wachtwoordUser);
             
             System.out.println("Dit is het ww van de JSP: " + wachtwoord);
+            
+            //Hieronder wordt de locale opgehaald uit de database
+            String locale = rs.getString(5);
+            
+            //Hieronder wordt de locale naar de console geprint
+            System.out.println("Dit is de locale van het lid: " + locale);
             
            if (wachtwoord.equals(wachtwoordUser)) {
             
@@ -74,14 +81,18 @@ public class SessieDao
             
             String vnaam = rs.getString(1);
             String anaam = rs.getString(2);
-			int lidnr = rs.getInt(4);
+            int lidnr = rs.getInt(4);
 
-            System.out.println("Welkom! " + vnaam);
+            System.out.println("Welkom " + vnaam);
 			
-			bean.setLidnr(lidnr);
+            bean.setLidnr(lidnr);
             bean.setVnaam(vnaam);
             bean.setAnaam(anaam);
+            //bean.setLocale(locale);
             bean.setValid(true);
+            
+            //Hieronder wordt de locale vanuit de getter geprint naar de console
+            System.out.println("Dit is de locale vanuit de getter van sessie :" + bean.getLocale() );
             
            }
            else {
@@ -126,5 +137,9 @@ public class SessieDao
 return bean;
 
       } 
+
+    private static Locale toString(String locale) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
    }
 

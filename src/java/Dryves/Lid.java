@@ -2,6 +2,7 @@ package Dryves;
 // Generated 26-mrt-2013 21:03:05 by Hibernate Tools 3.2.1.GA
 
 import java.util.Hashtable;
+import java.util.Locale;
 
 
 
@@ -28,6 +29,7 @@ public class Lid  implements java.io.Serializable {
      private int beoordeling;
      private String fotoUrl;
      private String tvoegsel;
+     private Locale locale;
      private String notify;
      private Hashtable errors;
 
@@ -35,7 +37,7 @@ public class Lid  implements java.io.Serializable {
     }
 
 	
-    public Lid(int lidnr, String vnaam, String anaam, char geslacht, String adres, String huisnummer, String reknr, String postcode, String stad, String email, String wachtwoord, String wachtwoord2, int beoordeling, String fotoUrl, String tvoegsel) {
+    public Lid(int lidnr, String vnaam, String anaam, char geslacht, String adres, String huisnummer, String reknr, String postcode, String stad, String email, String wachtwoord, String wachtwoord2, int beoordeling, String fotoUrl, String tvoegsel, Locale locale) {
         this.lidnr = lidnr;
         this.vnaam = vnaam;
         this.anaam = anaam;
@@ -51,8 +53,9 @@ public class Lid  implements java.io.Serializable {
         this.beoordeling = beoordeling;
         this.fotoUrl = fotoUrl;
         this.tvoegsel = tvoegsel;
+        this.locale = locale;
     }
-    public Lid(int lidnr, String vnaam, String anaam, char geslacht, String adres, String huisnummer, String postcode, String stad, String telnr, String reknr, String email, String wachtwoord, String wachtwoord2, int beoordeling, String fotoUrl, String tvoegsel) {
+    public Lid(int lidnr, String vnaam, String anaam, char geslacht, String adres, String huisnummer, String postcode, String stad, String telnr, String reknr, String email, String wachtwoord, String wachtwoord2, int beoordeling, String fotoUrl, String tvoegsel, Locale locale) {
        this.lidnr = lidnr;
        this.vnaam = vnaam;
        this.anaam = anaam;
@@ -68,6 +71,7 @@ public class Lid  implements java.io.Serializable {
        this.beoordeling = beoordeling;
        this.fotoUrl = fotoUrl;
        this.tvoegsel = tvoegsel;
+       this.locale = locale;
     }
     
     public boolean validate() {
@@ -271,6 +275,14 @@ public class Lid  implements java.io.Serializable {
     
     public void setTvoegsel(String tvoegsel) {
         this.tvoegsel = tvoegsel;
+    }
+
+    public Locale getLocale() {
+        return locale;
+    }
+
+    public void setLocale(Locale locale) {
+        this.locale = locale;
     }
 
     public String getNotify() {

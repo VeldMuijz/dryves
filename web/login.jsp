@@ -6,7 +6,12 @@
 
 <%@page import="Dryves.Sessie"%>
 <%@page import="Dryves.Login"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<fmt:setLocale value="nl_NL" />
+<fmt:setBundle basename="ResourceBundles.Dryves" scope="request" var="rb" />
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -51,44 +56,22 @@
             
 Dit is de login page! 
 
-<br />
-<br />
-
-
-
-<div id="showDiv">
-    
-    <%
-    
-    Sessie user = new Sessie();
-    
-    if (user.valid == false)
-        
-     {
-     
-     
-            }
-    %>
-
-
-
-    <br /><br />
-    
-</div>
-
+<br /><br />
 
 <form action="LoginServlet" method="get">
 <table style="width:320px;">
     <tr>
         <td>
-           Gebruikersnaam: 
+           <fmt:message bundle="${rb}" key="gebruikersnaam" />
         </td>
         <td>
           <input type="text" id="email" name="email" style="width:205px;"/>  
         </td>
     </tr>
     <tr>
-        <td>Wachtwoord:</td>
+        <td>
+            <fmt:message bundle="${rb}" key="wachtwoord" />
+        </td>
         <td><input type="text" id="wachtwoord" name="wachtwoord" style="width:205px;" /></td>
     </tr>
     <tr>
