@@ -78,7 +78,7 @@ public class SessieDao
 
             System.out.println("Welkom! " + vnaam);
 			
-			bean.setLidnr(lidnr);
+            bean.setLidnr(lidnr);
             bean.setVnaam(vnaam);
             bean.setAnaam(anaam);
             bean.setValid(true);
