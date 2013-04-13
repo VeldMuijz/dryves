@@ -105,7 +105,12 @@ public class RitPlannen extends HttpServlet {
 		rit.setStartpunt(request.getParameter("hiddenstart"));
 		rit.setEindpunt(request.getParameter("hiddenend"));
 		rit.setWaypoint(request.getParameter("hiddenwaypoints"));
-		rit.setAfstand(Double.parseDouble(request.getParameter("hiddenafstand")));
+		try{
+			rit.setAfstand(Double.parseDouble(request.getParameter("hiddenafstand")));
+		}catch(Exception e){
+			System.out.println(e);
+		}
+		
 		double prijs = (rit.getAfstand() * 0.21); //TODO ophalen vanuit Configuratie
 		rit.setPrijs(prijs);
 		rit.setGekocht(0);
@@ -121,7 +126,13 @@ public class RitPlannen extends HttpServlet {
 
 		//voer de insert query uit om rit op te slaan
 		ritDao.ritplannen(rit);
-
+		
+		if(ritDao.getSuccess()){
+			response.sendError(1, "het is helemaal fout gegaan");
+		}else{
+			response.sendRedirect("rit_plannen.jsp");
+			
+		}
 	}
 
 	/**
