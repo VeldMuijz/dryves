@@ -2,6 +2,7 @@ package Dryves;
 // Generated 26-mrt-2013 21:03:05 by Hibernate Tools 3.2.1.GA
 
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 /**
@@ -18,7 +19,8 @@ public class Rit  implements java.io.Serializable {
      private double afstand;
      private double prijs;
      private int gekocht;
-     private Date datum;
+	 private Timestamp datum;
+     //private Date datum;
 	 private int zitplaatsen;
      private String brandstof;
      private int aangeboden;
@@ -27,7 +29,7 @@ public class Rit  implements java.io.Serializable {
     }
 
 	
-    public Rit(long ritnr, int lidnr, String startpunt, String eindpunt, double afstand, double prijs, int gekocht, Date datum, int zitplaatsen, int aangeboden) {
+    public Rit(long ritnr, int lidnr, String startpunt, String eindpunt, double afstand, double prijs, int gekocht, Timestamp datum, int zitplaatsen, int aangeboden) {
         this.ritnr = ritnr;
         this.lidnr = lidnr;
         this.startpunt = startpunt;
@@ -39,7 +41,7 @@ public class Rit  implements java.io.Serializable {
         this.zitplaatsen = zitplaatsen;
         this.aangeboden = aangeboden;
     }
-    public Rit(long ritnr, int lidnr, String startpunt, String eindpunt, String waypoint, double afstand, double prijs, int gekocht, Date datum, int zitplaatsen, String brandstof, int aangeboden) {
+    public Rit(long ritnr, int lidnr, String startpunt, String eindpunt, String waypoint, double afstand, double prijs, int gekocht, Timestamp datum, int zitplaatsen, String brandstof, int aangeboden) {
        this.ritnr = ritnr;
        this.lidnr = lidnr;
        this.startpunt = startpunt;
@@ -110,11 +112,11 @@ public class Rit  implements java.io.Serializable {
     public void setGekocht(int gekocht) {
         this.gekocht = gekocht;
     }
-    public Date getDatum() {
+    public Timestamp getDatum() {
         return this.datum;
     }
     
-    public void setDatum(Date datum) {
+    public void setDatum(Timestamp datum) {
         this.datum = datum;
     }
     public int getZitplaatsen() {

@@ -7,6 +7,8 @@ package Dryves;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.lang.String;
+
+import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -71,30 +73,39 @@ public class RitPlannen extends HttpServlet {
 		Rit rit = new Rit();
 		// Haal de huidige sessie op
 		HttpSession session = request.getSession();
+
+		RitDao ritDao = new RitDao();
 		// Maak in de sessie een object rit aan met naam sessieRit
 		session.setAttribute("sessieRit", rit);
 		//Haal de userbean (dit moet sessiebean worden) op uit de sessie
 		Sessie user = (Sessie) session.getAttribute("currentSessionUser");
 
 
-		// Maak van de datum ipv een String een type Date
+//		// Maak van de datum ipv een String een type Date
+		
 		Date datum = null;
 		String stringDatum = request.getParameter("begindatum");
 		String stringTijd = request.getParameter("tijd");
-		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
 
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+		SimpleDateFormat timestampFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+
+//		
 		try {
 
 			datum = dateFormat.parse(stringDatum + " " + stringTijd);
+			String timestamp = timestampFormat.format(datum);
+			timestamp = timestamp + ":00";
+			System.out.println("dit is timestamp na conversie: " + timestamp);
+			rit.setDatum(Timestamp.valueOf(timestamp));
 
 		} catch (ParseException ex) {
 			Logger.getLogger(RitPlannen.class.getName()).log(Level.SEVERE, null, ex);
 		}
 
-		System.out.println("Stringdatum: " + stringDatum);
+		//System.out.println("Stringdatum: " + stringDatum);
 		System.out.println("Haal alle gegevens op en zet ze in Rit");
 		rit.setLidnr(user.getLidnr());
-		//TODO: Goede get parameters maken voor startpunt, eindpunt en waypoint
 		rit.setStartpunt(request.getParameter("hiddenstart"));
 		rit.setEindpunt(request.getParameter("hiddenend"));
 		rit.setWaypoint(request.getParameter("hiddenwaypoints"));
@@ -102,7 +113,6 @@ public class RitPlannen extends HttpServlet {
 		double prijs = (rit.getAfstand() * 0.21); //TODO ophalen vanuit Configuratie
 		rit.setPrijs(prijs);
 		rit.setGekocht(0);
-		rit.setDatum(datum);
 		rit.setZitplaatsen(Integer.parseInt(request.getParameter("aantalZitplaatsen")));
 
 		//check of rit direct aangeboden mag worden
@@ -113,7 +123,7 @@ public class RitPlannen extends HttpServlet {
 		}
 		rit.setBrandstof(request.getParameter("soortBrandstof"));
 		System.out.println("total value: " + request.getParameter("total"));
-		rit = RitDao.ritplannen(rit);
+		ritDao.ritplannen(rit);
 
 	}
 
