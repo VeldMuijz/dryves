@@ -10,7 +10,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <fmt:setLocale value="nl_NL" />
-<fmt:setBundle basename="ResourceBundles.HRTools" scope="request" var="rb" />
+<fmt:setBundle basename="ResourceBundles.Dryves" scope="request" var="rb" />
 
 <!DOCTYPE html>
 <html>
@@ -55,9 +55,8 @@
         <div class="contentPanel">
             
 Dit is de login page! 
-    
-</div>
 
+<br /><br />
 
 <form action="LoginServlet" method="get">
 <table style="width:320px;">

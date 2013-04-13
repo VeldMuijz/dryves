@@ -4,8 +4,27 @@
     Author     : Vincent
 --%>
 
+<%@page import="java.util.Locale"%>
 <%@page import="Dryves.Sessie"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<% 
+    Sessie currentUser = (Sessie) (session.getAttribute("currentSessionUser"));
+    
+    System.out.println("Locale uit mijndryves.jsp :" + currentUser.getLocale());
+    
+    Locale locale = currentUser.getLocale();
+    
+    System.out.println("Locale uit de String :" + locale);
+    
+%>
+
+
+<fmt:setLocale value="${locale}" />
+
+<fmt:setBundle basename="ResourceBundles.Dryves" scope="request" var="rb" />
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -41,9 +60,13 @@
                 <button onclick="window.location = 'mijndryves_gegevens.jsp';">Mijn gegevens</button>
                 <button onclick="window.location = 'rit_plannen.jsp';">Mijn berichten</button>
                 <button onclick="window.location = 'rit_plannen.jsp';">Mijn ritten</button>
-
-
-        <% Sessie currentUser = (Sessie) (session.getAttribute("currentSessionUser"));%>
+                
+                <br /><br />
+                
+                <fmt:message bundle="${rb}" key="ubentingelogdals" />
+                
+                <br /><br />
+        
 
         Welkom <%= currentUser.getVnaam() + " " + currentUser.getAnaam() %>
 

@@ -4,6 +4,8 @@
  */
 package Dryves;
 
+import java.util.Locale;
+
 /**
  *
  * @author RickSpijker
@@ -15,6 +17,7 @@ public class Sessie {
 	private String wachtwoord;
 	private String vnaam;
 	private String anaam;
+        private Locale locale;
 	public boolean valid;
 
 	public int getLidnr() {
@@ -57,6 +60,14 @@ public class Sessie {
 		email = newEmail;
 	}
 
+        public Locale getLocale() {
+            return locale;
+        }
+
+        public void setLocale(Locale locale) {
+            this.locale = locale;
+        }
+
 	public boolean isValid() {
 		return valid;
 	}
@@ -65,4 +76,9 @@ public class Sessie {
 		valid = newValid;
 
 	}
+
+    void setLocale(String locale) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

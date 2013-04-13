@@ -46,5 +46,8 @@
     <property name="tvoegsel" type="string">
       <column length="10" name="tvoegsel"/>
     </property>
+    <property name="locale" type="string">
+      <column length="10" name="locale"/>
+    </property>
   </class>
 </hibernate-mapping>
