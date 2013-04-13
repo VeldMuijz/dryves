@@ -1,3 +1,4 @@
+
 <%-- 
     Document   : index
     Created on : 24-mrt-2013, 19:59:48
@@ -10,7 +11,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Dryves reg</title>
+        <title>Dryves</title>
         <link type="text/css" rel="stylesheet" href="css/dryver.css"/>
         
         <script>
@@ -54,7 +55,7 @@ Schrijf je per direct in en word lid! Ontdek de vele voordele die de Dryves comm
             <form action="/dryves/proces.jsp" method=post>
             
                 <div class="regformheader">
-                        <font size=5>Registratie forumlier</font>
+                        <font size=5>Registratie formulier</font>
                         <br>
                         <font size=2 color="red"><sup>*</sup> Verplichte velden</font>
                 </div>
