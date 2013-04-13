@@ -35,7 +35,7 @@ public class SessieDao
          String email = bean.getEmail();    
          String wachtwoord = bean.getWachtwoord();   
 
-         String zoekQuery = "select lid.vnaam, lid.anaam, lid.wachtwoord, lid.lidnr, lid.locale from Lid as lid where lid.email='" + email +"';";
+         String zoekQuery = "select lid.vnaam, lid.anaam, lid.wachtwoord, lid.lidnr, lid.langnotify from Lid as lid where lid.email='" + email +"';";
              
 
       // "System.out.println" prints in the console; Normally used to trace the process
@@ -88,7 +88,7 @@ public class SessieDao
             bean.setLidnr(lidnr);
             bean.setVnaam(vnaam);
             bean.setAnaam(anaam);
-            bean.setLocale(locale);
+            //bean.setLocale(locale);
             bean.setValid(true);
             
             //Hieronder wordt de locale vanuit de getter geprint naar de console
