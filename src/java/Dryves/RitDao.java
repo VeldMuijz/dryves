@@ -1,7 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Dryves;
 
 import java.sql.Connection;
@@ -9,7 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -29,11 +25,16 @@ public class RitDao {
 	Double prijs;
 	int gekocht;
 	Timestamp datum;
-	//Date datum;
 	int zitplaatsen;
 	int aangeboden;
 	String brandstof;
-
+	Boolean success;
+	
+	/**
+	 * Ophalen van alle gegevens uit de servlet voor de rit_plannen.jsp
+	 * @param bean
+	 * @return 
+	 */
 	public Rit ritplannen(Rit bean) {
 
 		setLidnr(bean.getLidnr());
@@ -44,8 +45,6 @@ public class RitDao {
 		setPrijs(bean.getPrijs());
 		setGekocht(bean.getGekocht());
 		setDatum(bean.getDatum());
-
-		//setDatum(bean.getDatum());
 		setZitplaatsen(bean.getZitplaatsen());
 		setAangeboden(bean.getAangeboden());
 		setBrandstof(bean.getBrandstof());
@@ -71,7 +70,12 @@ public class RitDao {
 		return bean;
 	}
 
-	public void saveRit() {
+	
+	
+	/**
+	 * Opslaan van rit in de database
+	 */
+	private void saveRit() {
 		try {
 			currentCon = ConnectionManager.getConnection();
 			PreparedStatement insertRit;
@@ -124,8 +128,9 @@ public class RitDao {
 			
 		} catch (SQLException ex) {
 			Logger.getLogger(RitDao.class.getName()).log(Level.SEVERE, null, ex);
-
+			success = false;
 		} 
+		success = true;
 	}
 
 	public static Connection getCurrentCon() {
@@ -231,4 +236,13 @@ public class RitDao {
 	public void setBrandstof(String brandstof) {
 		this.brandstof = brandstof;
 	}
+
+	public Boolean getSuccess() {
+		return success;
+	}
+
+	public void setSuccess(Boolean success) {
+		this.success = success;
+	}
+	
 }
