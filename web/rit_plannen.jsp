@@ -100,15 +100,15 @@
 				startaddress = directionsDisplay.directions.routes[0].legs[0].start_address;
 				endaddress = directionsDisplay.directions.routes[0].legs[0].end_address;
 				waypoints = directionsDisplay.directions.routes[0].legs[0].via_waypoints;
-				
+
 				//zet de waardes voor het overzicht
 				document.getElementById("startadres").innerHTML = startaddress;
 				document.getElementById("end").value = endaddress;
-				
+
 				//zet de waardes voor de invoervelden
 				document.getElementById("eindadres").innerHTML = endaddress;
 				document.getElementById("start").value = startaddress;
-				
+
 				//zet de waardes voor de verborgenvelden (gebruikt door servlet)
 				document.getElementById("hiddenstart").value = startaddress;
 				document.getElementById("hiddenend").value = endaddress;
@@ -118,22 +118,8 @@
 
 			}
 
-			function saveWaypoints() {
-				var wparray = [], wp;
-				var route = {}
-				var routeLeg = directionsDisplay.directions.routes[0].legs[0];
-				route.start = {'lat': directionsDisplay.start_location, 'lng': directionsDisplay.start_location}
-				route.end = {'lat': directionsDisplay.end_location, 'lng': directionsDisplay.end_location}
-				wp = routeLeg.via_waypoints
-
-				for (var i = 0; i < wparray.length; i++) {
-					wparray[i] = [wp[i].lat(), wp[i].lng()];
-				}
 
 
-				//waypoints = wp;
-				console.log(wp);
-			}
 
 			function isChecked(blnchecked)
 			{
@@ -147,6 +133,44 @@
 					document.getElementById("dagenCheckBox").style.display = "none";
 				}
 
+
+
+			}
+			function isCompleet() {
+				var startadres = document.getElementById("start").value;
+				var eindadres = document.getElementById("end").value;
+				var begindatum = document.getElementById("begindatum").value;
+				var tijd = document.getElementById("tijd").value;
+				var einddatum = document.getElementById("einddatum").value;
+				var herhaling = document.getElementById("herhaling");
+				var maa = document.getElementsByName("ma");
+				var din = document.getElementsByName("di");
+				var woe = document.getElementsByName("wo");
+				var don = document.getElementsByName("do");
+				var vri = document.getElementsByName("vr");
+				var zat = document.getElementsByName("za");
+				var zon = document.getElementsByName("zo");
+
+
+				if (startadres === "") {
+					alert("Graag een bestaand startpunt invullen.");
+					return false;
+				} else if (eindadres === "") {
+					alert("Graag een bestaand eindpunt invullen.");
+					return false;
+				} else if (begindatum === "") {
+					alert("Graag een begindatum invullen.");
+					return false;
+				} else if (tijd === "") {
+					alert("Graag een tijdstip invullen.");
+					return false;
+				}
+				 else if ((herhaling.checked) && (einddatum === "")) {
+					alert("Graag een einddatum invullen.");
+					return false;
+				} //TODO: Invoegen controle op dagen
+			
+				return true;
 			}
 
         </script>
@@ -179,7 +203,7 @@
 
 
 				<div class="invoerveld">
-					<form action="RitPlannen" method="get">
+					<form action="RitPlannen" method="get" onsubmit="return isCompleet();">
 						Start adres: <br/>
 						<input type="text" id="start" name="start" onchange="calcRoute();" style ="width: 350; float: right:"><br />
 						Eind adres: <br/>
@@ -188,7 +212,7 @@
 						Begindatum:<br/> <input type="date" id="begindatum" name="begindatum"> <br/>
 						Tijd: <br/> <input type="text" id="tijd" name="tijd"> <br/><br/>
 						<td> Herhaling 
-							<input type="checkbox" id="herhaling" name="herhaling" onclick="isChecked(this.checked);"></td>
+							<input type="checkbox" id="herhaling" name="herhaling" onclick="isChecked(this.checked);"> </td>
 						<br/><br/>
 						<div id="dagenCheckBox" style="display: none;">
 							Selecteer hier uw herhaaldagen: <br/>

@@ -120,8 +120,6 @@ public class RitDao {
 			insertRit.setString(10, brandstof);
 			insertRit.setInt(11, aangeboden);
 
-
-
 			System.out.println("De query is: " + insertRit);
 
 			insertRit.executeQuery();
@@ -129,6 +127,7 @@ public class RitDao {
 		} catch (SQLException ex) {
 			Logger.getLogger(RitDao.class.getName()).log(Level.SEVERE, null, ex);
 			success = false;
+			System.out.println("Var Success = " + success);
 		} 
 		success = true;
 	}

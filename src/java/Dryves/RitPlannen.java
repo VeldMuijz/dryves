@@ -79,38 +79,41 @@ public class RitPlannen extends HttpServlet {
 		//Haal de userbean (dit moet sessiebean worden) op uit de sessie
 		Sessie user = (Sessie) session.getAttribute("currentSessionUser");
 
+		//Haal alle gegevens op en zet ze in Rit
 		//Bouw ingevoerde datum om naar een timestamp
 		Date datum;
 		String stringDatum = request.getParameter("begindatum");
 		String stringTijd = request.getParameter("tijd");
-
+		
+		String timestamp;
+				
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
 		SimpleDateFormat timestampFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
-	
 		try {
-
 			datum = dateFormat.parse(stringDatum + " " + stringTijd);
-			String timestamp = timestampFormat.format(datum);
+			timestamp = timestampFormat.format(datum);
 			timestamp = timestamp + ":00";
 			System.out.println("dit is timestamp na conversie: " + timestamp);
+			
 			rit.setDatum(Timestamp.valueOf(timestamp));
-
+			
 		} catch (ParseException ex) {
 			Logger.getLogger(RitPlannen.class.getName()).log(Level.SEVERE, null, ex);
+			System.out.println("************ Programma snapt Timestamp niet!");
 		}
 
-		System.out.println("Haal alle gegevens op en zet ze in Rit");
+
 		rit.setLidnr(user.getLidnr());
 		rit.setStartpunt(request.getParameter("hiddenstart"));
 		rit.setEindpunt(request.getParameter("hiddenend"));
 		rit.setWaypoint(request.getParameter("hiddenwaypoints"));
-		try{
+		try {
 			rit.setAfstand(Double.parseDouble(request.getParameter("hiddenafstand")));
-		}catch(Exception e){
+		} catch (Exception e) {
 			System.out.println(e);
 		}
-		
+
 		double prijs = (rit.getAfstand() * 0.21); //TODO ophalen vanuit Configuratie
 		rit.setPrijs(prijs);
 		rit.setGekocht(0);
@@ -124,16 +127,13 @@ public class RitPlannen extends HttpServlet {
 		}
 		rit.setBrandstof(request.getParameter("soortBrandstof"));
 
+
 		//voer de insert query uit om rit op te slaan
 		ritDao.ritplannen(rit);
-		
-		if(ritDao.getSuccess()){
-			response.sendError(1, "het is helemaal fout gegaan");
-		}else{
-			response.sendRedirect("rit_plannen.jsp");
+
 			
-		}
 	}
+
 
 	/**
 	 * Handles the HTTP

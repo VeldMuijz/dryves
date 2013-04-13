@@ -54,6 +54,7 @@ public class Rit  implements java.io.Serializable {
        this.zitplaatsen = zitplaatsen;
        this.brandstof = brandstof;
        this.aangeboden = aangeboden;
+	   
     }
    
     public long getRitnr() {
