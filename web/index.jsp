@@ -41,11 +41,6 @@
                 <button onclick="window.location = 'index.jsp';">Home</button><button onclick="window.location = 'watisdryves.jsp';">Wat is Dryves</button><button onclick="window.location = 'faq.jsp';">FAQ</button><button onclick="window.location = 'registratie.jsp';">Registreer</button>        
             </div>
 
-            <div class="contentPanel">
-                <button onclick="window.location = 'rit_plannen.jsp';">Home</button>
-
-                Dit is de homepage! 
-
                 <br /><br />
                         <div class="slider-wrapper theme-default">
                     <div id="slider" class="nivoSlider">
@@ -64,20 +59,7 @@
                         $('#slider').nivoSlider();
                     });
                 </script>
-                </div>
-
-        
-
-            
-
-
-
-
-
-
-
-
-        </div>
+                </div>        
 
     </body>
 </html>
