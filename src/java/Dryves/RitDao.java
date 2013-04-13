@@ -76,7 +76,8 @@ public class RitDao {
 			currentCon = ConnectionManager.getConnection();
 			PreparedStatement insertRit;
 
-			String queryString = ("INSERT INTO Rit ("
+			String queryString = (
+					"INSERT INTO Rit ("
 					+ "lidnr,"
 					+ " startpunt,"
 					+ " eindpunt,"
@@ -89,7 +90,8 @@ public class RitDao {
 					+ " brandstof,"
 					+ " aangeboden)"
 					+ " Values"
-					+ "(?,?,?,?,?,?,?,?,?,?,?);");
+					+ "(?,?,?,?,?,?,?,?,?,?,?);"
+					);
 
 
 			insertRit = currentCon.prepareStatement(queryString);
@@ -98,7 +100,14 @@ public class RitDao {
 			insertRit.setInt(1, lidnr);
 			insertRit.setString(2, startpunt);
 			insertRit.setString(3, eindpunt);
-			insertRit.setString(4, waypoints);
+			if (waypoints.equals("")) {
+				
+				insertRit.setString(4,null);
+				
+			}else {
+				insertRit.setString(4, waypoints);
+			}
+			
 			insertRit.setDouble(5, afstand);
 			insertRit.setDouble(6, prijs);
 			insertRit.setInt(7, gekocht);
@@ -112,12 +121,11 @@ public class RitDao {
 			System.out.println("De query is: " + insertRit);
 
 			insertRit.executeQuery();
-
+			
 		} catch (SQLException ex) {
 			Logger.getLogger(RitDao.class.getName()).log(Level.SEVERE, null, ex);
 
 		} 
-		
 	}
 
 	public static Connection getCurrentCon() {
@@ -200,13 +208,6 @@ public class RitDao {
 		this.datum = datum;
 	}
 
-//	public Date getDatum() {
-//		return datum;
-//	}
-//
-//	public void setDatum(Date datum) {
-//		this.datum = datum;
-//	}
 	public int getZitplaatsen() {
 		return zitplaatsen;
 	}
