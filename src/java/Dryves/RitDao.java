@@ -17,7 +17,6 @@ import org.joda.time.DateTimeConstants;
  */
 public class RitDao {
 
-	
 	static Connection currentCon;
 	static ResultSet rs;
 	int lidnr;
@@ -41,6 +40,7 @@ public class RitDao {
 	int vr;
 	int za;
 	int zo;
+	int meerdere = 0;
 
 	/**
 	 * Ophalen van alle gegevens uit de servlet voor de rit_plannen.jsp
@@ -64,15 +64,18 @@ public class RitDao {
 		setAangeboden(bean.getAangeboden());
 		setBrandstof(bean.getBrandstof());
 
-		saveRit();
-
+		if (meerdere != 0) {
+			saveMeerdereRitten();
+		} else {
+			saveRit();
+		}
 		return bean;
 	}
 
 	/**
 	 * Opslaan van rit in de database
 	 */
-	private void saveRit() {
+	private void saveMeerdereRitten() {
 		System.out.println("dit is waarde van ma: " + ma);
 		ArrayList<Integer> dagenVdWeek = new ArrayList();
 		if (ma == 1) {
@@ -96,7 +99,7 @@ public class RitDao {
 			DayOfWeekIterator it = new DayOfWeekIterator(begindatum, einddatum, dagenVdWeek.get(i));
 
 			while (it.hasNext()) {
-				System.out.println("dit is it.next();"+it.next());
+				System.out.println("dit is it.next();" + it.next());
 				datum = new Timestamp(it.next().getMillis());
 				System.out.println("Dit is datum na conversie: " + datum);
 				try {
@@ -163,62 +166,56 @@ public class RitDao {
 		}
 	}
 
-	private void saveRitMaandag() {
-		DayOfWeekIterator it = new DayOfWeekIterator(begindatum, einddatum, DateTimeConstants.MONDAY);
-		while (it.hasNext()) {
+	private void saveRit() {
 
+		datum = new Timestamp(begindatum.getMillis());
+		try {
+			currentCon = ConnectionManager.getConnection();
+			PreparedStatement insertRit;
 
-			//System.out.println("Dit is it.hasnext() : " + it.next());
-			datum = new Timestamp(it.next().getMillis());
-			//System.out.println("Dit is timestamp datum: " + datum);	
-			datum = new Timestamp(it.next().getMillis());
-			try {
-				currentCon = ConnectionManager.getConnection();
-				PreparedStatement insertRit;
+			String queryString = ("INSERT INTO Rit ("
+					+ "lidnr,"
+					+ " startpunt,"
+					+ " eindpunt,"
+					+ " waypoint,"
+					+ " afstand,"
+					+ " prijs,"
+					+ " gekocht,"
+					+ " datum,"
+					+ " zitplaatsen,"
+					+ " brandstof,"
+					+ " aangeboden)"
+					+ " Values"
+					+ "(?,?,?,?,?,?,?,?,?,?,?);");
+			insertRit = currentCon.prepareStatement(queryString);
 
-				String queryString = ("INSERT INTO Rit ("
-						+ "lidnr,"
-						+ " startpunt,"
-						+ " eindpunt,"
-						+ " waypoint,"
-						+ " afstand,"
-						+ " prijs,"
-						+ " gekocht,"
-						+ " datum,"
-						+ " zitplaatsen,"
-						+ " brandstof,"
-						+ " aangeboden)"
-						+ " Values"
-						+ "(?,?,?,?,?,?,?,?,?,?,?);");
-				insertRit = currentCon.prepareStatement(queryString);
-
-				insertRit.setInt(1, lidnr);
-				insertRit.setString(2, startpunt);
-				insertRit.setString(3, eindpunt);
-				if (waypoints.equals("")) {
-					insertRit.setString(4, null);
-				} else {
-					insertRit.setString(4, waypoints);
-				}
-				insertRit.setDouble(5, afstand);
-				insertRit.setDouble(6, prijs);
-				insertRit.setInt(7, gekocht);
-				insertRit.setTimestamp(8, datum);
-				insertRit.setInt(9, zitplaatsen);
-				insertRit.setString(10, brandstof);
-				insertRit.setInt(11, aangeboden);
-
-				System.out.println("De query is: " + insertRit);
-
-				insertRit.executeQuery();
-
-			} catch (SQLException ex) {
-				Logger.getLogger(RitDao.class.getName()).log(Level.SEVERE, null, ex);
-				success = false;
-				System.out.println("Var Success = " + success);
+			insertRit.setInt(1, lidnr);
+			insertRit.setString(2, startpunt);
+			insertRit.setString(3, eindpunt);
+			if (waypoints.equals("")) {
+				insertRit.setString(4, null);
+			} else {
+				insertRit.setString(4, waypoints);
 			}
-			success = true;
+			insertRit.setDouble(5, afstand);
+			insertRit.setDouble(6, prijs);
+			insertRit.setInt(7, gekocht);
+			insertRit.setTimestamp(8, datum);
+			insertRit.setInt(9, zitplaatsen);
+			insertRit.setString(10, brandstof);
+			insertRit.setInt(11, aangeboden);
+
+			System.out.println("De query is: " + insertRit);
+
+			insertRit.executeQuery();
+
+		} catch (SQLException ex) {
+			Logger.getLogger(RitDao.class.getName()).log(Level.SEVERE, null, ex);
+			success = false;
+			System.out.println("Var Success = " + success);
 		}
+		success = true;
+
 	}
 
 	public static Connection getCurrentCon() {
@@ -411,5 +408,13 @@ public class RitDao {
 
 	public void setZo(int zo) {
 		this.zo = zo;
+	}
+
+	public int getMeerdere() {
+		return meerdere;
+	}
+
+	public void setMeerdere(int meerdere) {
+		this.meerdere = meerdere;
 	}
 }

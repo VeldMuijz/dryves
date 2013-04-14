@@ -26,11 +26,12 @@ import org.joda.time.DateTime;
  * @author jeroen
  */
 public class RitPlannen extends HttpServlet {
-		String stringDatum;
-		String stringEindDatum;
-		String stringTijd;
-		String timestamp;
-		String eindTimestamp;
+
+	String stringDatum;
+	String stringEindDatum;
+	String stringTijd;
+	String timestamp;
+	String eindTimestamp;
 
 	/**
 	 * Processes requests for both HTTP
@@ -90,52 +91,64 @@ public class RitPlannen extends HttpServlet {
 		Date datum;
 		Date einddatum;
 		stringDatum = request.getParameter("begindatum");
-		stringEindDatum = request.getParameter("einddatum");
-		System.out.println("StringEinddatum: " + stringEindDatum);
 		stringTijd = request.getParameter("tijd");
-				
+
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy'T'HH:mm");
 		SimpleDateFormat timestampFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
 
 		try {
 			datum = dateFormat.parse(stringDatum + 'T' + stringTijd);
-			einddatum = dateFormat.parse(stringEindDatum + 'T' + stringTijd);
-			
+
+
 			timestamp = timestampFormat.format(datum);
-			//timestamp = timestamp + ":00";
-			eindTimestamp = timestampFormat.format(einddatum);
-			//eindTimestamp = eindTimestamp + ":00";
-			System.out.println("dit is timestamp na conversie: " + timestamp);
-			
+
 			ritDao.setBegindatum(DateTime.parse(timestamp));
-			ritDao.setEinddatum(DateTime.parse(eindTimestamp));
-			
+
+			//Alleen einddatum verwerken als hij ingevuld is
+			if (!request.getParameter("einddatum").isEmpty()) {
+
+				stringEindDatum = request.getParameter("einddatum");
+				System.out.println("StringEinddatum: " + stringEindDatum);
+				einddatum = dateFormat.parse(stringEindDatum + 'T' + stringTijd);
+				eindTimestamp = timestampFormat.format(einddatum);
+				ritDao.setEinddatum(DateTime.parse(eindTimestamp));
+			}
+
 		} catch (ParseException ex) {
 			Logger.getLogger(RitPlannen.class.getName()).log(Level.SEVERE, null, ex);
 			System.out.println("************ Programma snapt Timestamp niet!");
 		}
-		if(!request.getParameter("ma").equals("")){
-			ritDao.setMa(1);
-		}else if (!request.getParameter("di").equals("")){
-			ritDao.setDi(2);
-		
-		}else if (!request.getParameter("wo").equals("")){
-			ritDao.setWo(3);
-		
-		}else if (!request.getParameter("don").equals("")){
-			ritDao.setDon(4);
-		
-		}else if (!request.getParameter("vr").equals("")){
-			ritDao.setVr(5);
-		
-		}else if (!request.getParameter("za").equals("")){
-			ritDao.setZa(6);
-		
-		}else if (!request.getParameter("zo").equals("")){
-			ritDao.setZo(7);
+
+		//Checken of herhaling aangevinkt is, zo ja vul de dagen van de week
+		if (request.getParameter("herhaling") != null && !request.getParameter("einddatum").isEmpty()) {
+
+			if (!request.getParameter("ma").isEmpty()) {
+				ritDao.setMa(1);
+				ritDao.setMeerdere(1);
+			} else if (!request.getParameter("di").isEmpty()) {
+				ritDao.setDi(2);
+				ritDao.setMeerdere(1);
+			} else if (!request.getParameter("wo").isEmpty()) {
+				ritDao.setWo(3);
+				ritDao.setMeerdere(1);
+			} else if (!request.getParameter("don").isEmpty()) {
+				ritDao.setDon(4);
+				ritDao.setMeerdere(1);
+			} else if (!request.getParameter("vr").isEmpty()) {
+				ritDao.setVr(5);
+				ritDao.setMeerdere(1);
+			} else if (!request.getParameter("za").isEmpty()) {
+				ritDao.setZa(6);
+				ritDao.setMeerdere(1);
+			} else if (!request.getParameter("zo").isEmpty()) {
+				ritDao.setZo(7);
+				ritDao.setMeerdere(1);
+			}
+
+		} else {
+			ritDao.setMeerdere(0);
 		}
-		
-		
+
 
 		rit.setLidnr(user.getLidnr());
 		rit.setStartpunt(request.getParameter("hiddenstart"));
@@ -164,9 +177,8 @@ public class RitPlannen extends HttpServlet {
 		//voer de insert query uit om rit op te slaan
 		ritDao.ritplannen(rit);
 
-			
-	}
 
+	}
 
 	/**
 	 * Handles the HTTP
@@ -232,7 +244,4 @@ public class RitPlannen extends HttpServlet {
 	public void setEindTimestamp(String eindTimestamp) {
 		this.eindTimestamp = eindTimestamp;
 	}
-
-
-
 }
