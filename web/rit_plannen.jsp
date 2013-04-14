@@ -146,7 +146,7 @@
 				var maa = document.getElementsByName("ma");
 				var din = document.getElementsByName("di");
 				var woe = document.getElementsByName("wo");
-				var don = document.getElementsByName("do");
+				var don = document.getElementsByName("don");
 				var vri = document.getElementsByName("vr");
 				var zat = document.getElementsByName("za");
 				var zon = document.getElementsByName("zo");
@@ -220,13 +220,13 @@
 								<td><input type="checkbox" name="ma" value="ma"> Ma </input> </td>
 								<td><input type="checkbox" name="di" value="di"> Di </input> </td>
 								<td><input type="checkbox" name="wo" value="wo"> Wo </input> </td>
-								<td><input type="checkbox" name="do" value="do"> Do </input> </td>
+								<td><input type="checkbox" name="don" value="do"> Do </input> </td>
 								<td><input type="checkbox" name="vr" value="vr"> Vr </input> </td>
 								<td><input type="checkbox" name="za" value="za"> Za </input> </td>
 								<td><input type="checkbox" name="zo" value="zo"> Zo </input> </td>
 							</table>
 							<br/>
-							Einddatum: <input type="date" id="einddatum"> </div>
+							Einddatum: <input type="date" id="einddatum" name="einddatum"> </div>
 
 
 						<br /> <br />

@@ -20,7 +20,7 @@ public class Rit  implements java.io.Serializable {
      private double prijs;
      private int gekocht;
 	 private Timestamp datum;
-     //private Date datum;
+     private Timestamp einddatum;
 	 private int zitplaatsen;
      private String brandstof;
      private int aangeboden;
@@ -120,6 +120,15 @@ public class Rit  implements java.io.Serializable {
     public void setDatum(Timestamp datum) {
         this.datum = datum;
     }
+
+	public Timestamp getEinddatum() {
+		return einddatum;
+	}
+
+	public void setEinddatum(Timestamp einddatum) {
+		this.einddatum = einddatum;
+	}
+	
     public int getZitplaatsen() {
         return this.zitplaatsen;
     }

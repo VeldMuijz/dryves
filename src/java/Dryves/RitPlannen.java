@@ -19,12 +19,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.joda.time.DateTime;
 
 /**
  *
  * @author jeroen
  */
 public class RitPlannen extends HttpServlet {
+		String stringDatum;
+		String stringEindDatum;
+		String stringTijd;
+		String timestamp;
+		String eindTimestamp;
 
 	/**
 	 * Processes requests for both HTTP
@@ -82,27 +88,54 @@ public class RitPlannen extends HttpServlet {
 		//Haal alle gegevens op en zet ze in Rit
 		//Bouw ingevoerde datum om naar een timestamp
 		Date datum;
-		String stringDatum = request.getParameter("begindatum");
-		String stringTijd = request.getParameter("tijd");
-		
-		String timestamp;
+		Date einddatum;
+		stringDatum = request.getParameter("begindatum");
+		stringEindDatum = request.getParameter("einddatum");
+		System.out.println("StringEinddatum: " + stringEindDatum);
+		stringTijd = request.getParameter("tijd");
 				
-		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
-		SimpleDateFormat timestampFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy'T'HH:mm");
+		SimpleDateFormat timestampFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
 
 		try {
-			datum = dateFormat.parse(stringDatum + " " + stringTijd);
+			datum = dateFormat.parse(stringDatum + 'T' + stringTijd);
+			einddatum = dateFormat.parse(stringEindDatum + 'T' + stringTijd);
+			
 			timestamp = timestampFormat.format(datum);
-			timestamp = timestamp + ":00";
+			//timestamp = timestamp + ":00";
+			eindTimestamp = timestampFormat.format(einddatum);
+			//eindTimestamp = eindTimestamp + ":00";
 			System.out.println("dit is timestamp na conversie: " + timestamp);
 			
-			rit.setDatum(Timestamp.valueOf(timestamp));
+			ritDao.setBegindatum(DateTime.parse(timestamp));
+			ritDao.setEinddatum(DateTime.parse(eindTimestamp));
 			
 		} catch (ParseException ex) {
 			Logger.getLogger(RitPlannen.class.getName()).log(Level.SEVERE, null, ex);
 			System.out.println("************ Programma snapt Timestamp niet!");
 		}
-
+		if(!request.getParameter("ma").equals("")){
+			ritDao.setMa(1);
+		}else if (!request.getParameter("di").equals("")){
+			ritDao.setDi(2);
+		
+		}else if (!request.getParameter("wo").equals("")){
+			ritDao.setWo(3);
+		
+		}else if (!request.getParameter("don").equals("")){
+			ritDao.setDon(4);
+		
+		}else if (!request.getParameter("vr").equals("")){
+			ritDao.setVr(5);
+		
+		}else if (!request.getParameter("za").equals("")){
+			ritDao.setZa(6);
+		
+		}else if (!request.getParameter("zo").equals("")){
+			ritDao.setZo(7);
+		}
+		
+		
 
 		rit.setLidnr(user.getLidnr());
 		rit.setStartpunt(request.getParameter("hiddenstart"));
@@ -159,4 +192,47 @@ public class RitPlannen extends HttpServlet {
 	public String getServletInfo() {
 		return "Short description";
 	}// </editor-fold>
+
+	public String getStringDatum() {
+		return stringDatum;
+	}
+
+	public void setStringDatum(String stringDatum) {
+		this.stringDatum = stringDatum;
+	}
+
+	public String getStringEindDatum() {
+		return stringEindDatum;
+	}
+
+	public void setStringEindDatum(String stringEindDatum) {
+		this.stringEindDatum = stringEindDatum;
+	}
+
+	public String getStringTijd() {
+		return stringTijd;
+	}
+
+	public void setStringTijd(String stringTijd) {
+		this.stringTijd = stringTijd;
+	}
+
+	public String getTimestamp() {
+		return timestamp;
+	}
+
+	public void setTimestamp(String timestamp) {
+		this.timestamp = timestamp;
+	}
+
+	public String getEindTimestamp() {
+		return eindTimestamp;
+	}
+
+	public void setEindTimestamp(String eindTimestamp) {
+		this.eindTimestamp = eindTimestamp;
+	}
+
+
+
 }
