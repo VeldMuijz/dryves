@@ -88,129 +88,24 @@ public class Registreren extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-    }
-  
-    public String getErrorMsg(String s) {
-        String errorMsg = (String) errors.get(s.trim());
-        return (errorMsg == null) ? "" : errorMsg;
-    }
-         
-    public String isRbSelected(String s) {
-        return (geslacht.equals(s)) ? "checked" : "";   
-    }
-    public int getLidnr() {
-        return this.lidnr;
-    }
-    
-    public void setLidnr(int lidnr) {
-        this.lidnr = lidnr;
-    }
-    public String getVnaam() {
-        return this.vnaam;
-    }
-    
-    public void setVnaam(String vnaam) {
-        this.vnaam = vnaam;
-    }
-    public String getAnaam() {
-        return this.anaam;
-    }
-    
-    public void setAnaam(String anaam) {
-        this.anaam = anaam;
-    }
-    public String getGeslacht() {
-        return this.geslacht;
-    }
-    
-    public void setGeslacht(String geslacht) {
-        this.geslacht = geslacht;
-    }
-    public String getStraat() {
-        return this.straat;
-    }
-    
-    public void setStraat(String adres) {
-        this.straat = adres;
-    }
-    public String getHuisnummer() {
-        return this.huisnummer;
-            }
-    public void setHuisnummer(String huisnummer) {
-        this.huisnummer = huisnummer;
-    }
-    public String getPostcode() {
-        return this.postcode;
-    }
-    
-    public void setPostcode(String postcode) {
-        this.postcode = postcode;
-    }
-    public String getStad() {
-        return this.stad;
-    }
-    
-    public void setStad(String stad) {
-        this.stad = stad;
-    }
-    public String getTelnr() {
-        return this.telnr;
-    }
-    
-    public void setTelnr(String telnr) {
-        this.telnr = telnr;
-    }
-    public String getReknr() {
-        return this.reknr;
-    }
-    
-    public void setReknr(String reknr) {
-        this.reknr = reknr;
-    }
-    public String getEmail() {
-        return this.email;
-    }
-    
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getWachtwoord() {
-        return wachtwoord;
-    }
-
-    public void setWachtwoord(String wachtwoord) {
-        this.wachtwoord = wachtwoord;
-    }
-    public String getFotoUrl() {
-        return this.fotoUrl;
-    }
-    
-    public void setFotoUrl(String fotoUrl) {
-        this.fotoUrl = fotoUrl;
-    }
-    public String getTvoegsel() {
-        return this.tvoegsel;
-    }
-    
-    public void setTvoegsel(String tvoegsel) {
-        this.tvoegsel = tvoegsel;
-    }
-
-    public String getLangnotify() {
-        return langnotify;
-    }
-
-    public void setLangnotify(String langnotify) {
-        this.langnotify = langnotify;
-
-    }
-    
-    public void setErrors(String key, String msg) {
-        errors.put(key, msg);
         
-
-}
+        
+        Lid lid = new Lid();
+        
+        
+        //Zet de voornaam
+        lid.setVnaam(request.getParameter("vnaam"));
+        //Print voornaam naar console
+        System.out.println("Dit is de voornaam: " + lid.getVnaam());
+        
+        //Zet de achternaam
+        lid.setAnaam(request.getParameter("anaam"));
+        
+        //Print achternaam naar console
+        System.out.println("Dit is de achternaam: " + lid.getAnaam());
+        
+        
+    }
 
     private static class request {
 
@@ -233,6 +128,7 @@ public class Registreren extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
     }
+
 
     /**
      * Returns a short description of the servlet.

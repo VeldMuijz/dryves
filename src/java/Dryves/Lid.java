@@ -53,6 +53,16 @@ public class Lid  implements java.io.Serializable {
         this.langnotify = langnotify;
 
     }
+
+    Lid() {
+        
+        //Deze constructor is leeg, deze wordt gebruikt door registratie.java
+        
+        
+    }
+
+
+        
     
     public boolean validate() {
         boolean bool = true;

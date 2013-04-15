@@ -116,8 +116,7 @@ public class RegistrerenDao {
 					+ " wachtwoord,"
 					+ " fotoUrl,"
                                         + " langnotify,)"
-					+ "(?,?,?,?,?,?,?,?,?,?,?,?,?,?);"
-					);
+					+ "(?,?,?,?,?,?,?,?,?,?,?,?,?,?);");
 
 
 			insertLid = currentCon.prepareStatement(queryString);

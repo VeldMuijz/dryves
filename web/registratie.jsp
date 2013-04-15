@@ -57,7 +57,7 @@ Schrijf je per direct in en word lid! Ontdek de vele voordele die de Dryves comm
                 <div class="formInput">
                             <b>Voornaam<sup>*</sup></b> 
                             <br>
-                            <input type="text" name="vnaam" value="" size=15 maxlength=20>
+                            <input type="text" name="vnaam" value="Kees" size=15 maxlength=20>
                 </div>
                 <div class="formInput">
                             <b>Achternaam<sup>*</sup></b>
