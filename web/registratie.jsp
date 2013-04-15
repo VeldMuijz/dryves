@@ -4,7 +4,7 @@
     Created on : 24-mrt-2013, 19:59:48
     Author     : Kees van Heuven
 --%>
-<%@page import="Dryves.Login"%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -13,12 +13,7 @@
         <title>Dryves</title>
         <link type="text/css" rel="stylesheet" href="css/dryver.css"/>
         
-        <script>
-            
-            
-            
-            
-            
+        <script>           
         </script>
         
         
@@ -51,7 +46,7 @@
 Schrijf je per direct in en word lid! Ontdek de vele voordele die de Dryves community te bieden heeft. 
 
 <br /><br />
-            <form action="/dryves/proces.jsp" method=post>
+            <form action="/registreren.java" method=post>
             
                 <div class="regformheader">
                         <font size=5>Registratie formulier</font>
@@ -62,7 +57,7 @@ Schrijf je per direct in en word lid! Ontdek de vele voordele die de Dryves comm
                 <div class="formInput">
                             <b>Voornaam<sup>*</sup></b> 
                             <br>
-                            <input type="text" name="vnaam" value="" size=20 maxlength=20>
+                            <input type="text" name="vnaam" value="" size=15 maxlength=20>
                 </div>
                 <div class="formInput">
                             <b>Achternaam<sup>*</sup></b>
@@ -96,13 +91,13 @@ Schrijf je per direct in en word lid! Ontdek de vele voordele die de Dryves comm
                 <div class="formInput">
                             <b>Telefoonnummer<sup>*</sup></b> 
                             <br>
-                            <input type="text" name="telnr" value="" size=10  maxlength=8>
+                            <input type="text" name="telnr" value="" size=10  maxlength=10>
                 </div>
                 
                 <div class="formInput">
                             <b>E-Mail<sup>*</sup></b> 
                             <br>
-                            <input type="text" name="email" value="" size=25  maxlength=125>
+                            <input type="text" name="email" value="" size=25  maxlength=25>
                 </div>
                 <div class="formInput">
                             <b>Straatnaam<sup>*</sup></b>
@@ -112,12 +107,12 @@ Schrijf je per direct in en word lid! Ontdek de vele voordele die de Dryves comm
                 <div class="formInput">
                             <b>Huisnummer<sup>*</sup></b>
                             <br>
-                            <input type="text" name="huisnummer" value="" size=5 maxlength=10>            
+                            <input type="text" name="huisnummer" value="" size=5 maxlength=8>            
                 </div>
                 <div class="formInput">
                             <b>Postcode<sup>*</sup></b> 
                             <br>
-                            <input type="text" name="postcode" value="" size=10  maxlength=8>
+                            <input type="text" name="postcode" value="" size=5  maxlength=8>
                 </div>
                 
                 <div class="formInput">
@@ -130,12 +125,12 @@ Schrijf je per direct in en word lid! Ontdek de vele voordele die de Dryves comm
                        
                             <b>Wachtwoord<sup>*</sup></b> 
                             <br>
-                            <input type="password" name="wachtwoord" size=10 value="" maxlength=10>
+                            <input type="password" name="wachtwoord" size=10 value="" maxlength=30>
                 </div>
                 <div class="formInput">
                             <b>Bevestig wachtwoord<sup>*</sup></b>
                             <br>
-                            <input type="password" name="wachtwoord2" size=10 value="" maxlength=10>
+                            <input type="password" name="wachtwoord2" size=10 value="" maxlength=30>
                 </div>
                 
                 <div class="formInput">
