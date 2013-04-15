@@ -35,8 +35,6 @@ public class Registreren extends HttpServlet {
      private String reknr;
      private String email;
      private String wachtwoord;
-     private String wachtwoord2;
-     private int beoordeling;
      private String fotoUrl;
      private String tvoegsel;
      private Locale langnotify;
@@ -184,20 +182,6 @@ public class Registreren extends HttpServlet {
 
     public void setWachtwoord(String wachtwoord) {
         this.wachtwoord = wachtwoord;
-    }
-        public String getWachtwoord2() {
-        return wachtwoord2;
-    }
-
-    public void setWachtwoord2(String wachtwoord) {
-        this.wachtwoord2 = wachtwoord;
-    }
-    public int getBeoordeling() {
-        return this.beoordeling;
-    }
-    
-    public void setBeoordeling(int beoordeling) {
-        this.beoordeling = beoordeling;
     }
     public String getFotoUrl() {
         return this.fotoUrl;

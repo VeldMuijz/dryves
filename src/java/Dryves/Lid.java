@@ -29,12 +29,11 @@ public class Lid  implements java.io.Serializable {
      private int beoordeling;
      private String fotoUrl;
      private String tvoegsel;
-     private Locale langnotify;
      private Hashtable errors;
-     private Locale locale;
+     private String langnotify;
 
 	
-    public Lid(int lidnr, String vnaam, String anaam, String geslacht, String straat, String huisnummer, String reknr, String telnr, String postcode, String stad, String email, String wachtwoord, String wachtwoord2, int beoordeling, String fotoUrl, String tvoegsel, Locale langnotify) {
+    public Lid(int lidnr, String vnaam, String anaam, String geslacht, String straat, String huisnummer, String reknr, String telnr, String postcode, String stad, String email, String wachtwoord, String wachtwoord2, int beoordeling, String fotoUrl, String tvoegsel, String langnotify) {
         this.lidnr = lidnr;
         this.vnaam = vnaam;
         this.anaam = anaam;
@@ -51,7 +50,7 @@ public class Lid  implements java.io.Serializable {
         this.beoordeling = beoordeling;
         this.fotoUrl = fotoUrl;
         this.tvoegsel = tvoegsel;
-        this.locale = langnotify;
+        this.langnotify = langnotify;
 
     }
     
@@ -74,14 +73,14 @@ public class Lid  implements java.io.Serializable {
         }
                 
         if (reknr.equals("") || reknr.length() != 6) {
-            errors.put("billingnumber", "Typ een geldige rekening nummer");
+            errors.put("rekeningnummer", "Typ een geldige rekening nummer");
             reknr = "";
             bool = false;
         } else {
             try {
                 int x = Integer.parseInt(reknr);
             } catch (NumberFormatException e) {
-                errors.put("billingnumber", "Typ een geldige rekening nummer");
+                errors.put("rekeningnummer", "Typ een geldige rekening nummer");
                 reknr = "";
                 bool = false;
             }
@@ -93,13 +92,13 @@ public class Lid  implements java.io.Serializable {
             bool = false;
         }
         if (wachtwoord.equals("")) {
-            errors.put("password1", "Typ een geldig paswoord");
+            errors.put("wachtwoord", "Typ een geldig wachtword");
             wachtwoord = "";
             bool = false;
         }
         if (!wachtwoord2.equals("") && (wachtwoord2.equals("")
                 || !wachtwoord.equals(wachtwoord2))) {
-            errors.put("wachtwoord2", "Bevestig uw wachtwoord");
+            errors.put("wachtwoord", "Bevestig uw wachtwoord");
             wachtwoord2 = "";
             bool = false;
         }
@@ -134,7 +133,7 @@ public class Lid  implements java.io.Serializable {
             try {
                 int x = Integer.parseInt(postcode);
             } catch (NumberFormatException e) {
-                errors.put("zip", "Typ een geldige postcode");
+                errors.put("postcode", "Typ een geldige postcode");
                 postcode = "";
                 bool = false;
             }
@@ -264,20 +263,12 @@ public class Lid  implements java.io.Serializable {
         this.tvoegsel = tvoegsel;
     }
 
-    public Locale getLocale() {
-        return locale;
+    public String getLangnotify() {
+        return this.langnotify;
     }
 
-    public void setLocale(Locale locale) {
-        this.locale = langnotify;
-    }
-
-    public String getNotify() {
-        return geslacht;
-    }
-
-    public void setNotify(String n) {
-        geslacht = n;
+    public void setLangnotify(String langnotify) {
+        this.langnotify = langnotify;
     }
     
     public void setErrors(String key, String msg) {

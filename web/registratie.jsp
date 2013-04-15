@@ -5,7 +5,6 @@
     Author     : Kees van Heuven
 --%>
 <%@page import="Dryves.Login"%>
-<jsp:useBean id="formHandler" class="Dryves.Lid" scope="request"/>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -147,10 +146,10 @@ Schrijf je per direct in en word lid! Ontdek de vele voordele die de Dryves comm
                 </div>
                 
                 <div class="formInput">
-                            <b>Geslacht?</b>
+                            <b>Taal?</b>
                             <br>
-                            <input type="radio" name="langnotify" value="NL" checked> <img src="images/nl_NL.png" />
-                            <input type="radio" name="langnotify" value="EN"> <img src="images/en_EN.png" />
+                            <input type="radio" name="locale" value="NL" checked> <img src="images/nl_NL.png" />
+                            <input type="radio" name="locale" value="EN"> <img src="images/en_EN.png" />
                 </div>
 
                            

@@ -35,56 +35,36 @@ public class RegistrerenDao {
      private String email;
      private String wachtwoord;
      private String wachtwoord2;
-     private int beoordeling;
      private String fotoUrl;
      private String tvoegsel;
-     private Locale langnotify;
+     private String langnotify;
      private Hashtable errors;
-     private Locale locale;
+     private boolean success;
+    
 
 	
 	/**
-	 * Ophalen van alle gegevens uit de servlet voor de rit_plannen.jsp
+	 * Ophalen van alle gegevens uit de servlet voor de registreren.jsp
 	 * @param bean
 	 * @return 
 	 */
-	public RegistrerenDao(String vnaam, String anaam, String geslacht, String straat, String huisnummer, String reknr, String telnr, String postcode, String stad, String email, String wachtwoord, String wachtwoord2, String fotoUrl, String tvoegsel, Locale langnotify) {
-        
-        this.vnaam = vnaam;
-        this.anaam = anaam;
-        this.tvoegsel = tvoegsel;
-        this.geslacht = geslacht;
-        this.straat = straat;
-        this.huisnummer = huisnummer;
-        this.reknr = reknr;
-        this.telnr = telnr;
-        this.postcode = postcode;    
-        this.stad = stad;
-        this.email = email;
-        this.wachtwoord = wachtwoord;
-        this.wachtwoord2 = wachtwoord2;
-        this.beoordeling = beoordeling;
-        this.fotoUrl = fotoUrl;       
-        this.locale = langnotify;
-
-    }
-
-	
-		setVnaam(bean.getVnaam());
+	public Lid RegistrerenDao( Lid bean) {
+       
+            
+                setVnaam(bean.getVnaam());
 		setAnaam(bean.getAnaam());
                 setTvoegsel(bean.getTvoegsel());
 		setStraat(bean.getStraat());
 		setHuisnummer(bean.getHuisnummer());
-		setPostcode(bean.setPostcode());
+		setPostcode(bean.getPostcode());
 		setStad(bean.getStad());
-		getTelnr(bean.setTelnr());
+		setTelnr(bean.getTelnr());
 		setReknr(bean.getReknr());
 		setEmail(bean.getEmail());
-		setWachtwoord(bean.getWachtwoord());
-                setWachtwoord2(bean.getWachtwoord2());
+		setWachtwoord(bean.getWachtwoord());               
                 setFotoUrl(bean.getFotoUrl());
                 setLangnotify(bean.getLangnotify());
-                
+     
 
 		System.out.println("RIT DAO GEGEVENS:");
 		System.out.println("*******************************");
@@ -105,7 +85,7 @@ public class RegistrerenDao {
 		System.out.println("*******************************");
 		System.out.println("EIND DAO RIT GEGEVENS");
 
-		Registreren();
+		saveRegistratie();
 
 		return bean;
 	}
@@ -113,9 +93,9 @@ public class RegistrerenDao {
 	
 	
 	/**
-	 * Opslaan van rit in de database
+	 * Opslaan van registratie in de database
 	 */
-	private void saveRegistreren() {
+	private void saveRegistratie() {
 		try {
 			currentCon = ConnectionManager.getConnection();
 			PreparedStatement insertLid;
@@ -125,6 +105,7 @@ public class RegistrerenDao {
 					+ " vnaam,"
 					+ " anaam,"
 					+ " tvoegsel,"
+                                        + " geslacht,"
 					+ " straat,"
 					+ " huisnummer,"
 					+ " postcode,"
@@ -132,44 +113,168 @@ public class RegistrerenDao {
 					+ " telnr,"
 					+ " reknr,"
 					+ " email,"
-					+ " wachtwoord)"
-					+ " wachtwoord2"
-                                        + " fotoUrl"
-                                        + " locale"
+					+ " wachtwoord,"
+					+ " fotoUrl,"
+                                        + " langnotify,)"
 					+ "(?,?,?,?,?,?,?,?,?,?,?,?,?,?);"
 					);
 
 
-			insertRit = currentCon.prepareStatement(queryString);
+			insertLid = currentCon.prepareStatement(queryString);
 
 
-			insertRit.setString(1, vnaam);
-			insertRit.setString(2, anaam);
-			insertRit.setString(3, tvoegsel);
-                        insertRit.setString(3, straat);
-                        insertRit.setString(3, huisnummer);
-                        insertRit.setString(3, postcode);
-                        insertRit.setString(3, stad);
-                        insertRit.setString(3, telnr);
-                        insertRit.setString(3, reknr);
-                        insertRit.setString(3, email);
-                        insertRit.setString(3, wachtwoord);
-                        insertRit.setString(3, wachtwoord2);
-                        insertRit.setString(3, fotoUrl);
-                        insertRit.setString(3, locale);
+			insertLid.setString(1, vnaam);
+			insertLid.setString(2, anaam);
+			insertLid.setString(3, tvoegsel);
+                        insertLid.setString(4, geslacht);
+                        insertLid.setString(5, straat);
+                        insertLid.setString(6, huisnummer);
+                        insertLid.setString(7, postcode);
+                        insertLid.setString(8, stad);
+                        insertLid.setString(9, telnr);
+                        insertLid.setString(10, reknr);
+                        insertLid.setString(11, email);
+                        insertLid.setString(12, wachtwoord);
+                        insertLid.setString(13, fotoUrl);
+                        insertLid.setString(14, langnotify);
                         
 
 
-			System.out.println("De query is: " + insertRit);
+			System.out.println("De query is: " + insertLid);
 
-			insertRit.executeQuery();
+			insertLid.executeQuery();
 			
 		} catch (SQLException ex) {
-			Logger.getLogger(RitDao.class.getName()).log(Level.SEVERE, null, ex);
+			Logger.getLogger(RegistrerenDao.class.getName()).log(Level.SEVERE, null, ex);
 			success = false;
 			System.out.println("Var Success = " + success);
 		} 
 		success = true;
+        
 	}
+        
+    public String getErrorMsg(String s) {
+        String errorMsg = (String) errors.get(s.trim());
+        return (errorMsg == null) ? "" : errorMsg;
+    }
+         
+    public String isRbSelected(String s) {
+        return (geslacht.equals(s)) ? "checked" : "";   
+
+    }
+    public String getVnaam() {
+        return this.vnaam;
+    }
     
+    public void setVnaam(String vnaam) {
+        this.vnaam = vnaam;
+    }
+    public String getAnaam() {
+        return this.anaam;
+    }
+    
+    public void setAnaam(String anaam) {
+        this.anaam = anaam;
+    }
+    public String getGeslacht() {
+        return this.geslacht;
+    }
+    
+    public void setGeslacht(String geslacht) {
+        this.geslacht = geslacht;
+    }
+    public String getStraat() {
+        return this.straat;
+    }
+    
+    public void setStraat(String straat) {
+        this.straat = straat;
+    }
+    public String getHuisnummer() {
+        return this.huisnummer;
+            }
+    public void setHuisnummer(String huisnummer) {
+        this.huisnummer = huisnummer;
+    }
+    public String getPostcode() {
+        return this.postcode;
+    }
+    
+    public void setPostcode(String postcode) {
+        this.postcode = postcode;
+    }
+    public String getStad() {
+        return this.stad;
+    }
+    
+    public void setStad(String stad) {
+        this.stad = stad;
+    }
+    public String getTelnr() {
+        return this.telnr;
+    }
+    
+    public void setTelnr(String telnr) {
+        this.telnr = telnr;
+    }
+    public String getReknr() {
+        return this.reknr;
+    }
+    
+    public void setReknr(String reknr) {
+        this.reknr = reknr;
+    }
+    public String getEmail() {
+        return this.email;
+    }
+    
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getWachtwoord() {
+        return wachtwoord;
+    }
+
+    public void setWachtwoord(String wachtwoord) {
+        this.wachtwoord = wachtwoord;
+    }
+        public String getWachtwoord2() {
+        return wachtwoord2;
+    }
+    public String getFotoUrl() {
+        return this.fotoUrl;
+    }
+    
+    public void setFotoUrl(String fotoUrl) {
+        this.fotoUrl = fotoUrl;
+    }
+    public String getTvoegsel() {
+        return this.tvoegsel;
+    }
+    
+    public void setTvoegsel(String tvoegsel) {
+        this.tvoegsel = tvoegsel;
+    }
+
+    public String getLangnotify() {
+        return langnotify;
+    }
+
+    public void setLangnotify(String langnotify) {
+        this.langnotify = langnotify;
+    }
+    
+    public void setErrors(String key, String msg) {
+        errors.put(key, msg);
+        
+    } 
+    public Boolean getSuccess() {
+		return success;
+    }
+
+    public void setSuccess(Boolean success) {
+		this.success = success;
+        
+    }
 }
