@@ -4,8 +4,7 @@
     Created on : 24-mrt-2013, 19:59:48
     Author     : Kees van Heuven
 --%>
-<%@page import="Dryves.Login"%>
-<jsp:useBean id="formHandler" class="Dryves.Lid" scope="request"/>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -14,12 +13,7 @@
         <title>Dryves</title>
         <link type="text/css" rel="stylesheet" href="css/dryver.css"/>
         
-        <script>
-            
-            
-            
-            
-            
+        <script>           
         </script>
         
         
@@ -52,7 +46,7 @@
 Schrijf je per direct in en word lid! Ontdek de vele voordele die de Dryves community te bieden heeft. 
 
 <br /><br />
-            <form action="/dryves/proces.jsp" method=post>
+            <form action="Registreren" method=get>
             
                 <div class="regformheader">
                         <font size=5>Registratie formulier</font>
@@ -63,7 +57,7 @@ Schrijf je per direct in en word lid! Ontdek de vele voordele die de Dryves comm
                 <div class="formInput">
                             <b>Voornaam<sup>*</sup></b> 
                             <br>
-                            <input type="text" name="vnaam" value="" size=20 maxlength=20>
+                            <input type="text" name="vnaam" value="Kees" size=15 maxlength=20>
                 </div>
                 <div class="formInput">
                             <b>Achternaam<sup>*</sup></b>
@@ -76,10 +70,10 @@ Schrijf je per direct in en word lid! Ontdek de vele voordele die de Dryves comm
                <INPUT NAME="file" TYPE="file">
                </div>
                <div>
-               <a colspan="2" align="center">
+               
                </div>
                <div>
-               <td colspan="2" align="center"><input type="submit" value="Upload"> </td>
+               <td colspan="2" align="center"><input type="submit" value="Upload">
                </div>
                 
                 <div class="formInput">
@@ -95,24 +89,30 @@ Schrijf je per direct in en word lid! Ontdek de vele voordele die de Dryves comm
                 </div>
                 
                 <div class="formInput">
+                            <b>Telefoonnummer<sup>*</sup></b> 
+                            <br>
+                            <input type="text" name="telnr" value="" size=10  maxlength=10>
+                </div>
+                
+                <div class="formInput">
                             <b>E-Mail<sup>*</sup></b> 
                             <br>
-                            <input type="text" name="email" value="" size=25  maxlength=125>
+                            <input type="text" name="email" value="" size=25  maxlength=25>
                 </div>
                 <div class="formInput">
                             <b>Straatnaam<sup>*</sup></b>
                             <br>
-                            <input type="text" name="adres" value="" size=15 maxlength=20>            
+                            <input type="text" name="straat" value="" size=15 maxlength=20>            
                 </div>
                 <div class="formInput">
                             <b>Huisnummer<sup>*</sup></b>
                             <br>
-                            <input type="text" name="homenumber" value="" size=5 maxlength=10>            
+                            <input type="text" name="huisnummer" value="" size=5 maxlength=8>            
                 </div>
                 <div class="formInput">
                             <b>Postcode<sup>*</sup></b> 
                             <br>
-                            <input type="text" name="postcode" value="" size=10  maxlength=8>
+                            <input type="text" name="postcode" value="" size=5  maxlength=8>
                 </div>
                 
                 <div class="formInput">
@@ -125,28 +125,32 @@ Schrijf je per direct in en word lid! Ontdek de vele voordele die de Dryves comm
                        
                             <b>Wachtwoord<sup>*</sup></b> 
                             <br>
-                            <input type="password" name="password1" size=10 value="" maxlength=10>
+                            <input type="password" name="wachtwoord" size=10 value="" maxlength=30>
                 </div>
                 <div class="formInput">
                             <b>Bevestig wachtwoord<sup>*</sup></b>
                             <br>
-                            <input type="password" name="password2" size=10 value="" maxlength=10>
+                            <input type="password" name="wachtwoord2" size=10 value="" maxlength=30>
                 </div>
                 
                 <div class="formInput">
                             <b>Geslacht?</b>
                             <br>
-                            <input type="radio" name="notify" value="M" checked>M 
-                            <input type="radio" name="notify" value="V"> V
+                            <input type="radio" name="geslacht" value="M" checked>M 
+                            <input type="radio" name="geslacht" value="V"> V
                 </div>
-                           <div <form action="" method="POST" onsubmit="return checkCheckBox(this)">
-                           Accepteer <a href="/dryves/voorwaarden.jsp">Voorwaarden:</a> <input type="radio" value="v" name="notify">
+                
+                <div class="formInput">
+                            <b>Taal?</b>
+                            <br>
+                            <input type="radio" name="locale" value="NL" checked> <img src="images/nl_NL.png" />
+                            <input type="radio" name="locale" value="EN"> <img src="images/en_EN.png" />
+                </div>
+
                            
                            <input type="submit" value="Aanmelden"> <input type="reset" value="Reset">
                            </form>
                 </div>
                 </div>
-          
-        </form>
     </body>
 </html>
