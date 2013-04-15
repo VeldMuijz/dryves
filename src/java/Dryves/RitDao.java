@@ -33,13 +33,13 @@ public class RitDao {
 	int aangeboden;
 	String brandstof;
 	Boolean success;
-	int ma;
-	int di;
-	int wo;
-	int don;
-	int vr;
-	int za;
-	int zo;
+	int ma = 0;
+	int di = 0;
+	int wo = 0;
+	int don = 0;
+	int vr = 0;
+	int za = 0;
+	int zo = 0;
 	int meerdere = 0;
 
 	/**
@@ -69,6 +69,7 @@ public class RitDao {
 		} else {
 			saveRit();
 		}
+		
 		return bean;
 	}
 
@@ -76,7 +77,6 @@ public class RitDao {
 	 * Opslaan van rit in de database
 	 */
 	private void saveMeerdereRitten() {
-		System.out.println("dit is waarde van ma: " + ma);
 		ArrayList<Integer> dagenVdWeek = new ArrayList();
 		if (ma == 1) {
 			dagenVdWeek.add(ma);
@@ -121,17 +121,13 @@ public class RitDao {
 							+ " Values"
 							+ "(?,?,?,?,?,?,?,?,?,?,?);");
 
-
 					insertRit = currentCon.prepareStatement(queryString);
-
 
 					insertRit.setInt(1, lidnr);
 					insertRit.setString(2, startpunt);
 					insertRit.setString(3, eindpunt);
 					if (waypoints.equals("")) {
-
 						insertRit.setString(4, null);
-
 					} else {
 						insertRit.setString(4, waypoints);
 					}
@@ -144,28 +140,23 @@ public class RitDao {
 					insertRit.setInt(11, aangeboden);
 
 					System.out.println("De query is: " + insertRit);
-
-					insertRit.executeQuery();
+					insertRit.executeUpdate();
 
 				} catch (SQLException ex) {
 					Logger.getLogger(RitDao.class.getName()).log(Level.SEVERE, null, ex);
-					success = false;
-					System.out.println("Var Success = " + success);
+					
+
 				}
-				success = true;
+
+
 			}
 		}
+		
 	}
 
-	public void testDateTime() {
-		DayOfWeekIterator it = new DayOfWeekIterator(begindatum, einddatum, DateTimeConstants.FRIDAY);
-		while (it.hasNext()) {
-			System.out.println("Dit is it.hasnext() : " + it.next());
-			datum = new Timestamp(it.next().getMillis());
-			System.out.println("Dit is timestamp datum: " + datum);
-		}
-	}
-
+	/**
+	 *
+	 */
 	private void saveRit() {
 
 		datum = new Timestamp(begindatum.getMillis());
@@ -207,7 +198,7 @@ public class RitDao {
 
 			System.out.println("De query is: " + insertRit);
 
-			insertRit.executeQuery();
+			insertRit.executeUpdate();
 
 		} catch (SQLException ex) {
 			Logger.getLogger(RitDao.class.getName()).log(Level.SEVERE, null, ex);
@@ -345,14 +336,6 @@ public class RitDao {
 	public void setSuccess(Boolean success) {
 		this.success = success;
 	}
-//
-//	public ArrayList<Integer> getDagenVdWeek() {
-//		return dagenVdWeek;
-//	}
-//
-//	public void setDagenVdWeek(ArrayList<Integer> dagenVdWeek) {
-//		this.dagenVdWeek = dagenVdWeek;
-//	}
 
 	public int getMa() {
 		return ma;

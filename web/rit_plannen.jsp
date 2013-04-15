@@ -203,7 +203,7 @@
 
 
 				<div class="invoerveld">
-					<form action="RitPlannen" method="get" onsubmit="return isCompleet();">
+					<form action="RitPlannen" method="post" onsubmit="return isCompleet();">
 						Start adres: <br/>
 						<input type="text" id="start" name="start" onchange="calcRoute();" style ="width: 350; float: right:"><br />
 						Eind adres: <br/>
@@ -234,11 +234,12 @@
 						Selecteer hier uw autogegevens die relevant zijn voor de rit: <br/>								
 						<table><td>Aantal zitplaatsen: <select name="aantalZitplaatsen">	
 									<option value="1"> 1 </option>
-									<option value="1"> 2 </option> 
-									<option value="1"> 3 </option>
-									<option value="1"> 4 </option>
-									<option value="1"> 5 </option>
-								</select></td>
+									<option value="2"> 2 </option> 
+									<option value="3"> 3 </option>
+									<option value="4"> 4 </option>
+									<option value="5"> 5 </option>
+									<option value="6"> 6 </option>
+									</select></td>
 
 							<td>Soort brandstof: <select id="soortBrandstof" name="soortBrandstof">
 									<option value="benzine"> Benzine </option>
