@@ -37,9 +37,8 @@ public class Registreren extends HttpServlet {
      private String wachtwoord;
      private String fotoUrl;
      private String tvoegsel;
-     private Locale langnotify;
+     private String langnotify;
      private Hashtable errors;
-     private Locale locale;
 
     public Registreren() {
     }
@@ -198,12 +197,12 @@ public class Registreren extends HttpServlet {
         this.tvoegsel = tvoegsel;
     }
 
-    public Locale getLocale() {
-        return locale;
+    public String getLangnotify() {
+        return langnotify;
     }
 
-    public void setLocale(Locale locale) {
-        this.locale = langnotify;
+    public void setLangnotify(String langnotify) {
+        this.langnotify = langnotify;
 
     }
     

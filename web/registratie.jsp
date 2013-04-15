@@ -46,7 +46,7 @@
 Schrijf je per direct in en word lid! Ontdek de vele voordele die de Dryves community te bieden heeft. 
 
 <br /><br />
-            <form action="/registreren.java" method=post>
+            <form action="Registreren" method=post>
             
                 <div class="regformheader">
                         <font size=5>Registratie formulier</font>
