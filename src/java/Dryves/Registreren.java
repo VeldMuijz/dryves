@@ -92,7 +92,7 @@ public class Registreren extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
     }
-    processRequest(request, response);
+  
     public String getErrorMsg(String s) {
         String errorMsg = (String) errors.get(s.trim());
         return (errorMsg == null) ? "" : errorMsg;
@@ -220,14 +220,7 @@ public class Registreren extends HttpServlet {
 
     public void setLocale(Locale locale) {
         this.locale = langnotify;
-    }
 
-    public String getNotify() {
-        return geslacht;
-    }
-
-    public void setNotify(String n) {
-        geslacht = n;
     }
     
     public void setErrors(String key, String msg) {
