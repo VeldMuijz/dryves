@@ -12,7 +12,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
-    <body onload="hivi();">
+    <body onload="ShowMyName();">
         <h1>Hello World!</h1>
         
         
@@ -131,26 +131,7 @@ FB.api('/me/feed', 'post', { message: message_str}, function(response) {
         
     <input type="hidden" id="naamp" value="" />    
         
-        
-        
-        
-        
-         
 
-
-
-
-        
-        
-        
-        
-
-
-<p id="idp" ></p> 
-   <p type="hidden" id="naamp" ></p>
-   <p id="voornaamp"></p> 
-   <p id="achternaamp" ></p>
-   <p id="sexp"></p> 
 
      
 
