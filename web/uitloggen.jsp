@@ -4,16 +4,39 @@
     Author     : jeroen
 --%>
 
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Dryves uitgelogd</title>
+        <link type="text/css" rel="stylesheet" href="css/dryver.css"/>
     </head>
     <body>
-		<%session.invalidate();%>
-		
-        <h1>Uitgelogd mo'fokker</h1>
+
+        <div class="background">
+
+            <img src="images/background2.jpg" />
+
+        </div>
+
+        <div class="drvyesWrapper">
+
+            <div class="logo">    
+				<img src="images/Logo_Dryves.png" />
+            </div>
+
+
+			<jsp:include page="navigatie.jsp"  flush="true" />
+
+			<div class="contentPanel">
+
+				U bent uitgelogd. <br/>
+				Bedankt voor uw  bezoek.
+			</div>
+
+        </div>
+
     </body>
 </html>

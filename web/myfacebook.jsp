@@ -13,6 +13,7 @@
         <title>JSP Page</title>
     </head>
     <body onload="ShowMyName();">
+			<jsp:include page="navigatie.jsp"  flush="true" />
         <h1>Hello World!</h1>
         
         

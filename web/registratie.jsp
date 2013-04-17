@@ -39,13 +39,7 @@
             </div>
         
         
-        <div class="navigation">
-            
-            <div class="loginButton"><button  onclick="window.location='login.jsp';">Login</button></div>
-            
-            <button onclick="window.location='index.jsp';">Home</button><button onclick="window.location='watisdryves.jsp';">Wat is Dryves</button><button onclick="window.location='faq.jsp';">FAQ</button>
-            
-        </div>
+        	<jsp:include page="navigatie.jsp"  flush="true" />
         
         <div class="contentPanel">
             

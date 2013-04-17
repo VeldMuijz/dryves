@@ -165,11 +165,11 @@
 					alert("Graag een tijdstip invullen.");
 					return false;
 				}
-				 else if ((herhaling.checked) && (einddatum === "")) {
+				else if ((herhaling.checked) && (einddatum === "")) {
 					alert("Graag een einddatum invullen.");
 					return false;
 				} //TODO: Invoegen controle op dagen
-			
+
 				return true;
 			}
 
@@ -191,13 +191,7 @@
 			</div>
 
 
-			<div class="navigation">
-
-				<div style="float:right; margin-right: -1px;"><button  onclick="window.location = 'login.jsp';">Login</button></div>
-
-				<button onclick="window.location = 'index.jsp';">Home</button><button onclick="window.location = 'watisdryves.jsp';">Wat is Dryves</button><button>FAQ</button>
-
-			</div>
+			<jsp:include page="navigatie.jsp"  flush="true" />
 
 			<div class="contentPanel">
 
@@ -239,7 +233,7 @@
 									<option value="4"> 4 </option>
 									<option value="5"> 5 </option>
 									<option value="6"> 6 </option>
-									</select></td>
+								</select></td>
 
 							<td>Soort brandstof: <select id="soortBrandstof" name="soortBrandstof">
 									<option value="benzine"> Benzine </option>
