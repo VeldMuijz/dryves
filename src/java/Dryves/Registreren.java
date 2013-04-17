@@ -162,6 +162,10 @@ public class Registreren extends HttpServlet {
         lid.setLangnotify(request.getParameter("langnotify"));
         //Schrijf langnotify naar de console
         System.out.println("Dit is de langnotify: " + lid.getLangnotify());
+        
+        
+        
+        
     }
 
     private static class request {
