@@ -19,6 +19,7 @@ public class Sessie {
 	private String anaam;
         private Locale locale;
 	public boolean valid;
+        private long ritnr;
 
 	public int getLidnr() {
 		return lidnr;
@@ -76,6 +77,8 @@ public class Sessie {
 		valid = newValid;
 
 	}
+        
+        
 
     void setLocale(String locale) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

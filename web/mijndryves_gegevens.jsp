@@ -42,7 +42,7 @@
                 
                 <button onclick="window.location = 'mijndryves_gegevens.jsp';">Mijn gegevens</button>
                 <button onclick="window.location = 'rit_plannen.jsp';">Mijn berichten</button>
-                <button onclick="window.location = 'rit_plannen.jsp';">Mijn ritten</button>
+                <button onclick="window.location = 'mijn_ritten.jsp';">Mijn ritten</button>
 
 
 
