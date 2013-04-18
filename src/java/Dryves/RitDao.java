@@ -1,5 +1,11 @@
 package Dryves;
 
+import Dryves.ConnectionManager;
+import Dryves.DayOfWeekIterator;
+import Dryves.Rit;
+
+ 
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,6 +25,7 @@ public class RitDao {
 
 	static Connection currentCon;
 	static ResultSet rs;
+	int ritnr;
 	int lidnr;
 	String startpunt;
 	String eindpunt;
@@ -41,6 +48,7 @@ public class RitDao {
 	int za = 0;
 	int zo = 0;
 	int meerdere = 0;
+	String url;
 
 	/**
 	 * Ophalen van alle gegevens uit de servlet voor de rit_plannen.jsp
@@ -48,9 +56,9 @@ public class RitDao {
 	 * @param bean
 	 * @return
 	 */
-	public Rit ritplannen(Rit bean) {
-
-		setLidnr(bean.getLidnr());
+	public Rit vulRitDao(Rit bean) {
+		
+		lidnr = bean.getLidnr();
 		setStartpunt(bean.getStartpunt());
 		setEindpunt(bean.getEindpunt());
 		setWaypoints(bean.getWaypoint());
@@ -63,20 +71,26 @@ public class RitDao {
 		setZitplaatsen(bean.getZitplaatsen());
 		setAangeboden(bean.getAangeboden());
 		setBrandstof(bean.getBrandstof());
-
-		if (meerdere != 0) {
-			saveMeerdereRitten();
-		} else {
-			saveRit();
-		}
 		
+		// dit uitsterren
+//	 if(url.contains("ritwijzigen.jsp")){ 
+//		updateRit();
+//		} else {
+//				if (meerdere != 0) {
+//					saveMeerdereRitten();
+//				} else {
+//					saveRit();
+//			}
+//		}
 		return bean;
+		
 	}
 
 	/**
 	 * Opslaan van rit in de database
 	 */
 	private void saveMeerdereRitten() {
+		
 		ArrayList<Integer> dagenVdWeek = new ArrayList();
 		if (ma == 1) {
 			dagenVdWeek.add(ma);
@@ -96,6 +110,7 @@ public class RitDao {
 
 		// voor elk geselecteerde dag voer volgende query uit
 		for (int i = 0; i < dagenVdWeek.size(); i++) {
+			
 			DayOfWeekIterator it = new DayOfWeekIterator(begindatum, einddatum, dagenVdWeek.get(i));
 
 			while (it.hasNext()) {
@@ -157,8 +172,8 @@ public class RitDao {
 	/**
 	 *
 	 */
-	private void saveRit() {
-
+	private Boolean saveRit() {
+		
 		datum = new Timestamp(begindatum.getMillis());
 		try {
 			currentCon = ConnectionManager.getConnection();
@@ -202,11 +217,90 @@ public class RitDao {
 
 		} catch (SQLException ex) {
 			Logger.getLogger(RitDao.class.getName()).log(Level.SEVERE, null, ex);
-			success = false;
-			System.out.println("Var Success = " + success);
+			
+			return false;
 		}
-		success = true;
+		return true;
 
+	}
+	
+	public Rit enkeleRitOphalen(int ritnr, Rit bean){
+		
+			try{
+			currentCon = ConnectionManager.getConnection();
+			PreparedStatement select1Rit;
+			String queryString = ("SELECT * FROM Rit WHERE ritnr = ?; ");
+			
+			select1Rit = currentCon.prepareStatement(queryString);
+			
+			select1Rit.setInt(1, ritnr);
+			System.out.println("De query is: " + select1Rit);
+			
+			select1Rit.executeQuery();
+			
+			}catch(SQLException ex){
+			Logger.getLogger(RitDao.class.getName()).log(Level.SEVERE, null, ex);
+			
+			}
+			
+			System.out.println(bean.getRitnr());
+			return bean;
+			
+	}
+	
+	public Boolean updateRit(int ritnr){
+	
+			datum = new Timestamp(begindatum.getMillis());
+		try {
+			currentCon = ConnectionManager.getConnection();
+			PreparedStatement updateRit;
+
+			String queryString = ("Update Rit SET"
+					
+					+ " startpunt = ?,"
+					+ " eindpunt = ?,"
+					+ " waypoint = ?,"
+					+ " afstand = ?,"
+					+ " prijs = ?,"
+					+ " gekocht = ?,"
+					+ " datum = ?,"
+					+ " zitplaatsen = ?,"
+					+ " brandstof = ?,"
+					+ " aangeboden = ?" 
+					+ "WHERE ritnr = ?;");
+			
+			updateRit = currentCon.prepareStatement(queryString);
+
+			
+			updateRit.setString(1, startpunt);
+			updateRit.setString(2, eindpunt);
+//			if (!waypoints.isEmpty()) {
+//					updateRit.setString(3, waypoints);
+//				} else {
+//					updateRit.setString(3, null);
+//				}
+			updateRit.setString(3, "Mahalo");
+			updateRit.setDouble(4, afstand);
+			updateRit.setDouble(5, prijs);
+			updateRit.setInt(6, gekocht);
+			updateRit.setTimestamp(7, datum);
+			updateRit.setInt(8, zitplaatsen);
+			updateRit.setString(9, brandstof);
+			updateRit.setInt(10, aangeboden);
+			updateRit.setInt(11, ritnr);
+
+			System.out.println("De query is: " + updateRit);
+
+			updateRit.executeUpdate();
+
+		} catch (SQLException ex) {
+			Logger.getLogger(RitDao.class.getName()).log(Level.SEVERE, null, ex);
+			return false;
+			
+		}
+		return true;
+
+	
 	}
 
 	public static Connection getCurrentCon() {
@@ -223,6 +317,13 @@ public class RitDao {
 
 	public static void setRs(ResultSet rs) {
 		RitDao.rs = rs;
+	}
+	public int getRitnr() {
+		return ritnr;
+	}
+
+	public void setRitnr(int ritnr) {
+		this.ritnr = ritnr;
 	}
 
 	public int getLidnr() {
@@ -399,5 +500,13 @@ public class RitDao {
 
 	public void setMeerdere(int meerdere) {
 		this.meerdere = meerdere;
+	}
+	
+		public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
 	}
 }
