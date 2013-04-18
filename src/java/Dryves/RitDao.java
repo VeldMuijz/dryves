@@ -89,7 +89,7 @@ public class RitDao {
 	/**
 	 * Opslaan van rit in de database
 	 */
-	private void saveMeerdereRitten() {
+	public Boolean saveMeerdereRitten() {
 		
 		ArrayList<Integer> dagenVdWeek = new ArrayList();
 		if (ma == 1) {
@@ -159,20 +159,20 @@ public class RitDao {
 
 				} catch (SQLException ex) {
 					Logger.getLogger(RitDao.class.getName()).log(Level.SEVERE, null, ex);
-					
+					return false;
 
 				}
-
+				
 
 			}
 		}
-		
+		return true;
 	}
 
 	/**
 	 *
 	 */
-	private Boolean saveRit() {
+	public Boolean saveRit() {
 		
 		datum = new Timestamp(begindatum.getMillis());
 		try {
