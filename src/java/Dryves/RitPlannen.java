@@ -295,14 +295,24 @@ public class RitPlannen extends HttpServlet {
 
 		ritDao.vulRitDao(rit);
 		if (referer.contains("ritwijzigen.jsp")) {
-			ritDao.updateRit(1);
+			ritDao.updateRit(1); //TODO ophalen van ritnummer uit link
+			if(ritDao.updateRit(1)){
+				response.sendRedirect("mijnritten.jsp");
+			}
 
 		} else {
 			if (ritDao.getMeerdere() == 0) {
 				ritDao.saveRit();
+				if(ritDao.saveRit()) {
+					response.sendRedirect("mijnritten.jsp"); 
+					
+				}
 
 			} else {
 				ritDao.saveMeerdereRitten();
+				if(ritDao.saveMeerdereRitten()){
+					response.sendRedirect("mijnritten.jsp");
+				}
 			}
 
 		}
