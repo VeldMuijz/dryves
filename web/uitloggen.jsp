@@ -29,7 +29,7 @@
 
 
 			<jsp:include page="navigatie.jsp"  flush="true" />
-
+			<% session.invalidate();%>
 			<div class="contentPanel">
 
 				U bent uitgelogd. <br/>

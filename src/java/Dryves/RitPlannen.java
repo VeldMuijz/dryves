@@ -14,6 +14,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -45,22 +46,7 @@ public class RitPlannen extends HttpServlet {
 	 */
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		response.setContentType("text/html;charset=UTF-8");
-		PrintWriter out = response.getWriter();
-		try {
-			/* TODO output your page here. You may use following sample code. */
-			out.println("<!DOCTYPE html>");
-			out.println("<html>");
-			out.println("<head>");
-			out.println("<title>Servlet RitPlannen</title>");
-			out.println("</head>");
-			out.println("<body>");
-			out.println("<h1>Servlet RitPlannen at " + request.getContextPath() + "</h1>");
-			out.println("</body>");
-			out.println("</html>");
-		} finally {
-			out.close();
-		}
+
 	}
 
 	// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -297,21 +283,27 @@ public class RitPlannen extends HttpServlet {
 		if (referer.contains("ritwijzigen.jsp")) {
 			ritDao.updateRit(1); //TODO ophalen van ritnummer uit link
 			if(ritDao.updateRit(1)){
-				response.sendRedirect("mijnritten.jsp");
+						  String address = "/WEB-INF/mijndryves.jsp";
+		  RequestDispatcher dispatcher = request.getRequestDispatcher(address);
+		  dispatcher.forward(request,response);
 			}
 
 		} else {
 			if (ritDao.getMeerdere() == 0) {
 				ritDao.saveRit();
 				if(ritDao.saveRit()) {
-					response.sendRedirect("mijnritten.jsp"); 
-					
+								  String address = "/WEB-INF/mijndryves.jsp";
+		  RequestDispatcher dispatcher = request.getRequestDispatcher(address);
+		  dispatcher.forward(request,response);
+			
 				}
 
 			} else {
 				ritDao.saveMeerdereRitten();
 				if(ritDao.saveMeerdereRitten()){
-					response.sendRedirect("mijnritten.jsp");
+							  String address = "/WEB-INF/mijndryves.jsp";
+		  RequestDispatcher dispatcher = request.getRequestDispatcher(address);
+		  dispatcher.forward(request,response);
 				}
 			}
 

@@ -4,6 +4,7 @@
  */
 package Dryves;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -37,8 +38,13 @@ try
 
           HttpSession session = request.getSession(true);       
           session.setAttribute("currentSessionUser",user); 
-          response.sendRedirect("mijndryves.jsp"); //logged-in page             
-     }
+          //response.sendRedirect("mijndryves.jsp"); //logged-in page             
+		  
+		  String address = "/WEB-INF/mijndryves.jsp";
+		  RequestDispatcher dispatcher = request.getRequestDispatcher(address);
+		  dispatcher.forward(request,response);
+     
+	 }
 
      else 
           response.sendRedirect("login.jsp"); //Retry login 
