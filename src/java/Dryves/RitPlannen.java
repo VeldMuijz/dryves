@@ -306,12 +306,16 @@ public class RitPlannen extends HttpServlet {
 				if(ritDao.saveRit()) {
 					response.sendRedirect("mijnritten.jsp"); 
 					
+				}else{
+					//TODO Errro pagina maken
 				}
 
 			} else {
 				ritDao.saveMeerdereRitten();
 				if(ritDao.saveMeerdereRitten()){
 					response.sendRedirect("mijnritten.jsp");
+				}else{
+					//TODO Errro pagina maken
 				}
 			}
 
