@@ -123,11 +123,14 @@
             </div>
 
 
-<body>
-    <div id="accordion">
-         <h3><fmt:message bundle="${rb}" key="hoeplanikeenrit" /></h3>
+<jsp:include page="navigatie.jsp"  flush="true" />
+
+
 
 			<div class="contentPanel">
+                            
+
+                            
 
 				<html lang="en">
 
