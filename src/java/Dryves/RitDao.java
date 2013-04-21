@@ -96,10 +96,6 @@ public class RitDao {
 			dagenVdWeek.add(zo);
 		}
 
-		// voor elk geselecteerde dag voer volgende query uit
-		for (int i = 0; i < dagenVdWeek.size(); i++) {
-
-			DayOfWeekIterator it = new DayOfWeekIterator(begindatum, einddatum, dagenVdWeek.get(i));
 
         // voor elk geselecteerde dag voer volgende query uit
         for (int i = 0; i < dagenVdWeek.size(); i++) {
@@ -150,30 +146,18 @@ public class RitDao {
 					Logger.getLogger(RitDao.class.getName()).log(Level.SEVERE, null, ex);
 					return false;
 
-                } catch (SQLException ex) {
-                    Logger.getLogger(RitDao.class.getName()).log(Level.SEVERE, null, ex);
-
-
-			}
-		}
-		return true;
-	}
-
-	/**
-	 * Opslaan van een enkele rit
-	 * @return false of true
-	 */
-	public Boolean saveRit() {
-
+		
+            }
+		
             }
         }
-
-    }
+        return true;
+        }
 
     /**
      *
      */
-    private void saveRit() {
+    public Boolean saveRit() {
 
         datum = new Timestamp(begindatum.getMillis());
         try {
@@ -218,10 +202,9 @@ public class RitDao {
 
         } catch (SQLException ex) {
             Logger.getLogger(RitDao.class.getName()).log(Level.SEVERE, null, ex);
-            success = false;
-            System.out.println("Var Success = " + success);
+           return false;
         }
-        success = true;
+        return true;
 
     }
 
@@ -253,72 +236,40 @@ public class RitDao {
      * @throws SQLException
      */
     public List<Rit> getAlleRittenPerLid() throws SQLException {
-        Connection connection = null;
+         Connection connection = null;
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         List<Rit> ritten = new ArrayList<Rit>();
-
+        
         try {
-
+           
             currentCon = ConnectionManager.getConnection();
-            PreparedStatement zoekRitten;
+            PreparedStatement zoekritten;
             String queryString = "SELECT * FROM Rit WHERE lidnr = ?;";
-
-			insertRit.setInt(1, lidnr);
-			insertRit.setString(2, startpunt);
-			insertRit.setString(3, eindpunt);
-			if (!waypoints.isEmpty()) {
-				insertRit.setString(4, waypoints);
-			} else {
-				insertRit.setString(4, null);
-			}
-			insertRit.setDouble(5, afstand);
-			insertRit.setDouble(6, prijs);
-			insertRit.setInt(7, gekocht);
-			insertRit.setTimestamp(8, datum);
-			insertRit.setInt(9, zitplaatsen);
-			insertRit.setString(10, brandstof);
-			insertRit.setInt(11, aangeboden);
-
-            resultSet = zoekRitten.executeQuery();
-
+            
+            zoekritten = currentCon.prepareStatement(queryString);
+            zoekritten.setInt(1, lidnr);
+            resultSet = zoekritten.executeQuery();
+            
             while (resultSet.next()) {
                 Rit rit = new Rit();
-                rit.setRitnr(resultSet.getLong("ritnr"));
+                rit.setRitnr(resultSet.getInt("ritnr"));
                 rit.setStartpunt(resultSet.getString("startpunt"));
                 rit.setEindpunt(resultSet.getString("eindpunt"));
                 rit.setPrijs(resultSet.getDouble("prijs"));
                 ritten.add(rit);
             }
-        } finally {
-            if (resultSet != null) {
-                try {
-                    resultSet.close();
-                } catch (SQLException ignore) {
-                }
-            }
-            if (statement != null) {
-                try {
-                    statement.close();
-                } catch (SQLException ignore) {
-                }
-            }
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException ignore) {
-                }
-            }
         }
+            finally {
+//            if (resultSet != null) try { resultSet.close(); } catch (SQLException ignore) {}
+//            if (statement != null) try { statement.close(); } catch (SQLException ignore) {}
+//            if (connection != null) try { connection.close(); } catch (SQLException ignore) {}
+//        }
+        }
+        return ritten;
+        
+    }
 
-		} catch (SQLException ex) {
-			Logger.getLogger(RitDao.class.getName()).log(Level.SEVERE, null, ex);
-
-			return false;
-		}
-		return true;
-
-	}
 
 	/**
 	 * Ophalen van een enkele rit
@@ -330,16 +281,32 @@ public class RitDao {
 
 		try {
 			currentCon = ConnectionManager.getConnection();
+                        
 			PreparedStatement select1Rit;
-			String queryString = ("SELECT * FROM Rit WHERE ritnr = ?; ");
+			String queryString = ("SELECT * FROM Rit WHERE ritnr = ?;");
 
 			select1Rit = currentCon.prepareStatement(queryString);
 
 			select1Rit.setInt(1, ritnr);
 			System.out.println("De query is: " + select1Rit);
-
-			select1Rit.executeQuery();
-
+                        
+			rs = select1Rit.executeQuery();
+                        
+                        while(rs.next()){
+                        bean.setRitnr(rs.getInt("ritnr"));
+                        bean.setStartpunt(rs.getString("startpunt"));
+                        bean.setEindpunt(rs.getString("eindpunt"));
+                        bean.setPrijs(rs.getDouble("prijs"));
+                        bean.setWaypoint(rs.getString("waypoint"));
+                        bean.setAfstand(rs.getDouble("afstand"));
+                        bean.setDatum(rs.getTimestamp("datum"));
+                        bean.setZitplaatsen(rs.getInt("zitplaatsen"));
+                        bean.setBrandstof(rs.getString("brandstof"));
+                        bean.setAangeboden(rs.getInt("aangeboden"));
+                        }
+                       
+                        
+                        
 		} catch (SQLException ex) {
 			Logger.getLogger(RitDao.class.getName()).log(Level.SEVERE, null, ex);
 

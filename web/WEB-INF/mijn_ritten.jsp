@@ -8,27 +8,57 @@ Document : mijn_ritten
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
- <head>
- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
- <title>Mijn ritten</title>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link type="text/css" rel="stylesheet" href="css/dryver.css"/>
+        <title>Mijn ritten</title>
 
 
- </head>
- <body>
- <h1>Hello World!</h1>
+    </head>
+    <body>
 
 
-<table>
-    <c:forEach items="${ritten}" var="rit">
-        <tr>
-            <td>Ritnr:  ${rit.ritnr}</td>
-            <td>${rit.startpunt}</td>
-            <td>${rit.eindpunt}</td>
-            <td>${rit.prijs}</td>
-        </tr>
-    </c:forEach>
-</table>
+        <div class="background">
+
+            <img src="images/background1.jpg" />
+
+        </div>
+        <div class="drvyesWrapper">
+            <div class="logo">    
+                <img src="images/Logo_Dryves.png" />
+            </div>
+            <jsp:include page="/WEB-INF/navigatie.jsp"  flush="true" />
 
 
- </body>
+
+
+            <div class="contentPanel">         
+                <h1>Hello World!</h1>
+
+                
+                
+                <c:forEach items="${ritten}" var="rit">
+                    <div class="rittenlijst">
+                        <table onclick="window.location = 'ritwijzigen.jsp';">
+                            <form action="RitPlannen" method="get">
+                                <tr>
+                                <input name="ritnr" value="${rit.ritnr}" hidden ="true"/>
+                                <td>${rit.startpunt}</td>
+                                <td><img src ="images/pijl.jpg" /></td>
+                                <td>${rit.eindpunt}</td>
+                                <td>${rit.prijs}</td>
+                                <td><button action="submit"> Rit wijzigen</button></td>
+                                </tr> 
+                            </form>
+
+                        </table>
+                    </div>
+                </c:forEach>
+                
+             
+            </div>
+        </div>
+
+
+    </body>
 </html>

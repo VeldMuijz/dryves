@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -198,14 +199,15 @@
 
 				<div class="invoerveld">
 					<form action="RitPlannen" method="post" onsubmit="return isCompleet();">
-						Start adres: <br/>
-						<input type="text" id="start" name="start" onchange="calcRoute();" style ="width: 350; float: right:"><br />
+                                            <input name="ritnr" value="${sessieRit.ritnr}" hidden="false"/>
+						Start adres: <br/> 
+						<input type="text" id="start" name="start" onchange="calcRoute();" style ="width: 350; float: right:" value="${sessieRit.startpunt}"><br />
 						Eind adres: <br/>
-						<input type="text" id="end" name="end" onchange="calcRoute();" style ="width: 350; float: right:"> <br />	
+						<input type="text" id="end" name="end" onchange="calcRoute();" style ="width: 350; float: right:" value="${sessieRit.eindpunt}"> <br />	
 
-						Begindatum:<br/> <input type="date" id="begindatum" name="begindatum"> <br/>
+						Begindatum:<br/> <input type="date" id="begindatum" name="begindatum" value="${sessieRit.datum}"> <br/>
 						Tijd: <br/> <input type="text" id="tijd" name="tijd"> <br/><br/>
-						<td> Herhaling 
+<!--						<td> Herhaling 
 							<input type="checkbox" id="herhaling" name="herhaling" onclick="isChecked(this.checked);"> </td>
 						<br/><br/>
 						<div id="dagenCheckBox" style="display: none;">
@@ -220,7 +222,7 @@
 								<td><input type="checkbox" name="zo" value="zo"> Zo </input> </td>
 							</table>
 							<br/>
-							Einddatum: <input type="date" id="einddatum" name="einddatum"> </div>
+							Einddatum: <input type="date" id="einddatum" name="einddatum"> </div>-->
 
 
 						<br /> <br />
@@ -242,8 +244,14 @@
 									<option value="electrisch"> Electrisch </option>
 									<option value="hybride"> Hybride </option>
 								</select></td></table> <br/><br/>
-
-						<input type="checkbox" name="aanbieden">Direct aanbieden</input>			
+                                                                
+                                                <c:choose>       
+                                                    <c:when  test="${sessieRit.aangeboden > 0}">
+                                                        <input type="checkbox" name="aanbieden" checked>Direct aanbieden</input> </c:when>
+                                                        <c:otherwise>
+                                                            <input type="checkbox" name="aanbieden">Direct aanbieden</input>
+                                                        </c:otherwise>
+                                                </c:choose>
 						<button type="submit"> Klik </button>
 
 						<input id="hiddenstart" name="hiddenstart" style="display: none;" ></input>

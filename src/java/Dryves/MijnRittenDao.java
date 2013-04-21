@@ -42,7 +42,7 @@ public class MijnRittenDao {
             
             while (resultSet.next()) {
                 Rit rit = new Rit();
-                rit.setRitnr(resultSet.getLong("ritnr"));
+                rit.setRitnr(resultSet.getInt("ritnr"));
                 rit.setStartpunt(resultSet.getString("startpunt"));
                 rit.setEindpunt(resultSet.getString("eindpunt"));
                 rit.setPrijs(resultSet.getDouble("prijs"));

@@ -63,6 +63,10 @@ public class Sessie {
         public Locale getLocale() {
             return locale;
         }
+        public String getLocaleStr(){
+            
+            return locale.toString();
+        }
 
         public void setLocale(Locale locale) {
             this.locale = locale;
@@ -78,7 +82,7 @@ public class Sessie {
 	}
 
     void setLocale(String locale) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.locale = new Locale(locale);
     }
 
 }

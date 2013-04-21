@@ -6,6 +6,14 @@
 
 <%@page import="Dryves.Sessie"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+
+<fmt:setLocale value="${currentSessionUser.localeStr}" scope="session" />
+
+<fmt:setBundle basename="ResourceBundles.Dryves" scope="request" var="rb" />
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -38,7 +46,7 @@
                 
         <% Sessie currentUser = (Sessie) (session.getAttribute("currentSessionUser"));%>
 
-        Welkom <%= currentUser.getVnaam() + " " + currentUser.getAnaam() %>
+        <fmt:message bundle="${rb}" key="welkom" /> <%= currentUser.getVnaam() + " " + currentUser.getAnaam() %>
                 
                 <button onclick="window.location = 'mijndryves_gegevens.jsp';">Mijn gegevens</button>
                 <button onclick="window.location = 'rit_plannen.jsp';">Mijn berichten</button>

@@ -5,6 +5,14 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+
+<fmt:setLocale value="${currentSessionUser.localeStr}" scope="session" />
+
+<fmt:setBundle basename="ResourceBundles.Dryves" scope="request" var="rb" />
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -198,7 +206,7 @@
 
 				<div class="invoerveld">
 					<form action="RitPlannen" method="post" onsubmit="return isCompleet();">
-						Start adres: <br/>
+						<fmt:message bundle="${rb}" key="startadres" /><br/>
 						<input type="text" id="start" name="start" onchange="calcRoute();" style ="width: 350; float: right:"><br />
 						Eind adres: <br/>
 						<input type="text" id="end" name="end" onchange="calcRoute();" style ="width: 350; float: right:"> <br />	
