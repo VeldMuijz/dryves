@@ -46,7 +46,7 @@
                 
         <% Sessie currentUser = (Sessie) (session.getAttribute("currentSessionUser"));%>
 
-        Welkom <%= currentUser.getVnaam() + " " + currentUser.getAnaam() %>
+        <fmt:message bundle="${rb}" key="welkom" /> <%= currentUser.getVnaam() + " " + currentUser.getAnaam() %>
                 
                 <button onclick="window.location = 'mijndryves_gegevens.jsp';">Mijn gegevens</button>
                 <button onclick="window.location = 'rit_plannen.jsp';">Mijn berichten</button>

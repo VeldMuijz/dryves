@@ -45,7 +45,7 @@
         
         <div class="contentPanel">
             
-Algemene voorwaarden 
+<fmt:message bundle="${rb}" key="algemenevoorwaarden" /> 
 
 <br /><br />
             

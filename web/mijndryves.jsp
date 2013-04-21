@@ -39,10 +39,6 @@
             <jsp:include page="navigatie.jsp"  flush="true" />
 
 
-
-
-
-
             <div class="contentPanel">
                 
 

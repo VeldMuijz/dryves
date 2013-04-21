@@ -134,7 +134,7 @@
 
 <body>
     <div id="accordion">
-         <h3>Hoe plan ik een rit?</h3>
+         <h3><fmt:message bundle="${rb}" key="hoeplanikeenrit" /></h3>
 
         <div>
             
