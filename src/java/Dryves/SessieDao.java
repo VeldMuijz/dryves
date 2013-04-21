@@ -88,7 +88,7 @@ public class SessieDao
             bean.setLidnr(lidnr);
             bean.setVnaam(vnaam);
             bean.setAnaam(anaam);
-            //bean.setLocale(locale);
+            bean.setLocale(locale);
             bean.setValid(true);
             
             //Hieronder wordt de locale vanuit de getter geprint naar de console
