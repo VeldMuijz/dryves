@@ -6,10 +6,13 @@
 
 <%@page import="Dryves.Sessie"%>
 <%@page import="Dryves.Login"%>
-<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<fmt:setLocale value="nl_NL" />
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+
+<fmt:setLocale value="${currentSessionUser.localeStr}" scope="session" />
+
 <fmt:setBundle basename="ResourceBundles.Dryves" scope="request" var="rb" />
 
 <!DOCTYPE html>
