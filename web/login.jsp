@@ -3,14 +3,20 @@
     Created on : 11-mrt-2013, 19:59:48
     Author     : RickSpijker
 --%>
-<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<%@page import="Dryves.Sessie"%>
+<%@page import="Dryves.Login"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="Dryves.Sessie"%>
 <%@page import="Dryves.Login"%>
 
 <%@page import="com.facebook.Datv"%>
 
-<fmt:setLocale value="nl_NL" />
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+
+<fmt:setLocale value="${currentSessionUser.localeStr}" scope="session" />
+
 <fmt:setBundle basename="ResourceBundles.Dryves" scope="request" var="rb" />
 
 <!DOCTYPE html>

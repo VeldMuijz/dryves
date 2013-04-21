@@ -4,24 +4,14 @@
     Author     : Vincent
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="java.util.Locale"%>
 <%@page import="Dryves.Sessie"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<% 
-    Sessie currentUser = (Sessie) (session.getAttribute("currentSessionUser"));
-    
-    System.out.println("Locale uit mijndryves.jsp :" + currentUser.getLocale());
-    
-    Locale locale = currentUser.getLocale();
-    
-    System.out.println("Locale uit de String :" + locale);
-    
-%>
 
-
-<fmt:setLocale value="${locale}" />
+<fmt:setLocale value="${currentSessionUser.localeStr}" scope="session" />
 
 <fmt:setBundle basename="ResourceBundles.Dryves" scope="request" var="rb" />
 
@@ -49,10 +39,6 @@
             <jsp:include page="navigatie.jsp"  flush="true" />
 
 
-
-
-
-
             <div class="contentPanel">
                 
 
@@ -60,7 +46,6 @@
                 <button onclick="window.location = 'mijndryves_gegevens.jsp';">Mijn gegevens</button>
                 <button onclick="window.location = 'rit_plannen.jsp';">Mijn berichten</button>
                 <button onclick="window.location = 'rit_plannen.jsp';">Mijn ritten</button>
-                
                 <br /><br />
                 
                 <fmt:message bundle="${rb}" key="ubentingelogdals" />
@@ -68,7 +53,7 @@
                 <br /><br />
         
 
-        Welkom <%= currentUser.getVnaam() + " " + currentUser.getAnaam() %>
+        Welkom ${currentSessionUser.vnaam} ${currentSessionUser.anaam}
 
             </div>
         </div>

@@ -5,6 +5,14 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+
+<fmt:setLocale value="${currentSessionUser.localeStr}" scope="session" />
+
+<fmt:setBundle basename="ResourceBundles.Dryves" scope="request" var="rb" />
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -115,7 +123,9 @@
             </div>
 
 
-				<jsp:include page="navigatie.jsp"  flush="true" />
+<body>
+    <div id="accordion">
+         <h3><fmt:message bundle="${rb}" key="hoeplanikeenrit" /></h3>
 
 			<div class="contentPanel">
 
