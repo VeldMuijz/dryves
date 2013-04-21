@@ -28,12 +28,18 @@ public class MijnRittenDao {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         List<Rit> ritten = new ArrayList<Rit>();
-
+        System.out.println("DIT IS EEN TESET************************");
         try {
+           
             currentCon = ConnectionManager.getConnection();
-            statement = connection.prepareStatement("SELECT * FROM rit WHERE lidnr = lidnr");
-            resultSet = statement.executeQuery();
+            PreparedStatement zoekritten;
+            String queryString = "SELECT * FROM Rit WHERE lidnr = ;";
+            
+            zoekritten = currentCon.prepareStatement(queryString);
+            resultSet = zoekritten.executeQuery();
 
+             //System.out.println("Uitvoeren van query: \n\n\n " + queryString);
+            
             while (resultSet.next()) {
                 Rit rit = new Rit();
                 rit.setRitnr(resultSet.getLong("ritnr"));
@@ -42,13 +48,16 @@ public class MijnRittenDao {
                 rit.setPrijs(resultSet.getDouble("prijs"));
                 ritten.add(rit);
             }
-        } finally {
-            if (resultSet != null) try { resultSet.close(); } catch (SQLException ignore) {}
-            if (statement != null) try { statement.close(); } catch (SQLException ignore) {}
-            if (connection != null) try { connection.close(); } catch (SQLException ignore) {}
+//            System.out.println(resultSet.getInt("ritnr"));
         }
-
+            finally {
+//            if (resultSet != null) try { resultSet.close(); } catch (SQLException ignore) {}
+//            if (statement != null) try { statement.close(); } catch (SQLException ignore) {}
+//            if (connection != null) try { connection.close(); } catch (SQLException ignore) {}
+//        }
+        }
         return ritten;
+        
     }
 
     

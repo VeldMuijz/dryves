@@ -25,6 +25,16 @@
         <servlet-name>RitPlannen</servlet-name>
         <servlet-class>Dryves.RitPlannen</servlet-class>
     </servlet>
+    
+        <servlet>
+        <servlet-name>MijnRitten</servlet-name>
+        <servlet-class>Dryves.MijnRitten</servlet-class>
+    </servlet>
+    
+       <servlet-mapping>
+        <servlet-name>MijnRitten</servlet-name>
+        <url-pattern>/MijnRitten</url-pattern>
+    </servlet-mapping>
 	
 
 </web-app>
