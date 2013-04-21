@@ -28,26 +28,12 @@
             </div>
 
 
-			<div class="navigation">
-			
+			<jsp:include page="navigatie.jsp"  flush="true" />
 
-            <div><button  class="loginButton" onclick="window.location = 'login.jsp';">Login</button></div>
-			
-
-			<button onclick="window.location = 'index.jsp';">Home</button>
-			<button onclick="window.location = 'watisdryves.jsp';">Wat is Dryves</button>
-			<button onclick="window.location = 'faq.jsp';">FAQ</button>
-			<button onclick="window.location = 'mijndryves.jsp';">Mijn Dryves</button>
-			<button onclick="window.location = 'registratie.jsp';">Registreer</button>
-						
-        </div>
-			<% session.invalidate(); %>
 			<div class="contentPanel">
-				<div style="height: 350px; margin-left: 15px;">
-				<br/><br/>
+
 				U bent uitgelogd. <br/>
-				Bedankt voor uw bezoek.
-				</div>
+				Bedankt voor uw  bezoek.
 			</div>
 
         </div>

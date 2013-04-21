@@ -1,5 +1,11 @@
 package Dryves;
 
+import Dryves.ConnectionManager;
+import Dryves.DayOfWeekIterator;
+import Dryves.Rit;
+
+
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,82 +23,83 @@ import org.joda.time.DateTime;
  */
 public class RitDao {
 
-    static Connection currentCon;
-    static ResultSet rs;
-    int lidnr;
-    String startpunt;
-    String eindpunt;
-    String waypoints;
-    Double afstand;
-    Double prijs;
-    int gekocht;
-    Timestamp datum;
-    DateTime begindatum;
-    DateTime einddatum;
-    int zitplaatsen;
-    int aangeboden;
-    String brandstof;
-    Boolean success;
-    int ma = 0;
-    int di = 0;
-    int wo = 0;
-    int don = 0;
-    int vr = 0;
-    int za = 0;
-    int zo = 0;
-    int meerdere = 0;
+	static Connection currentCon;
+	static ResultSet rs;
+	int ritnr;
+	int lidnr;
+	String startpunt;
+	String eindpunt;
+	String waypoints;
+	Double afstand;
+	Double prijs;
+	int gekocht;
+	Timestamp datum;
+	DateTime begindatum;
+	DateTime einddatum;
+	int zitplaatsen;
+	int aangeboden;
+	String brandstof;
+	Boolean success;
+	int ma = 0;
+	int di = 0;
+	int wo = 0;
+	int don = 0;
+	int vr = 0;
+	int za = 0;
+	int zo = 0;
+	int meerdere = 0;
+	String url;
 
-    /**
-     * Ophalen van alle gegevens uit de servlet voor de rit_plannen.jsp
-     *
-     * @param bean
-     * @return
-     */
-    public Rit ritplannen(Rit bean) {
+	/**
+	 * Ophalen van alle gegevens uit de servlet voor de rit_plannen.jsp
+	 *
+	 * @param bean
+	 * @return bean (rit object)
+	 */
+	public Rit vulRitDao(Rit bean) {
 
-        setLidnr(bean.getLidnr());
-        setStartpunt(bean.getStartpunt());
-        setEindpunt(bean.getEindpunt());
-        setWaypoints(bean.getWaypoint());
-        setAfstand(bean.getAfstand());
-        setPrijs(bean.getPrijs());
-        setGekocht(bean.getGekocht());
-        setDatum(bean.getDatum());
-        //setEinddatum(bean.getEinddatum());
+		lidnr = bean.getLidnr();
+		startpunt = bean.getStartpunt();
+		eindpunt = bean.getEindpunt();
+		waypoints = bean.getWaypoint();
+		afstand = bean.getAfstand();
+		prijs = bean.getPrijs();
+		gekocht = bean.getGekocht();
+		datum = bean.getDatum();
+		zitplaatsen = bean.getZitplaatsen();
+		aangeboden = bean.getAangeboden();
+		brandstof = bean.getBrandstof();
+		return bean;
 
-        setZitplaatsen(bean.getZitplaatsen());
-        setAangeboden(bean.getAangeboden());
-        setBrandstof(bean.getBrandstof());
+	}
 
-        if (meerdere != 0) {
-            saveMeerdereRitten();
-        } else {
-            saveRit();
-        }
+	/**
+	 * Opslaan van rit in de database
+	 * @return false of true
+	 */
+	public Boolean saveMeerdereRitten() {
 
-        return bean;
-    }
+		ArrayList<Integer> dagenVdWeek = new ArrayList();
+		if (ma == 1) {
+			dagenVdWeek.add(ma);
+		} else if (di == 2) {
+			dagenVdWeek.add(di);
+		} else if (wo == 3) {
+			dagenVdWeek.add(wo);
+		} else if (don == 4) {
+			dagenVdWeek.add(don);
+		} else if (vr == 5) {
+			dagenVdWeek.add(vr);
+		} else if (za == 6) {
+			dagenVdWeek.add(za);
+		} else if (zo == 7) {
+			dagenVdWeek.add(zo);
+		}
 
-    /**
-     * Opslaan van rit in de database
-     */
-    private void saveMeerdereRitten() {
-        ArrayList<Integer> dagenVdWeek = new ArrayList();
-        if (ma == 1) {
-            dagenVdWeek.add(ma);
-        } else if (di == 2) {
-            dagenVdWeek.add(di);
-        } else if (wo == 3) {
-            dagenVdWeek.add(wo);
-        } else if (don == 4) {
-            dagenVdWeek.add(don);
-        } else if (vr == 5) {
-            dagenVdWeek.add(vr);
-        } else if (za == 6) {
-            dagenVdWeek.add(za);
-        } else if (zo == 7) {
-            dagenVdWeek.add(zo);
-        }
+		// voor elk geselecteerde dag voer volgende query uit
+		for (int i = 0; i < dagenVdWeek.size(); i++) {
+
+			DayOfWeekIterator it = new DayOfWeekIterator(begindatum, einddatum, dagenVdWeek.get(i));
 
         // voor elk geselecteerde dag voer volgende query uit
         for (int i = 0; i < dagenVdWeek.size(); i++) {
@@ -139,15 +146,24 @@ public class RitDao {
                     insertRit.setString(10, brandstof);
                     insertRit.setInt(11, aangeboden);
 
-                    System.out.println("De query is: " + insertRit);
-                    insertRit.executeUpdate();
+				} catch (SQLException ex) {
+					Logger.getLogger(RitDao.class.getName()).log(Level.SEVERE, null, ex);
+					return false;
 
                 } catch (SQLException ex) {
                     Logger.getLogger(RitDao.class.getName()).log(Level.SEVERE, null, ex);
 
 
-                }
+			}
+		}
+		return true;
+	}
 
+	/**
+	 * Opslaan van een enkele rit
+	 * @return false of true
+	 */
+	public Boolean saveRit() {
 
             }
         }
@@ -248,8 +264,21 @@ public class RitDao {
             PreparedStatement zoekRitten;
             String queryString = "SELECT * FROM Rit WHERE lidnr = ?;";
 
-            zoekRitten = currentCon.prepareStatement(queryString);
-            zoekRitten.setInt(1, lidnr);
+			insertRit.setInt(1, lidnr);
+			insertRit.setString(2, startpunt);
+			insertRit.setString(3, eindpunt);
+			if (!waypoints.isEmpty()) {
+				insertRit.setString(4, waypoints);
+			} else {
+				insertRit.setString(4, null);
+			}
+			insertRit.setDouble(5, afstand);
+			insertRit.setDouble(6, prijs);
+			insertRit.setInt(7, gekocht);
+			insertRit.setTimestamp(8, datum);
+			insertRit.setInt(9, zitplaatsen);
+			insertRit.setString(10, brandstof);
+			insertRit.setInt(11, aangeboden);
 
             resultSet = zoekRitten.executeQuery();
 
@@ -282,7 +311,100 @@ public class RitDao {
             }
         }
 
-        return ritten;
+		} catch (SQLException ex) {
+			Logger.getLogger(RitDao.class.getName()).log(Level.SEVERE, null, ex);
+
+			return false;
+		}
+		return true;
+
+	}
+
+	/**
+	 * Ophalen van een enkele rit
+	 * @param ritnr
+	 * @param bean
+	 * @return rit object
+	 */
+	public Rit enkeleRitOphalen(int ritnr, Rit bean) {
+
+		try {
+			currentCon = ConnectionManager.getConnection();
+			PreparedStatement select1Rit;
+			String queryString = ("SELECT * FROM Rit WHERE ritnr = ?; ");
+
+			select1Rit = currentCon.prepareStatement(queryString);
+
+			select1Rit.setInt(1, ritnr);
+			System.out.println("De query is: " + select1Rit);
+
+			select1Rit.executeQuery();
+
+		} catch (SQLException ex) {
+			Logger.getLogger(RitDao.class.getName()).log(Level.SEVERE, null, ex);
+
+		}
+
+		System.out.println(bean.getRitnr());
+		return bean;
+
+	}
+
+	/**
+	 * Updaten van een rit, wijzigingen opslaan
+	 * @param ritnr
+	 * @return true of false
+	 */
+	public Boolean updateRit(int ritnr) {
+
+		datum = new Timestamp(begindatum.getMillis());
+		try {
+			currentCon = ConnectionManager.getConnection();
+			PreparedStatement updateRit;
+
+			String queryString = ("Update Rit SET"
+					+ " startpunt = ?,"
+					+ " eindpunt = ?,"
+					+ " waypoint = ?,"
+					+ " afstand = ?,"
+					+ " prijs = ?,"
+					+ " gekocht = ?,"
+					+ " datum = ?,"
+					+ " zitplaatsen = ?,"
+					+ " brandstof = ?,"
+					+ " aangeboden = ?"
+					+ "WHERE ritnr = ?;");
+
+			updateRit = currentCon.prepareStatement(queryString);
+
+
+			updateRit.setString(1, startpunt);
+			updateRit.setString(2, eindpunt);
+			if (!waypoints.isEmpty()) {
+					updateRit.setString(3, waypoints);
+				} else {
+					updateRit.setString(3, null);
+				}
+			updateRit.setDouble(4, afstand);
+			updateRit.setDouble(5, prijs);
+			updateRit.setInt(6, gekocht);
+			updateRit.setTimestamp(7, datum);
+			updateRit.setInt(8, zitplaatsen);
+			updateRit.setString(9, brandstof);
+			updateRit.setInt(10, aangeboden);
+			updateRit.setInt(11, ritnr);
+
+			System.out.println("De query is: " + updateRit);
+
+			updateRit.executeUpdate();
+
+		} catch (SQLException ex) {
+			Logger.getLogger(RitDao.class.getName()).log(Level.SEVERE, null, ex);
+			return false;
+
+		}
+		return true;
+
 
     }
 
@@ -298,9 +420,17 @@ public class RitDao {
         return rs;
     }
 
-    public static void setRs(ResultSet rs) {
-        RitDao.rs = rs;
-    }
+	public static void setRs(ResultSet rs) {
+		RitDao.rs = rs;
+	}
+
+	public int getRitnr() {
+		return ritnr;
+	}
+
+	public void setRitnr(int ritnr) {
+		this.ritnr = ritnr;
+	}
 
     public int getLidnr() {
         return lidnr;
@@ -474,7 +604,15 @@ public class RitDao {
         return meerdere;
     }
 
-    public void setMeerdere(int meerdere) {
-        this.meerdere = meerdere;
-    }
+	public void setMeerdere(int meerdere) {
+		this.meerdere = meerdere;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
 }
