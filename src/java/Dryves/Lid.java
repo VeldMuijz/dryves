@@ -16,8 +16,8 @@ public class Lid  implements java.io.Serializable {
      private int lidnr;
      private String vnaam;
      private String anaam;
-     private char geslacht;
-     private String adres;
+     private String geslacht;
+     private String straat;
      private String huisnummer;
      private String postcode;
      private String stad;
@@ -29,22 +29,19 @@ public class Lid  implements java.io.Serializable {
      private int beoordeling;
      private String fotoUrl;
      private String tvoegsel;
-     private Locale locale;
-     private String notify;
      private Hashtable errors;
-
-    public Lid() {
-    }
+     private String langnotify;
 
 	
-    public Lid(int lidnr, String vnaam, String anaam, char geslacht, String adres, String huisnummer, String reknr, String postcode, String stad, String email, String wachtwoord, String wachtwoord2, int beoordeling, String fotoUrl, String tvoegsel, Locale locale) {
+    public Lid(int lidnr, String vnaam, String anaam, String geslacht, String straat, String huisnummer, String reknr, String telnr, String postcode, String stad, String email, String wachtwoord, String wachtwoord2, int beoordeling, String fotoUrl, String tvoegsel, String langnotify) {
         this.lidnr = lidnr;
         this.vnaam = vnaam;
         this.anaam = anaam;
         this.geslacht = geslacht;
-        this.adres = adres;
+        this.straat = straat;
         this.huisnummer = huisnummer;
         this.reknr = reknr;
+        this.telnr = telnr;
         this.postcode = postcode;    
         this.stad = stad;
         this.email = email;
@@ -53,26 +50,19 @@ public class Lid  implements java.io.Serializable {
         this.beoordeling = beoordeling;
         this.fotoUrl = fotoUrl;
         this.tvoegsel = tvoegsel;
-        this.locale = locale;
+        this.langnotify = langnotify;
+
     }
-    public Lid(int lidnr, String vnaam, String anaam, char geslacht, String adres, String huisnummer, String postcode, String stad, String telnr, String reknr, String email, String wachtwoord, String wachtwoord2, int beoordeling, String fotoUrl, String tvoegsel, Locale locale) {
-       this.lidnr = lidnr;
-       this.vnaam = vnaam;
-       this.anaam = anaam;
-       this.geslacht = geslacht;
-       this.adres = adres;
-       this.huisnummer = huisnummer;
-       this.postcode = postcode;
-       this.stad = stad;
-       this.telnr = telnr;
-       this.reknr = reknr;
-       this.email = email;
-       this.wachtwoord = wachtwoord;
-       this.beoordeling = beoordeling;
-       this.fotoUrl = fotoUrl;
-       this.tvoegsel = tvoegsel;
-       this.locale = locale;
+
+    Lid() {
+        
+        //Deze constructor is leeg, deze wordt gebruikt door registratie.java
+        
+        
     }
+
+
+        
     
     public boolean validate() {
         boolean bool = true;
@@ -93,14 +83,14 @@ public class Lid  implements java.io.Serializable {
         }
                 
         if (reknr.equals("") || reknr.length() != 6) {
-            errors.put("billingnumber", "Typ een geldige rekening nummer");
+            errors.put("rekeningnummer", "Typ een geldige rekening nummer");
             reknr = "";
             bool = false;
         } else {
             try {
                 int x = Integer.parseInt(reknr);
             } catch (NumberFormatException e) {
-                errors.put("billingnumber", "Typ een geldige rekening nummer");
+                errors.put("rekeningnummer", "Typ een geldige rekening nummer");
                 reknr = "";
                 bool = false;
             }
@@ -112,19 +102,19 @@ public class Lid  implements java.io.Serializable {
             bool = false;
         }
         if (wachtwoord.equals("")) {
-            errors.put("password1", "Typ een geldig paswoord");
+            errors.put("wachtwoord", "Typ een geldig wachtword");
             wachtwoord = "";
             bool = false;
         }
         if (!wachtwoord2.equals("") && (wachtwoord2.equals("")
                 || !wachtwoord.equals(wachtwoord2))) {
-            errors.put("wachtwoord2", "Bevestig uw wachtwoord");
+            errors.put("wachtwoord", "Bevestig uw wachtwoord");
             wachtwoord2 = "";
             bool = false;
         }
-        if (adres.equals("")) {
+        if (straat.equals("")) {
             errors.put("straat", "Typ hier uw straatnaam");
-            adres = "";
+            straat = "";
             bool = false;
         }
               
@@ -138,6 +128,12 @@ public class Lid  implements java.io.Serializable {
             errors.put("stad", "Typ hier de naam van uw woonplaats");
             stad = "";
             bool = false;
+            
+        }
+        if (telnr.equals("")) {
+            errors.put("telefoonnummer", "Typ hier uw telefoonnummer");
+            telnr = "";
+            bool = false;    
         }
         if (postcode.equals("") || postcode.length() != 6) {
             errors.put("postcode", "Typ een geldige postcode");
@@ -147,7 +143,7 @@ public class Lid  implements java.io.Serializable {
             try {
                 int x = Integer.parseInt(postcode);
             } catch (NumberFormatException e) {
-                errors.put("zip", "Typ een geldige postcode");
+                errors.put("postcode", "Typ een geldige postcode");
                 postcode = "";
                 bool = false;
             }
@@ -162,7 +158,7 @@ public class Lid  implements java.io.Serializable {
     }
          
     public String isRbSelected(String s) {
-        return (notify.equals(s)) ? "checked" : "";   
+        return (geslacht.equals(s)) ? "checked" : "";   
     }
     public int getLidnr() {
         return this.lidnr;
@@ -185,19 +181,19 @@ public class Lid  implements java.io.Serializable {
     public void setAnaam(String anaam) {
         this.anaam = anaam;
     }
-    public char getGeslacht() {
+    public String getGeslacht() {
         return this.geslacht;
     }
     
-    public void setGeslacht(char geslacht) {
+    public void setGeslacht(String geslacht) {
         this.geslacht = geslacht;
     }
-    public String getAdres() {
-        return this.adres;
+    public String getStraat() {
+        return this.straat;
     }
     
-    public void setAdres(String adres) {
-        this.adres = adres;
+    public void setStraat(String straat) {
+        this.straat = straat;
     }
     public String getHuisnummer() {
         return this.huisnummer;
@@ -277,20 +273,12 @@ public class Lid  implements java.io.Serializable {
         this.tvoegsel = tvoegsel;
     }
 
-    public Locale getLocale() {
-        return locale;
+    public String getLangnotify() {
+        return this.langnotify;
     }
 
-    public void setLocale(Locale locale) {
-        this.locale = locale;
-    }
-
-    public String getNotify() {
-        return notify;
-    }
-
-    public void setNotify(String n) {
-        notify = n;
+    public void setLangnotify(String langnotify) {
+        this.langnotify = langnotify;
     }
     
     public void setErrors(String key, String msg) {

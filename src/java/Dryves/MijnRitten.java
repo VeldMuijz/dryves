@@ -72,7 +72,7 @@ public class MijnRitten extends HttpServlet {
         try {
             RitDao ritDao = new RitDao();
             List<Rit> ritten;
-            
+            ritDao.
             ritten = ritDao.getAlleRittenPerLid();
             request.setAttribute("ritten", ritten);
 

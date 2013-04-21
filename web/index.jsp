@@ -32,14 +32,8 @@
             <div class="logo">    
                 <img src="images/Logo_Dryves.png" />
             </div>
+			<jsp:include page="navigatie.jsp"  flush="true" />
 
-
-            <div class="navigation">
-
-                <div style="float:right; margin-right: -1px;"><button  onclick="window.location = 'login.jsp';">Login</button></div>
-
-                <button onclick="window.location = 'index.jsp';">Home</button><button onclick="window.location = 'watisdryves.jsp';">Wat is Dryves</button><button onclick="window.location = 'faq.jsp';">FAQ</button><button onclick="window.location = 'registratie.jsp';">Registreer</button>        
-            </div>
 
                 <br /><br />
                         <div class="slider-wrapper theme-default">
