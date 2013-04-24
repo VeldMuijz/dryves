@@ -4,7 +4,7 @@
     Author     : Vincent
 --%>
 
-<%@page import="Dryves.Sessie"%>
+<%@page import="Dryves.Lid"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -36,7 +36,7 @@
 
             <div class="contentPanel">
                 
-        <% Sessie currentUser = (Sessie) (session.getAttribute("currentSessionUser"));%>
+                <% Lid currentUser = (Lid) (session.getAttribute("currentSessionUser"));%>
 
         Welkom <%= currentUser.getVnaam() + " " + currentUser.getAnaam() %>
                 

@@ -12,6 +12,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 
 
@@ -23,7 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 public class Registreren extends HttpServlet {
 
     
-     private int lidnr;
+     
      private String vnaam;
      private String anaam;
      private String geslacht;
@@ -89,10 +90,18 @@ public class Registreren extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
+        //De objecten worden aangemmakt
+        Lid lid = new Lid();  
+        String email = request.getParameter("email");
+        RegistrerenDao registerdao = new RegistrerenDao();
         
-        Lid lid = new Lid();
         
         
+                //check of de email bestaat, zo niet dan wordt de gebruiker toegevoegd in de database
+          if (!registerdao.checkDuplicate(email)) { 
+           
+              //email komt niet in de database voor
+              
         //Zet de voornaam
         lid.setVnaam(request.getParameter("vnaam"));
         //Print voornaam naar console
@@ -103,7 +112,7 @@ public class Registreren extends HttpServlet {
         //Print achternaam naar console
         System.out.println("Dit is de achternaam: " + lid.getAnaam());
         
-         //Zet tvoegsel
+        //Zet tvoegsel
         lid.setTvoegsel(request.getParameter("tvoegsel"));
         //Print tvoegsel naar de console
         System.out.println("Dit is de tussenvoegsel: " + lid.getTvoegsel());
@@ -114,7 +123,7 @@ public class Registreren extends HttpServlet {
         System.out.println("Dit is het geslacht: " + lid.getGeslacht());
         
         //Zet de straat
-        lid.setStraat(request.getParameter("straat:"));
+        lid.setStraat(request.getParameter("straat"));
         //Print de straat naar de console
         System.out.println("Dit is de straat: " + lid.getStraat());
         
@@ -159,13 +168,40 @@ public class Registreren extends HttpServlet {
         System.out.println("Dit is de fotourl: " + lid.getFotoUrl());
         
         //Zet de langnotify
-        lid.setLangnotify(request.getParameter("langnotify"));
+        lid.setLangnotify(request.getParameter("locale"));
         //Schrijf langnotify naar de console
         System.out.println("Dit is de langnotify: " + lid.getLangnotify());
         
         
+           RegistrerenDao newregistratie = new RegistrerenDao();
+       
+           // hier wordt de gebruiker in de database opgeslagen
+           newregistratie.RegistrerenDao(lid);
+           
+           //Hier maken we een neiuwe sessie voor de nieuwe gebruiker
+          HttpSession session = request.getSession(true);       
+          session.setAttribute("currentSessionUser",lid); 
+          
+          // en hier wordt de gebruiker door gelinked naar mijndryves
+          response.sendRedirect("mijndryves.jsp"); //logged-in page  
+        
+           
+           
+           
+           
+       } else { 
+           
+           
+           
+           //Indien het email bestaat wordt er een melding weergegeven.
+           // Moet nog gedaan worden    
+           response.sendRedirect("http://www.telegraaf.nl");
+       
+       
+       }
         
         
+  
     }
 
     private static class request {
@@ -174,7 +210,7 @@ public class Registreren extends HttpServlet {
         }
     }
 
-
+        
 /**
      * Handles the HTTP
      * <code>POST</code> method.

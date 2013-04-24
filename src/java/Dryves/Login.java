@@ -26,17 +26,21 @@ public class Login extends HttpServlet {
 try
 {       
 
-     Sessie user = new Sessie();
-     user.setEmail(request.getParameter("email"));
-     user.setWachtwoord(request.getParameter("wachtwoord"));
+     
+     
+     Lid lid= new Lid();
+     
+     lid.setEmail(request.getParameter("email"));
+     lid.setWachtwoord(request.getParameter("wachtwoord"));
 
-     user = SessieDao.login(user);
+     lid = SessieDao.login(lid);
 
-     if (user.isValid())
+     if (lid.isValid())
      {
 
           HttpSession session = request.getSession(true);       
-          session.setAttribute("currentSessionUser",user); 
+          session.setAttribute("currentSessionUser", lid); 
+		  //TODO: Hier gebruik maken van een login servlet om door te sturen naar WEB-INF/login.jsp
           response.sendRedirect("mijndryves.jsp"); //logged-in page             
      }
 

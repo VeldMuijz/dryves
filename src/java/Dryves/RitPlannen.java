@@ -77,7 +77,7 @@ public class RitPlannen extends HttpServlet {
 		// Maak in de sessie een object rit aan met naam sessieRit
 		session.setAttribute("sessieRit", rit);
 		//Haal de userbean (dit moet sessiebean worden) op uit de sessie
-		Sessie user = (Sessie) session.getAttribute("currentSessionUser");
+		Lid user = (Lid) session.getAttribute("currentSessionUser");
 
 		//Haal alle gegevens op en zet ze in Rit
 		//Bouw ingevoerde datum om naar een timestamp
