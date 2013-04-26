@@ -31,7 +31,7 @@
 
 			<button onclick="window.location = 'index.jsp';" <% if(request.getParameter("menu_active").equals("home")){  %> class="active" <% } %> >Home</button>
 			<button onclick="window.location = 'watisdryves.jsp';" <% if(request.getParameter("menu_active").equals("watisdryves")){  %> class="active" <% } %> >Wat is dryves</button>
-                       	<button onclick="window.location = 'faq.jsp';">FAQ</button>
+                       	<button onclick="window.location = 'faq.jsp';" <% if(request.getParameter("menu_active").equals("faq")){  %> class="active" <% } %> >FAQ</button>
 			<button onclick="window.location = 'mijndryves.jsp';">Mijn Dryves</button>
 			<button onclick="window.location = 'registratie.jsp';">Registreer</button>
 
