@@ -29,7 +29,7 @@
             <div><button  class="loginButton" onclick="window.location = 'login.jsp';">Login</button></div>
 			
 
-			<button onclick="window.location = 'index.jsp';">Home</button>
+			<button onclick="window.location = 'index.jsp';" <% if(request.getParameter("menu_active").equals("home")){  %> class="active" <% } %> >Home</button>
 			<button onclick="window.location = 'watisdryves.jsp';">Wat is Dryves</button>
 			<button onclick="window.location = 'faq.jsp';">FAQ</button>
 			<button onclick="window.location = 'mijndryves.jsp';">Mijn Dryves</button>
