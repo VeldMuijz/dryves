@@ -12,6 +12,10 @@
         <servlet-name>RitZoeken</servlet-name>
         <servlet-class>Dryves.RitZoeken</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>MijnDryves</servlet-name>
+        <servlet-class>Dryves.MijnDryves</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RitPlannen</servlet-name>
         <url-pattern>/RitPlannen</url-pattern>
@@ -27,6 +31,10 @@
     <servlet-mapping>
         <servlet-name>RitZoeken</servlet-name>
         <url-pattern>/RitZoeken</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MijnDryves</servlet-name>
+        <url-pattern>/MijnDryves</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
