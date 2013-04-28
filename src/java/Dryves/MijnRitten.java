@@ -75,7 +75,7 @@ public class MijnRitten extends HttpServlet {
 		// Maak in de sessie een object rit aan met naam sessieRit
 		session.setAttribute("sessieRit", rit);
 		//Haal de userbean (dit moet sessiebean worden) op uit de sessie
-                    Sessie user = (Sessie) session.getAttribute("currentSessionUser");
+                    Lid user = (Lid) session.getAttribute("currentSessionUser");
         try {
             List<Rit> ritten;
             rit.setLidnr(user.getLidnr());

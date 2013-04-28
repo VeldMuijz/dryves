@@ -4,13 +4,12 @@
     Author     : RickSpijker
 --%>
 
-<%@page import="Dryves.Sessie"%>
+<%@page import="Dryves.Lid"%>
 <%@page import="Dryves.Login"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="Dryves.Sessie"%>
+
 <%@page import="Dryves.Login"%>
 
-<%@page import="com.facebook.Datv"%>
 
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
@@ -26,12 +25,14 @@
         <title>Dryves</title>
         <link type="text/css" rel="stylesheet" href="css/dryver.css"/>
         
-        <script>
-            
+   
         
-             function hivi() {
+        <script>
+           
+        
+             function verbergKnopVerde() {
      
-            document.getElementById('khovtg').style.visibility = 'hidden';
+            document.getElementById('GaVerderKnop').style.visibility = 'hidden';
        }
     
     
@@ -41,7 +42,7 @@
         
         
     </head>
-    <body onload="hivi();">
+    <body onload="verbergKnopVerder();">
         
         <div class="background">
             
@@ -99,16 +100,36 @@ Dit is de login page!
     </tr>
 </table>
 
+        
+        
+        
+        
+        
+<fb:profile-pic uid="loggedinuser" facebook-logo="true" linked="false" 
+width="300" height="400"></fb:profile-pic>
+
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
 </form>
       <script src="http://connect.facebook.net/en_US/all.js"></script>
 
-    <fb:login-button autologoutlink="true" onlogin="OnRequestPermission(); ShowMyName() "   >
+    <fb:login-button autologoutlink="true" onlogin="OnRequestPermission(); VanFaceNaarP() "   >
 Login met Facebook</fb:login-button>
 <script language="javascript" type="text/javascript">
     FB.init({
         
         
-        
+       
         appId: '475117289226684',
         status: true, 
         cookie: true, 
@@ -120,7 +141,7 @@ Login met Facebook</fb:login-button>
     });   
     
       FB.Event.subscribe('auth.login', function () {
-         ShowMyName();
+         VanFaceNaarP();
       });
     
     
@@ -153,47 +174,55 @@ Login met Facebook</fb:login-button>
     
     
     
-    
- function ShowMyName() {
+    // In deze functie wordt de gegevens die van Facebook afkomen in de paragraph opgeslagen
+    // Na het inloggen kan je op dezelfde pagina je naam voornaam etc zien
+ function VanFaceNaarP() {
+       
         FB.api("/me",
                 function (response) {
                     document.getElementById("idp").innerHTML=  response.id;
-                     document.getElementById("naamp").innerHTML=  response.name;
-                     
-                     
+                    document.getElementById("naamp").innerHTML=  response.name;
                     document.getElementById("voornaamp").innerHTML=response.first_name;
-            document.getElementById("achternaamp").innerHTML=response.last_name;
-                document.getElementById("sexp").innerHTML=response.gender;
-           
-                  
-                      document.getElementById('khovtg').style.visibility = 'visible';
+                    document.getElementById("achternaamp").innerHTML=response.last_name;
+                    document.getElementById("sexp").innerHTML=response.gender;
+                    document.getElementById("emailp").innerHTML=response.email;
+                    document.getElementById('GaVerderKnop').style.visibility = 'visible';
                      
                 });
          
     }
     
     
-    
-    
-    function ShowMyName2() {
+    // De waarde die in de paragraaf zijn opgeslagen worden hier doorverwezen naar de form 
+    // zodat deze verstuurd kunnen worden naar een servlet
+    function VanPnaarHF() {
         
                 
               document.getElementById("idh").value  = document.getElementById("idp").innerHTML;
               document.getElementById("naamh").value  = document.getElementById("naamp").innerHTML;
-                              document.getElementById("voornaamh").value  = document.getElementById("voornaamp").innerHTML;
-              document.getElementById("achternaamh").value  = document.getElementById("achternaap").innerHTML;
-                document.getElementById("sexh").value  = document.getElementById("sexp").innerHTML;
-    
-                
-           window.location = "mijndryves.jsp";
-           document.getElementById('khovtg').style.visibility = 'visible';
+              document.getElementById("voornaamh").value  = document.getElementById("voornaamp").innerHTML;
+              document.getElementById("achternaamh").value  = document.getElementById("achternaamp").innerHTML;
+              document.getElementById("sexh").value  = document.getElementById("sexp").innerHTML;
+              document.getElementById("emailh").value  = document.getElementById("emailp").innerHTML;
+              document.getElementById('GaVerderKnop').style.visibility = 'visible';
            
     }
-    
-    
-function rfr() {
-window.location = facebooklogin.jsp;
-ShowMyName();
+         // Met deze functie vargen we toestemming en vargen we wat zijn email is.
+     function getEmail() {  
+    FB.login(function(response) {
+      if (response.session && response.perms) {
+        FB.api('/me',  function(response) {
+            
+          }
+        );
+      }
+    } , {perms:'email'}); 
+}
+
+     // De refresh functie zodat de velden leeg worden
+    function rfr() {
+   window.location = facebooklogin.jsp;
+VanFaceNaarP();
 }
 //-->
 
@@ -206,19 +235,20 @@ FB.api('/me/feed', 'post', { message: message_str}, function(response) {
       
   } else { 
     alert("Message successfully posted to your wall");
-    ShowMyName();
+    VanFaceNaarP();
   }
 });
     
     
 </script>
-       <form action="serv" method="get">
+       <form action="FacebookLoginServlet" method="get">
     
     <input type="hidden" id="idh" name="id" value="" />
     <input type="hidden" id="naamh" name="naam" value="" />
     <input type="hidden" id="voornaamh" name="voornaam" value="" />
     <input type="hidden" id="achternaamh" name="achternaam" value="" />
     <input type="hidden" id="sexh" name="sex" value="" />
+    <input type="hidden" id="emailh" name="email" value="" />
 
     
     
@@ -227,18 +257,19 @@ FB.api('/me/feed', 'post', { message: message_str}, function(response) {
     
 
 
-       
+      
 <p id="idp" ></p> 
    <p type="hidden" id="naamp" ></p>
    <p id="voornaamp"></p> 
    <p id="achternaamp" ></p>
    <p id="sexp"></p> 
+   <p id="emailp"></p> 
    
    
    <br >
    
    
-<input id="khovtg" type="submit" value="Ga verder met Dryves" onclick="ShowMyName2()" />
+<input id="GaverderKnop" type="submit" value="Ga verder met Dryves" onclick="VanPnaarHF();" />
    
    </form> 
    
@@ -249,3 +280,6 @@ FB.api('/me/feed', 'post', { message: message_str}, function(response) {
         
     </body>
 </html>
+
+        
+        

@@ -4,7 +4,7 @@
     Author     : Vincent
 --%>
 
-<%@page import="Dryves.Sessie"%>
+<%@page import="Dryves.Lid"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -44,7 +44,7 @@
 
             <div class="contentPanel">
                 
-        <% Sessie currentUser = (Sessie) (session.getAttribute("currentSessionUser"));%>
+                <% Lid currentUser = (Lid) (session.getAttribute("currentSessionUser"));%>
 
         <fmt:message bundle="${rb}" key="welkom" /> <%= currentUser.getVnaam() + " " + currentUser.getAnaam() %>
                 

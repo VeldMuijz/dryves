@@ -4,6 +4,10 @@
         <servlet-name>Registreren</servlet-name>
         <servlet-class>Dryves.Registreren</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>FacebookLoginServlet</servlet-name>
+        <servlet-class>Dryves.FacebookLoginServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RitPlannen</servlet-name>
         <url-pattern>/RitPlannen</url-pattern>
@@ -11,6 +15,10 @@
     <servlet-mapping>
         <servlet-name>Registreren</servlet-name>
         <url-pattern>/Registreren</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FacebookLoginServlet</servlet-name>
+        <url-pattern>/FacebookLoginServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
@@ -32,16 +40,12 @@
         <servlet-name>RitPlannen</servlet-name>
         <servlet-class>Dryves.RitPlannen</servlet-class>
     </servlet>
-    
-        <servlet>
+    <servlet>
         <servlet-name>MijnRitten</servlet-name>
         <servlet-class>Dryves.MijnRitten</servlet-class>
     </servlet>
-    
-       <servlet-mapping>
+    <servlet-mapping>
         <servlet-name>MijnRitten</servlet-name>
         <url-pattern>/MijnRitten</url-pattern>
     </servlet-mapping>
-	
-
 </web-app>

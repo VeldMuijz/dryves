@@ -4,7 +4,7 @@
     Author     : Vincent
 --%>
 
-<%@page import="Dryves.Sessie"%>
+<%@page import="Dryves.Lid"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
@@ -15,14 +15,6 @@
 
 <fmt:setBundle basename="ResourceBundles.Dryves" scope="request" var="rb" />
 
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>Dryves</title>
-        <link type="text/css" rel="stylesheet" href="css/dryver.css"/>
-    </head>
-    <body>
 		<div class="navigation">
 			
 
@@ -56,5 +48,3 @@
         </div>
 
 
-    </body>
-</html>
