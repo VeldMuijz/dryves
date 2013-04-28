@@ -48,7 +48,7 @@
             </jsp:include>
 
 
-            <br /><br />
+            <br />
 
             <div class="contentPanel">
 
@@ -58,8 +58,13 @@
                                             </form>      -->
 
                 <jsp:include page="zoekrit.jsp" flush="true" ></jsp:include> 
+                
 
             </div>
+                
+            <br />   
+                
+                
             <div class="slider-wrapper theme-default">
                 <div id="slider" class="nivoSlider">
                     <img src="images/nemo.jpg" alt="" />
