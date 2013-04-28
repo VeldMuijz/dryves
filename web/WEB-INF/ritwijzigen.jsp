@@ -184,6 +184,7 @@
 			<img src="images/background1.jpg" />
 
 		</div>
+	
 
 		<div class="drvyesWrapper">
 
@@ -192,7 +193,9 @@
 			</div>
 
 
-			<jsp:include page="navigatie.jsp"  flush="true" />
+			<jsp:include page="navigatie.jsp" flush="true">
+                <jsp:param name="menu_active" value="mijndryves"></jsp:param>
+            </jsp:include>
 
 			<div class="contentPanel">
 

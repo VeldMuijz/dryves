@@ -42,17 +42,15 @@ Document : mijn_ritten
                 
                 <c:forEach items="${ritten}" var="rit">
                     <div class="rittenlijst">
-                        <table onclick="window.location = 'ritwijzigen.jsp';">
-                            <form action="RitPlannen" method="get">
+                        <table onclick="window.location = 'RitPlannen?ritnr=${rit.ritnr}';">
+                            
                                 <tr>
-                                <input name="ritnr" value="${rit.ritnr}" hidden ="true"/>
                                 <td>${rit.startpunt}</td>
                                 <td><img src ="images/pijl.jpg" /></td>
                                 <td>${rit.eindpunt}</td>
                                 <td>${rit.prijs}</td>
-                                <td><button action="submit"> Rit wijzigen</button></td>
+                                <td><button onclick="RitPlannen?ritnr=${rit.ritnr}"> Rit wijzigen</button></td>
                                 </tr> 
-                            </form>
 
                         </table>
                     </div>

@@ -28,10 +28,12 @@
             </div>
 
 
-			<jsp:include page="navigatie.jsp"  flush="true" />
+			<jsp:include page="navigatie.jsp" flush="true">
+                <jsp:param name="menu_active" value="home"></jsp:param>
+            </jsp:include>
 
 			<div class="contentPanel">
-
+				<% session.invalidate(); %>
 				U bent uitgelogd. <br/>
 				Bedankt voor uw  bezoek.
 			</div>
