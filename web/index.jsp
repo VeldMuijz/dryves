@@ -49,6 +49,12 @@
 
 
                 <br /><br />
+                
+                <div class="contentPanel">
+                <h2>Zoeken: </h2>    
+                    
+             
+                </div>
                         <div class="slider-wrapper theme-default">
                     <div id="slider" class="nivoSlider">
                         <img src="images/nemo.jpg" alt="" />
