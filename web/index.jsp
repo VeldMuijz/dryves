@@ -42,10 +42,19 @@
             <div class="logo">    
                 <img src="images/Logo_Dryves.png" />
             </div>
-			<jsp:include page="navigatie.jsp"  flush="true" />
+			
+<jsp:include page="navigatie.jsp" flush="true">
+                <jsp:param name="menu_active" value="home"></jsp:param>
+            </jsp:include>
 
 
                 <br /><br />
+                
+                <div class="contentPanel">
+                <h2>Zoeken: </h2>    
+                    
+             
+                </div>
                         <div class="slider-wrapper theme-default">
                     <div id="slider" class="nivoSlider">
                         <img src="images/nemo.jpg" alt="" />

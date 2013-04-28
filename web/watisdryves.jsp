@@ -35,7 +35,9 @@
             </div>
 
 
-			<jsp:include page="navigatie.jsp"  flush="true" />
+			<jsp:include page="navigatie.jsp" flush="true">
+                <jsp:param name="menu_active" value="watisdryves"></jsp:param>
+            </jsp:include>
 
 			<div class="contentPanel">
 
