@@ -185,8 +185,12 @@
 			}
                         
                         $(function() {
+                            
                         $( "#begindatum" ).datepicker();
+                        
+                        
                         });
+                        
 
         </script>
 
@@ -205,8 +209,9 @@
 				<img src="images/Logo_Dryves.png" />
 			</div>
 
-
-			<jsp:include page="navigatie.jsp"  flush="true" />
+ <jsp:include page="navigatie.jsp" flush="true">
+                <jsp:param name="menu_active" value="mijndryves"></jsp:param>
+            </jsp:include>
 
 			<div class="contentPanel">
 
@@ -219,7 +224,7 @@
 						<input type="text" id="end" name="end" onchange="calcRoute();" style ="width: 350; float: right:"> <br />	
 
 						Begindatum:<br/> <input type="date" id="begindatum" name="begindatum"> <br/>
-						Tijd: <br/> <input type="text" id="tijd" name="tijd"> <br/><br/>
+                                                Tijd: <br/> <input type="text" id="tijd" name="tijd" placeholder="09:10"> <br/><br/>
 						<td> Herhaling 
 							<input type="checkbox" id="herhaling" name="herhaling" onclick="isChecked(this.checked);"> </td>
 						<br/><br/>
