@@ -8,6 +8,10 @@
         <servlet-name>FacebookLoginServlet</servlet-name>
         <servlet-class>Dryves.FacebookLoginServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RitZoeken</servlet-name>
+        <servlet-class>Dryves.RitZoeken</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RitPlannen</servlet-name>
         <url-pattern>/RitPlannen</url-pattern>
@@ -19,6 +23,10 @@
     <servlet-mapping>
         <servlet-name>FacebookLoginServlet</servlet-name>
         <url-pattern>/FacebookLoginServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RitZoeken</servlet-name>
+        <url-pattern>/RitZoeken</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

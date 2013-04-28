@@ -42,38 +42,44 @@
             <div class="logo">    
                 <img src="images/Logo_Dryves.png" />
             </div>
-			
-<jsp:include page="navigatie.jsp" flush="true">
+
+            <jsp:include page="navigatie.jsp" flush="true">
                 <jsp:param name="menu_active" value="home"></jsp:param>
             </jsp:include>
 
 
-                <br /><br />
-                
-                <div class="contentPanel">
-                <b>Zoeken: <b> <input> 
-                
-                    
-             
-                </div>
-                        <div class="slider-wrapper theme-default">
-                    <div id="slider" class="nivoSlider">
-                        <img src="images/nemo.jpg" alt="" />
-                        <a href="http://dev7studios.com">
-                        <img src="images/toystory.jpg" alt="" title="#htmlcaption" /></a>
-                        <img src="images/up.jpg" alt="" title="This is an example of a caption" />
-                        <img src="images/walle.jpg" alt="" />
-                    </div>
-                </div>
-                <div id="htmlcaption" class="nivo-html-caption">
-                    <strong>This</strong> is an example of a <em>HTML</em> caption with <a href="#">a link</a>.
-                </div>
-                <script type="text/javascript">
-                    $(window).load(function() {
-                        $('#slider').nivoSlider();
-                    });
-                </script>
-                </div>        
+            <br /><br />
 
-    </body>
-</html>
+            <div class="contentPanel">
+                <form action="RitZoeken" method="get" >
+                    <b>Zoek rit: <b> <input name="zoekrit" onchange="RitZoeken" ></input> 
+                            <button onclick="RitZoeken">Uitvoeren</button>
+                            
+                                
+                            
+                            </form>      
+
+
+
+                            </div>
+                            <div class="slider-wrapper theme-default">
+                                <div id="slider" class="nivoSlider">
+                                    <img src="images/nemo.jpg" alt="" />
+                                    <a href="http://dev7studios.com">
+                                        <img src="images/toystory.jpg" alt="" title="#htmlcaption" /></a>
+                                    <img src="images/up.jpg" alt="" title="This is an example of a caption" />
+                                    <img src="images/walle.jpg" alt="" />
+                                </div>
+                            </div>
+                            <div id="htmlcaption" class="nivo-html-caption">
+                                <strong>This</strong> is an example of a <em>HTML</em> caption with <a href="#">a link</a>.
+                            </div>
+                            <script type="text/javascript">
+                                    $(window).load(function() {
+                                        $('#slider').nivoSlider();
+                                    });
+                            </script>
+                            </div>        
+
+                            </body>
+                            </html>
