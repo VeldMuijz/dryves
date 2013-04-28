@@ -5,20 +5,11 @@
 --%>
 
 <%@page import="java.util.Locale"%>
-<%@page import="Dryves.Sessie"%>
+<%@page import="Dryves.Lid"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<% 
-    Sessie currentUser = (Sessie) (session.getAttribute("currentSessionUser"));
-    
-    System.out.println("Locale uit mijndryves.jsp :" + currentUser.getLocale());
-    
-    Locale locale = currentUser.getLocale();
-    
-    System.out.println("Locale uit de String :" + locale);
-    
-%>
+
 
 
 <fmt:setLocale value="${locale}" />
@@ -70,7 +61,7 @@
                 <br /><br />
         
 
-        Welkom <%= currentUser.getVnaam() + " " + currentUser.getAnaam() %>
+        Welkom  ${currentSessionUser.getVnaam()} ${currentSessionUser.getAnaam()}
 
             </div>
         </div>
