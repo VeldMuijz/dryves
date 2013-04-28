@@ -123,9 +123,14 @@
             </div>
 
 
-				<jsp:include page="navigatie.jsp"  flush="true" />
+<jsp:include page="navigatie.jsp"  flush="true" />
+
+
 
 			<div class="contentPanel">
+                            
+
+                            
 
 				<html lang="en">
 
