@@ -51,7 +51,8 @@
                 <br /><br />
                 
                 <div class="contentPanel">
-                <h2>Zoeken: </h2>    
+                <b>Zoeken: <b> <input> 
+                
                     
              
                 </div>
