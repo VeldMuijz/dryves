@@ -31,6 +31,26 @@ public class Lid  implements java.io.Serializable {
      private String tvoegsel;
      private Hashtable errors;
      private String langnotify;
+     private String LocaleStr;
+     private String Locale;
+
+    public String getLocale() {
+        return Locale;
+    }
+
+    public void setLocale(String Locale) {
+        this.Locale = Locale;
+    }
+     private boolean Valid;
+
+    public boolean isValid() {
+        return Valid;
+    }
+
+    public void setValid(boolean Valid) {
+        this.Valid = Valid;
+    }
+
 
 	
     public Lid(int lidnr, String vnaam, String anaam, String geslacht, String straat, String huisnummer, String reknr, String telnr, String postcode, String stad, String email, String wachtwoord, String wachtwoord2, int beoordeling, String fotoUrl, String tvoegsel, String langnotify) {
@@ -62,6 +82,13 @@ public class Lid  implements java.io.Serializable {
     }
 
 
+    public String getLocaleStr() {
+        return LocaleStr;
+    }
+
+    public void setLocaleStr(String LocaleStr) {
+        this.LocaleStr = LocaleStr;
+    }
         
     
     public boolean validate() {

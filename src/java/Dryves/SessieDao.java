@@ -27,7 +27,7 @@ public class SessieDao
 
 
 
-      public static Sessie login(Sessie bean) {
+      public static Lid login(Lid bean) {
 
          //preparing some objects for connection 
          Statement stmt = null;    

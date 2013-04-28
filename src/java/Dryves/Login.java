@@ -26,7 +26,7 @@ public class Login extends HttpServlet {
 try
 {       
 
-     Sessie user = new Sessie();
+     Lid user = new Lid();
      user.setEmail(request.getParameter("email"));
      user.setWachtwoord(request.getParameter("wachtwoord"));
 
