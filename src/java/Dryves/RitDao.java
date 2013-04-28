@@ -208,7 +208,48 @@ public class RitDao {
 
     }
 
-    public List<Rit> getRittenLijst() {
+        /**
+* Haal een lijst van ritten per lid op
+*
+* @return
+* @throws SQLException
+*/
+    public List<Rit> getAlleRittenPerLid() throws SQLException {
+         Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+        List<Rit> ritten = new ArrayList<Rit>();
+        
+        try {
+           
+            currentCon = ConnectionManager.getConnection();
+            PreparedStatement zoekritten;
+            String queryString = "SELECT * FROM Rit WHERE lidnr = ?;";
+            
+            zoekritten = currentCon.prepareStatement(queryString);
+            zoekritten.setInt(1, lidnr);
+            resultSet = zoekritten.executeQuery();
+            
+            while (resultSet.next()) {
+                Rit rit = new Rit();
+                rit.setRitnr(resultSet.getInt("ritnr"));
+                rit.setStartpunt(resultSet.getString("startpunt"));
+                rit.setEindpunt(resultSet.getString("eindpunt"));
+                rit.setPrijs(resultSet.getDouble("prijs"));
+                ritten.add(rit);
+            }
+        }
+            finally {
+// if (resultSet != null) try { resultSet.close(); } catch (SQLException ignore) {}
+// if (statement != null) try { statement.close(); } catch (SQLException ignore) {}
+// if (connection != null) try { connection.close(); } catch (SQLException ignore) {}
+// }
+        }
+        return ritten;
+        
+    }
+    
+        public List<Rit> getRittenLijst() {
 
         try {
             currentCon = ConnectionManager.getConnection();
@@ -235,9 +276,9 @@ public class RitDao {
      * @return
      * @throws SQLException
      */
-    public List<Rit> getAlleRittenPerLid() throws SQLException {
+    public List<Rit> getAlleRitten(String startpunt, String eindpunt) throws SQLException {
          Connection connection = null;
-        PreparedStatement statement = null;
+        //PreparedStatement statement = null;
         ResultSet resultSet = null;
         List<Rit> ritten = new ArrayList<Rit>();
         
@@ -245,15 +286,20 @@ public class RitDao {
            
             currentCon = ConnectionManager.getConnection();
             PreparedStatement zoekritten;
-            String queryString = "SELECT * FROM Rit WHERE lidnr = ?;";
+            String queryString = "SELECT * FROM Rit WHERE aangeboden = 1 AND LOWER(startpunt) LIKE LOWER(?) OR LOWER(eindpunt) LIKE LOWER(?);";
             
             zoekritten = currentCon.prepareStatement(queryString);
-            zoekritten.setInt(1, lidnr);
+
+            zoekritten.setString(1, "%"+startpunt+"%");
+
+            zoekritten.setString(2, "%"+eindpunt+"%");
+            
             resultSet = zoekritten.executeQuery();
             
             while (resultSet.next()) {
                 Rit rit = new Rit();
                 rit.setRitnr(resultSet.getInt("ritnr"));
+
                 rit.setStartpunt(resultSet.getString("startpunt"));
                 rit.setEindpunt(resultSet.getString("eindpunt"));
                 rit.setPrijs(resultSet.getDouble("prijs"));

@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -68,14 +70,14 @@ public class MijnRitten extends HttpServlet {
             throws ServletException, IOException {
         //processRequest(request, response);
 // Instantieren van objecten
-		Rit rit = new Rit();
-		RitDao ritDao = new RitDao();
-		// Haal de huidige sessie op
-		HttpSession session = request.getSession();
-		// Maak in de sessie een object rit aan met naam sessieRit
-		session.setAttribute("sessieRit", rit);
-		//Haal de userbean (dit moet sessiebean worden) op uit de sessie
-                    Lid user = (Lid) session.getAttribute("currentSessionUser");
+        Rit rit = new Rit();
+        RitDao ritDao = new RitDao();
+// Haal de huidige sessie op
+        HttpSession session = request.getSession();
+// Maak in de sessie een object rit aan met naam sessieRit
+        session.setAttribute("sessieRit", rit);
+//Haal de userbean (dit moet sessiebean worden) op uit de sessie
+        Lid user = (Lid) session.getAttribute("currentSessionUser");
         try {
             List<Rit> ritten;
             rit.setLidnr(user.getLidnr());
@@ -88,6 +90,7 @@ public class MijnRitten extends HttpServlet {
         } catch (SQLException e) {
             throw new ServletException("Cannot obtain products from DB", e);
         }
+
     }
 
     /**
