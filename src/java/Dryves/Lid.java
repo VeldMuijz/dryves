@@ -2,7 +2,6 @@ package Dryves;
 // Generated 26-mrt-2013 21:03:05 by Hibernate Tools 3.2.1.GA
 
 import java.util.Hashtable;
-import java.util.Locale;
 
 
 
@@ -82,13 +81,7 @@ public class Lid  implements java.io.Serializable {
     }
 
 
-    public String getLocaleStr() {
-        return LocaleStr;
-    }
 
-    public void setLocaleStr(String LocaleStr) {
-        this.LocaleStr = LocaleStr;
-    }
         
     
     public boolean validate() {
@@ -311,7 +304,14 @@ public class Lid  implements java.io.Serializable {
     public void setErrors(String key, String msg) {
         errors.put(key, msg);
         
+    }
+    
+    public String getLocaleStr() {
+        return LocaleStr;
+    }
 
-}
+    public void setLocaleStr(String LocaleStr) {
+        this.LocaleStr = LocaleStr.toString();
+    }
 
 }

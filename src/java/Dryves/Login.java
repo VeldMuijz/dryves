@@ -38,7 +38,7 @@ try
           HttpSession session = request.getSession(true);       
           session.setAttribute("currentSessionUser",user); 
           // response.sendRedirect("mijndryves.jsp"); //logged-in page 
-           request.getRequestDispatcher("WEB-INF/mijndryves.jsp").forward(request, response);
+          request.getRequestDispatcher("WEB-INF/mijndryves.jsp").forward(request, response);
      }
 
      else 

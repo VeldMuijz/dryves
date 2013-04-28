@@ -10,9 +10,7 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 
-
-
-<fmt:setLocale value="${locale}" />
+<fmt:setLocale value="${currentSessionUser.locale}" />
 
 <fmt:setBundle basename="ResourceBundles.Dryves" scope="request" var="rb" />
 
@@ -40,11 +38,6 @@
             <jsp:include page="navigatie.jsp" flush="true">
                 <jsp:param name="menu_active" value="mijndryves"></jsp:param>
             </jsp:include>
-
-
-
-
-
 
             <div class="contentPanel">
                 
