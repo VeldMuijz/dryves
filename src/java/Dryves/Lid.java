@@ -2,6 +2,7 @@ package Dryves;
 // Generated 26-mrt-2013 21:03:05 by Hibernate Tools 3.2.1.GA
 
 import java.util.Hashtable;
+import java.util.Locale;
 
 
 
@@ -32,24 +33,7 @@ public class Lid  implements java.io.Serializable {
      private String langnotify;
      private String LocaleStr;
      private String Locale;
-
-    public String getLocale() {
-        return Locale;
-    }
-
-    public void setLocale(String Locale) {
-        this.Locale = Locale;
-    }
-     private boolean Valid;
-
-    public boolean isValid() {
-        return Valid;
-    }
-
-    public void setValid(boolean Valid) {
-        this.Valid = Valid;
-    }
-
+    private Locale locale;
 
 	
     public Lid(int lidnr, String vnaam, String anaam, String geslacht, String straat, String huisnummer, String reknr, String telnr, String postcode, String stad, String email, String wachtwoord, String wachtwoord2, int beoordeling, String fotoUrl, String tvoegsel, String langnotify) {
@@ -298,7 +282,7 @@ public class Lid  implements java.io.Serializable {
     }
 
     public void setLangnotify(String langnotify) {
-        this.langnotify = langnotify;
+        this.langnotify = langnotify.toString();
     }
     
     public void setErrors(String key, String msg) {
@@ -306,12 +290,33 @@ public class Lid  implements java.io.Serializable {
         
     }
     
-    public String getLocaleStr() {
-        return LocaleStr;
-    }
+   public String getLocaleStr(){
+            
+            return locale.toString();
+        }
 
     public void setLocaleStr(String LocaleStr) {
         this.LocaleStr = LocaleStr.toString();
     }
+    
+        public String getLocale() {
+        return Locale;
+    }
+
+    void setLocale(String locale) {
+        this.locale = new Locale(locale);
+    }
+    
+     private boolean Valid;
+
+    public boolean isValid() {
+        return Valid;
+    }
+
+    public void setValid(boolean Valid) {
+        this.Valid = Valid;
+    }
+    
+    
 
 }
