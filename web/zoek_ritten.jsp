@@ -36,7 +36,7 @@ Document : mijn_ritten
 
 
             <div class="contentPanel">         
-                <h1>Hello World!</h1>
+                <jsp:include page="zoekrit.jsp" flush="true" ></jsp:include> 
 
                 
                 
