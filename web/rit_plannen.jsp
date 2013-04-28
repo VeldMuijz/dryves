@@ -19,6 +19,9 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Dryves - Rit plannen </title>
         <link type="text/css" rel="stylesheet" href="css/dryver.css"/>
+        <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
+        <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+        <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
 
 		<script type="text/javascript"
 				src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAQ5JCTE_OQi2SCYXO6urNY17FW5DaOVvU&sensor=false">
@@ -180,6 +183,10 @@
 
 				return true;
 			}
+                        
+                        $(function() {
+                        $( "#begindatum" ).datepicker();
+                        });
 
         </script>
 
