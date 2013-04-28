@@ -26,7 +26,9 @@
         <div class="navigation">
 
 
-            <div><button  class="loginButton" onclick="window.location = 'login.jsp';">Login</button></div>
+            <div>
+<!--           <button  class="loginButton" onclick="window.location = 'login.jsp';">Login</button>-->
+            </div>
 
 
             <button onclick="window.location = 'index.jsp';" <% if (request.getParameter("menu_active").equals("home")) {%> class="active" <% }%> >Home</button>
