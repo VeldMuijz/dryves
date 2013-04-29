@@ -229,7 +229,7 @@ public class RitDao {
             zoekritten = currentCon.prepareStatement(queryString);
             zoekritten.setInt(1, lidnr);
             resultSet = zoekritten.executeQuery();
-            
+           
             while (resultSet.next()) {
                 Rit rit = new Rit();
                 rit.setRitnr(resultSet.getInt("ritnr"));

@@ -41,7 +41,7 @@ Document : mijn_ritten
                 
                 <c:forEach items="${ritten}" var="rit">
                     <div class="rittenlijst">
-                        <table onclick="window.location = 'RitPlannen?ritnr=${rit.ritnr}';">
+                        <table onclick="window.location = 'RitWijzigen?ritnr=${rit.ritnr}';">
                             
                                 <tr>
                                 <td>${rit.startpunt}</td>

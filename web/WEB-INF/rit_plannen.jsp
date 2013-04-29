@@ -199,7 +199,9 @@
 			</div>
 
 
-			<jsp:include page="navigatie.jsp"  flush="true" />
+			            <jsp:include page="/WEB-INF/navigatie.jsp"  flush="true">
+              <jsp:param name="menu_active" value="mijndryves"></jsp:param>
+              </jsp:include>
 
 			<div class="contentPanel">
 
