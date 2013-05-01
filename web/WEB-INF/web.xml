@@ -24,6 +24,10 @@
         <servlet-name>Uitloggen</servlet-name>
         <servlet-class>Dryves.Uitloggen</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RitKopen</servlet-name>
+        <servlet-class>Dryves.RitKopen</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RitPlannen</servlet-name>
         <url-pattern>/RitPlannen</url-pattern>
@@ -51,6 +55,10 @@
     <servlet-mapping>
         <servlet-name>Uitloggen</servlet-name>
         <url-pattern>/Uitloggen</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RitKopen</servlet-name>
+        <url-pattern>/RitKopen</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
