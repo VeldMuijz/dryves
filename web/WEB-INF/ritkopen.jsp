@@ -141,10 +141,10 @@
 				document.getElementById("hiddenstart").value = startaddress;
 				document.getElementById("hiddenend").value = endaddress;
 				document.getElementById("hiddenwaypoints").value = waypoints;
-				
+
 				var afstand = parseFloat(document.getElementById("total").value);
 				var prijs = parseFloat(document.getElementById("prijs").value);
-				
+
 				var kostenberekening = prijs * afstand;
 				document.getElementById("kosten").innerHTML = kostenberekening;
 
@@ -208,19 +208,30 @@
 
 
 				<div class="invoerveld">
-					<form action="RitPlannen" method="post" onsubmit="return isCompleet();">
+					<form action="RitKopen" method="post" onsubmit="return isCompleet();">
+						Ritnummer: 
+						<input id="ritnr" name="ritnr" value="${sessieRit.ritnr}"></input>
 						<fmt:message bundle="${rb}" key="startadres" /><br/>
-						Start adres:
-						<input type="text" id="start" name="start" disabled="true" style ="width: 350; float: right:"><br />
+						Start adres: <br/> 
+						<input type="text" id="start" name="start" disabled="true" style ="width: 350; float: right:" value="${sessieRit.startpunt}"><br />
 						Hier wil ik opgehaald worden: <br/>
 						<input type="text" id="pickup" style="width: 350; float: right:"><br />
 						Eind adres: <br/>
-						<input type="text" id="end" name="end" disabled="true" style ="width: 350; float: right:"> </input> <br />	
-						Begindatum:<br/> <input type="date" id="begindatum" name="begindatum"> <br/>
+						<input type="text" id="end" name="end" disabled="true" style ="width: 350; float: right:" value="${sessieRit.eindpunt}"> <br />	
+						Begindatum:<br/> <input type="date" id="begindatum" name="begindatum" value="${sessieRit.datum}"> <br/>
 						Tijd: <br/> <input type="text" id="tijd" name="tijd"> <br/><br/>
 						Kosten voor deze rit zijn: € <span id="kosten" name="kosten"></span><br/>
-						
+
 						Prijs per km: <div id ="prijs" name="prijs">0.21</div>
+						
+						<input type="radio" name="betaalwijze" value ="ideal">iDEAL <br/>
+						<input type="radio" name="betaalwijze" value ="creditcard">Credit Card <br/>
+						<br/>
+						<br/>
+						
+						
+						
+						<button action="submit"><strong>Rit kopen</strong></button>
 
 					</form>
 
