@@ -59,102 +59,117 @@
 
 
                 <br /><br />
-                <form action="/dryves/proces.jsp" method=post>
-
-
+                <form id="RegistratieForm" action="Registreren" method="get" onsubmit="return validateForm();">
 
                     <div class="regformheader">
-                        <font size=3>Persoonsgegevens</font> 
+                        <font size=5>Registratie formulier</font>
+                        <br>
+                        <font size=1 color="red"><sup>*</sup> Verplichte velden</font>
                     </div>
 
-                    <div class="formInput">
-                        <b>Voornaam<sup>*</sup></b> 
+                    <div class="formInput">                   
+                        <b>Voornaam<sup>*</sup></b>                             
                         <br>
-                        <input type="text" name="firstName" value="" size=20 maxlength=20>
+                        <font id="vnaamerror" size=1 color="red"> </font>
+                        <input type="text" name="vnaam" value="" size=15 maxlength=20>
                     </div>
                     <div class="formInput">
                         <b>Achternaam<sup>*</sup></b>
                         <br>
-                        <input type="text" name="lastName" value="" size=15 maxlength=20>
+                        <font id="anaamerror" size=1 color="red"> </font>
+                        <input type="text" name="anaam" value="" size=15 maxlength=20>
                     </div>
+
+                    <div>
+                        <b>Kies een foto:</b> 
+                        <img src="images/NoPhotoAvailable.png />
+                        <td colspan="2" align="center"><input type="file" value="Upload">                           
+                    </div>
+ 
                     <div class="formInput">
                         <b>Tussenvoegsel<sup></sup></b>
-                        <br>
-                        <input type="text" name="insertion" value="" size=5 maxlength=20>
+                        <br>                        
+                        <input type="text" name="tvoegsel" value="" size=5 maxlength=20>
                     </div>
 
                     <div class="formInput">
                         <b>Rekening nummer<sup>*</sup></b> 
                         <br>
-                        <input type="text" name="billingnumber" value="" size=10  maxlength=8>
+                        <font id="reknrerror" size=1 color="red"> </font>
+                        <input type="text" name="reknr" value="" size=10  maxlength=8>
+                    </div>
+
+                    <div class="formInput">
+                        <b>Telefoonnummer<sup>*</sup></b> 
+                        <br>
+                        <font id="telnrerror" size=1 color="red"> </font>
+                        <input type="text" name="telnr" value="" size=15  maxlength=15>
                     </div>
 
                     <div class="formInput">
                         <b>E-Mail<sup>*</sup></b> 
                         <br>
-                        <input type="text" name="email" value="" size=25  maxlength=125>
+                        <font id="emailerror" size=1 color="red"> </font>
+                        <input type="text" name="email" value="" size=25  maxlength=25>
                     </div>
                     <div class="formInput">
                         <b>Straatnaam<sup>*</sup></b>
                         <br>
-                        <input type="text" name="street" value="" size=15 maxlength=20>            
+                        <font id="straaterror" size=1 color="red"> </font>
+                        <input type="text" name="straat" value="" size=15 maxlength=20>            
                     </div>
                     <div class="formInput">
                         <b>Huisnummer<sup>*</sup></b>
                         <br>
-                        <input type="text" name="homenumber" value="" size=5 maxlength=10>            
+                        <font id="huisnummererror" size=1 color="red"> </font>
+                        <input type="text" name="huisnummer" value="" size=5 maxlength=8>            
                     </div>
                     <div class="formInput">
                         <b>Postcode<sup>*</sup></b> 
                         <br>
-                        <input type="text" name="zip" value="" size=10  maxlength=8>
+                        <font id="postcodeerror" size=1 color="red"> </font>
+                        <input type="text" name="postcode" value="" size=5  maxlength=8>
                     </div>
 
                     <div class="formInput">
                         <b>Stad<sup>*</sup></b>
                         <br>
-                        <input type="text" name="city" value="" size=15 maxlength=20>            
+                        <font id="staderror" size=1 color="red"> </font>
+                        <input type="text" name="stad" value="" size=15 maxlength=20>            
                     </div>
-                    <div class="formInput">
-                        <b>Gebruikersnaam<sup>*</sup></b>
-                        <br>
-                        <input type="text" name="userName" size=20 value=""  maxlength=10>
-                    </div>
+
                     <div class="formInput">
 
                         <b>Wachtwoord<sup>*</sup></b> 
                         <br>
-                        <input type="password" name="password1" size=10 value="" maxlength=10>
+                        <input type="password" name="wachtwoord" size=10 value="" maxlength=30>
                     </div>
                     <div class="formInput">
                         <b>Bevestig wachtwoord<sup>*</sup></b>
                         <br>
-                        <input type="password" name="password2" size=10 value="" maxlength=10>
+                        <input type="password" name="wachtwoord2" size=10 value="" maxlength=30>
                     </div>
 
                     <div class="formInput">
-                        <b>Geslacht</b>
+                        <b>Geslacht?</b>
                         <br>
-                        <input type="radio" name="notify" value="M" checked>M 
-                        <input type="radio" name="notify" value="V"> V
+                        <input type="radio" name="geslacht" value="M" checked>M 
+                        <input type="radio" name="geslacht" value="V"> V
+                    </div>
+
+                    <div class="formInput">
+                        <b>Taal?</b>
+                        <br>
+                        <input type="radio" name="locale" value="NL" checked> <img src="images/nl_NL.png" />
+                        <input type="radio" name="locale" value="EN"> <img src="images/en_GB.png" />
                     </div>
 
 
-                    <input type="submit" value="Wijzigen"> 
-
-
-
-
+<!--                    <input type="submit" value="Aanmelden"> <input type="reset" value="Reset">-->
+                    <button type ="submit">Aanmelden</button>
+                    <input type="reset" value="Reset">
                 </form>
-
             </div>
         </div>
-
-
-
-
-
-
-
-</body>
+    </body>
 </html>

@@ -178,7 +178,7 @@ public class Registreren extends HttpServlet {
            // hier wordt de gebruiker in de database opgeslagen
            newregistratie.RegistrerenDao(lid);
            
-           //Hier maken we een neiuwe sessie voor de nieuwe gebruiker
+           //Hier maken we een nieuwe sessie voor de nieuwe gebruiker
           HttpSession session = request.getSession(true);       
           session.setAttribute("currentSessionUser",lid); 
           
