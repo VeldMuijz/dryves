@@ -19,9 +19,6 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Dryves - Rit plannen </title>
         <link type="text/css" rel="stylesheet" href="css/dryver.css"/>
-        <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
-        <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-        <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
 
 		<script type="text/javascript"
 				src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAQ5JCTE_OQi2SCYXO6urNY17FW5DaOVvU&sensor=false">
@@ -183,14 +180,6 @@
 
 				return true;
 			}
-                        
-                        $(function() {
-                            
-                        $( "#begindatum" ).datepicker();
-                        
-                        
-                        });
-                        
 
         </script>
 
@@ -209,9 +198,10 @@
 				<img src="images/Logo_Dryves.png" />
 			</div>
 
- <jsp:include page="navigatie.jsp" flush="true">
-                <jsp:param name="menu_active" value="mijndryves"></jsp:param>
-            </jsp:include>
+
+			            <jsp:include page="/WEB-INF/navigatie.jsp"  flush="true">
+              <jsp:param name="menu_active" value="mijndryves"></jsp:param>
+              </jsp:include>
 
 			<div class="contentPanel">
 
@@ -224,7 +214,7 @@
 						<input type="text" id="end" name="end" onchange="calcRoute();" style ="width: 350; float: right:"> <br />	
 
 						Begindatum:<br/> <input type="date" id="begindatum" name="begindatum"> <br/>
-                                                Tijd: <br/> <input type="text" id="tijd" name="tijd" placeholder="09:10"> <br/><br/>
+						Tijd: <br/> <input type="text" id="tijd" name="tijd"> <br/><br/>
 						<td> Herhaling 
 							<input type="checkbox" id="herhaling" name="herhaling" onclick="isChecked(this.checked);"> </td>
 						<br/><br/>

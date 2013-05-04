@@ -58,6 +58,10 @@
 
         Welkom  ${currentSessionUser.getVnaam()} ${currentSessionUser.getAnaam()}
 
+        <img src='${currentSessionUser.getFotoUrl()}'/>
+        
+        
+    
             </div>
         </div>
 

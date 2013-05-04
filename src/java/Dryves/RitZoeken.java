@@ -83,7 +83,9 @@ public class RitZoeken extends HttpServlet {
             ritten = ritDao.getAlleRitten(startpunt, eindpunt);
 
             request.setAttribute("ritten", ritten);
-
+//			String formatprijs = ritten.get(4).toString();
+//				String format = String.format("€ %.2f", formatprijs);
+//				String format1 = String.format("€ %.2f", ritten.get(4));
             RequestDispatcher dispatcher = request.getRequestDispatcher("zoek_ritten.jsp");
             dispatcher.forward(request, response);
         } catch (SQLException e) {
