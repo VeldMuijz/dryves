@@ -54,7 +54,18 @@ try
           HttpSession session = request.getSession(true);       
           session.setAttribute("currentSessionUser",user); 
           // response.sendRedirect("mijndryves.jsp"); //logged-in page 
-          request.getRequestDispatcher("WEB-INF/mijndryves.jsp").forward(request, response);
+          
+          if (user.getRol() == 1){
+              
+              request.getRequestDispatcher("WEB-INF/mijndryves.jsp").forward(request, response);
+              
+          }else {
+          
+              request.getRequestDispatcher("WEB-INF/admin.jsp").forward(request, response);
+          
+          }
+          
+          
      }
 
      else 

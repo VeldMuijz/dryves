@@ -39,7 +39,7 @@ public class SessieDao {
 		// System.out.println("Query: " + zoekQuery);
 
 		try {
-			PreparedStatement pstmt = con.prepareStatement("SELECT lidnr ,vnaam,anaam,geslacht,straat,postcode, stad,telnr,reknr,email,beoordeling,fotourl,tvoegsel,wachtwoord,langnotify FROM lid WHERE email = ?");
+			PreparedStatement pstmt = con.prepareStatement("SELECT lidnr ,vnaam,anaam,geslacht,straat,postcode, stad,telnr,reknr,email,beoordeling,fotourl,tvoegsel,wachtwoord,langnotify,rol FROM lid WHERE email = ?");
 			pstmt.setString(1, email);
 			//connect to DB 
 			con = ConnectionManager.getConnection();
@@ -96,13 +96,17 @@ public class SessieDao {
 					bean.setTvoegsel(rs.getString(13));;
 					bean.setWachtwoord(rs.getString(14));
 					bean.setLangnotify(rs.getString(15));
-					bean.setLocale(rs.getString(15));//
+					bean.setLocale(rs.getString(15));
 					bean.setWachtwoord2(wachtwoord);
+                                        bean.setRol(rs.getInt(16));
 					bean.setValid(true);
 
 
 					//Hieronder wordt de locale vanuit de getter geprint naar de console
 					System.out.println("Dit is de locale vanuit de getter van sessie :" + bean.getLocale());
+                                        
+                                        
+                                        System.out.println("Dit is de user role: " + bean.getRol());
 
 				} else {
 					System.out.println("Sorry, you are not a registered user! Please sign up first");
