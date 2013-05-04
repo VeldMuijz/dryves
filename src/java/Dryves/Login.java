@@ -4,6 +4,7 @@
  */
 package Dryves;
 
+import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -22,7 +23,22 @@ public class Login extends HttpServlet {
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) 
                        throws ServletException, java.io.IOException {
-
+}
+	
+	/**
+     * Handles the HTTP
+     * <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        
+		
 try
 {       
 
@@ -50,7 +66,20 @@ catch (Throwable theException)
 {
      System.out.println(theException); 
 }
-       }
+       
+		
+    }
+
+
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
+        return "Short description";
+    }// </editor-fold>
     }
 
     
