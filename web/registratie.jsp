@@ -189,7 +189,7 @@
                     </div>
 
                     <div class="formInput">
-                        <b>Stad<sup>*</sup></b>
+                        <b><fmt:message bundle="${rb}" key="stad" /><sup>*</sup></b>
                         <br>
                         <font id="staderror" size=1 color="red"> </font>
                         <input type="text" name="stad" value="" size=15 maxlength=20>            

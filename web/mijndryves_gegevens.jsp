@@ -110,15 +110,15 @@
 
             <div class="contentPanel">
 
-                Schrijf je per direct in en word lid! Ontdek de vele voordele die de Dryves community te bieden heeft. 
+                <fmt:message bundle="${rb}" key="sloganregistratie" /> 
 
                 <br /><br />
                 <form id="RegistratieForm" action="LidWijzigen" method="post" onsubmit="return validateForm();">
 
                     <div class="regformheader">
-                        <font size=5>Registratie formulier</font>
+                        <font size=5><fmt:message bundle="${rb}" key="registratieformulier" /></font>
                         <br>
-                        <font size=1 color="red"><sup>*</sup>Verplichte velden</font>
+                        <font size=1 color="red"><sup>*</sup><fmt:message bundle="${rb}" key="verplichtevelden" /></font>
                     </div>
 
                     <div class="formInput">                   
@@ -134,11 +134,11 @@
                         <input type="text" name="anaam" value="${currentSessionUser.anaam}" size=15 maxlength=20>
                     </div>
 
-                    <div>
+<!--                    <div>
                         <b>Kies een foto:</b> 
                         <img src="images/NoPhotoAvailable.png />
                         <td colspan="2" align="center"><input type="file" value="Upload">                           
-                    </div>
+                    </div>-->
  
                     <div class="formInput">
                         <b><fmt:message bundle="${rb}" key="tussenvoegsel" /><sup></sup></b>
@@ -181,7 +181,7 @@
                     </div>
 
                     <div class="formInput">
-                        <b>Stad<sup>*</sup></b>
+                        <b><fmt:message bundle="${rb}" key="stad" /><sup>*</sup></b>
                         <br>
                         <font id="staderror" size=1 color="red"> </font>
                         <input type="text" name="stad" value="${currentSessionUser.stad}" size=15 maxlength=20>            
@@ -200,14 +200,14 @@
                     </div>
 
                     <div class="formInput">
-                        <b><fmt:message bundle="${rb}" key="geslacht" /><sup>*</sup></b>
+                        <b><fmt:message bundle="${rb}" key="geslacht" /></b>
                         <br>
                         <input type="radio" name="geslacht" value="M" checked>M 
                         <input type="radio" name="geslacht" value="V"> V
                     </div>
 
                     <div class="formInput">
-                        <b><fmt:message bundle="${rb}" key="taal" /><sup>*</sup></b>
+                        <b><fmt:message bundle="${rb}" key="taal" /></b>
                         <br>
                         <input type="radio" name="locale" value="nl_NL" checked> <img src="images/nl_NL.png" />
                         <input type="radio" name="locale" value="en_GB"> <img src="images/en_EN.png" />
@@ -215,7 +215,7 @@
 
 
 <!--                    <input type="submit" value="Aanmelden"> <input type="reset" value="Reset">-->
-                    <button type ="submit"><fmt:message bundle="${rb}" key="wijzigen" /><sup>*</sup></button>
+                    <button type ="submit"><fmt:message bundle="${rb}" key="wijzigen" /></button>
                     <input type="reset" value="Reset">
                 </form>
             </div>
