@@ -75,25 +75,25 @@ public class RitPlannen extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Instantieren van objecten
-        Rit rit = new Rit();
-        RitDao ritDao = new RitDao();
+//        // Instantieren van objecten
+//        Rit rit = new Rit();
+//        RitDao ritDao = new RitDao();
+//
+//        // Haal de huidige sessie op
+//        HttpSession session = request.getSession();
+//        // Maak in de sessie een object rit aan met naam sessieRit
+//        session.setAttribute("sessieRit", rit);
+//        //Haal de userbean (dit moet sessiebean worden) op uit de sessie
+//        Lid user = (Lid) session.getAttribute("currentSessionUser");
+//
+//        System.out.println("**************** \n dit is rinr:   " + request.getParameter("ritnr"));
+//
+//        rit.setRitnr(Integer.parseInt(request.getParameter("ritnr")));
+//        System.out.println("Dit is het ritnummer± " + rit.getRitnr());
+//        ritDao.enkeleRitOphalen(rit.getRitnr(), rit);
+//        System.out.println("dit is het eindpunt" + rit.getEindpunt());
 
-        // Haal de huidige sessie op
-        HttpSession session = request.getSession();
-        // Maak in de sessie een object rit aan met naam sessieRit
-        session.setAttribute("sessieRit", rit);
-        //Haal de userbean (dit moet sessiebean worden) op uit de sessie
-        Lid user = (Lid) session.getAttribute("currentSessionUser");
-
-        System.out.println("**************** \n dit is rinr:   " + request.getParameter("ritnr"));
-
-        rit.setRitnr(Integer.parseInt(request.getParameter("ritnr")));
-        System.out.println("Dit is het ritnummer± " + rit.getRitnr());
-        ritDao.enkeleRitOphalen(rit.getRitnr(), rit);
-        System.out.println("dit is het eindpunt" + rit.getEindpunt());
-
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/ritwijzigen.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/rit_plannen.jsp");
         dispatcher.forward(request, response);
 
     }
@@ -193,7 +193,8 @@ public class RitPlannen extends HttpServlet {
         }
 
         double prijs = (rit.getAfstand() * 0.21); //TODO ophalen vanuit Configuratie
-        rit.setPrijs(prijs);
+		String formatprijs = String.format("%.2f", prijs);
+        rit.setPrijs(Double.parseDouble(formatprijs));
         rit.setGekocht(0);
         rit.setZitplaatsen(Integer.parseInt(request.getParameter("aantalZitplaatsen")));
 
@@ -215,16 +216,14 @@ public class RitPlannen extends HttpServlet {
         if (referer.contains("RitPlannen?ritnr")) {
             ritDao.updateRit(Integer.parseInt(request.getParameter("ritnr"))); //TODO ophalen van ritnummer uit link
             if (ritDao.updateRit(Integer.parseInt(request.getParameter("ritnr")))) {
-                System.out.println("****************\n \n Nu gaat ie naar de mijnrittten servlet");
-                 //request.getRequestDispatcher("Dryves/MijnRitten").forward(request, response);
-                 request.getRequestDispatcher("WEB-INF/mijndryves.jsp").forward(request, response);
+                 request.getRequestDispatcher("Dryves/MijnRitten").forward(request, response);
             }
 
         } else {
             if (ritDao.getMeerdere() == 0) {
                 ritDao.saveRit();
                 if (ritDao.saveRit()) {
-                    response.sendRedirect("WEB-INF/mijn_ritten.jsp");
+                    response.sendRedirect("/MijnRitten");
 
                 }
 

@@ -44,7 +44,7 @@
             <!--					TODO Hier nog de actuele aantal ongelezen berichten ophalen-->
             <div style="float: right; margin-right: 5px;"> 
                 <a href="mijnberichten.jsp"> 0</a> :nieuwe berichten  <br/> 
-                <a href="uitloggen.jsp" style="float: right;"> uitloggen </a>
+                <a href="Uitloggen" style="float: right;"> uitloggen </a>
             </div>
 
         </div>

@@ -25,6 +25,8 @@
     <body>
         <div class="navigation">
 <!--    check of er een ingelogde gebruiker is, zo ja dan toon je dit menu zonder registratie en login:-->
+
+
     <c:choose>
         <c:when test="${currentSessionUser.lidnr > 0}"> 
             <button onclick="window.location = 'index.jsp';" <% if (request.getParameter("menu_active").equals("home")) {%> class="active" <% }%> >Home</button>
@@ -52,7 +54,7 @@
                     <!--					TODO Hier nog de actuele aantal ongelezen berichten ophalen-->
                     <div style="float: right; margin-right: 5px;"> 
                         <a href="mijnberichten.jsp"> 0</a> :nieuwe berichten  <br/> 
-                        <a href="uitloggen.jsp" style="float: right;"> uitloggen </a>
+                        <a href="Uitloggen" style="float: right;"> uitloggen </a>
                     </div>
 
                 </div>
