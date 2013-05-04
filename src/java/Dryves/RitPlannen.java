@@ -217,22 +217,21 @@ public class RitPlannen extends HttpServlet {
         }
 
         ritDao.vulRitDao(rit);
-        if (referer.contains("RitPlannen?ritnr")) {
-            ritDao.updateRit(Integer.parseInt(request.getParameter("ritnr"))); //TODO ophalen van ritnummer uit link
+        if (referer.contains("RitWijzigen")) {
+          
             if (ritDao.updateRit(Integer.parseInt(request.getParameter("ritnr")))) {
-                 request.getRequestDispatcher("Dryves/MijnRitten").forward(request, response);
+                 request.getRequestDispatcher("MijnRitten").forward(request, response);
+                 
             }
 
         } else {
             if (ritDao.getMeerdere() == 0) {
-                ritDao.saveRit();
                 if (ritDao.saveRit()) {
                     response.sendRedirect("MijnRitten");
-
                 }
 
             } else {
-                ritDao.saveMeerdereRitten();
+                //ritDao.saveMeerdereRitten();
                 if (ritDao.saveMeerdereRitten()) {
                     response.sendRedirect("MijnRitten");
                 }
