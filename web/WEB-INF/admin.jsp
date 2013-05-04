@@ -42,26 +42,30 @@
             <div class="contentPanel">
                 
 
-                
-                <button onclick="window.location = 'mijndryves_gegevens.jsp';">Mijn gegevens</button>
-                <button onclick="window.location = 'rit_plannen.jsp';">Mijn berichten</button>
-                <!--<button onclick="window.location = 'mijn_ritten.jsp';">Mijn ritten</button>-->
-                <form action="MijnRitten" method="get">
-                    <button type="submit" > Mijn Ritten</button>
-                </form>
-                <br /><br />
-                
-                <fmt:message bundle="${rb}" key="ubentingelogdals" />
-                
-                <br /><br />
-        
+        <fmt:message bundle="${rb}" key="welkom" /> ${currentSessionUser.getVnaam()} ${currentSessionUser.getAnaam()}
 
-        Welkom op de adminpagina  ${currentSessionUser.getVnaam()} ${currentSessionUser.getAnaam()}
+        <br /><br />
+        
+        <fieldset>
+            <legend>Achtergrond</legend> 
 
-        <img src='${currentSessionUser.getFotoUrl()}'/>
+            <input type="radio" name="radios" value="background1" /> <img src="images/background1_thumb.png" />  
+            <input type="radio" name="radios" value="background2" /> <img src="images/background2_thumb.png" />  
+            <input type="radio" name="radios" value="background3" /> <img src="images/background3_thumb.png" />
+ 
+        </fieldset>
         
+        <br />
         
-    
+        <fieldset>
+            
+            <legend>Prijs per kilometer</legend>
+            
+            <input type="text" placeholder="0,19" />
+            
+        </fieldset>
+
+        
             </div>
         </div>
 
