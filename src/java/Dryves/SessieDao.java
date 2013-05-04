@@ -113,7 +113,7 @@ public class SessieDao
  bean.setTvoegsel(rs.getString(13));;
  bean.setWachtwoord(rs.getString(14));
  bean.setLangnotify(rs.getString(15));
- bean.setLocaleStr(rs.getString(15));//
+ bean.setLocale(rs.getString(15));//
  bean.setWachtwoord2(wachtwoord);
    bean.setValid(true);
             
