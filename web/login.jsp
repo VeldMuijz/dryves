@@ -85,7 +85,7 @@ Dit is de login page!
         <td>
             <fmt:message bundle="${rb}" key="wachtwoord" />
         </td>
-        <td><input type="text" id="wachtwoord" name="wachtwoord" style="width:205px;" /></td>
+        <td><input type="password" id="wachtwoord" name="wachtwoord" style="width:205px;" /></td>
     </tr>
     <tr>
         <td>
