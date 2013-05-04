@@ -14,7 +14,7 @@
     </head>
     <body>
                      <form action="RitZoeken" method="get" >
-                         <b>Zoek rit: <b> <input class="zoektextveld" name="zoekrit" onchange="RitZoeken" placeholder="Zoek op adres, stad, postcode..." ></input><button onclick="RitZoeken" class="heliosActionBarIconButton"><img src="images/zoom_grey.png" /></button>
+                     <input class="zoektextveld" name="zoekrit" onchange="RitZoeken" placeholder="Zoek op adres, stad, postcode..." ></input><button onclick="RitZoeken" class="heliosActionBarIconButton"><img src="images/zoom_grey.png" /></button>
                             </form>   
     </body>
 </html>
