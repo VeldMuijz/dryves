@@ -28,16 +28,10 @@
    
         
         <script>
-           
-        
              function verbergKnopVerde() {
      
             document.getElementById('GaVerderKnop').style.visibility = 'hidden';
        }
-    
-    
-            
-            
         </script>
         
         
@@ -106,7 +100,7 @@ Dit is de login page!
         
         
 <fb:profile-pic uid="loggedinuser" facebook-logo="true" linked="false" 
-width="300" height="400"></fb:profile-pic>
+width="80" height="80"></fb:profile-pic>
 
 
         
