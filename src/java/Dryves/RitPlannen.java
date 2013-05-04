@@ -193,7 +193,11 @@ public class RitPlannen extends HttpServlet {
         }
 
         double prijs = (rit.getAfstand() * 0.21); //TODO ophalen vanuit Configuratie
+        
 		String formatprijs = String.format("%.2f", prijs);
+                System.out.println(formatprijs);
+                formatprijs = formatprijs.replace(",", ".");
+                System.out.println(formatprijs);
         rit.setPrijs(Double.parseDouble(formatprijs));
         rit.setGekocht(0);
         rit.setZitplaatsen(Integer.parseInt(request.getParameter("aantalZitplaatsen")));

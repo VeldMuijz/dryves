@@ -35,7 +35,7 @@ Document : mijn_ritten
 
 
             <div class="contentPanel">         
-                <h1>Hello World!</h1>
+                <button onclick="window.location = '/Dryves/RitPlannen';">Rit plannen</button> <br />
 
                 
                 
