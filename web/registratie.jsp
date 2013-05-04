@@ -6,6 +6,12 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+
+<fmt:setLocale value="${locale}" />
+
+<fmt:setBundle basename="ResourceBundles.Dryves" scope="request" var="rb" />
 <!DOCTYPE html>
 <html>
     <head>
@@ -101,7 +107,9 @@
             </div>
 
 
-            <jsp:include page="navigatie.jsp"  flush="true" />
+            <jsp:include page="navigatie.jsp" flush="true">
+                <jsp:param name="menu_active" value="registratie"></jsp:param>
+            </jsp:include>
 
             <div class="contentPanel">
 
@@ -113,17 +121,17 @@
                     <div class="regformheader">
                         <font size=5>Registratie formulier</font>
                         <br>
-                        <font size=1 color="red"><sup>*</sup> Verplichte velden</font>
+                        <font size=1 color="red"><sup>*</sup>Verplichte velden</font>
                     </div>
 
                     <div class="formInput">                   
-                        <b>Voornaam<sup>*</sup></b>                             
+                        <b><fmt:message bundle="${rb}" key="voornaam" /><sup>*</sup></b>                             
                         <br>
                         <font id="vnaamerror" size=1 color="red"> </font>
                         <input type="text" name="vnaam" value="" size=15 maxlength=20>
                     </div>
                     <div class="formInput">
-                        <b>Achternaam<sup>*</sup></b>
+                        <b><fmt:message bundle="${rb}" key="achternaam" /><sup>*</sup></b>
                         <br>
                         <font id="anaamerror" size=1 color="red"> </font>
                         <input type="text" name="anaam" value="" size=15 maxlength=20>
@@ -136,45 +144,45 @@
                     </div>
  
                     <div class="formInput">
-                        <b>Tussenvoegsel<sup></sup></b>
+                        <b><fmt:message bundle="${rb}" key="tussenvoegsel" /><sup></sup></b>
                         <br>                        
                         <input type="text" name="tvoegsel" value="" size=5 maxlength=20>
                     </div>
 
                     <div class="formInput">
-                        <b>Rekening nummer<sup>*</sup></b> 
+                        <b><fmt:message bundle="${rb}" key="rekeningnummer" /><sup>*</sup></b> 
                         <br>
                         <font id="reknrerror" size=1 color="red"> </font>
                         <input type="text" name="reknr" value="" size=10  maxlength=8>
                     </div>
 
                     <div class="formInput">
-                        <b>Telefoonnummer<sup>*</sup></b> 
+                        <b><fmt:message bundle="${rb}" key="telefoonnummer" /><sup>*</sup></b> 
                         <br>
                         <font id="telnrerror" size=1 color="red"> </font>
                         <input type="text" name="telnr" value="" size=15  maxlength=15>
                     </div>
 
                     <div class="formInput">
-                        <b>E-Mail<sup>*</sup></b> 
+                        <b><fmt:message bundle="${rb}" key="e-mail" /><sup>*</sup></b> 
                         <br>
                         <font id="emailerror" size=1 color="red"> </font>
                         <input type="text" name="email" value="" size=25  maxlength=25>
                     </div>
                     <div class="formInput">
-                        <b>Straatnaam<sup>*</sup></b>
+                        <b><fmt:message bundle="${rb}" key="straatnaam" /><sup>*</sup></b>
                         <br>
                         <font id="straaterror" size=1 color="red"> </font>
                         <input type="text" name="straat" value="" size=15 maxlength=20>            
                     </div>
                     <div class="formInput">
-                        <b>Huisnummer<sup>*</sup></b>
+                        <b><fmt:message bundle="${rb}" key="huisnummer" /><sup>*</sup></b>
                         <br>
                         <font id="huisnummererror" size=1 color="red"> </font>
                         <input type="text" name="huisnummer" value="" size=5 maxlength=8>            
                     </div>
                     <div class="formInput">
-                        <b>Postcode<sup>*</sup></b> 
+                        <b><fmt:message bundle="${rb}" key="postcode" /><sup>*</sup></b> 
                         <br>
                         <font id="postcodeerror" size=1 color="red"> </font>
                         <input type="text" name="postcode" value="" size=5  maxlength=8>
@@ -189,33 +197,33 @@
 
                     <div class="formInput">
 
-                        <b>Wachtwoord<sup>*</sup></b> 
+                        <b><fmt:message bundle="${rb}" key="wachtwoord" /><sup>*</sup></b> 
                         <br>
-                        <input type="password" name="wachtwoord" size=10 value="" maxlength=30>
+                        <input type="password" name="<fmt:message bundle="${rb}" key="wachtwoord" /><sup>*</sup>" size=10 value="" maxlength=30>
                     </div>
                     <div class="formInput">
-                        <b>Bevestig wachtwoord<sup>*</sup></b>
+                        <b><fmt:message bundle="${rb}" key="bevestigwachtwoord" /><sup>*</sup></b>
                         <br>
-                        <input type="password" name="wachtwoord2" size=10 value="" maxlength=30>
+                        <input type="password" name="<fmt:message bundle="${rb}" key="bevestigwachtwoord" /><sup>*</sup>" size=10 value="" maxlength=30>
                     </div>
 
                     <div class="formInput">
-                        <b>Geslacht?</b>
+                        <b><fmt:message bundle="${rb}" key="geslacht" /><sup>*</sup></b>
                         <br>
                         <input type="radio" name="geslacht" value="M" checked>M 
                         <input type="radio" name="geslacht" value="V"> V
                     </div>
 
                     <div class="formInput">
-                        <b>Taal?</b>
+                        <b><fmt:message bundle="${rb}" key="taal" /><sup>*</sup></b>
                         <br>
                         <input type="radio" name="locale" value="NL" checked> <img src="images/nl_NL.png" />
-                        <input type="radio" name="locale" value="EN"> <img src="images/en_EN.png" />
+                        <input type="radio" name="locale" value="EN"> <img src="images/en_GB.png" />
                     </div>
 
 
 <!--                    <input type="submit" value="Aanmelden"> <input type="reset" value="Reset">-->
-                    <button type ="submit">Aanmelden</button>
+                    <button type ="submit"><fmt:message bundle="${rb}" key="aanmelden" /><sup>*</sup></button>
                     <input type="reset" value="Reset">
                 </form>
             </div>
