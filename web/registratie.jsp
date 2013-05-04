@@ -217,8 +217,8 @@
                     <div class="formInput">
                         <b><fmt:message bundle="${rb}" key="taal" /><sup>*</sup></b>
                         <br>
-                        <input type="radio" name="locale" value="NL" checked> <img src="images/nl_NL.png" />
-                        <input type="radio" name="locale" value="EN"> <img src="images/en_GB.png" />
+                        <input type="radio" name="locale" value="nl_NL" checked> <img src="images/nl_NL.png" />
+                        <input type="radio" name="locale" value="en_GB"> <img src="images/en_EN.png" />
                     </div>
 
 

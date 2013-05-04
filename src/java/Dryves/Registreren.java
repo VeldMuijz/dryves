@@ -183,7 +183,7 @@ public class Registreren extends HttpServlet {
           session.setAttribute("currentSessionUser",lid); 
           
           // en hier wordt de gebruiker door gelinked naar mijndryves
-          response.sendRedirect("mijndryves.jsp"); //logged-in page  
+          response.sendRedirect("WEB-INF/mijndryves.jsp"); //logged-in page  
         
            
            
