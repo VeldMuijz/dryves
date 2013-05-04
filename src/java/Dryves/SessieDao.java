@@ -8,15 +8,20 @@ package Dryves;
  *
  * @author RickSpijker
  */
+import static Dryves.RitDao.currentCon;
 import java.text.*;
 import java.util.*;
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author RickSpijker
  */
 public class SessieDao {
+    static Connection currentCon;
+	static ResultSet rs;
 
 	public static Lid login(Lid bean2) {
 
@@ -135,6 +140,48 @@ public class SessieDao {
 		return bean;
 
 	}
+        
+        public Lid enkelLidUpdaten(Lid bean){
+            try {
+			currentCon = ConnectionManager.getConnection();
+                        
+			PreparedStatement updateLid;
+			String queryString = ("UPDATE TABLE lid (lidnr, vnaam, anaam, tvoegsel, straat, postcode, reknr, telnr, wachtwoord, email, stad, geslacht, langnotify)"
+                                + "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?);");
+
+			updateLid = currentCon.prepareStatement(queryString);
+
+                        updateLid.setString(1, bean.getVnaam());
+                        updateLid.setString(2, bean.getAnaam());
+                        updateLid.setString(3, bean.getTvoegsel());
+                        updateLid.setString(4, bean.getStraat());                       
+                        updateLid.setString(5, bean.getPostcode());
+                        updateLid.setString(6, bean.getReknr());
+                        updateLid.setString(7, bean.getTelnr());
+                        updateLid.setString(8, bean.getWachtwoord());
+                        updateLid.setString(9, bean.getEmail());
+                        updateLid.setString(10, bean.getStad());
+                        updateLid.setString(11, bean.getGeslacht());
+                        updateLid.setString(12, bean.getLangnotify());
+                        updateLid.setString(13, bean.getWachtwoord());
+                        
+                        
+                        
+			System.out.println("De query is: " + updateLid);
+                        
+			updateLid.executeUpdate();
+                        
+                        
+                       
+                        
+                        
+		} catch (SQLException ex) {
+			Logger.getLogger(RitDao.class.getName()).log(Level.SEVERE, null, ex);
+
+		}
+            
+            return bean;
+        }
 
 	private static Locale toString(String locale) {
 		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
