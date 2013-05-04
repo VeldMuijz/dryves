@@ -227,14 +227,14 @@ public class RitPlannen extends HttpServlet {
             if (ritDao.getMeerdere() == 0) {
                 ritDao.saveRit();
                 if (ritDao.saveRit()) {
-                    response.sendRedirect("/MijnRitten");
+                    response.sendRedirect("MijnRitten");
 
                 }
 
             } else {
                 ritDao.saveMeerdereRitten();
                 if (ritDao.saveMeerdereRitten()) {
-                    response.sendRedirect("/MijnRitten");
+                    response.sendRedirect("MijnRitten");
                 }
             }
 
