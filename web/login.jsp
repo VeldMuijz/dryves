@@ -71,7 +71,7 @@ Dit is de login page!
 
 <br /><br />
 
-<form action="LoginServlet" method="get">
+<form action="LoginServlet" method="post">
 <table style="width:320px;">
     <tr>
         <td>
