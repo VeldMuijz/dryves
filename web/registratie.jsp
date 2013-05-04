@@ -101,7 +101,9 @@
             </div>
 
 
-            <jsp:include page="navigatie.jsp"  flush="true" />
+            <jsp:include page="navigatie.jsp" flush="true">
+                <jsp:param name="menu_active" value="registratie"></jsp:param>
+            </jsp:include>
 
             <div class="contentPanel">
 
@@ -209,8 +211,8 @@
                     <div class="formInput">
                         <b>Taal?</b>
                         <br>
-                        <input type="radio" name="locale" value="NL" checked> <img src="images/nl_NL.png" />
-                        <input type="radio" name="locale" value="EN"> <img src="images/en_EN.png" />
+                        <input type="radio" name="locale" value="nl_NL" checked> <img src="images/nl_NL.png" />
+                        <input type="radio" name="locale" value="en_GB"> <img src="images/en_EN.png" />
                     </div>
 
 

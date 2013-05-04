@@ -290,8 +290,7 @@ public class Lid  implements java.io.Serializable {
         
     }
     
-   public String getLocaleStr(){
-            
+   public String getLocaleStr(){   
             return locale.toString();
         }
 
