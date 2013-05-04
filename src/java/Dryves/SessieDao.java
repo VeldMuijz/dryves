@@ -23,33 +23,47 @@ package Dryves;
 public class SessieDao     
    
    {
-      static Connection currentCon = null;
-      static ResultSet rs = null;  
+  
+      
+       
+      
+        
 
 
+      public static Lid login(Lid bean2) {
 
-      public static Lid login(Lid bean) {
-
-         //preparing some objects for connection 
+          
+          
+          //preparing some objects for connection 
          Statement stmt = null;    
+         
+         String email = bean2.getEmail();    
+         String wachtwoord = bean2.getWachtwoord();   
 
-         String email = bean.getEmail();    
-         String wachtwoord = bean.getWachtwoord();   
-
-         String zoekQuery = "select lid.vnaam, lid.anaam, lid.wachtwoord, lid.lidnr, lid.langnotify from Lid as lid where lid.email='" + email +"';";
-             
-
+         ResultSet rs ;
+         Connection con = Dryves.ConnectionManager.getConnection();  
+          Lid bean = new Lid();
+                          
+                          
       // "System.out.println" prints in the console; Normally used to trace the process
       System.out.println("Your user name is " + email);  
       System.out.println("Your wachtwoord is " + wachtwoord);
-      System.out.println("Query: " + zoekQuery);
+     // System.out.println("Query: " + zoekQuery);
 
       try 
       {
-         //connect to DB 
-         currentCon = ConnectionManager.getConnection();
-         stmt=currentCon.createStatement();
-         rs = stmt.executeQuery(zoekQuery);           
+          PreparedStatement pstmt = con.prepareStatement("SELECT lidnr ,vnaam,anaam,geslacht,straat,postcode, stad,telnr,reknr,email,beoordeling,fotourl,tvoegsel,wachtwoord,langnotify FROM lid WHERE email = ?");
+     pstmt.setString(1, email);  
+              //connect to DB 
+         con = ConnectionManager.getConnection();
+         stmt=con.createStatement();
+            
+                          
+                          
+
+                            rs = pstmt.executeQuery(); 
+      
+         //rs = stmt.executeQuery(zoekQuery);           
          boolean more = rs.next();
 
          // if user does not exist set the isValid variable to false
@@ -63,7 +77,7 @@ public class SessieDao
          else if (more) 
          { 
             //Hieronder wordt het wachtwoord van de user opgehaald uit de database 
-            String wachtwoordUser = rs.getString(3);
+            String wachtwoordUser = rs.getString(14);
             
             //Hieronder worden de wachtwoorden geprint in de console
             System.out.println("Dit is het ww uit de DB: " + wachtwoordUser);
@@ -71,26 +85,38 @@ public class SessieDao
             System.out.println("Dit is het ww van de JSP: " + wachtwoord);
             
             //Hieronder wordt de locale opgehaald uit de database
-            String locale = rs.getString(5);
+           // String locale = rs.getString(5);
             
             //Hieronder wordt de locale naar de console geprint
-            System.out.println("Dit is de locale van het lid: " + locale);
+            //System.out.println("Dit is de locale van het lid: " + locale);
             
            if (wachtwoord.equals(wachtwoordUser)) {
             
             
             
-            String vnaam = rs.getString(1);
-            String anaam = rs.getString(2);
-            int lidnr = rs.getInt(4);
-
-            System.out.println("Welkom " + vnaam);
-			
-            bean.setLidnr(lidnr);
-            bean.setVnaam(vnaam);
-            bean.setAnaam(anaam);
-            bean.setLocale(locale);
-            bean.setValid(true);
+        
+            
+            
+            //de nieuwe
+            bean.setLidnr(rs.getInt(1));
+             bean.setVnaam(rs.getString(2).toString()); 
+         bean.setAnaam(rs.getString(3));  
+   bean.setGeslacht(rs.getString(4)); 
+ bean.setStraat(rs.getString(5));
+ bean.setPostcode(rs.getString(6));
+ bean.setStad(rs.getString(7));
+ bean.setTelnr(rs.getString(8));
+ bean.setReknr(rs.getString(9));
+ bean.setEmail(rs.getString(10));
+ bean.setBeoordeling(rs.getInt(11));
+ bean.setFotoUrl(rs.getString(12));
+ bean.setTvoegsel(rs.getString(13));;
+ bean.setWachtwoord(rs.getString(14));
+ bean.setLangnotify(rs.getString(15));
+ bean.setLocaleStr(rs.getString(15));//
+ bean.setWachtwoord2(wachtwoord);
+   bean.setValid(true);
+            
             
             //Hieronder wordt de locale vanuit de getter geprint naar de console
             System.out.println("Dit is de locale vanuit de getter van sessie :" + bean.getLocale() );
@@ -111,13 +137,7 @@ public class SessieDao
       //some exception handling
       finally 
       {
-         if (rs != null)    {
-            try {
-               rs.close();
-            } catch (Exception e) {}
-               rs = null;
-            }
-
+        
          if (stmt != null) {
             try {
                stmt.close();
@@ -125,13 +145,13 @@ public class SessieDao
                stmt = null;
             }
 
-         if (currentCon != null) {
+         if (con != null) {
             try {
-               currentCon.close();
+               con.close();
             } catch (Exception e) {
             }
 
-            currentCon = null;
+            con = null;
          }
       }
 
