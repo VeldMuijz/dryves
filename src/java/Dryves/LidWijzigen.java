@@ -76,16 +76,17 @@ public class LidWijzigen extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-              
-        //De objecten worden aangemmakt
-        Lid lid = new Lid();  
-        String email = request.getParameter("email");
-        RegistrerenDao registerdao = new RegistrerenDao();
+
+        // Haal de huidige sessie op
+        HttpSession session = request.getSession();
+        //Haal de userbean (dit moet sessiebean worden) op uit de sessie
+        Lid lid = (Lid) session.getAttribute("currentSessionUser");
 
                 //check of de email bestaat, zo niet dan wordt de gebruiker toegevoegd in de database
-          if (!registerdao.checkDuplicate(email)) { 
+
            
               //email komt niet in de database voor
+              
               
         //Zet de voornaam
         lid.setVnaam(request.getParameter("vnaam"));
@@ -166,15 +167,6 @@ public class LidWijzigen extends HttpServlet {
           
           // en hier wordt de gebruiker door gelinked naar mijndryves
           response.sendRedirect("MijnDryves"); //logged-in page  
-
-       } else { 
-
-           //Indien het email bestaat wordt er een melding weergegeven.
-           // Moet nog gedaan worden    
-           response.sendRedirect("http://www.telegraaf.nl");
-       
-       
-       }
            
            
  

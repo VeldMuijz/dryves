@@ -146,8 +146,22 @@ public class SessieDao {
 			currentCon = ConnectionManager.getConnection();
                         
 			PreparedStatement updateLid;
-			String queryString = ("UPDATE TABLE lid (lidnr, vnaam, anaam, tvoegsel, straat, postcode, reknr, telnr, wachtwoord, email, stad, geslacht, langnotify)"
-                                + "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?);");
+			String queryString = ("UPDATE lid "
+                                + "SET"
+                          
+                                + " vnaam = ?,"
+                                + " anaam = ?,"
+                                + " tvoegsel =?,"
+                                + " straat = ?,"
+                                + " postcode = ?,"
+                                + " reknr =?,"
+                                + " telnr =?,"
+                                + " wachtwoord =?,"
+                                + " email =?,"
+                                + " stad = ?,"
+                                + " geslacht =?,"
+                                + " langnotify = ?"
+                                + " WHERE lidnr = ?");
 
 			updateLid = currentCon.prepareStatement(queryString);
 
@@ -156,14 +170,15 @@ public class SessieDao {
                         updateLid.setString(3, bean.getTvoegsel());
                         updateLid.setString(4, bean.getStraat());                       
                         updateLid.setString(5, bean.getPostcode());
-                        updateLid.setString(6, bean.getReknr());
+                                               updateLid.setInt(6, Integer.parseInt(bean.getReknr()));
                         updateLid.setString(7, bean.getTelnr());
                         updateLid.setString(8, bean.getWachtwoord());
                         updateLid.setString(9, bean.getEmail());
                         updateLid.setString(10, bean.getStad());
                         updateLid.setString(11, bean.getGeslacht());
                         updateLid.setString(12, bean.getLangnotify());
-                        updateLid.setString(13, bean.getWachtwoord());
+                        
+                        updateLid.setInt(13, bean.getLidnr());
                         
                         
                         
