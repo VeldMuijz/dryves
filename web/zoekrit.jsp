@@ -5,6 +5,9 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setBundle basename="ResourceBundles.Dryves" scope="request" var="rb" />
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -14,7 +17,12 @@
     </head>
     <body>
                      <form action="RitZoeken" method="get" >
-                     <input class="zoektextveld" name="zoekrit" onchange="RitZoeken" placeholder="Zoek op adres, stad, postcode..." ></input><button onclick="RitZoeken" class="heliosActionBarIconButton"><img src="images/zoom_grey.png" /></button>
+                    <b><fmt:message bundle="${rb}" key="zoekrit" />: <b> <input id='zoekveld' name="zoekrit" onchange="RitZoeken" placeholder="<fmt:message bundle="${rb}" key="placeholder" />" ></input> 
+                            <button onclick="RitZoeken"><fmt:message bundle="${rb}" key="uitvoeren" /></button>
+                            
+                            
+                          
+                            
                             </form>   
     </body>
 </html>
