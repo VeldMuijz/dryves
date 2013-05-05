@@ -28,6 +28,14 @@
         <servlet-name>RitKopen</servlet-name>
         <servlet-class>Dryves.RitKopen</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>BerichtServlet</servlet-name>
+        <servlet-class>Dryves.BerichtServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Berichtverzenden</servlet-name>
+        <servlet-class>Dryves.Berichtverzenden</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RitPlannen</servlet-name>
         <url-pattern>/RitPlannen</url-pattern>
@@ -59,6 +67,14 @@
     <servlet-mapping>
         <servlet-name>RitKopen</servlet-name>
         <url-pattern>/RitKopen</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BerichtServlet</servlet-name>
+        <url-pattern>/BerichtServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Berichtverzenden</servlet-name>
+        <url-pattern>/Berichtverzenden</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

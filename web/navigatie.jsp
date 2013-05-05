@@ -4,6 +4,7 @@
     Author     : Vincent
 --%>
 
+<%@page import="Dryves.BerichtClass"%>
 <%@page import="Dryves.Lid"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -43,7 +44,15 @@
 
             <!--					TODO Hier nog de actuele aantal ongelezen berichten ophalen-->
             <div style="float: right; margin-right: 5px;"> 
-                <a href="mijnberichten.jsp"> 0</a> :nieuwe berichten  <br/> 
+                <a href="mijnberichten.jsp"> <% BerichtClass berichtclas =new BerichtClass();
+                
+                 // Haal de huidige sessie op
+        
+ //Haal de userbean (dit moet sessiebean worden) op uit de sessie
+        Lid user = (Lid) session.getAttribute("currentSessionUser");
+                
+                berichtclas.statusbalk(user.getLidnr());
+                %></a> :nieuwe berichten  <br/> 
                 <a href="Uitloggen" style="float: right;"> uitloggen </a>
             </div>
 
