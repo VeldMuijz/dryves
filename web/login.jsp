@@ -28,16 +28,10 @@
    
         
         <script>
-           
-        
              function verbergKnopVerde() {
      
             document.getElementById('GaVerderKnop').style.visibility = 'hidden';
        }
-    
-    
-            
-            
         </script>
         
         
@@ -71,7 +65,7 @@ Dit is de login page!
 
 <br /><br />
 
-<form action="LoginServlet" method="get">
+<form action="LoginServlet" method="post">
 <table style="width:320px;">
     <tr>
         <td>
@@ -85,7 +79,7 @@ Dit is de login page!
         <td>
             <fmt:message bundle="${rb}" key="wachtwoord" />
         </td>
-        <td><input type="text" id="wachtwoord" name="wachtwoord" style="width:205px;" /></td>
+        <td><input type="password" id="wachtwoord" name="wachtwoord" style="width:205px;" /></td>
     </tr>
     <tr>
         <td>
@@ -106,7 +100,7 @@ Dit is de login page!
         
         
 <fb:profile-pic uid="loggedinuser" facebook-logo="true" linked="false" 
-width="300" height="400"></fb:profile-pic>
+width="80" height="80"></fb:profile-pic>
 
 
         
