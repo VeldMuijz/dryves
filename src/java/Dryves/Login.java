@@ -54,6 +54,8 @@ public class Login extends HttpServlet {
                                     
                 HttpSession session = request.getSession(true);
                 session.setAttribute("currentSessionUser", user);
+                
+                SessieDao.adminLogin(user);
 
                 if (user.getRol() == 1) {
 
@@ -61,7 +63,7 @@ public class Login extends HttpServlet {
 
                 } else if (user.getRol() == 2) {
                     
-                    SessieDao.adminLogin(user);
+                    
 
                     request.getRequestDispatcher("WEB-INF/admin.jsp").forward(request, response);
 
