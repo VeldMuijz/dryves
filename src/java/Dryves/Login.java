@@ -17,15 +17,15 @@ import org.hibernate.Session;
  * @author RickSpijker
  */
 public class Login extends HttpServlet {
-    
+
     Session session = null;
-    
+
     @Override
-    public void doGet(HttpServletRequest request, HttpServletResponse response) 
-                       throws ServletException, java.io.IOException {
-}
-	
-	/**
+    public void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, java.io.IOException {
+    }
+
+    /**
      * Handles the HTTP
      * <code>POST</code> method.
      *
@@ -37,39 +37,49 @@ public class Login extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-		
-try
-{       
-
-     Lid user = new Lid();
-     user.setEmail(request.getParameter("email"));
-     user.setWachtwoord(request.getParameter("wachtwoord"));
-
-     user = SessieDao.login(user);
-
-     if (user.isValid())
-     {
-
-          HttpSession session = request.getSession(true);       
-          session.setAttribute("currentSessionUser",user); 
-          // response.sendRedirect("mijndryves.jsp"); //logged-in page 
-          request.getRequestDispatcher("WEB-INF/mijndryves.jsp").forward(request, response);
-     }
-
-     else 
-          response.sendRedirect("login.jsp"); //Retry login 
-} 
 
 
-catch (Throwable theException)      
-{
-     System.out.println(theException); 
-}
-       
-		
+        try {
+
+            Lid user = new Lid();
+
+            user.setEmail(request.getParameter("email"));
+            user.setWachtwoord(request.getParameter("wachtwoord"));
+
+            user = SessieDao.login(user);
+
+            if (user.isValid()) {
+
+                //Hieronder wordt bepaald of het lid admin is of niet.
+                                    
+                HttpSession session = request.getSession(true);
+                session.setAttribute("currentSessionUser", user);
+
+                if (user.getRol() == 1) {
+
+                    request.getRequestDispatcher("WEB-INF/mijndryves.jsp").forward(request, response);
+
+                } else if (user.getRol() == 2) {
+                    
+                    SessieDao.adminLogin(user);
+
+                    request.getRequestDispatcher("WEB-INF/admin.jsp").forward(request, response);
+
+                }
+
+
+            } else {
+
+                System.out.println("Het inloggen is niet gelukt, probeer het opnieuw!");
+
+                response.sendRedirect("login.jsp"); //Retry login 
+            }
+        } catch (Throwable theException) {
+            System.out.println(theException);
+        }
+
+
     }
-
 
     /**
      * Returns a short description of the servlet.
@@ -80,7 +90,4 @@ catch (Throwable theException)
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-    }
-
-    
-
+}

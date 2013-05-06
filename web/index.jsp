@@ -48,7 +48,7 @@
             </jsp:include>
 
 
-            <br /><br />
+            <br />
 
             <div class="contentPanel">
 
@@ -58,15 +58,18 @@
                                             </form>      -->
 
                 <jsp:include page="zoekrit.jsp" flush="true" ></jsp:include> 
+                
 
             </div>
+                
+            <br /> <br />  
+                
+                
             <div class="slider-wrapper theme-default">
                 <div id="slider" class="nivoSlider">
-                    <img src="images/nemo.jpg" alt="" />
-                    <a href="http://dev7studios.com">
-                        <img src="images/toystory.jpg" alt="" title="#htmlcaption" /></a>
-                    <img src="images/up.jpg" alt="" title="This is an example of a caption" />
-                    <img src="images/walle.jpg" alt="" />
+                    <img src="images/slider_audi.png" alt="" />
+                        <img src="images/slider_brandstof.png" alt=""/>
+                    <img src="images/slider_dryvesfile.png" alt="" />
                 </div>
             </div>
             <div id="htmlcaption" class="nivo-html-caption">

@@ -11,7 +11,7 @@ Document : mijn_ritten
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link type="text/css" rel="stylesheet" href="css/dryver.css"/>
-        <title>Mijn ritten</title>
+        <title>Rit zoeken</title>
 
 
     </head>
@@ -35,10 +35,11 @@ Document : mijn_ritten
 
 
 
-            <div class="contentPanel">         
+            <div class="contentPanel">  
+                
                 <jsp:include page="zoekrit.jsp" flush="true" ></jsp:include> 
 
-                
+                <br /><br />
                 
                 <c:forEach items="${ritten}" var="rit">
                     <div class="rittenlijst">

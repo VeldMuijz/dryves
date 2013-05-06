@@ -29,17 +29,10 @@
 
     <c:choose>
         <c:when test="${currentSessionUser.lidnr > 0}"> 
-            <button onclick="window.location = 'index.jsp';" <% if (request.getParameter("menu_active").equals("home")) {%> class="active" <% }%> >Home</button>
-            <button onclick="window.location = 'watisdryves.jsp';" <% if (request.getParameter("menu_active").equals("watisdryves")) {%> class="active" <% }%> >Wat is dryves</button>
-            <button onclick="window.location = 'faq.jsp';" <% if (request.getParameter("menu_active").equals("faq")) {%> class="active" <% }%> >FAQ</button>
-            <button onclick="window.location = '/Dryves/MijnDryves';" <% if (request.getParameter("menu_active").equals("mijndryves")) {%> class="active" <% }%> >Mijn Dryves</button>
+            <button onclick="window.location = 'index.jsp';" <% if (request.getParameter("menu_active").equals("home")) {%> class="active" <% }%> >Home</button><button onclick="window.location = 'watisdryves.jsp';" <% if (request.getParameter("menu_active").equals("watisdryves")) {%> class="active" <% }%> >Wat is dryves</button><button onclick="window.location = 'faq.jsp';" <% if (request.getParameter("menu_active").equals("faq")) {%> class="active" <% }%> >FAQ</button><button onclick="window.location = '/Dryves/MijnDryves';" <% if (request.getParameter("menu_active").equals("mijndryves")) {%> class="active" <% }%> >Mijn Dryves</button>
         </c:when>
         <c:otherwise>
-            <button onclick="window.location = 'index.jsp';" <% if (request.getParameter("menu_active").equals("home")) {%> class="active" <% }%> >Home</button>
-            <button onclick="window.location = 'watisdryves.jsp';" <% if (request.getParameter("menu_active").equals("watisdryves")) {%> class="active" <% }%> >Wat is dryves</button>
-            <button onclick="window.location = 'faq.jsp';" <% if (request.getParameter("menu_active").equals("faq")) {%> class="active" <% }%> >FAQ</button>
-            <button onclick="window.location = 'registratie.jsp';" <% if (request.getParameter("menu_active").equals("registratie")) {%> class="active" <% }%> >Registreer</button>
-            <button  class="loginButton" onclick="window.location = 'login.jsp';">Login</button>
+            <button onclick="window.location = 'index.jsp';" <% if (request.getParameter("menu_active").equals("home")) {%> class="active" <% }%> >Home</button><button onclick="window.location = 'watisdryves.jsp';" <% if (request.getParameter("menu_active").equals("watisdryves")) {%> class="active" <% }%> >Wat is dryves</button><button onclick="window.location = 'faq.jsp';" <% if (request.getParameter("menu_active").equals("faq")) {%> class="active" <% }%> >FAQ</button><button onclick="window.location = 'registratie.jsp';" <% if (request.getParameter("menu_active").equals("registratie")) {%> class="active" <% }%> >Registreer</button><button  class="loginButton" onclick="window.location = 'login.jsp';">Login</button>
         </c:otherwise>
     </c:choose>
 

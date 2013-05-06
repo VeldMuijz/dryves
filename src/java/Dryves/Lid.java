@@ -33,10 +33,15 @@ public class Lid  implements java.io.Serializable {
      private String langnotify;
      private String LocaleStr;
      private String Locale;
-    private Locale locale;
+     private Locale locale;
+     private int rol;
+     
+     // Gegevens voor adminpagina
+     private String achtergrond;
+     private String ritprijs;
 
 	
-    public Lid(int lidnr, String vnaam, String anaam, String geslacht, String straat, String huisnummer, String reknr, String telnr, String postcode, String stad, String email, String wachtwoord, String wachtwoord2, int beoordeling, String fotoUrl, String tvoegsel, String langnotify) {
+    public Lid(int lidnr, String vnaam, String anaam, String geslacht, String straat, String huisnummer, String reknr, String telnr, String postcode, String stad, String email, String wachtwoord, String wachtwoord2, int beoordeling, String fotoUrl, String tvoegsel, String langnotify, int rol) {
         this.lidnr = lidnr;
         this.vnaam = vnaam;
         this.anaam = anaam;
@@ -54,6 +59,8 @@ public class Lid  implements java.io.Serializable {
         this.fotoUrl = fotoUrl;
         this.tvoegsel = tvoegsel;
         this.langnotify = langnotify;
+        this.rol = rol;
+
 
     }
 
@@ -290,8 +297,7 @@ public class Lid  implements java.io.Serializable {
         
     }
     
-   public String getLocaleStr(){
-            
+   public String getLocaleStr(){   
             return locale.toString();
         }
 
@@ -316,7 +322,31 @@ public class Lid  implements java.io.Serializable {
     public void setValid(boolean Valid) {
         this.Valid = Valid;
     }
+
+    public int getRol() {
+        return rol;
+    }
+
+    public void setRol(int rol) {
+        this.rol = rol;
+    }
+
+    public String getAchtergrond() {
+        return achtergrond;
+    }
+
+    public void setAchtergrond(String achtergrond) {
+        this.achtergrond = achtergrond;
+    }
+
+    public String getRitprijs() {
+        return ritprijs;
+    }
+
+    public void setRitprijs(String ritprijs) {
+        this.ritprijs = ritprijs;
+    }
     
-    
+
 
 }
