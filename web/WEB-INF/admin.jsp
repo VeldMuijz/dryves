@@ -61,7 +61,7 @@
             
             <legend>Prijs per kilometer</legend>
             
-            <input type="text" />
+            <input type="text" name="ritprijs" />
             
         </fieldset>
 
