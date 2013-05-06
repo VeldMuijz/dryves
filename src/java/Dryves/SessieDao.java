@@ -98,21 +98,22 @@ public class SessieDao {
                     bean.setLangnotify(rs.getString(15));
                     bean.setLocale(rs.getString(15));
                     bean.setWachtwoord2(wachtwoord);
-                    
-                    
-                    
                     bean.setRol(rs.getInt(16));
                     
-                    
+                    if (bean.getRol() == 2){
+                            
+                        
+                        
+                    }
                     
                     bean.setValid(true);
 
 
                     //Hieronder wordt de locale vanuit de getter geprint naar de console
-                    System.out.println("Dit is de locale vanuit de getter van sessie :" + bean.getLocale());
+                    System.out.println("Dit is de locale vanuit de getter van sessie :" + bean.getLocaleStr());
 
 
-                    System.out.println("Dit is de user role: " + bean.getRol());
+                    System.out.println("Dit is de rol van de gebruiker: " + bean.getRol());
 
                 } else {
                     System.out.println("Sorry, you are not a registered user! Please sign up first");
@@ -151,20 +152,18 @@ public class SessieDao {
      * @param beanadmin
      * @return
      */
-    public static Lid adminLogin(Lid beanadmin) {
+    public static void adminLogin(Lid bean) {
   
         //preparing some objects for connection 
         Statement stmt = null;
         
         Connection currentCon = Dryves.ConnectionManager.getConnection();
         
-        Lid lid = new Lid();
+        //Lid bean = new Lid();
   
         try {
             
             PreparedStatement pstmtadmin = currentCon.prepareStatement("SELECT * FROM configuratie WHERE confnr = 1");
-            
-            System.out.println("kom ik hier nog??");
             
             //connect to DB 
             currentCon = ConnectionManager.getConnection();
@@ -173,8 +172,6 @@ public class SessieDao {
             stmt = currentCon.createStatement();
 
             rs = pstmtadmin.executeQuery();
-            
-            System.out.println("Resultset: " + rs);
 
             //rs = stmt.executeQuery(zoekQuery);           
             boolean more = rs.next();
@@ -190,11 +187,11 @@ public class SessieDao {
                 //Hieronder wordt de adminbean gevuld met de waarden uit de configuratietabel
 
 
-                lid.setAchtergrond(rs.getString(2));
-                lid.setRitprijs(rs.getString(3));
+                bean.setAchtergrond(rs.getString(2));
+                bean.setRitprijs(rs.getString(3));
 
-                System.out.println("Dit is de waarde uit achtergrond: " + lid.getAchtergrond());
-                System.out.println("Dit is de waarde uit ritprijs: " + lid.getRitprijs());
+                System.out.println("Dit is de waarde uit achtergrond: " + bean.getAchtergrond());
+                System.out.println("Dit is de waarde uit ritprijs: " + bean.getRitprijs());
 
 
 
@@ -226,8 +223,6 @@ public class SessieDao {
         }
 
 
-
-        return lid;
 
 
     }

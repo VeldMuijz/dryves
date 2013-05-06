@@ -60,7 +60,9 @@ public class Login extends HttpServlet {
 
                     request.getRequestDispatcher("WEB-INF/mijndryves.jsp").forward(request, response);
 
-                } else if (user.getRol() == 2) {                 
+                } else if (user.getRol() == 2) {
+                    
+                    SessieDao.adminLogin(user);
 
                     request.getRequestDispatcher("WEB-INF/admin.jsp").forward(request, response);
 

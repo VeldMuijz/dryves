@@ -49,9 +49,9 @@
         <fieldset>
             <legend>Achtergrond</legend> 
 
-            <input type="radio" name="radios" value="background1" /> <img src="images/background1_thumb.png" />  
-            <input type="radio" name="radios" value="background2" /> <img src="images/background2_thumb.png" />  
-            <input type="radio" name="radios" value="background3" /> <img src="images/background3_thumb.png" />
+            <input type="radio" name="radios" value="images/background1" /> <img src="images/background1_thumb.png" />  
+            <input type="radio" name="radios" value="images/background2" /> <img src="images/background2_thumb.png" />  
+            <input type="radio" name="radios" value="images/background3" /> <img src="images/background3_thumb.png" />
  
         </fieldset>
         
@@ -61,11 +61,11 @@
             
             <legend>Prijs per kilometer</legend>
             
-            <input type="text" name="ritprijs" value="${currentSessionUser.ritprijs}" />
+            <input type="text" name="ritprijs" value="${currentSessionUser.getRitprijs()}" />
             
         </fieldset>
-
-        
+            
+         
             </div>
         </div>
 
