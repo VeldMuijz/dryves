@@ -54,7 +54,6 @@ public class Login extends HttpServlet {
                                     
                 HttpSession session = request.getSession(true);
                 session.setAttribute("currentSessionUser", user);
-                
 
                 if (user.getRol() == 1) {
 

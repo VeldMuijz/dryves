@@ -347,8 +347,6 @@ public class Lid  implements java.io.Serializable {
         this.ritprijs = ritprijs;
     }
     
-    
-    
-    
+
 
 }
