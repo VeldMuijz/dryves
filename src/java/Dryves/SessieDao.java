@@ -43,7 +43,6 @@ public class SessieDao {
         System.out.println("Your user name is " + email);
         System.out.println("Your wachtwoord is " + wachtwoord);
         // System.out.println("Query: " + zoekQuery);
-        
 
         try {
             PreparedStatement pstmt = con.prepareStatement("SELECT lidnr ,vnaam,anaam,geslacht,straat,postcode, stad,telnr,reknr,email,beoordeling,fotourl,tvoegsel,wachtwoord,langnotify,rol FROM lid WHERE email = ?");
@@ -100,13 +99,6 @@ public class SessieDao {
                     bean.setLocale(rs.getString(15));
                     bean.setWachtwoord2(wachtwoord);
                     bean.setRol(rs.getInt(16));
-                    
-                    if (bean.getRol() == 2){
-                            
-                        
-                        
-                    }
-                    
                     bean.setValid(true);
 
 
@@ -159,8 +151,6 @@ public class SessieDao {
         Statement stmt = null;
         
         Connection currentCon = Dryves.ConnectionManager.getConnection();
-        
-        //Lid bean = new Lid();
   
         try {
             

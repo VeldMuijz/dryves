@@ -63,7 +63,7 @@
             
             <legend>Achtergrond</legend>
             
-            <input type="text" name="achtergrond" value="${currentSessionUser.getachtergrond()}" />
+            <input type="text" name="achtergrond" value="${currentSessionUser.getAchtergrond()}" />
             
         </fieldset>
             
