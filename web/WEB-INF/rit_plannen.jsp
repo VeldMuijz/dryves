@@ -271,13 +271,13 @@
 					<div id="mapcanvas"></div>
 					<div id ="ritoverzicht"> 
 						<table>
-							<td><strong> Totale afstand: </strong> </br>
+							<td><strong> <fmt:message bundle="${rb}" key="totalafstand" /> </strong> </br>
 								<div id="total" name="total"></div> </td> <br/>
 
-							<td><strong>Startadres:</strong><br/>
+							<td><strong><fmt:message bundle="${rb}" key="startadres" /></strong><br/>
 								<div id="startadres" name="startadres"></div></td>
 
-							<td><strong>Eindadres:</strong> <br/>
+							<td><strong><fmt:message bundle="${rb}" key="eindadres" /></strong> <br/>
 								<div id="eindadres" name="eindadres"></div></td>
 
 						</table>
