@@ -35,6 +35,10 @@ public class Lid  implements java.io.Serializable {
      private String Locale;
      private Locale locale;
      private int rol;
+     
+     // Gegevens voor adminpagina
+     private String achtergrond;
+     private String ritprijs;
 
 	
     public Lid(int lidnr, String vnaam, String anaam, String geslacht, String straat, String huisnummer, String reknr, String telnr, String postcode, String stad, String email, String wachtwoord, String wachtwoord2, int beoordeling, String fotoUrl, String tvoegsel, String langnotify, int rol) {
@@ -326,9 +330,23 @@ public class Lid  implements java.io.Serializable {
     public void setRol(int rol) {
         this.rol = rol;
     }
+
+    public String getAchtergrond() {
+        return achtergrond;
+    }
+
+    public void setAchtergrond(String achtergrond) {
+        this.achtergrond = achtergrond;
+    }
+
+    public String getRitprijs() {
+        return ritprijs;
+    }
+
+    public void setRitprijs(String ritprijs) {
+        this.ritprijs = ritprijs;
+    }
     
-    
-    
-    
+
 
 }
