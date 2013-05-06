@@ -28,6 +28,14 @@
         <servlet-name>RitKopen</servlet-name>
         <servlet-class>Dryves.RitKopen</servlet-class>
     </servlet>
+	<servlet>
+        <servlet-name>LidWijzigen</servlet-name>
+        <servlet-class>Dryves.LidWijzigen</servlet-class>
+    </servlet>
+	<servlet-mapping>
+        <servlet-name>LidWijzigen</servlet-name>
+        <url-pattern>/LidWijzigen</url-pattern>
+    </servlet-mapping>
     <servlet>
         <servlet-name>Admin</servlet-name>
         <servlet-class>Dryves.Admin</servlet-class>

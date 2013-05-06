@@ -2,62 +2,32 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package Dryves;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Hashtable;
-import java.util.Locale;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-
-
-
-    /**
+/**
  *
  * @author heuvenk
  */
-public class Registreren extends HttpServlet {
-
-    
-     
-     private String vnaam;
-     private String anaam;
-     private String geslacht;
-     private String straat;
-     private String huisnummer;
-     private String postcode;
-     private String stad;
-     private String telnr;
-     private String reknr;
-     private String email;
-     private String wachtwoord;
-     private String fotoUrl;
-     private String tvoegsel;
-     private String langnotify;
-     private Hashtable errors;
-
-    public Registreren() {
-    }
-
-	
-
-    /**
-     * Processes requests for both HTTP
-     * <code>GET</code> and
-     * <code>POST</code> methods.
-     *
+public class LidWijzigen extends HttpServlet {
+   
+    /** 
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
@@ -65,22 +35,20 @@ public class Registreren extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Registreren</title>");            
+            out.println("<title>Servlet LidWijzigen</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Registreren at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet LidWijzigen at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
-        } finally {            
+        } finally { 
             out.close();
         }
-    }
+    } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP
-     * <code>GET</code> method.
-     *
+    /** 
+     * Handles the HTTP <code>GET</code> method.
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -88,19 +56,37 @@ public class Registreren extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    throws ServletException, IOException {
+         // Instantieren van objecten
+        Lid lid = new Lid();
+        // Haal de huidige sessie op
+        HttpSession session = request.getSession();
+        //Haal de userbean (dit moet sessiebean worden) op uit de sessie
+        Lid user = (Lid) session.getAttribute("currentSessionUser");
         
-        //De objecten worden aangemmakt
-        Lid lid = new Lid();  
-        String email = request.getParameter("email");
-        RegistrerenDao registerdao = new RegistrerenDao();
-        
-        
-        
+    } 
+
+    /** 
+     * Handles the HTTP <code>POST</code> method.
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    throws ServletException, IOException {
+
+        // Haal de huidige sessie op
+        HttpSession session = request.getSession();
+        //Haal de userbean (dit moet sessiebean worden) op uit de sessie
+        Lid lid = (Lid) session.getAttribute("currentSessionUser");
+
                 //check of de email bestaat, zo niet dan wordt de gebruiker toegevoegd in de database
-          if (!registerdao.checkDuplicate(email)) { 
+
            
               //email komt niet in de database voor
+              
               
         //Zet de voornaam
         lid.setVnaam(request.getParameter("vnaam"));
@@ -123,15 +109,16 @@ public class Registreren extends HttpServlet {
         System.out.println("Dit is het geslacht: " + lid.getGeslacht());
         
         //Zet de straat
-        lid.setStraat(request.getParameter("straat"));
+        lid.setStraat(request.getParameter("straat") + " " + request.getParameter("huisnummer"));
         //Print de straat naar de console
         System.out.println("Dit is de straat: " + lid.getStraat());
         
-        //Zet het huisnummer
-        lid.setHuisnummer(request.getParameter("huisnummer"));
-        //Print het huisnummer naar de console
-        System.out.println("Dit is het huisnummer: " + lid.getHuisnummer());
-        
+//        //Zet het huisnummer
+//        lid.setHuisnummer(request.getParameter("huisnummer"));
+//        //Print het huisnummer naar de console
+//        System.out.println("Dit is het huisnummer: " + lid.getHuisnummer());
+//        
+//        lid.setStraat(request.getParameter("straat") + " " + request.getParameter("huisnummer"));
         //Zet de postcode
         lid.setPostcode(request.getParameter("postcode"));
         //Print de postcode naar de console
@@ -173,67 +160,25 @@ public class Registreren extends HttpServlet {
         System.out.println("Dit is de langnotify: " + lid.getLangnotify());
         
         
-           RegistrerenDao newregistratie = new RegistrerenDao();
+          SessieDao lidDao = new SessieDao();
        
            // hier wordt de gebruiker in de database opgeslagen
-           newregistratie.RegistrerenDao(lid);
-           
-           //Hier maken we een nieuwe sessie voor de nieuwe gebruiker
-          HttpSession session = request.getSession(true);       
-          session.setAttribute("currentSessionUser",lid); 
+           lidDao.enkelLidUpdaten(lid);
           
           // en hier wordt de gebruiker door gelinked naar mijndryves
-          response.sendRedirect("WEB-INF/mijndryves.jsp"); //logged-in page  
-        
+          response.sendRedirect("MijnDryves"); //logged-in page  
            
            
-           
-           
-       } else { 
-           
-           
-           
-           //Indien het email bestaat wordt er een melding weergegeven.
-           // Moet nog gedaan worden    
-           response.sendRedirect("http://www.telegraaf.nl");
-       
-       
-       }
-        
-        
-  
+ 
     }
 
-    private static class request {
-
-        public request() {
-        }
-    }
-
-        
-/**
-     * Handles the HTTP
-     * <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-
-    /**
+    /** 
      * Returns a short description of the servlet.
-     *
      * @return a String containing servlet description
      */
     @Override
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
 }

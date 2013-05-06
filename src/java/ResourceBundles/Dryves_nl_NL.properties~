@@ -46,12 +46,12 @@ totalafstand=Totale afstand:
 #Voorwaarden pagina
 algemenevoorwaarden=Algemene voorwaarden
 
-
+<<<<<<< HEAD
 #Zoek rit
 zoekrit=Zoek rit
 uitvoeren=Uitvoeren
 placeholder=Zoek adres, plaats, postcode
-
+=======
 #Registratie pagina
 voornaam=Voornaam       
 achternaam=Achternaam
@@ -73,4 +73,4 @@ wijzigen=Wijzig
 registratieformulier=Registratie formulier
 verplichtevelden=verplichte velden
 sloganregistratie=Schrijf je in en word lid! Ontdek de vele voordelen die de Dryves community te bieden heeft. 
-
+>>>>>>> 0e8427a3c37e7ccac3ad3974c7473857862f7fbc

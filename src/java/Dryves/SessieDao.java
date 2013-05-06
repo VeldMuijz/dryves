@@ -8,17 +8,21 @@ package Dryves;
  *
  * @author RickSpijker
  */
+import static Dryves.RitDao.currentCon;
 import java.text.*;
 import java.util.*;
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author RickSpijker
  */
 public class SessieDao {
+    static Connection currentCon;
+	static ResultSet rs;
 
-    static ResultSet rs;
 
     private static Locale toString(String locale) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -214,7 +218,65 @@ public class SessieDao {
         }
 
 
+	}
+        
+        public Lid enkelLidUpdaten(Lid bean){
+            try {
+			currentCon = ConnectionManager.getConnection();
+                        
+			PreparedStatement updateLid;
+			String queryString = ("UPDATE lid "
+                                + "SET"
+                          
+                                + " vnaam = ?,"
+                                + " anaam = ?,"
+                                + " tvoegsel =?,"
+                                + " straat = ?,"
+                                + " postcode = ?,"
+                                + " reknr =?,"
+                                + " telnr =?,"
+                                + " wachtwoord =?,"
+                                + " email =?,"
+                                + " stad = ?,"
+                                + " geslacht =?,"
+                                + " langnotify = ?"
+                                + " WHERE lidnr = ?");
+
+			updateLid = currentCon.prepareStatement(queryString);
+
+                        updateLid.setString(1, bean.getVnaam());
+                        updateLid.setString(2, bean.getAnaam());
+                        updateLid.setString(3, bean.getTvoegsel());
+                        updateLid.setString(4, bean.getStraat());                       
+                        updateLid.setString(5, bean.getPostcode());
+                                               updateLid.setInt(6, Integer.parseInt(bean.getReknr()));
+                        updateLid.setString(7, bean.getTelnr());
+                        updateLid.setString(8, bean.getWachtwoord());
+                        updateLid.setString(9, bean.getEmail());
+                        updateLid.setString(10, bean.getStad());
+                        updateLid.setString(11, bean.getGeslacht());
+                        updateLid.setString(12, bean.getLangnotify());
+                        
+                        updateLid.setInt(13, bean.getLidnr());
+                        
+                        
+                        
+			System.out.println("De query is: " + updateLid);
+                        
+			updateLid.executeUpdate();
+                        
+                        
+                       
+                        
+                        
+		} catch (SQLException ex) {
+			Logger.getLogger(RitDao.class.getName()).log(Level.SEVERE, null, ex);
+
+		}
+            
+            return bean;
+        }
 
 
     }
-}
+
