@@ -25,7 +25,7 @@
 
         <div class="background">
 
-            <img src="images/background1.jpg" />
+            <img src="${currentSessionUser.getAchtergrond()}" />
 
         </div>
 
@@ -49,12 +49,25 @@
         <form id="adminPanel" action="Admindryves" method="Get">
         
         <fieldset>
-            <legend>Achtergrond</legend> 
+            <legend>Achtergronden</legend> 
 
-            <input type="radio" name="radios" value="images/background1" /> <img src="images/background1_thumb.png" />  
-            <input type="radio" name="radios" value="images/background2" /> <img src="images/background2_thumb.png" />  
-            <input type="radio" name="radios" value="images/background3" /> <img src="images/background3_thumb.png" />
+            1. <img src="images/background1_thumb.png" />  
+            2. <img src="images/background2_thumb.png" />  
+            3. <img src="images/background3_thumb.png" />
  
+        </fieldset>
+        
+        <br />
+        
+        <fieldset>
+        
+            <legend>Kies uw achtergrond</legend>
+        <select name="background">
+            <option value="images/background1.jpg">Achtergrond 1</option>
+            <option value="images/background2.jpg">Achtergrond 2</option>
+            <option value="images/background3.jpg">Achtergrond 3</option>
+        </select>
+        
         </fieldset>
         
         <br />
