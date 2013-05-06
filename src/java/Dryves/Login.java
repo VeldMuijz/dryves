@@ -50,19 +50,17 @@ public class Login extends HttpServlet {
 
             if (user.isValid()) {
 
+                //Hieronder wordt bepaald of het lid admin is of niet.
+                                    
                 HttpSession session = request.getSession(true);
                 session.setAttribute("currentSessionUser", user);
-                // response.sendRedirect("mijndryves.jsp"); //logged-in page 
+                
 
                 if (user.getRol() == 1) {
 
                     request.getRequestDispatcher("WEB-INF/mijndryves.jsp").forward(request, response);
 
-                } else if (user.getRol() == 2) {
-
-                    Admin admin = new Admin();
-                    
-                    admin = SessieDao.adminLogin(admin);
+                } else if (user.getRol() == 2) {                 
 
                     request.getRequestDispatcher("WEB-INF/admin.jsp").forward(request, response);
 

@@ -98,7 +98,13 @@ public class SessieDao {
                     bean.setLangnotify(rs.getString(15));
                     bean.setLocale(rs.getString(15));
                     bean.setWachtwoord2(wachtwoord);
+                    
+                    
+                    
                     bean.setRol(rs.getInt(16));
+                    
+                    
+                    
                     bean.setValid(true);
 
 
@@ -145,14 +151,14 @@ public class SessieDao {
      * @param beanadmin
      * @return
      */
-    public static Admin adminLogin(Admin beanadmin) {
+    public static Lid adminLogin(Lid beanadmin) {
   
         //preparing some objects for connection 
         Statement stmt = null;
         
         Connection currentCon = Dryves.ConnectionManager.getConnection();
         
-        Admin admin = new Admin();
+        Lid lid = new Lid();
   
         try {
             
@@ -184,11 +190,11 @@ public class SessieDao {
                 //Hieronder wordt de adminbean gevuld met de waarden uit de configuratietabel
 
 
-                admin.setAchtergrond(rs.getString(2));
-                admin.setRitprijs(rs.getString(3));
+                lid.setAchtergrond(rs.getString(2));
+                lid.setRitprijs(rs.getString(3));
 
-                System.out.println("Dit is de waarde uit achtergrond: " + admin.getAchtergrond());
-                System.out.println("Dit is de waarde uit ritprijs: " + admin.getRitprijs());
+                System.out.println("Dit is de waarde uit achtergrond: " + lid.getAchtergrond());
+                System.out.println("Dit is de waarde uit ritprijs: " + lid.getRitprijs());
 
 
 
@@ -221,7 +227,7 @@ public class SessieDao {
 
 
 
-        return admin;
+        return lid;
 
 
     }

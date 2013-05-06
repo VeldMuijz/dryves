@@ -61,7 +61,7 @@
             
             <legend>Prijs per kilometer</legend>
             
-            <input type="text" name="ritprijs" />
+            <input type="text" name="ritprijs" value="${currentSessionUser.ritprijs}" />
             
         </fieldset>
 
