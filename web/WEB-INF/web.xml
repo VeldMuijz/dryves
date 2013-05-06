@@ -32,6 +32,10 @@
         <servlet-name>Admin</servlet-name>
         <servlet-class>Dryves.Admin</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Admindryves</servlet-name>
+        <servlet-class>Dryves.Admindryves</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RitPlannen</servlet-name>
         <url-pattern>/RitPlannen</url-pattern>
@@ -67,6 +71,10 @@
     <servlet-mapping>
         <servlet-name>Admin</servlet-name>
         <url-pattern>/Admin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Admindryves</servlet-name>
+        <url-pattern>/Admindryves</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

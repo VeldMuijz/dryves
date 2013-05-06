@@ -46,6 +46,8 @@
 
         <br /><br />
         
+        <form id="adminPanel" action="Admindryves" method="Get">
+        
         <fieldset>
             <legend>Achtergrond</legend> 
 
@@ -59,12 +61,25 @@
         
         <fieldset>
             
+            <legend>Achtergrond</legend>
+            
+            <input type="text" name="achtergrond" value="${currentSessionUser.getachtergrond()}" />
+            
+        </fieldset>
+            
+            <br />
+        
+        <fieldset>
+            
             <legend>Prijs per kilometer</legend>
             
             <input type="text" name="ritprijs" value="${currentSessionUser.getRitprijs()}" />
             
         </fieldset>
             
+        <button type ="submit">Wijzig</button>
+            
+        </form>
             
          
             </div>
