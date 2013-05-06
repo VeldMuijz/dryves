@@ -61,7 +61,7 @@
             
             <legend>Prijs per kilometer</legend>
             
-            <input type="text" placeholder="0,19" />
+            <input type="text" />
             
         </fieldset>
 
