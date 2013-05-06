@@ -77,6 +77,8 @@
             
         </fieldset>
             
+            <br />
+            
         <button type ="submit">Wijzig</button>
             
         </form>
