@@ -25,8 +25,7 @@
                 var vnaam = document.forms["RegistratieForm"]["vnaam"].value;
                 var anaam = document.forms["RegistratieForm"]["anaam"].value;
                 var reknr = document.forms["RegistratieForm"]["reknr"].value;
-                var telnr = document.forms["RegistratieForm"]["telnr"].value;
-                var numbersOnly = /^\d+$/;               
+                var telnr = document.forms["RegistratieForm"]["telnr"].value;             
                 var email = document.forms["RegistratieForm"]["email"].value;
                 var atpos=email.indexOf("@");
                 var dotpos=email.lastIndexOf(".");
@@ -199,12 +198,12 @@
 
                         <b><fmt:message bundle="${rb}" key="wachtwoord" /><sup>*</sup></b> 
                         <br>
-                        <input type="password" name="<fmt:message bundle="${rb}" key="wachtwoord" /><sup>*</sup>" size=10 value="" maxlength=30>
+                        <input type="password" name="wachtwoord" size=10 value="" maxlength=30>
                     </div>
                     <div class="formInput">
                         <b><fmt:message bundle="${rb}" key="bevestigwachtwoord" /><sup>*</sup></b>
                         <br>
-                        <input type="password" name="<fmt:message bundle="${rb}" key="bevestigwachtwoord" /><sup>*</sup>" size=10 value="" maxlength=30>
+                        <input type="password" name="wachtwoord2" size=10 value="" maxlength=30>
                     </div>
 
                     <div class="formInput">
@@ -220,7 +219,6 @@
                         <input type="radio" name="locale" value="nl_NL" checked> <img src="images/nl_NL.png" />
                         <input type="radio" name="locale" value="en_GB"> <img src="images/en_EN.png" />
                     </div>
-
 
 <!--                    <input type="submit" value="Aanmelden"> <input type="reset" value="Reset">-->
                     <button type ="submit"><fmt:message bundle="${rb}" key="aanmelden" /></button>
