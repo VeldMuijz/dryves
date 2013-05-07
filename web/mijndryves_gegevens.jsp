@@ -114,109 +114,81 @@
 
                 <br /><br />
                 <form id="RegistratieForm" action="LidWijzigen" method="post" onsubmit="return validateForm();">
-
-                    <div class="regformheader">
-                        <font size=5><fmt:message bundle="${rb}" key="registratieformulier" /></font>
-                        <br>
-                        <font size=1 color="red"><sup>*</sup><fmt:message bundle="${rb}" key="verplichtevelden" /></font>
-                    </div>
-
-                    <div class="formInput">                   
-                        <b><fmt:message bundle="${rb}" key="voornaam" /><sup>*</sup></b>                             
-                        <br>
-                        <font id="vnaamerror" size=1 color="red"> </font>
-                        <input type="text" name="vnaam" value="${currentSessionUser.vnaam}" size=15 maxlength=20>
-                    </div>
-                    <div class="formInput">
-                        <b><fmt:message bundle="${rb}" key="achternaam" /><sup>*</sup></b>
-                        <br>
-                        <font id="anaamerror" size=1 color="red"> </font>
-                        <input type="text" name="anaam" value="${currentSessionUser.anaam}" size=15 maxlength=20>
-                    </div>
-
-<!--                    <div>
-                        <b>Kies een foto:</b> 
-                        <img src="images/NoPhotoAvailable.png />
-                        <td colspan="2" align="center"><input type="file" value="Upload">                           
-                    </div>-->
- 
-                    <div class="formInput">
-                        <b><fmt:message bundle="${rb}" key="tussenvoegsel" /><sup></sup></b>
-                        <br>                        
-                        <input type="text" name="tvoegsel" value="${currentSessionUser.tvoegsel}" size=5 maxlength=20>
-                    </div>
-
-                    <div class="formInput">
-                        <b><fmt:message bundle="${rb}" key="rekeningnummer" /><sup>*</sup></b> 
-                        <br>
-                        <font id="reknrerror" size=1 color="red"> </font>
-                        <input type="text" name="reknr" value="${currentSessionUser.reknr}" size=10  maxlength=8>
-                    </div>
-
-                    <div class="formInput">
-                        <b><fmt:message bundle="${rb}" key="telefoonnummer" /><sup>*</sup></b> 
-                        <br>
-                        <font id="telnrerror" size=1 color="red"> </font>
-                        <input type="text" name="telnr" value="${currentSessionUser.telnr}" size=15  maxlength=15>
-                    </div>
-
-                    <div class="formInput">
-                        <b><fmt:message bundle="${rb}" key="e-mail" /><sup>*</sup></b> 
-                        <br>
-                        <font id="emailerror" size=1 color="red"> </font>
-                        <input type="text" name="email" value="${currentSessionUser.email}" size=25  maxlength=25>
-                    </div>
-                    <div class="formInput">
-                        <b><fmt:message bundle="${rb}" key="straatnaam" /><sup>*</sup></b>
-                        <br>
-                        <font id="straaterror" size=1 color="red"> </font>
-                        <input type="text" name="straat" value="${currentSessionUser.straat}" size=15 maxlength=20>            
-                    </div>
                     
-                    <div class="formInput">
-                        <b><fmt:message bundle="${rb}" key="postcode" /><sup>*</sup></b> 
-                        <br>
-                        <font id="postcodeerror" size=1 color="red"> </font>
-                        <input type="text" name="postcode" value="${currentSessionUser.postcode}" size=5  maxlength=8>
-                    </div>
+                    
+                    
+                    <table class="registratietabel">
 
-                    <div class="formInput">
-                        <b><fmt:message bundle="${rb}" key="stad" /><sup>*</sup></b>
-                        <br>
-                        <font id="staderror" size=1 color="red"> </font>
-                        <input type="text" name="stad" value="${currentSessionUser.stad}" size=15 maxlength=20>            
-                    </div>
+                            <tr>
+                                <td><input class="zoektextveld" type="text" name="vnaam" value="${currentSessionUser.vnaam}" size=15 maxlength=20></td>
+                                <td><font id="vnaamerror" size=1 color="red"> </font></td>
+                                <td><input class="zoektextveld" type="text" name="straat" value="${currentSessionUser.straat}" size=15 maxlength=20></td>
+                                <td><font id="straaterror" size=1 color="red"> </font></td>
+                            </tr>
+                            <tr>
+                                <td><input class="zoektextveld" type="text" name="tvoegsel" value="${currentSessionUser.tvoegsel}" size=5 maxlength=20></td>
+                                <td></td>
+                                <td><input class="zoektextveld" type="text" name="stad" value="${currentSessionUser.stad}" size=15 maxlength=20></td>
+                                <td><font id="staderror" size=1 color="red"> </font></td>
+                            </tr>
+                            <tr>
+                                <td><input class="zoektextveld" type="text" name="anaam" value="${currentSessionUser.anaam}" size=15 maxlength=20></td>
+                                <td><font id="anaamerror" size=1 color="red"> </font></td>
+                                <td><input class="zoektextveld" key="rekeningnummer" type="text" name="reknr" value="${currentSessionUser.reknr}" size=10  maxlength=8></td>
+                                <td><font id="reknrerror" size=1 color="red"> </font></td>
+                            </tr>
+                            <tr>
+                                <td><input class="zoektextveld" type="text" name="email" value="${currentSessionUser.email}" size=25  maxlength=25></td>
+                                <td><font id="emailerror" size=1 color="red"> </font></td>
+                                <td><input class="zoektextveld" type="password" name="wachtwoord" size=10 value="${currentSessionUser.wachtwoord}" maxlength=30></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><input class="zoektextveld" type="text" name="telnr" value="${currentSessionUser.telnr}" size=15  maxlength=15></td>
+                                <td><font id="telnrerror" size=1 color="red"> </font></td>
+                                <td><input class="zoektextveld" type="password" name="bevestigwachtwoord" size=10 value="${currentSessionUser.wachtwoord}" maxlength=30></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><input class="zoektextveld" type="text" name="postcode" value="${currentSessionUser.postcode}" size=5  maxlength=8></td>
+                                <td><font id="postcodeerror" size=1 color="red"> </font></td>
+                                <td>                                    
+                                    <fmt:message bundle="${rb}" key="geslacht" />
+                                    <br>
+                                    <input type="radio" name="geslacht" value="M" checked>M 
+                                    <input type="radio" name="geslacht" value="V"> V</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td>                        
+                                    <fmt:message bundle="${rb}" key="taal" />
+                                    <br>
+                                    <input type="radio" name="locale" value="nl_NL" checked> <img src="images/nl_NL.png" />
+                                    <input type="radio" name="locale" value="en_GB"> <img src="images/en_EN.png" /></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><button type ="submit"><fmt:message bundle="${rb}" key="wijzigen" /></button></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
 
-                    <div class="formInput">
+                        </table>
+                    
+                    
+                    
+                    
 
-                        <b><fmt:message bundle="${rb}" key="wachtwoord" /><sup>*</sup></b> 
-                        <br>
-                        <input type="password" name="<fmt:message bundle="${rb}" key="wachtwoord" /><sup>*</sup>" size=10 value="${currentSessionUser.wachtwoord}" maxlength=30>
-                    </div>
-                    <div class="formInput">
-                        <b><fmt:message bundle="${rb}" key="bevestigwachtwoord" /><sup>*</sup></b>
-                        <br>
-                        <input type="password" name="<fmt:message bundle="${rb}" key="bevestigwachtwoord" /><sup>*</sup>" size=10 value="${currentSessionUser.wachtwoord}" maxlength=30>
-                    </div>
-
-                    <div class="formInput">
-                        <b><fmt:message bundle="${rb}" key="geslacht" /></b>
-                        <br>
-                        <input type="radio" name="geslacht" value="M" checked>M 
-                        <input type="radio" name="geslacht" value="V"> V
-                    </div>
-
-                    <div class="formInput">
-                        <b><fmt:message bundle="${rb}" key="taal" /></b>
-                        <br>
-                        <input type="radio" name="locale" value="nl_NL" checked> <img src="images/nl_NL.png" />
-                        <input type="radio" name="locale" value="en_GB"> <img src="images/en_EN.png" />
-                    </div>
-
-
-<!--                    <input type="submit" value="Aanmelden"> <input type="reset" value="Reset">-->
-                    <button type ="submit"><fmt:message bundle="${rb}" key="wijzigen" /></button>
-                    <input type="reset" value="Reset">
+                    
                 </form>
             </div>
         </div>
