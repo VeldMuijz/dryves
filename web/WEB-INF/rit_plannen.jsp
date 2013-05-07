@@ -254,7 +254,7 @@
 								</select></td></table> <br/><br/>
 
 						<input type="checkbox" name="aanbieden"><fmt:message bundle="${rb}" key="directaanbieden" /></input>			
-						<button type="submit"> Klik </button>
+						<button type="submit"><fmt:message bundle="${rb}" key="klik" /></button>
 
 						<input id="hiddenstart" name="hiddenstart" style="display: none;" ></input>
 						<input id="hiddenend" name="hiddenend" style="display: none;"></input>
