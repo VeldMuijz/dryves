@@ -191,12 +191,12 @@
 
                         <b><fmt:message bundle="${rb}" key="wachtwoord" /><sup>*</sup></b> 
                         <br>
-                        <input type="password" name="<fmt:message bundle="${rb}" key="wachtwoord" /><sup>*</sup>" size=10 value="${currentSessionUser.wachtwoord}" maxlength=30>
+                        <input type="password" name="wachtwoord" size=10 value="${currentSessionUser.wachtwoord}" maxlength=30>
                     </div>
                     <div class="formInput">
                         <b><fmt:message bundle="${rb}" key="bevestigwachtwoord" /><sup>*</sup></b>
                         <br>
-                        <input type="password" name="<fmt:message bundle="${rb}" key="bevestigwachtwoord" /><sup>*</sup>" size=10 value="${currentSessionUser.wachtwoord}" maxlength=30>
+                        <input type="password" name="wachtwoord2" size=10 value="${currentSessionUser.wachtwoord}" maxlength=30>
                     </div>
 
                     <div class="formInput">
