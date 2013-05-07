@@ -93,7 +93,7 @@
 
         <div class="background">
 
-            <img src="images/background1.jpg" />
+            <img src="${currentSessionUser.getAchtergrond()}" />
 
         </div>
 
