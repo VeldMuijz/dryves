@@ -183,7 +183,7 @@ public class Registreren extends HttpServlet {
           session.setAttribute("currentSessionUser",lid); 
           
           // en hier wordt de gebruiker door gelinked naar mijndryves
-          response.sendRedirect("/WEB-INF/mijndryves.jsp"); //logged-in page  
+          response.sendRedirect("MijnDryves"); //logged-in page  
         
            
            
@@ -195,7 +195,7 @@ public class Registreren extends HttpServlet {
            
            //Indien het email bestaat wordt er een melding weergegeven.
            // Moet nog gedaan worden    
-           response.sendRedirect("http://www.telegraaf.nl");
+           response.sendRedirect("login_error");
        
        
        }
