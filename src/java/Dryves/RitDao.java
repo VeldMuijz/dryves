@@ -125,7 +125,7 @@ public class RitDao {
                             + "(?,?,?,?,?,?,?,?,?,?,?);");
 
                     insertRit = currentCon.prepareStatement(queryString);
-
+					
                     insertRit.setInt(1, lidnr);
                     insertRit.setString(2, startpunt);
                     insertRit.setString(3, eindpunt);
@@ -141,6 +141,8 @@ public class RitDao {
                     insertRit.setInt(9, zitplaatsen);
                     insertRit.setString(10, brandstof);
                     insertRit.setInt(11, aangeboden);
+					System.out.println(insertRit);
+					insertRit.executeUpdate();
 
 				} catch (SQLException ex) {
 					Logger.getLogger(RitDao.class.getName()).log(Level.SEVERE, null, ex);
