@@ -220,7 +220,7 @@ public class RitPlannen extends HttpServlet {
         if (referer.contains("RitWijzigen")) {
           
             if (ritDao.updateRit(Integer.parseInt(request.getParameter("ritnr")))) {
-                 request.getRequestDispatcher("MijnRitten").forward(request, response);
+                 response.sendRedirect("MijnRitten");
                  
             }
 

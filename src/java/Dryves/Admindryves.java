@@ -10,6 +10,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -55,7 +56,8 @@ public class Admindryves extends HttpServlet {
             out.close();
         }
     }
-
+    
+    
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP
@@ -70,8 +72,9 @@ public class Admindryves extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
+        HttpSession session = request.getSession();
         //Maak een nieuw lid aan
-        Lid user = new Lid();
+        Lid user = (Lid) session.getAttribute("currentSessionUser");
         
         //Haal de nieuwe waardes op van de admin.jsp
         user.setAchtergrond(request.getParameter("achtergrond"));
@@ -82,10 +85,13 @@ public class Admindryves extends HttpServlet {
        
         System.out.println("Waarde uit de admin jsp - ritprijs: " + user.getRitprijs());
         
+        AdmindryvesDao add = new AdmindryvesDao();
         
+        add.vulAdd(user);
         
+        add.AdmindryvesDao();
         
-        processRequest(request, response);
+        request.getRequestDispatcher("WEB-INF/admin.jsp").forward(request, response);
     }
 
     /**
