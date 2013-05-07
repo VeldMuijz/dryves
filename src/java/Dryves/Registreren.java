@@ -178,12 +178,12 @@ public class Registreren extends HttpServlet {
            // hier wordt de gebruiker in de database opgeslagen
            newregistratie.RegistrerenDao(lid);
            
-           //Hier maken we een nieuwe sessie voor de nieuwe gebruiker
-          HttpSession session = request.getSession(true);       
-          session.setAttribute("currentSessionUser",lid); 
+//           //Hier maken we een nieuwe sessie voor de nieuwe gebruiker
+//          HttpSession session = request.getSession(true);       
+//          session.setAttribute("currentSessionUser",lid); 
           
           // en hier wordt de gebruiker door gelinked naar mijndryves
-          response.sendRedirect("MijnDryves"); //logged-in page  
+          response.sendRedirect("login.jsp"); //logged-in page  
         
            
            
