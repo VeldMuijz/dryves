@@ -271,7 +271,7 @@
 					<div id="mapcanvas"></div>
 					<div id ="ritoverzicht"> 
 						<table>
-							<td><strong> <fmt:message bundle="${rb}" key="totalafstand" /> </strong> </br>
+							<td><strong> <fmt:message bundle="${rb}" key="totaleafstand" /> </strong> </br>
 								<div id="total" name="total"></div> </td> <br/>
 
 							<td><strong><fmt:message bundle="${rb}" key="startadres" /></strong><br/>
