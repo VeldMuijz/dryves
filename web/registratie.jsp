@@ -21,11 +21,12 @@
 
         <script>
             function validateForm() {
-                                                            
+                
+                //var vnaam = document.getElementById("vnaam").value;                                            
                 var vnaam = document.forms["RegistratieForm"]["vnaam"].value;
                 var anaam = document.forms["RegistratieForm"]["anaam"].value;
                 var reknr = document.forms["RegistratieForm"]["reknr"].value;
-                var telnr = document.forms["RegistratieForm"]["telnr"].value;             
+                var telnr = document.forms["RegistratieForm"]["telnr"].value;
                 var email = document.forms["RegistratieForm"]["email"].value;
                 var atpos=email.indexOf("@");
                 var dotpos=email.lastIndexOf(".");
@@ -35,6 +36,8 @@
                 var stad = document.forms["RegistratieForm"]["stad"].value;
                 var wachtwoord = document.forms["RegistratieForm"]["wachtwoord"].value;
                 var wachtwoord2 = document.forms["RegistratieForm"]["wachtwoord2"].value;
+                
+                console.log(vnaam);
 
                 var check = true;
 
@@ -42,41 +45,49 @@
                 {
                     document.getElementById("vnaamerror").innerHTML = "Geen voornaam ingevuld!";                    
                     check = false;
-                } ;
+                };
                 if (anaam === "") {                                
                     document.getElementById("anaamerror").innerHTML = "Geen achternaam ingevuld!";
                     check = false;
-                } ;
+                };
                 if (reknr === "" || (/[^0-9]+$/.test(reknr))) {
                    document.getElementById("reknrerror").innerHTML = "Geen geldig rekeningnummer ingevuld!";
                    check = false;
-                } ;
+                };
                 if(telnr === "" || (/[^0-9]+$/.test(telnr))) {		
                     document.getElementById("telnrerror").innerHTML = "Geen geldig telefoonnummer ingevuld!"; 
                     check = false;                
-                } ;                       
+                };                       
                 if (email === "" || atpos<1 || dotpos<atpos+2 || dotpos+2>=email.length) {                                                      
                     document.getElementById("emailerror").innerHTML = "Geen geldig of geen email adres ingevuld!";
                     check = false;                                    
-                } ;
+                };
                 if (straat === "") {
                     document.getElementById("straaterror").innerHTML = "Geen straatnaam ingevuld!";
                     check = false;                    
-                } ;
+                };
                 if (huisnummer === "") {
                     document.getElementById("huisnummererror").innerHTML = "Geen huisnummer ingevuld!";
                     check = false;
-                } ;
+                };
                 if (postcode === "") {
                     document.getElementById("postcodeerror").innerHTML = "Geen postcode ingevuld!";
                     check = false;
-                } ;
+                };
                 if (stad === "") {
                     document.getElementById("staderror").innerHTML = "Geen stad ingevuld!";
                     check = false;
-                } ;
-                if (wachtwoord === "" && wachtwoord !== wachtwoord2) {
-                    document.getElementById("wachtwoorderror").innerHTML = "wachtwoorden komen niet overeen!";  
+                };
+                if (wachtwoord === "") {
+                    document.getElementById("wachtwoorderror1").innerHTML = "Geen wachtwoord ingevuld!";
+                    check = false;
+                };
+                if (wachtwoord2 === "") {
+                    document.getElementById("wachtwoorderror2").innerHTML = "Geen wachtwoord ingevuld!";
+                    check = false;
+                };
+                if (wachtwoord !== wachtwoord2) {
+                    document.getElementById("wachtwoorderror3").innerHTML = "Wachtwoorden komen niet overeen!";  
                     check = false;
                 };
                 
@@ -115,6 +126,7 @@
                 <fmt:message bundle="${rb}" key="sloganregistratie" />
                 
                 <br /><br />
+                
                 <form id="RegistratieForm" action="Registreren" method="get" onsubmit="return validateForm();">
                     
                     <div class="regformheader">
@@ -124,6 +136,8 @@
                     </div>
                     
                         <table class="registratietabel">
+                            
+                            <!--<table class="registratietabel">-->
 
                             <tr>
                                 <td><input class="zoektextveld" type="text" name="vnaam" value="" size=15 maxlength=20 placeholder="<fmt:message bundle="${rb}" key="voornaam" />"></td>
@@ -153,13 +167,13 @@
                                 <td><input class="zoektextveld" placeholder="<fmt:message bundle="${rb}" key="telefoonnummer" />" type="text" name="telnr" value="" size=15  maxlength=15></td>
                                 <td><font id="telnrerror" size=1 color="red"> </font></td>
                                 <td><input class="zoektextveld" type="password" name="wachtwoord" placeholder="<fmt:message bundle="${rb}" key="wachtwoord" />" size=10 value="" maxlength=30></td>
-                                <td></td>
+                                <td><font id="wachtwoorderror1" size=1 color="red"> </font></td>
                             </tr>
                             <tr>
                                 <td><input class="zoektextveld" placeholder="<fmt:message bundle="${rb}" key="postcode" />" type="text" name="postcode" value="" size=5  maxlength=8></td>
                                 <td><font id="postcodeerror" size=1 color="red"> </font></td>
-                                <td><input class="zoektextveld" type="password" placeholder="<fmt:message bundle="${rb}" key="bevestigwachtwoord" />" name="bevestigwachtwoord" size=10 value="" maxlength=30></td>
-                                <td></td>
+                                <td><input class="zoektextveld" type="password" placeholder="<fmt:message bundle="${rb}" key="bevestigwachtwoord" />" name="wachtwoord2" size=10 value="" maxlength=30></td>
+                                <td><font id="wachtwoorderror2" size=1 color="red"> </font> <font id="wachtwoorderror3" size=1 color="red"> </font></td>
                             </tr>
                             <tr>
                                 <td>                        
@@ -182,7 +196,7 @@
                                 <td></td>
                             </tr>
                             <tr>
-                                <td><button type ="submit"><fmt:message bundle="${rb}" key="aanmelden" /></button></td>
+                                <td><button type="submit"><fmt:message bundle="${rb}" key="aanmelden" /></button></td>
                                 <td></td>
                                 <td></td>
                                 <td></td>

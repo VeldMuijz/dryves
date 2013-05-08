@@ -49,12 +49,12 @@
 
                 <br /><br />
                 
-                <fmt:message bundle="${rb}" key="ubentingelogdals" />
+                <fmt:message bundle="${rb}" key="ubentingelogdals" /> ${currentSessionUser.getVnaam()} ${currentSessionUser.getAnaam()}
                 
                 <br /><br />
         
 
-        Welkom  ${currentSessionUser.getVnaam()} ${currentSessionUser.getAnaam()}
+        
 
         <img src='${currentSessionUser.getFotoUrl()}'/>
         

@@ -146,7 +146,7 @@
                             <tr>
                                 <td><input class="zoektextveld" type="text" name="telnr" value="${currentSessionUser.telnr}" size=15  maxlength=15></td>
                                 <td><font id="telnrerror" size=1 color="red"> </font></td>
-                                <td><input class="zoektextveld" type="password" name="bevestigwachtwoord" size=10 value="${currentSessionUser.wachtwoord}" maxlength=30></td>
+                                <td><input class="zoektextveld" type="password" name="wachtwoord2" size=10 value="${currentSessionUser.wachtwoord}" maxlength=30></td>
                                 <td></td>
                             </tr>
                             <tr>

@@ -75,23 +75,23 @@ public class RitPlannen extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        // Instantieren van objecten
-//        Rit rit = new Rit();
-//        RitDao ritDao = new RitDao();
-//
-//        // Haal de huidige sessie op
-//        HttpSession session = request.getSession();
-//        // Maak in de sessie een object rit aan met naam sessieRit
-//        session.setAttribute("sessieRit", rit);
-//        //Haal de userbean (dit moet sessiebean worden) op uit de sessie
-//        Lid user = (Lid) session.getAttribute("currentSessionUser");
-//
-//        System.out.println("**************** \n dit is rinr:   " + request.getParameter("ritnr"));
-//
-//        rit.setRitnr(Integer.parseInt(request.getParameter("ritnr")));
-//        System.out.println("Dit is het ritnummer± " + rit.getRitnr());
-//        ritDao.enkeleRitOphalen(rit.getRitnr(), rit);
-//        System.out.println("dit is het eindpunt" + rit.getEindpunt());
+        // Instantieren van objecten
+        Rit rit = new Rit();
+        RitDao ritDao = new RitDao();
+
+        // Haal de huidige sessie op
+        HttpSession session = request.getSession();
+        // Maak in de sessie een object rit aan met naam sessieRit
+        session.setAttribute("sessieRit", rit);
+        //Haal de userbean (dit moet sessiebean worden) op uit de sessie
+        Lid user = (Lid) session.getAttribute("currentSessionUser");
+
+        System.out.println("**************** \n dit is rinr:   " + request.getParameter("ritnr"));
+
+        rit.setRitnr(Integer.parseInt(request.getParameter("ritnr")));
+        System.out.println("Dit is het ritnummer± " + rit.getRitnr());
+        ritDao.enkeleRitOphalen(rit.getRitnr(), rit);
+        System.out.println("dit is het eindpunt" + rit.getEindpunt());
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/rit_plannen.jsp");
         dispatcher.forward(request, response);
