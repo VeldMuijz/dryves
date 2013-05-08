@@ -55,7 +55,8 @@ public class Login extends HttpServlet {
                 HttpSession session = request.getSession(true);
                 session.setAttribute("currentSessionUser", user);
                 
-                SessieDao.adminLogin(user);
+                SessieDao dao = new SessieDao();
+				dao.adminLogin(user);
 
                 if (user.getRol() == 1) {
 

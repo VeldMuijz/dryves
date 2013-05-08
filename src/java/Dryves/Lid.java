@@ -13,7 +13,8 @@ import java.util.Locale;
 public class Lid  implements java.io.Serializable {
 
 
-     private int lidnr;
+    private int lidnr;
+   private String facebookid;
      private String vnaam;
      private String anaam;
      private String geslacht;
@@ -35,10 +36,19 @@ public class Lid  implements java.io.Serializable {
      private String Locale;
      private Locale locale;
      private int rol;
-     
-     // Gegevens voor adminpagina
+
+      // Gegevens voor adminpagina
      private String achtergrond;
      private String ritprijs;
+     
+    public String getFacebookid() {
+        return facebookid;
+    }
+
+    public void setFacebookid(String facebookid) {
+        this.facebookid = facebookid;
+    }
+    
 
 	
     public Lid(int lidnr, String vnaam, String anaam, String geslacht, String straat, String huisnummer, String reknr, String telnr, String postcode, String stad, String email, String wachtwoord, String wachtwoord2, int beoordeling, String fotoUrl, String tvoegsel, String langnotify, int rol) {
