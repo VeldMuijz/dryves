@@ -126,7 +126,7 @@
                                 <td><font id="straaterror" size=1 color="red"> </font></td>
                             </tr>
                             <tr>
-                                <td><input class="zoektextveld" type="text" name="tvoegsel" value="${currentSessionUser.tvoegsel}" size=5 maxlength=20></td>
+                                <td><input class="zoektextveld" placeholder="<fmt:message bundle="${rb}" key="tussenvoegsel" />" type="text" name="tvoegsel" value="${currentSessionUser.tvoegsel}" size=5 maxlength=20></td>
                                 <td></td>
                                 <td><input class="zoektextveld" type="text" name="stad" value="${currentSessionUser.stad}" size=15 maxlength=20></td>
                                 <td><font id="staderror" size=1 color="red"> </font></td>
@@ -185,11 +185,9 @@
                         </table>
                     
                     
-                    
-                    
-
-                    
                 </form>
+                               
+                                
             </div>
         </div>
     </body>
