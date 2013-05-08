@@ -1,7 +1,12 @@
 package Dryves;
 
+import static Dryves.RitDao.currentCon;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -33,117 +38,97 @@ public class FacebookLoginServlet extends HttpServlet {
         
        //De objecten worden aangemmakt
         Lid lid = new Lid();  
-        String email = request.getParameter("email");
         RegistrerenDao registerdao = new RegistrerenDao();
         
+        lid.setAnaam(request.getParameter("achternaam"));
+        lid.setVnaam(request.getParameter("voornaam"));
+        lid.setFacebookid(request.getParameter("id"));
+        lid.setEmail(request.getParameter("email"));
+        lid.setLocaleStr("Facebook");
+     
+        String facebookid2=lid.getFacebookid();
+      
+        //Met een facebookid gaan we kijken of de huidige gebruiker al eerder een keer heeft aangemeld
+       
+       
+        
+        
+ 
         
         
                 //check of de email bestaat, zo niet dan wordt de gebruiker toegevoegd in de database
-          if (!registerdao.checkDuplicate(email)) { 
-           
-              //email komt niet in de database voor
+          if (!registerdao.checkDuplicateFacebookID(facebookid2)) { 
+         
+                           
+             //Wanneer de email niet voorkomt in de database
+              //wordt de gebruiker hier toegevoegd 
               
-        //Zet de voornaam
-        lid.setVnaam(request.getParameter("voornaam"));
-        //Print voornaam naar console
-        System.out.println("Dit is de voornaam: " + lid.getVnaam());
-        
-        //Zet de achternaam
-        lid.setAnaam(request.getParameter("achternaam"));
-        //Print achternaam naar console
-        System.out.println("Dit is de achternaam: " + lid.getAnaam());
-        
-        //Zet tvoegsel
-        lid.setTvoegsel("facebook");
-        //Print tvoegsel naar de console
-        System.out.println("Dit is de tussenvoegsel: " + lid.getTvoegsel());
-        
-        //Zet het geslacht
-        lid.setGeslacht(request.getParameter("sex"));
-        //Print geslacht naar de console
-        System.out.println("Dit is het geslacht: " + lid.getGeslacht());
-        
-        //Zet de straat
-        lid.setStraat("facebook");
-        //Print de straat naar de console
-        System.out.println("Dit is de straat: " + lid.getStraat());
-        
-        //Zet het huisnummer
-        lid.setHuisnummer("facebook");
-        //Print het huisnummer naar de console
-        System.out.println("Dit is het huisnummer: " + lid.getHuisnummer());
-        
-        //Zet de postcode
-        lid.setPostcode("facebook");
-        //Print de postcode naar de console
-        System.out.println("Dit is de postcode: " + lid.getPostcode());
-        
-        //Zet stad
-        lid.setStad("facebook");
-        //Print stad naar de console
-        System.out.println("Dit is de stad: " + lid.getStad());
-        
-        //Zet het telefoonummer
-        lid.setTelnr("facebook");
-        //Schrijf telefoonnummer naar de console
-        System.out.println("Dit is het telefoonnummer: " + lid.getTelnr());
-        
-        //Zet het rekeningnummer 
-        lid.setReknr("11111");
-        //Schrijf het rekeningnummer naar de console
-        System.out.println("Dit is het rekeningnummer: " + lid.getReknr());
-        
-        //Zet het email adres
-        lid.setEmail(request.getParameter("email"));
-        //Schrijf het email adres naar de console
-        System.out.println("Dit is het email adres: " + lid.getEmail());
-        
-        //Zet het wachtwoord
-        lid.setWachtwoord("facebook");
-        //Schrijf het wachtwoord naar de console
-        System.out.println("Dit is het wachtwoord: " + lid.getWachtwoord());
-        
-        //Zet de fotourl
-        lid.setFotoUrl("facebook");
-        //Schrijf de fotourl naar de console
-        System.out.println("Dit is de fotourl: " + lid.getFotoUrl());
-        
-        //Zet de langnotify
-        lid.setLangnotify("facebook");
-        //Schrijf langnotify naar de console
-        System.out.println("Dit is de langnotify: " + lid.getLangnotify());
-        
-        
-           RegistrerenDao newregistratie = new RegistrerenDao();
+         
+              try {
+			currentCon = ConnectionManager.getConnection();
+			PreparedStatement addfacebook;
+
+			String queryString = ("INSERT INTO lid ( vnaam, anaam,geslacht,straat,postcode,stad,telnr,reknr,email, beoordeling,fotourl,tvoegsel,wachtwoord,langnotify,rol,facebookid)VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+			
+			addfacebook = currentCon.prepareStatement(queryString);
+
+			addfacebook.setString(1, lid.getVnaam());
+                        addfacebook.setString(2, lid.getAnaam());
+                        addfacebook.setString(3, "");
+                        addfacebook.setString(4,"");
+                        addfacebook.setString(5, "");
+                        addfacebook.setString(6, "");
+                        addfacebook.setInt(7,0);
+                        addfacebook.setInt(8, 0);
+                        
+			
+			addfacebook.setString(9, lid.getEmail());
+			addfacebook.setInt(10, 5);
+                        addfacebook.setString(11, "");
+                        addfacebook.setString(12, "");
+                        addfacebook.setString(13, "");
+                        addfacebook.setString(14, "");
+                        addfacebook.setInt(15, 1);
+                        addfacebook.setString(16, facebookid2);
+			
+
+
+    
+			System.out.println("De query is:   insert facebook use");
+
+			addfacebook.executeUpdate();
+
+		} catch (SQLException ex) {
+			System.out.println(ex);
+		}
+              
        
-           // hier wordt de gebruiker in de database opgeslagen
-           newregistratie.RegistrerenDao(lid);
-           
+        Lid lid2= new Lid();
+        SessieDao dao = new SessieDao();
+      lid2=  dao.loginFacebook(facebookid2);
            //Hier maken we een neiuwe sessie voor de gebruiker
           HttpSession session = request.getSession(true);       
-          session.setAttribute("currentSessionUser",lid); 
+          session.setAttribute("currentSessionUser",lid2); 
           
-          // en hier wordt de gebruiker door gelinked naar mijndryves
-          response.sendRedirect("mijndryves.jsp"); //logged-in page  
+          request.getRequestDispatcher("WEB-INF/mijndryves.jsp").forward(request, response);
+          
+          
+              
         
-           
            
            
            
        } else { 
            
            
-           
-           //Indien het email bestaat wordt er een melding weergegeven.
-           // Moet nog gedaan worden  
-              
+           Lid lid2= new Lid();
+        SessieDao dao = new SessieDao();
+      lid2=  dao.loginFacebook(facebookid2);
            //Hier maken we een neiuwe sessie voor de gebruiker
           HttpSession session = request.getSession(true);       
-          session.setAttribute("currentSessionUser",lid); 
+          session.setAttribute("currentSessionUser",lid2); 
           
-          // en hier wordt de gebruiker door gelinked naar mijndryves
-          response.sendRedirect("mijndryves.jsp"); //logged-in page 
-       
+          request.getRequestDispatcher("WEB-INF/mijndryves.jsp").forward(request, response);
        
        }
         

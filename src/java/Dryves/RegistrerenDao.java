@@ -15,6 +15,7 @@ import java.util.Hashtable;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import sun.security.util.BigInt;
 
 /**
  *
@@ -40,23 +41,55 @@ public class RegistrerenDao {
     private Hashtable errors;
     private boolean success;
 
+    //Hier kijken of de gebruiker al bestaat met behyulp van een facebookid
+    public Boolean checkDuplicateFacebookID(String facebookid) {
+
+        boolean more=false;
+
+        try {
+
+
+            Connection con = Dryves.ConnectionManager.getConnection();
+
+            ResultSet rs;
+            PreparedStatement pstmt = con.prepareStatement("select facebookid from lid  where facebookid=?");
+
+            pstmt.setString(1, facebookid);
+            
+            rs = pstmt.executeQuery();
+            if(rs.next()){
+            
+            more=true;
+            }
+            
+            
+
+        }catch(SQLException e){System.out.println();}
+
     
+    return more;
+    
+    }
+          
+      
+
     // in deze functie kijken we of de email bestaat
-        public Boolean checkDuplicate(String email) {
+    public Boolean checkDuplicate(String email) {
         currentCon = ConnectionManager.getConnection();
         Boolean more = null;
         Statement stmt = null;
 
         try {
             stmt = currentCon.createStatement();
-            String query = "SELECT email FROM Lid WHERE email='" +email+ "'";
+            String query = "SELECT email FROM Lid WHERE email='" + email + "'";
             ResultSet rs = stmt.executeQuery(query);
 
             if (rs.next()) {
                 more = true;
             } else {
-                more = false;                
-            } currentCon.close();
+                more = false;
+            }
+            currentCon.close();
         } catch (SQLException s) {
             System.out.println("Er kan geen vebinding worden gemaakt met de database." + s);
         }
@@ -170,6 +203,14 @@ public class RegistrerenDao {
 
     }
 
+    
+    
+    
+    
+  
+    
+    
+    
     public String getErrorMsg(String s) {
         String errorMsg = (String) errors.get(s.trim());
         return (errorMsg == null) ? "" : errorMsg;

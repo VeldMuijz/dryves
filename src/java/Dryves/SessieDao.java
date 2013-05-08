@@ -136,6 +136,104 @@ public class SessieDao {
 
 	}
 
+        
+        
+        public Lid loginFacebook(String facebookid){
+            
+      Connection con = Dryves.ConnectionManager.getConnection();
+		Statement stmt = null;
+                ResultSet rs;
+	
+Lid lidfacebook= new Lid();
+        
+        
+        try {
+			PreparedStatement pstmt = con.prepareStatement("SELECT lidnr ,vnaam,anaam,geslacht,straat,postcode, stad,telnr,reknr,email,beoordeling,fotourl,tvoegsel,wachtwoord,langnotify FROM lid WHERE facebookid = ?");
+			pstmt.setString(1, facebookid);
+			//connect to DB 
+			con = ConnectionManager.getConnection();
+			stmt = con.createStatement();
+
+
+
+
+			rs = pstmt.executeQuery();
+
+			
+				while(rs.next()) {
+
+
+
+
+
+
+					//de nieuwe
+					lidfacebook.setLidnr(rs.getInt(1));
+					lidfacebook.setVnaam(rs.getString(2).toString());
+					lidfacebook.setAnaam(rs.getString(3));
+					lidfacebook.setGeslacht(rs.getString(4));
+					lidfacebook.setStraat(rs.getString(5));
+					lidfacebook.setPostcode(rs.getString(6));
+					lidfacebook.setStad(rs.getString(7));
+					lidfacebook.setTelnr(rs.getString(8));
+					lidfacebook.setReknr(rs.getString(9));
+					lidfacebook.setEmail(rs.getString(10));
+					lidfacebook.setBeoordeling(rs.getInt(11));
+					lidfacebook.setFotoUrl(rs.getString(12));
+					lidfacebook.setTvoegsel(rs.getString(13));;
+					lidfacebook.setWachtwoord(rs.getString(14));
+					lidfacebook.setLangnotify(rs.getString(15));
+					lidfacebook.setLocale(rs.getString(15));//
+					lidfacebook.setWachtwoord2(rs.getString(14));
+					lidfacebook.setValid(true);
+
+
+					//Hieronder wordt de locale vanuit de getter geprint naar de console
+					System.out.println("Dit is de locale vanuit de getter van sessie :" + lidfacebook.getLocale());
+
+				} 
+		} catch (Exception ex) {
+			System.out.println("Log In failed: An Exception has occurred! " + ex);
+		} //some exception handling
+		finally {
+
+			if (stmt != null) {
+				try {
+					stmt.close();
+				} catch (Exception e) {
+				}
+				stmt = null;
+			}
+
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+				}
+
+				con = null;
+			}
+		}
+
+		return lidfacebook;
+
+	
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        }
+        
+        
 	private static Locale toString(String locale) {
 		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 	}
