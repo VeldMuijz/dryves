@@ -10,6 +10,10 @@ root {
     display: block;
 }
 
+.hidden {
+    display: none;
+}
+
 .background {
     position: fixed; 
     top: -50%; 
