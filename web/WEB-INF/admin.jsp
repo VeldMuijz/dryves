@@ -60,19 +60,6 @@
         <br />
         
         <fieldset>
-        
-            <legend>Kies uw achtergrond</legend>
-        <select name="background">
-            <option value="images/background1.jpg">Achtergrond 1</option>
-            <option value="images/background2.jpg">Achtergrond 2</option>
-            <option value="images/background3.jpg">Achtergrond 3</option>
-        </select>
-        
-        </fieldset>
-        
-        <br />
-        
-        <fieldset>
             
             <legend>Achtergrond</legend>
             
