@@ -15,8 +15,18 @@
         <title>Rit zoeken</title>
     </head>
     <body>
+        
+        <div class="contentPanelBackground">
+            
+            <div>
+        
         <form action="RitZoeken" method="get" >
             <input class="zoektextveld" name="zoekrit" onchange="RitZoeken" placeholder="<fmt:message bundle="${rb}" key="placeholder" />" ></input><button onclick="RitZoeken" class="heliosActionBarIconButton"><img src="images/zoom_grey.png" /></button>
-        </form>   
+        </form>
+        
+            </div>
+        
+        </div>
+        
     </body>
 </html>

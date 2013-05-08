@@ -50,17 +50,17 @@
 
             <br />
 
-            <div class="contentPanel">
+            
 
                 <!--                <form action="RitZoeken" method="get" >
                                     <b>Zoek rit: <b> <input id='zoekveld' name="zoekrit" onchange="RitZoeken" placeholder="Zoek op adres, stad, postcode" ></input> 
                                             <button onclick="RitZoeken">Uitvoeren</button>
                                             </form>      -->
 
-                <jsp:include page="zoekrit.jsp" flush="true" ></jsp:include> 
+           <jsp:include page="zoekrit.jsp" flush="true" ></jsp:include> 
                 
 
-            </div>
+            
                 
             <br /> <br />  
                 
