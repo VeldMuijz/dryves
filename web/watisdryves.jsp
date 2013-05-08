@@ -5,6 +5,14 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+
+<fmt:setLocale value="${currentSessionUser.localeStr}" scope="session" />
+
+<fmt:setBundle basename="ResourceBundles.Dryves" scope="request" var="rb" />
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -27,20 +35,33 @@
             </div>
 
 
-			<jsp:include page="navigatie.jsp"  flush="true" />
+			<jsp:include page="navigatie.jsp" flush="true">
+                <jsp:param name="menu_active" value="watisdryves"></jsp:param>
+            </jsp:include>
 
 			<div class="contentPanel">
 
-				Dit is 'Wat is Dryves?'! 
+				<fmt:message bundle="${rb}" key="watisdryves" /> 
 
 				<br /><br />
 
-				Lorem Ipsum is slechts een proeftekst uit het drukkerij- en zetterijwezen. Lorem Ipsum is de standaard proeftekst in deze bedrijfstak sinds de 16e eeuw, toen een onbekende drukker een zethaak met letters nam en ze door elkaar husselde om een font-catalogus te maken. Het heeft niet alleen vijf eeuwen overleefd maar is ook, vrijwel onveranderd, overgenomen in elektronische letterzetting. Het is in de jaren '60 populair geworden met de introductie van Letraset vellen met Lorem Ipsum passages en meer recentelijk door desktop publishing software zoals Aldus PageMaker die versies van Lorem Ipsum bevatten.
+				<fmt:message bundle="${rb}" key="watisdryves1" />
 
 				<br /><br />
 
-				Lorem Ipsum is slechts een proeftekst uit het drukkerij- en zetterijwezen. Lorem Ipsum is de standaard proeftekst in deze bedrijfstak sinds de 16e eeuw, toen een onbekende drukker een zethaak met letters nam en ze door elkaar husselde om een font-catalogus te maken. Het heeft niet alleen vijf eeuwen overleefd maar is ook, vrijwel onveranderd, overgenomen in elektronische letterzetting. Het is in de jaren '60 populair geworden met de introductie van Letraset vellen met Lorem Ipsum passages en meer recentelijk door desktop publishing software zoals Aldus PageMaker die versies van Lorem Ipsum bevatten.
-
+				<fmt:message bundle="${rb}" key="watisdryves2" />
+                                    
+                                <br /><br />
+                                    
+                                <fmt:message bundle="${rb}" key="watisdryves21" />
+                                
+                                <br /><br />
+                                
+                                <fmt:message bundle="${rb}" key="watisdryves3" />
+                                
+                                 <br /><br />
+                                 
+                                 <fmt:message bundle="${rb}" key="watisdryves31" />
 			</div>
 
         </div>

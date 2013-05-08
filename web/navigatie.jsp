@@ -4,49 +4,46 @@
     Author     : Vincent
 --%>
 
-<%@page import="Dryves.Sessie"%>
+<%@page import="Dryves.BerichtClass"%>
+<%@page import="Dryves.Lid"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>Dryves</title>
-        <link type="text/css" rel="stylesheet" href="css/dryver.css"/>
-    </head>
-    <body>
-		<div class="navigation">
-			
 
-            <div><button  class="loginButton" onclick="window.location = 'login.jsp';">Login</button></div>
-			
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-			<button onclick="window.location = 'index.jsp';">Home</button>
-			<button onclick="window.location = 'watisdryves.jsp';">Wat is Dryves</button>
-			<button onclick="window.location = 'faq.jsp';">FAQ</button>
-			<button onclick="window.location = 'mijndryves.jsp';">Mijn Dryves</button>
-			<button onclick="window.location = 'registratie.jsp';">Registreer</button>
 
-			
-			
-			<c:if test="${currentSessionUser.lidnr > 0}"> 
-            <div class="welkom" id="welkom" style=" float: right; width: 300px; height: 100%;">
-				
-				<div style="float: left; margin-right: 5px;">Welkom, <br/>
-					<div id="anaam"> <label id="vnaam"></label></div>
-					<c:out value="${currentSessionUser.vnaam}"/> <c:out value="${currentSessionUser.anaam}"/></div> 
-				
-				<!--					TODO Hier nog de actuele aantal ongelezen berichten ophalen-->
-				<div style="float: right; margin-right: 5px;"> 
-					<a href="mijnberichten.jsp"> 0</a> :nieuwe berichten  <br/> 
-					<a href="uitloggen.jsp" style="float: right;"> uitloggen </a>
-				</div>
-			
-			</div>
-			</c:if>
-						
+<fmt:setLocale value="${currentSessionUser.localeStr}" scope="session" />
+
+<fmt:setBundle basename="ResourceBundles.Dryves" scope="request" var="rb" />
+
+<div class="navigation">
+
+<!--    check of er een ingelogde gebruiker is, zo ja dan toon je dit menu zonder registratie en login:-->
+    <c:choose>
+        <c:when test="${currentSessionUser.lidnr > 0}"> 
+            <button onclick="window.location = 'index.jsp';" <% if (request.getParameter("menu_active").equals("home")) {%> class="active" <% }%> >Home</button><button onclick="window.location = 'watisdryves.jsp';" <% if (request.getParameter("menu_active").equals("watisdryves")) {%> class="active" <% }%> ><fmt:message bundle="${rb}" key="watisdryvesnav" /></button><button onclick="window.location = 'faq.jsp';" <% if (request.getParameter("menu_active").equals("faq")) {%> class="active" <% }%> >FAQ</button><button onclick="window.location = '/Dryves/MijnDryves';" <% if (request.getParameter("menu_active").equals("mijndryves")) {%> class="active" <% }%> ><fmt:message bundle="${rb}" key="mijndryvesnav" /></button>
+        </c:when>
+        <c:otherwise>
+            <button onclick="window.location = 'index.jsp';" <% if (request.getParameter("menu_active").equals("home")) {%> class="active" <% }%> >Home</button><button onclick="window.location = 'watisdryves.jsp';" <% if (request.getParameter("menu_active").equals("watisdryves")) {%> class="active" <% }%> ><fmt:message bundle="${rb}" key="watisdryvesnav" /></button><button onclick="window.location = 'faq.jsp';" <% if (request.getParameter("menu_active").equals("faq")) {%> class="active" <% }%> >FAQ</button><button onclick="window.location = 'registratie.jsp';" <% if (request.getParameter("menu_active").equals("registratie")) {%> class="active" <% }%> ><fmt:message bundle="${rb}" key="registreernav" /></button><button  class="loginButton" onclick="window.location = 'login.jsp';">Login</button>
+        </c:otherwise>
+    </c:choose>
+
+    <c:if test="${currentSessionUser.lidnr > 0}"> 
+        <div class="welkom" id="welkom" style=" float: right; width: 300px; height: 100%;">
+
+            <div style="float: left; margin-right: 5px;"><fmt:message bundle="${rb}" key="welkomnav" /><br/>
+                <div id="anaam"> <label id="vnaam"></label></div>
+                <c:out value="${currentSessionUser.vnaam}"/> <c:out value="${currentSessionUser.anaam}"/></div> 
+
+            <!--					TODO Hier nog de actuele aantal ongelezen berichten ophalen-->
+            <div style="float: right; margin-right: 5px;"> 
+                <a href="mijnberichten.jsp"> 0</a><fmt:message bundle="${rb}" key="nieuweberichtennav" /><br/> 
+                <a href="Uitloggen" style="float: right;"><fmt:message bundle="${rb}" key="uitlognav" /></a>
+            </div>
+
         </div>
+    </c:if>
+
+</div>
 
 
-    </body>
-</html>

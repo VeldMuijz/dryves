@@ -1,0 +1,2231 @@
+/*
+
+V2.3
+
+	Updated many of the style classes.
+
+V2.2
+
+	Updated the action page
+
+V2.1
+
+	Added Action Page
+	Updated the responsive design
+
+v2.0
+	responsive + viewport for iphone / android
+	support for Opera and InternetExplorer v10
+	
+v1.9
+
+	Card and thumb view
+
+v1.8
+	content box
+
+v1.0 
+	helios basic design.
+*/
+
+			
+			button{
+				cursor:pointer;	
+			}
+			
+			.hidden {
+				display: none;
+			}
+			.heliosHeaderMobile{
+				display:none;
+				height: 46px;
+				width: 100%;
+				z-index: 99;
+				overflow: hidden;
+				position:fixed;
+				left:0px;
+				top:0px;
+			}
+			.heliosHeader {				
+				height: 60px;
+				width: 100%;
+				z-index: 99;
+				overflow: hidden;
+			}
+			.heliosHeader>a>img {
+				left: 0px;
+				width:172px;
+				height:60px;
+			}
+
+			.heliosHeaderRight {
+				float: right;
+				color: #FFFFFF;
+				font-family: Verdana, Arial;
+				font-size: 10px;
+				right: 12px;
+				top: 36px;
+				position:absolute;
+			}
+		
+			
+			.heliosHeaderRight a:link {
+				color: #FFFFFF;
+				text-decoration: none;
+			}
+			
+			.heliosContainer{
+				overflow:hidden;
+				padding-left:180px;
+				padding-right:10px;
+				min-height:100%;
+				max-width: 1058px;
+			}
+			
+			.heliosContainerActionPage {
+				overflow:hidden;
+				padding-left:10px;
+				padding-right:10px;
+				padding-bottom: 30px;
+				min-height:100%;
+				max-width: 1228px;
+			}
+			
+			
+			.heliosHeaderRight a:hover img {
+				position: relative;
+				top: -2px;
+				cursor: pointer;
+			}
+			
+			.heliosHeaderRight a:hover {
+				text-decoration: underline;
+			}
+			
+			.heliosHeaderRight a img {
+				padding-bottom: 0px;
+			}
+			.heliosHeaderRight a:visited {
+				color: #FFFFFF;
+				text-decoration: none;
+			}
+
+			.heliosMiddle {
+				float:left;
+				position:relative;
+				width:100%;
+				padding:0px;
+				
+
+
+			}
+
+			.heliosNavigation {
+				padding-top:16px;
+				width: 170px;
+				position:relative;
+				float:left;
+				background: #eaeaea;
+				border-right: 1px solid #BBB;
+				height: 100%;
+				margin-bottom:-1000em;					
+				margin-left: -100%;
+			    padding: 0 0px 1001em 0;
+			    right: 180px;
+			    
+
+				
+			}
+			
+			.heliosNavigationActionPage {
+				padding-top:16px;
+				width: 170px;
+				position:relative;
+				float:left;
+				background: #eaeaea;
+				border-right: 1px solid #BBB;
+				height: 100%;
+				margin-bottom:-1000em;					
+				margin-left: -100%;
+			    padding: 0 0px 1001em 0;
+			    right: 180px;
+			    display: none;
+			}
+
+			
+			.heliosNavigation h1{
+				text-transform:uppercase;
+				font-weight:bold;
+				font-size:12px;
+				line-height:16px;		
+				color:#0095DA;					
+				padding-left:8px;
+				margin:0px;
+				margin-top:16px;
+				display:block;	
+				
+				/* 
+				Tools #7f2d99 
+				Bestelbox #f15922 
+				MenuManager #0095DA
+				Supplier #f8981d
+				*/
+			
+			}
+			
+			.heliosNavigation button {			
+				display:block;
+				width:169px;
+				height: 35px;
+				border:none;
+				border-top: 1px solid #d4d4d4;	
+				border-bottom: 1px solid #d4d4d4;						
+				background: #eaeaea;
+				/*
+				background: linear-gradient(180deg, #FFFFFF, #EEEEEE);
+				background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#FFFFFF),	to(#EEEEEE) );
+				filter: progid:DXImageTransform.Microsoft.Gradient ( StartColorStr ='#FFFFFF', EndColorStr = '#EEEEEE' );	
+				*/	
+				font: bold 10px  verdana, arial, sans-serif;
+				line-height: 10px;
+				text-align: left;
+				text-transform:lowercase;
+				color: #333333;
+				text-shadow: 0 1px 0 #fff;				
+				padding: 8px 5px 9px 5px;
+				margin-bottom:-1px;
+				vertical-align:bottom;
+				border-radius:0px;
+			}
+			
+			
+			.heliosNavigation button:hover {
+				padding-left: 10px;
+				
+				-webkit-box-shadow: inset 0 0 1px 1px #f6f6f6;
+				-moz-box-shadow: inset 0 0 1px 1px #f6f6f6;
+				-ms-box-shadow: inset 0 0 1px 1px #f6f6f6;
+				-o-box-shadow: inset 0 0 1px 1px #f6f6f6;
+				box-shadow: inset 0 0 1px 1px #f6f6f6;
+				
+				
+				background: linear-gradient(180deg, #f4f4f4, #f4f4f4);
+				background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#f4f4f4),	to(#f4f4f4) );
+				filter: progid:DXImageTransform.Microsoft.Gradient ( StartColorStr ='#f4f4f4', EndColorStr = '#f4f4f4' );
+				
+				
+			}
+			
+			.heliosNavigation button:hover:before {
+				display:block;
+				border-color: transparent #000;
+				border-style: solid;
+				border-width: 5px 0px 5px 5px;
+				content: "";	
+				position: absolute;
+				left: 0px;
+				margin-top: 0px;
+				height:0px;
+				width: 0px;
+				
+			}
+			
+			.heliosNavigation button.selected {
+				
+				background: #FFF;
+					/*
+					background: -moz-linear-gradient(-180deg, #FFFFFF, #eaeaea);
+					background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#FFFFFF),	to(#eaeaea) );
+					filter: progid:DXImageTransform.Microsoft.Gradient ( StartColorStr ='#EAEAEA', EndColorStr = '#FFFFFF' ,GradientType=1 );
+					*/
+				padding-left: 10px;
+				border-right: 1px solid #FFF;
+				text-shadow: 0 1px 0 #fff;
+				width: 171px;
+				
+
+
+			}
+			
+			.heliosNavigation button.navigationBack:before  {
+				display:block;
+				border-color: RGBA(255,255,255,0) #000;
+				border-style: solid;
+				border-width: 5px 5px 5px 0px;
+				content: "";
+				left:8px;	
+				position: absolute;
+				top: 28px;
+				height:0px;
+				width: 0px;
+			}
+			
+			.heliosNavigation button.navigationBack:hover:before  {
+				display:block;
+				border-color: RGBA(255,255,255,0) #000;
+				border-style: solid;
+				border-width: 5px 5px 5px 0px;
+				content: "";
+				left:8px;	
+				position: absolute;
+				top: 28px;
+				height:0px;
+				width: 0px;
+			}
+			
+			.heliosNavigation button.navigationBack  {
+				width: 170px;
+				padding-left: 20px;
+				margin-top: 16px;
+				border-top: 1px solid #C5C5C5;	
+				border-bottom: 1px solid #C5C5C5;
+				background: linear-gradient(180deg, #FEFEFE, #E3E3E3);
+				background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#FEFEFE),	to(#E3E3E3) );
+				filter: progid:DXImageTransform.Microsoft.Gradient ( StartColorStr ='#FEFEFE', EndColorStr = '#E3E3E3' );
+												
+				-webkit-box-shadow: inset 0 0 1px 1px #f6f6f6;
+				-moz-box-shadow: inset 0 0 1px 1px #f6f6f6;
+				-ms-box-shadow: inset 0 0 1px 1px #f6f6f6;
+				-o-box-shadow: inset 0 0 1px 1px #f6f6f6;
+				box-shadow: inset 0 0 1px 1px #f6f6f6;
+				
+				/*
+				background: #d8d8d8;
+				box-shadow: inset 0px -1px 4px 0px RGBA(0,0,0,0.1);
+				
+				background: linear-gradient(180deg, #58a9fb, #58a9fb); 
+				background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#58a9fb),	to(#58a9fb) );
+				filter: progid:DXImageTransform.Microsoft.Gradient ( StartColorStr ='#58a9fb', EndColorStr = '#58a9fb' );
+				*/
+			}
+			
+			.heliosNavigation button.navigationBack:hover  {
+				padding-left: 20px;	
+				background: linear-gradient(180deg, #FEFEFE, #d3d3d3);
+				background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#FEFEFE),	to(#d3d3d3) );
+				filter: progid:DXImageTransform.Microsoft.Gradient ( StartColorStr ='#FEFEFE', EndColorStr = '#d3d3d3' );
+				
+				/*
+				box-shadow: inset 0px -1px 4px 0px RGBA(0,0,0,0.2);
+				background: linear-gradient(180deg, #0095DA, #0095DA); 
+				background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#0095DA),	to(#0095DA) );
+				filter: progid:DXImageTransform.Microsoft.Gradient ( StartColorStr ='#0095DA', EndColorStr = '#0095DA' );
+				*/
+			}
+			
+			.heliosBreadcrumbStandAlone {
+				display:block;
+				width: 100%;
+				margin-top: 25px;
+				margin-left: 13px;
+				margin-bottom: 25px;
+				font-size:11px;
+				line-height:16px;
+				
+			}
+			
+			.heliosBreadcrumbStandAlone h1 {
+				font-weight: bold;
+				font-size: 1.2em;
+				line-height: 4px;
+				margin-left:5px;
+				display:inline;
+			}
+
+			.heliosActionBar {
+				display:block;
+				height: 35px;				
+
+				margin-top: 16px;
+
+			}
+			
+			.heliosActionBar h1 {
+				font-weight: bold;
+				font-size: 1.2em;
+				line-height: 4px;
+				display:inline;
+			}
+			
+			.heliosActionBar button {
+				display:inline;
+				height: 35px;
+				border: 1px solid #BBB;
+				
+				background: linear-gradient(180deg, #FEFEFE, #E3E3E3);
+				background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#FEFEFE),	to(#E3E3E3) );
+				filter: progid:DXImageTransform.Microsoft.Gradient ( StartColorStr ='#FEFEFE', EndColorStr = '#E3E3E3' );
+												
+				-webkit-box-shadow: inset 0 0 1px 1px #f6f6f6;
+				-moz-box-shadow: inset 0 0 1px 1px #f6f6f6;
+				-ms-box-shadow: inset 0 0 1px 1px #f6f6f6;
+				-o-box-shadow: inset 0 0 1px 1px #f6f6f6;
+				box-shadow: inset 0 0 1px 1px #f6f6f6;
+				
+				color: #333333;
+				font: bold 11px  helvetica, arial, sans-serif;
+				line-height: 10px;
+				padding: 8px 16px 9px 10px;
+				text-align: center;
+				text-shadow: 0 1px 0 #fff;
+				margin:0px;
+				margin-right:-1px;
+				overflow:visible;
+				position:relative;
+				vertical-align:top;
+				border-radius:2px;
+				
+			}
+			
+			.heliosActionBar button.heliosActionBarIconButton {
+				display:inline;
+				height: 35px;
+				border: 1px solid #BBB;
+				border-left: 1px solid #cfcfcf;
+				
+				background: linear-gradient(180deg, #FEFEFE, #E3E3E3);
+				background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#FEFEFE),	to(#E3E3E3) );
+				filter: progid:DXImageTransform.Microsoft.Gradient ( StartColorStr ='#FEFEFE', EndColorStr = '#E3E3E3' );
+												
+				-webkit-box-shadow: inset 0 0 1px 1px #f6f6f6;
+				-moz-box-shadow: inset 0 0 1px 1px #f6f6f6;
+				-ms-box-shadow: inset 0 0 1px 1px #f6f6f6;
+				-o-box-shadow: inset 0 0 1px 1px #f6f6f6;
+				box-shadow: inset 0 0 1px 1px #f6f6f6;
+				
+				color: #333333;
+				font: bold 11px  helvetica, arial, sans-serif;
+				line-height: 10px;
+				padding: 9px 7px 9px 7px;
+				text-align: center;
+				text-shadow: 0 1px 0 #fff;
+				margin-left: -2px;
+				overflow:visible;
+				position:relative;
+				vertical-align:top;
+				border-radius: 0px 2px 2px 0px;
+			}
+			
+			
+			.heliosActionBar button.heliosActionBarIconButton:before  {
+				display:block;
+				border-color: transparent #cfcfcf;
+				border-style: solid;
+				border-width: 8px 8px 8px 0px;
+				content: "";	
+				position: absolute;
+				left: -8px;
+				height:0px;
+				width: 0px;
+			}
+			
+			.heliosActionBar button.heliosActionBarIconButton:hover:before  {
+				display:block;
+				border-color: transparent #999;
+				border-style: solid;
+				border-width: 8px 8px 8px 0px;
+				content: "";	
+				position: absolute;
+				left: -8px;
+				height:0px;
+				width: 0px;
+			}
+			
+			
+			.heliosActionBar button.tab {
+				background: URL("/Elements_Design.nsf/heliosActionBarDown.png") no-repeat 100% center,linear-gradient(180deg, #FEFEFE, #E3E3E3);
+				background: URL("/Elements_Design.nsf/heliosActionBarDown.png") no-repeat 100% center,-webkit-gradient(linear, 0% 0%, 0% 100%, from(#FEFEFE),	to(#E3E3E3) );
+				filter: progid:DXImageTransform.Microsoft.Gradient ( StartColorStr ='#FEFEFE', EndColorStr = '#E3E3E3' );
+				padding: 8px 16px 9px 10px;
+			
+			}
+			
+			.heliosActionBar button:hover {
+				border-color: #999;
+				-webkit-box-shadow: inset 0 0 1px 1px #ccc;
+				-moz-box-shadow: inset 0 0 1px 1px #ccc;
+				-ms-box-shadow: inset 0 0 1px 1px #ccc;
+				-o-box-shadow: inset 0 0 1px 1px #ccc;
+				box-shadow: inset 0 0 1px 1px #ccc;
+				text-shadow: 0 1px 0 #ccc;
+
+			}
+			.heliosActionBar button:focus {
+				border-color: #999;
+				-webkit-box-shadow: inset 0 0 1px 1px #ccc;
+				-moz-box-shadow: inset 0 0 1px 1px #ccc;
+				-ms-box-shadow: inset 0 0 1px 1px #ccc;
+				-o-box-shadow: inset 0 0 1px 1px #ccc;
+				box-shadow: inset 0 0 1px 1px #ccc;
+				text-shadow: 0 1px 0 #ccc;
+				
+
+			}
+			
+			.heliosActionBar button:active {
+				color:#000;	
+			
+
+			}
+			
+			.heliosActionBar button.selected  {
+				box-shadow: none;
+				background: URL("/Elements_Design.nsf/heliosActionBarUp.png") no-repeat 100% center,linear-gradient(180deg, #EEEEEE, #CCCCCC);
+				background: URL("/Elements_Design.nsf/heliosActionBarUp.png") no-repeat 100% center,-webkit-gradient(linear, 0% 0%, 0% 100%, from(#EEEEEE),to(#CCCCCC));
+				filter: progid:DXImageTransform.Microsoft.Gradient ( StartColorStr ='#EEEEEE', EndColorStr = '#CCCCCC' );
+				
+			}
+			
+			.heliosActionBar button.selected:before  {
+				display:block;
+				border-color:  #CCCCCC transparent;
+				border-style: solid;
+				border-width: 10px 10px 0px 10px;
+				content: "";
+				left:7px;	
+				position: absolute;
+				top: 33px;
+				height:0px;
+				width: 0px;
+			}
+			
+			.heliosActionBar button.heliosActionButton {
+				box-shadow: none;
+				border: 1px solid #9a9a9a;
+				background: -moz-linear-gradient(-90deg, #fcfcfc, #cdcdcd);
+				background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fcfcfc),	to(#cdcdcd) );
+				filter: progid:DXImageTransform.Microsoft.Gradient ( StartColorStr ='#fcfcfc', EndColorStr = '#cdcdcd' );
+			}
+			
+			.heliosActionBar button.heliosActionButton:hover {
+				border: 1px solid #767676;
+				background: -moz-linear-gradient(-90deg, #fcfcfc, #dadada);
+				background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fcfcfc),	to(#dadada) );
+				filter: progid:DXImageTransform.Microsoft.Gradient ( StartColorStr ='#fcfcfc', EndColorStr = '#dadada' );
+				-webkit-box-shadow: inset 0 0 1px 1px #ccc;
+				-moz-box-shadow: inset 0 0 1px 1px #ccc;
+				-ms-box-shadow: inset 0 0 1px 1px #ccc;
+				-o-box-shadow: inset 0 0 1px 1px #ccc;
+				box-shadow: inset 0 0 1px 1px #ccc;
+				text-shadow: 0 1px 0 #d8d8d8;
+				
+			}
+			
+			
+			.heliosActionBar button.activeFilter  {
+				box-shadow: none;
+				background: -moz-linear-gradient(-90deg, #EEEEEE, #CCCCCC);
+				background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#EEEEEE),to(#CCCCCC));
+				filter: progid:DXImageTransform.Microsoft.Gradient ( StartColorStr ='#EEEEEE', EndColorStr = '#CCCCCC' );
+				
+			}
+			
+			.heliosActionBar input[type=text], actionBarTextarea{
+				border:1px solid #BBB;
+				font: bold 11px  helvetica, arial, sans-serif;
+				padding-right: 4px;
+				padding-top: 4px;
+				padding-bottom: 4px;
+				padding-left: 10px;
+				height:25px;
+				width: 200px;
+				color: #666;
+				font-style: italic;
+				box-shadow: inset 0px -2px 5px 0px RGBA(0,0,0,0.1);
+				border-radius: 2px;
+				margin-right: -1px;
+				background: linear-gradient(180deg, #F0F0F0, #FFFFFF);
+				z-index: 5;			
+			}
+			
+			.heliosActionBar input[type=text]:focus, actionBarTextarea:focus{
+				box-shadow: inset 0px -2px 5px 0px RGBA(0,0,0,0.2);
+				border:1px solid #BBB;
+			}
+			
+			
+			.heliosActionBar button.navigationBack {
+				display:inline;
+				height: 35px;
+				width: 160px;
+				border: 1px solid #BBB;
+				
+				background: linear-gradient(180deg, #FEFEFE, #E3E3E3);
+				background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#FEFEFE),	to(#E3E3E3) );
+				filter: progid:DXImageTransform.Microsoft.Gradient ( StartColorStr ='#FEFEFE', EndColorStr = '#E3E3E3' );
+												
+				-webkit-box-shadow: inset 0 0 1px 1px #f6f6f6;
+				-moz-box-shadow: inset 0 0 1px 1px #f6f6f6;
+				-ms-box-shadow: inset 0 0 1px 1px #f6f6f6;
+				-o-box-shadow: inset 0 0 1px 1px #f6f6f6;
+				box-shadow: inset 0 0 1px 1px #f6f6f6;
+				
+				color: #333333;
+				font: bold 11px  helvetica, arial, sans-serif;
+				line-height: 10px;
+				padding: 8px 16px 9px 10px;
+				text-shadow: 0 1px 0 #fff;
+				margin:0px;
+				margin-right:-1px;
+				overflow:visible;
+				position:relative;
+				vertical-align:top;
+				border-radius:2px;
+				
+			}
+			
+			.heliosActionBar button.navigationBack:hover {
+				border-color: #999;
+				-webkit-box-shadow: inset 0 0 1px 1px #ccc;
+				-moz-box-shadow: inset 0 0 1px 1px #ccc;
+				-ms-box-shadow: inset 0 0 1px 1px #ccc;
+				-o-box-shadow: inset 0 0 1px 1px #ccc;
+				box-shadow: inset 0 0 1px 1px #ccc;
+				text-shadow: 0 1px 0 #ccc;
+
+			}
+			
+			
+			.heliosActionBar button.navigationBack:before  {
+				display:block;
+				border-color: RGBA(255,255,255,0) #000;
+				border-style: solid;
+				border-width: 5px 5px 5px 0px;
+				content: "";
+				left:8px;	
+				position: absolute;
+				top: 13px;
+				height:0px;
+				width: 0px;
+			}
+			
+			.heliosActionBar button.navigationBack:hover:before  {
+				display:block;
+				border-color: RGBA(255,255,255,0) #000;
+				border-style: solid;
+				border-width: 5px 5px 5px 0px;
+				content: "";
+				left:8px;	
+				position: absolute;
+				top: 13px;
+				height:0px;
+				width: 0px;
+			}
+			
+			
+			.heliosPageTitle {
+				font-weight:bold;
+				font-size:12px;
+				line-height:16px;
+				margin:0px;
+				margin-top:15px;
+				display:block;
+				color: #666666;
+			}
+			
+			.heliosViewChange {
+			
+				float: right;
+			
+			}
+			
+			.heliosViewChange img {
+			
+				cursor: pointer;
+
+			
+			}
+			
+			.heliosViewChange img:hover {
+			
+				cursor: pointer;
+				box-shadow: 2px 2px 6px 0 rgba(0, 0, 0, 0.20);
+				
+			}
+			
+			
+			
+			
+			
+			.heliosUserInputField {
+				
+				display: block;
+				margin-left: 10px;
+				margin-bottom: 10px;
+				width: 305px;
+				max-width: 1208px;
+				height: 320px;
+				overflow: hidden;
+				
+			
+			}
+			
+			.heliosTableTitleBar {						
+						
+						display: block;
+						min-width: 300px;
+						max-width: 1208px;
+						margin: 10px;
+						padding: 6px 6px 6px 6px;
+						vertical-align:middle;
+						border: 1px solid #BBBBBB;				
+						background: linear-gradient(180deg, #FEFEFE, #EEEEEE);
+						background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#FEFEFE),	to(#EEEEEE) );
+						filter: progid:DXImageTransform.Microsoft.Gradient ( StartColorStr ='#FEFEFE', EndColorStr = '#EEEEEE' );	
+						text-shadow: 0 1px 0 #fff;
+						border-radius: 2px 2px 2px 2px;						
+
+						
+			}
+			
+			.heliosTableTitleBar td{
+				font-weight: bold;
+				color: #4c4c4c;
+			}
+			
+			.heliosTableTitleBarStandAlone {						
+						
+						display: block;
+						min-width: 320px;
+						max-width: 1214px;
+						margin-bottom: 10px;
+						padding: 6px 6px 6px 6px;
+						vertical-align:middle;
+						border: 1px solid #BBBBBB;				
+						background: linear-gradient(180deg, #FEFEFE, #EEEEEE);
+						background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#FEFEFE),	to(#EEEEEE) );
+						filter: progid:DXImageTransform.Microsoft.Gradient ( StartColorStr ='#FEFEFE', EndColorStr = '#EEEEEE' );
+						-webkit-box-shadow: inset 0 0 1px 1px #f6f6f6;
+						-moz-box-shadow: inset 0 0 1px 1px #f6f6f6;
+						-ms-box-shadow: inset 0 0 1px 1px #f6f6f6;
+						-o-box-shadow: inset 0 0 1px 1px #f6f6f6;
+						box-shadow: inset 0 0 1px 1px #f6f6f6;		
+						text-shadow: 0 1px 0 #fff;
+						border-radius: 2px 2px 2px 2px;						
+						box-shadow: 2px 2px 6px 0 rgba(0, 0, 0, 0.1);
+						
+			}
+			
+			.heliosTableTitleBarStandAlone td{
+				font-weight: bold;
+				color: #4c4c4c;
+			}
+			
+			
+			.heliosexpandedPanel {
+				display:block;				
+				margin-top:4px;				
+				border: 1px solid #BBBBBB;				
+				background: linear-gradient(180deg, #FEFEFE, #EEEEEE);
+				background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#FEFEFE),	to(#EEEEEE) );
+				filter: progid:DXImageTransform.Microsoft.Gradient ( StartColorStr ='#FEFEFE', EndColorStr = '#EEEEEE' );
+				-webkit-box-shadow: inset 0 0 1px 1px #f6f6f6;
+				-moz-box-shadow: inset 0 0 1px 1px #f6f6f6;
+				-ms-box-shadow: inset 0 0 1px 1px #f6f6f6;
+				-o-box-shadow: inset 0 0 1px 1px #f6f6f6;
+				box-shadow: inset 0 0 1px 1px #f6f6f6;				
+				text-shadow: 0 1px 0 #fff;
+				border-radius: 4px 4px 4px 4px ;
+				box-shadow: 5px 5px 10px 0 rgba(0, 0, 0, 0.1);
+				padding: 10px;
+			}
+			
+			.heliosexpandedPanel button {
+				display:inline;
+				height: 35px;
+				border: 1px solid #BBB;
+				
+				background: linear-gradient(180deg, #FEFEFE, #E3E3E3);
+				background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#FEFEFE),	to(#E3E3E3) );
+				filter: progid:DXImageTransform.Microsoft.Gradient ( StartColorStr ='#FEFEFE', EndColorStr = '#E3E3E3' );
+								
+				-webkit-box-shadow: inset 0 0 1px 1px #f6f6f6;
+				-moz-box-shadow: inset 0 0 1px 1px #f6f6f6;
+				-ms-box-shadow: inset 0 0 1px 1px #f6f6f6;
+				-o-box-shadow: inset 0 0 1px 1px #f6f6f6;
+				box-shadow: inset 0 0 1px 1px #f6f6f6;
+				
+				color: #333333;
+				font: bold 11px  helvetica, arial, sans-serif;
+				line-height: 10px;
+				padding: 8px 10px 9px 10px;
+				text-align: center;
+				text-shadow: 0 1px 0 #fff;
+				margin:0px;
+				margin-right:-1px;
+				overflow:visible;
+				position:relative;
+				vertical-align:top;
+				border-radius:2px;
+				
+				
+			}
+			
+			.heliosexpandedPanel button:hover {
+				border-color: #999;
+				-webkit-box-shadow: inset 0 0 1px 1px #ccc;
+				-moz-box-shadow: inset 0 0 1px 1px #ccc;
+				-ms-box-shadow: inset 0 0 1px 1px #ccc;
+				-o-box-shadow: inset 0 0 1px 1px #ccc;
+				box-shadow: inset 0 0 1px 1px #ccc;
+				text-shadow: 0 1px 0 #ccc;
+
+			}
+			.heliosexpandedPanel button:focus {
+				border-color: #999;
+				-webkit-box-shadow: inset 0 0 1px 1px #ccc;
+				-moz-box-shadow: inset 0 0 1px 1px #ccc;
+				-ms-box-shadow: inset 0 0 1px 1px #ccc;
+				-o-box-shadow: inset 0 0 1px 1px #ccc;
+				box-shadow: inset 0 0 1px 1px #ccc;
+				text-shadow: 0 1px 0 #ccc;
+
+			}
+			
+			.heliosexpandedPanel h1{
+				text-transform:uppercase;
+				font-weight:bold;
+				font-size:11px;
+				line-height:16px;			
+				color:#444;						
+				margin:0px;
+				display:block;	
+			}
+			
+			.heliosSelectedFilterBar{
+				
+
+
+			}
+			
+			.heliosSelectedFilterBar h1 {
+				font-size: 10px;
+				display: inline;
+				color: #898989;
+			}
+			
+			.heliosSelectedFilterBar button{
+				display:inline;
+				height: 20px;
+				border: 1px solid #BBB;
+				width:320px;
+				background: linear-gradient(180deg, #FEFEFE, #E3E3E3);
+				background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#FEFEFE),	to(#E3E3E3) );
+				filter: progid:DXImageTransform.Microsoft.Gradient ( StartColorStr ='#FEFEFE', EndColorStr = '#E3E3E3' );
+								
+				-webkit-box-shadow: inset 0 0 1px 1px #f6f6f6;
+				-moz-box-shadow: inset 0 0 1px 1px #f6f6f6;
+				-ms-box-shadow: inset 0 0 1px 1px #f6f6f6;
+				-o-box-shadow: inset 0 0 1px 1px #f6f6f6;
+				box-shadow: inset 0 0 1px 1px #f6f6f6;
+				
+				color: #333333;
+				font: bold 11px  helvetica, arial, sans-serif;
+				line-height: 10px;
+				padding: 3px 3px 3px 3px;
+				text-align: center;
+				text-shadow: 0 1px 0 #fff;
+				margin:0px;
+				margin-right:-1px;
+				overflow:visible;
+				position:relative;
+				vertical-align:top;
+				border-radius:2px;
+				
+			}
+			
+			.heliosAlertBar {			
+						display:block;
+						width: 600px;
+						margin-left:auto;
+						margin-right:auto;
+						margin-top:13px;	
+						padding: 10px 10px 10px 10px;
+						vertical-align:middle;
+						border: 1px solid #889de0;				
+						background: linear-gradient(180deg, #e0e3ed, #a7b5e2);
+						background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#e0e3ed),	to(#a7b5e2) );
+						filter: progid:DXImageTransform.Microsoft.Gradient ( StartColorStr ='#e0e3ed', EndColorStr = '#a7b5e2' );
+						box-shadow: 5px 5px 10px 0 rgba(0, 0, 0, 0.1);						
+						text-shadow: 0 1px 0 #fff;
+						border-radius: 4px 4px 4px 4px ;						
+						
+			}
+			
+			.heliosErrorBar {			
+						display:block;
+						width: 600px;
+						margin-left:auto;
+						margin-right:auto;
+						margin-top:13px;	
+						padding: 10px 10px 10px 10px;
+						vertical-align:middle;
+						border: 1px solid #FF0000;				
+						background: linear-gradient(180deg, #f28788, #ea3a3a);
+						background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#f28788),	to(#ea3a3a) );
+						filter: progid:DXImageTransform.Microsoft.Gradient ( StartColorStr ='#f28788', EndColorStr = '#ea3a3a' );
+						box-shadow: 5px 5px 10px 0 rgba(0, 0, 0, 0.1);						
+						text-shadow: 0 1px 0 #fff;
+						border-radius: 4px 4px 4px 4px ;						
+						
+			}
+			
+			.heliosWarningBar {			
+						display:block;
+						max-width: 1037px;
+						margin-top:13px;
+						margin-bottom: 10px;	
+						padding: 10px 10px 10px 10px;
+						vertical-align:middle;
+						border: 1px solid #e9b006;	
+						background: linear-gradient(180deg, #f6e5b0, #ecc756);
+						background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#f6e5b0),	to(#ecc756) );
+						filter: progid:DXImageTransform.Microsoft.Gradient ( StartColorStr ='#f6e5b0', EndColorStr = '#ecc756' );
+						box-shadow: 5px 5px 10px 0 rgba(0, 0, 0, 0.1);						
+						text-shadow: 0 1px 0 #fff;
+						border-radius: 4px 4px 4px 4px ;
+
+						padding-left: 50px;
+						padding-top:	10px;
+						padding-bottom:	10px;
+			}
+			
+			.heliosWarningBar:before {	
+						display: block;
+						content: "";
+						width: 32px;
+						height: 32px;
+						background: url('/Elements_Design.nsf/heliosWarning.png') no-repeat;
+						position: absolute;
+						left: 6px;
+						top: 14px;
+						
+			}
+			
+			.heliosConfirmationBar {	
+						position: absolute;
+						bottom: 20px;
+						display:block;
+						width: 757px;
+						margin-left:13px;
+						margin-right:0px;	
+						padding: 10px 10px 10px 10px;
+						vertical-align:middle;
+						border: 1px solid #33BB00;				
+						background: linear-gradient(180deg, #7cef5c, #52cc25);
+						background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#7cef5c),	to(#52cc25) );
+						filter: progid:DXImageTransform.Microsoft.Gradient ( StartColorStr ='#7cef5c', EndColorStr = '#52cc25' );
+						box-shadow: 5px 5px 10px 0 rgba(0, 0, 0, 0.1);						
+						text-shadow: 0 1px 0 #fff;
+						border-radius: 4px 4px 4px 4px ;
+						z-index: 99;
+						
+			}
+			
+			.heliosMessageBar {			
+						display:block;
+						max-width: 1037px;
+						margin-top:13px;
+						margin-bottom: 10px;	
+						padding: 10px 10px 10px 10px;
+						vertical-align:middle;
+						border: 1px solid #BBBBBB;				
+						background: linear-gradient(180deg, #FEFEFE, #EEEEEE);
+						background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#FEFEFE),	to(#EEEEEE) );
+						filter: progid:DXImageTransform.Microsoft.Gradient ( StartColorStr ='#FEFEFE', EndColorStr = '#EEEEEE' );
+						-webkit-box-shadow: inset 0 0 1px 1px #f6f6f6;
+						-moz-box-shadow: inset 0 0 1px 1px #f6f6f6;
+						-ms-box-shadow: inset 0 0 1px 1px #f6f6f6;
+						-o-box-shadow: inset 0 0 1px 1px #f6f6f6;
+						box-shadow: inset 0 0 1px 1px #f6f6f6;		
+						text-shadow: 0 1px 0 #fff;
+						border-radius: 4px 4px 4px 4px ;						
+						box-shadow: 5px 5px 10px 0 rgba(0, 0, 0, 0.1);
+			}	
+			
+			.heliosMessageBarActionPage {			
+						display:block;
+						max-width: 1206px;
+						margin-top:13px;
+						margin-bottom: 10px;	
+						padding: 10px 10px 10px 10px;
+						vertical-align:middle;
+						border: 1px solid #BBBBBB;				
+						background: linear-gradient(180deg, #FEFEFE, #EEEEEE);
+						background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#FEFEFE),	to(#EEEEEE) );
+						filter: progid:DXImageTransform.Microsoft.Gradient ( StartColorStr ='#FEFEFE', EndColorStr = '#EEEEEE' );
+						-webkit-box-shadow: inset 0 0 1px 1px #f6f6f6;
+						-moz-box-shadow: inset 0 0 1px 1px #f6f6f6;
+						-ms-box-shadow: inset 0 0 1px 1px #f6f6f6;
+						-o-box-shadow: inset 0 0 1px 1px #f6f6f6;
+						box-shadow: inset 0 0 1px 1px #f6f6f6;		
+						text-shadow: 0 1px 0 #fff;
+						border-radius: 4px 4px 4px 4px ;						
+						box-shadow: 5px 5px 10px 0 rgba(0, 0, 0, 0.1);
+			}	
+			
+			.heliosMessageBarNoActionBar {
+			
+						display:block;
+						max-width: 1037px;
+						margin-top:16px;
+						margin-bottom: 10px;	
+						padding: 10px 10px 10px 10px;
+						vertical-align:middle;
+						border: 1px solid #BBBBBB;				
+						background: linear-gradient(180deg, #FEFEFE, #EEEEEE);
+						background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#FEFEFE),	to(#EEEEEE) );
+						filter: progid:DXImageTransform.Microsoft.Gradient ( StartColorStr ='#FEFEFE', EndColorStr = '#EEEEEE' );
+						-webkit-box-shadow: inset 0 0 1px 1px #f6f6f6;
+						-moz-box-shadow: inset 0 0 1px 1px #f6f6f6;
+						-ms-box-shadow: inset 0 0 1px 1px #f6f6f6;
+						-o-box-shadow: inset 0 0 1px 1px #f6f6f6;
+						box-shadow: inset 0 0 1px 1px #f6f6f6;		
+						text-shadow: 0 1px 0 #fff;
+						border-radius: 4px 4px 4px 4px ;						
+						box-shadow: 5px 5px 10px 0 rgba(0, 0, 0, 0.1);
+			
+			}		
+			
+			.heliosContent {
+				display:block;
+				margin-top:16px;
+				text-align:left;
+
+			}
+			
+			.heliosContent button {
+				display:inline;
+				height: 35px;
+				border: 1px solid #BBB;
+				
+				background: linear-gradient(180deg, #FEFEFE, #E3E3E3);
+				background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#FEFEFE),	to(#E3E3E3) );
+				filter: progid:DXImageTransform.Microsoft.Gradient ( StartColorStr ='#FEFEFE', EndColorStr = '#E3E3E3' );
+												
+				-webkit-box-shadow: inset 0 0 1px 1px #f6f6f6;
+				-moz-box-shadow: inset 0 0 1px 1px #f6f6f6;
+				-ms-box-shadow: inset 0 0 1px 1px #f6f6f6;
+				-o-box-shadow: inset 0 0 1px 1px #f6f6f6;
+				box-shadow: inset 0 0 1px 1px #f6f6f6;
+				
+				color: #333333;
+				font: bold 11px  helvetica, arial, sans-serif;
+				line-height: 10px;
+				padding: 8px 16px 9px 10px;
+				text-align: center;
+				text-shadow: 0 1px 0 #fff;
+				margin:0px;
+				margin-right:-1px;
+				overflow:visible;
+				position:relative;
+				vertical-align:top;
+				border-radius:2px;
+				
+			}
+			
+			.heliosContent button:hover {
+				border-color: #999;
+				-webkit-box-shadow: inset 0 0 1px 1px #ccc;
+				-moz-box-shadow: inset 0 0 1px 1px #ccc;
+				-ms-box-shadow: inset 0 0 1px 1px #ccc;
+				-o-box-shadow: inset 0 0 1px 1px #ccc;
+				box-shadow: inset 0 0 1px 1px #ccc;
+				text-shadow: 0 1px 0 #ccc;
+
+			}
+			
+			input[type=text]{
+				border:1px solid #AAA;
+				font: bold 11px  helvetica, arial, sans-serif;
+				padding:4px;
+				height:20px;
+				border-radius: 4px 4px 4px 4px ;
+				box-shadow: inset 0px -2px 5px 0px RGBA(0,0,0,0.1);
+
+				background: linear-gradient(180deg, #F0F0F0, #FFFFFF);					
+			}
+			
+			input[type=text]:focus{
+				box-shadow: inset 0px -2px 5px 0px RGBA(0,0,0,0.2);
+				border-color:#666;
+			}
+			
+			/* The style of the checkboxes and radiobuttons has to be reconsidered first.
+			
+			input[type=checkbox],input[type=radio]{
+				border:1px solid #AAA;
+				font: bold 11px  helvetica, arial, sans-serif;
+				padding:4px;
+				height:20px;
+				border-radius: 4px 4px 4px 4px ;
+				box-shadow: inset 0px -2px 5px 0px RGBA(0,0,0,0.1);
+
+				background: linear-gradient(180deg, #F0F0F0, #FFFFFF);					
+			}
+			
+			input[type=checkbox]:focus,input[type=radio]:focus{
+				box-shadow: inset 0px -2px 5px 0px RGBA(0,0,0,0.2);
+				border-color:#666;
+			}
+			
+			*/
+			
+			select{
+				border:1px solid #AAA;
+				font: bold 11px  helvetica, arial, sans-serif;
+				padding:4px;
+				height:30px;
+				border-radius: 4px 4px 4px 4px ;
+				box-shadow: inset 0px -2px 5px 0px RGBA(0,0,0,0.1);
+
+				background: linear-gradient(180deg, #F0F0F0, #FFFFFF);					
+			}
+			
+			select:focus{
+				box-shadow: inset 0px -2px 5px 0px RGBA(0,0,0,0.2);
+				border-color:#666;
+				border-radius: 4px 4px 0px 0px ;
+			}
+			
+			/* Hereunder you'll find the style for the alert/help baloon */
+			
+			.heliosHelpPanelBackground {
+				position: absolute;
+				top: 0%;
+				left: 0%;
+				width: 100%;
+				height: 100%;
+				background-color: black;
+				z-index:1001;
+				-moz-opacity: 0.6;
+				opacity:.60;
+				filter: alpha(opacity=60);
+			}
+			
+			.heliosHelpPanel {
+				text-shadow: 0 1px 0 #fff;
+				font-family: helvetica, arial;
+				font-size: 11.5px;
+				line-height: 16px;
+				text-align: left;
+				display:inline-block;
+				border: 2px solid #393939;				
+				background: linear-gradient(180deg, #FEFEFE, #EEEEEE);
+				background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#FEFEFE),	to(#EEEEEE) );
+				filter: progid:DXImageTransform.Microsoft.Gradient ( StartColorStr ='#FEFEFE', EndColorStr = '#EEEEEE' );
+				-webkit-box-shadow: inset 0 0 1px 1px #f6f6f6;
+				-moz-box-shadow: inset 0 0 1px 1px #f6f6f6;
+				-ms-box-shadow: inset 0 0 1px 1px #f6f6f6;
+				-o-box-shadow: inset 0 0 1px 1px #f6f6f6;
+				box-shadow: inset 0 0 1px 1px #f6f6f6;
+				margin-left:13px;
+				margin-top:4px;
+				
+			}
+			
+			.heliosHelpPanelText {
+				padding: 14px;
+			}
+
+			
+			.heliosHelpPanel:before {
+			
+				/* 
+				Tools #7f2d99 
+				Bestelbox #f15922 
+				MenuManager #0095DA
+				Supplier #f8981d
+				*/
+			
+				border-color: #EEEEEE #393939;
+				border-style:solid;
+				border-width:6px 0px 6px 6px;
+				content:"";
+				margin-top: 16px;
+				width:0px;
+				position:absolute;
+		
+			}
+			
+			.heliosButtonPlaceHolder {
+				background: linear-gradient(180deg, #fefefe, #c0c0c0);
+				background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fefefe),	to(#c0c0c0) );
+				filter: progid:DXImageTransform.Microsoft.Gradient ( StartColorStr ='#fefefe', EndColorStr = '#c0c0c0' );
+				height: 46px;
+				padding-top: 12px;
+				padding-right: 14px;
+				border-top: 1px solid #d8d8d8;
+			}
+			
+			.heliosButtonPlaceHolder button {
+				display:inline;
+				height: 35px;
+				border: 1px solid #BBB;
+				
+				/* 
+				Tools from #7f2d99 to #a939cc 
+				Bestelbox from #f15922 to #f5855d 
+				MenuManager from #0095DA to #58a9fb
+				Supplier from #f8981d to #fcca8a
+				*/
+				
+				background: linear-gradient(180deg, #fefefe, #b4b4b4); 
+				background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fefefe),	to(#b4b4b4) );
+				filter: progid:DXImageTransform.Microsoft.Gradient ( StartColorStr ='#fefefe', EndColorStr = '#b4b4b4' );
+								
+				-webkit-box-shadow: inset 0 0 1px 1px #f6f6f6;
+				-moz-box-shadow: inset 0 0 1px 1px #f6f6f6;
+				-ms-box-shadow: inset 0 0 1px 1px #f6f6f6;
+				-o-box-shadow: inset 0 0 1px 1px #f6f6f6;
+				box-shadow: inset 0 0 1px 1px #f6f6f6;
+				
+				color: #393939;
+				font: bold 11px  helvetica, arial, sans-serif;
+				line-height: 10px;
+				padding: 8px 10px 9px 10px;
+				text-align: center;
+				text-shadow: 0 1px 0 #fff;
+				margin:0px;
+				margin-right:-1px;
+				overflow:visible;
+				position:relative;
+				vertical-align:top;
+				border-radius:2px;
+			}
+			
+			.heliosButtonPlaceHolder button:hover {
+				border-color: #868686;
+				-webkit-box-shadow: inset 0 0 1px 1px #ccc;
+				-moz-box-shadow: inset 0 0 1px 1px #ccc;
+				-ms-box-shadow: inset 0 0 1px 1px #ccc;
+				-o-box-shadow: inset 0 0 1px 1px #ccc;
+				box-shadow: inset 0 0 1px 1px #ccc;
+				text-shadow: 0 1px 0 #ccc;
+				background: linear-gradient(180deg, #fefefe, #a2a2a2); 
+				background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fefefe),	to(#a2a2a2) );
+				filter: progid:DXImageTransform.Microsoft.Gradient ( StartColorStr ='#fefefe', EndColorStr = '#a2a2a2' );
+				color: #000;
+
+			}
+			.heliosButtonPlaceHolder button:focus {
+				border-color: #999;
+				-webkit-box-shadow: inset 0 0 1px 1px #ccc;
+				-moz-box-shadow: inset 0 0 1px 1px #ccc;
+				-ms-box-shadow: inset 0 0 1px 1px #ccc;
+				-o-box-shadow: inset 0 0 1px 1px #ccc;
+				box-shadow: inset 0 0 1px 1px #ccc;
+				text-shadow: 0 1px 0 #ccc;
+
+			}
+			
+			.heliosHelpPanel h1{
+				text-transform:uppercase;
+				font-weight:bold;
+				font-size:12px;
+				line-height:16px;			
+				color:#444;						
+				margin:0px;
+				display:block;	
+			}
+			
+			.heliosHelpPanel ul{
+				margin-left: -28px;
+			}
+			
+			.heliosHelpPanel hr{
+				height: 0px;
+				border: 1px solid #BBBBBB;
+				opacity: 0.4;
+				margin-bottom: 5px;
+			}
+			
+			.heliosButtonPlaceHolder td{
+				font: 11px  helvetica, arial, sans-serif;
+			}
+
+
+			.heliosViewCard {
+				display:inline-block;
+				text-align:left;
+				width:100%;
+				min-width: 320px;
+				min-height: 100px;
+				margin-top:1px;
+				margin-left: -1px;	
+				margin-right: -1px;			
+				border: 1px solid #BBBBBB;				
+				background: linear-gradient(180deg, #FEFEFE, #EEEEEE);
+				background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#FEFEFE),	to(#EEEEEE) );
+				filter: progid:DXImageTransform.Microsoft.Gradient ( StartColorStr ='#FEFEFE', EndColorStr = '#EEEEEE' );
+				-webkit-box-shadow: inset 0 0 1px 1px #f6f6f6;
+				-moz-box-shadow: inset 0 0 1px 1px #f6f6f6;
+				-ms-box-shadow: inset 0 0 1px 1px #f6f6f6;
+				-o-box-shadow: inset 0 0 1px 1px #f6f6f6;
+				box-shadow: inset 0 0 1px 1px #f6f6f6;				
+				text-shadow: 0 1px 0 #fff;
+				box-shadow: 5px 5px 10px 0 rgba(0, 0, 0, 0.1);
+				box-sizing: border-box;
+				-moz-box-sizing: border-box;
+				-webkit-box-sizing: border-box;
+				cursor: pointer;
+				padding:10px;
+			
+			} 
+			
+
+
+			.heliosViewCard img {			
+				float: left;			
+				-webkit-box-shadow: inset 0 0 2px rgba(0,0,0,.7), inset 0 2px 0 rgba(255,255,255,.3), inset 0 -1px 0 rgba(0,0,0,.5), 0 1.5px 3px rgba(0,0,0,.4);
+				-moz-box-shadow: inset 0 0 2px rgba(0,0,0,.7), inset 0 2px 0 rgba(255,255,255,.3), inset 0 -1px 0 rgba(0,0,0,.5), 0 1.5px 3px rgba(0,0,0,.4);
+				box-shadow: inset 0 0 2px rgba(0,0,0,.7), inset 0 2px 0 rgba(255,255,255,.3), inset 0 -1px 0 rgba(0,0,0,.5), 0 1.5px 3px rgba(0,0,0,.4);
+			
+			}
+
+			
+			.heliosViewCard h1 {
+
+				text-transform:uppercase;
+				font-weight:bold;
+				font-size:12px;
+				line-height:16px;			
+				color:#090909;						
+				margin:0px;
+				display:block;
+				padding-left: 110px;
+
+			}
+			
+
+			.heliosViewCard h2 {
+				font-weight:bold;
+				font-size:11px;
+				line-height:16px;			
+				color:#7d7d7d;						
+				margin-top:22px;
+				display:block;
+				padding-left: 110px;
+			}
+			
+			.heliosViewCard button {
+			
+				float: left;
+				height: 35px;
+				border: 1px solid #BBB;
+				
+				background: linear-gradient(180deg, #FEFEFE, #E3E3E3);
+				background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#FEFEFE),	to(#E3E3E3) );
+				filter: progid:DXImageTransform.Microsoft.Gradient ( StartColorStr ='#FEFEFE', EndColorStr = '#E3E3E3' );
+								
+				-webkit-box-shadow: inset 0 0 1px 1px #f6f6f6;
+				-moz-box-shadow: inset 0 0 1px 1px #f6f6f6;
+				-ms-box-shadow: inset 0 0 1px 1px #f6f6f6;
+				-o-box-shadow: inset 0 0 1px 1px #f6f6f6;
+				box-shadow: inset 0 0 1px 1px #f6f6f6;
+				
+				color: #333333;
+				font: bold 11px  helvetica, arial, sans-serif;
+				line-height: 10px;
+				padding: 8px 10px 9px 10px;
+				text-align: center;
+				text-shadow: 0 1px 0 #fff;
+				margin:0px;
+				margin-right:-1px;
+				overflow:visible;
+				vertical-align:top;
+				border-radius:2px;
+			
+			}
+			
+			.heliosViewCard table {
+				
+				width: 100%;
+				vertical-align: bottom;
+				padding-left: 10px;
+			
+			}
+			
+			.heliosViewCard table button {
+			
+				height: 28px;
+				padding: 5px 9px 9px 8px;
+			
+			}
+			
+			.heliosViewCard table img {
+
+				width: 16px;
+				height: 16px;
+				-webkit-box-shadow: none;
+				-moz-box-shadow: none;
+				box-shadow: none;
+					
+				
+			}
+
+			
+
+			.heliosViewThumb {
+			
+				display:inline-block;
+				width: 160px;
+				height: 280px;
+				margin-right: 4px;
+				margin-top:8px;				
+				border: 1px solid #BBBBBB;				
+				background: linear-gradient(180deg, #FEFEFE, #EEEEEE);
+				background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#FEFEFE),	to(#EEEEEE) );
+				filter: progid:DXImageTransform.Microsoft.Gradient ( StartColorStr ='#FEFEFE', EndColorStr = '#EEEEEE' );
+				-webkit-box-shadow: inset 0 0 1px 1px #f6f6f6;
+				-moz-box-shadow: inset 0 0 1px 1px #f6f6f6;
+				-ms-box-shadow: inset 0 0 1px 1px #f6f6f6;
+				-o-box-shadow: inset 0 0 1px 1px #f6f6f6;
+				box-shadow: inset 0 0 1px 1px #f6f6f6;				
+				text-shadow: 0 1px 0 #fff;
+				box-shadow: 5px 5px 10px 0 rgba(0, 0, 0, 0.1);
+				padding-top: 10px;
+				vertical-align:top;
+				text-align: center;
+				cursor: pointer;
+			
+			}
+			
+			.heliosViewThumb img {
+				-webkit-box-shadow: inset 0 0 2px rgba(0,0,0,.7), inset 0 2px 0 rgba(255,255,255,.3), inset 0 -1px 0 rgba(0,0,0,.5), 0 1.5px 3px rgba(0,0,0,.4);
+				-moz-box-shadow: inset 0 0 2px rgba(0,0,0,.7), inset 0 2px 0 rgba(255,255,255,.3), inset 0 -1px 0 rgba(0,0,0,.5), 0 1.5px 3px rgba(0,0,0,.4);
+				box-shadow: inset 0 0 2px rgba(0,0,0,.7), inset 0 2px 0 rgba(255,255,255,.3), inset 0 -1px 0 rgba(0,0,0,.5), 0 1.5px 3px rgba(0,0,0,.4);
+				margin-left: auto;
+				margin-right: auto;
+				width: 140px;
+				display: block;
+			}
+
+
+
+				
+			.heliosViewThumb h1 {
+			
+				height: 63px;
+				padding-top: 10px;
+				padding-bottom: 10px;
+				margin-top: 10px;
+				text-transform:uppercase;
+				font-weight:bold;
+				font-size:12px;
+				line-height:16px;			
+				color:#090909;						
+				margin:0px;
+				display:block;
+			
+			}
+			
+			.heliosViewThumb table {
+				
+				width: 100%;
+			
+			}
+			
+			.heliosViewThumb table button {
+			
+				padding-left: 0px;
+				padding-right: 0px;
+				margin-left: -4px;
+				width: 81px;
+				height: 28px;
+				padding: 5px 9px 9px 8px;
+				border-radius: 0px;
+			
+			}
+			
+			.heliosViewThumb table img {
+
+				width: 16px;
+				height: 16px;
+				-webkit-box-shadow: none;
+				-moz-box-shadow: none;
+				box-shadow: none;
+					
+				
+			}
+			
+			.heliosCardPlain {
+			
+				display:inline-block;
+				width: 747px;
+
+
+
+				margin-top:0px;				
+				border: 1px solid #BBBBBB;				
+				background: linear-gradient(180deg, #FEFEFE, #EEEEEE);
+				background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#FEFEFE),	to(#EEEEEE) );
+				filter: progid:DXImageTransform.Microsoft.Gradient ( StartColorStr ='#FEFEFE', EndColorStr = '#EEEEEE' );
+				-webkit-box-shadow: inset 0 0 1px 1px #f6f6f6;
+				-moz-box-shadow: inset 0 0 1px 1px #f6f6f6;
+				-ms-box-shadow: inset 0 0 1px 1px #f6f6f6;
+				-o-box-shadow: inset 0 0 1px 1px #f6f6f6;
+				box-shadow: inset 0 0 1px 1px #f6f6f6;				
+				text-shadow: 0 1px 0 #fff;
+				box-shadow: 5px 5px 10px 0 rgba(0, 0, 0, 0.1);
+				padding: 10px;
+			
+			} 
+			
+
+
+			.heliosCardPlain button {
+			
+				float: left;
+				height: 35px;
+				border: 1px solid #BBB;
+				
+				background: linear-gradient(180deg, #FEFEFE, #E3E3E3);
+				background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#FEFEFE),	to(#E3E3E3) );
+				filter: progid:DXImageTransform.Microsoft.Gradient ( StartColorStr ='#FEFEFE', EndColorStr = '#E3E3E3' );
+								
+				-webkit-box-shadow: inset 0 0 1px 1px #f6f6f6;
+				-moz-box-shadow: inset 0 0 1px 1px #f6f6f6;
+				-ms-box-shadow: inset 0 0 1px 1px #f6f6f6;
+				-o-box-shadow: inset 0 0 1px 1px #f6f6f6;
+				box-shadow: inset 0 0 1px 1px #f6f6f6;
+				
+				color: #333333;
+				font: bold 11px  helvetica, arial, sans-serif;
+				line-height: 10px;
+				padding: 8px 10px 9px 10px;
+				text-align: center;
+				text-shadow: 0 1px 0 #fff;
+				margin:0px;
+				margin-right:-1px;
+				overflow:visible;
+				vertical-align:top;
+				border-radius:2px;
+			
+			}
+			
+			.heliosDataTable {
+			
+				width: 100%;
+				vertical-align: middle;
+				border-collapse: collapse;
+			
+			}
+			
+			.heliosDataTable td {
+			
+				border-top: 1px solid #e1e1e1;
+				padding: 0px;
+				
+			}
+			
+			.heliosDataTable tr:hover {
+			
+				background: #f6f6f6;
+				
+			}
+			
+			.heliosDataTable button {
+			
+				width: 46px;
+				height: 35px;
+				background: linear-gradient(180deg, #FEFEFE, #E3E3E3);
+				background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#FEFEFE),	to(#E3E3E3) );
+				filter: progid:DXImageTransform.Microsoft.Gradient ( StartColorStr ='#FEFEFE', EndColorStr = '#E3E3E3' );
+			    border: 1px solid #BBBBBB;
+			    border-radius: 2px 2px 2px 2px;
+			    box-shadow: 0 0 1px 1px #F6F6F6 inset;
+			    color: #333333;
+			    float: right;
+			    font: bold 11px/10px helvetica,arial,sans-serif;
+			    margin: 2px -2px 2px 0;
+			    overflow: visible;
+			    padding: 5px 0 7px 6px;
+			    text-align: center;
+			    text-shadow: 0 1px 0 #FFFFFF;
+			    vertical-align: top;
+			    
+			}
+			
+			.heliosDataTable button img {
+				
+				width: 16px;
+				height: 16px;
+			
+			}
+			
+			
+			.heliosDataTablePointer {
+			
+				width: 100%;
+				vertical-align: middle;
+				border-collapse: collapse;
+			
+			}
+			
+			.heliosDataTablePointer td {
+			
+				border-top: 1px solid #e1e1e1;
+				padding: 0px;
+				
+			}
+			
+			.heliosDataTablePointer tr:hover {
+			
+				background: #f6f6f6;
+				cursor: pointer;
+				
+			}
+			
+			.heliosDataTablePointer button {
+			
+				width: 46px;
+				height: 35px;
+				background: linear-gradient(180deg, #FEFEFE, #E3E3E3);
+				background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#FEFEFE),	to(#E3E3E3) );
+				filter: progid:DXImageTransform.Microsoft.Gradient ( StartColorStr ='#FEFEFE', EndColorStr = '#E3E3E3' );
+			    border: 1px solid #BBBBBB;
+			    border-radius: 2px 2px 2px 2px;
+			    box-shadow: 0 0 1px 1px #F6F6F6 inset;
+			    color: #333333;
+			    float: right;
+			    font: bold 11px/10px helvetica,arial,sans-serif;
+			    margin: 2px -2px 2px 0;
+			    overflow: visible;
+			    padding: 5px 0 7px 6px;
+			    text-align: center;
+			    text-shadow: 0 1px 0 #FFFFFF;
+			    vertical-align: top;
+			    
+			}
+			
+			.heliosDataTablePointer button img {
+				
+				width: 16px;
+				height: 16px;
+			
+			}
+			
+			
+			
+			.heliosTable button {
+			
+				background: linear-gradient(180deg, #FEFEFE, #E3E3E3);
+				background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#FEFEFE),	to(#E3E3E3) );
+				filter: progid:DXImageTransform.Microsoft.Gradient ( StartColorStr ='#FEFEFE', EndColorStr = '#E3E3E3' );
+			    border: 1px solid #BBBBBB;
+			    border-radius: 2px 2px 2px 2px;
+			    box-shadow: 0 0 1px 1px #F6F6F6 inset;
+			    color: #333333;
+			    float: left;
+			    font: bold 11px/10px helvetica,arial,sans-serif;
+			    height: 22px;
+			    margin: 0 -1px 0 0;
+			    overflow: visible;
+			    padding: 2px 0 3px 4px;
+			    text-align: center;
+			    text-shadow: 0 1px 0 #FFFFFF;
+			    vertical-align: top;
+			    
+			}
+			
+			.heliosTable img {
+				
+				width: 16px;
+				height: 16px;
+			
+			}
+			
+			.heliosCardPlain h1 {
+			
+				padding-top: 10px;
+				padding-bottom: 10px;
+				margin-top: 10px;
+				text-transform:uppercase;
+				font-weight:bold;
+				font-size:12px;
+				line-height:16px;			
+				color:#090909;						
+				margin:0px;
+				display:block;
+			
+			}
+			
+			.heliosexpandedActionPagePanel {
+				min-width: 320px;
+				width: 100%;
+				display:block;				
+				margin-top:16px;				
+				border: 1px solid #BBBBBB;				
+				background: linear-gradient(180deg, #FEFEFE, #EEEEEE);
+				background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#FEFEFE),	to(#EEEEEE) );
+				filter: progid:DXImageTransform.Microsoft.Gradient ( StartColorStr ='#FEFEFE', EndColorStr = '#EEEEEE' );
+				-webkit-box-shadow: inset 0 0 1px 1px #f6f6f6;
+				-moz-box-shadow: inset 0 0 1px 1px #f6f6f6;
+				-ms-box-shadow: inset 0 0 1px 1px #f6f6f6;
+				-o-box-shadow: inset 0 0 1px 1px #f6f6f6;
+				box-shadow: inset 0 0 1px 1px #f6f6f6;				
+				text-shadow: 0 1px 0 #fff;
+				box-shadow: 5px 5px 10px 0 rgba(0, 0, 0, 0.1);
+				float: left;
+			}
+			
+			.heliosexpandedActionPagePanel h1 {
+				font-size: 14px;
+				font-weight: bold;
+				padding-top: 10px;
+				padding-left: 10px;
+				padding-bottom: 10px;
+			}
+			
+			.heliosexpandedActionPagePanelImgContainer {
+			
+				width: 320px;
+				float: left;
+				border-right: 1px solid #BBBBBB;
+			
+			}
+		
+			
+			.heliosexpandedActionPagePanelContainer {
+			
+				max-width: 320px;
+				padding: 10px;
+				float: left;
+			
+			}
+			
+			.heliosexpandedActionPagePanel button {
+				display:inline;
+				height: 35px;
+				border: 1px solid #BBB;
+				
+				background: linear-gradient(180deg, #FEFEFE, #E3E3E3);
+				background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#FEFEFE),	to(#E3E3E3) );
+				filter: progid:DXImageTransform.Microsoft.Gradient ( StartColorStr ='#FEFEFE', EndColorStr = '#E3E3E3' );
+								
+				-webkit-box-shadow: inset 0 0 1px 1px #f6f6f6;
+				-moz-box-shadow: inset 0 0 1px 1px #f6f6f6;
+				-ms-box-shadow: inset 0 0 1px 1px #f6f6f6;
+				-o-box-shadow: inset 0 0 1px 1px #f6f6f6;
+				box-shadow: inset 0 0 1px 1px #f6f6f6;
+				
+				color: #333333;
+				font: bold 11px  helvetica, arial, sans-serif;
+				line-height: 10px;
+				padding: 8px 10px 9px 10px;
+				text-align: center;
+				text-shadow: 0 1px 0 #fff;
+				margin:0px;
+				margin-right:-1px;
+				overflow:visible;
+				position:relative;
+				vertical-align:top;
+				border-radius:2px;
+				
+				
+			}
+			
+			.menuItemImg {
+			
+			width:320px;
+			height:320px;
+			
+			}
+			
+			.heliosexpandedActionPagePanel button.changeImg {
+				
+			    height: 20px;
+			    left: 135px;
+			    padding: 4px 4px 9px;
+			    position: absolute;
+			    top: 396px;
+			
+			}
+			
+			.heliosexpandedActionPagePanel button.deleteImg {
+				
+			    height: 20px;
+			    left: 207px;
+			    padding: 4px 4px 9px;
+			    position: absolute;
+			    top: 396px;
+			
+			}
+			
+			.heliosexpandedActionPagePanel button:hover {
+				border-color: #999;
+				-webkit-box-shadow: inset 0 0 1px 1px #ccc;
+				-moz-box-shadow: inset 0 0 1px 1px #ccc;
+				-ms-box-shadow: inset 0 0 1px 1px #ccc;
+				-o-box-shadow: inset 0 0 1px 1px #ccc;
+				box-shadow: inset 0 0 1px 1px #ccc;
+				text-shadow: 0 1px 0 #ccc;
+
+			}
+			.heliosexpandedActionPagePanel button:focus {
+				border-color: #999;
+				-webkit-box-shadow: inset 0 0 1px 1px #ccc;
+				-moz-box-shadow: inset 0 0 1px 1px #ccc;
+				-ms-box-shadow: inset 0 0 1px 1px #ccc;
+				-o-box-shadow: inset 0 0 1px 1px #ccc;
+				box-shadow: inset 0 0 1px 1px #ccc;
+				text-shadow: 0 1px 0 #ccc;
+
+			}
+			
+			
+			.heliosExpandableBeam {
+				width: 320px;
+				height: 26px;
+				display:block;				
+				margin-top:16px;			
+				border: 1px solid #BBBBBB;				
+				background: linear-gradient(180deg, #FEFEFE, #EEEEEE);
+				background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#FEFEFE),	to(#EEEEEE) );
+				filter: progid:DXImageTransform.Microsoft.Gradient ( StartColorStr ='#FEFEFE', EndColorStr = '#EEEEEE' );
+				-webkit-box-shadow: inset 0 0 1px 1px #f6f6f6;
+				-moz-box-shadow: inset 0 0 1px 1px #f6f6f6;
+				-ms-box-shadow: inset 0 0 1px 1px #f6f6f6;
+				-o-box-shadow: inset 0 0 1px 1px #f6f6f6;
+				box-shadow: inset 0 0 1px 1px #f6f6f6;				
+				text-shadow: 0 1px 0 #fff;
+				box-shadow: 5px 5px 10px 0 rgba(0, 0, 0, 0.1);
+				cursor: pointer;
+			}
+			
+			.heliosExpandableBeam:hover {
+				border-color: #999;
+				-webkit-box-shadow: inset 0 0 1px 1px #ccc;
+				-moz-box-shadow: inset 0 0 1px 1px #ccc;
+				-ms-box-shadow: inset 0 0 1px 1px #ccc;
+				-o-box-shadow: inset 0 0 1px 1px #ccc;
+				box-shadow: inset 0 0 1px 1px #ccc;
+				text-shadow: 0 1px 0 #ccc;
+
+			}
+			
+			.heliosExpandableBeam p {
+			
+				padding: 8px;
+				display: inline-block;
+			
+			}
+			
+			.heliosExpandableBeam table {
+			
+				padding: 3px;
+				display: inline-block;
+			
+			}
+			
+			
+			.heliosExpandableBeam button {
+				display:inline;
+				height: 28px;
+				width: 28px;
+				border-left: 1px solid #BBB;
+				margin: -1px -1px 0 0;
+				
+				
+				background: linear-gradient(180deg, #FEFEFE, #E3E3E3);
+				background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#FEFEFE),	to(#E3E3E3) );
+				filter: progid:DXImageTransform.Microsoft.Gradient ( StartColorStr ='#FEFEFE', EndColorStr = '#E3E3E3' );
+								
+				-webkit-box-shadow: inset 0 0 1px 1px #f6f6f6;
+				-moz-box-shadow: inset 0 0 1px 1px #f6f6f6;
+				-ms-box-shadow: inset 0 0 1px 1px #f6f6f6;
+				-o-box-shadow: inset 0 0 1px 1px #f6f6f6;
+				box-shadow: inset 0 0 1px 1px #f6f6f6;
+				
+				color: #333333;
+				font: bold 11px  helvetica, arial, sans-serif;
+				line-height: 10px;
+				padding: 6px 5px 5px 6px;
+				text-align: center;
+				text-shadow: 0 1px 0 #fff;
+				overflow:visible;
+				position:relative;
+				vertical-align:top;
+				border-radius:2px;
+				float:right;
+			}
+			
+			.heliosExpandableBeam button:before {
+				display:block;
+				border-color: #000 transparent;
+				border-style: solid;
+				border-width: 6px 6px 0px 6px;
+				content: "";	
+				position: absolute;
+				left: 7px;
+				top: 11px;
+				height:0px;
+				width: 0px;
+				
+			}
+			
+			
+			.heliosExpandableBeam button:hover {
+				border-color: #999;
+				-webkit-box-shadow: inset 0 0 1px 1px #ccc;
+				-moz-box-shadow: inset 0 0 1px 1px #ccc;
+				-ms-box-shadow: inset 0 0 1px 1px #ccc;
+				-o-box-shadow: inset 0 0 1px 1px #ccc;
+				box-shadow: inset 0 0 1px 1px #ccc;
+				text-shadow: 0 1px 0 #ccc;
+
+			}
+			
+			.heliosExpandableBeam button:focus {
+				border-color: #999;
+				-webkit-box-shadow: inset 0 0 1px 1px #ccc;
+				-moz-box-shadow: inset 0 0 1px 1px #ccc;
+				-ms-box-shadow: inset 0 0 1px 1px #ccc;
+				-o-box-shadow: inset 0 0 1px 1px #ccc;
+				box-shadow: inset 0 0 1px 1px #ccc;
+				text-shadow: 0 1px 0 #ccc;
+
+			}
+			
+			.heliosExpandedBeam {
+			
+				width: 308px;
+				display:block;	
+				padding: 6px;	
+				margin-top: -1px;				
+				border: 1px solid #BBBBBB;				
+				background: linear-gradient(180deg, #FEFEFE, #EEEEEE);
+				background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#FEFEFE),	to(#EEEEEE) );
+				filter: progid:DXImageTransform.Microsoft.Gradient ( StartColorStr ='#FEFEFE', EndColorStr = '#EEEEEE' );
+				-webkit-box-shadow: inset 0 0 1px 1px #f6f6f6;
+				-moz-box-shadow: inset 0 0 1px 1px #f6f6f6;
+				-ms-box-shadow: inset 0 0 1px 1px #f6f6f6;
+				-o-box-shadow: inset 0 0 1px 1px #f6f6f6;
+				box-shadow: inset 0 0 1px 1px #f6f6f6;				
+				text-shadow: 0 1px 0 #fff;
+				box-shadow: 5px 5px 10px 0 rgba(0, 0, 0, 0.1);
+			
+			}
+			
+			.heliosExpandedBeam img {
+				-webkit-box-shadow: inset 0 0 2px rgba(0,0,0,.7), inset 0 2px 0 rgba(255,255,255,.3), inset 0 -1px 0 rgba(0,0,0,.5), 0 1.5px 3px rgba(0,0,0,.4);
+				-moz-box-shadow: inset 0 0 2px rgba(0,0,0,.7), inset 0 2px 0 rgba(255,255,255,.3), inset 0 -1px 0 rgba(0,0,0,.5), 0 1.5px 3px rgba(0,0,0,.4);
+				box-shadow: inset 0 0 2px rgba(0,0,0,.7), inset 0 2px 0 rgba(255,255,255,.3), inset 0 -1px 0 rgba(0,0,0,.5), 0 1.5px 3px rgba(0,0,0,.4);
+				margin-left: 10px;
+				width: 140px;
+				height: 140px;
+				display: block;
+				margin-top: 10px;
+				margin-bottom: 10px;
+			}
+			
+			.heliosExpandedBeam p {
+			
+				padding: 10px;
+				display: inline-block;
+			
+			}
+			
+			.heliosMobileNavBack {
+		
+		 		padding-right: 6px;
+		 		height:46px;	
+		 		float: left;
+				background: transparant;
+				background: transparant;
+				filter: transparant;								
+				color: #333333;
+				text-align: center;
+				overflow:hidden;
+				position:relative;
+				vertical-align:top;
+				box-shadow: 0px 0px 2px 0px #363636;
+				-webkit-box-shadow: 0px 0px 2px 0px #363636;
+				-moz-box-shadow: 0px 0px 2px 0px #363636;
+				-o-box-shadow: 0px 0px 2px 0px #363636;
+				cursor:pointer;
+				color: #FFF;
+				font-weight: bold;
+			
+			}
+			
+			.heliosMobileNavBack img {
+			
+				margin-right: 4px;
+				margin-top: -1px;
+			
+			}
+			
+			
+			
+						/*
+		@media screen and (min-width: 1280px)  {	
+			.heliosContainer{
+				width:1070px;
+				background-color:red;
+			}			
+		}
+		@media screen and (min-width: 1111px) and (max-width: 1279px) {	
+			.heliosContainer{
+				width:960px;
+				background-color:pink;
+			}			
+		}
+		@media screen and (min-width: 961px) and (max-width: 1023px) {	
+			.heliosContainer{
+				width:640px;
+				background-color:yellow;
+			}			
+		}
+*/
+	@media screen and (min-width: 1280px) {
+
+		.heliosViewCard {
+			
+				box-sizing:border-box;
+				-moz-box-sizing:border-box; /* Firefox */
+				-webkit-box-sizing:border-box; /* Safari */
+				 width:50%;
+			}	
+	}
+		
+		
+		@media screen and (min-width: 670px) and (max-width: 959px) {	
+			
+			.heliosViewCard {
+			
+				box-sizing:border-box;
+				-moz-box-sizing:border-box; /* Firefox */
+				-webkit-box-sizing:border-box; /* Safari */
+				 width:50%;
+			}	
+				
+		}	
+		
+		@media screen and (min-width: 481px) and (max-width: 670px) {	
+			
+			.heliosViewCard {
+			
+				width:100%;
+			}	
+				
+		}
+		
+		@media screen and (min-width: 961px) and (max-width: 1279px) {	
+			
+			.heliosViewCard {
+			
+				box-sizing:border-box;
+				-moz-box-sizing:border-box; /* Firefox */
+				-webkit-box-sizing:border-box; /* Safari */
+				 width:50%;
+			}	
+				
+		}	
+				
+
+
+		@media screen and (max-width: 960px) {	
+
+			.heliosContainer{
+				padding-left:10px;
+			}
+			.heliosMiddle{
+				padding-top:40px;
+			}
+			.heliosNavigation{
+				margin-top:40px;
+			}
+			
+			.heliosActionBar {
+			
+				margin-top: 24px;
+			
+			}
+			
+			.heliosNavigation{
+				display:none;
+			}
+			.showNavigation	.heliosNavigation{
+				display:block;
+			}
+			.showNavigation .heliosContainer{
+				left:0px;
+				padding-left:180px;
+			}
+	
+			.heliosHeader{
+				display:none;
+			}
+			
+			.heliosHeaderMobile{
+				display:block;
+				position:fixed;
+				left:0px;
+				top:0px;
+			}
+			
+			.heliosexpandedActionPagePanel {
+				margin-top: 16px;
+			}
+			
+			.heliosActionBar button.navigationBack {
+			
+				display: none;
+			
+			}
+			
+			.heliosPageTitle {
+				margin-top: 12px;
+			}
+
+			
+			
+}
+		@media screen and (max-width: 480px) {	
+		
+		.heliosContainer {
+			padding: 0px;
+		}
+		
+		.heliosContainerActionPage {
+			padding: 0px;
+		}
+
+		.heliosMiddle{
+			left:0px;
+		}
+
+			
+		.heliosActionBarWrapper {
+			height: 34px;
+			width: 100%;
+			border-bottom: 1px solid #BBB;
+			display: block;
+			position: fixed;
+			left: 0px;
+			top: 48px;
+			background: linear-gradient(180deg, #FEFEFE, #EEEEEE);
+			background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#FEFEFE),	to(#EEEEEE) );
+			filter: progid:DXImageTransform.Microsoft.Gradient ( StartColorStr ='#FEFEFE', EndColorStr = '#EEEEEE' );
+		}
+		
+		.heliosActionBar button {
+		
+			height: 36px;
+   			margin: -1px -1px 0 0;
+		
+		}
+		
+			
+			.heliosNavigation{
+				display:none;
+				position:absolute;
+				left:0px;
+				width:90%;				
+				margin:0;
+				margin-top:47px;
+				box-shadow: 11px 21px 58px 0 #363636;
+				-webkit-box-shadow: 11px 21px 58px 0 #363636;
+				-moz-box-shadow: 11px 21px 58px 0 #363636;
+				-o-box-shadow: 11px 21px 58px 0 #363636;	
+				
+			}
+			.showNavigation .heliosMiddle{
+				position:absolute;
+				overflow:hidden;
+
+			}
+			
+			.heliosNavigation button{
+				width:100%;
+				padding-left:20px;
+				height:44px;
+				font-size:1.6em;
+				
+			}
+			
+			.heliosNavigation button.selected {
+			
+				width: 100%;
+			
+			}
+			
+			.heliosNavigation button.navigationBack  {
+			
+				width: 100%;
+				
+			}
+			
+			.heliosNavigation button.navigationBack:before  {
+			
+				top: 33px;
+			
+			}
+			
+			
+			.heliosHeader{
+				display:none;
+			}
+			
+			.heliosViewThumb {
+			
+				box-sizing:border-box;
+				-moz-box-sizing:border-box; /* Firefox */
+				-webkit-box-sizing:border-box; /* Safari */
+				 width:50%;
+				 margin: -1px;
+			
+			}
+			
+			.heliosViewThumb h1 {
+			
+				height: 46px;
+			
+			}
+			
+			.heliosViewThumb table button {
+			
+				box-sizing:border-box;
+				-moz-box-sizing:border-box; /* Firefox */
+				-webkit-box-sizing:border-box; /* Safari */
+				 width:100%;
+				height: 28px;
+				padding: 5px 9px 9px 8px;
+			
+			}
+			
+			.heliosActionBar {
+				margin-top: 0px;
+			
+			}
+			
+			.heliosActionBar input[type=text], actionBarTextarea{
+				display: none;
+			}
+			
+			.heliosActionBar button.heliosActionBarIconButton {
+				display: none;
+			}
+			
+			.heliosActionBar button.navigationBack {
+			
+				display: none;
+			
+			}
+			
+			.heliosexpandedActionPagePanel {
+				margin-top: 16px;
+			}
+			
+			.heliosPageTitle {
+				height: 25px;
+				margin-top:15px;
+			}
+
+		}
+		
+
+
+			

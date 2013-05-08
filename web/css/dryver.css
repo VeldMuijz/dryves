@@ -63,7 +63,9 @@ button {
     width: 960px;
     height: 35px;
     border: 1px solid #bbbbbb;;
-    background: linear-gradient(180deg, rgb(254, 254, 254), rgb(238, 238, 238)) repeat scroll 0% 0% transparent;
+    background: linear-gradient(180deg, #FEFEFE, #EEEEEE);
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#FEFEFE),	to(#EEEEEE) );
+    filter: progid:DXImageTransform.Microsoft.Gradient ( StartColorStr ='#FEFEFE', EndColorStr = '#EEEEEE' );
     text-shadow: 0px 1px 0px rgb(255, 255, 255);
     box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.1);
     -moz-box-sizing: border-box;
@@ -90,11 +92,14 @@ button {
 
 }
 
-.navigation button:hover {
+.navigation button:hover, .navigation .active {
 
     border-color: rgb(153, 153, 153);
     box-shadow: 0px 0px 1px 1px rgb(204, 204, 204) inset;
     text-shadow: 0px 1px 0px rgb(204, 204, 204);
+    background: linear-gradient(180deg, #FEFEFE, #E3E3E3);
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#FEFEFE),	to(#E3E3E3) );
+    filter: progid:DXImageTransform.Microsoft.Gradient ( StartColorStr ='#FEFEFE', EndColorStr = '#E3E3E3' );
 
 }
 
@@ -106,22 +111,32 @@ button {
     heigth: 100%;
     margin-top: 16px;
     border: 1px solid rgb(187, 187, 187);
-    background: linear-gradient(180deg, rgb(254, 254, 254), rgb(238, 238, 238)) repeat scroll 0% 0% transparent;
+    background: linear-gradient(180deg, #FEFEFE, #EEEEEE);
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#FEFEFE),	to(#EEEEEE) );
+    filter: progid:DXImageTransform.Microsoft.Gradient ( StartColorStr ='#FEFEFE', EndColorStr = '#EEEEEE' );
     text-shadow: 0px 1px 0px rgb(255, 255, 255);
     box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.1);
     padding: 10px;
 
 }
 
-
+.contentPanelBackground {
+    
+    background-image: url('images/bmw.png');
+    width: 940px;
+    height: 382px;
+    display: block;
+    
+    
+}
 
 .mapcontent{
-	float: right;
-	top: 5px;
-	margin-right: 3px;
-	width: 633px;
-	position: static;
-	
+    float: right;
+    top: 5px;
+    margin-right: 3px;
+    width: 633px;
+    position: static;
+
 }
 
 #mapcanvas {
@@ -132,11 +147,11 @@ button {
 }
 
 .invoerveld{
-	width: 300px;
-	margin-left: 3px;
-	margin-top: 5px;
-	float: left;
-	
+    width: 300px;
+    margin-left: 3px;
+    margin-top: 5px;
+    float: left;
+
 }
 #invoerveldadres {
     width: 100px;
@@ -162,6 +177,105 @@ button {
 
 }
 
+.registratietabel {
+    
+    width: 100%;
+    
+    
+}
+
+
+.registratietabel .zoektextveld {
+    border:1px solid #BBB;
+    font: bold 11px  helvetica, arial, sans-serif;
+    padding-right: 4px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-left: 10px;
+    height:25px;
+    width: 200px;
+    color: #666;
+    font-style: italic;
+    box-shadow: inset 0px -2px 5px 0px RGBA(0,0,0,0.1);
+    border-radius: 2px;
+    margin-top: 4px;
+    margin-bottom: 4px;
+    margin-right: -1px;
+    background: linear-gradient(180deg, #F0F0F0, #FFFFFF);
+    z-index: 5;
+
+}
+
+.registratietabel .zoektextveld:focus {
+
+    box-shadow: inset 0px -2px 5px 0px RGBA(0,0,0,0.2);
+    border:1px solid #BBB;
+}
+
+.registratietabel button {
+    display:inline;
+    height: 35px;
+    border: 1px solid #BBB;
+
+    /* 
+    Tools from #7f2d99 to #a939cc 
+    Bestelbox from #f15922 to #f5855d 
+    MenuManager from #0095DA to #58a9fb
+    Supplier from #f8981d to #fcca8a
+    */
+
+    background: linear-gradient(180deg, #fefefe, #b4b4b4); 
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fefefe),	to(#b4b4b4) );
+    filter: progid:DXImageTransform.Microsoft.Gradient ( StartColorStr ='#fefefe', EndColorStr = '#b4b4b4' );
+
+    -webkit-box-shadow: inset 0 0 1px 1px #f6f6f6;
+    -moz-box-shadow: inset 0 0 1px 1px #f6f6f6;
+    -ms-box-shadow: inset 0 0 1px 1px #f6f6f6;
+    -o-box-shadow: inset 0 0 1px 1px #f6f6f6;
+    box-shadow: inset 0 0 1px 1px #f6f6f6;
+
+    color: #393939;
+    font: bold 11px  helvetica, arial, sans-serif;
+    line-height: 10px;
+    padding: 8px 10px 9px 10px;
+    text-align: center;
+    text-shadow: 0 1px 0 #fff;
+    margin:0px;
+    margin-right:-1px;
+    overflow:visible;
+    position:relative;
+    vertical-align:top;
+    border-radius:2px;
+}
+
+.registratietabel button:hover {
+    border-color: #868686;
+    -webkit-box-shadow: inset 0 0 1px 1px #ccc;
+    -moz-box-shadow: inset 0 0 1px 1px #ccc;
+    -ms-box-shadow: inset 0 0 1px 1px #ccc;
+    -o-box-shadow: inset 0 0 1px 1px #ccc;
+    box-shadow: inset 0 0 1px 1px #ccc;
+    text-shadow: 0 1px 0 #ccc;
+    background: linear-gradient(180deg, #fefefe, #a2a2a2); 
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fefefe),	to(#a2a2a2) );
+    filter: progid:DXImageTransform.Microsoft.Gradient ( StartColorStr ='#fefefe', EndColorStr = '#a2a2a2' );
+    color: #000;
+
+}
+.registratietabel button:focus {
+    border-color: #999;
+    -webkit-box-shadow: inset 0 0 1px 1px #ccc;
+    -moz-box-shadow: inset 0 0 1px 1px #ccc;
+    -ms-box-shadow: inset 0 0 1px 1px #ccc;
+    -o-box-shadow: inset 0 0 1px 1px #ccc;
+    box-shadow: inset 0 0 1px 1px #ccc;
+    text-shadow: 0 1px 0 #ccc;
+
+}
+
+
+
+
 .clear {
     clear:both
 }
@@ -169,3 +283,101 @@ button {
 .regformheader {
 
 }
+
+.rittenlijst{
+    background: #F2F2F2;
+    margin-bottom: 10px;
+    padding: 20px;
+    border: 1px solid #333;
+    cursor: pointer;
+}
+
+.rittenlijst h1 {
+    font-size: 14px;
+
+}
+
+.zoektextveld {
+    border:1px solid #BBB;
+    font: bold 11px  helvetica, arial, sans-serif;
+    padding-right: 4px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-left: 10px;
+    height:25px;
+    width: 888px;
+    color: #666;
+    font-style: italic;
+    box-shadow: inset 0px -2px 5px 0px RGBA(0,0,0,0.1);
+    border-radius: 2px;
+    margin-top: 4px;
+    margin-bottom: 4px;
+    margin-right: -1px;
+    background: linear-gradient(180deg, #F0F0F0, #FFFFFF);
+    z-index: 5;
+
+}
+
+.zoektextveld:focus {
+
+    box-shadow: inset 0px -2px 5px 0px RGBA(0,0,0,0.2);
+    border:1px solid #BBB;
+}
+
+
+
+button.heliosActionBarIconButton {
+    display:inline;
+    height: 35px;
+    border: 1px solid #BBB;
+    border-left: 1px solid #cfcfcf;
+
+    background: linear-gradient(180deg, #FEFEFE, #E3E3E3);
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#FEFEFE),	to(#E3E3E3) );
+    filter: progid:DXImageTransform.Microsoft.Gradient ( StartColorStr ='#FEFEFE', EndColorStr = '#E3E3E3' );
+
+    -webkit-box-shadow: inset 0 0 1px 1px #f6f6f6;
+    -moz-box-shadow: inset 0 0 1px 1px #f6f6f6;
+    -ms-box-shadow: inset 0 0 1px 1px #f6f6f6;
+    -o-box-shadow: inset 0 0 1px 1px #f6f6f6;
+    box-shadow: inset 0 0 1px 1px #f6f6f6;
+
+    color: #333333;
+    font: bold 11px  helvetica, arial, sans-serif;
+    line-height: 10px;
+    padding: 9px 7px 9px 7px;
+    text-align: center;
+    text-shadow: 0 1px 0 #fff;
+    margin-top: 4px;
+    margin-left: -2px;
+    overflow:visible;
+    position:relative;
+    vertical-align:top;
+    border-radius: 0px 2px 2px 0px;
+}
+
+
+button.heliosActionBarIconButton:before  {
+    display:block;
+    border-color: transparent #cfcfcf;
+    border-style: solid;
+    border-width: 8px 8px 8px 0px;
+    content: "";	
+    position: absolute;
+    left: -8px;
+    height:0px;
+    width: 0px;
+}
+
+button.heliosActionBarIconButton:hover:before  {
+    display:block;
+    border-color: transparent #999;
+    border-style: solid;
+    border-width: 8px 8px 8px 0px;
+    content: "";	
+    position: absolute;
+    left: -8px;
+    height:0px;
+    width: 0px;
+}
+

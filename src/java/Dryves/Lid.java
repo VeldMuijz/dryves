@@ -13,7 +13,8 @@ import java.util.Locale;
 public class Lid  implements java.io.Serializable {
 
 
-     private int lidnr;
+    private int lidnr;
+   private String facebookid;
      private String vnaam;
      private String anaam;
      private String geslacht;
@@ -31,9 +32,26 @@ public class Lid  implements java.io.Serializable {
      private String tvoegsel;
      private Hashtable errors;
      private String langnotify;
+     private String LocaleStr;
+     private String Locale;
+     private Locale locale;
+     private int rol;
+
+      // Gegevens voor adminpagina
+     private String achtergrond;
+     private String ritprijs;
+     
+    public String getFacebookid() {
+        return facebookid;
+    }
+
+    public void setFacebookid(String facebookid) {
+        this.facebookid = facebookid;
+    }
+    
 
 	
-    public Lid(int lidnr, String vnaam, String anaam, String geslacht, String straat, String huisnummer, String reknr, String telnr, String postcode, String stad, String email, String wachtwoord, String wachtwoord2, int beoordeling, String fotoUrl, String tvoegsel, String langnotify) {
+    public Lid(int lidnr, String vnaam, String anaam, String geslacht, String straat, String huisnummer, String reknr, String telnr, String postcode, String stad, String email, String wachtwoord, String wachtwoord2, int beoordeling, String fotoUrl, String tvoegsel, String langnotify, int rol) {
         this.lidnr = lidnr;
         this.vnaam = vnaam;
         this.anaam = anaam;
@@ -51,6 +69,8 @@ public class Lid  implements java.io.Serializable {
         this.fotoUrl = fotoUrl;
         this.tvoegsel = tvoegsel;
         this.langnotify = langnotify;
+        this.rol = rol;
+
 
     }
 
@@ -60,6 +80,7 @@ public class Lid  implements java.io.Serializable {
         
         
     }
+
 
 
         
@@ -278,13 +299,64 @@ public class Lid  implements java.io.Serializable {
     }
 
     public void setLangnotify(String langnotify) {
-        this.langnotify = langnotify;
+        this.langnotify = langnotify.toString();
     }
     
     public void setErrors(String key, String msg) {
         errors.put(key, msg);
         
+    }
+    
+   public String getLocaleStr(){   
+            return locale.toString();
+        }
 
-}
+    public void setLocaleStr(String LocaleStr) {
+        this.LocaleStr = LocaleStr.toString();
+    }
+    
+        public String getLocale() {
+        return Locale;
+    }
+
+    void setLocale(String locale) {
+        this.locale = new Locale(locale);
+    }
+    
+     private boolean Valid;
+
+    public boolean isValid() {
+        return Valid;
+    }
+
+    public void setValid(boolean Valid) {
+        this.Valid = Valid;
+    }
+
+    public int getRol() {
+        return rol;
+    }
+
+    public void setRol(int rol) {
+        this.rol = rol;
+    }
+
+    public String getAchtergrond() {
+        return achtergrond;
+    }
+
+    public void setAchtergrond(String achtergrond) {
+        this.achtergrond = achtergrond;
+    }
+
+    public String getRitprijs() {
+        return ritprijs;
+    }
+
+    public void setRitprijs(String ritprijs) {
+        this.ritprijs = ritprijs;
+    }
+    
+
 
 }

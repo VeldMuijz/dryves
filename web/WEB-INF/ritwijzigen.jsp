@@ -5,12 +5,22 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+
+<fmt:setLocale value="${currentSessionUser.localeStr}" scope="session" />
+
+<fmt:setBundle basename="ResourceBundles.Dryves" scope="request" var="rb" />
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Dryves - Rit plannen </title>
         <link type="text/css" rel="stylesheet" href="css/dryver.css"/>
+        <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
+        <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+        <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
 
 		<script type="text/javascript"
 				src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAQ5JCTE_OQi2SCYXO6urNY17FW5DaOVvU&sensor=false">
@@ -172,6 +182,13 @@
 
 				return true;
 			}
+                        
+                       $(function() {
+                            
+                        $( "#begindatum" ).datepicker();
+                        
+                        
+                        });
 
         </script>
 
@@ -180,9 +197,10 @@
 
 		<div class="background">
 
-			<img src="images/background1.jpg" />
+			<img src="${currentSessionUser.getAchtergrond()}" />
 
 		</div>
+	
 
 		<div class="drvyesWrapper">
 
@@ -191,21 +209,24 @@
 			</div>
 
 
-			<jsp:include page="navigatie.jsp"  flush="true" />
+			<jsp:include page="navigatie.jsp" flush="true">
+                <jsp:param name="menu_active" value="mijndryves"></jsp:param>
+            </jsp:include>
 
 			<div class="contentPanel">
 
 
 				<div class="invoerveld">
 					<form action="RitPlannen" method="post" onsubmit="return isCompleet();">
-						Start adres: <br/>
-						<input type="text" id="start" name="start" onchange="calcRoute();" style ="width: 350; float: right:"><br />
-						Eind adres: <br/>
-						<input type="text" id="end" name="end" onchange="calcRoute();" style ="width: 350; float: right:"> <br />	
+                                            <input name="ritnr" value="${sessieRit.ritnr}" hidden="false"/>
+						<fmt:message bundle="${rb}" key="startadres" /><br/> 
+						<input type="text" id="start" name="start" onchange="calcRoute();" style ="width: 350; float: right:" value="${sessieRit.startpunt}"><br />
+						<fmt:message bundle="${rb}" key="eindadres" /><br/>
+						<input type="text" id="end" name="end" onchange="calcRoute();" style ="width: 350; float: right:" value="${sessieRit.eindpunt}"> <br />	
 
-						Begindatum:<br/> <input type="date" id="begindatum" name="begindatum"> <br/>
-						Tijd: <br/> <input type="text" id="tijd" name="tijd"> <br/><br/>
-						<td> Herhaling 
+						<fmt:message bundle="${rb}" key="begindatum" /><br/> <input type="date" id="begindatum" name="begindatum" value="${sessieRit.datum}"> <br/>
+						<fmt:message bundle="${rb}" key="tijd" /><br/> <input type="text" id="tijd" name="tijd"> <br/><br/>
+<!--						<td> Herhaling 
 							<input type="checkbox" id="herhaling" name="herhaling" onclick="isChecked(this.checked);"> </td>
 						<br/><br/>
 						<div id="dagenCheckBox" style="display: none;">
@@ -220,13 +241,13 @@
 								<td><input type="checkbox" name="zo" value="zo"> Zo </input> </td>
 							</table>
 							<br/>
-							Einddatum: <input type="date" id="einddatum" name="einddatum"> </div>
+							Einddatum: <input type="date" id="einddatum" name="einddatum"> </div>-->
 
 
 						<br /> <br />
 
-						Selecteer hier uw autogegevens die relevant zijn voor de rit: <br/>								
-						<table><td>Aantal zitplaatsen: <select name="aantalZitplaatsen">	
+						<fmt:message bundle="${rb}" key="selectautogegevens" /><br/>								
+						<table><td><fmt:message bundle="${rb}" key="aantalzit" /><select name="aantalZitplaatsen">	
 									<option value="1"> 1 </option>
 									<option value="2"> 2 </option> 
 									<option value="3"> 3 </option>
@@ -235,16 +256,22 @@
 									<option value="6"> 6 </option>
 								</select></td>
 
-							<td>Soort brandstof: <select id="soortBrandstof" name="soortBrandstof">
-									<option value="benzine"> Benzine </option>
-									<option value="diesel"> Diesel </option>
-									<option value="gas/lpg"> Gas/LPG </option>						
-									<option value="electrisch"> Electrisch </option>
-									<option value="hybride"> Hybride </option>
+							<td><fmt:message bundle="${rb}" key="soortbrandstof" /><select id="soortBrandstof" name="soortBrandstof">
+									<option value="benzine"><fmt:message bundle="${rb}" key="benzine" /></option>
+									<option value="diesel"><fmt:message bundle="${rb}" key="diesel" /></option>
+									<option value="gas/lpg"><fmt:message bundle="${rb}" key="gas" /></option>						
+									<option value="electrisch"><fmt:message bundle="${rb}" key="electrisch" /></option>
+									<option value="hybride"><fmt:message bundle="${rb}" key="hybride" /></option>
 								</select></td></table> <br/><br/>
-
-						<input type="checkbox" name="aanbieden">Direct aanbieden</input>			
-						<button type="submit"> Klik </button>
+                                                                
+                                                <c:choose>       
+                                                    <c:when  test="${sessieRit.aangeboden > 0}">
+                                                        <input type="checkbox" name="aanbieden" checked><fmt:message bundle="${rb}" key="directaanbieden" /></input> </c:when>
+                                                        <c:otherwise>
+                                                            <input type="checkbox" name="aanbieden"><fmt:message bundle="${rb}" key="directaanbieden" /></input>
+                                                        </c:otherwise>
+                                                </c:choose>
+						<button type="submit"><fmt:message bundle="${rb}" key="klik" /></button>
 
 						<input id="hiddenstart" name="hiddenstart" style="display: none;" ></input>
 						<input id="hiddenend" name="hiddenend" style="display: none;"></input>
@@ -261,13 +288,13 @@
 					<div id="mapcanvas"></div>
 					<div id ="ritoverzicht"> 
 						<table>
-							<td><strong> Totale afstand: </strong> </br>
+							<td><strong><fmt:message bundle="${rb}" key="totaleafstand" /></strong> </br>
 								<div id="total" name="total"></div> </td> <br/>
 
-							<td><strong>Startadres:</strong><br/>
+							<td><strong><fmt:message bundle="${rb}" key="startadres" /></strong><br/>
 								<div id="startadres" name="startadres"></div></td>
 
-							<td><strong>Eindadres:</strong> <br/>
+							<td><strong><fmt:message bundle="${rb}" key="eindadres" /></strong> <br/>
 								<div id="eindadres" name="eindadres"></div></td>
 
 						</table>

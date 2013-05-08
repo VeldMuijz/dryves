@@ -4,7 +4,17 @@
     Author     : RickSpijker
 --%>
 
+<%@page import="java.util.Locale"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+
+<fmt:setLocale value="${currentSessionUser.localeStr}" scope="session" />
+
+
+<fmt:setBundle basename="ResourceBundles.Dryves" scope="request" var="rb" />
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -32,28 +42,45 @@
             <div class="logo">    
                 <img src="images/Logo_Dryves.png" />
             </div>
-			<jsp:include page="navigatie.jsp"  flush="true" />
+
+            <jsp:include page="navigatie.jsp" flush="true">
+                <jsp:param name="menu_active" value="home"></jsp:param>
+            </jsp:include>
 
 
-                <br /><br />
-                        <div class="slider-wrapper theme-default">
-                    <div id="slider" class="nivoSlider">
-                        <img src="images/nemo.jpg" alt="" />
-                        <a href="http://dev7studios.com">
-                        <img src="images/toystory.jpg" alt="" title="#htmlcaption" /></a>
-                        <img src="images/up.jpg" alt="" title="This is an example of a caption" />
-                        <img src="images/walle.jpg" alt="" />
-                    </div>
+            <br />
+
+            <div class="contentPanel">
+
+                <!--                <form action="RitZoeken" method="get" >
+                                    <b>Zoek rit: <b> <input id='zoekveld' name="zoekrit" onchange="RitZoeken" placeholder="Zoek op adres, stad, postcode" ></input> 
+                                            <button onclick="RitZoeken">Uitvoeren</button>
+                                            </form>      -->
+
+                <jsp:include page="zoekrit.jsp" flush="true" ></jsp:include> 
+                
+
+            </div>
+                
+            <br /> <br />  
+                
+                
+            <div class="slider-wrapper theme-default">
+                <div id="slider" class="nivoSlider">
+                    <img src="images/slider_audi.png" alt="" />
+                        <img src="images/slider_brandstof.png" alt=""/>
+                    <img src="images/slider_dryvesfile.png" alt="" />
                 </div>
-                <div id="htmlcaption" class="nivo-html-caption">
-                    <strong>This</strong> is an example of a <em>HTML</em> caption with <a href="#">a link</a>.
-                </div>
-                <script type="text/javascript">
-                    $(window).load(function() {
-                        $('#slider').nivoSlider();
-                    });
-                </script>
-                </div>        
+            </div>
+            <div id="htmlcaption" class="nivo-html-caption">
+                <strong>This</strong> is an example of a <em>HTML</em> caption with <a href="#">a link</a>.
+            </div>
+            <script type="text/javascript">
+                $(window).load(function() {
+                    $('#slider').nivoSlider();
+                });
+            </script>
+        </div>        
 
     </body>
 </html>

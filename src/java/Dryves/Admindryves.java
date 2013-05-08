@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.facebook;
+package Dryves;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -10,12 +10,22 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author H
+ * @author RickSpijker
  */
-public class serv extends HttpServlet {
+public class Admindryves extends HttpServlet {
+    
+    
+    private String achtergrond;
+    private String ritprijs;
+    
+    public Admindryves(){
+    }
+    
+    
 
     /**
      * Processes requests for both HTTP
@@ -36,17 +46,18 @@ public class serv extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet serv</title>");            
+            out.println("<title>Servlet Admindryves</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet serv at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet Admindryves at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         } finally {            
             out.close();
         }
     }
-
+    
+    
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP
@@ -61,54 +72,26 @@ public class serv extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
+        HttpSession session = request.getSession();
+        //Maak een nieuw lid aan
+        Lid user = (Lid) session.getAttribute("currentSessionUser");
         
+        //Haal de nieuwe waardes op van de admin.jsp
+        user.setAchtergrond(request.getParameter("achtergrond"));
         
-        Datv v= new Datv();
-        response.setContentType("text/html");
-        PrintWriter out =response.getWriter();
-        String id= request.getParameter("id");
+        System.out.println("Waarde uit de admin jsp - achtergrond: " + user.getAchtergrond());
         
-        if(v.lees(id)){
-        
-        //Hier heb ik die sessie nodig waar Jeroen mee bezig was
-            //
-        
-        // dit is voor later response.sendRedirect("mijndryves.jsp");
-        
-         out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Facebooklogin</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Facebooklogin " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        
-        }else{
-        
-     
-       String voornaam= request.getParameter("voornaam");
-        String achternaam= request.getParameter("achternaam");
-         String sex= request.getParameter("sex");
-       v.gebruikertoevoegen(id, voornaam, achternaam, sex);
-          
+        user.setRitprijs(request.getParameter("ritprijs"));
        
-       
-       response.sendRedirect("mijndryves.jsp");
+        System.out.println("Waarde uit de admin jsp - ritprijs: " + user.getRitprijs());
         
+        AdmindryvesDao add = new AdmindryvesDao();
         
-        }
+        add.vulAdd(user);
         
+        add.AdmindryvesDao();
         
-        
-        
-        
-        
-        
-        
-        
-        processRequest(request, response);
+        request.getRequestDispatcher("WEB-INF/admin.jsp").forward(request, response);
     }
 
     /**
@@ -133,9 +116,6 @@ public class serv extends HttpServlet {
      */
     @Override
     public String getServletInfo() {
-        
-        
-        
         return "Short description";
     }// </editor-fold>
 }

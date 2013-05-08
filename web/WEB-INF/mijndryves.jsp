@@ -5,20 +5,9 @@
 --%>
 
 <%@page import="java.util.Locale"%>
-<%@page import="Dryves.Sessie"%>
+<%@page import="Dryves.Lid"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
-<% 
-    Sessie currentUser = (Sessie) (session.getAttribute("currentSessionUser"));
-    
-    System.out.println("Locale uit mijndryves.jsp :" + currentUser.getLocale());
-    
-    Locale locale = currentUser.getLocale();
-    
-    System.out.println("Locale uit de String :" + locale);
-    
-%>
 
 
 <fmt:setLocale value="${locale}" />
@@ -36,7 +25,7 @@
 
         <div class="background">
 
-            <img src="images/background1.jpg" />
+            <img src="${currentSessionUser.getAchtergrond()}" />
 
         </div>
 
@@ -46,30 +35,32 @@
                 <img src="images/Logo_Dryves.png" />
             </div>
 
-            <jsp:include page="navigatie.jsp"  flush="true" />
-
-
-
-
-
+            <jsp:include page="navigatie.jsp" flush="true">
+                <jsp:param name="menu_active" value="mijndryves"></jsp:param>
+            </jsp:include>
 
             <div class="contentPanel">
                 
 
                 
-                <button onclick="window.location = 'mijndryves_gegevens.jsp';">Mijn gegevens</button>
-                <button onclick="window.location = 'rit_plannen.jsp';">Mijn berichten</button>
-                <button onclick="window.location = 'rit_plannen.jsp';">Mijn ritten</button>
-                
+                <button onclick="window.location = 'mijndryves_gegevens.jsp';"><fmt:message bundle="${rb}" key="mijngegevens" /></button>
+                <button onclick="window.location = 'rit_plannen.jsp';"><fmt:message bundle="${rb}" key="mijnberichten" /></button>
+                <button onclick="window.location = 'MijnRitten';"><fmt:message bundle="${rb}" key="mijnritten" /></button>
+
                 <br /><br />
                 
-                <fmt:message bundle="${rb}" key="ubentingelogdals" />
+                <fmt:message bundle="${rb}" key="ubentingelogdals" /> ${currentSessionUser.getVnaam()} ${currentSessionUser.getAnaam()}
                 
                 <br /><br />
         
 
-        Welkom <%= currentUser.getVnaam() + " " + currentUser.getAnaam() %>
+        
 
+        <img src='${currentSessionUser.getFotoUrl()}'/>
+        
+        
+        
+    
             </div>
         </div>
 
