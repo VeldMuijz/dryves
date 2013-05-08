@@ -178,14 +178,12 @@ public class Registreren extends HttpServlet {
            // hier wordt de gebruiker in de database opgeslagen
            newregistratie.RegistrerenDao(lid);
            
-           //Hier maken we een nieuwe sessie voor de nieuwe gebruiker
-          HttpSession session = request.getSession(true);       
-          session.setAttribute("currentSessionUser",lid); 
+//           //Hier maken we een nieuwe sessie voor de nieuwe gebruiker
+//          HttpSession session = request.getSession(true);       
+//          session.setAttribute("currentSessionUser",lid); 
           
           // en hier wordt de gebruiker door gelinked naar mijndryves
-          //response.sendRedirect("WEB-INF/mijndryves.jsp"); //logged-in page  
-          
-          request.getRequestDispatcher("WEB-INF/mijndryves.jsp").forward(request, response);
+          response.sendRedirect("login.jsp"); //logged-in page  
         
            
            
@@ -197,7 +195,7 @@ public class Registreren extends HttpServlet {
            
            //Indien het email bestaat wordt er een melding weergegeven.
            // Moet nog gedaan worden    
-           response.sendRedirect("http://www.telegraaf.nl");
+           response.sendRedirect("login_error");
        
        
        }

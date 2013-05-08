@@ -5,6 +5,12 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+
+<fmt:setLocale value="${currentSessionUser.localeStr}" scope="session" />
+
+<fmt:setBundle basename="ResourceBundles.Dryves" scope="request" var="rb" />
 <!DOCTYPE html>
 <html>
     <head>
@@ -209,20 +215,19 @@
 
 				<div class="invoerveld">
 					<form action="RitKopen" method="post" onsubmit="return isCompleet();">
-						Ritnummer: 
-						<input id="ritnr" name="ritnr" value="${sessieRit.ritnr}"></input>
-						<fmt:message bundle="${rb}" key="startadres" /><br/>
-						Start adres: <br/> 
+                                                <br><fmt:message bundle="${rb}" key="ritnummer" /><br/>
+						<input id="ritnr" name="ritnr" value="${sessieRit.ritnr}"></input>                                               
+                                                <br><fmt:message bundle="${rb}" key="startadres" /><br/> 
 						<input type="text" id="start" name="start" disabled="true" style ="width: 350; float: right:" value="${sessieRit.startpunt}"><br />
-						Hier wil ik opgehaald worden: <br/>
+						<fmt:message bundle="${rb}" key="hierwilikopgehaaldworden" /><br/>
 						<input type="text" id="pickup" style="width: 350; float: right:"><br />
-						Eind adres: <br/>
+						<fmt:message bundle="${rb}" key="eindadres" /> <br/>
 						<input type="text" id="end" name="end" disabled="true" style ="width: 350; float: right:" value="${sessieRit.eindpunt}"> <br />	
-						Begindatum:<br/> <input type="date" id="begindatum" name="begindatum" value="${sessieRit.datum}"> <br/>
-						Tijd: <br/> <input type="text" id="tijd" name="tijd"> <br/><br/>
-						Kosten voor deze rit zijn: € <span id="kosten" name="kosten"></span><br/>
+						<fmt:message bundle="${rb}" key="begindatum" /><br/> <input type="date" id="begindatum" name="begindatum" value="${sessieRit.datum}"> <br/>
+						<fmt:message bundle="${rb}" key="tijd" /> <br/> <input type="text" id="tijd" name="tijd"> <br/><br/>
+						<fmt:message bundle="${rb}" key="kostendezerit" /><span id="kosten" name="kosten"></span><br/>
 
-						Prijs per km: <div id ="prijs" name="prijs">0.21</div>
+						<fmt:message bundle="${rb}" key="prijsperkm" /> <div id ="prijs" name="prijs">0.21</div>
 						
 						<input type="radio" name="betaalwijze" value ="ideal">iDEAL <br/>
 						<input type="radio" name="betaalwijze" value ="creditcard">Credit Card <br/>
@@ -231,7 +236,7 @@
 						
 						
 						
-						<button action="submit"><strong>Rit kopen</strong></button>
+						<button action="submit"><strong><fmt:message bundle="${rb}" key="ritkopen" /></strong></button>
 
 					</form>
 
@@ -243,10 +248,10 @@
 					<div id="mapcanvas"></div>
 					<div id ="ritoverzicht"> 
 						<table>
-							<td><strong> Totale afstand: </strong> </br>
+							<td><strong><fmt:message bundle="${rb}" key="totaleafstand" /></strong></br>
 								<div id="total" name="total"></div> </td> <br/>
 
-							<td><strong>Oppikpunt:</strong><br/>
+							<td><strong><fmt:message bundle="${rb}" key="oppikpunt" /></strong><br/>
 								<div id="oppikpunt" name="oppikpunt"></div></td> <br/>
 						</table>
 

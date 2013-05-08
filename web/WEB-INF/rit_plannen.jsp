@@ -254,7 +254,7 @@
 								</select></td></table> <br/><br/>
 
 						<input type="checkbox" name="aanbieden"><fmt:message bundle="${rb}" key="directaanbieden" /></input>			
-						<button type="submit"> Klik </button>
+						<button type="submit"><fmt:message bundle="${rb}" key="klik" /></button>
 
 						<input id="hiddenstart" name="hiddenstart" style="display: none;" ></input>
 						<input id="hiddenend" name="hiddenend" style="display: none;"></input>
@@ -271,7 +271,7 @@
 					<div id="mapcanvas"></div>
 					<div id ="ritoverzicht"> 
 						<table>
-							<td><strong> <fmt:message bundle="${rb}" key="totalafstand" /> </strong> </br>
+							<td><strong> <fmt:message bundle="${rb}" key="totaleafstand" /> </strong> </br>
 								<div id="total" name="total"></div> </td> <br/>
 
 							<td><strong><fmt:message bundle="${rb}" key="startadres" /></strong><br/>

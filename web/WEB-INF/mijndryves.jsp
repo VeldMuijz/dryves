@@ -43,9 +43,9 @@
                 
 
                 
-                <button onclick="window.location = 'mijndryves_gegevens.jsp';">Mijn gegevens</button>
-                <button onclick="window.location = 'rit_plannen.jsp';">Mijn berichten</button>
-                <button onclick="window.location = 'MijnRitten';">Mijn ritten</button>
+                <button onclick="window.location = 'mijndryves_gegevens.jsp';"><fmt:message bundle="${rb}" key="mijngegevens" /></button>
+                <button onclick="window.location = 'rit_plannen.jsp';"><fmt:message bundle="${rb}" key="mijnberichten" /></button>
+                <button onclick="window.location = 'MijnRitten';"><fmt:message bundle="${rb}" key="mijnritten" /></button>
 
                 <br /><br />
                 

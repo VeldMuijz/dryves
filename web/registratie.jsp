@@ -25,8 +25,7 @@
                 var vnaam = document.forms["RegistratieForm"]["vnaam"].value;
                 var anaam = document.forms["RegistratieForm"]["anaam"].value;
                 var reknr = document.forms["RegistratieForm"]["reknr"].value;
-                var telnr = document.forms["RegistratieForm"]["telnr"].value;
-                var numbersOnly = /^\d+$/;               
+                var telnr = document.forms["RegistratieForm"]["telnr"].value;             
                 var email = document.forms["RegistratieForm"]["email"].value;
                 var atpos=email.indexOf("@");
                 var dotpos=email.lastIndexOf(".");
