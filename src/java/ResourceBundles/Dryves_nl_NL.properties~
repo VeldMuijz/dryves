@@ -1,0 +1,76 @@
+# To change this template, choose Tools | Templates
+# and open the template in the editor.
+
+#Navigatie:
+home=Home
+
+#Mijn Dryves
+welkom=Welkom
+ubentingelogdals=U bent ingelogd als:
+
+#Login pagina
+gebruikersnaam=Gebruikersnaam:
+wachtwoord=Wachtwoord:
+
+#FAQ pagina
+hoeplanikeenrit=Hoe plan ik een rit?
+
+#Rit plannen pagina
+startadres=Start adres:
+eindadres=Eind adres:
+begindatum=Begin datum:
+tijd=Tijd:
+herhaling=Herhaling
+selectherhaaldagen:Selecteer hier uw herhaaldagen:
+ma=Ma
+di=Di
+wo=Wo
+do=Do
+vr=Vr
+za=Za
+zo=Zo
+einddatum=Eind datum:
+selectautogegevens=Selecteer hier uw autogegevens die relevant zijn voor de rit:
+aantalzit=Aantal vrije zitplaatsen:
+soortbrandstof=Soort brandstof:
+benzine=Benzine
+diesel=Diesel
+gas=Gas/LPG
+electrisch=Electrisch
+hybride=Hybride
+directaanbieden=Direct aanbieden
+totalafstand=Totale afstand:
+
+
+
+#Voorwaarden pagina
+algemenevoorwaarden=Algemene voorwaarden
+
+<<<<<<< HEAD
+#Zoek rit
+zoekrit=Zoek rit
+uitvoeren=Uitvoeren
+placeholder=Zoek adres, plaats, postcode
+=======
+#Registratie pagina
+voornaam=Voornaam       
+achternaam=Achternaam
+tussenvoegsel=Tussenvoegsel
+rekeningnummer=Rekeningnummer
+telefoonnummer=Telefoonnummer
+e-mail=E-Mail
+straatnaam=Straatnaam
+huisnummer=Huisnummer
+postcode=Postcode
+stad=Stad
+wachtwoord=wachtwoord
+bevestigwachtwoord=Bevestig wachtwoord
+geslacht=Geslacht
+taal=Taal
+aanmelden=Aanmelden
+reset=Resert
+wijzigen=Wijzig
+registratieformulier=Registratie formulier
+verplichtevelden=verplichte velden
+sloganregistratie=Schrijf je in en word lid! Ontdek de vele voordelen die de Dryves community te bieden heeft. 
+>>>>>>> 0e8427a3c37e7ccac3ad3974c7473857862f7fbc

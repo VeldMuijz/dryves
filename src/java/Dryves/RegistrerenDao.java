@@ -123,7 +123,7 @@ public class RegistrerenDao {
 
         System.out.println("Lid DAO GEGEVENS:");
         System.out.println("*******************************");
-        System.out.println("voornaam" + vnaam);
+        System.out.println("voornaam: " + vnaam);
         System.out.println("achternaam: " + anaam);
         System.out.println("tussenvoegsel: " + tvoegsel);
         System.out.println("geslacht: " + geslacht);
@@ -312,7 +312,9 @@ public class RegistrerenDao {
     public String getWachtwoord2() {
         return wachtwoord2;
     }
-
+    public void setWachtwoord2() {
+        this.wachtwoord = wachtwoord2;
+    }
     public String getFotoUrl() {
         return this.fotoUrl;
     }

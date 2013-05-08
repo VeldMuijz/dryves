@@ -153,44 +153,42 @@
 
 					<body>
 						<div id="accordion">
-							<h3>Hoe plan ik een rit?</h3>
+							<h3><fmt:message bundle="${rb}" key="hoeplanikeenrit" /></h3>
 
 							<div>
 
 								<p>
 
-
-									Een rit kan geplanned worden door op "Plan rit" te klikken
+                                                        <fmt:message bundle="${rb}" key="zoplanikeenrit" />
+									
 
 								</p>
 
 							</div>
-							<h3>Hoe zet ik een rit online?</h3>
+							<h3><fmt:message bundle="${rb}" key="hoezetikeenritonline" /></h3>
 
 							<div>
-								<p>Vanuit de pagina MyDryves kun je de ritte die ingevoerd zijn publiceren.</p>
+								<p><fmt:message bundle="${rb}" key="zozetikeenritonline" /></p>
 							</div>
-							<h3>Hoe verwijder ik een rit?</h3>
+							<h3><fmt:message bundle="${rb}" key="hoeverwijderikeenrit" /></h3>
 
 							<div>
-								<p>Vanuit de pagina MyDryves kun je ritten selecteren en vervolgens op het knopje "verwijder rit" 
-									klikken om de rit te verwijderen.</p>
+								<p><fmt:message bundle="${rb}" key="zoverwijderrit" /></p>
 							</div>
-							<h3>Hoe spreek ik een ontmoetingsplek af?</h3>
+							<h3><fmt:message bundle="${rb}" key="hoeontmoetingsplek" /></h3>
 							<div>
-								<p>Bij het aangaan van de rit kun je een persoonlijk bericht sturen naar de rit aanbieder
-									om een plaats overeen te komen.</p>
+								<p><fmt:message bundle="${rb}" key="zohoeontmoetingsplek" /></p>
 							</div>
-							<h3>Hoe voeg ik herhalende ritten toe?</h3>
+							<h3><fmt:message bundle="${rb}" key="hoeherhalenderit" /></h3>
 							<div>
-								<p>uitleg hoe dit te bewerkstelligen.</p>
+								<p><fmt:message bundle="${rb}" key="zoherhalenderitten" /></p>
 							</div>
-							<h3>Hoe verleng ik mijn herhalende ritten?</h3>
+							<h3><fmt:message bundle="${rb}" key="hoeverlengrit" /></h3>
 							<div>
-								<p>uitleg hoe dit te bewerkstelligen.</p>
+								<p><fmt:message bundle="${rb}" key="zoverlengrit" /></p>
 							</div>
-							<h3>Er worden geen ritten getoond, hoe kan dit?</h3>
+							<h3><fmt:message bundle="${rb}" key="geenritgetoond" /></h3>
 							<div>
-								<p>uitleg hoe dit mogelijk is.</p>
+								<p><fmt:message bundle="${rb}" key="zogeenritgetoond" /></p>
 							</div>
 					</body>

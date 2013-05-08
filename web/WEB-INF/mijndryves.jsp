@@ -25,7 +25,7 @@
 
         <div class="background">
 
-            <img src="images/background1.jpg" />
+            <img src="${currentSessionUser.getAchtergrond()}" />
 
         </div>
 
@@ -43,12 +43,10 @@
                 
 
                 
-                <button onclick="window.location = 'mijndryves_gegevens.jsp';">Mijn gegevens</button>
-                <button onclick="window.location = 'rit_plannen.jsp';">Mijn berichten</button>
-                <!--<button onclick="window.location = 'mijn_ritten.jsp';">Mijn ritten</button>-->
-                <form action="MijnRitten" method="get">
-                    <button type="submit" > Mijn Ritten</button>
-                </form>
+                <button onclick="window.location = 'mijndryves_gegevens.jsp';"><fmt:message bundle="${rb}" key="mijngegevens" /></button>
+                <button onclick="window.location = 'rit_plannen.jsp';"><fmt:message bundle="${rb}" key="mijnberichten" /></button>
+                <button onclick="window.location = 'MijnRitten';"><fmt:message bundle="${rb}" key="mijnritten" /></button>
+
                 <br /><br />
                 
                 <fmt:message bundle="${rb}" key="ubentingelogdals" />
@@ -59,6 +57,7 @@
         Welkom  ${currentSessionUser.getVnaam()} ${currentSessionUser.getAnaam()}
 
         <img src='${currentSessionUser.getFotoUrl()}'/>
+        
         
         
     

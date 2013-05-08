@@ -6,6 +6,12 @@ Document : mijn_ritten
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+
+<fmt:setLocale value="${locale}" />
+
+<fmt:setBundle basename="ResourceBundles.Dryves" scope="request" var="rb" />
 <!DOCTYPE html> 
 <html>
     <head>
@@ -35,7 +41,7 @@ Document : mijn_ritten
 
 
             <div class="contentPanel">         
-                <h1>Hello World!</h1>
+                <button onclick="window.location = '/Dryves/RitPlannen';"><fmt:message bundle="${rb}" key="planrit" /></button> <br />
 
                 
                 
@@ -48,8 +54,8 @@ Document : mijn_ritten
                                 <td><img src ="images/pijl.jpg" /></td>
                                 <td>${rit.eindpunt}</td>
                                 <td>${rit.prijs}</td>
-                                <td><button onclick="window.location = 'RitWijzigen?ritnr=${rit.ritnr}';"> Rit wijzigen</button></td>
-                                <td><button onclick="window.location = 'RitKopen?ritnr=${rit.ritnr}';"> Rit kopen</button></td>
+                                <td><button onclick="window.location = 'RitWijzigen?ritnr=${rit.ritnr}';"><fmt:message bundle="${rb}" key="ritwijzigen" /></button></td>
+                                <td><button onclick="window.location = 'RitKopen?ritnr=${rit.ritnr}';"><fmt:message bundle="${rb}" key="ritkopen" /></button></td>
                                 </tr> 
 
                         </table>

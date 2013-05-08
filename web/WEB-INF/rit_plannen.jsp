@@ -210,33 +210,33 @@
 					<form action="RitPlannen" method="post" onsubmit="return isCompleet();">
 						<fmt:message bundle="${rb}" key="startadres" /><br/>
 						<input type="text" id="start" name="start" onchange="calcRoute();" style ="width: 350; float: right:"><br />
-						Eind adres: <br/>
+						<fmt:message bundle="${rb}" key="eindadres" /> <br/>
 						<input type="text" id="end" name="end" onchange="calcRoute();" style ="width: 350; float: right:"> <br />	
 
-						Begindatum:<br/> <input type="date" id="begindatum" name="begindatum"> <br/>
-						Tijd: <br/> <input type="text" id="tijd" name="tijd"> <br/><br/>
-						<td> Herhaling 
+						<fmt:message bundle="${rb}" key="begindatum" /><br/> <input type="date" id="begindatum" name="begindatum"> <br/>
+						<fmt:message bundle="${rb}" key="tijd" /> <br/> <input type="text" id="tijd" name="tijd"> <br/><br/>
+						<td> <fmt:message bundle="${rb}" key="herhaling" />
 							<input type="checkbox" id="herhaling" name="herhaling" onclick="isChecked(this.checked);"> </td>
 						<br/><br/>
 						<div id="dagenCheckBox" style="display: none;">
-							Selecteer hier uw herhaaldagen: <br/>
+							<fmt:message bundle="${rb}" key="selectherhaaldagen" /> <br/>
 							<table>
-								<td><input type="checkbox" name="ma" value="ma"> Ma </input> </td>
-								<td><input type="checkbox" name="di" value="di"> Di </input> </td>
-								<td><input type="checkbox" name="wo" value="wo"> Wo </input> </td>
-								<td><input type="checkbox" name="don" value="do"> Do </input> </td>
-								<td><input type="checkbox" name="vr" value="vr"> Vr </input> </td>
-								<td><input type="checkbox" name="za" value="za"> Za </input> </td>
-								<td><input type="checkbox" name="zo" value="zo"> Zo </input> </td>
+								<td><input type="checkbox" name="ma" value="ma"> <fmt:message bundle="${rb}" key="ma" /> </input> </td>
+								<td><input type="checkbox" name="di" value="di"> <fmt:message bundle="${rb}" key="di" /> </input> </td>
+								<td><input type="checkbox" name="wo" value="wo"> <fmt:message bundle="${rb}" key="wo" /> </input> </td>
+								<td><input type="checkbox" name="don" value="do"> <fmt:message bundle="${rb}" key="do" /> </input> </td>
+								<td><input type="checkbox" name="vr" value="vr"> <fmt:message bundle="${rb}" key="vr" /> </input> </td>
+								<td><input type="checkbox" name="za" value="za"> <fmt:message bundle="${rb}" key="za" /> </input> </td>
+								<td><input type="checkbox" name="zo" value="zo"> <fmt:message bundle="${rb}" key="zo" /> </input> </td>
 							</table>
 							<br/>
-							Einddatum: <input type="date" id="einddatum" name="einddatum"> </div>
+							<fmt:message bundle="${rb}" key="einddatum" /> <input type="date" id="einddatum" name="einddatum"> </div>
 
 
 						<br /> <br />
 
-						Selecteer hier uw autogegevens die relevant zijn voor de rit: <br/>								
-						<table><td>Aantal zitplaatsen: <select name="aantalZitplaatsen">	
+						<fmt:message bundle="${rb}" key="selectautogegevens" /> <br/>								
+						<table><td><fmt:message bundle="${rb}" key="aantalzit" /> <select name="aantalZitplaatsen">	
 									<option value="1"> 1 </option>
 									<option value="2"> 2 </option> 
 									<option value="3"> 3 </option>
@@ -245,16 +245,16 @@
 									<option value="6"> 6 </option>
 								</select></td>
 
-							<td>Soort brandstof: <select id="soortBrandstof" name="soortBrandstof">
-									<option value="benzine"> Benzine </option>
-									<option value="diesel"> Diesel </option>
-									<option value="gas/lpg"> Gas/LPG </option>						
-									<option value="electrisch"> Electrisch </option>
-									<option value="hybride"> Hybride </option>
+							<td><fmt:message bundle="${rb}" key="soortbrandstof" /> <select id="soortBrandstof" name="soortBrandstof">
+									<option value="benzine"> <fmt:message bundle="${rb}" key="benzine" /> </option>
+									<option value="diesel"> <fmt:message bundle="${rb}" key="diesel" /> </option>
+									<option value="gas/lpg"> <fmt:message bundle="${rb}" key="gas" /> </option>						
+									<option value="electrisch"> <fmt:message bundle="${rb}" key="electrisch" /> </option>
+									<option value="hybride"> <fmt:message bundle="${rb}" key="hybride" /> </option>
 								</select></td></table> <br/><br/>
 
-						<input type="checkbox" name="aanbieden">Direct aanbieden</input>			
-						<button type="submit"> Klik </button>
+						<input type="checkbox" name="aanbieden"><fmt:message bundle="${rb}" key="directaanbieden" /></input>			
+						<button type="submit"><fmt:message bundle="${rb}" key="klik" /></button>
 
 						<input id="hiddenstart" name="hiddenstart" style="display: none;" ></input>
 						<input id="hiddenend" name="hiddenend" style="display: none;"></input>
@@ -271,13 +271,13 @@
 					<div id="mapcanvas"></div>
 					<div id ="ritoverzicht"> 
 						<table>
-							<td><strong> Totale afstand: </strong> </br>
+							<td><strong> <fmt:message bundle="${rb}" key="totaleafstand" /> </strong> </br>
 								<div id="total" name="total"></div> </td> <br/>
 
-							<td><strong>Startadres:</strong><br/>
+							<td><strong><fmt:message bundle="${rb}" key="startadres" /></strong><br/>
 								<div id="startadres" name="startadres"></div></td>
 
-							<td><strong>Eindadres:</strong> <br/>
+							<td><strong><fmt:message bundle="${rb}" key="eindadres" /></strong> <br/>
 								<div id="eindadres" name="eindadres"></div></td>
 
 						</table>

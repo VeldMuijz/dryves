@@ -56,7 +56,7 @@
 
             <div class="contentPanel">
 
-                Dit is de login page! 
+                 <fmt:message bundle="${rb}" key="Ditisdeloginpage" />
 
                 <br /><br />
 
@@ -113,7 +113,7 @@
                 <script src="http://connect.facebook.net/en_US/all.js"></script>
 
                 <fb:login-button autologoutlink="true" onlogin="OnRequestPermission(); VanFaceNaarP() "   >
-                    Login met Facebook</fb:login-button>
+                  <fmt:message bundle="${rb}" key="loginmetfacebook" /> </fb:login-button>
 
                 <script language="javascript" type="text/javascript">
 

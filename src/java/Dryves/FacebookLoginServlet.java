@@ -83,7 +83,7 @@ public class FacebookLoginServlet extends HttpServlet {
                         
 			
 			addfacebook.setString(9, lid.getEmail());
-			addfacebook.setInt(10, 5);
+			addfacebook.setInt(10, 0);
                         addfacebook.setString(11, "");
                         addfacebook.setString(12, "");
                         addfacebook.setString(13, "");
