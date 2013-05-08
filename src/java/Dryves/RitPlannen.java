@@ -6,7 +6,6 @@ package Dryves;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Timestamp;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -19,6 +18,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.joda.time.DateTime;
 
 /**
  *
@@ -129,28 +129,14 @@ public class RitPlannen extends HttpServlet {
 		System.out.println("Dit is begindatum met het keuze menu'tje: "+ stringDatum);
         stringTijd = request.getParameter("tijd");
 
-       SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy'T'HH:mm");
-//        SimpleDateFormat timestampFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy'T'HH:mm");
+        SimpleDateFormat timestampFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
 
         try {
-//            datum = dateFormat.parse(rit.getDatum());
-//            timestamp = timestampFormat.format(datum);
-			
-			Timestamp tijd;
-			//Timestamp datum;
+            datum = dateFormat.parse(stringDatum + 'T' + stringTijd);
+            timestamp = timestampFormat.format(datum);
 
-			
-			tijd = new Timestamp(rit.getDatum().getTime());
-			datum = new Date(tijd.getTime());
-			datum = dateFormat.parse(datum.toString());
-			System.out.println("Dit is datum na conversie"+datum);
-
-			
-			
-//			Timestamp.getTime(rit.getDatum());
-
-            //ritDao.setBegindatum(DateTime.parse(timestamp));
-
+            ritDao.setBegindatum(DateTime.parse(timestamp));
 
         } catch (ParseException ex) {
             Logger.getLogger(RitPlannen.class.getName()).log(Level.SEVERE, null, ex);
