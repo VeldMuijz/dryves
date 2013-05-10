@@ -21,6 +21,8 @@ public class Rit implements java.io.Serializable {
     private int zitplaatsen;
     private String brandstof;
     private int aangeboden;
+	private String tijd;
+	private String datumkort;
 
     public Rit() {
     }
@@ -157,4 +159,21 @@ public class Rit implements java.io.Serializable {
     public void setAangeboden(int aangeboden) {
         this.aangeboden = aangeboden;
     }
+
+	public String getTijd() {
+		return tijd;
+	}
+
+	public void setTijd(String tijd) {
+		this.tijd = tijd;
+	}
+
+	public String getDatumkort() {
+		return datumkort;
+	}
+
+	public void setDatumkort(String datumkort) {
+		this.datumkort = datumkort;
+	}
+	
 }

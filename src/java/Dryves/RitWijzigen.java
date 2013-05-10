@@ -82,40 +82,50 @@ public class RitWijzigen extends HttpServlet {
 		HttpSession session = request.getSession();
 		// Maak in de sessie een object rit aan met naam sessieRit
 		session.setAttribute("sessieRit", rit);
+		Rit sessieRit = (Rit) session.getAttribute("sessieRit");
 		//Haal de userbean (dit moet sessiebean worden) op uit de sessie
 		Lid user = (Lid) session.getAttribute("currentSessionUser");
 
-		System.out.println("**************** \n dit is rinr:   " + request.getParameter("ritnr"));
-		rit.getDatum();
+		rit.setRitnr(Integer.parseInt(request.getParameter("ritnr")));
+		System.out.println("Dit is het ritnummer: " + rit.getRitnr());
+		ritDao.enkeleRitOphalen(rit.getRitnr(), rit);
 
-		//Haal alle gegevens op en zet ze in Rit
-		//Bouw ingevoerde datum om naar een timestamp
-		Date datum;
-		Date einddatum;
-		stringDatum = request.getParameter("begindatum");
-		System.out.println("Dit is begindatum met het keuze menu'tje: " + stringDatum);
-		stringTijd = 
+		System.out.println("+++++++++++++Security Check++++++++++++++++++\n Lidnr uit rit: " + rit.getLidnr() + " lidnr uit lid: " + user.getLidnr());
+		//check of dit lid wel bij deze rit hoort
+		if (rit.getLidnr() != user.getLidnr()) {
+			
+			System.out.println("Dit lid mag deze rit niet aanpassen, terug naar MijnRitten!");
+			response.sendRedirect("MijnRitten");
 
-//		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-//		SimpleDateFormat timestampFormat = new SimpleDateFormat("dd/MM/yyyy");
-	
+		}else{
+
+		Date datum = null;
+		Date einddatum = null;
+
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");
+		SimpleDateFormat datumFormat = new SimpleDateFormat("dd/MM/yyyy");
+		SimpleDateFormat tijdFormat = new SimpleDateFormat("HH:mm");
+
 		try {
-			datum = dateFormat.parse(rit.getDatum());
-			timestamp = timestampFormat.format(datum);
+			System.out.println(sessieRit.getDatum().toString());
+			datum = dateFormat.parse(sessieRit.getDatum().toString());
+			stringDatum = datumFormat.format(datum);
+			String tijd = tijdFormat.format(datum);
+			rit.setTijd(tijd);
+			rit.setDatumkort(stringDatum);
+			
 
-			ritDao.setBegindatum(DateTime.parse(timestamp));
+			System.out.println("Dit is datum na conversie: " + stringDatum);
+			System.out.println("Dit is tijd na conversie: " + tijd);
 
 		} catch (ParseException ex) {
 			Logger.getLogger(RitPlannen.class.getName()).log(Level.SEVERE, null, ex);
 			System.out.println("************ Programma snapt Timestamp niet!");
 		}
-		rit.setRitnr(Integer.parseInt(request.getParameter("ritnr")));
-		System.out.println("Dit is het ritnummer± " + rit.getRitnr());
-		ritDao.enkeleRitOphalen(rit.getRitnr(), rit);
-		System.out.println("dit is het eindpunt" + rit.getEindpunt());
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/ritwijzigen.jsp");
 		dispatcher.forward(request, response);
+		}
 	}
 
 	/**

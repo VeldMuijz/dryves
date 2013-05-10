@@ -341,6 +341,7 @@ public class RitDao {
 			rs = select1Rit.executeQuery();
                         
                         while(rs.next()){
+						bean.setLidnr(rs.getInt("lidnr"));
                         bean.setRitnr(rs.getInt("ritnr"));
                         bean.setStartpunt(rs.getString("startpunt"));
                         bean.setEindpunt(rs.getString("eindpunt"));
