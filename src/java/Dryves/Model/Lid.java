@@ -1,4 +1,4 @@
-package Dryves;
+package Dryves.Model;
 // Generated 26-mrt-2013 21:03:05 by Hibernate Tools 3.2.1.GA
 
 import java.util.Hashtable;
@@ -74,17 +74,13 @@ public class Lid  implements java.io.Serializable {
 
     }
 
-    Lid() {
+    public Lid() {
         
         //Deze constructor is leeg, deze wordt gebruikt door registratie.java
         
         
     }
 
-
-
-        
-    
     public boolean validate() {
         boolean bool = true;
         if (vnaam.equals("")) {

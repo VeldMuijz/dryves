@@ -2,9 +2,11 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package Dryves;
+package Dryves.Model;
 
-import static Dryves.RitDao.currentCon;
+import Dryves.ConnectionManager;
+import Dryves.Controller.Aankoop;
+import static Dryves.Model.RitDao.currentCon;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Timestamp;

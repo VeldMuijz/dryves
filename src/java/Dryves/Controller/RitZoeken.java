@@ -2,8 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package Dryves;
+package Dryves.Controller;
 
+import Dryves.Model.Rit;
+import Dryves.Model.RitDao;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;

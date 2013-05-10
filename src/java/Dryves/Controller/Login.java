@@ -2,8 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package Dryves;
+package Dryves.Controller;
 
+import Dryves.Model.Lid;
+import Dryves.Model.LidDao;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

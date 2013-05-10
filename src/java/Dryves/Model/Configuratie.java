@@ -1,4 +1,4 @@
-package Dryves;
+package Dryves.Model;
 // Generated 26-mrt-2013 21:03:05 by Hibernate Tools 3.2.1.GA
 
 

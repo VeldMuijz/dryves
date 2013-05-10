@@ -1,10 +1,9 @@
-package Dryves;
+package Dryves.Controller;
 
-import static Dryves.RitDao.currentCon;
+import Dryves.Model.Lid;
+import Dryves.Model.LidDao;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -31,7 +30,7 @@ public class FacebookLoginServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		//De objecten worden aangemmakt
+		//De objecten worden aangemaakt
 		Lid lid = new Lid();
 		LidDao lidDao = new LidDao();
 
@@ -51,47 +50,8 @@ public class FacebookLoginServlet extends HttpServlet {
 
 			//Wanneer de email niet voorkomt in de database
 			//wordt de gebruiker hier toegevoegd 
-
-
-			try {
-				currentCon = ConnectionManager.getConnection();
-				PreparedStatement addfacebook;
-
-				String queryString = ("INSERT INTO lid ( vnaam, anaam,geslacht,straat,postcode,stad,telnr,reknr,email, beoordeling,fotourl,tvoegsel,wachtwoord,langnotify,rol,facebookid)VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-
-				addfacebook = currentCon.prepareStatement(queryString);
-
-				addfacebook.setString(1, lid.getVnaam());
-				addfacebook.setString(2, lid.getAnaam());
-				addfacebook.setString(3, "");
-				addfacebook.setString(4, "");
-				addfacebook.setString(5, "");
-				addfacebook.setString(6, "");
-				addfacebook.setInt(7, 0);
-				addfacebook.setInt(8, 0);
-
-
-				addfacebook.setString(9, lid.getEmail());
-				addfacebook.setInt(10, 0);
-				addfacebook.setString(11, "");
-				addfacebook.setString(12, "");
-				addfacebook.setString(13, "");
-				addfacebook.setString(14, "nl_NL");
-				addfacebook.setInt(15, 1);
-				addfacebook.setString(16, facebookid2);
-
-
-
-
-				System.out.println("De query is: " + addfacebook);
-
-				addfacebook.executeUpdate();
-
-			} catch (SQLException ex) {
-				System.out.println(ex);
-			}
-
-
+			lidDao.vulLidDao(lid);
+			
 			Lid lid2 = new Lid();
 			LidDao dao = new LidDao();
 			lid2 = dao.loginFacebook(facebookid2);

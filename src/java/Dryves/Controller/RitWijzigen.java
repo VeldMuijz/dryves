@@ -2,11 +2,13 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package Dryves;
+package Dryves.Controller;
 
+import Dryves.Model.Lid;
+import Dryves.Model.Rit;
+import Dryves.Model.RitDao;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -18,12 +20,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.joda.time.DateTime;
 
 /**
  *
  * @author jeroen
  */
-public class RitKopen extends HttpServlet {
+public class RitWijzigen extends HttpServlet {
+
+	String stringDatum;
+	String stringEindDatum;
+	String stringTijd;
+	String timestamp;
+	String eindTimestamp;
 
 	/**
 	 * Processes requests for both HTTP
@@ -44,13 +53,13 @@ public class RitKopen extends HttpServlet {
 			out.println("<!DOCTYPE html>");
 			out.println("<html>");
 			out.println("<head>");
-			out.println("<title>Servlet RitKopen</title>");			
+			out.println("<title>Servlet RitWijzigen</title>");
 			out.println("</head>");
 			out.println("<body>");
-			out.println("<h1>Servlet RitKopen at " + request.getContextPath() + "</h1>");
+			out.println("<h1>Servlet RitWijzigen at " + request.getContextPath() + "</h1>");
 			out.println("</body>");
 			out.println("</html>");
-		} finally {			
+		} finally {
 			out.close();
 		}
 	}
@@ -68,29 +77,25 @@ public class RitKopen extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		//processRequest(request, response);
-		
 		// Instantieren van objecten
-        Rit rit = new Rit();
-        RitDao ritDao = new RitDao();
-		Aankoop aankoop = new Aankoop();
-		AankoopDao aankoopDao = new AankoopDao();
-		
-        // Haal de huidige sessie op
-        HttpSession session = request.getSession();
-        // Maak in de sessie een object rit aan met naam sessieRit
-        session.setAttribute("sessieRit", rit);
-        //Haal de userbean (dit moet sessiebean worden) op uit de sessie
-        Lid user = (Lid) session.getAttribute("currentSessionUser");
-		
-		int ritnr = Integer.parseInt(request.getParameter("ritnr"));
-		ritDao.enkeleRitOphalen(ritnr, rit);
-//		        // Maak in de sessie een object rit aan met naam sessieRit
-//        session.setAttribute("sessieRit", rit);
-		
-		
+		Rit rit = new Rit();
+		RitDao ritDao = new RitDao();
+
+		// Haal de huidige sessie op
+		HttpSession session = request.getSession();
+		// Maak in de sessie een object rit aan met naam sessieRit
+		session.setAttribute("sessieRit", rit);
+		Rit sessieRit = (Rit) session.getAttribute("sessieRit");
+		//Haal de userbean (dit moet sessiebean worden) op uit de sessie
+		Lid user = (Lid) session.getAttribute("currentSessionUser");
+
+		rit.setRitnr(Integer.parseInt(request.getParameter("ritnr")));
+		System.out.println("Dit is het ritnummer: " + rit.getRitnr());
+		ritDao.enkeleRitOphalen(rit.getRitnr(), rit);
+
+		System.out.println("+++++++++++++Security Check++++++++++++++++++\n Lidnr uit rit: " + rit.getLidnr() + " lidnr uit lid: " + user.getLidnr());
 		//check of dit lid wel bij deze rit hoort
-		if (rit.getAangeboden() < 1) {
+		if (rit.getLidnr() != user.getLidnr()) {
 			
 			System.out.println("Dit lid mag deze rit niet aanpassen, terug naar MijnRitten!");
 			response.sendRedirect("MijnRitten");
@@ -99,18 +104,16 @@ public class RitKopen extends HttpServlet {
 
 		Date datum = null;
 		Date einddatum = null;
-		String stringDatum, tijd;
-		
 
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");
 		SimpleDateFormat datumFormat = new SimpleDateFormat("dd/MM/yyyy");
 		SimpleDateFormat tijdFormat = new SimpleDateFormat("HH:mm");
 
 		try {
-			System.out.println(rit.getDatum().toString());
-			datum = dateFormat.parse(rit.getDatum().toString());
+			System.out.println(sessieRit.getDatum().toString());
+			datum = dateFormat.parse(sessieRit.getDatum().toString());
 			stringDatum = datumFormat.format(datum);
-			tijd = tijdFormat.format(datum);
+			String tijd = tijdFormat.format(datum);
 			rit.setTijd(tijd);
 			rit.setDatumkort(stringDatum);
 			
@@ -123,11 +126,9 @@ public class RitKopen extends HttpServlet {
 			System.out.println("************ Programma snapt Timestamp niet!");
 		}
 
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/ritkopen.jsp");
-            dispatcher.forward(request, response);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/ritwijzigen.jsp");
+		dispatcher.forward(request, response);
 		}
-
-		
 	}
 
 	/**
@@ -142,36 +143,7 @@ public class RitKopen extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		//processRequest(request, response);
-		// Instantieren van objecten
-        Rit rit = new Rit();
-        RitDao ritDao = new RitDao();
-		Aankoop aankoop = new Aankoop();
-		AankoopDao aankoopDao = new AankoopDao();
-		
-        // Haal de huidige sessie op
-        HttpSession session = request.getSession();
-        // Maak in de sessie een object rit aan met naam sessieRit
-        session.setAttribute("sessieRit", rit);
-        //Haal de userbean (dit moet sessiebean worden) op uit de sessie
-        Lid lid = (Lid) session.getAttribute("currentSessionUser");
-		
-		aankoop.setRitnr(Integer.parseInt(request.getParameter("ritnr")));
-		aankoop.setBetaalwijze(request.getParameter("betaalwijze"));
-		Date date = new Date();
-		aankoop.setDatum(new Timestamp(date.getTime()));
-		aankoop.setOntmoetingnr(1);
-		aankoop.setFactuurnr(1);
-		aankoop.setLidnr(lid.getLidnr());
-		
-		//Haal rit op
-		ritDao.enkeleRitOphalen(aankoop.getRitnr(), rit);
-		
-		//Voer aankoop uit
-		aankoopDao.vulAankoopDao(aankoop);
-		aankoopDao.aankoopDoen();
-
-		response.sendRedirect("MijnDryves");
+		processRequest(request, response);
 	}
 
 	/**

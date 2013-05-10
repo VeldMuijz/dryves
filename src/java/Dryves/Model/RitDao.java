@@ -1,8 +1,10 @@
-package Dryves;
+package Dryves.Model;
 
 import Dryves.ConnectionManager;
+import Dryves.ConnectionManager;
 import Dryves.DayOfWeekIterator;
-import Dryves.Rit;
+import Dryves.DayOfWeekIterator;
+import Dryves.Model.Rit;
 
 
 

@@ -2,10 +2,18 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package Dryves;
+package Dryves.Controller;
 
+import Dryves.BerichtClass;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -15,43 +23,60 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author H
  */
-public class Berichtverzenden extends HttpServlet {
-
-    
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+public class BerichtServlet extends HttpServlet {
+String berichtid;
+  String h=null;
+  BerichtClass berichtclas = new BerichtClass();
+ protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+     
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
+      
+            
+            
+            
         
     }
 
-    
-    
-    
-    
-    
+   
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
         
         
-      int naar=Integer.parseInt(request.getParameter("naar"));
-        String onderwerp=request.getParameter("onderwerp");
-        String inhoud=request.getParameter("inhoud");
-       int afzender=Integer.parseInt(request.getParameter("afzender"));
-        String datum=request.getParameter("datum");
      
-        
-        
-        BerichtClass verstuurbericht= new BerichtClass();
-        verstuurbericht.verstuurbericht(naar, onderwerp, inhoud, datum, afzender);
-        
-        
-        
-    }
+double DOUBLEVAR=Double.parseDouble( request.getParameter("berichtid"));
+    
+     
+BerichtClass berichtclassobject= new BerichtClass();
 
+       berichtclassobject= berichtclas.Haalinbox(DOUBLEVAR);
+
+        
+        berichtclas.checkgelezen(DOUBLEVAR);
+        
+            
+        
+        
+              
+        
+        String x1= berichtclassobject.getDatum();
+        String x2= berichtclassobject.getInhoud();
+        String x3=berichtclassobject.getOnderwerp();
+     
+        request.setAttribute("datum", x1);
+        request.setAttribute("inhoud", x2);
+        request.setAttribute("onderwerp", x3);
+        
+        
+        request.getRequestDispatcher("helebericht.jsp").forward(request, response);
+     
   
+
+       
+    }
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
