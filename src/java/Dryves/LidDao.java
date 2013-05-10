@@ -19,10 +19,76 @@ import java.util.logging.Logger;
  *
  * @author RickSpijker
  */
-public class SessieDao {
+public class LidDao {
+	 private String vnaam;
+    private String anaam;
+    private String geslacht;
+    private String straat;
+    private String huisnummer;
+    private String postcode;
+    private String stad;
+    private String telnr;
+    private String reknr;
+    private String email;
+    private String wachtwoord;
+    private String wachtwoord2;
+    private String fotoUrl;
+    private String tvoegsel;
+    private String langnotify;
+    private Hashtable errors;
+    private boolean success;
     static Connection currentCon;
 	static ResultSet rs;
 
+	  /**
+     * Ophalen van alle gegevens uit de servlet voor de registreren.jsp
+     *
+     * @param bean
+     * @return
+     */
+    public Lid vulLidDao(Lid bean) {
+
+		vnaam = bean.getVnaam();
+        setVnaam(bean.getVnaam());
+        setAnaam(bean.getAnaam());
+        setTvoegsel(bean.getTvoegsel());
+        setStraat(bean.getStraat());
+        setHuisnummer(bean.getHuisnummer());
+        setGeslacht(bean.getGeslacht());
+        setPostcode(bean.getPostcode());
+        setStad(bean.getStad());
+        setTelnr(bean.getTelnr());
+        setReknr(bean.getReknr());
+        setEmail(bean.getEmail());
+        setWachtwoord(bean.getWachtwoord());
+        setFotoUrl(bean.getFotoUrl());
+        setLangnotify(bean.getLangnotify());
+
+
+        System.out.println("Lid DAO GEGEVENS:");
+        System.out.println("*******************************");
+        System.out.println("voornaam: " + vnaam);
+        System.out.println("achternaam: " + anaam);
+        System.out.println("tussenvoegsel: " + tvoegsel);
+        System.out.println("geslacht: " + geslacht);
+        System.out.println("straat: " + straat);
+        System.out.println("husinummer: " + huisnummer);
+        System.out.println("postcode: " + postcode);
+        System.out.println("stad: " + stad);
+        System.out.println("telefoonnummer: " + telnr);
+        System.out.println("reneningnummer: " + reknr);
+        System.out.println("email: " + email);
+        System.out.println("wachtwoord: " + wachtwoord);
+        System.out.println("wachtwoord2: " + wachtwoord2);
+        System.out.println("fotourl: " + fotoUrl);
+        System.out.println("locale: " + langnotify);
+        System.out.println("*******************************");
+        System.out.println("EIND DAO Lid GEGEVENS");
+
+        saveRegistratie();
+
+        return bean;
+    }
 
     private static Locale toString(String locale) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -141,6 +207,121 @@ public class SessieDao {
         }
 
         return bean;
+
+    }
+
+
+    //Hier kijken of de gebruiker al bestaat met behyulp van een facebookid
+    public Boolean checkDuplicateFacebookID(String facebookid) {
+
+        boolean more=false;
+
+        try {
+
+
+            Connection con = Dryves.ConnectionManager.getConnection();
+
+            ResultSet rs;
+            PreparedStatement pstmt = con.prepareStatement("SELECT facebookid FROM lid  WHERE facebookid=?");
+
+            pstmt.setString(1, facebookid);
+            
+            rs = pstmt.executeQuery();
+            if(rs.next()){
+            
+            more=true;
+            }
+            
+            
+
+        }catch(SQLException e){System.out.println();}
+
+    
+    return more;
+    
+    }
+          
+      
+
+    // in deze functie kijken we of de email bestaat
+    public Boolean checkDuplicate(String email) {
+        currentCon = ConnectionManager.getConnection();
+        Boolean more = null;
+        Statement stmt = null;
+
+        try {
+            stmt = currentCon.createStatement();
+            String query = "SELECT email FROM Lid WHERE email='" + email + "'";
+            ResultSet rs = stmt.executeQuery(query);
+
+            if (rs.next()) {
+                more = true;
+            } else {
+                more = false;
+            }
+            currentCon.close();
+        } catch (SQLException s) {
+            System.out.println("Er kan geen vebinding worden gemaakt met de database." + s);
+        }
+        return more;
+    }
+
+  
+
+    /**
+     * Opslaan van registratie in de database
+     */
+    public Boolean saveRegistratie() {
+        try {
+            currentCon = ConnectionManager.getConnection();
+            PreparedStatement insertLid;
+
+            String queryString = ("INSERT INTO Lid ("
+                    + " vnaam,"
+                    + " anaam,"
+                    + " tvoegsel,"
+                    + " geslacht,"
+                    + " straat,"
+                    + " postcode,"
+                    + " stad,"
+                    + " telnr,"
+                    + " reknr,"
+                    + " email,"
+                    + " wachtwoord,"
+                    + " fotoUrl,"
+                    + " langnotify)"
+                    + "values(?,?,?,?,?,?,?,?,?,?,?,?,?)");
+
+
+            insertLid = currentCon.prepareStatement(queryString);
+
+
+            insertLid.setString(1, vnaam);
+            insertLid.setString(2, anaam);
+            insertLid.setString(3, tvoegsel);
+            insertLid.setString(4, geslacht);
+            insertLid.setString(5, straat);
+            insertLid.setString(6, postcode);
+            insertLid.setString(7, stad);
+            insertLid.setString(8, telnr);
+            insertLid.setInt(9, Integer.parseInt(reknr));
+            insertLid.setString(10, email);
+            insertLid.setString(11, wachtwoord);
+            insertLid.setString(12, fotoUrl);
+            insertLid.setString(13, langnotify);
+
+
+
+            System.out.println("De query is: " + insertLid);
+
+            insertLid.executeUpdate();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(LidDao.class.getName()).log(Level.SEVERE, null, ex);
+				return false;
+
+        }
+        return true;
 
     }
 
@@ -376,6 +557,158 @@ Lid lidfacebook= new Lid();
         
         
         }
+
+	public String getVnaam() {
+		return vnaam;
+	}
+
+	public void setVnaam(String vnaam) {
+		this.vnaam = vnaam;
+	}
+
+	public String getAnaam() {
+		return anaam;
+	}
+
+	public void setAnaam(String anaam) {
+		this.anaam = anaam;
+	}
+
+	public String getGeslacht() {
+		return geslacht;
+	}
+
+	public void setGeslacht(String geslacht) {
+		this.geslacht = geslacht;
+	}
+
+	public String getStraat() {
+		return straat;
+	}
+
+	public void setStraat(String straat) {
+		this.straat = straat;
+	}
+
+	public String getHuisnummer() {
+		return huisnummer;
+	}
+
+	public void setHuisnummer(String huisnummer) {
+		this.huisnummer = huisnummer;
+	}
+
+	public String getPostcode() {
+		return postcode;
+	}
+
+	public void setPostcode(String postcode) {
+		this.postcode = postcode;
+	}
+
+	public String getStad() {
+		return stad;
+	}
+
+	public void setStad(String stad) {
+		this.stad = stad;
+	}
+
+	public String getTelnr() {
+		return telnr;
+	}
+
+	public void setTelnr(String telnr) {
+		this.telnr = telnr;
+	}
+
+	public String getReknr() {
+		return reknr;
+	}
+
+	public void setReknr(String reknr) {
+		this.reknr = reknr;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getWachtwoord() {
+		return wachtwoord;
+	}
+
+	public void setWachtwoord(String wachtwoord) {
+		this.wachtwoord = wachtwoord;
+	}
+
+	public String getWachtwoord2() {
+		return wachtwoord2;
+	}
+
+	public void setWachtwoord2(String wachtwoord2) {
+		this.wachtwoord2 = wachtwoord2;
+	}
+
+	public String getFotoUrl() {
+		return fotoUrl;
+	}
+
+	public void setFotoUrl(String fotoUrl) {
+		this.fotoUrl = fotoUrl;
+	}
+
+	public String getTvoegsel() {
+		return tvoegsel;
+	}
+
+	public void setTvoegsel(String tvoegsel) {
+		this.tvoegsel = tvoegsel;
+	}
+
+	public String getLangnotify() {
+		return langnotify;
+	}
+
+	public void setLangnotify(String langnotify) {
+		this.langnotify = langnotify;
+	}
+
+	public Hashtable getErrors() {
+		return errors;
+	}
+
+	public void setErrors(Hashtable errors) {
+		this.errors = errors;
+	}
+
+	public boolean isSuccess() {
+		return success;
+	}
+
+	public void setSuccess(boolean success) {
+		this.success = success;
+	}
+
+	public static Connection getCurrentCon() {
+		return currentCon;
+	}
+
+	public static void setCurrentCon(Connection currentCon) {
+		LidDao.currentCon = currentCon;
+	}
+
+	public static ResultSet getRs() {
+		return rs;
+	}
+
+	public static void setRs(ResultSet rs) {
+		LidDao.rs = rs;
+	}
         
         
 	

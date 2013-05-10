@@ -38,7 +38,6 @@ public class Login extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-
         try {
 
             Lid user = new Lid();
@@ -46,7 +45,7 @@ public class Login extends HttpServlet {
             user.setEmail(request.getParameter("email"));
             user.setWachtwoord(request.getParameter("wachtwoord"));
 
-            user = SessieDao.login(user);
+            user = LidDao.login(user);
 
             if (user.isValid()) {
 
@@ -55,7 +54,7 @@ public class Login extends HttpServlet {
                 HttpSession session = request.getSession(true);
                 session.setAttribute("currentSessionUser", user);
                 
-                SessieDao dao = new SessieDao();
+                LidDao dao = new LidDao();
 				dao.adminLogin(user);
 
                 if (user.getRol() == 1) {
@@ -63,25 +62,17 @@ public class Login extends HttpServlet {
                     request.getRequestDispatcher("WEB-INF/mijndryves.jsp").forward(request, response);
 
                 } else if (user.getRol() == 2) {
-                    
-                    
-
                     request.getRequestDispatcher("WEB-INF/admin.jsp").forward(request, response);
 
                 }
-
-
             } else {
 
                 System.out.println("Het inloggen is niet gelukt, probeer het opnieuw!");
-
                 response.sendRedirect("login.jsp"); //Retry login 
             }
         } catch (Throwable theException) {
             System.out.println(theException);
         }
-
-
     }
 
     /**

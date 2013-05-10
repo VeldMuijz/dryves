@@ -160,7 +160,7 @@ public class LidWijzigen extends HttpServlet {
         System.out.println("Dit is de langnotify: " + lid.getLangnotify());
         
         
-          SessieDao lidDao = new SessieDao();
+          LidDao lidDao = new LidDao();
        
            // hier wordt de gebruiker in de database opgeslagen
            lidDao.enkelLidUpdaten(lid);
