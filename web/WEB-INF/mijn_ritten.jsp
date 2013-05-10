@@ -55,7 +55,7 @@ Document : mijn_ritten
                                 <td>${rit.eindpunt}</td>
                                 <td>${rit.prijs}</td>
                                 <td><button onclick="window.location = 'RitWijzigen?ritnr=${rit.ritnr}';"><fmt:message bundle="${rb}" key="ritwijzigen" /></button></td>
-                                <td><button onclick="window.location = 'RitKopen?ritnr=${rit.ritnr}';"><fmt:message bundle="${rb}" key="ritkopen" /></button></td>
+                                
                                 </tr> 
 
                         </table>

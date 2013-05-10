@@ -43,14 +43,14 @@ Document : mijn_ritten
                 
                 <c:forEach items="${ritten}" var="rit">
                     <div class="rittenlijst">
-                        <table onclick="window.location = 'RitPlannen?ritnr=${rit.ritnr}';">
+                        <table>
                             
                                 <tr>
                                 <td>${rit.startpunt}</td>
                                 <td><img src ="images/pijl.jpg" /></td>
                                 <td>${rit.eindpunt}</td>
                                 <td>${rit.prijs}</td>
-<!--                                <td><button onclick="RitPlannen?ritnr=${rit.ritnr}"> Rit wijzigen</button></td>-->
+                        <td><button onclick="window.location = 'RitKopen?ritnr=${rit.ritnr}';"><fmt:message bundle="${rb}" key="ritkopen" /></button></td>
                                 </tr> 
 
                         </table>

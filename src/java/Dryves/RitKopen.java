@@ -7,7 +7,11 @@ package Dryves;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -81,9 +85,48 @@ public class RitKopen extends HttpServlet {
 		
 		int ritnr = Integer.parseInt(request.getParameter("ritnr"));
 		ritDao.enkeleRitOphalen(ritnr, rit);
+//		        // Maak in de sessie een object rit aan met naam sessieRit
+//        session.setAttribute("sessieRit", rit);
 		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/ritkopen.jsp");
+		
+		//check of dit lid wel bij deze rit hoort
+		if (rit.getAangeboden() < 1) {
+			
+			System.out.println("Dit lid mag deze rit niet aanpassen, terug naar MijnRitten!");
+			response.sendRedirect("MijnRitten");
+
+		}else{
+
+		Date datum = null;
+		Date einddatum = null;
+		String stringDatum, tijd;
+		
+
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");
+		SimpleDateFormat datumFormat = new SimpleDateFormat("dd/MM/yyyy");
+		SimpleDateFormat tijdFormat = new SimpleDateFormat("HH:mm");
+
+		try {
+			System.out.println(rit.getDatum().toString());
+			datum = dateFormat.parse(rit.getDatum().toString());
+			stringDatum = datumFormat.format(datum);
+			tijd = tijdFormat.format(datum);
+			rit.setTijd(tijd);
+			rit.setDatumkort(stringDatum);
+			
+
+			System.out.println("Dit is datum na conversie: " + stringDatum);
+			System.out.println("Dit is tijd na conversie: " + tijd);
+
+		} catch (ParseException ex) {
+			Logger.getLogger(RitPlannen.class.getName()).log(Level.SEVERE, null, ex);
+			System.out.println("************ Programma snapt Timestamp niet!");
+		}
+
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/ritkopen.jsp");
             dispatcher.forward(request, response);
+		}
+
 		
 	}
 
@@ -127,10 +170,8 @@ public class RitKopen extends HttpServlet {
 		//Voer aankoop uit
 		aankoopDao.vulAankoopDao(aankoop);
 		aankoopDao.aankoopDoen();
-		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("MijnDryves");
-            dispatcher.forward(request, response);
-		
+
+		response.sendRedirect("MijnDryves");
 	}
 
 	/**
