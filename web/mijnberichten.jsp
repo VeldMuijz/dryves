@@ -4,7 +4,7 @@
     Author     : RickSpijker
 --%>
 
-<%@page import="Dryves.Lid"%>
+<%@page import="Dryves.Model.Lid"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.Connection"%>
