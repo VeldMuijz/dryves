@@ -51,6 +51,7 @@ public class FacebookLoginServlet extends HttpServlet {
 			//Wanneer de email niet voorkomt in de database
 			//wordt de gebruiker hier toegevoegd 
 			lidDao.vulLidDao(lid);
+			lidDao.addFacebookLid();
 			
 			Lid lid2 = new Lid();
 			LidDao dao = new LidDao();
