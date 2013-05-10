@@ -89,7 +89,8 @@
                         </tr>
                     </table>
 
-
+							Nog geen lid? Klik <a href="registratie.jsp">hier</a> om u gratis te registreren<br />
+							of login met uw Facebook account.<br/> <br/>
 
 
 
