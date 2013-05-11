@@ -4,23 +4,18 @@
  */
 package Dryves.Controller;
 
+import Dryves.DatumConverter;
 import Dryves.Model.Lid;
 import Dryves.Model.Rit;
 import Dryves.Model.RitDao;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import org.joda.time.DateTime;
 
 /**
  *
@@ -101,31 +96,35 @@ public class RitWijzigen extends HttpServlet {
 			response.sendRedirect("MijnRitten");
 
 		}else{
+//
+//		Date datum = null;
+//		Date einddatum = null;
+//
+//		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");
+//		SimpleDateFormat datumFormat = new SimpleDateFormat("dd/MM/yyyy");
+//		SimpleDateFormat tijdFormat = new SimpleDateFormat("HH:mm");
+//
+//		try {
+//			System.out.println(sessieRit.getDatum().toString());
+//			datum = dateFormat.parse(sessieRit.getDatum().toString());
+//			stringDatum = datumFormat.format(datum);
+//			String tijd = tijdFormat.format(datum);
+//			rit.setTijd(tijd);
+//			rit.setDatumkort(stringDatum);
+//			
+//
+//			System.out.println("Dit is datum na conversie: " + stringDatum);
+//			System.out.println("Dit is tijd na conversie: " + tijd);
+//
+//		} catch (ParseException ex) {
+//			Logger.getLogger(RitPlannen.class.getName()).log(Level.SEVERE, null, ex);
+//			System.out.println("************ Programma snapt Timestamp niet!");
+//		}
+			DatumConverter dc = new DatumConverter();
 
-		Date datum = null;
-		Date einddatum = null;
-
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");
-		SimpleDateFormat datumFormat = new SimpleDateFormat("dd/MM/yyyy");
-		SimpleDateFormat tijdFormat = new SimpleDateFormat("HH:mm");
-
-		try {
-			System.out.println(sessieRit.getDatum().toString());
-			datum = dateFormat.parse(sessieRit.getDatum().toString());
-			stringDatum = datumFormat.format(datum);
-			String tijd = tijdFormat.format(datum);
-			rit.setTijd(tijd);
-			rit.setDatumkort(stringDatum);
+			rit.setDatumkort(dc.korteDatum(sessieRit.getDatum()));
+			rit.setTijd(dc.korteTijd(sessieRit.getDatum()));
 			
-
-			System.out.println("Dit is datum na conversie: " + stringDatum);
-			System.out.println("Dit is tijd na conversie: " + tijd);
-
-		} catch (ParseException ex) {
-			Logger.getLogger(RitPlannen.class.getName()).log(Level.SEVERE, null, ex);
-			System.out.println("************ Programma snapt Timestamp niet!");
-		}
-
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/ritwijzigen.jsp");
 		dispatcher.forward(request, response);
 		}

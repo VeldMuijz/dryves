@@ -4,6 +4,7 @@
  */
 package Dryves.Controller;
 
+import Dryves.DatumConverter;
 import Dryves.Model.AankoopDao;
 import Dryves.Model.Lid;
 import Dryves.Model.Rit;
@@ -101,31 +102,35 @@ public class RitKopen extends HttpServlet {
 
 		}else{
 
-		Date datum = null;
-		Date einddatum = null;
-		String stringDatum, tijd;
-		
+//		Date datum = null;
+//		Date einddatum = null;
+//		String stringDatum, tijd;
+//		
+//
+//		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");
+//		SimpleDateFormat datumFormat = new SimpleDateFormat("dd/MM/yyyy");
+//		SimpleDateFormat tijdFormat = new SimpleDateFormat("HH:mm");
+//
+//		try {
+//			System.out.println(rit.getDatum().toString());
+//			datum = dateFormat.parse(rit.getDatum().toString());
+//			stringDatum = datumFormat.format(datum);
+//			tijd = tijdFormat.format(datum);
+//			rit.setTijd(tijd);
+//			rit.setDatumkort(stringDatum);
+//			
+//
+//			System.out.println("Dit is datum na conversie: " + stringDatum);
+//			System.out.println("Dit is tijd na conversie: " + tijd);
+//
+//		} catch (ParseException ex) {
+//			Logger.getLogger(RitPlannen.class.getName()).log(Level.SEVERE, null, ex);
+//			System.out.println("************ Programma snapt Timestamp niet!");
+//		}
+			DatumConverter dc = new DatumConverter();
 
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");
-		SimpleDateFormat datumFormat = new SimpleDateFormat("dd/MM/yyyy");
-		SimpleDateFormat tijdFormat = new SimpleDateFormat("HH:mm");
-
-		try {
-			System.out.println(rit.getDatum().toString());
-			datum = dateFormat.parse(rit.getDatum().toString());
-			stringDatum = datumFormat.format(datum);
-			tijd = tijdFormat.format(datum);
-			rit.setTijd(tijd);
-			rit.setDatumkort(stringDatum);
-			
-
-			System.out.println("Dit is datum na conversie: " + stringDatum);
-			System.out.println("Dit is tijd na conversie: " + tijd);
-
-		} catch (ParseException ex) {
-			Logger.getLogger(RitPlannen.class.getName()).log(Level.SEVERE, null, ex);
-			System.out.println("************ Programma snapt Timestamp niet!");
-		}
+			rit.setDatumkort(dc.korteDatum(rit.getDatum()));
+			rit.setTijd(dc.korteTijd(rit.getDatum()));
 
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/ritkopen.jsp");
             dispatcher.forward(request, response);

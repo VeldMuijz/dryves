@@ -4,6 +4,7 @@
  */
 package Dryves.Controller;
 
+import Dryves.DatumConverter;
 import Dryves.Model.Lid;
 import Dryves.Model.Rit;
 import Dryves.Model.RitDao;
@@ -117,34 +118,38 @@ public class RitPlannen extends HttpServlet {
         // Instantieren van objecten
         Rit rit = new Rit();
         RitDao ritDao = new RitDao();
-        // Haal de huidige sessie op
+        DatumConverter dc = new DatumConverter();
+		// Haal de huidige sessie op
         HttpSession session = request.getSession();
         // Maak in de sessie een object rit aan met naam sessieRit
         session.setAttribute("sessieRit", rit);
         //Haal de userbean (dit moet sessiebean worden) op uit de sessie
         Lid user = (Lid) session.getAttribute("currentSessionUser");
+		
 
         //Haal alle gegevens op en zet ze in Rit
         //Bouw ingevoerde datum om naar een timestamp
-        Date datum;
-        Date einddatum;
-        stringDatum = request.getParameter("begindatum");
-		System.out.println("Dit is begindatum met het keuze menu'tje: "+ stringDatum);
-        stringTijd = request.getParameter("tijd");
-
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy'T'HH:mm");
-        SimpleDateFormat timestampFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
-
-        try {
-            datum = dateFormat.parse(stringDatum + 'T' + stringTijd);
-            timestamp = timestampFormat.format(datum);
-
-            ritDao.setBegindatum(DateTime.parse(timestamp));
-
-        } catch (ParseException ex) {
-            Logger.getLogger(RitPlannen.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println("************ Programma snapt Timestamp niet!");
-        }
+//        Date datum;
+//        Date einddatum;
+//        stringDatum = request.getParameter("begindatum");
+//		System.out.println("Dit is begindatum met het keuze menu'tje: "+ stringDatum);
+//        stringTijd = request.getParameter("tijd");
+//
+//        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy'T'HH:mm");
+//        SimpleDateFormat timestampFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
+//
+//        try {
+//            datum = dateFormat.parse(stringDatum + 'T' + stringTijd);
+//            timestamp = timestampFormat.format(datum);
+//
+//            ritDao.setBegindatum(DateTime.parse(timestamp));
+//
+//        } catch (ParseException ex) {
+//            Logger.getLogger(RitPlannen.class.getName()).log(Level.SEVERE, null, ex);
+//            System.out.println("************ Programma snapt Timestamp niet!");
+//        }
+		System.out.println("request.getParameter(\"begindatum\") = " + request.getParameter("begindatum"));
+		ritDao.setBegindatum(dc.convertTimestamp(request.getParameter("begindatum"), request.getParameter("tijd")));
 
         //Checken of herhaling aangevinkt is, zo ja vul de dagen van de week
         if (request.getParameter("herhaling") != null && !request.getParameter("einddatum").isEmpty()) {

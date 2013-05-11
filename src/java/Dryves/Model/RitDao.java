@@ -1,10 +1,8 @@
 package Dryves.Model;
 
 import Dryves.ConnectionManager;
-import Dryves.ConnectionManager;
+import Dryves.DatumConverter;
 import Dryves.DayOfWeekIterator;
-import Dryves.DayOfWeekIterator;
-import Dryves.Model.Rit;
 
 
 
@@ -285,12 +283,12 @@ public class RitDao {
         //PreparedStatement statement = null;
         ResultSet resultSet = null;
         List<Rit> ritten = new ArrayList<Rit>();
-        
+        DatumConverter dc = new DatumConverter();
         try {
            
             currentCon = ConnectionManager.getConnection();
             PreparedStatement zoekritten;
-            String queryString = "SELECT * FROM Rit WHERE aangeboden = 1 AND LOWER(startpunt) LIKE LOWER(?) OR LOWER(eindpunt) LIKE LOWER(?);";
+            String queryString = "SELECT * FROM Rit WHERE aangeboden = 1 AND LOWER(startpunt) LIKE LOWER(?) AND LOWER(eindpunt) LIKE LOWER(?);";
             
             zoekritten = currentCon.prepareStatement(queryString);
 
@@ -303,10 +301,14 @@ public class RitDao {
             while (resultSet.next()) {
                 Rit rit = new Rit();
                 rit.setRitnr(resultSet.getInt("ritnr"));
-
                 rit.setStartpunt(resultSet.getString("startpunt"));
                 rit.setEindpunt(resultSet.getString("eindpunt"));
                 rit.setPrijs(resultSet.getDouble("prijs"));
+				rit.setDatum(resultSet.getTimestamp("datum"));
+				
+				rit.setDatumkort(dc.korteDatum(resultSet.getTimestamp("datum")));
+				rit.setTijd(dc.korteTijd(resultSet.getTimestamp("datum")));
+	
                 ritten.add(rit);
             }
         }

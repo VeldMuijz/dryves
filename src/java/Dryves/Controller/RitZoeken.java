@@ -9,7 +9,12 @@ import Dryves.Model.RitDao;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -76,8 +81,8 @@ public class RitZoeken extends HttpServlet {
 		// Maak in de sessie een object rit aan met naam sessieRit
 		session.setAttribute("sessieRit", rit);
 		//   Lid user = (Lid) session.getAttribute("currentSessionUser");
-                String startpunt = request.getParameter("zoekrit");
-                String eindpunt = request.getParameter("zoekrit");
+                String startpunt = request.getParameter("zoekritbegin");
+                String eindpunt = request.getParameter("zoekriteind");
         try {
             List<Rit> ritten;
            // rit.setLidnr(user.getLidnr());
