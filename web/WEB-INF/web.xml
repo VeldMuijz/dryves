@@ -32,6 +32,14 @@
         <servlet-name>LidWijzigen</servlet-name>
         <servlet-class>Dryves.Controller.LidWijzigen</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LidBeoordelen</servlet-name>
+        <servlet-class>Dryves.Controller.LidBeoordelen</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>MijnGekochteRitten</servlet-name>
+        <servlet-class>Dryves.Controller.MijnGekochteRitten</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LidWijzigen</servlet-name>
         <url-pattern>/LidWijzigen</url-pattern>
@@ -83,6 +91,14 @@
     <servlet-mapping>
         <servlet-name>Admindryves</servlet-name>
         <url-pattern>/Admindryves</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LidBeoordelen</servlet-name>
+        <url-pattern>/LidBeoordelen</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MijnGekochteRitten</servlet-name>
+        <url-pattern>/MijnGekochteRitten</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>

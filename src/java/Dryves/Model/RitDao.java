@@ -251,6 +251,48 @@ public class RitDao {
         
     }
     
+	        /**
+* Haal een lijst van gekochte ritten per lid op
+*
+* @return
+* @throws SQLException
+*/
+    public List<Rit> getAlleGekochteRittenPerLid() throws SQLException {
+         Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+        List<Rit> ritten = new ArrayList<Rit>();
+        
+        try {
+           
+            currentCon = ConnectionManager.getConnection();
+            PreparedStatement gekochteritten;
+            String queryString = "SELECT r.* "
+								+ "FROM rit AS r, aankoop AS a "
+								+ "WHERE r.ritnr = a.ritnr AND a.lidnr = ?;";
+            
+            gekochteritten = currentCon.prepareStatement(queryString);
+            gekochteritten.setInt(1, lidnr);
+            resultSet = gekochteritten.executeQuery();
+           
+            while (resultSet.next()) {
+                Rit rit = new Rit();
+                rit.setRitnr(resultSet.getInt("ritnr"));
+                rit.setStartpunt(resultSet.getString("startpunt"));
+                rit.setEindpunt(resultSet.getString("eindpunt"));
+                rit.setPrijs(resultSet.getDouble("prijs"));
+                ritten.add(rit);
+            }
+        }
+            finally {
+// if (resultSet != null) try { resultSet.close(); } catch (SQLException ignore) {}
+// if (statement != null) try { statement.close(); } catch (SQLException ignore) {}
+// if (connection != null) try { connection.close(); } catch (SQLException ignore) {}
+// }
+        }
+        return ritten;
+        
+    }
         public List<Rit> getRittenLijst() {
 
         try {
