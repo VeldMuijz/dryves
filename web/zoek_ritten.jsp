@@ -59,7 +59,12 @@ Document : mijn_ritten
 										<td>${rit.startpunt}</td>
 										<td><img src ="images/pijl.jpg" /></td>
 										<td>${rit.eindpunt}</td>
-										<td>${rit.prijs}</td>
+									</tr>
+									
+									<tr>
+										<td>Prijs: € ${rit.prijs}</td>
+										<td/>
+										<td>${rit.datumkort} ${rit.tijd}</td>
 										<td>
 											<c:choose>
 												<c:when test="${currentSessionUser.lidnr > 0}"> 
