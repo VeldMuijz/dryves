@@ -48,7 +48,6 @@ Document : mijn_ritten
                 <c:forEach items="${aankopen}" var="aankoop">
                     <div class="rittenlijst">
                         <table>
-                            
                                 <tr>
                                 <td>${aankoop.aankoopnr}</td>
 								<td>${aankoop.factuurnr}</td>

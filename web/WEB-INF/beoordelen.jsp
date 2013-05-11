@@ -37,6 +37,7 @@
 
 				<div class="invoerveld">
 					<form action="LidBeoordelen" method="post">
+						<input name="aankoopnr" hidden="true" value="${sessieBeoordeling.aankoopnr}"/>
 						Stiptheid
 						<select name="stiptheid" > 
 									<option value="5"> 5 </option>
