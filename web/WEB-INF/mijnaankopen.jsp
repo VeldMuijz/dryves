@@ -17,7 +17,7 @@ Document : mijn_ritten
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link type="text/css" rel="stylesheet" href="css/dryver.css"/>
-        <title>Mijn gekochte ritten</title>
+        <title>Mijn ritten</title>
 
     </head>
     <body>
@@ -41,19 +41,20 @@ Document : mijn_ritten
 
 
             <div class="contentPanel">         
-<!--                <button onclick="window.location = '/Dryves/RitPlannen';"><fmt:message bundle="${rb}" key="planrit" /></button> <br />-->
+                <button onclick="window.location = '/Dryves/RitPlannen';"><fmt:message bundle="${rb}" key="planrit" /></button> <br />
 
                 
                 
-                <c:forEach items="${aankooplijst}" var="aankoop">
+                <c:forEach items="${aankopen}" var="aankoop">
                     <div class="rittenlijst">
                         <table>
                             
                                 <tr>
-									<td>
                                 <td>${aankoop.aankoopnr}</td>
+								<td>${aankoop.factuurnr}</td>
+								<td>${aankoop.ritnr}</td>
                                 <td>${aankoop.datum}</td>
-<!--                                <td><button onclick="window.location = 'LidBeoordelen?aankoopnr=${aankoop.aankoopnr}';"><fmt:message bundle="${rb}" key="ritwijzigen" /></button></td>-->
+                               <td><button onclick="window.location = 'LidBeoordelen?aankoopnr=${aankoop.aankoopnr}';">Beoordelen</button></td>
                                 
                                 </tr> 
 

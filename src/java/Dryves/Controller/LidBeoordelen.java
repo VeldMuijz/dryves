@@ -67,19 +67,47 @@ public class LidBeoordelen extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
 		// Instantieren van objecten
 		Beoordeling beoordeling = new Beoordeling();
 		DatumConverter dc = new DatumConverter();
-
-
 		// Haal de huidige sessie op
 		HttpSession session = request.getSession();
 		// Maak in de sessie een object rit aan met naam sessieRit
 		session.setAttribute("sessieBeoordeling", beoordeling);
-		
-		Beoordeling sessieBeoordeling = (Beoordeling) session.getAttribute("sessieBeoordeling");
 		//Haal de userbean (dit moet sessiebean worden) op uit de sessie
 		Lid user = (Lid) session.getAttribute("currentSessionUser");
+		Beoordeling sessieBeoordeling = (Beoordeling) session.getAttribute("sessieBeoordeling");	
+		
+		sessieBeoordeling.setAankoopnr(Integer.parseInt(request.getParameter("aankoopnr")));
+		sessieBeoordeling.setLidnr(user.getLidnr());
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/beoordelen.jsp");
+		dispatcher.forward(request, response);
+	}
+
+	/**
+	 * Handles the HTTP
+	 * <code>POST</code> method.
+	 *
+	 * @param request servlet request
+	 * @param response servlet response
+	 * @throws ServletException if a servlet-specific error occurs
+	 * @throws IOException if an I/O error occurs
+	 */
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// Instantieren van objecten
+		Beoordeling beoordeling = new Beoordeling();
+		DatumConverter dc = new DatumConverter();
+		// Haal de huidige sessie op
+		HttpSession session = request.getSession();
+		// Maak in de sessie een object rit aan met naam sessieRit
+		session.setAttribute("sessieBeoordeling", beoordeling);
+		//Haal de userbean (dit moet sessiebean worden) op uit de sessie
+		Lid user = (Lid) session.getAttribute("currentSessionUser");
+		Beoordeling sessieBeoordeling = (Beoordeling) session.getAttribute("sessieBeoordeling");
 		
 		request.getParameter("aankoopnr");
 		
@@ -100,34 +128,6 @@ public class LidBeoordelen extends HttpServlet {
 			
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/ritwijzigen.jsp");
 		dispatcher.forward(request, response);
-	}
-
-	/**
-	 * Handles the HTTP
-	 * <code>POST</code> method.
-	 *
-	 * @param request servlet request
-	 * @param response servlet response
-	 * @throws ServletException if a servlet-specific error occurs
-	 * @throws IOException if an I/O error occurs
-	 */
-	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		  // Instantieren van objecten
-        Rit rit = new Rit();
-        RitDao ritDao = new RitDao();
-        DatumConverter dc = new DatumConverter();
-		// Haal de huidige sessie op
-        HttpSession session = request.getSession();
-        // Maak in de sessie een object rit aan met naam sessieRit
-        session.setAttribute("sessieRit", rit);
-        //Haal de userbean (dit moet sessiebean worden) op uit de sessie
-        Lid user = (Lid) session.getAttribute("currentSessionUser");
-		
-		request.getParameter("beoordeling");
-		request.getParameter("");
-		
 		
 		
 	}
