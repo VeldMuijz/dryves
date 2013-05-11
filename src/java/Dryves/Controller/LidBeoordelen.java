@@ -5,11 +5,13 @@
 package Dryves.Controller;
 
 import Dryves.DatumConverter;
+import Dryves.Model.Beoordeling;
 import Dryves.Model.Lid;
 import Dryves.Model.Rit;
 import Dryves.Model.RitDao;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -65,7 +67,39 @@ public class LidBeoordelen extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		processRequest(request, response);
+		// Instantieren van objecten
+		Beoordeling beoordeling = new Beoordeling();
+		DatumConverter dc = new DatumConverter();
+
+
+		// Haal de huidige sessie op
+		HttpSession session = request.getSession();
+		// Maak in de sessie een object rit aan met naam sessieRit
+		session.setAttribute("sessieBeoordeling", beoordeling);
+		
+		Beoordeling sessieBeoordeling = (Beoordeling) session.getAttribute("sessieBeoordeling");
+		//Haal de userbean (dit moet sessiebean worden) op uit de sessie
+		Lid user = (Lid) session.getAttribute("currentSessionUser");
+		
+		request.getParameter("aankoopnr");
+		
+
+		System.out.println("+++++++++++++Security Check++++++++++++++++++\n Lidnr uit aankoop: " + beoordeling.getLidnr() + " lidnr uit lid: " + user.getLidnr());
+		//check of dit lid wel bij deze rit hoort
+		if (beoordeling.getLidnr() != user.getLidnr()) {
+			
+			System.out.println("Dit lid mag deze aankoop niet beoordelen, terug naar MijnAankopen!");
+			response.sendRedirect("MijnAankopen");
+
+		}else{
+			
+		}
+		
+
+
+			
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/ritwijzigen.jsp");
+		dispatcher.forward(request, response);
 	}
 
 	/**
@@ -90,6 +124,11 @@ public class LidBeoordelen extends HttpServlet {
         session.setAttribute("sessieRit", rit);
         //Haal de userbean (dit moet sessiebean worden) op uit de sessie
         Lid user = (Lid) session.getAttribute("currentSessionUser");
+		
+		request.getParameter("beoordeling");
+		request.getParameter("");
+		
+		
 		
 	}
 

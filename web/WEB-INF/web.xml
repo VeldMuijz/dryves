@@ -37,8 +37,8 @@
         <servlet-class>Dryves.Controller.LidBeoordelen</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>MijnGekochteRitten</servlet-name>
-        <servlet-class>Dryves.Controller.MijnGekochteRitten</servlet-class>
+        <servlet-name>MijnAankopen</servlet-name>
+        <servlet-class>Dryves.Controller.MijnAankopen</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LidWijzigen</servlet-name>
@@ -97,8 +97,8 @@
         <url-pattern>/LidBeoordelen</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>MijnGekochteRitten</servlet-name>
-        <url-pattern>/MijnGekochteRitten</url-pattern>
+        <servlet-name>MijnAankopen</servlet-name>
+        <url-pattern>/MijnAankopen</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>

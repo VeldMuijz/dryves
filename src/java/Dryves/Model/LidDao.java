@@ -9,6 +9,7 @@ package Dryves.Model;
  * @author RickSpijker
  */
 import Dryves.ConnectionManager;
+import static Dryves.Model.RitDao.currentCon;
 import java.util.*;
 import java.sql.*;
 import java.util.logging.Level;
@@ -200,6 +201,36 @@ public class LidDao {
 
 		return bean;
 
+	}
+/**
+ * Beoordeling voor een lid updaten
+ * @param beoordeelde
+ * @param beoordeling
+ * @return 
+ */
+	public Boolean updateBeoordelingLid(int beoordeelde, int beoordeling) {
+		
+		try {
+			currentCon = ConnectionManager.getConnection();
+			PreparedStatement beoordeelLid;
+			String queryString = 
+					"UPDATE lid "
+					+ "SET beoordeling = ("
+					+ "("
+					+ "		(SELECT beoordeling FROM lid WHERE lidnr = ?) + ? )/ 2"
+					+ ");";
+			
+			beoordeelLid = currentCon.prepareStatement(queryString);
+			beoordeelLid.setInt(1, beoordeelde);
+			beoordeelLid.setInt(2, beoordeling);
+			
+			System.out.println("+++++++++++++BeoordeelLid+++++++++++++++\n Query = " + queryString + "\n");
+			beoordeelLid.executeUpdate();
+
+		} catch (SQLException ex) {
+			Logger.getLogger(LidDao.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		return true;
 	}
 
 	//Hier kijken of de gebruiker al bestaat met behyulp van een facebookid

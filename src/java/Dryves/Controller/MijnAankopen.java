@@ -4,6 +4,7 @@
  */
 package Dryves.Controller;
 
+import Dryves.Model.AankoopDao;
 import Dryves.Model.Lid;
 import Dryves.Model.Rit;
 import Dryves.Model.RitDao;
@@ -22,7 +23,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author jeroen
  */
-public class MijnGekochteRitten extends HttpServlet {
+public class MijnAankopen extends HttpServlet {
 
 	/**
 	 * Processes requests for both HTTP
@@ -67,14 +68,17 @@ public class MijnGekochteRitten extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-	//processRequest(request, response);
+
 	// Instantieren van objecten
 		Rit rit = new Rit();
 		RitDao ritDao = new RitDao();
+		Aankoop aankoop = new Aankoop();
+		AankoopDao aankoopDao = new AankoopDao();
 		// Haal de huidige sessie op
 		HttpSession session = request.getSession();
-		// Maak in de sessie een object rit aan met naam sessieRit
+		// Maak in de sessie een object rit aan met naam sessieRit, en sessieAankoop
 		session.setAttribute("sessieRit", rit);
+		session.setAttribute("sessieAankoop", aankoop);
 		//Haal de userbean (dit moet sessiebean worden) op uit de sessie
 		Lid user = (Lid) session.getAttribute("currentSessionUser");
 		try {
@@ -82,9 +86,14 @@ public class MijnGekochteRitten extends HttpServlet {
 			rit.setLidnr(user.getLidnr());
 			ritDao.vulRitDao(rit);
 			ritten = ritDao.getAlleGekochteRittenPerLid();
+			
+			List<Aankoop> aankopen;
+			aankopen = aankoopDao.getAlleAankopenPerLid(user.getLidnr());
+			
 			request.setAttribute("ritten", ritten);
-
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/mijngekochteritten.jsp");
+			request.setAttribute("aankopen", aankopen);
+			
+			RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/mijnaankopen.jsp");
 			dispatcher.forward(request, response);
 		} catch (SQLException e) {
 			throw new ServletException("Cannot obtain products from DB", e);
