@@ -189,7 +189,11 @@ public class RitKopen extends HttpServlet {
                 //Hier wordt ervoor gezorgd, dat de gegevens van het Lid, gebruikt kunnen worden in de PDF.
                 pdf.vulPDF(lid);
                 
+                //Hier worden de ritgegevens doorgespeeld aan de PDF class.
+                pdf.vulRit(rit);
                 
+                //Hier wordt de PDF opgesteld. 
+                pdf.bouwPDF();
 
 		response.sendRedirect("MijnDryves");
 	}

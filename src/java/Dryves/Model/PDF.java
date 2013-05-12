@@ -20,7 +20,6 @@ import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
-import com.itextpdf.text.Image;
 import com.itextpdf.text.List;
 import com.itextpdf.text.ListItem;
 import com.itextpdf.text.Paragraph;
@@ -31,6 +30,7 @@ import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import org.joda.time.DateTime;
 
 
 public class PDF {
@@ -41,34 +41,54 @@ public class PDF {
       Font.NORMAL, BaseColor.RED);
   private static Font subFont = new Font(Font.FontFamily.TIMES_ROMAN, 16,
       Font.BOLD);
-  private static Font smallBold = new Font(Font.FontFamily.TIMES_ROMAN, 12,
+  private static Font smallBold = new Font(Font.FontFamily.TIMES_ROMAN, 11,
       Font.BOLD);
   
+  //Hieronder worden de variabelen gedeclareerd, die gebruikt worden om de lidgegevens te kunnen gebruiken in de PDF.
+  
   private String voornaam;
+  private String achternaam;
+  private String email;
+  
+  
+  //De ritgegevens worden toegewezen aan de PDF.
+  
+  private int ritnummer;
+  private int factuurnr;
   
   public Lid vulPDF(Lid bean){
       
       voornaam = bean.getVnaam();
+      achternaam = bean.getAnaam();
+      email = bean.getEmail();
       
       return bean;
   } 
   
+  public Rit vulRit(Rit bean2){
   
- 
-
-  public void main(String[] args) {
-    try {
+      ritnummer = bean2.getRitnr();
+  
+      return bean2;
+  }
+  
+  public void bouwPDF(){
+  
+      try {
       Document document = new Document();
       PdfWriter.getInstance(document, new FileOutputStream(FILE));
       document.open();
       addMetaData(document);
       addTitlePage(document);
-      addContent(document);
+      //addContent(document);
       document.close();
     } catch (Exception e) {
       e.printStackTrace();
     }
+  
+      
   }
+
 
   // iText allows to add metadata to the PDF which can be viewed in your Adobe
   // Reader
@@ -87,21 +107,34 @@ public class PDF {
     // We add one empty line
     addEmptyLine(preface, 1);
     
-    Image image1 = Image.getInstance("Web/images/Logo_Dryves.png");
-    preface.add(image1);
+    //Image image1 = Image.getInstance("Web/images/Logo_Dryves.png");
+    //preface.add(image1);
     
     // Lets write a big header
     preface.add(new Paragraph("Factuur - Dryves.eu", catFont));
 
     addEmptyLine(preface, 1);
 
-    preface.add(new Paragraph("Hieronder kunt u uw zojuist gekocht rit bekijken. ",
+    preface.add(new Paragraph("Uw gegevens:",
         smallBold));
     
     addEmptyLine(preface, 1);
     
     
-    preface.add(new Paragraph(voornaam,
+    preface.add(new Paragraph(voornaam + " " + achternaam,
+        smallBold));
+    
+    preface.add(new Paragraph(email,
+        smallBold)); 
+    
+    addEmptyLine(preface, 1);
+
+    preface.add(new Paragraph("Uw aankoop:",
+        smallBold));
+    
+    addEmptyLine(preface, 1);
+    
+    preface.add(new Paragraph("Ritnummer: " + ritnummer,
         smallBold));
 
     document.add(preface);
