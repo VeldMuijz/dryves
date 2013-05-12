@@ -210,7 +210,7 @@ public class RitKopen extends HttpServlet {
                         "\n" + "Van: " + rit.getStartpunt() +
                         "\n" + "Naar: " + rit.getEindpunt() +
                         "\n" + "U heeft deze rit gekocht via: " +aankoop.getBetaalwijze() +
-                        "\n" + "TEST - Lidnummer van de aanbieder: " + rit.getLidnr();
+                        "\n" + "Lidnummer van de aanbieder: " + rit.getLidnr();
  
                 verstuurEmail ve = new verstuurEmail();
             

@@ -63,19 +63,4 @@ public class verstuurEmail {
     
     }
  
-	public static void main(String[] args) {
-            
-            String van = "dryveseu@gmail.com";
-            String naar = "rick@plusmeer.nl";
-            String onderwerp = "Factuur Dryves";
-            String bericht = "Dit is het eerste bericht";
- 
-            verstuurEmail se = new verstuurEmail();
-            
-            se.verstuurEmail(van, naar, onderwerp, bericht);
-            
-            System.out.println("Het versturen van de mail naar " + naar + " is gelukt!");
-            
-            
-	}
 }
