@@ -5,7 +5,7 @@
 --%>
 
 <%@page import="Dryves.BerichtClass"%>
-<%@page import="Dryves.Lid"%>
+<%@page import="Dryves.Model.Lid"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 

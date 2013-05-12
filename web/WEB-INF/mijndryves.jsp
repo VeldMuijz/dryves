@@ -5,7 +5,7 @@
 --%>
 
 <%@page import="java.util.Locale"%>
-<%@page import="Dryves.Lid"%>
+<%@page import="Dryves.Model.Lid"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
@@ -46,6 +46,7 @@
                 <button onclick="window.location = 'mijndryves_gegevens.jsp';"><fmt:message bundle="${rb}" key="mijngegevens" /></button>
                 <div class="hidden"> <button onclick="window.location = 'rit_plannen.jsp';"><fmt:message bundle="${rb}" key="mijnberichten" /></button></div>
                 <button onclick="window.location = 'MijnRitten';"><fmt:message bundle="${rb}" key="mijnritten" /></button>
+                <button onclick="window.location = 'MijnAankopen';">Mijn Aankopen</button>
 
                 <br /><br />
                 

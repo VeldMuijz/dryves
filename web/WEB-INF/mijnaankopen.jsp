@@ -45,16 +45,15 @@ Document : mijn_ritten
 
                 
                 
-                <c:forEach items="${ritten}" var="rit">
+                <c:forEach items="${aankopen}" var="aankoop">
                     <div class="rittenlijst">
                         <table>
-                            
                                 <tr>
-                                <td>${rit.startpunt}</td>
-                                <td><img src ="images/pijl.jpg" /></td>
-                                <td>${rit.eindpunt}</td>
-                                <td>${rit.prijs}</td>
-                                <td><button onclick="window.location = 'RitWijzigen?ritnr=${rit.ritnr}';"><fmt:message bundle="${rb}" key="ritwijzigen" /></button></td>
+                                <td>${aankoop.aankoopnr}</td>
+								<td>${aankoop.factuurnr}</td>
+								<td>${aankoop.ritnr}</td>
+                                <td>${aankoop.datum}</td>
+                               <td><button onclick="window.location = 'LidBeoordelen?aankoopnr=${aankoop.aankoopnr}';">Beoordelen</button></td>
                                 
                                 </tr> 
 

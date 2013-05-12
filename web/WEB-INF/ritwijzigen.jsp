@@ -182,13 +182,13 @@
 
 				return true;
 			}
-                        
-                       $(function() {
-                            
-                        $( "#begindatum" ).datepicker();
-                        
-                        
-                        });
+
+			$(function() {
+
+				$("#begindatum").datepicker();
+
+
+			});
 
         </script>
 
@@ -200,7 +200,7 @@
 			<img src="${currentSessionUser.getAchtergrond()}" />
 
 		</div>
-	
+
 
 		<div class="drvyesWrapper">
 
@@ -214,35 +214,20 @@
             </jsp:include>
 
 			<div class="contentPanel">
+				<% String tijd = (String) request.getAttribute("tijd");%>
 
 
 				<div class="invoerveld">
 					<form action="RitPlannen" method="post" onsubmit="return isCompleet();">
-                                            <input name="ritnr" value="${sessieRit.ritnr}" hidden="false"/>
+						<input name="ritnr" value="${sessieRit.ritnr}" hidden="false"/>
 						<fmt:message bundle="${rb}" key="startadres" /><br/> 
 						<input type="text" id="start" name="start" onchange="calcRoute();" style ="width: 350; float: right:" value="${sessieRit.startpunt}"><br />
 						<fmt:message bundle="${rb}" key="eindadres" /><br/>
 						<input type="text" id="end" name="end" onchange="calcRoute();" style ="width: 350; float: right:" value="${sessieRit.eindpunt}"> <br />	
 
-						<fmt:message bundle="${rb}" key="begindatum" /><br/> <input type="date" id="begindatum" name="begindatum" value="${sessieRit.datum}"> <br/>
-						<fmt:message bundle="${rb}" key="tijd" /><br/> <input type="text" id="tijd" name="tijd"> <br/><br/>
-<!--						<td> Herhaling 
-							<input type="checkbox" id="herhaling" name="herhaling" onclick="isChecked(this.checked);"> </td>
-						<br/><br/>
-						<div id="dagenCheckBox" style="display: none;">
-							Selecteer hier uw herhaaldagen: <br/>
-							<table>
-								<td><input type="checkbox" name="ma" value="ma"> Ma </input> </td>
-								<td><input type="checkbox" name="di" value="di"> Di </input> </td>
-								<td><input type="checkbox" name="wo" value="wo"> Wo </input> </td>
-								<td><input type="checkbox" name="don" value="do"> Do </input> </td>
-								<td><input type="checkbox" name="vr" value="vr"> Vr </input> </td>
-								<td><input type="checkbox" name="za" value="za"> Za </input> </td>
-								<td><input type="checkbox" name="zo" value="zo"> Zo </input> </td>
-							</table>
-							<br/>
-							Einddatum: <input type="date" id="einddatum" name="einddatum"> </div>-->
-
+						<fmt:message bundle="${rb}" key="begindatum" /><br/> <input type="date" id="begindatum" name="begindatum" value="${sessieRit.datumkort}"> <br/>
+						<fmt:message bundle="${rb}" key="tijd" /><br/> <input type="text" id="tijd" name="tijd" value="${sessieRit.tijd}"> <br/><br/>
+						${tijd}
 
 						<br /> <br />
 
@@ -263,14 +248,14 @@
 									<option value="electrisch"><fmt:message bundle="${rb}" key="electrisch" /></option>
 									<option value="hybride"><fmt:message bundle="${rb}" key="hybride" /></option>
 								</select></td></table> <br/><br/>
-                                                                
-                                                <c:choose>       
-                                                    <c:when  test="${sessieRit.aangeboden > 0}">
-                                                        <input type="checkbox" name="aanbieden" checked><fmt:message bundle="${rb}" key="directaanbieden" /></input> </c:when>
-                                                        <c:otherwise>
-                                                            <input type="checkbox" name="aanbieden"><fmt:message bundle="${rb}" key="directaanbieden" /></input>
-                                                        </c:otherwise>
-                                                </c:choose>
+
+						<c:choose>       
+							<c:when  test="${sessieRit.aangeboden > 0}">
+								<input type="checkbox" name="aanbieden" checked><fmt:message bundle="${rb}" key="directaanbieden" /></input> </c:when>
+							<c:otherwise>
+								<input type="checkbox" name="aanbieden"><fmt:message bundle="${rb}" key="directaanbieden" /></input>
+							</c:otherwise>
+						</c:choose>
 						<button type="submit"><fmt:message bundle="${rb}" key="klik" /></button>
 
 						<input id="hiddenstart" name="hiddenstart" style="display: none;" ></input>

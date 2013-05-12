@@ -4,11 +4,11 @@
     Author     : RickSpijker
 --%>
 
-<%@page import="Dryves.Lid"%>
-<%@page import="Dryves.Login"%>
+<%@page import="Dryves.Model.Lid"%>
+<%@page import="Dryves.Controller.Login"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<%@page import="Dryves.Login"%>
+<%@page import="Dryves.Controller.Login"%>
 
 
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
