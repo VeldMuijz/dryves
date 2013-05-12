@@ -4,11 +4,15 @@
  */
 package Dryves.Controller;
 
+import Dryves.Model.PDF;
 import Dryves.DatumConverter;
 import Dryves.Model.AankoopDao;
 import Dryves.Model.Lid;
 import Dryves.Model.Rit;
 import Dryves.Model.RitDao;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.pdf.PdfWriter;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Timestamp;
@@ -179,6 +183,13 @@ public class RitKopen extends HttpServlet {
 		//Voer aankoop uit
 		aankoopDao.vulAankoopDao(aankoop);
 		aankoopDao.aankoopDoen();
+                
+                PDF pdf = new PDF();
+                
+                //Hier wordt ervoor gezorgd, dat de gegevens van het Lid, gebruikt kunnen worden in de PDF.
+                pdf.vulPDF(lid);
+                
+                
 
 		response.sendRedirect("MijnDryves");
 	}
