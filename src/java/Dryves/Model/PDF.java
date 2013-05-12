@@ -9,6 +9,7 @@ package Dryves.Model;
  * @author RickSpijker
  */
 
+import Dryves.Controller.Aankoop;
 import Dryves.Model.Lid;
 import java.io.FileOutputStream;
 
@@ -20,6 +21,7 @@ import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
+import com.itextpdf.text.Image;
 import com.itextpdf.text.List;
 import com.itextpdf.text.ListItem;
 import com.itextpdf.text.Paragraph;
@@ -50,12 +52,6 @@ public class PDF {
   private String achternaam;
   private String email;
   
-  
-  //De ritgegevens worden toegewezen aan de PDF.
-  
-  private int ritnummer;
-  private int factuurnr;
-  
   public Lid vulPDF(Lid bean){
       
       voornaam = bean.getVnaam();
@@ -65,11 +61,27 @@ public class PDF {
       return bean;
   } 
   
+  //De ritgegevens worden toegewezen aan de PDF.
+  private int ritnummer;
+  
   public Rit vulRit(Rit bean2){
   
       ritnummer = bean2.getRitnr();
   
       return bean2;
+  }
+  
+  //Hieronder worden de gegevens van de aankoop opgehaald.
+  private String betaalwijze;
+  private int factuurnr;
+  
+  public Aankoop vulAankoop(Aankoop bean3){
+      
+      betaalwijze = bean3.getBetaalwijze();
+      factuurnr = bean3.getFactuurnr();
+  
+      return bean3;
+  
   }
   
   public void bouwPDF(){
@@ -107,11 +119,12 @@ public class PDF {
     // We add one empty line
     addEmptyLine(preface, 1);
     
-    //Image image1 = Image.getInstance("Web/images/Logo_Dryves.png");
-    //preface.add(image1);
+    //Image logodryves = Image.getInstance("images/Logo_Dryves.png");
+    //preface.add(logodryves);
     
     // Lets write a big header
     preface.add(new Paragraph("Factuur - Dryves.eu", catFont));
+    preface.add(new Paragraph("Factuurnummer :" + factuurnr, smallBold));
 
     addEmptyLine(preface, 1);
 
@@ -136,12 +149,15 @@ public class PDF {
     
     preface.add(new Paragraph("Ritnummer: " + ritnummer,
         smallBold));
+    
+    preface.add(new Paragraph("Betaalwijze: " + betaalwijze,
+        smallBold));
 
     document.add(preface);
 
   }
 
-  private static void addContent(Document document) throws DocumentException {
+  private void addContent(Document document) throws DocumentException {
     Anchor anchor = new Anchor("Factuurgegevens", catFont);
     anchor.setName("Factuurgegevens");
 
@@ -186,7 +202,7 @@ public class PDF {
 
   }
 
-  private static void createTable(Section subCatPart)
+  private void createTable(Section subCatPart)
       throws BadElementException {
     PdfPTable table = new PdfPTable(3);
 
@@ -195,7 +211,7 @@ public class PDF {
     // t.setSpacing(4);
     // t.setBorderWidth(1);
 
-    PdfPCell c1 = new PdfPCell(new Phrase("Table Header 1"));
+    PdfPCell c1 = new PdfPCell(new Phrase("Uw Gegevens"));
     c1.setHorizontalAlignment(Element.ALIGN_CENTER);
     table.addCell(c1);
 
@@ -208,8 +224,8 @@ public class PDF {
     table.addCell(c1);
     table.setHeaderRows(1);
 
-    table.addCell("1.0");
-    table.addCell("1.1");
+    table.addCell("Naam");
+    table.addCell(voornaam + " " + achternaam);
     table.addCell("1.2");
     table.addCell("2.1");
     table.addCell("2.2");

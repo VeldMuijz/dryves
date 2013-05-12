@@ -10,6 +10,7 @@ import Dryves.Model.AankoopDao;
 import Dryves.Model.Lid;
 import Dryves.Model.Rit;
 import Dryves.Model.RitDao;
+import Dryves.Model.verstuurEmail;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.pdf.PdfWriter;
 import java.io.FileOutputStream;
@@ -192,8 +193,21 @@ public class RitKopen extends HttpServlet {
                 //Hier worden de ritgegevens doorgespeeld aan de PDF class.
                 pdf.vulRit(rit);
                 
+                pdf.vulAankoop(aankoop);
+                
                 //Hier wordt de PDF opgesteld. 
                 pdf.bouwPDF();
+                
+                //Mailfunctie! Hier moet alleen nog de PDf aan toegevoegd worden.
+                //TODO PDF toevoegen aan de mail.
+                String van = "dryveseu@gmail.com";
+                String naar = lid.getEmail();
+                String onderwerp = "Factuurnummer" + aankoop.getFactuurnr() + " Dryves";
+                String bericht = "U heeft zojuist ritnummer " + rit.getRitnr() + " gekocht.";
+ 
+                verstuurEmail ve = new verstuurEmail();
+            
+                ve.verstuurEmail(van, naar, onderwerp, bericht);
 
 		response.sendRedirect("MijnDryves");
 	}
