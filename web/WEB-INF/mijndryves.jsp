@@ -41,22 +41,18 @@
 
             <div class="contentPanel">
                 
-
+            <fmt:message bundle="${rb}" key="ubentingelogdals" /> ${currentSessionUser.getVnaam()} ${currentSessionUser.getAnaam()}
+            
+            <br /><br />
+            
+            <div class="mijndryves">
                 
-                <button onclick="window.location = 'mijndryves_gegevens.jsp';"><fmt:message bundle="${rb}" key="mijngegevens" /></button>
-                <div class="hidden"> <button onclick="window.location = 'rit_plannen.jsp';"><fmt:message bundle="${rb}" key="mijnberichten" /></button></div>
-                <button onclick="window.location = 'MijnRitten';"><fmt:message bundle="${rb}" key="mijnritten" /></button>
-                <button onclick="window.location = 'MijnAankopen';">Mijn Aankopen</button>
-
-                <br /><br />
+                <button onclick="window.location = 'mijndryves_gegevens.jsp';"><fmt:message bundle="${rb}" key="mijngegevens" /> <img src="images/personal.png" /></button><button onclick="window.location = 'rit_plannen.jsp';"><fmt:message bundle="${rb}" key="planrit" /> <img src="images/mapicon.png" /></button><button onclick="window.location = 'MijnRitten';"><fmt:message bundle="${rb}" key="mijnritten" /> <img src="images/tire.png" /></button><button onclick="window.location = 'MijnAankopen';">Mijn Aankopen <img src="images/cart.png" /></button>
                 
-                <fmt:message bundle="${rb}" key="ubentingelogdals" /> ${currentSessionUser.getVnaam()} ${currentSessionUser.getAnaam()}
+            </div>
+
+            <br />
                 
-                <br /><br />
-        
-
-        
-
         <img src='${currentSessionUser.getFotoUrl()}'/>
         
         
