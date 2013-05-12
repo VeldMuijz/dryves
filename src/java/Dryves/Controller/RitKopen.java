@@ -193,6 +193,7 @@ public class RitKopen extends HttpServlet {
                 //Hier worden de ritgegevens doorgespeeld aan de PDF class.
                 pdf.vulRit(rit);
                 
+                //Hier worden de aankoopgegevens doorgespeeld aan de PDF class.
                 pdf.vulAankoop(aankoop);
                 
                 //Hier wordt de PDF opgesteld. 
@@ -202,8 +203,14 @@ public class RitKopen extends HttpServlet {
                 //TODO PDF toevoegen aan de mail.
                 String van = "dryveseu@gmail.com";
                 String naar = lid.getEmail();
-                String onderwerp = "Factuurnummer" + aankoop.getFactuurnr() + " Dryves";
-                String bericht = "U heeft zojuist ritnummer " + rit.getRitnr() + " gekocht.";
+                String onderwerp = "Dryves factuurnummer " + aankoop.getFactuurnr();
+                String bericht = "Ritnummer: " + rit.getRitnr() +
+                        "\n" + "Factuurnummer: " + aankoop.getFactuurnr() +
+                        "\n" +
+                        "\n" + "Van: " + rit.getStartpunt() +
+                        "\n" + "Naar: " + rit.getEindpunt() +
+                        "\n" + "U heeft deze rit gekocht via: " +aankoop.getBetaalwijze() +
+                        "\n" + "Einde bericht";
  
                 verstuurEmail ve = new verstuurEmail();
             
