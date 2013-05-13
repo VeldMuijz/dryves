@@ -118,8 +118,13 @@ public class PDF {
     Paragraph preface = new Paragraph();
     // We add one empty line
     addEmptyLine(preface, 1);
+      
+    //resourceloader.class.getClassLoader().getResource("images/Logo_Dryves.png").toString();
     
-    //Image logodryves = Image.getInstance("images/Logo_Dryves.png");
+      //String toString = ClassLoader.getResource("images/Logo_Dryves.png");
+    
+    
+    //Image logodryves = Image.getInstance("./images/Logo_Dryves.png");
     //preface.add(logodryves);
     
     // Lets write a big header
