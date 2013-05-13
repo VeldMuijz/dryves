@@ -21,8 +21,7 @@
 
         <script>
             function validateForm() {
-                
-                //var vnaam = document.getElementById("vnaam").value;                                            
+                                                          
                 var vnaam = document.forms["RegistratieForm"]["vnaam"].value;
                 var anaam = document.forms["RegistratieForm"]["anaam"].value;
                 var reknr = document.forms["RegistratieForm"]["reknr"].value;
@@ -50,10 +49,10 @@
                     document.getElementById("anaamerror").innerHTML = "Geen achternaam ingevuld!";
                     check = false;
                 };
-                if (reknr === "" || (/[^0-9]+$/.test(reknr))) {
+                if (reknr === "" || reknr.lenght>6 || reknr.lenght<10 || (/[^0-9]+$/.test(reknr))) {
                    document.getElementById("reknrerror").innerHTML = "Geen geldig rekeningnummer ingevuld!";
                    check = false;
-                };
+            
                 if(telnr === "" || (/[^0-9]+$/.test(telnr))) {		
                     document.getElementById("telnrerror").innerHTML = "Geen geldig telefoonnummer ingevuld!"; 
                     check = false;                
@@ -70,9 +69,11 @@
                     document.getElementById("huisnummererror").innerHTML = "Geen huisnummer ingevuld!";
                     check = false;
                 };
-                if (postcode === "") {
-                    document.getElementById("postcodeerror").innerHTML = "Geen postcode ingevuld!";
-                    check = false;
+                rExp = /^[1-8]{1}[0-9]{3}[a-zA-Z]{2}$/;
+                if (!rExp.exec(postcode)) {                 
+                document.getElementById("postcodeerror").innerHTML = "Vul de postcode in met notatie 1234AB"; 
+                check = false;
+                
                 };
                 if (stad === "") {
                     document.getElementById("staderror").innerHTML = "Geen stad ingevuld!";
@@ -97,7 +98,7 @@
                 return check;
             }
             
-
+            }
         </script>
 
 
