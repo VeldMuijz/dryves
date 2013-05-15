@@ -9,7 +9,6 @@
 
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-
 <fmt:setLocale value="${currentSessionUser.localeStr}" scope="session" />
 
 
@@ -50,25 +49,31 @@
 
             <br />
 
+
+
+            <!--                <form action="RitZoeken" method="get" >
+                                <b>Zoek rit: <b> <input id='zoekveld' name="zoekrit" onchange="RitZoeken" placeholder="Zoek op adres, stad, postcode" ></input> 
+                                        <button onclick="RitZoeken">Uitvoeren</button>
+                                        </form>      -->
+
             <div class="contentPanel">
 
-                <!--                <form action="RitZoeken" method="get" >
-                                    <b>Zoek rit: <b> <input id='zoekveld' name="zoekrit" onchange="RitZoeken" placeholder="Zoek op adres, stad, postcode" ></input> 
-                                            <button onclick="RitZoeken">Uitvoeren</button>
-                                            </form>      -->
-
                 <jsp:include page="zoekrit.jsp" flush="true" ></jsp:include> 
-                
+
+                <br /><br />
+
+                <div class="contentPanelBackground"></div>
 
             </div>
-                
+
+
             <br /> <br />  
-                
-                
+
+
             <div class="slider-wrapper theme-default">
                 <div id="slider" class="nivoSlider">
                     <img src="images/slider_audi.png" alt="" />
-                        <img src="images/slider_brandstof.png" alt=""/>
+                    <img src="images/slider_brandstof.png" alt=""/>
                     <img src="images/slider_dryvesfile.png" alt="" />
                 </div>
             </div>

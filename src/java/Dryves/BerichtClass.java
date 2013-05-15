@@ -96,6 +96,12 @@ pstmt.close();
      
      
      System.out.println(e);}
+     
+     
+     
+     //LET OP!!!! even toegevoegd, zodat de error weg is
+     //TODO hieronder de return aanpassen.
+            return 0;
     
     
     

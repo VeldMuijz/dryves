@@ -3,21 +3,18 @@
  * and open the template in the editor.
  */
 package Dryves.Controller;
-
+import Dryves.Model.PDF;
 import Dryves.Model.Aankoop;
 import Dryves.DatumConverter;
 import Dryves.Model.AankoopDao;
 import Dryves.Model.Lid;
 import Dryves.Model.Rit;
 import Dryves.Model.RitDao;
+import Dryves.Model.verstuurEmail;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Timestamp;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -180,6 +177,34 @@ public class RitKopen extends HttpServlet {
 		//Voer aankoop uit
 		aankoopDao.vulAankoopDao(aankoop);
 		aankoopDao.aankoopDoen();
+                
+                PDF pdf = new PDF();
+                
+                //Vullen van de gegevens, in de PDF
+                pdf.vulDePDF(lid.getVnaam(), lid.getAnaam(), lid.getEmail(), rit.getRitnr(), aankoop.getBetaalwijze(), aankoop.getFactuurnr());
+                
+                //Hier wordt de PDF opgesteld. 
+                pdf.bouwPDF();
+                
+                //Mailfunctie! Hier moet alleen nog de PDf aan toegevoegd worden.
+                //TODO PDF toevoegen aan de mail.
+                String van = "dryveseu@gmail.com";
+                String naar = lid.getEmail();
+                String onderwerp = "Dryves factuurnummer " + aankoop.getFactuurnr();
+                String bericht = "Ritnummer: " + rit.getRitnr() +
+                        "\n" + "Factuurnummer: " + aankoop.getFactuurnr() +
+                        "\n" +
+                        "\n" + "Van: " + rit.getStartpunt() +
+                        "\n" + "Naar: " + rit.getEindpunt() +
+                        "\n" + "U heeft deze rit gekocht via: " +aankoop.getBetaalwijze() +
+                        "\n" + "Lidnummer van de aanbieder: " + rit.getLidnr();
+                
+                String attachment = "/Users/RickSpijker/Desktop/FirstPdf.pdf";
+                String attachmentName = "Dryves Factuur: " + aankoop.getFactuurnr() +".pdf";
+ 
+                verstuurEmail ve = new verstuurEmail();
+            
+                ve.verstuurEmail(van, naar, onderwerp, bericht, attachment, attachmentName);
 
 		response.sendRedirect("MijnDryves");
 	}

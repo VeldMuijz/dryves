@@ -16,6 +16,8 @@
         <title>Rit zoeken</title>
     </head>
     <body>
+       
+        
         <form action="RitZoeken" method="get" >
             <input class="zoektextveld" name="zoekritbegin" onchange="RitZoeken" placeholder="<fmt:message bundle="${rb}" key="placeholderbegin" />" ></input><!--<button onclick="RitZoeken" class="heliosActionBarIconButton"><img src="images/zoom_grey.png" /></button>-->
             <input class="zoektextveld" name="zoekriteind" onchange="RitZoeken" placeholder="<fmt:message bundle="${rb}" key="placeholdereind" />" ></input><button onclick="RitZoeken" class="heliosActionBarIconButton"><img src="images/zoom_grey.png" /></button>
