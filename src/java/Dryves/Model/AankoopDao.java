@@ -5,7 +5,7 @@
 package Dryves.Model;
 
 import Dryves.ConnectionManager;
-import Dryves.Controller.Aankoop;
+import Dryves.DatumConverter;
 import static Dryves.Model.RitDao.currentCon;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -64,6 +64,9 @@ public class AankoopDao {
 		ResultSet resultSet = null;
 		List<Aankoop> aankooplijst = new ArrayList<Aankoop>();
 		List<Rit> aankoopritten = new ArrayList<Rit>();
+		DatumConverter dc = new DatumConverter();
+		
+		
 		try {
 
 			currentCon = ConnectionManager.getConnection();
@@ -80,6 +83,8 @@ public class AankoopDao {
 				Aankoop aankoop = new Aankoop();
 				aankoop.setRitnr(resultSet.getInt("ritnr"));
 				aankoop.setAankoopnr(resultSet.getInt("aankoopnr"));
+				aankoop.setStringDatum(dc.korteDatum(resultSet.getTimestamp("datum")));
+				aankoop.setStringTijd(dc.korteTijd(resultSet.getTimestamp("datum")));
 				aankoop.setDatum(resultSet.getTimestamp("datum"));
 				aankoop.setLidnr(resultSet.getInt("lidnr"));
 

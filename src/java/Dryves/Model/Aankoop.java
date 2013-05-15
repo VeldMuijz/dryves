@@ -1,4 +1,4 @@
-package Dryves.Controller;
+package Dryves.Model;
 // Generated 26-mrt-2013 21:03:05 by Hibernate Tools 3.2.1.GA
 
 import java.sql.Timestamp;
@@ -16,9 +16,13 @@ public class Aankoop  implements java.io.Serializable {
      private String betaalwijze;
      private Timestamp datum;
      private int factuurnr;
+	 private String stringTijd;
+	 private String stringDatum;
+	 
 
     public Aankoop() {
     }
+
 
 	
     public Aankoop(int aankoopnr, int ritnr, int lidnr, int ontmoetingnr, int factuurnr) {
@@ -88,7 +92,21 @@ public class Aankoop  implements java.io.Serializable {
         this.factuurnr = factuurnr;
     }
 
+	public String getStringTijd() {
+		return stringTijd;
+	}
 
+	public void setStringTijd(String stringTijd) {
+		this.stringTijd = stringTijd;
+	}
+
+	public String getStringDatum() {
+		return stringDatum;
+	}
+
+	public void setStringDatum(String stringDatum) {
+		this.stringDatum = stringDatum;
+	}
 
 
 }

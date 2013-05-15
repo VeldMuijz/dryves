@@ -48,11 +48,11 @@ Document : mijn_ritten
                 <c:forEach items="${aankopen}" var="aankoop">
                     <div class="rittenlijst">
                         <table>
-                                <tr>
-                                <td>${aankoop.aankoopnr}</td>
-								<td>${aankoop.factuurnr}</td>
-								<td>${aankoop.ritnr}</td>
-                                <td>${aankoop.datum}</td>
+							<tr>
+                                <td>Aankoopnummmer: ${aankoop.aankoopnr}</td>
+								<td>Factuurnr: ${aankoop.factuurnr}</td>
+								<td>Ritnummer: ${aankoop.ritnr}</td>
+                                <td>Datum: ${aankoop.stringTijd} ${aankoop.stringDatum}</td>
                                <td><button onclick="window.location = 'LidBeoordelen?aankoopnr=${aankoop.aankoopnr}';">Beoordelen</button></td>
                                 
                                 </tr> 

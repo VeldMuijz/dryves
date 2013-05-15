@@ -4,6 +4,7 @@
  */
 package Dryves.Controller;
 
+import Dryves.Model.Aankoop;
 import Dryves.DatumConverter;
 import Dryves.Model.AankoopDao;
 import Dryves.Model.Lid;
