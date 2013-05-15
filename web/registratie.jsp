@@ -42,13 +42,14 @@
                 console.log(vnaam);
 
                 var check = true;
-
-                if (vnaam === "")
-                {
+                
+                rExp = /^([ \u00c0-\u01ffa-zA-Z'\-]{2,})*$/;
+                if (!rExp.exec(vnaam)) {
                     document.getElementById("vnaamerror").innerHTML = "Geen voornaam ingevuld!";                    
                     check = false;
                 };
-                if (anaam === "") {                                
+                rExp = /^([ \u00c0-\u01ffa-zA-Z'\-]{2,})+$/;
+                if (!rExp.exec(anaam)) {                                
                     document.getElementById("anaamerror").innerHTML = "Geen achternaam ingevuld!";
                     check = false;
                 };
@@ -68,12 +69,14 @@
                     document.getElementById("emailerror").innerHTML = "Geen geldig of geen email adres ingevuld!";
                     check = false;                                    
                 };
-                if (straat === "") {
+                rExp = /^([ \u00c0-\u01ffa-zA-Z'\-]{3,})+$/;
+                if (!rExp.exec(straat)) {
                     document.getElementById("straaterror").innerHTML = "Geen straatnaam ingevuld!";
                     check = false;                    
                 };
-            
-                if (huisnummer === "") {
+                
+                rExp = /^[0-9]{1,}[a-zA-Z]{1,}$/;
+                if (!rExp.exec(huisnummer)) { 
                     document.getElementById("huisnummererror").innerHTML = "Geen huisnummer ingevuld!";
                     check = false;
                 };
@@ -83,7 +86,8 @@
                 check = false;
                 
                 };
-                if (stad === "") {
+                rExp = /^([ \u00c0-\u01ffa-zA-Z'\-]{2,})+$/;
+                if (!rExp.exec(stad)) {
                     document.getElementById("staderror").innerHTML = "Geen stad ingevuld!";
                     check = false;
                 };
@@ -174,7 +178,7 @@
                                 <td><font id="reknrerror" size=1 color="red"> </font></td>
                             </tr>
                             <tr>
-                                <td><input class="zoektextveld" placeholder="<fmt:message bundle="${rb}" key="telefoonnummer" />" type="text" name="telnr" value="" size=15  maxlength=15></td>
+                                <td><input class="zoektextveld" placeholder="<fmt:message bundle="${rb}" key="telefoonnummer" />" type="text" name="telnr" value="" size=15  maxlength=10></td>
                                 <td><font id="telnrerror" size=1 color="red"> </font></td>
                                 <td><input class="zoektextveld" type="password" name="wachtwoord" placeholder="<fmt:message bundle="${rb}" key="wachtwoord" />" size=10 value="" maxlength=30></td>
                                 <td><font id="wachtwoorderror1" size=1 color="red"> </font></td>
