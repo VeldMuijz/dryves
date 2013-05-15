@@ -56,7 +56,7 @@
 
             <div class="contentPanel">
 
-                 <fmt:message bundle="${rb}" key="Ditisdeloginpage" />
+                 <fmt:message bundle="${rb}" key="ditisdeloginpage" />
 
                 <br /><br />
 
@@ -72,7 +72,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <fmt:message bundle="${rb}" key="wachtwoord" />
+                                <fmt:message bundle="${rb}" key="wachtwoordlogin" />
                             </td>
                             <td><input type="password" id="wachtwoord" name="wachtwoord" style="width:205px;" /></td>
                         </tr>

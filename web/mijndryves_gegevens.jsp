@@ -189,14 +189,15 @@
                             <td>                        
                                 <fmt:message bundle="${rb}" key="taal" />
                                 <br>
+                               
                                <c:choose>
-                                    <c:when test="${currentSessionUser.locale == 'nl_NL'}"> 
-                                        <input type="radio" name="locale" value="nl_NL" checked >NL
-                                        <input type="radio" name="locale" value="en_GB">EN
+                                    <c:when test="${currentSessionUser.langnotify == 'nl_NL'}"> 
+                                        <input type="radio" name="locale" value="nl_NL" checked ><img src="images/nl_NL.png" />
+                                        <input type="radio" name="locale" value="en_GB"><img src="images/en_EN.png" />
                                     </c:when>
                                     <c:otherwise>
-                                        <input type="radio" name="locale" value="nl_NL" >NL
-                                        <input type="radio" name="locale" value="en_GB" checked >E
+                                        <input type="radio" name="locale" value="nl_NL" ><img src="images/nl_NL.png" />
+                                        <input type="radio" name="locale" value="en_GB" checked ><img src="images/en_EN.png" />
                                     </c:otherwise>
                                 </c:choose>
 <!--                                <input type="radio" name="locale" value="nl_NL" checked> <img src="images/nl_NL.png" />
