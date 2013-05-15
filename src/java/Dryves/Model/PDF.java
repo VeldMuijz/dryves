@@ -52,37 +52,24 @@ public class PDF {
   private String achternaam;
   private String email;
   
-  public Lid vulPDF(Lid bean){
-      
-      voornaam = bean.getVnaam();
-      achternaam = bean.getAnaam();
-      email = bean.getEmail();
-      
-      return bean;
-  } 
-  
-  //De ritgegevens worden toegewezen aan de PDF.
+  //gegevens van de rit
   private int ritnummer;
-  
-  public Rit vulRit(Rit bean2){
-  
-      ritnummer = bean2.getRitnr();
-  
-      return bean2;
-  }
   
   //Hieronder worden de gegevens van de aankoop opgehaald.
   private String betaalwijze;
   private int factuurnr;
   
-  public Aankoop vulAankoop(Aankoop bean3){
-      
-      betaalwijze = bean3.getBetaalwijze();
-      factuurnr = bean3.getFactuurnr();
+  public void vulDePDF(String vnaam, String anaam, String mail, int ritnr, String betaalw, int fnr){
   
-      return bean3;
+   this.voornaam = vnaam;
+   this.achternaam = anaam;
+   this.email = mail;
+   this.ritnummer = ritnr;
+   this.betaalwijze = betaalw;
+   this.factuurnr = fnr;
   
   }
+  
   
   public void bouwPDF(){
   

@@ -341,9 +341,17 @@ public class RitDao {
             resultSet = zoekritten.executeQuery();
             
             while (resultSet.next()) {
+                
                 Rit rit = new Rit();
                 rit.setRitnr(resultSet.getInt("ritnr"));
                 rit.setStartpunt(resultSet.getString("startpunt"));
+                
+                String[] arrSplit = rit.getStartpunt().split(", ");
+                
+                System.out.println(arrSplit[0]);
+                System.out.println(arrSplit[1].substring(5));
+                System.out.println(arrSplit[2]);
+                
                 rit.setEindpunt(resultSet.getString("eindpunt"));
                 rit.setPrijs(resultSet.getDouble("prijs"));
 				rit.setDatum(resultSet.getTimestamp("datum"));

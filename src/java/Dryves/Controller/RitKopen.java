@@ -180,14 +180,8 @@ public class RitKopen extends HttpServlet {
                 
                 PDF pdf = new PDF();
                 
-                //Hier wordt ervoor gezorgd, dat de gegevens van het Lid, gebruikt kunnen worden in de PDF.
-                pdf.vulPDF(lid);
-                
-                //Hier worden de ritgegevens doorgespeeld aan de PDF class.
-                pdf.vulRit(rit);
-                
-                //Hier worden de aankoopgegevens doorgespeeld aan de PDF class.
-                pdf.vulAankoop(aankoop);
+                //Vullen van de gegevens, in de PDF
+                pdf.vulDePDF(lid.getVnaam(), lid.getAnaam(), lid.getEmail(), rit.getRitnr(), aankoop.getBetaalwijze(), aankoop.getFactuurnr());
                 
                 //Hier wordt de PDF opgesteld. 
                 pdf.bouwPDF();
@@ -206,10 +200,11 @@ public class RitKopen extends HttpServlet {
                         "\n" + "Lidnummer van de aanbieder: " + rit.getLidnr();
                 
                 String attachment = "/Users/RickSpijker/Desktop/FirstPdf.pdf";
+                String attachmentName = "Dryves Factuur: " + aankoop.getFactuurnr() +".pdf";
  
                 verstuurEmail ve = new verstuurEmail();
             
-                ve.verstuurEmail(van, naar, onderwerp, bericht, attachment);
+                ve.verstuurEmail(van, naar, onderwerp, bericht, attachment, attachmentName);
 
 		response.sendRedirect("MijnDryves");
 	}

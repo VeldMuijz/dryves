@@ -32,8 +32,9 @@ public class verstuurEmail {
     private String onderwerp;
     private String bericht;
     private String attachment;
+    private String attachmentName;
     
-    public void verstuurEmail(String van, String naar, String onderwerp, String bericht, String attachment){
+    public void verstuurEmail(String van, String naar, String onderwerp, String bericht, String attachment, String attachmentName){
     
         final String username = "dryveseu@gmail.com";
 		final String password = "Qwerty!2";
@@ -76,11 +77,13 @@ public class verstuurEmail {
                     messageBodyPart.setDataHandler(
                             new DataHandler(source));
                     
-                    messageBodyPart.setFileName(attachment);
+                    messageBodyPart.setFileName(attachmentName);
+                    
+                    message.setContent(multipart);
                     
                     multipart.addBodyPart(messageBodyPart); 
                     
-                    message.setContent(multipart);
+
                         
  
 			Transport.send(message);

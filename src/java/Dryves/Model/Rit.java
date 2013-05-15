@@ -21,8 +21,13 @@ public class Rit implements java.io.Serializable {
     private int zitplaatsen;
     private String brandstof;
     private int aangeboden;
-	private String tijd;
-	private String datumkort;
+    private String tijd;
+    private String datumkort;
+    private String straatnummer;
+    private String postcodeplaats;
+    private String land;
+
+
 
     public Rit() {
     }
@@ -175,5 +180,29 @@ public class Rit implements java.io.Serializable {
 	public void setDatumkort(String datumkort) {
 		this.datumkort = datumkort;
 	}
+        
+            public String getStraatnummer() {
+        return straatnummer;
+    }
+
+    public void setStraatnummer(String straatnummer) {
+        this.straatnummer = straatnummer;
+    }
+
+    public String getPostcodeplaats() {
+        return postcodeplaats;
+    }
+
+    public void setPostcodeplaats(String postcodeplaats) {
+        this.postcodeplaats = postcodeplaats;
+    }
+
+    public String getLand() {
+        return land;
+    }
+
+    public void setLand(String land) {
+        this.land = land;
+    }
 	
 }
