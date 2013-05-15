@@ -10,14 +10,20 @@ package Dryves.Model;
  */
 
 import java.util.Properties;
+import javax.activation.DataHandler;
+import javax.activation.DataSource;
+import javax.activation.FileDataSource;
  
 import javax.mail.Message;
 import javax.mail.MessagingException;
+import javax.mail.Multipart;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
  
 public class verstuurEmail {
     
@@ -25,8 +31,9 @@ public class verstuurEmail {
     private String naar;
     private String onderwerp;
     private String bericht;
+    private String attachment;
     
-    public void verstuurEmail(String van, String naar, String onderwerp, String bericht){
+    public void verstuurEmail(String van, String naar, String onderwerp, String bericht, String attachment){
     
         final String username = "dryveseu@gmail.com";
 		final String password = "Qwerty!2";
@@ -45,13 +52,36 @@ public class verstuurEmail {
 		  });
  
 		try {
- 
+                    
+                    MimeBodyPart messageBodyPart =
+                            new MimeBodyPart();
+                    Multipart multipart = new MimeMultipart();
+                    
+                    messageBodyPart = new MimeBodyPart();
+                    
 			Message message = new MimeMessage(session);
-			message.setFrom(new InternetAddress(van));
+                        
 			message.setRecipients(Message.RecipientType.TO,
 				InternetAddress.parse(naar));
 			message.setSubject(onderwerp);
 			message.setText(bericht);
+                        
+
+
+                    // Part two is attachment  
+
+                    DataSource source =
+                            new FileDataSource(attachment);
+                    
+                    messageBodyPart.setDataHandler(
+                            new DataHandler(source));
+                    
+                    messageBodyPart.setFileName(attachment);
+                    
+                    multipart.addBodyPart(messageBodyPart); 
+                    
+                    message.setContent(multipart);
+                        
  
 			Transport.send(message);
  

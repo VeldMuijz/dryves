@@ -11,17 +11,10 @@ import Dryves.Model.Lid;
 import Dryves.Model.Rit;
 import Dryves.Model.RitDao;
 import Dryves.Model.verstuurEmail;
-import com.itextpdf.text.Document;
-import com.itextpdf.text.pdf.PdfWriter;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Timestamp;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -211,10 +204,12 @@ public class RitKopen extends HttpServlet {
                         "\n" + "Naar: " + rit.getEindpunt() +
                         "\n" + "U heeft deze rit gekocht via: " +aankoop.getBetaalwijze() +
                         "\n" + "Lidnummer van de aanbieder: " + rit.getLidnr();
+                
+                String attachment = "/Users/RickSpijker/Desktop/FirstPdf.pdf";
  
                 verstuurEmail ve = new verstuurEmail();
             
-                ve.verstuurEmail(van, naar, onderwerp, bericht);
+                ve.verstuurEmail(van, naar, onderwerp, bericht, attachment);
 
 		response.sendRedirect("MijnDryves");
 	}
