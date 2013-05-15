@@ -83,15 +83,15 @@ public class LidBeoordelen extends HttpServlet {
 		sessieBeoordeling.setAankoopnr(Integer.parseInt(request.getParameter("aankoopnr")));
 		sessieBeoordeling.setLidnr(user.getLidnr());
 		
-		System.out.println("+++++++++++++Security Check++++++++++++++++++\n Lidnr uit aankoop: " + beoordeling.getLidnr() + " lidnr uit lid: " + user.getLidnr());
+		System.out.println("+++++++++++++Security Check++++++++++++++++++\n Aankoopnr: " + beoordeling.getAankoopnr() + " Lidnr: " + user.getLidnr());
 		//check of dit lid wel bij deze rit hoort
 		if (!aankoopDao.checkBestaanAankoop(sessieBeoordeling.getAankoopnr(), user.getLidnr())) {
-			
+			System.out.println("Er zijn geen aankopen gevonden voor lid" + user.getLidnr() + " en aankoopnr: " + beoordeling.getAankoopnr());
 			System.out.println("Dit lid mag deze aankoop niet beoordelen, terug naar MijnAankopen!");
 			response.sendRedirect("MijnAankopen");
 
 		}else{
-			
+			System.out.println("Lid mag deze aankoop beoordelen");
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/beoordelen.jsp");
 		dispatcher.forward(request, response);
 			

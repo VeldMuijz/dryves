@@ -52,6 +52,12 @@ public class AankoopDao {
 
 	}
 
+	/**
+	 * Checkt of een aankoop voor een lid bestaat
+	 * @param aankoopnr aankoopnr in de database
+	 * @param lidnr lidnummer in de database
+	 * @return geeft true terug wanneer er een aankoop gevonden is, geeft false terug wanneer er niets gevonden is
+	 */
 	public Boolean checkBestaanAankoop(int aankoopnr, int lidnr) {
 
 		Connection connection = null;
@@ -68,7 +74,7 @@ public class AankoopDao {
 			PreparedStatement aankopen;
 			String queryString = "SELECT aankoopnr, lidnr "
 					+ "FROM aankoop AS a "
-					+ "WHERE a.aankoopnr = ? AND a.lidnr = ?;";
+					+ "WHERE a.aankoopnr = ? AND a.lidnr = ? LIMIT 1;";
 
 			aankopen = currentCon.prepareStatement(queryString);
 			aankopen.setInt(1, aankoopnr);
