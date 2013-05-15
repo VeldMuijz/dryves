@@ -190,5 +190,9 @@
 							<h3><fmt:message bundle="${rb}" key="geenritgetoond" /></h3>
 							<div>
 								<p><fmt:message bundle="${rb}" key="zogeenritgetoond" /></p>
+                                                        </div>
+							<h3><fmt:message bundle="${rb}" key="algemenevoorwaarden" /></h3>
+							<div>
+								<p><fmt:message bundle="${rb}" key="voorwaardenfaq" /></p>
 							</div>
 					</body>

@@ -178,7 +178,7 @@ public class Registreren extends HttpServlet {
 		} else {
 			//Indien het email bestaat wordt er een melding weergegeven.
 			// Moet nog gedaan worden    
-			response.sendRedirect("login_error");
+			response.sendRedirect("login_error.jsp");
 		}
 
 	}
