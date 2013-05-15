@@ -23,7 +23,7 @@ import java.util.logging.Logger;
  * @author jeroen
  */
 public class AankoopDao {
-
+	private int aankoopnr;
 	private int ritnr;
 	private int lidnr;
 	private int ontmoetingnr;
@@ -39,6 +39,7 @@ public class AankoopDao {
 	 */
 	public Aankoop vulAankoopDao(Aankoop bean) {
 		Date date = new Date();
+		aankoopnr = bean.getAankoopnr();
 		lidnr = bean.getLidnr();
 		ritnr = bean.getRitnr();
 		ontmoetingnr = bean.getOntmoetingnr();
@@ -106,13 +107,13 @@ public class AankoopDao {
 			PreparedStatement aankoop;
 
 			String queryString = ("INSERT INTO aankoop ("
-					+ " ritnr,"
-					+ " lidnr,"
-					+ " ontmoetingnr,"
-					+ " betaalwijze,"
-					+ " datum,"
-					+ " factuurnr)"
-					+ "VALUES(?,?,?,?,?,?);");
+														+ " ritnr,"
+														+ " lidnr,"
+														+ " ontmoetingnr,"
+														+ " betaalwijze,"
+														+ " datum,"
+														+ " factuurnr)"
+														+ "VALUES(?,?,?,?,?,?);");
 
 			aankoop = currentCon.prepareStatement(queryString);
 
@@ -123,7 +124,7 @@ public class AankoopDao {
 			aankoop.setTimestamp(5, datum);
 			aankoop.setInt(6, factuurnr);
 
-
+			
 			System.out.println("De query is: " + aankoop);
 
 			aankoop.executeUpdate();
