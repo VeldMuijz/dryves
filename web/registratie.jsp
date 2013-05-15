@@ -21,6 +21,9 @@
 
         <script>
             function validateForm() {
+
+		
+	
                                                           
                 var vnaam = document.forms["RegistratieForm"]["vnaam"].value;
                 var anaam = document.forms["RegistratieForm"]["anaam"].value;
@@ -49,11 +52,14 @@
                     document.getElementById("anaamerror").innerHTML = "Geen achternaam ingevuld!";
                     check = false;
                 };
-                if (reknr === "" || reknr.lenght>6 || reknr.lenght<10 || (/[^0-9]+$/.test(reknr))) {
-                   document.getElementById("reknrerror").innerHTML = "Geen geldig rekeningnummer ingevuld!";
-                   check = false;
-            
-                if(telnr === "" || (/[^0-9]+$/.test(telnr))) {		
+                rExp = /^[1-9]\d{6,9}$/;
+                if (!rExp.exec(reknr)) {                 
+                document.getElementById("reknrerror").innerHTML = "7 of 10 cijferig bank/giro rekeningnummer!"; 
+                check = false;
+
+                };
+                
+                if(telnr === "") {		
                     document.getElementById("telnrerror").innerHTML = "Geen geldig telefoonnummer ingevuld!"; 
                     check = false;                
                 };                       
@@ -65,6 +71,7 @@
                     document.getElementById("straaterror").innerHTML = "Geen straatnaam ingevuld!";
                     check = false;                    
                 };
+            
                 if (huisnummer === "") {
                     document.getElementById("huisnummererror").innerHTML = "Geen huisnummer ingevuld!";
                     check = false;
@@ -96,9 +103,10 @@
             
             
                 return check;
-            }
+        }
+        
             
-            }
+            
         </script>
 
 
@@ -161,7 +169,7 @@
                             <tr>
                                 <td><input class="zoektextveld" placeholder="<fmt:message bundle="${rb}" key="e-mail" />" type="text" name="email" value="" size=25  maxlength=25></td>
                                 <td><font id="emailerror" size=1 color="red"> </font></td>
-                                <td><input class="zoektextveld" placeholder="<fmt:message bundle="${rb}" key="rekeningnummer" />" type="text" name="reknr" value="" size=10  maxlength=8></td>
+                                <td><input class="zoektextveld" placeholder="<fmt:message bundle="${rb}" key="rekeningnummer" />" type="text" name="reknr" value="" size=10  maxlength=10></td>
                                 <td><font id="reknrerror" size=1 color="red"> </font></td>
                             </tr>
                             <tr>
