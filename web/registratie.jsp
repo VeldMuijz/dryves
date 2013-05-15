@@ -54,7 +54,7 @@
                     check = false;
                 };
                 
-                rExp = /^(\s*(\d{7}|\d{10})\s*)$/; 
+                rExp = /^(\s*(\d{7}|\d{9}|\d{10})\s*)$/; 
                 if (!rExp.exec(reknr)) {                 
                 document.getElementById("reknrerror").innerHTML = "7 of 10 cijferig bank/giro nummer!"; 
                 check = false;
@@ -201,6 +201,7 @@
                                     <br>
                                     <input type="radio" name="locale" value="nl_NL" checked> <img src="images/nl_NL.png" />
                                     <input type="radio" name="locale" value="en_GB"> <img src="images/en_EN.png" /></td>
+                                <a id="voorwaarden" href="voorwaarden.jsp">Akkoord algemene voorwaarden</a><input type="radio" name="voorwaarden" value="" checked>
                                 <td></td>
                             </tr>
                             <tr>
