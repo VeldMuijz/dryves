@@ -9,22 +9,19 @@ package Dryves.Model;
  * @author jeroen
  */
 public class Beoordeling {
-	
-private int	 beoordelingnr;
-private int  waardering;
-private int  stiptheid;
-private int  rijstijl;
-private int  gezelligheid;
-private int  betrouwbaarheid;
-private String  commentaar;
-private int  lidnr;
-private int  aankoopnr;
-	
- public Beoordeling(){
-	 
- }
- 
- 
+
+	private int beoordelingnr;
+	private int waardering;
+	private int stiptheid;
+	private int rijstijl;
+	private int gezelligheid;
+	private int betrouwbaarheid;
+	private String commentaar;
+	private int lidnr;
+	private int aankoopnr;
+
+	public Beoordeling() {
+	}
 
 	public int getBeoordelingnr() {
 		return beoordelingnr;

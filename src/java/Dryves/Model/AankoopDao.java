@@ -23,6 +23,7 @@ import java.util.logging.Logger;
  * @author jeroen
  */
 public class AankoopDao {
+
 	private int aankoopnr;
 	private int ritnr;
 	private int lidnr;
@@ -51,22 +52,63 @@ public class AankoopDao {
 
 	}
 
+	public Boolean checkBestaanAankoop(int aankoopnr, int lidnr) {
+
+		Connection connection = null;
+		PreparedStatement statement = null;
+		ResultSet resultSet = null;
+		List<Aankoop> aankooplijst = new ArrayList<Aankoop>();
+		List<Rit> aankoopritten = new ArrayList<Rit>();
+		Boolean check = false;
+
+
+		try {
+
+			currentCon = ConnectionManager.getConnection();
+			PreparedStatement aankopen;
+			String queryString = "SELECT aankoopnr, lidnr "
+					+ "FROM aankoop AS a "
+					+ "WHERE a.aankoopnr = ? AND a.lidnr = ?;";
+
+			aankopen = currentCon.prepareStatement(queryString);
+			aankopen.setInt(1, aankoopnr);
+			aankopen.setInt(2, lidnr);
+			System.out.println("De query is: " + aankopen);
+			resultSet = aankopen.executeQuery();
+			
+			
+			if(resultSet.next()){
+				System.out.println("resultSet = " + resultSet.getInt("aankoopnr"));
+				System.out.println("resultSet = leeg dus gebruiker mag niet beoordelen");
+				check = true;
+			}
+			
+			
+		} catch (SQLException ex) {
+			Logger.getLogger(AankoopDao.class.getName()).log(Level.SEVERE, null, ex);
+
+		}
+		
+		return check;
+
+	}
+
 	/**
 	 *
 	 * Haal een lijst van aankopen per lid op
-	 *	 
+	 *
 	 * @return
 	 * @throws SQLException
 	 */
-	public List<Aankoop> getAlleAankopenPerLid( int lidnr) throws SQLException {
+	public List<Aankoop> getAlleAankopenPerLid(int lidnr) throws SQLException {
 		Connection connection = null;
 		PreparedStatement statement = null;
 		ResultSet resultSet = null;
 		List<Aankoop> aankooplijst = new ArrayList<Aankoop>();
 		List<Rit> aankoopritten = new ArrayList<Rit>();
 		DatumConverter dc = new DatumConverter();
-		
-		
+
+
 		try {
 
 			currentCon = ConnectionManager.getConnection();
@@ -89,7 +131,10 @@ public class AankoopDao {
 				aankoop.setLidnr(resultSet.getInt("lidnr"));
 
 				aankooplijst.add(aankoop);
+
 			}
+		} catch (SQLException ex) {
+			Logger.getLogger(AankoopDao.class.getName()).log(Level.SEVERE, null, ex);
 		} finally {
 // if (resultSet != null) try { resultSet.close(); } catch (SQLException ignore) {}
 // if (statement != null) try { statement.close(); } catch (SQLException ignore) {}
@@ -112,13 +157,13 @@ public class AankoopDao {
 			PreparedStatement aankoop;
 
 			String queryString = ("INSERT INTO aankoop ("
-														+ " ritnr,"
-														+ " lidnr,"
-														+ " ontmoetingnr,"
-														+ " betaalwijze,"
-														+ " datum,"
-														+ " factuurnr)"
-														+ "VALUES(?,?,?,?,?,?);");
+					+ " ritnr,"
+					+ " lidnr,"
+					+ " ontmoetingnr,"
+					+ " betaalwijze,"
+					+ " datum,"
+					+ " factuurnr)"
+					+ "VALUES(?,?,?,?,?,?);");
 
 			aankoop = currentCon.prepareStatement(queryString);
 
@@ -129,7 +174,7 @@ public class AankoopDao {
 			aankoop.setTimestamp(5, datum);
 			aankoop.setInt(6, factuurnr);
 
-			
+
 			System.out.println("De query is: " + aankoop);
 
 			aankoop.executeUpdate();

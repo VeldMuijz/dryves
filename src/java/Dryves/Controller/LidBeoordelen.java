@@ -5,6 +5,7 @@
 package Dryves.Controller;
 
 import Dryves.DatumConverter;
+import Dryves.Model.AankoopDao;
 import Dryves.Model.Beoordeling;
 import Dryves.Model.BeoordelingDao;
 import Dryves.Model.Lid;
@@ -69,6 +70,7 @@ public class LidBeoordelen extends HttpServlet {
 
 		// Instantieren van objecten
 		Beoordeling beoordeling = new Beoordeling();
+		AankoopDao aankoopDao = new AankoopDao();
 		DatumConverter dc = new DatumConverter();
 		// Haal de huidige sessie op
 		HttpSession session = request.getSession();
@@ -80,9 +82,21 @@ public class LidBeoordelen extends HttpServlet {
 		System.out.println("Dit gaat in sessiBeoordeling: " + request.getParameter("aankoopnr"));
 		sessieBeoordeling.setAankoopnr(Integer.parseInt(request.getParameter("aankoopnr")));
 		sessieBeoordeling.setLidnr(user.getLidnr());
+		
+		System.out.println("+++++++++++++Security Check++++++++++++++++++\n Lidnr uit aankoop: " + beoordeling.getLidnr() + " lidnr uit lid: " + user.getLidnr());
+		//check of dit lid wel bij deze rit hoort
+		if (!aankoopDao.checkBestaanAankoop(sessieBeoordeling.getAankoopnr(), user.getLidnr())) {
+			
+			System.out.println("Dit lid mag deze aankoop niet beoordelen, terug naar MijnAankopen!");
+			response.sendRedirect("MijnAankopen");
 
+		}else{
+			
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/beoordelen.jsp");
 		dispatcher.forward(request, response);
+			
+		}
+
 	}
 
 	/**
@@ -119,18 +133,7 @@ public class LidBeoordelen extends HttpServlet {
 		String opmerking = request.getParameter("opmerking");
 
 		beoordelingDao.beoordelingAanmaken(waardering, stiptheid, rijstijl, gezelligheid, betrouwbaarheid, opmerking, user.getLidnr(), aankoopnr);
-
-
-//		System.out.println("+++++++++++++Security Check++++++++++++++++++\n Lidnr uit aankoop: " + beoordeling.getLidnr() + " lidnr uit lid: " + user.getLidnr());
-//		//check of dit lid wel bij deze rit hoort
-//		if (beoordeling.getLidnr() != user.getLidnr()) {
-//			
-//			System.out.println("Dit lid mag deze aankoop niet beoordelen, terug naar MijnAankopen!");
-//			response.sendRedirect("MijnAankopen");
-//
-//		}else{
-//			
-//		}
+		
 
 		response.sendRedirect("MijnAankopen");
 

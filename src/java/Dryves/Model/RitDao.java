@@ -353,7 +353,10 @@ public class RitDao {
 	
                 ritten.add(rit);
             }
-        }
+        }catch (SQLException ex) {
+			Logger.getLogger(RitDao.class.getName()).log(Level.SEVERE, null, ex);
+
+		}
             finally {
 //            if (resultSet != null) try { resultSet.close(); } catch (SQLException ignore) {}
 //            if (statement != null) try { statement.close(); } catch (SQLException ignore) {}
