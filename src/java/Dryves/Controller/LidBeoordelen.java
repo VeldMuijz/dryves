@@ -132,10 +132,17 @@ public class LidBeoordelen extends HttpServlet {
 		
 		String opmerking = request.getParameter("opmerking");
 
-		beoordelingDao.beoordelingAanmaken(waardering, stiptheid, rijstijl, gezelligheid, betrouwbaarheid, opmerking, user.getLidnr(), aankoopnr);
+		if(beoordelingDao.beoordelingAanmaken(waardering, stiptheid, rijstijl, gezelligheid, betrouwbaarheid, opmerking, user.getLidnr(), aankoopnr)){
+			System.out.println("Beoordeling aangemaakt");
+			response.sendRedirect("MijnAankopen");
+		} else {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/oops.jsp");
+			dispatcher.forward(request, response);
+		}
+		
 		
 
-		response.sendRedirect("MijnAankopen");
+		
 
 	}
 
