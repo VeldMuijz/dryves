@@ -52,14 +52,15 @@
                     document.getElementById("anaamerror").innerHTML = "Geen achternaam ingevuld!";
                     check = false;
                 };
-                rExp = /^[1-9]\d{6,9}$/;
+                
+                rExp = /^(\s*(\d{7}|\d{10})\s*)$/; 
                 if (!rExp.exec(reknr)) {                 
-                document.getElementById("reknrerror").innerHTML = "7 of 10 cijferig bank/giro rekeningnummer!"; 
+                document.getElementById("reknrerror").innerHTML = "7 of 10 cijferig bank/giro nummer!"; 
                 check = false;
 
                 };
-                
-                if(telnr === "") {		
+               rExp = /^[0-9]{10}$/;
+                if (!rExp.exec(telnr)) { 		
                     document.getElementById("telnrerror").innerHTML = "Geen geldig telefoonnummer ingevuld!"; 
                     check = false;                
                 };                       
@@ -76,7 +77,7 @@
                     document.getElementById("huisnummererror").innerHTML = "Geen huisnummer ingevuld!";
                     check = false;
                 };
-                rExp = /^[1-8]{1}[0-9]{3}[a-zA-Z]{2}$/;
+                rExp = /^[1-9]{1}[0-9]{3}[a-zA-Z]{2}$/;
                 if (!rExp.exec(postcode)) {                 
                 document.getElementById("postcodeerror").innerHTML = "Vul de postcode in met notatie 1234AB"; 
                 check = false;
