@@ -1,80 +1,75 @@
 <%-- 
-    Document   : helebericht
-    Created on : 30-apr-2013, 18:05:00
+    Document   : mijnberichten3
+    Created on : 16-mei-2013, 1:19:05
     Author     : H
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 
-<fmt:setLocale value="${currentSessionUser.localeStr}" scope="session" />
+<fmt:setLocale value="${locale}" />
 
 <fmt:setBundle basename="ResourceBundles.Dryves" scope="request" var="rb" />
-
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Dryves</title>
         <link type="text/css" rel="stylesheet" href="css/dryver.css"/>
+        <title>Mijn berichten</title>
+
     </head>
     <body>
 
+
         <div class="background">
 
-            <img src="images/background2.jpg" />
+            <img src="${currentSessionUser.getAchtergrond()}" />
 
         </div>
-
         <div class="drvyesWrapper">
-
             <div class="logo">    
-				
+                <img src="images/Logo_Dryves.png" />
             </div>
+            
+            <jsp:include page="/WEB-INF/navigatie.jsp"  flush="true">
+              <jsp:param name="menu_active" value="mijndryves"></jsp:param>
+              </jsp:include>
 
 
-			<jsp:include page="navigatie.jsp" flush="true">
-                <jsp:param name="menu_active" value="watisdryves"></jsp:param>
-            </jsp:include>
 
-			<div class="contentPanel">
-                          
-                       
-                            
-                          
-				
-                            
-                          <c:forEach items="${gehelebericht}" var="bericht">
-                 
-                  <table>
-                            
-                                <tr>
-                                <td>${bericht.onderwerp} </td>
-                                <td><img src ="images/pijl.jpg" /></td>
-                                <td>${bericht.datumt}</td>
-                                <td>${bericht.inhoudbericht}</td>
-                                <td></td>
-                                 
-                                
-                                </tr> 
 
-                        </table>
-                             
-                              
+            <div class="contentPanel">         
+             <input type="button"  value="Inbox" onclick="location.href='MijnBerichten'">
+                
+                <br />
+                <br><br>
+              
+                
+                <c:forEach items="${berichten}" var="bericht">
                    
-                              
-                  
+                                <td>Bericht lidnr ${bericht.lidnr} </td>
+                                <td></td>
+                                <h1>${bericht.onderwerp}</h1>
+                                <p>Datm: ${bericht.datum}</p>
+                                <p>Ritnummer: ${bericht.ritnr}</p>
+                                <p>Bericht: ${bericht.inhoud}</p>
+                                
+                                
+                                
+               
+                                
+                             
+                    </div>
                 </c:forEach>
                 
-                            
-                            
-                            
-                            
-			</div>
-
+             
+            </div>
         </div>
+
 
     </body>
 </html>
+

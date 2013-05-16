@@ -28,97 +28,47 @@ public class BerichtenDao {
     
     
     
-    /////
+    /////ver stuurbericht
     
-     //hiermee vullen we de inbox
-    public List<Berichten> haalHetGeheleBericht2(int berichtid)throws SQLException {
+    public void BerichtVersturen(int ritid)throws SQLException {
     
-    
-                  
         Connection connection = null;
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         List<Berichten> berichten =  new ArrayList<Berichten>();
-        
+        int lidnr;
         try {
-           System.out.println("Berichtid:"+berichtid);
+           System.out.println("Rit id: "+ ritid);
             currentCon = ConnectionManager.getConnection();
-            PreparedStatement HaalAlleBerichten;
-            String queryString = "SELECT  IDBERICHT, INHOUDBERICHT, DATUM, ONDERWERP,inhoudbericht lidnr FROM berichten WHERE IDBERICHT =?;";
+            PreparedStatement haalLidnr;
+            String queryString = "SELECT lidnr FROM rit WHERE ritnr=?;";
                  
-            HaalAlleBerichten = currentCon.prepareStatement(queryString);
-            HaalAlleBerichten.setInt(1, berichtid);
-            resultSet = HaalAlleBerichten.executeQuery();
-           
+            haalLidnr = currentCon.prepareStatement(queryString);
+            haalLidnr.setInt(1, ritid);
+            resultSet = haalLidnr.executeQuery();
+         
             while (resultSet.next()) {
-                Berichten bericht= new Berichten();
-                bericht.setBerichtid(resultSet.getInt(1));
-                bericht.setOnderwerp(resultSet.getString(2));
-                bericht.setDatum(resultSet.getString(3));
-                bericht.setInhoud(resultSet.getString(4));
-                
- 
-                berichten.add(bericht);
+                              
+                lidnr=resultSet.getInt(1);
+                                         
             }
-        }
-            finally {
-            
-            System.out.println("aantal waarden in lijst berichten"+berichten.size());
+        }catch (SQLException e) {
 
-        }
-        return berichten;
+
+            System.out.println(e);}
+        
+        
+        
+      
+        
+        
+            
         
     
     }
+      
     
     
-    
-    
-    /////
-    
-    
-    // met deze functie halen we een enkel bericht op
-    public List<Berichten> haalHetGeheleBericht(int berichtid) {
-       
-        Berichten berichtclas= new Berichten();
-        currentCon  = Dryves.ConnectionManager.getConnection();
-          List<Berichten> berichten =  new ArrayList<Berichten>();
-
-        try {
-            
-            PreparedStatement pstmt = currentCon.prepareStatement("SELECT  IDBERICHT, INHOUDBERICHT, DATUM, ONDERWERP, lidnr FROM berichten WHERE IDBERICHT =?");
-           
-            pstmt.setInt(1, berichtid);      
-
-            rs = pstmt.executeQuery();
-
-            while (rs.next()) {
-
-
-                berichtclas.setBerichtid(rs.getInt("IDBERICHT"));
-                berichtclas.setInhoud(rs.getString("INHOUDBERICHT"));
-                berichtclas.setDatum(rs.getString("DATUM"));
-                berichtclas.setOnderwerp(rs.getString("ONDERWERP"));
-                berichten.add(berichtclas);
-                System.out.println("ID BERICHT :"+rs.getString("IDBERICHT"));
-                System.out.println("Inhoud bericht:"+rs.getString("INHOUDBERICHT"));
-                System.out.println("Datum bericht:"+rs.getString("DATUM"));
-                System.out.println("Onderwerp bericht:"+rs.getString("ONDERWERP"));
-
-            }
-            rs.close();                      
-            pstmt.close();
-
-
-        } catch (SQLException e) {
-
-
-            System.out.println(e);
-        }
-
-        return berichten;
-
-    }
     
     
     
@@ -148,7 +98,7 @@ public class BerichtenDao {
                 bericht.setBerichtid(resultSet.getInt(1));
                 bericht.setOnderwerp(resultSet.getString(2));
                 bericht.setDatum(resultSet.getString(3));
-                
+             
  
                 berichten.add(bericht);
             }
@@ -161,4 +111,66 @@ public class BerichtenDao {
     
     }
     
+    
+    private int lidnr;
+    private String onderwerp;
+    private String datum;
+    private String inhoud;
+    private int ritnr;
+    
+    
+    public Berichten vulBerichtDao(Berichten bean){
+    
+    lidnr=bean.getLidnr();
+    onderwerp=bean.getOnderwerp();
+    datum=bean.getDatum();
+    inhoud=bean.getInhoud();
+    ritnr=bean.getRitnr();
+        
+        
+        return bean;
+        
+    }
+    
+    
+    
+    
+    
+
+  public List<Berichten> getAlleBerichtenbijId(int berichtid) throws SQLException {
+         Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+        List<Berichten> berichtlijst = new ArrayList<Berichten>();
+        
+        try {
+           
+            currentCon = ConnectionManager.getConnection();
+            PreparedStatement selecteerbericht;
+            String queryString = "SELECT  IDBERICHT, INHOUDBERICHT, DATUM, ONDERWERP, Ritnm FROM berichten WHERE IDBERICHT =?;";
+            
+            selecteerbericht = currentCon.prepareStatement(queryString);
+            selecteerbericht.setInt(1, berichtid);
+            resultSet = selecteerbericht.executeQuery();
+           
+            while (resultSet.next()) {
+                Berichten bericht= new Berichten();
+                bericht.setBerichtid(resultSet.getInt(1));
+                bericht.setInhoud(resultSet.getString(2));
+                bericht.setDatum(resultSet.getString(3));
+                bericht.setOnderwerp(resultSet.getString(4));
+                bericht.setRitnr(resultSet.getInt(5));
+                
+                berichtlijst.add(bericht);
+            }
+        }
+            finally {
+
+        }
+        return berichtlijst;
+        
+    }
+
 }
+
+

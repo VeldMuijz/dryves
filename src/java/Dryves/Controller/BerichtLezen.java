@@ -68,166 +68,38 @@ public class BerichtLezen extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        
-        
+
         //processRequest(request, response);
         // Instantieren van objecten
-        Berichten berichten = new Berichten();
-        BerichtenDao berichtendao = new BerichtenDao();
-
+        Berichten bericht = new Berichten();
+        BerichtenDao berichtDao = new BerichtenDao();
         // Haal de huidige sessie op
         HttpSession session = request.getSession();
         // Maak in de sessie een object rit aan met naam sessieRit
-        
-       // session.setAttribute("sessieRit", berichten);
+        session.setAttribute("sessieRit", bericht);
         //Haal de userbean (dit moet sessiebean worden) op uit de sessie
-        Lid user = (Lid) session.getAttribute("currentSessionUser");
-        
-        try {
-            List<Berichten> bericht;
-            int berichtid=Integer.parseInt(request.getParameter("berichtid"));
-           
-           bericht = berichtendao.haalHetGeheleBericht2(berichtid);
-           request.setAttribute("gehelebericht", bericht );
 
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/helebericht.jsp");
-            dispatcher.forward(request, response);
-                       
-       
-            
-            
-            
-            
-            
-        } catch (SQLException e) {
-            throw new ServletException("Cannot obtain products from DB", e);
-     
-        }
+        int berichtid = Integer.parseInt(request.getParameter("berichtid"));
 
-        
-        
-        
-        
-        
-        
-
-
-/*
-
-
-        Berichten bericht = new Berichten();
-        BerichtenDao berichtDao = new BerichtenDao();
-        
-    
-		try {
-			List<Berichten> berichtlijst;
-			int berichtid=Integer.parseInt(request.getParameter("berichtid"));
-                        
-			berichtlijst = berichtDao.haalHetGeheleBericht2(berichtid);
-			request.setAttribute("gehelebericht", berichtlijst);
-
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/helebericht.jsp");
-			dispatcher.forward(request, response);
-		} catch (SQLException e) {
-			throw new ServletException("Cannot obtain products from DB", e);
-		}
-
-        
-        
-/* Haal de huidige sessie op
-        HttpSession session = request.getSession();
-// Maak in de sessie een object rit aan met naam sessieRit
-        session.setAttribute("berichten", bericht);
-        
-        int berichtid=Integer.parseInt(request.getParameter("berichtid"));
-        
-        
-//Haal de userbean (dit moet sessiebean worden) op uit de sessie
         Lid user = (Lid) session.getAttribute("currentSessionUser");
         try {
-            List<Berichten> berichtenlijst;
-           berichtenlijst= berichtDao.haalHetGeheleBericht2(berichtid);
-        
-            
-            request.setAttribute("gehelebericht", berichtenlijst);
+            List<Berichten> ritten;
+            bericht.setLidnr(user.getLidnr());
+            berichtDao.vulBerichtDao(bericht);
+            ritten = berichtDao.getAlleBerichtenbijId(berichtid);
+            request.setAttribute("berichten", ritten);
 
             RequestDispatcher dispatcher = request.getRequestDispatcher("helebericht.jsp");
             dispatcher.forward(request, response);
-        } catch (Exception e) {
+        } catch (SQLException e) {
             throw new ServletException("Cannot obtain products from DB", e);
         }
 
 
 
-*/
 
 
 
-
-
-        /* processRequest(request, response);
-        
-         //processRequest(request, response);
-         // Instantieren van objecten
-         Berichten berichten = new Berichten();
-         BerichtenDao berichtendao = new BerichtenDao();
-
-         // Haal de huidige sessie op
-         //  HttpSession session = request.getSession();
-         // Maak in de sessie een object rit aan met naam sessieRit
-        
-         //session.setAttribute("sessieRit", berichten);
-         //Haal de userbean (dit moet sessiebean worden) op uit de sessie
-         //Lid user = (Lid) session.getAttribute("currentSessionUser");
-        
-         try {
-         List<Berichten> bericht;
-         int berichtid=Integer.parseInt(request.getParameter("berichtid"));
-           
-         bericht = berichtendao.haalHetGeheleBericht(berichtid);
-         request.setAttribute("gehelebericht", bericht );
-
-         RequestDispatcher dispatcher = request.getRequestDispatcher("/helebericht.jsp");
-         dispatcher.forward(request, response);
-                       
-       
-            
-            
-            
-            
-            
-         } catch (Exception e) {
-         throw new ServletException("Cannot obtain products from DB", e);
-     
-         }
-
-        
-        
-        
-         /*
-        
-         BerichtenDao berichtdao=new BerichtenDao(); 
-         Berichten berichtclas=new Berichten();
-         int berichtid=Integer.parseInt(request.getParameter("berichtid"));        
-         List<Berichten> lijstbericht=new ArrayList<Berichten>();
-        
-        
-         try {
-                      
-         lijstbericht.add( berichtclas=berichtdao.haalHetGeheleBericht(berichtid));
-         request.setAttribute("gehelebericht", lijstbericht);
-         System.out.println(lijstbericht.toString());
-         RequestDispatcher dispatcher = request.getRequestDispatcher("helebericht.jsp");
-         dispatcher.forward(request, response);
-         } catch (Exception e) {
-         System.out.println(e);
-         throw new ServletException(e);
-                        
-         }
-        
-        
-         */
 
 
     }

@@ -13,6 +13,28 @@ public class Berichten {
     private String onderwerp;
     private String datum;
     private String inhoud;
+    private int ritnr;
+
+    public int getRitnr() {
+        return ritnr;
+    }
+
+    public void setRitnr(int ritnr) {
+        this.ritnr = ritnr;
+    }
+
+    public Berichten() {
+    }
+
+    public Berichten(int lidnr, String onderwerp, String datum, String inhoud, int berichtid, int ritnr) {
+        this.lidnr = lidnr;
+        this.onderwerp = onderwerp;
+        this.datum = datum;
+        this.inhoud = inhoud;
+
+        this.berichtid = berichtid;
+        this.ritnr=ritnr;
+    }
      private int berichtid;
 
     public int getBerichtid() {

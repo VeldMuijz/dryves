@@ -54,9 +54,16 @@ Document : mijn_ritten
                                 <td><img src ="images/pijl.jpg" /></td>
                                 <td>${rit.eindpunt}</td>
                                 <td>${rit.prijs}</td>
-                                <td><button onclick="window.location = 'RitWijzigen?ritnr=${rit.ritnr}';"><fmt:message bundle="${rb}" key="ritwijzigen" /></button></td>
+                                <td><button onclick="window.location = 'RitWijzigen?ritnr=${rit.ritnr}';"><fmt:message bundle="${rb}" key="ritwijzigen" /></button>    
+                                
+                                
+                                 <button onclick="window.location = 'Berichtverzenden?ritid=${rit.ritnr}';">Verstuur bericht</button>
+                                
+                                </td>
                                  
                                 
+                                
+                               
                                 </tr> 
 
                         </table>

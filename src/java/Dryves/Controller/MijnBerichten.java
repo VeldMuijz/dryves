@@ -91,7 +91,7 @@ public class MijnBerichten extends HttpServlet {
            bericht = berichtendao.haalberichten(userid);
            request.setAttribute("berichten", bericht );
 
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/mijnberichten3.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/mijnberichten.jsp");
             dispatcher.forward(request, response);
                        
        
