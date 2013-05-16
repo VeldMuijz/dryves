@@ -170,7 +170,45 @@ public class BerichtenDao {
         return berichtlijst;
         
     }
+  
+  
+   public int statusbalk(int lidnummer) {
 
+
+
+        Connection con = Dryves.ConnectionManager.getConnection();
+       
+        int aantal = 0;
+
+        try {
+            
+            PreparedStatement pstmt = con.prepareStatement("SELECT  gelezen FROM berichten WHERE lidnr =? and gelezen=1");
+
+            pstmt.setInt(1, lidnummer);
+            rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+
+                rs.getInt(1);
+                aantal++;
+
+            }
+            rs.close();                      
+            pstmt.close();
+
+
+        } catch (SQLException e) {
+
+
+            System.out.println(e);
+        }
+
+        return aantal;
+
+
+
+    }
 }
+
 
 
