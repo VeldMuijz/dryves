@@ -4,7 +4,6 @@
  */
 package Dryves.Controller;
 
-import Dryves.BerichtClass;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -18,41 +17,48 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class Berichtverzenden extends HttpServlet {
 
-    
+    /**
+     * Processes requests for both HTTP
+     * <code>GET</code> and
+     * <code>POST</code> methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
+       
+              
         
-    }
+        }
+    
 
-    
-    
-    
-    
-    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
         
         
-      int naar=Integer.parseInt(request.getParameter("naar"));
-        String onderwerp=request.getParameter("onderwerp");
-        String inhoud=request.getParameter("inhoud");
-       int afzender=Integer.parseInt(request.getParameter("afzender"));
-        String datum=request.getParameter("datum");
-     
-        
-        
-        BerichtClass verstuurbericht= new BerichtClass();
-        verstuurbericht.verstuurbericht(naar, onderwerp, inhoud, datum, afzender);
+       int ritid=Integer.parseInt( request.getParameter("ritid"));
+       
+       
         
         
         
     }
 
-  
+    /**
+     * Handles the HTTP
+     * <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

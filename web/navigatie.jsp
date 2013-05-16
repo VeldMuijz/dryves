@@ -37,7 +37,14 @@
 
             <!--					TODO Hier nog de actuele aantal ongelezen berichten ophalen-->
             <div style="float: right; margin-right: 5px;"> 
-                <a href="mijnberichten.jsp"> 0</a><fmt:message bundle="${rb}" key="nieuweberichtennav" /><br/> 
+                <a href="mijnberichten.jsp">   <%
+            Lid user = (Lid) session.getAttribute("currentSessionUser");
+        int lidnr=user.getLidnr();
+        
+        BerichtClass bericht= new BerichtClass();
+        
+       int aantalberichten= bericht.statusbalk(lidnr);  %>
+  <% out.println( aantalberichten );  %> </a><fmt:message bundle="${rb}" key="nieuweberichtennav" /><br/> 
                 <a href="Uitloggen" style="float: right;"><fmt:message bundle="${rb}" key="uitlognav" /></a>
             </div>
 

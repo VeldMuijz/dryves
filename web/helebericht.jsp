@@ -40,10 +40,31 @@
             </jsp:include>
 
 			<div class="contentPanel">
-                            <h1>${onderwerp}</h1>
-				 <p>   </p>
-           <p>   ${inhoud}</p>
-              <p>   ${datum}</p>
+                            <button onclick="window.location = 'mijnberichten3.jsp';">Inbox</button>
+                       
+                            
+                          
+				
+                            
+                             <c:forEach items="${gehelebericht}" var="bericht">
+                 
+                 
+                              <h1>${bericht.onderwerp}</h1>
+                              
+                     
+                               
+                                <p>${bericht.datum}  </p>
+                                <p> ${bericht.inhoud}</p>
+                                
+                           
+                          
+               
+                                
+                              
+                  
+                </c:forEach>
+                
+                            
                             
                             
                             
