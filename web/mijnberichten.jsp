@@ -53,6 +53,7 @@
       
  //Haal de userbean (dit moet sessiebean worden) op uit de sessie
         Lid user = (Lid) session.getAttribute("currentSessionUser");
+        
  
 
  
@@ -61,7 +62,7 @@
         
         
         %>		 <p>   ${currentSessionUser.lidnr}</p>
-     <form action="BerichtServlet" method="get">
+     <form action="BerichtServ" method="get">
          <table>
       <% 
 
@@ -88,7 +89,7 @@ mails:<% out.println(rs.getString(2)); %>, <% out.println(rs.getString(3)); %> <
      <% } %>
 	
 	
-	<input type="submit" value="Submit">
+	<input type="submit" value="Bevestig">
 
    
     

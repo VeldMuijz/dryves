@@ -4,7 +4,7 @@
     Author     : Vincent
 --%>
 
-<%@page import="Dryves.BerichtClass"%>
+
 <%@page import="Dryves.Model.Lid"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -37,7 +37,7 @@
 
             <!--					TODO Hier nog de actuele aantal ongelezen berichten ophalen-->
             <div style="float: right; margin-right: 5px;"> 
-                <a href="mijnberichten.jsp"> 0</a><fmt:message bundle="${rb}" key="nieuweberichtennav" /><br/> 
+                <a href="mijnberichten.jsp">    </a><fmt:message bundle="${rb}" key="nieuweberichtennav" /><br/> 
                 <a href="Uitloggen" style="float: right;"><fmt:message bundle="${rb}" key="uitlognav" /></a>
             </div>
 

@@ -41,27 +41,9 @@ Document : mijn_ritten
 
 
             <div class="contentPanel">         
-                <button onclick="window.location = '/Dryves/RitPlannen';"><fmt:message bundle="${rb}" key="planrit" /></button> <br />
-
               
                 
-                <c:forEach items="${ritten}" var="rit">
-                    <div class="rittenlijst">
-                        <table>
-                            
-                                <tr>
-                                <td>${rit.startpunt} </td>
-                                <td><img src ="images/pijl.jpg" /></td>
-                                <td>${rit.eindpunt}</td>
-                                <td>${rit.prijs}</td>
-                                <td><button onclick="window.location = 'RitWijzigen?ritnr=${rit.ritnr}';"><fmt:message bundle="${rb}" key="ritwijzigen" /></button></td>
-                                 
-                                
-                                </tr> 
-
-                        </table>
-                    </div>
-                </c:forEach>
+               
                 
              
             </div>

@@ -31,7 +31,7 @@
         <div class="drvyesWrapper">
 
             <div class="logo">    
-				<img src="images/Logo_Dryves.png" />
+				
             </div>
 
 
@@ -40,10 +40,35 @@
             </jsp:include>
 
 			<div class="contentPanel">
-                            <h1>${onderwerp}</h1>
-				 <p>   </p>
-           <p>   ${inhoud}</p>
-              <p>   ${datum}</p>
+                          
+                       
+                            
+                          
+				
+                            
+                          <c:forEach items="${gehelebericht}" var="bericht">
+                 
+                  <table>
+                            
+                                <tr>
+                                <td>${bericht.onderwerp} </td>
+                                <td><img src ="images/pijl.jpg" /></td>
+                                <td>${bericht.datumt}</td>
+                                <td>${bericht.inhoudbericht}</td>
+                                <td></td>
+                                 
+                                
+                                </tr> 
+
+                        </table>
+                             
+                              
+                   
+                              
+                  
+                </c:forEach>
+                
+                            
                             
                             
                             

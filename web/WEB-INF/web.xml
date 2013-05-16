@@ -40,6 +40,22 @@
         <servlet-name>MijnAankopen</servlet-name>
         <servlet-class>Dryves.Controller.MijnAankopen</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>BerichtServ</servlet-name>
+        <servlet-class>Dryves.Controller.BerichtServ</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Berichtverzenden</servlet-name>
+        <servlet-class>Dryves.Controller.Berichtverzenden</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>MijnBerichten</servlet-name>
+        <servlet-class>Dryves.Controller.MijnBerichten</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BerichtLezen</servlet-name>
+        <servlet-class>Dryves.Controller.BerichtLezen</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LidWijzigen</servlet-name>
         <url-pattern>/LidWijzigen</url-pattern>
@@ -100,6 +116,22 @@
         <servlet-name>MijnAankopen</servlet-name>
         <url-pattern>/MijnAankopen</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BerichtServ</servlet-name>
+        <url-pattern>/BerichtServ</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Berichtverzenden</servlet-name>
+        <url-pattern>/Berichtverzenden</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MijnBerichten</servlet-name>
+        <url-pattern>/MijnBerichten</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BerichtLezen</servlet-name>
+        <url-pattern>/BerichtLezen</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>
     </session-config>
@@ -109,6 +141,10 @@
     <servlet>
         <servlet-name>Login</servlet-name>
         <servlet-class>Dryves.Controller.Login</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BerichtServlet</servlet-name>
+        <servlet-class>Dryves.Controller.BerichtServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
