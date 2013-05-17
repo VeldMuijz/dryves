@@ -52,7 +52,7 @@
                    
                                 <td>Bericht lidnr ${bericht.lidnr} </td>
                                 <td></td>
-                                <h1>${bericht.onderwerp}</h1>
+                                <h1></h1>
                                 <p>Datm: ${bericht.datum}</p>
                                 <p>Ritnummer: ${bericht.ritnr}</p>
                                 <p>Bericht: ${bericht.inhoud}</p>

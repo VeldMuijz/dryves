@@ -11,7 +11,6 @@ import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -21,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author H
  */
-public class Berichtverzenden extends HttpServlet {
+public class VerstuurBericht extends HttpServlet {
 
     /**
      * Processes requests for both HTTP
@@ -36,42 +35,40 @@ public class Berichtverzenden extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
        
-              
-        
-        }
-    
+    }
 
+  
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       /* processRequest(request, response);
-        
-        BerichtenDao berichtDao= new BerichtenDao();
-        
-        
-       //query 
-       int ritnr=Integer.parseInt( request.getParameter("ritid"));
-       int lidnr=Integer.parseInt( request.getParameter("lidnr"));
-       
-       // beter deze functie niet hier uitvoeren
-       berichtDao.haalLidNr(ritnr);
-        
-       */
+        processRequest(request, response);
         
         Berichten bericht= new Berichten();
+        BerichtenDao berichtDao= new BerichtenDao();
+        
+       bericht.setRitnr(Integer.parseInt(request.getParameter("ritnr")));
+        bericht.setLidnr(Integer.parseInt(request.getParameter("lidnr")));
+        bericht.setInhoud(request.getParameter("inhoud"));
+        bericht.setDatum(request.getParameter("datum"));
+        System.out.println(bericht.getInhoud());
         
         
-       bericht.setRitnr(Integer.parseInt( request.getParameter("ritid")));
-       bericht.setLidnr(Integer.parseInt( request.getParameter("lidnr")));
+        try {
+            berichtDao.BerichtVersturen(bericht);
+            response.sendRedirect("succesvol.jsp");
+        } catch (SQLException ex) {
+            Logger.getLogger(Berichtverzenden.class.getName()).log(Level.SEVERE, null, ex);
+            response.sendRedirect("oops.jsp");
+           
+        }
         
-      response.sendRedirect("nieuwbericht.jsp");
-
-
-       
-       
-       
-       
+        
+        
+        
+        
+        
         
         
         

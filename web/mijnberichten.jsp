@@ -53,8 +53,8 @@
                                 <tr>
                                 <td>${bericht.lidnr} </td>
                                 <td><img src ="images/pijl.jpg" /></td>
-                                <td>${bericht.onderwerp}</td>
-                                <td>${bericht.datum}</td>
+                                <td>Ritnummer is ${bericht.ritnr}</td>
+                                <td>Datum:  ${bericht.datum}</td>
                                 <td><button onclick="window.location = 'BerichtLezen?berichtid=${bericht.berichtid}';">Bekijk bericht</button></td>
                
                                 

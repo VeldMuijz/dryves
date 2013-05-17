@@ -10,7 +10,7 @@ package Dryves.Model;
  */
 public class Berichten {
      private int lidnr;
-    private String onderwerp;
+ 
     private String datum;
     private String inhoud;
     private int ritnr;
@@ -26,9 +26,9 @@ public class Berichten {
     public Berichten() {
     }
 
-    public Berichten(int lidnr, String onderwerp, String datum, String inhoud, int berichtid, int ritnr) {
+    public Berichten(int lidnr, String datum, String inhoud, int berichtid, int ritnr) {
         this.lidnr = lidnr;
-        this.onderwerp = onderwerp;
+       
         this.datum = datum;
         this.inhoud = inhoud;
 
@@ -67,13 +67,7 @@ public class Berichten {
         this.lidnr = lidnr;
     }
 
-    public String getOnderwerp() {
-        return onderwerp;
-    }
-
-    public void setOnderwerp(String onderwerp) {
-        this.onderwerp = onderwerp;
-    }
+   
 
     public String getDatum() {
         return datum;

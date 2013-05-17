@@ -55,9 +55,9 @@ Document : mijn_ritten
                                 <td>${rit.eindpunt}</td>
                                 <td>${rit.prijs}</td>
                                 <td><button onclick="window.location = 'RitWijzigen?ritnr=${rit.ritnr}';"><fmt:message bundle="${rb}" key="ritwijzigen" /></button>    
+                            
                                 
-                                
-                                 <button onclick="window.location = 'Berichtverzenden?ritid=${rit.ritnr}';">Verstuur bericht</button>
+                                 <button onclick="window.location = 'nieuwbericht.jsp?ritnr=${rit.ritnr}&lidnr=${currentSessionUser.lidnr} ';">Verstuur bericht</button>
                                 
                                 </td>
                                  

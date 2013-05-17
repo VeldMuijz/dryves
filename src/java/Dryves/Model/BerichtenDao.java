@@ -28,43 +28,76 @@ public class BerichtenDao {
     
     
     
-    /////ver stuurbericht
     
-    public void BerichtVersturen(int ritid)throws SQLException {
+    //achterhaal lid nr d.m.v berichtid
+    public int haalLidNr(int ritnr){
     
+               
         Connection connection = null;
         PreparedStatement statement = null;
         ResultSet resultSet = null;
-        List<Berichten> berichten =  new ArrayList<Berichten>();
-        int lidnr;
+        int lidnr=0;
+        
         try {
-           System.out.println("Rit id: "+ ritid);
+           
             currentCon = ConnectionManager.getConnection();
-            PreparedStatement haalLidnr;
+            PreparedStatement haallidnr;
             String queryString = "SELECT lidnr FROM rit WHERE ritnr=?;";
                  
-            haalLidnr = currentCon.prepareStatement(queryString);
-            haalLidnr.setInt(1, ritid);
-            resultSet = haalLidnr.executeQuery();
-         
+            haallidnr = currentCon.prepareStatement(queryString);
+            haallidnr.setInt(1, ritnr);
+            resultSet = haallidnr.executeQuery();
+           
             while (resultSet.next()) {
                               
-                lidnr=resultSet.getInt(1);
-                                         
+                lidnr=resultSet.getInt(1);   
+                System.out.println("Lidnummer: "+ lidnr);
             }
+        }
+            catch(Exception e) {
+                System.out.println(e);
+
+        }
+       System.out.println("output van haallidnr: "+ lidnr);
+        return lidnr;
+    
+    
+    }
+    
+    
+    /////verstuur bericht 
+    
+    public boolean BerichtVersturen(Berichten bean)throws SQLException {
+        
+        //Met deze functie komen we erachter wie
+        //de eigenaar is van de aangeboden rit d.m.v ritnr
+        int lidnreigenaar= haalLidNr(bean.getRitnr());
+        
+        ResultSet resultSet = null;
+        boolean more=false;
+        try {        
+            currentCon = ConnectionManager.getConnection();
+            PreparedStatement verstuurbericht;
+            String queryString = "INSERT INTO berichten  (inhoudbericht,datum,afzender,lidnr,gelezen,ritnm)"
+                    + "VALUES (?,?,?,?,?,?)";
+            verstuurbericht = currentCon.prepareStatement(queryString);
+            verstuurbericht.setString(1, bean.getInhoud());
+            verstuurbericht.setString(2, bean.getDatum());
+            verstuurbericht.setInt(3, bean.getLidnr());
+            verstuurbericht.setInt(4,lidnreigenaar );
+            verstuurbericht.setInt(5, 1);
+            verstuurbericht.setInt(6, bean.getRitnr());
+            resultSet = verstuurbericht.executeQuery();
+         
+            
+            more=true;
+           
         }catch (SQLException e) {
 
 
             System.out.println(e);}
         
-        
-        
-      
-        
-        
-            
-        
-    
+         return more;
     }
       
     
@@ -77,7 +110,8 @@ public class BerichtenDao {
     public List<Berichten> haalberichten(int lidnummer)throws SQLException {
     
     
-                  
+        
+        
         Connection connection = null;
         PreparedStatement statement = null;
         ResultSet resultSet = null;
@@ -87,7 +121,7 @@ public class BerichtenDao {
            System.out.println("Lidnummer:"+lidnummer);
             currentCon = ConnectionManager.getConnection();
             PreparedStatement HaalAlleBerichten;
-            String queryString = "select IDBERICHT, ONDERWERP, DATUM  from BERICHTEN  where lidnr=?;";
+            String queryString = "select berichtnr,  DATUM ,ritnm from BERICHTEN  where lidnr=?;";
                  
             HaalAlleBerichten = currentCon.prepareStatement(queryString);
             HaalAlleBerichten.setInt(1, lidnummer);
@@ -96,8 +130,9 @@ public class BerichtenDao {
             while (resultSet.next()) {
                 Berichten bericht= new Berichten();
                 bericht.setBerichtid(resultSet.getInt(1));
-                bericht.setOnderwerp(resultSet.getString(2));
-                bericht.setDatum(resultSet.getString(3));
+               
+                bericht.setDatum(resultSet.getString(2));
+                bericht.setRitnr(resultSet.getInt(3));
              
  
                 berichten.add(bericht);
@@ -122,7 +157,7 @@ public class BerichtenDao {
     public Berichten vulBerichtDao(Berichten bean){
     
     lidnr=bean.getLidnr();
-    onderwerp=bean.getOnderwerp();
+    //onderwerp=bean.getOnderwerp();
     datum=bean.getDatum();
     inhoud=bean.getInhoud();
     ritnr=bean.getRitnr();
@@ -147,7 +182,7 @@ public class BerichtenDao {
            
             currentCon = ConnectionManager.getConnection();
             PreparedStatement selecteerbericht;
-            String queryString = "SELECT  IDBERICHT, INHOUDBERICHT, DATUM, ONDERWERP, Ritnm FROM berichten WHERE IDBERICHT =?;";
+            String queryString = "SELECT  berichtnr, INHOUDBERICHT, DATUM, Ritnm FROM berichten WHERE berichtnr =?;";
             
             selecteerbericht = currentCon.prepareStatement(queryString);
             selecteerbericht.setInt(1, berichtid);
@@ -158,8 +193,8 @@ public class BerichtenDao {
                 bericht.setBerichtid(resultSet.getInt(1));
                 bericht.setInhoud(resultSet.getString(2));
                 bericht.setDatum(resultSet.getString(3));
-                bericht.setOnderwerp(resultSet.getString(4));
-                bericht.setRitnr(resultSet.getInt(5));
+                
+                bericht.setRitnr(resultSet.getInt(4));
                 
                 berichtlijst.add(bericht);
             }
