@@ -40,6 +40,22 @@
         <servlet-name>MijnAankopen</servlet-name>
         <servlet-class>Dryves.Controller.MijnAankopen</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>MijnBerichten</servlet-name>
+        <servlet-class>Dryves.Controller.MijnBerichten</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BerichtLezen</servlet-name>
+        <servlet-class>Dryves.Controller.BerichtLezen</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BerichtBeantwoorden</servlet-name>
+        <servlet-class>Dryves.Controller.BerichtBeantwoorden</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>VerstuurBericht</servlet-name>
+        <servlet-class>Dryves.Controller.VerstuurBericht</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LidWijzigen</servlet-name>
         <url-pattern>/LidWijzigen</url-pattern>
@@ -99,6 +115,22 @@
     <servlet-mapping>
         <servlet-name>MijnAankopen</servlet-name>
         <url-pattern>/MijnAankopen</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MijnBerichten</servlet-name>
+        <url-pattern>/MijnBerichten</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BerichtLezen</servlet-name>
+        <url-pattern>/BerichtLezen</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BerichtBeantwoorden</servlet-name>
+        <url-pattern>/BerichtBeantwoorden</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>VerstuurBericht</servlet-name>
+        <url-pattern>/VerstuurBericht</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>

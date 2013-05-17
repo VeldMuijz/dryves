@@ -65,13 +65,14 @@ Document : mijn_ritten
                                     </tr>
 
                                     <tr>
-                                        <td>Prijs: € ${rit.prijs}</td>
+                                        <td><fmt:message bundle="${rb}" key="prijs" /> € ${rit.prijs}</td>
                                         <td/>
                                         <td>${rit.datumkort} ${rit.tijd}</td>
                                         <td>
                                             <c:choose>
                                                 <c:when test="${currentSessionUser.lidnr > 0}"> 
                                                     <button onclick="window.location = 'RitKopen?ritnr=${rit.ritnr}';"><fmt:message bundle="${rb}" key="ritkopen" /></button>
+                                                    <button onclick="window.location = 'nieuwbericht.jsp?ritnr=${rit.ritnr}&lidnr=${currentSessionUser.lidnr} ';">Verstuur bericht</button>
                                                 </c:when>
                                                 <c:otherwise>
                                                     <button onclick="window.location = 'login.jsp';">Login/registreer <br>om te bekijken</button>
