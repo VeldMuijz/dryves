@@ -102,6 +102,39 @@ public class BerichtenDao {
       
     
     
+    //beantwoord bericht
+    
+     public boolean beantwoordBericht(Berichten bean)throws SQLException {
+        
+        
+        
+        ResultSet resultSet = null;
+        boolean more=false;
+        try {        
+            currentCon = ConnectionManager.getConnection();
+            PreparedStatement verstuurbericht;
+            String queryString = "INSERT INTO berichten  (inhoudbericht,datum,afzender,lidnr,gelezen,ritnm)"
+                    + "VALUES (?,?,?,?,?,?)";
+            verstuurbericht = currentCon.prepareStatement(queryString);
+            verstuurbericht.setString(1, bean.getInhoud());
+            verstuurbericht.setString(2, bean.getDatum());
+            verstuurbericht.setInt(3, bean.getAfzender());
+            verstuurbericht.setInt(4,bean.getLidnr());
+            verstuurbericht.setInt(5, 1);
+            verstuurbericht.setInt(6, bean.getRitnr());
+            resultSet = verstuurbericht.executeQuery();
+         
+            
+            more=true;
+           
+        }catch (SQLException e) {
+
+
+            System.out.println(e);}
+        
+         return more;
+    }
+      
     
     
     
@@ -182,7 +215,7 @@ public class BerichtenDao {
            
             currentCon = ConnectionManager.getConnection();
             PreparedStatement selecteerbericht;
-            String queryString = "SELECT  berichtnr, INHOUDBERICHT, DATUM, Ritnm FROM berichten WHERE berichtnr =?;";
+            String queryString = "SELECT  berichtnr, INHOUDBERICHT, DATUM, Ritnm, lidnr, afzender FROM berichten WHERE berichtnr =?;";
             
             selecteerbericht = currentCon.prepareStatement(queryString);
             selecteerbericht.setInt(1, berichtid);
@@ -195,7 +228,8 @@ public class BerichtenDao {
                 bericht.setDatum(resultSet.getString(3));
                 
                 bericht.setRitnr(resultSet.getInt(4));
-                
+                bericht.setLidnr(resultSet.getInt(5));
+                bericht.setAfzender(resultSet.getInt(6));
                 berichtlijst.add(bericht);
             }
         }

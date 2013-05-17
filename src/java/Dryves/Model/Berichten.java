@@ -10,7 +10,7 @@ package Dryves.Model;
  */
 public class Berichten {
      private int lidnr;
- 
+
     private String datum;
     private String inhoud;
     private int ritnr;
@@ -22,11 +22,19 @@ public class Berichten {
     public void setRitnr(int ritnr) {
         this.ritnr = ritnr;
     }
+ private int afzender;
 
+    public int getAfzender() {
+        return afzender;
+    }
+
+    public void setAfzender(int afzender) {
+        this.afzender = afzender;
+    }
     public Berichten() {
     }
 
-    public Berichten(int lidnr, String datum, String inhoud, int berichtid, int ritnr) {
+    public Berichten(int lidnr, String datum, String inhoud, int berichtid, int ritnr, int afzender) {
         this.lidnr = lidnr;
        
         this.datum = datum;
@@ -34,6 +42,7 @@ public class Berichten {
 
         this.berichtid = berichtid;
         this.ritnr=ritnr;
+        this.afzender=afzender;
     }
      private int berichtid;
 
