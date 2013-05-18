@@ -47,11 +47,11 @@
             
             <div class="mijndryves">
                 
-                <button onclick="window.location = 'mijndryves_gegevens.jsp';"><img src="images/personal.png" /> <br /><br /> <fmt:message bundle="${rb}" key="mijngegevens" /></button><button onclick="window.location = 'RitPlannen';"><img src="images/mapicon.png" /> <br /><br /> <fmt:message bundle="${rb}" key="planrit" /></button><button onclick="window.location = 'MijnRitten';"><img src="images/tire.png" /> <br /><br /> <fmt:message bundle="${rb}" key="mijnritten" /></button><button onclick="window.location = 'MijnAankopen';"><img src="images/cart.png" /> <br /><br /> <fmt:message bundle="${rb}" key="mijnaankopen" /></button>
+                <button onclick="window.location = 'mijndryves_gegevens.jsp';"><img src="images/personal.png" /> <br /><br /> <fmt:message bundle="${rb}" key="mijngegevens" /></button><button onclick="window.location = 'RitPlannen';"><img src="images/mapicon.png" /> <br /><br /> <fmt:message bundle="${rb}" key="planrit" /></button><button onclick="window.location = 'MijnRitten';"><img src="images/tire.png" /> <br /><br /> <fmt:message bundle="${rb}" key="mijnritten" /></button><button onclick="window.location = 'MijnAankopen';"><img src="images/cart.png" /> <br /><br /> <fmt:message bundle="${rb}" key="mijnaankopen" /></button><button onclick="window.location = 'MijnBerichten';"><img src="images/envelope.png" /> <br /><br /> <fmt:message bundle="${rb}" key="mijnberichten" /></button>
                 
             </div>      
             
-            <button onclick="window.location = 'MijnBerichten';"><img src="images/envelope.png" /><fmt:message bundle="${rb}" key="mijnberichten" /></button>
+            
                                                          
             
         <img src='${currentSessionUser.getFotoUrl()}'/>
