@@ -77,18 +77,19 @@ public class BerichtBeantwoorden extends HttpServlet {
         Berichten bericht = new Berichten();
         BerichtenDao berichtDao = new BerichtenDao();
         
-        //huidige tijdstip opvragen
-        Date dagMaandJaar = new Date ();
-        SimpleDateFormat datumformat = new SimpleDateFormat("dd/mm/yyyy hh:mm");
-        StringBuilder tijdstipNu = new StringBuilder( datumformat.format( dagMaandJaar ) );
-     
+//        //huidige tijdstip opvragen
+ Date datum = new Date ();
+//        SimpleDateFormat datumformat = new SimpleDateFormat("dd/mm/yyyy hh:mm");
+//        StringBuilder tijdstipNu = new StringBuilder( datumformat.format( dagMaandJaar ) );
+//     
         
 
 
         bericht.setAfzender(Integer.parseInt(request.getParameter("afzender")));
         bericht.setLidnr(Integer.parseInt(request.getParameter("naar")));
         bericht.setInhoud(request.getParameter("inhoud"));
-        bericht.setDatum(tijdstipNu.toString());
+//        bericht.setDatum(tijdstipNu.toString());
+		bericht.setDatum(new Timestamp(datum.getTime()));
         bericht.setRitnr(Integer.parseInt(request.getParameter("ritnr")));
 
         System.out.println(bericht.getAfzender());
