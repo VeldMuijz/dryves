@@ -54,7 +54,7 @@
                                <%--  <td>${bericht.lidnr} </td>   --%>
                                 <td><img src ="images/pijl.jpg" /></td>
                                 <td><fmt:message bundle="${rb}" key="ritnummeris" /> ${bericht.ritnr}</td>
-                                <%-- <td><fmt:message bundle="${rb}" key="datum" />  ${bericht.datum}</td>  --%>
+                             <td><fmt:message bundle="${rb}" key="datum" />  ${bericht.datum}</td>  
                                 <td><button onclick="window.location = 'BerichtLezen?berichtid=${bericht.berichtid}';"><fmt:message bundle="${rb}" key="bekijkbericht" /></button></td>
                
                                 

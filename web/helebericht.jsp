@@ -78,7 +78,7 @@
                 <c:forEach items="${berichten}" var="bericht">
                     <form id="beantwoorden" action="BerichtBeantwoorden" method="get">
 
-                        <input type="hidden" id="datum" name="datum"  />
+                        
                         <input type="hidden" name="afzender" value="${currentSessionUser.lidnr}"/>
                         <input type="hidden" name="naar" value="${bericht.afzender}"/>
                         <input type="hidden" name="ritnr" value="${bericht.ritnr}"/>
@@ -102,7 +102,7 @@
                     <h1><fmt:message bundle="${rb}" key="ritnummeris" /> ${bericht.ritnr}</h1>
                     <p><fmt:message bundle="${rb}" key="lidnr" /> ${bericht.lidnr} </p>
                     <p><fmt:message bundle="${rb}" key="afzender" /> ${bericht.afzender}</p>                         
-                  <%--  <p><fmt:message bundle="${rb}" key="datum" /> ${bericht.datum}</p> --%>
+                    <p><fmt:message bundle="${rb}" key="datum" /> ${bericht.datum}</p> 
 
                     <p><fmt:message bundle="${rb}" key="bericht" /> ${bericht.inhoud}</p>
 
