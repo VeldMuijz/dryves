@@ -83,12 +83,14 @@ public class MijnBerichten extends HttpServlet {
        // session.setAttribute("sessieRit", berichten);
         //Haal de userbean (dit moet sessiebean worden) op uit de sessie
         Lid user = (Lid) session.getAttribute("currentSessionUser");
+		
         
         try {
             List<Berichten> bericht;
             int userid=user.getLidnr();
            
            bericht = berichtendao.haalberichten(userid);
+		   
            request.setAttribute("berichten", bericht );
           
             RequestDispatcher dispatcher = request.getRequestDispatcher("mijnberichten.jsp");
