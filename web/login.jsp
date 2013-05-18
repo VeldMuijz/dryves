@@ -25,97 +25,6 @@
         <title>Dryves</title>
         <link type="text/css" rel="stylesheet" href="css/dryver.css"/>
 
-
-
-
-
-
-    </head>
-    <body>
-
-        <div class="background">
-
-            <img src="images/background1.jpg" />
-
-        </div>
-
-        <div class="drvyesWrapper">
-
-            <div class="logo">    
-                <img src="images/Logo_Dryves.png" />
-            </div>
-
-
-            <div class="navigation">
-
-                <div style="float:right; margin-right: -1px;"><button>Login</button></div>
-
-                <button onclick="window.location = 'index.jsp';">Home</button><button onclick="window.location = 'watisdryves.jsp';">Wat is Dryves</button><button onclick="window.location = 'faq.jsp';">FAQ</button><button onclick="window.location = 'registratie.jsp';">Registreer</button>
-
-            </div>
-
-            <div class="contentPanel">
-
-                 <fmt:message bundle="${rb}" key="ditisdeloginpage" />
-
-                <br /><br />
-
-                <form action="LoginServlet" method="post">
-                    <table style="width:320px;">
-                        <tr>
-                            <td>
-                                <fmt:message bundle="${rb}" key="gebruikersnaam" />
-                            </td>
-                            <td>
-                                <input type="text" id="email" name="email" style="width:205px;"/>  
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <fmt:message bundle="${rb}" key="wachtwoordlogin" />
-                            </td>
-                            <td><input type="password" id="wachtwoord" name="wachtwoord" style="width:205px;" /></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                &nbsp;
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-
-                            </td>
-                            <td><button type="submit" style="float:right;" />Login</button></td>
-                        </tr>
-                    </table>
-
-							Nog geen lid? Klik <a href="registratie.jsp">hier</a> om u gratis te registreren<br />
-							of login met uw Facebook account.<br/> <br/>
-
-
-
-
-                    <fb:profile-pic uid="loggedinuser" facebook-logo="true" linked="false" 
-                                    width="80" height="80"></fb:profile-pic>
-
-
-
-
-
-
-
-
-
-
-
-
-
-                </form>
-                <script src="http://connect.facebook.net/en_US/all.js"></script>
-
-                <fb:login-button autologoutlink="true" onlogin="OnRequestPermission(); VanFaceNaarP() "   >
-                  <fmt:message bundle="${rb}" key="loginmetfacebook" /> </fb:login-button>
-
                 <script language="javascript" type="text/javascript">
 
 
@@ -196,7 +105,95 @@
 
                 </script>
 
-                <form id="v" action="FacebookLoginServlet" method="get">
+
+
+
+    </head>
+    <body>
+
+        <div class="background">
+
+            <img src="images/background1.jpg" />
+
+        </div>
+
+        <div class="drvyesWrapper">
+
+            <div class="logo">    
+                <img src="images/Logo_Dryves.png" />
+            </div>
+
+
+            <div class="navigation">
+
+                <div style="float:right; margin-right: -1px;"><button>Login</button></div>
+
+                <button onclick="window.location = 'index.jsp';">Home</button><button onclick="window.location = 'watisdryves.jsp';">Wat is Dryves</button><button onclick="window.location = 'faq.jsp';">FAQ</button><button onclick="window.location = 'registratie.jsp';">Registreer</button>
+
+            </div>
+
+            <div class="contentPanel">
+
+                 <fmt:message bundle="${rb}" key="ditisdeloginpage" />
+
+                <br /><br />
+                
+                <div style="float:left; margin-right:50px;">
+
+                <form action="LoginServlet" method="post">
+                    <table style="width:320px;">
+                        <tr>
+                            <td>
+                                <fmt:message bundle="${rb}" key="gebruikersnaam" />
+                            </td>
+                            <td>
+                                <input type="text" id="email" name="email" style="width:205px;"/>  
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <fmt:message bundle="${rb}" key="wachtwoordlogin" />
+                            </td>
+                            <td><input type="password" id="wachtwoord" name="wachtwoord" style="width:205px;" /></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                &nbsp;
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+
+                            </td>
+                            <td><button type="submit" style="float:right;" />Login</button></td>
+                        </tr>
+                    </table>
+                        
+                </form>
+                            <br />
+                            
+                            <button onclick="window.location = 'wwvergeten.jsp'"><fmt:message bundle="${rb}" key="wwvergeten" /></button>
+                            
+                            <br /><br />
+                        
+                            Nog geen lid? Klik <a href="registratie.jsp">hier</a> om u gratis te registreren<br />
+                            of login met uw Facebook account.
+                </div>
+
+
+                    <fb:profile-pic uid="loggedinuser" facebook-logo="true" linked="false" 
+                                    width="80" height="80"></fb:profile-pic>
+
+
+                
+                <script src="http://connect.facebook.net/en_US/all.js"></script>
+
+                <fb:login-button autologoutlink="true" onlogin="OnRequestPermission(); VanFaceNaarP() "   >
+                  <fmt:message bundle="${rb}" key="loginmetfacebook" /> </fb:login-button>
+
+
+
+                <form id="v" action="FacebookLoginServlet" method="get" style="float:right">
 
                     <input type="hidden" id="idh" name="id" value="" />
                     <input type="hidden" id="naamh" name="naam" value="" />

@@ -27,7 +27,7 @@ import javax.mail.internet.MimeMultipart;
  
 public class verstuurEmail {
     
-    private String van;
+    String van = "dryveseu@gmail.com";
     private String naar;
     private String onderwerp;
     private String bericht;
@@ -67,23 +67,50 @@ public class verstuurEmail {
 			message.setSubject(onderwerp);
 			message.setText(bericht);
                         
-
-
-                    // Part two is attachment  
-
-                    DataSource source =
-                            new FileDataSource(attachment);
+ 
+			Transport.send(message);
+ 
+			System.out.println("Done");
+ 
+		} catch (MessagingException e) {
+			throw new RuntimeException(e);
+		}
+    
+    }
+    
+    
+        public void verstuurEmailZonderBijlage(String naar, String onderwerp, String bericht){
+    
+        final String username = "dryveseu@gmail.com";
+		final String password = "Qwerty!2";
+ 
+		Properties props = new Properties();
+		props.put("mail.smtp.auth", "true");
+		props.put("mail.smtp.starttls.enable", "true");
+		props.put("mail.smtp.host", "smtp.gmail.com");
+		props.put("mail.smtp.port", "587");
+ 
+		Session session = Session.getInstance(props,
+		  new javax.mail.Authenticator() {
+			protected PasswordAuthentication getPasswordAuthentication() {
+				return new PasswordAuthentication(username, password);
+			}
+		  });
+ 
+		try {
                     
-                    messageBodyPart.setDataHandler(
-                            new DataHandler(source));
+                    MimeBodyPart messageBodyPart =
+                            new MimeBodyPart();
+                    Multipart multipart = new MimeMultipart();
                     
-                    messageBodyPart.setFileName(attachmentName);
+                    messageBodyPart = new MimeBodyPart();
                     
-                    message.setContent(multipart);
-                    
-                    multipart.addBodyPart(messageBodyPart); 
-                    
-
+			Message message = new MimeMessage(session);
+                        
+			message.setRecipients(Message.RecipientType.TO,
+				InternetAddress.parse(naar));
+			message.setSubject(onderwerp);
+			message.setText(bericht);
                         
  
 			Transport.send(message);
@@ -95,5 +122,6 @@ public class verstuurEmail {
 		}
     
     }
+    
  
 }
