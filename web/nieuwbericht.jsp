@@ -75,7 +75,7 @@
 
                             <form action="VerstuurBericht" method="get">
 
-                                <p><fmt:message bundle="${rb}" key="datum" /> <% out.print(datum);%> </p> 
+                            <%--    <p><fmt:message bundle="${rb}" key="datum" /> <% out.print(datum);%> </p> --%>
 
                                 <input type="hidden" name="ritnr" value="<% out.print(ritnr);%>" />
                                 <input type="hidden" name="lidnr" value="<% out.print(lidnr);%>" />
