@@ -53,7 +53,7 @@ Document : mijn_ritten
 								<td>Factuurnr: ${aankoop.factuurnr}</td>
 								<td>Ritnummer: ${aankoop.ritnr}</td>
                                 <td>Datum: ${aankoop.stringTijd} ${aankoop.stringDatum}</td>
-                               <td><button onclick="window.location = 'LidBeoordelen?aankoopnr=${aankoop.aankoopnr}';">Beoordelen</button></td>
+                               <td><button onclick="window.location = 'LidBeoordelen?aankoopnr=${aankoop.aankoopnr}';"><fmt:message bundle="${rb}" key="beoordeelknop" /></button></td>
                                 
                                 </tr> 
 
