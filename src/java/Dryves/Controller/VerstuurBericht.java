@@ -51,7 +51,7 @@ public class VerstuurBericht extends HttpServlet {
         BerichtenDao berichtDao= new BerichtenDao();
         
         Date dateNow = new Date ();
-        SimpleDateFormat datumformat = new SimpleDateFormat("MM/dd/yyyy hh:mm");
+        SimpleDateFormat datumformat = new SimpleDateFormat("dd/mm/yyyy hh:mm");
         StringBuilder tijdstipNu = new StringBuilder( datumformat.format( dateNow ) );
         
         
