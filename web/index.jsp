@@ -56,17 +56,6 @@
                                         <button onclick="RitZoeken">Uitvoeren</button>
                                         </form>      -->
 
-            <div class="contentPanel">
-
-                <jsp:include page="zoekrit.jsp" flush="true" ></jsp:include> 
-
-                <br /><br />
-
-                <div class="contentPanelBackground"></div>
-
-            </div>
-
-
             <br /> <br />  
 
 

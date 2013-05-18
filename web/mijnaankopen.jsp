@@ -34,6 +34,11 @@ Document : mijn_ritten
                 
                 <img src="images/Logo_Dryves.png" />
             </div>
+            
+            
+            <jsp:include page="navigatie.jsp" flush="true">
+                <jsp:param name="menu_active" value="mijndryves"></jsp:param>
+            </jsp:include>
 
 <jsp:include page="navigatie.jsp" flush="true">
                 <jsp:param name="menu_active" value="home"></jsp:param>
