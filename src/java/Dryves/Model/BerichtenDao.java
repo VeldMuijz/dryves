@@ -20,8 +20,14 @@ import java.util.List;
  */
 public class BerichtenDao {
 
+	List<Lid> afzender = new ArrayList<Lid>();
 	static Connection currentCon;
 	static ResultSet rs;
+	private int lidnr;
+	private String onderwerp;
+	private Timestamp datum;
+	private String inhoud;
+	private int ritnr;
 
 	//achterhaal lid nr d.m.v berichtid
 	public int haalLidNr(int ritnr) {
@@ -82,12 +88,6 @@ public class BerichtenDao {
 
 			System.out.println(e);
 		}
-
-
-
-
-
-
 
 	}
 	/////verstuur bericht 
@@ -165,6 +165,7 @@ public class BerichtenDao {
 		PreparedStatement statement = null;
 		ResultSet resultSet = null;
 		List<Berichten> berichten = new ArrayList<Berichten>();
+
 		DatumConverter dc = new DatumConverter();
 
 		try {
@@ -179,26 +180,38 @@ public class BerichtenDao {
 			resultSet = HaalAlleBerichten.executeQuery();
 
 			while (resultSet.next()) {
+
 				Berichten bericht = new Berichten();
 				bericht.setBerichtid(resultSet.getInt("berichtnr"));
 				bericht.setAfzender(resultSet.getInt("afzender"));
+
 				bericht.setDatum(resultSet.getTimestamp("datum"));
 				bericht.setStringTijd(dc.korteTijd(bericht.getDatum()));
 				bericht.setStringDatum(dc.korteDatum(bericht.getDatum()));
 				bericht.setRitnr(resultSet.getInt("ritnm"));
 				bericht.setOngelezen(resultSet.getInt("gelezen"));
+				
 
 				berichten.add(bericht);
 			}
 		} finally {
 		}
+
 		return berichten;
 	}
-	private int lidnr;
-	private String onderwerp;
-	private Timestamp datum;
-	private String inhoud;
-	private int ritnr;
+
+	public Lid afzender(int afzenderLidnr) {
+
+		Lid afzenderLid = new Lid();
+		LidDao lidDao = new LidDao();
+		
+		afzenderLid = lidDao.enkelLidOphalen(afzenderLidnr, afzenderLid);
+		System.out.println("afzenderlid na het ophalen van gegevens = " + afzenderLid.getLidnr());
+		System.out.println("Afzenderlid na het ophalen van gegevens = " +  afzenderLid.getAnaam());
+		
+		return afzenderLid;
+
+	}
 
 	public Berichten vulBerichtDao(Berichten bean) {
 
