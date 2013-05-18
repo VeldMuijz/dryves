@@ -14,7 +14,15 @@ public class Berichten {
     private String datum;
     private String inhoud;
     private int ritnr;
+    private int ongelezen;
 
+    public int getOngelezen() {
+        return ongelezen;
+    }
+
+    public void setOngelezen(int ongelezen) {
+        this.ongelezen = ongelezen;
+    }
     public int getRitnr() {
         return ritnr;
     }
@@ -34,7 +42,7 @@ public class Berichten {
     public Berichten() {
     }
 
-    public Berichten(int lidnr, String datum, String inhoud, int berichtid, int ritnr, int afzender) {
+    public Berichten(int lidnr, String datum, String inhoud, int berichtid, int ritnr, int afzender, int ongelezen) {
         this.lidnr = lidnr;
        
         this.datum = datum;
@@ -43,6 +51,7 @@ public class Berichten {
         this.berichtid = berichtid;
         this.ritnr=ritnr;
         this.afzender=afzender;
+        this.ongelezen=ongelezen;
     }
      private int berichtid;
 

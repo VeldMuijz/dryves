@@ -174,7 +174,7 @@ public class BerichtenDao {
             System.out.println("Lidnummer:" + lidnummer);
             currentCon = ConnectionManager.getConnection();
             PreparedStatement HaalAlleBerichten;
-            String queryString = "select berichtnr,  DATUM ,ritnm from BERICHTEN  where lidnr=?;";
+            String queryString = "select berichtnr,  DATUM ,ritnm,gelezen from BERICHTEN  where lidnr=?;";
 
             HaalAlleBerichten = currentCon.prepareStatement(queryString);
             HaalAlleBerichten.setInt(1, lidnummer);
@@ -186,6 +186,7 @@ public class BerichtenDao {
 
                 bericht.setDatum(resultSet.getString(2));
                 bericht.setRitnr(resultSet.getInt(3));
+                bericht.setOngelezen(resultSet.getInt(4));
 
 
                 berichten.add(bericht);

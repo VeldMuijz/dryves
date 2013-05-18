@@ -33,38 +33,47 @@
             <div class="logo">    
                 <img src="images/Logo_Dryves.png" />
             </div>
-            
+
             <jsp:include page="/WEB-INF/navigatie.jsp"  flush="true">
-              <jsp:param name="menu_active" value="mijndryves"></jsp:param>
-              </jsp:include>
+                <jsp:param name="menu_active" value="mijndryves"></jsp:param>
+            </jsp:include>
 
 
 
 
             <div class="contentPanel">         
-               
 
-              
-                
+
+
+
                 <c:forEach items="${berichten}" var="bericht">
                     <div class="rittenlijst">
                         <table>
-                            
-                                <tr>
-                               <%--  <td>${bericht.lidnr} </td>   --%>
+
+                            <tr>
+                                <%--  <td>${bericht.lidnr} </td>   --%>
                                 <td><img src ="images/pijl.jpg" /></td>
-                                <td><fmt:message bundle="${rb}" key="ritnummeris" /> ${bericht.ritnr}</td>
-                             <td><fmt:message bundle="${rb}" key="datum" />  ${bericht.datum}</td>  
+                               <td><fmt:message bundle="${rb}" key="ritnummeris" /> ${bericht.ritnr}</td>
+                                <td><fmt:message bundle="${rb}" key="datum" />  ${bericht.datum}</td>  
+                                <c:choose>
+                                    <c:when test="${bericht.ongelezen==1}"><img src="images/envelope.png" /></c:when>
+                                    <c:when test="${bericht.ongelezen==0}"></c:when>
+
+                                </c:choose>
+
+
+
                                 <td><button onclick="window.location = 'BerichtLezen?berichtid=${bericht.berichtid}';"><fmt:message bundle="${rb}" key="bekijkbericht" /></button></td>
-               
-                                
-                                </tr> 
+
+
+                            </tr> 
 
                         </table>
                     </div>
                 </c:forEach>
-                
-             
+
+
+
             </div>
         </div>
 
