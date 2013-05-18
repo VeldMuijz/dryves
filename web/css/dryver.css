@@ -452,4 +452,19 @@ button.heliosActionBarIconButton:hover:before  {
     
 }
 
+.contentPanelMijnBerichten {
 
+
+    display: inline-block;
+    width: 400px;
+    heigth: 30%;
+    margin-top: 16px;
+    border: 1px solid rgb(187, 187, 187);
+    background: linear-gradient(180deg, #FEFEFE, #EEEEEE);
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#FEFEFE),	to(#EEEEEE) );
+    filter: progid:DXImageTransform.Microsoft.Gradient ( StartColorStr ='#FEFEFE', EndColorStr = '#EEEEEE' );
+    text-shadow: 0px 1px 0px rgb(255, 255, 255);
+    box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+
+}

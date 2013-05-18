@@ -79,14 +79,15 @@ public class BerichtLezen extends HttpServlet {
         session.setAttribute("sessieRit", bericht);
         //Haal de userbean (dit moet sessiebean worden) op uit de sessie
 
-        int berichtid = Integer.parseInt(request.getParameter("berichtid"));
+        int berichtnr = Integer.parseInt(request.getParameter("berichtid"));
 
         Lid user = (Lid) session.getAttribute("currentSessionUser");
         try {
             List<Berichten> ritten;
             bericht.setLidnr(user.getLidnr());
             berichtDao.vulBerichtDao(bericht);
-            ritten = berichtDao.getAlleBerichtenbijId(berichtid);
+            ritten = berichtDao.getAlleBerichtenbijId(berichtnr);
+            berichtDao.markeerBericht(berichtnr);
             request.setAttribute("berichten", ritten);
 
             RequestDispatcher dispatcher = request.getRequestDispatcher("helebericht.jsp");
@@ -94,14 +95,6 @@ public class BerichtLezen extends HttpServlet {
         } catch (SQLException e) {
             throw new ServletException("Cannot obtain products from DB", e);
         }
-
-
-
-
-
-
-
-
     }
 
     /**

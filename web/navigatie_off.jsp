@@ -40,7 +40,7 @@
 				
 				<!--					TODO Hier nog de actuele aantal ongelezen berichten ophalen-->
 				<div style="float: right; margin-right: 5px;"> 
-					<a href="mijnberichten.jsp"> <%
+					<a href="MijnBerichten"> <%
             Lid user = (Lid) session.getAttribute("currentSessionUser");
         int lidnr=user.getLidnr();
         

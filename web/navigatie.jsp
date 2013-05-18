@@ -4,6 +4,7 @@
     Author     : Vincent
 --%>
 
+<%@page import="Dryves.Model.BerichtenDao"%>
 <%@page import="Dryves.BerichtClass"%>
 <%@page import="Dryves.Model.Lid"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -37,7 +38,14 @@
 
             <!--					TODO Hier nog de actuele aantal ongelezen berichten ophalen-->
             <div style="float: right; margin-right: 5px;"> 
-                <a href="mijnberichten.jsp"> 0</a><fmt:message bundle="${rb}" key="nieuweberichtennav" /><br/> 
+                <a href="MijnBerichten"> <%
+            Lid user = (Lid) session.getAttribute("currentSessionUser");
+        int lidnr=user.getLidnr();
+        
+        BerichtenDao berichtDao= new BerichtenDao();
+        
+       int aantalberichten= berichtDao.statusbalk(lidnr);  %>
+  <% out.println( aantalberichten );  %></a><fmt:message bundle="${rb}" key="nieuweberichtennav" /><br/> 
                 <a href="Uitloggen" style="float: right;"><fmt:message bundle="${rb}" key="uitlognav" /></a>
             </div>
 
