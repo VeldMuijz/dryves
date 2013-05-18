@@ -348,11 +348,18 @@ public class RitDao {
                 
                 String[] arrSplit = rit.getStartpunt().split(", ");
                 
-                System.out.println(arrSplit[0]);
-                System.out.println(arrSplit[1].substring(5));
-                System.out.println(arrSplit[2]);
+                rit.setStraatnummer(arrSplit[0]);
+                rit.setPostcodeplaats(arrSplit[1].substring(5));
+                rit.setLand(arrSplit[2]);
                 
                 rit.setEindpunt(resultSet.getString("eindpunt"));
+                
+                String[] arrSplit2 = rit.getEindpunt().split(", ");
+                
+                rit.setStraatnummerEnd(arrSplit2[0]);
+                rit.setPostcodeplaatsEnd(arrSplit2[1].substring(5));
+                rit.setLandEnd(arrSplit[2]);
+                
                 rit.setPrijs(resultSet.getDouble("prijs"));
 				rit.setDatum(resultSet.getTimestamp("datum"));
 				

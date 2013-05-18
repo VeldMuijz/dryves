@@ -56,19 +56,43 @@ Document : mijn_ritten
 
                         <c:forEach items="${ritten}" var="rit">
                             <div class="rittenlijst">
-                                <table>
+                                <table width="100%">
 
                                     <tr>
-                                        <td>${rit.startpunt}</td>
+                                        <td>Van:</td>
+                                        <td>${rit.straatnummer}</td>
                                         <td><img src ="images/pijl.jpg" /></td>
-                                        <td>${rit.eindpunt}</td>
+                                        <td>Naar:</td>
+                                        <td>${rit.straatnummerEnd}</td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>${rit.postcodeplaats}</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>${rit.postcodeplaatsEnd}</td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>${rit.land}</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>${rit.landEnd}</td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td>Prijs: € ${rit.prijs}</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
                                     </tr>
 
                                     <tr>
-                                        <td><fmt:message bundle="${rb}" key="prijs" /> € ${rit.prijs}</td>
-                                        <td/>
                                         <td>${rit.datumkort} ${rit.tijd}</td>
-                                        <td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td style="float:right;">
                                             <c:choose>
                                                 <c:when test="${currentSessionUser.lidnr > 0}"> 
                                                     <button onclick="window.location = 'RitKopen?ritnr=${rit.ritnr}';"><fmt:message bundle="${rb}" key="ritkopen" /></button>

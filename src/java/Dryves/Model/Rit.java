@@ -26,6 +26,9 @@ public class Rit implements java.io.Serializable {
     private String straatnummer;
     private String postcodeplaats;
     private String land;
+    private String straatnummerEnd;
+    private String postcodeplaatsEnd;
+    private String landEnd;
 
 
 
@@ -204,5 +207,31 @@ public class Rit implements java.io.Serializable {
     public void setLand(String land) {
         this.land = land;
     }
+    
+        public String getStraatnummerEnd() {
+        return straatnummerEnd;
+    }
+
+    public void setStraatnummerEnd(String straatnummerEnd) {
+        this.straatnummerEnd = straatnummerEnd;
+    }
+
+    public String getPostcodeplaatsEnd() {
+        return postcodeplaatsEnd;
+    }
+
+    public void setPostcodeplaatsEnd(String postcodeplaatsEnd) {
+        this.postcodeplaatsEnd = postcodeplaatsEnd;
+    }
+
+    public String getLandEnd() {
+        return landEnd;
+    }
+
+    public void setLandEnd(String landEnd) {
+        this.landEnd = landEnd;
+    }
+
+
 	
 }
