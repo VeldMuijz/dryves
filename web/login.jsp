@@ -46,13 +46,11 @@
             </div>
 
 
-            <div class="navigation">
-
-                <div style="float:right; margin-right: -1px;"><button>Login</button></div>
-
-                <button onclick="window.location = 'index.jsp';">Home</button><button onclick="window.location = 'watisdryves.jsp';">Wat is Dryves</button><button onclick="window.location = 'faq.jsp';">FAQ</button><button onclick="window.location = 'registratie.jsp';">Registreer</button>
-
-            </div>
+                 
+            
+            <jsp:include page="navigatie.jsp" flush="true">
+                <jsp:param name="menu_active" value="home"></jsp:param>
+            </jsp:include>
 
             <div class="contentPanel">
 

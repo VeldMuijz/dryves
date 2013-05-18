@@ -17,13 +17,13 @@
 <fmt:setBundle basename="ResourceBundles.Dryves" scope="request" var="rb" />
 
 <!DOCTYPE html>
-<html>
-    <head>
+<!--<html>-->
+<!--    <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Dryves</title>
         <link type="text/css" rel="stylesheet" href="css/dryver.css"/>
-    </head>
-    <body>
+    </head>-->
+<!--    <body>-->
         <div class="navigation">
 <!--    check of er een ingelogde gebruiker is, zo ja dan toon je dit menu zonder registratie en login:-->
 
@@ -60,9 +60,25 @@
 
                 </div>
             </c:if>
-
+            
+         
         </div>
 
+ <div class="contentPanel">
 
-    </body>
-</html>
+                <jsp:include page="zoekrit.jsp" flush="true" ></jsp:include> 
+
+                <br /><br />
+
+                <div class="contentPanelBackground"></div>
+
+            </div>
+
+               
+
+   
+        
+
+
+<!--    </body>
+</html>-->

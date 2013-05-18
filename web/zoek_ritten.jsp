@@ -41,8 +41,7 @@ Document : mijn_ritten
 
             <div class="contentPanel">  
 
-                <jsp:include page="zoekrit.jsp" flush="true" ></jsp:include> 
-
+              
                     <br />
                 <c:choose>
                     <c:when test="${empty ritten}"> 
