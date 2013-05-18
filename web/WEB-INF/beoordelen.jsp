@@ -76,7 +76,7 @@
 						<fmt:message bundle="${rb}" key="opmerking" />
 						<textarea class="vrijtextinputveld" name="opmerking" maxlength="150" placeholder="<fmt:message bundle="${rb}" key="opmerkingveld" />"></textarea>
 						<br/><br/>
-						<button type="submit"/>
+						<button type="submit"> <fmt:message bundle="${rb}" key="buttonBeoordelen"/></button> 
 					</form>
 
 
