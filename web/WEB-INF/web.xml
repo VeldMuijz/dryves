@@ -56,6 +56,10 @@
         <servlet-name>VerstuurBericht</servlet-name>
         <servlet-class>Dryves.Controller.VerstuurBericht</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Wachtwoord</servlet-name>
+        <servlet-class>Dryves.Controller.Wachtwoord</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LidWijzigen</servlet-name>
         <url-pattern>/LidWijzigen</url-pattern>
@@ -131,6 +135,10 @@
     <servlet-mapping>
         <servlet-name>VerstuurBericht</servlet-name>
         <url-pattern>/VerstuurBericht</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Wachtwoord</servlet-name>
+        <url-pattern>/Wachtwoord</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>

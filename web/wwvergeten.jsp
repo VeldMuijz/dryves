@@ -60,12 +60,12 @@
 
                 <br /><br />
 
-                <form action="LoginServlet" method="post">
-                    <table style="width:320px;">
+                <form action="Wachtwoord" method="post">
+                    <table>
                         <tr>
                             <td><input class="zoektextveld" placeholder="<fmt:message bundle="${rb}" key="email" />" type="text" name="email" value="" size=25  maxlength=25></td>
-                            <td></td>
-                            <td></td>
+                            <td><button type="submit"><fmt:message bundle="${rb}" key="verstuur" /></button></td>
+                            
                         </tr>
 
                 </form>

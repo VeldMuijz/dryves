@@ -493,7 +493,7 @@ public class LidDao {
 			updateLid.executeUpdate();
 
 		} catch (SQLException ex) {
-			Logger.getLogger(RitDao.class.getName()).log(Level.SEVERE, null, ex);
+			Logger.getLogger(LidDao.class.getName()).log(Level.SEVERE, null, ex);
 
 		}
 
@@ -571,6 +571,58 @@ public class LidDao {
 		return lidfacebook;
 
 	}
+        
+        
+    public Lid verstuurWachtwoord(Lid user) {
+
+        Statement stmt = null;
+        Connection connection = null;
+        ResultSet resultSet = null;
+        String email = user.getEmail();
+        
+        System.out.println("Dit is het email adres uit de lidDao: " + email);
+
+        try {
+            
+            currentCon = ConnectionManager.getConnection();
+            PreparedStatement verstuurwachtwoord;
+            String queryString = "SELECT vnaam, anaam, wachtwoord FROM lid WHERE email =?;";
+            
+            verstuurwachtwoord = currentCon.prepareStatement(queryString);
+            verstuurwachtwoord.setString(1, email);
+            resultSet = verstuurwachtwoord.executeQuery();
+            
+            while (resultSet.next()) {
+                
+                user.setVnaam(resultSet.getString(1));
+                
+                System.out.println("Vnaam wijzig wachtwoord: " + user.getVnaam());
+                
+                user.setAnaam(resultSet.getString(2));
+                
+                System.out.println("Anaam wijzig wachtwoord: " + user.getAnaam());
+                
+                user.setWachtwoord(resultSet.getString(3));
+                
+                System.out.println("Wwoord wijzig wachtwoord: " + user.getWachtwoord());
+            
+            }
+
+        } catch (SQLException ex) {
+			Logger.getLogger(LidDao.class.getName()).log(Level.SEVERE, null, ex);
+                        System.out.println("Foutje, oeps!");
+            
+        }
+
+
+
+        return user;
+
+    }
+       
+        
+        
+        
 
 	private static Locale toString(String locale) {
 		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
