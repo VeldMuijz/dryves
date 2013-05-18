@@ -30,7 +30,7 @@ setTimeout(redirect, 5000);
 
     </head>
     <body >
-<a  href="MijnBerichten"></a>
+<a  href="MijnDryves"></a>
         <div class="background">
 
             <img src="${currentSessionUser.getAchtergrond()}" />
