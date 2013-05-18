@@ -79,7 +79,7 @@
 
                                 <input type="hidden" name="ritnr" value="<% out.print(ritnr);%>" />
                                 <input type="hidden" name="lidnr" value="<% out.print(lidnr);%>" />
-                                <input type="hidden" name="datum" value="<% out.print(datum);%>" />
+                                <%--  <input type="hidden" name="datum" value="<% out.print(datum);%>" />  --%>
                                 
 
                                 <h1><fmt:message bundle="${rb}" key="schrijfjebericht" /></h1>                        

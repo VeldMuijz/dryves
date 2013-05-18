@@ -102,7 +102,7 @@
                     <h1><fmt:message bundle="${rb}" key="ritnummeris" /> ${bericht.ritnr}</h1>
                     <p><fmt:message bundle="${rb}" key="lidnr" /> ${bericht.lidnr} </p>
                     <p><fmt:message bundle="${rb}" key="afzender" /> ${bericht.afzender}</p>                         
-                    <p><fmt:message bundle="${rb}" key="datum" /> ${bericht.datum}</p>
+                  <%--  <p><fmt:message bundle="${rb}" key="datum" /> ${bericht.datum}</p> --%>
 
                     <p><fmt:message bundle="${rb}" key="bericht" /> ${bericht.inhoud}</p>
 
