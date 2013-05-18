@@ -80,14 +80,17 @@ public class BerichtLezen extends HttpServlet {
         //Haal de userbean (dit moet sessiebean worden) op uit de sessie
 
         int berichtnr = Integer.parseInt(request.getParameter("berichtid"));
-
+        System.out.println(berichtnr);
         Lid user = (Lid) session.getAttribute("currentSessionUser");
+        berichtDao.markeerBericht(berichtnr);        
+        
         try {
             List<Berichten> ritten;
             bericht.setLidnr(user.getLidnr());
             berichtDao.vulBerichtDao(bericht);
             ritten = berichtDao.getAlleBerichtenbijId(berichtnr);
-            berichtDao.markeerBericht(berichtnr);
+            
+           
             request.setAttribute("berichten", ritten);
 
             RequestDispatcher dispatcher = request.getRequestDispatcher("helebericht.jsp");

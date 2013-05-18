@@ -9,6 +9,12 @@ import Dryves.Model.BerichtenDao;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -41,13 +47,13 @@ public class BerichtBeantwoorden extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet BerichtBeantwoorden</title>");            
+            out.println("<title>Servlet BerichtBeantwoorden</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet BerichtBeantwoorden at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
-        } finally {            
+        } finally {
             out.close();
         }
     }
@@ -65,35 +71,47 @@ public class BerichtBeantwoorden extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-      //  processRequest(request, response);
-        
+        //  processRequest(request, response);
+
         //maak object
-       Berichten bericht= new Berichten();
-       BerichtenDao berichtDao=new BerichtenDao();  
-               //hier vullen we de bean
-             bericht.setAfzender(Integer.parseInt(request.getParameter("afzender")));
-             bericht.setLidnr(Integer.parseInt(request.getParameter("naar")));
-             bericht.setInhoud(request.getParameter("inhoud"));
-             bericht.setDatum(request.getParameter("datum"));
-             bericht.setRitnr(Integer.parseInt(request.getParameter("ritnr")));
-             
-             System.out.println(bericht.getAfzender());
-             System.out.println(bericht.getLidnr());
-             System.out.println(bericht.getInhoud());
-             System.out.println(bericht.getRitnr());
-             System.out.println(bericht.getDatum());
-             
+        Berichten bericht = new Berichten();
+        BerichtenDao berichtDao = new BerichtenDao();
+
+        Calendar now = Calendar.getInstance();
+        int year = now.get(Calendar.YEAR);
+        int month = now.get(Calendar.MONTH); // Note: zero based!
+        int day = now.get(Calendar.DAY_OF_MONTH);
+        int hour = now.get(Calendar.HOUR_OF_DAY);
+        int minute = now.get(Calendar.MINUTE);
+        
+
+     
+
+
+
+        bericht.setAfzender(Integer.parseInt(request.getParameter("afzender")));
+        bericht.setLidnr(Integer.parseInt(request.getParameter("naar")));
+        bericht.setInhoud(request.getParameter("inhoud"));
+        //bericht.setDatum(tijd);
+        bericht.setRitnr(Integer.parseInt(request.getParameter("ritnr")));
+
+        System.out.println(bericht.getAfzender());
+        System.out.println(bericht.getLidnr());
+        System.out.println(bericht.getInhoud());
+        System.out.println(bericht.getRitnr());
+        System.out.println(bericht.getDatum());
+
         try {
             berichtDao.beantwoordBericht(bericht);
-            
+
             response.sendRedirect("succesvol.jsp");
         } catch (SQLException ex) {
             Logger.getLogger(BerichtBeantwoorden.class.getName()).log(Level.SEVERE, null, ex);
         }
-                        
-        
-        
-        
+
+
+
+
     }
 
     /**

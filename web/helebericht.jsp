@@ -20,7 +20,16 @@
         <link type="text/css" rel="stylesheet" href="css/dryver.css"/>
         <title>Mijn berichten</title>
 
+ <script type="text/javascript">
+     
+     
+     
+ 
+
+
+ </script>
     </head>
+    
     <body>
 
 
@@ -37,6 +46,7 @@
                 });
                 $("#show").click(function() {
                     $("#beantwoorden").show();
+                    
                 });
             });
         </script>
@@ -68,7 +78,7 @@
                 <c:forEach items="${berichten}" var="bericht">
                     <form id="beantwoorden" action="BerichtBeantwoorden" method="get">
 
-                        <input type="hidden" name="datum" value="${bericht.datum}" />
+                        <input type="hidden" id="datum" name="datum"  />
                         <input type="hidden" name="afzender" value="${currentSessionUser.lidnr}"/>
                         <input type="hidden" name="naar" value="${bericht.afzender}"/>
                         <input type="hidden" name="ritnr" value="${bericht.ritnr}"/>

@@ -60,22 +60,32 @@ public class BerichtenDao {
     //min 1 bij ongelezen berichten
     public void markeerBericht(int berichtid) {
 
-        Connection connection = null;
-        PreparedStatement statement = null;
+        
+        
         ResultSet resultSet = null;
-
+        
         try {
-
             currentCon = ConnectionManager.getConnection();
-            PreparedStatement selecteerbericht;
+            PreparedStatement updatestatus;
             String queryString = "UPDATE berichten set gelezen=0 WHERE berichtnr =?;";
+            
+            updatestatus = currentCon.prepareStatement(queryString);
+            updatestatus.setInt(1, berichtid);
+            
+            resultSet = updatestatus.executeQuery();
 
-            selecteerbericht = currentCon.prepareStatement(queryString);
-            selecteerbericht.setInt(1, berichtid);
+
+           
 
         } catch (SQLException e) {
+
+
             System.out.println(e);
         }
+
+       
+
+        
 
 
 
