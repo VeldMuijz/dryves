@@ -184,7 +184,20 @@ public class RitKopen extends HttpServlet {
                 pdf.vulDePDF(lid.getVnaam(), lid.getAnaam(), lid.getEmail(), rit.getRitnr(), aankoop.getBetaalwijze(), aankoop.getFactuurnr());
                 
                 //Hier wordt de PDF opgesteld. 
-                pdf.bouwPDF();
+                //TODO PDF wordt nog niet meegegeven in de mail, vandaar uitgeremd.
+                //pdf.bouwPDF();
+                
+                String[] arrSplit = rit.getStartpunt().split(", ");
+                
+                rit.setStraatnummer(arrSplit[0]);
+                rit.setPostcodeplaats(arrSplit[1].substring(5));
+                rit.setLand(arrSplit[2]);
+                
+                String[] arrSplit2 = rit.getEindpunt().split(", ");
+                
+                rit.setStraatnummerEnd(arrSplit2[0]);
+                rit.setPostcodeplaatsEnd(arrSplit2[1].substring(5));
+                rit.setLandEnd(arrSplit[2]);
                 
                 //Mailfunctie! Hier moet alleen nog de PDf aan toegevoegd worden.
                 //TODO PDF toevoegen aan de mail.
@@ -194,10 +207,22 @@ public class RitKopen extends HttpServlet {
                 String bericht = "Ritnummer: " + rit.getRitnr() +
                         "\n" + "Factuurnummer: " + aankoop.getFactuurnr() +
                         "\n" +
-                        "\n" + "Van: " + rit.getStartpunt() +
-                        "\n" + "Naar: " + rit.getEindpunt() +
-                        "\n" + "U heeft deze rit gekocht via: " +aankoop.getBetaalwijze() +
-                        "\n" + "Lidnummer van de aanbieder: " + rit.getLidnr();
+                        "\n" + "Van: " + 
+                        "\n" + rit.getStraatnummer() +
+                        "\n" + rit.getPostcodeplaats() +
+                        "\n" + rit.getLand() +
+                        "\n" +
+                        "\n" + "Naar: " +
+                        "\n" + rit.getStraatnummerEnd() +
+                        "\n" + rit.getPostcodeplaatsEnd() +
+                        "\n" + rit.getLandEnd() +
+                        "\n" + 
+                        "\n" + "Datum & Tijd: " + rit.getDatum() +
+                        "\n" +
+                        "\n" + "U heeft deze rit gekocht via: " + aankoop.getBetaalwijze() +
+                        "\n" + "Totaalbedrag: " + rit.getPrijs() +
+                        "\n" + 
+                        "\n" + "Bedankt voor uw aankoop en graag tot ziens!";
                 
                 String attachment = "/Users/RickSpijker/Desktop/FirstPdf.pdf";
                 String attachmentName = "Dryves Factuur: " + aankoop.getFactuurnr() +".pdf";
