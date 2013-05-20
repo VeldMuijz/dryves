@@ -57,6 +57,8 @@ public class Wachtwoord extends HttpServlet {
                     
                     ve.verstuurEmailZonderBijlage(email, "E-mail adres niet gevonden", "Uw e-mail adres is niet gevonden.");
                     
+                    response.sendRedirect("login.jsp");
+                    
                 }else{
                     
                     System.out.println("Dit is het email adres, waar het wachtwoord naartoe wordt verzonden: " + email);
@@ -71,6 +73,8 @@ public class Wachtwoord extends HttpServlet {
                     
                     
                     ve.verstuurEmailZonderBijlage(naar, onderwerp, bericht);
+                    
+                    response.sendRedirect("login.jsp");
                 
                 }
 
