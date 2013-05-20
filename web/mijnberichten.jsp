@@ -42,42 +42,48 @@
 
 
             <div class="contentPanel">         
+				
+				<c:choose>
+					<c:when test="${empty berichten}"> 
+						<h2>Er zijn geen berichten voor u</h2>
+						<p>Kom hier later nog eens terug</p>
+					</c:when>
+					<c:otherwise>
+
+						<c:set var="counter" value="0"/>
+						<c:forEach items="${berichten}" var="bericht">
+							<div class="rittenlijst">
+
+								
+								<table>
+									
+									<tr>
+										<td>${afzender[counter].vnaam} ${afzender[counter].anaam}</td>
+										<td>Bericht van: ${bericht.afzender}</td>
+										<td><fmt:message bundle="${rb}" key="ritnummeris" /> ${bericht.ritnr}</td>
+										<td><fmt:message bundle="${rb}" key="datum" />  ${bericht.stringDatum} ${bericht.stringTijd}</td>  
+										<c:choose>
+											<c:when test="${bericht.ongelezen==1}"><img src="images/envelope.png" /></c:when>
+										<c:when test="${bericht.ongelezen==0}"></c:when>
+									</c:choose>
+								
+									<td><button onclick="window.location = 'BerichtLezen?berichtid=${bericht.berichtid}';"><fmt:message bundle="${rb}" key="bekijkbericht" /></button></td>
+									<c:set var="counter" value="${counter + 1 }"/>
+
+									</tr> 
+
+								</table> 
+							</div>
+
+						</c:forEach>
+					</c:otherwise>
+				</c:choose>
 
 
+				</div>
+			</div>
 
 
-                <c:forEach items="${berichten}" var="bericht">
-                    <div class="rittenlijst">
-                        <table>
-
-                            <tr>
-                                <%--  <td>${bericht.lidnr} </td>   --%>
-                                <td><img src ="images/pijl.jpg" /></td>
-                               <td><fmt:message bundle="${rb}" key="ritnummeris" /> ${bericht.ritnr}</td>
-                                <td><fmt:message bundle="${rb}" key="datum" />  ${bericht.datum}</td>  
-                                <c:choose>
-                                    <c:when test="${bericht.ongelezen==1}"><img src="images/envelope.png" /></c:when>
-                                    <c:when test="${bericht.ongelezen==0}"></c:when>
-
-                                </c:choose>
-
-
-
-                                <td><button onclick="window.location = 'BerichtLezen?berichtid=${bericht.berichtid}';"><fmt:message bundle="${rb}" key="bekijkbericht" /></button></td>
-
-
-                            </tr> 
-
-                        </table>
-                    </div>
-                </c:forEach>
-
-
-
-            </div>
-        </div>
-
-
-    </body>
-</html>
+		</body>
+	</html>
 

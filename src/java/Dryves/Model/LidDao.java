@@ -9,7 +9,6 @@ package Dryves.Model;
  * @author RickSpijker
  */
 import Dryves.ConnectionManager;
-import static Dryves.Model.RitDao.currentCon;
 import java.util.*;
 import java.sql.*;
 import java.util.logging.Level;
@@ -202,28 +201,30 @@ public class LidDao {
 		return bean;
 
 	}
-/**
- * Beoordeling voor een lid updaten
- * @param beoordeelde
- * @param beoordeling
- * @return 
- */
+
+	/**
+	 * Beoordeling voor een lid updaten
+	 *
+	 * @param beoordeelde
+	 * @param beoordeling
+	 * @return
+	 */
 	public Boolean updateBeoordelingLid(int beoordeelde, int beoordeling) {
-		
+
 		try {
 			currentCon = ConnectionManager.getConnection();
 			PreparedStatement beoordeelLid;
-			String queryString = 
+			String queryString =
 					"UPDATE lid "
 					+ "SET beoordeling = ("
 					+ "("
 					+ "		(SELECT beoordeling FROM lid WHERE lidnr = ?) + ? )/ 2"
 					+ ");";
-			
+
 			beoordeelLid = currentCon.prepareStatement(queryString);
 			beoordeelLid.setInt(1, beoordeelde);
 			beoordeelLid.setInt(2, beoordeling);
-			
+
 			System.out.println("+++++++++++++BeoordeelLid+++++++++++++++\n Query = " + queryString + "\n");
 			beoordeelLid.executeUpdate();
 
@@ -449,6 +450,51 @@ public class LidDao {
 		}
 
 
+	}
+
+	public Lid enkelLidOphalen(int lidnr, Lid bean) {
+		currentCon = ConnectionManager.getConnection();
+
+		PreparedStatement enkelLidOphalen = null;
+		String queryString;
+		ResultSet resultSet = null;
+	
+
+		try {
+
+			queryString = "SELECT * FROM lid WHERE lidnr = ?";
+
+			enkelLidOphalen = currentCon.prepareStatement(queryString);
+			enkelLidOphalen.setInt(1, lidnr);
+
+			resultSet = enkelLidOphalen.executeQuery();
+
+		
+			if(resultSet.next()){
+				bean.setLidnr(resultSet.getInt("lidnr"));
+				bean.setVnaam(resultSet.getString("vnaam"));
+				bean.setAnaam(resultSet.getString("anaam"));
+				bean.setGeslacht(resultSet.getString("geslacht"));
+				bean.setStraat(resultSet.getString("straat"));
+				bean.setPostcode(resultSet.getString("postcode"));
+				bean.setStad(resultSet.getString("stad"));
+				bean.setTelnr(resultSet.getString("telnr"));
+				bean.setReknr(resultSet.getString("reknr"));
+				bean.setEmail(resultSet.getString("email"));
+				bean.setBeoordeling(resultSet.getInt("beoordeling"));
+				bean.setFotoUrl(resultSet.getString("fotourl"));
+				bean.setTvoegsel(resultSet.getString("tvoegsel"));;
+				bean.setWachtwoord(resultSet.getString("wachtwoord"));
+				bean.setLangnotify(resultSet.getString("langnotify"));
+				bean.setRol(resultSet.getInt("rol"));
+			}
+
+
+
+		} catch (SQLException ex) {
+			Logger.getLogger(LidDao.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		return bean;
 	}
 
 	public Lid enkelLidUpdaten(Lid bean) {

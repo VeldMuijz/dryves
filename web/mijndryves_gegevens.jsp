@@ -53,7 +53,7 @@
                 ;
                 rExp = /^(\s*(\d{7}|\d{9}|\d{10})\s*)$/;
                 if (!rExp.exec(reknr)) {
-                    document.getElementById("reknrerror").innerHTML = "voer een geldig bank of giro nummer in!";
+                    document.getElementById("reknrerror").innerHTML = "Voer een geldig bank of giro nummer in!";
                     check = false;
                 }
                 ;

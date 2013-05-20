@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -31,14 +32,15 @@
             </jsp:include>
 
 			<div class="contentPanel">
+                            
+				<fmt:message bundle="${rb}" key="beoordeelrit" /><br /><br />
 				
-				<h2>Beoordeling van een rit</h2>
 				
 
 				<div class="invoerveld">
 					<form action="LidBeoordelen" method="post">
 						<input name="aankoopnr" hidden="true" value="${sessieBeoordeling.aankoopnr}"/>
-						Stiptheid
+						<fmt:message bundle="${rb}" key="stiptheid" />
 						<select name="stiptheid" > 
 									<option value="5"> 5 </option>
 									<option value="4"> 4 </option> 
@@ -47,7 +49,7 @@
 									<option value="1"> 1 </option> 
 						</select>
 						<br/><br/>
-						Betrouwbaarheid
+						<fmt:message bundle="${rb}" key="betrouwbaarheid" />
 						<select name="betrouwbaarheid" > <option value="5"> 5 </option>
 									<option value="4"> 4 </option> 
 									<option value="3"> 3 </option>
@@ -55,7 +57,7 @@
 									<option value="1"> 1 </option> 
 						</select>
 						<br/><br/>
-						Gezelligheid
+						<fmt:message bundle="${rb}" key="gezelligheid" />
 						<select name="gezelligheid" > <option value="5"> 5 </option>
 									<option value="4"> 4 </option> 
 									<option value="3"> 3 </option>
@@ -63,7 +65,7 @@
 									<option value="1"> 1 </option> 
 						</select>
 						<br/><br/>
-						Rijstijl
+						<fmt:message bundle="${rb}" key="rijstijl" />
 						<select name="rijstijl" > <option value="5"> 5 </option>
 									<option value="4"> 4 </option> 
 									<option value="3"> 3 </option>
@@ -71,10 +73,10 @@
 									<option value="1"> 1 </option> 
 						</select>
 						<br/><br/>
-						Opmerking
-						<textarea class="vrijtextinputveld" name="opmerking" maxlength="150" placeholder="Hier kunt u een opmerking kwijt van 150 tekens"></textarea>
+						<fmt:message bundle="${rb}" key="opmerking" />
+						<textarea class="vrijtextinputveld" name="opmerking" maxlength="150" placeholder="<fmt:message bundle="${rb}" key="opmerkingveld" />"></textarea>
 						<br/><br/>
-						<button type="submit"/>
+						<button type="submit"> <fmt:message bundle="${rb}" key="buttonBeoordelen"/></button> 
 					</form>
 
 

@@ -9,7 +9,7 @@ import Dryves.Model.BerichtenDao;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -50,17 +50,17 @@ public class VerstuurBericht extends HttpServlet {
         Berichten bericht= new Berichten();
         BerichtenDao berichtDao= new BerichtenDao();
         
-        ////huidige tijdstip opvragen
-        Date dateNow = new Date ();
-        SimpleDateFormat datumformat = new SimpleDateFormat("dd/mm/yyyy hh:mm");
-        StringBuilder tijdstipNu = new StringBuilder( datumformat.format( dateNow ) );
+//        ////huidige tijdstip opvragen
+        Date datum = new Date ();
+//        SimpleDateFormat datumformat = new SimpleDateFormat("dd/mm/yyyy hh:mm");
+//        StringBuilder tijdstipNu = new StringBuilder( datumformat.format( dateNow ) );
         
         
         
         bericht.setRitnr(Integer.parseInt(request.getParameter("ritnr")));
         bericht.setLidnr(Integer.parseInt(request.getParameter("lidnr")));
         bericht.setInhoud(request.getParameter("inhoud"));
-        bericht.setDatum(tijdstipNu.toString());
+        bericht.setDatum(new Timestamp(datum.getTime()));
         System.out.println(bericht.getInhoud());
         
         

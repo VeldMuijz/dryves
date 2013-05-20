@@ -4,98 +4,146 @@
  */
 package Dryves.Model;
 
+import java.sql.Timestamp;
+
 /**
  *
  * @author H
  */
 public class Berichten {
-     private int lidnr;
 
-    private String datum;
-    private String inhoud;
-    private int ritnr;
-    private int ongelezen;
+	private int lidnr;
+	private String stringDatum;
+	private String stringTijd;
+	private Timestamp datum;
+	private String inhoudbericht;
+	private int ritnr;
+	private int ongelezen;
+	private int afzender;
+	private int gelezen;
+	private String onderwerp;
+	private int berichtnr;
 
-    public int getOngelezen() {
-        return ongelezen;
-    }
+	public Berichten() {
+	}
 
-    public void setOngelezen(int ongelezen) {
-        this.ongelezen = ongelezen;
-    }
-    public int getRitnr() {
-        return ritnr;
-    }
+	public Berichten(int lidnr, String stringDatum, Timestamp datum, String inhoudbericht, int ritnr, int ongelezen, int afzender, int gelezen, String onderwerp, int berichtnr, int berichtid) {
+		this.lidnr = lidnr;
+		this.stringDatum = stringDatum;
+		this.datum = datum;
+		this.inhoudbericht = inhoudbericht;
+		this.ritnr = ritnr;
+		this.ongelezen = ongelezen;
+		this.afzender = afzender;
+		this.gelezen = gelezen;
+		this.onderwerp = onderwerp;
+		this.berichtnr = berichtnr;
+		this.berichtid = berichtid;
+	}
+	private int berichtid;
 
-    public void setRitnr(int ritnr) {
-        this.ritnr = ritnr;
-    }
- private int afzender;
+	public int getBerichtid() {
+		return berichtid;
+	}
 
-    public int getAfzender() {
-        return afzender;
-    }
+	public void setBerichtid(int berichtid) {
+		this.berichtid = berichtid;
+	}
 
-    public void setAfzender(int afzender) {
-        this.afzender = afzender;
-    }
-    public Berichten() {
-    }
+	public String getInhoud() {
+		return inhoudbericht;
+	}
 
-    public Berichten(int lidnr, String datum, String inhoud, int berichtid, int ritnr, int afzender, int ongelezen) {
-        this.lidnr = lidnr;
-       
-        this.datum = datum;
-        this.inhoud = inhoud;
+	public void setInhoud(String inhoud) {
+		this.inhoudbericht = inhoud;
+	}
 
-        this.berichtid = berichtid;
-        this.ritnr=ritnr;
-        this.afzender=afzender;
-        this.ongelezen=ongelezen;
-    }
-     private int berichtid;
+	public int getLidnr() {
+		return lidnr;
+	}
 
-    public int getBerichtid() {
-        return berichtid;
-    }
+	public void setLidnr(int lidnr) {
+		this.lidnr = lidnr;
+	}
 
-    public void setBerichtid(int berichtid) {
-        this.berichtid = berichtid;
-    }
-    
+	public String getStringDatum() {
+		return stringDatum;
+	}
 
-    public String getInhoud() {
-        return inhoud;
-    }
+	public void setStringDatum(String stringDatum) {
+		this.stringDatum = stringDatum;
+	}
 
-    public void setInhoud(String inhoud) {
-        this.inhoud = inhoud;
-    }
-    
-    
-    
+	public Timestamp getDatum() {
+		return datum;
+	}
 
-    
+	public void setDatum(Timestamp datum) {
+		this.datum = datum;
+	}
 
-    public int getLidnr() {
-        return lidnr;
-    }
+	public int getOngelezen() {
+		return ongelezen;
+	}
 
-    public void setLidnr(int lidnr) {
-        this.lidnr = lidnr;
-    }
+	public void setOngelezen(int ongelezen) {
+		this.ongelezen = ongelezen;
+	}
 
-   
+	public int getRitnr() {
+		return ritnr;
+	}
 
-    public String getDatum() {
-        return datum;
-    }
+	public void setRitnr(int ritnr) {
+		this.ritnr = ritnr;
+	}
 
-    public void setDatum(String datum) {
-        this.datum = datum;
-    }
-   
-            
-          
-    
+	public int getAfzender() {
+		return afzender;
+	}
+
+	public void setAfzender(int afzender) {
+		this.afzender = afzender;
+	}
+
+	public String getInhoudbericht() {
+		return inhoudbericht;
+	}
+
+	public void setInhoudbericht(String inhoudbericht) {
+		this.inhoudbericht = inhoudbericht;
+	}
+
+	public int getGelezen() {
+		return gelezen;
+	}
+
+	public void setGelezen(int gelezen) {
+		this.gelezen = gelezen;
+	}
+
+	public String getOnderwerp() {
+		return onderwerp;
+	}
+
+	public void setOnderwerp(String onderwerp) {
+		this.onderwerp = onderwerp;
+	}
+
+	public int getBerichtnr() {
+		return berichtnr;
+	}
+
+	public void setBerichtnr(int berichtnr) {
+		this.berichtnr = berichtnr;
+	}
+
+	public String getStringTijd() {
+		return stringTijd;
+	}
+
+	public void setStringTijd(String stringTijd) {
+		this.stringTijd = stringTijd;
+	}
+	
 }
