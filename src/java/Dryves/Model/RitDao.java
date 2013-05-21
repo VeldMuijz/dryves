@@ -75,6 +75,7 @@ public class RitDao {
 
 	/**
 	 * Opslaan van rit in de database
+	 *
 	 * @return false of true
 	 */
 	public Boolean saveMeerdereRitten() {
@@ -82,65 +83,71 @@ public class RitDao {
 		ArrayList<Integer> dagenVdWeek = new ArrayList();
 		if (ma == 1) {
 			dagenVdWeek.add(ma);
-		} else if (di == 2) {
+		}
+		if (di == 2) {
 			dagenVdWeek.add(di);
-		} else if (wo == 3) {
+		}
+		if (wo == 3) {
 			dagenVdWeek.add(wo);
-		} else if (don == 4) {
+		}
+		if (don == 4) {
 			dagenVdWeek.add(don);
-		} else if (vr == 5) {
+		}
+		if (vr == 5) {
 			dagenVdWeek.add(vr);
-		} else if (za == 6) {
+		}
+		if (za == 6) {
 			dagenVdWeek.add(za);
-		} else if (zo == 7) {
+		}
+		if (zo == 7) {
 			dagenVdWeek.add(zo);
 		}
 
 
-        // voor elk geselecteerde dag voer volgende query uit
-        for (int i = 0; i < dagenVdWeek.size(); i++) {
-            DayOfWeekIterator it = new DayOfWeekIterator(begindatum, einddatum, dagenVdWeek.get(i));
+		// voor elk geselecteerde dag voer volgende query uit
+		for (int i = 0; i < dagenVdWeek.size(); i++) {
+			DayOfWeekIterator it = new DayOfWeekIterator(begindatum, einddatum, dagenVdWeek.get(i));
 
-            while (it.hasNext()) {
-                System.out.println("dit is it.next();" + it.next());
-                datum = new Timestamp(it.next().getMillis());
-                System.out.println("Dit is datum na conversie: " + datum);
-                try {
-                    currentCon = ConnectionManager.getConnection();
-                    PreparedStatement insertRit;
+			while (it.hasNext()) {
+				System.out.println("dit is it.next();" + it.next());
+				datum = new Timestamp(it.next().getMillis());
+				System.out.println("Dit is datum na conversie: " + datum);
+				try {
+					currentCon = ConnectionManager.getConnection();
+					PreparedStatement insertRit;
 
-                    String queryString = ("INSERT INTO Rit ("
-                            + "lidnr,"
-                            + " startpunt,"
-                            + " eindpunt,"
-                            + " waypoint,"
-                            + " afstand,"
-                            + " prijs,"
-                            + " gekocht,"
-                            + " datum,"
-                            + " zitplaatsen,"
-                            + " brandstof,"
-                            + " aangeboden)"
-                            + " Values"
-                            + "(?,?,?,?,?,?,?,?,?,?,?);");
+					String queryString = ("INSERT INTO Rit ("
+							+ "lidnr,"
+							+ " startpunt,"
+							+ " eindpunt,"
+							+ " waypoint,"
+							+ " afstand,"
+							+ " prijs,"
+							+ " gekocht,"
+							+ " datum,"
+							+ " zitplaatsen,"
+							+ " brandstof,"
+							+ " aangeboden)"
+							+ " Values"
+							+ "(?,?,?,?,?,?,?,?,?,?,?);");
 
-                    insertRit = currentCon.prepareStatement(queryString);
-					
-                    insertRit.setInt(1, lidnr);
-                    insertRit.setString(2, startpunt);
-                    insertRit.setString(3, eindpunt);
-                    if (waypoints.equals("")) {
-                        insertRit.setString(4, null);
-                    } else {
-                        insertRit.setString(4, waypoints);
-                    }
-                    insertRit.setDouble(5, afstand);
-                    insertRit.setDouble(6, prijs);
-                    insertRit.setInt(7, gekocht);
-                    insertRit.setTimestamp(8, datum);
-                    insertRit.setInt(9, zitplaatsen);
-                    insertRit.setString(10, brandstof);
-                    insertRit.setInt(11, aangeboden);
+					insertRit = currentCon.prepareStatement(queryString);
+
+					insertRit.setInt(1, lidnr);
+					insertRit.setString(2, startpunt);
+					insertRit.setString(3, eindpunt);
+					if (waypoints.equals("")) {
+						insertRit.setString(4, null);
+					} else {
+						insertRit.setString(4, waypoints);
+					}
+					insertRit.setDouble(5, afstand);
+					insertRit.setDouble(6, prijs);
+					insertRit.setInt(7, gekocht);
+					insertRit.setTimestamp(8, datum);
+					insertRit.setInt(9, zitplaatsen);
+					insertRit.setString(10, brandstof);
+					insertRit.setInt(11, aangeboden);
 					System.out.println(insertRit);
 					insertRit.executeUpdate();
 
@@ -148,243 +155,241 @@ public class RitDao {
 					Logger.getLogger(RitDao.class.getName()).log(Level.SEVERE, null, ex);
 					return false;
 
-		
-            }
-		
-            }
-        }
-        return true;
-        }
 
-    /**
-     *
-     */
-    public Boolean saveRit() {
+				}
 
-        datum = new Timestamp(begindatum.getMillis());
-        try {
-            currentCon = ConnectionManager.getConnection();
-            PreparedStatement insertRit;
+			}
+		}
+		return true;
+	}
 
-            String queryString = ("INSERT INTO Rit ("
-                    + "lidnr,"
-                    + " startpunt,"
-                    + " eindpunt,"
-                    + " waypoint,"
-                    + " afstand,"
-                    + " prijs,"
-                    + " gekocht,"
-                    + " datum,"
-                    + " zitplaatsen,"
-                    + " brandstof,"
-                    + " aangeboden)"
-                    + " Values"
-                    + "(?,?,?,?,?,?,?,?,?,?,?);");
-            insertRit = currentCon.prepareStatement(queryString);
+	/**
+	 *
+	 */
+	public Boolean saveRit() {
 
-            insertRit.setInt(1, lidnr);
-            insertRit.setString(2, startpunt);
-            insertRit.setString(3, eindpunt);
-            if (waypoints.equals("")) {
-                insertRit.setString(4, null);
-            } else {
-                insertRit.setString(4, waypoints);
-            }
-            insertRit.setDouble(5, afstand);
-            insertRit.setDouble(6, prijs);
-            insertRit.setInt(7, gekocht);
-            insertRit.setTimestamp(8, datum);
-            insertRit.setInt(9, zitplaatsen);
-            insertRit.setString(10, brandstof);
-            insertRit.setInt(11, aangeboden);
+		datum = new Timestamp(begindatum.getMillis());
+		try {
+			currentCon = ConnectionManager.getConnection();
+			PreparedStatement insertRit;
 
-            System.out.println("De query is: " + insertRit);
+			String queryString = ("INSERT INTO Rit ("
+					+ "lidnr,"
+					+ " startpunt,"
+					+ " eindpunt,"
+					+ " waypoint,"
+					+ " afstand,"
+					+ " prijs,"
+					+ " gekocht,"
+					+ " datum,"
+					+ " zitplaatsen,"
+					+ " brandstof,"
+					+ " aangeboden)"
+					+ " Values"
+					+ "(?,?,?,?,?,?,?,?,?,?,?);");
+			insertRit = currentCon.prepareStatement(queryString);
 
-            insertRit.executeUpdate();
+			insertRit.setInt(1, lidnr);
+			insertRit.setString(2, startpunt);
+			insertRit.setString(3, eindpunt);
+			if (waypoints.equals("")) {
+				insertRit.setString(4, null);
+			} else {
+				insertRit.setString(4, waypoints);
+			}
+			insertRit.setDouble(5, afstand);
+			insertRit.setDouble(6, prijs);
+			insertRit.setInt(7, gekocht);
+			insertRit.setTimestamp(8, datum);
+			insertRit.setInt(9, zitplaatsen);
+			insertRit.setString(10, brandstof);
+			insertRit.setInt(11, aangeboden);
 
-        } catch (SQLException ex) {
-            Logger.getLogger(RitDao.class.getName()).log(Level.SEVERE, null, ex);
-           return false;
-        }
-        return true;
+			System.out.println("De query is: " + insertRit);
 
-    }
+			insertRit.executeUpdate();
 
-        /**
-* Haal een lijst van ritten per lid op
-*
+		} catch (SQLException ex) {
+			Logger.getLogger(RitDao.class.getName()).log(Level.SEVERE, null, ex);
+			return false;
+		}
+		return true;
+
+	}
+
+	/**
+	 * Haal een lijst van ritten per lid op
+	 *	 
 * @return
-* @throws SQLException
-*/
-    public List<Rit> getAlleRittenPerLid() throws SQLException {
-         Connection connection = null;
-        PreparedStatement statement = null;
-        ResultSet resultSet = null;
-        List<Rit> ritten = new ArrayList<Rit>();
-        
-        try {
-           
-            currentCon = ConnectionManager.getConnection();
-            PreparedStatement zoekritten;
-            String queryString = "SELECT * FROM Rit WHERE lidnr = ?;";
-            
-            zoekritten = currentCon.prepareStatement(queryString);
-            zoekritten.setInt(1, lidnr);
-            resultSet = zoekritten.executeQuery();
-           
-            while (resultSet.next()) {
-                Rit rit = new Rit();
-                rit.setRitnr(resultSet.getInt("ritnr"));
-                rit.setStartpunt(resultSet.getString("startpunt"));
-                rit.setEindpunt(resultSet.getString("eindpunt"));
-                rit.setPrijs(resultSet.getDouble("prijs"));
-                ritten.add(rit);
-            }
-        }
-            finally {
+	 * @throws SQLException
+	 */
+	public List<Rit> getAlleRittenPerLid() throws SQLException {
+		Connection connection = null;
+		PreparedStatement statement = null;
+		ResultSet resultSet = null;
+		List<Rit> ritten = new ArrayList<Rit>();
+
+		try {
+
+			currentCon = ConnectionManager.getConnection();
+			PreparedStatement zoekritten;
+			String queryString = "SELECT * FROM Rit WHERE lidnr = ?;";
+
+			zoekritten = currentCon.prepareStatement(queryString);
+			zoekritten.setInt(1, lidnr);
+			resultSet = zoekritten.executeQuery();
+
+			while (resultSet.next()) {
+				Rit rit = new Rit();
+				rit.setRitnr(resultSet.getInt("ritnr"));
+				rit.setStartpunt(resultSet.getString("startpunt"));
+				rit.setEindpunt(resultSet.getString("eindpunt"));
+				rit.setPrijs(resultSet.getDouble("prijs"));
+				ritten.add(rit);
+			}
+		} finally {
 // if (resultSet != null) try { resultSet.close(); } catch (SQLException ignore) {}
 // if (statement != null) try { statement.close(); } catch (SQLException ignore) {}
 // if (connection != null) try { connection.close(); } catch (SQLException ignore) {}
 // }
-        }
-        return ritten;
-        
-    }
-    
-	        /**
-* Haal een lijst van gekochte ritten per lid op
-*
+		}
+		return ritten;
+
+	}
+
+	/**
+	 * Haal een lijst van gekochte ritten per lid op
+	 *	 
 * @return
-* @throws SQLException
-*/
-    public List<Rit> getAlleGekochteRittenPerLid() throws SQLException {
-         Connection connection = null;
-        PreparedStatement statement = null;
-        ResultSet resultSet = null;
-        List<Rit> ritten = new ArrayList<Rit>();
-        
-        try {
-           
-            currentCon = ConnectionManager.getConnection();
-            PreparedStatement gekochteritten;
-            String queryString = "SELECT r.* "
-								+ "FROM rit AS r, aankoop AS a "
-								+ "WHERE r.ritnr = a.ritnr AND a.lidnr = ?;";
-            
-            gekochteritten = currentCon.prepareStatement(queryString);
-            gekochteritten.setInt(1, lidnr);
-            resultSet = gekochteritten.executeQuery();
-           
-            while (resultSet.next()) {
-                Rit rit = new Rit();
-                rit.setRitnr(resultSet.getInt("ritnr"));
-                rit.setStartpunt(resultSet.getString("startpunt"));
-                rit.setEindpunt(resultSet.getString("eindpunt"));
-                rit.setPrijs(resultSet.getDouble("prijs"));
-                ritten.add(rit);
-            }
-        }
-            finally {
+	 * @throws SQLException
+	 */
+	public List<Rit> getAlleGekochteRittenPerLid() throws SQLException {
+		Connection connection = null;
+		PreparedStatement statement = null;
+		ResultSet resultSet = null;
+		List<Rit> ritten = new ArrayList<Rit>();
+
+		try {
+
+			currentCon = ConnectionManager.getConnection();
+			PreparedStatement gekochteritten;
+			String queryString = "SELECT r.* "
+					+ "FROM rit AS r, aankoop AS a "
+					+ "WHERE r.ritnr = a.ritnr AND a.lidnr = ?;";
+
+			gekochteritten = currentCon.prepareStatement(queryString);
+			gekochteritten.setInt(1, lidnr);
+			resultSet = gekochteritten.executeQuery();
+
+			while (resultSet.next()) {
+				Rit rit = new Rit();
+				rit.setRitnr(resultSet.getInt("ritnr"));
+				rit.setStartpunt(resultSet.getString("startpunt"));
+				rit.setEindpunt(resultSet.getString("eindpunt"));
+				rit.setPrijs(resultSet.getDouble("prijs"));
+				ritten.add(rit);
+			}
+		} finally {
 // if (resultSet != null) try { resultSet.close(); } catch (SQLException ignore) {}
 // if (statement != null) try { statement.close(); } catch (SQLException ignore) {}
 // if (connection != null) try { connection.close(); } catch (SQLException ignore) {}
 // }
-        }
-        return ritten;
-        
-    }
-        public List<Rit> getRittenLijst() {
+		}
+		return ritten;
 
-        try {
-            currentCon = ConnectionManager.getConnection();
-            PreparedStatement selectRitten;
+	}
 
-            String queryString = "SELECT * FROM rit WHERE lidnr = ?;";
+	public List<Rit> getRittenLijst() {
 
-            selectRitten = currentCon.prepareStatement(queryString);
+		try {
+			currentCon = ConnectionManager.getConnection();
+			PreparedStatement selectRitten;
 
-            selectRitten.setInt(1, lidnr);
+			String queryString = "SELECT * FROM rit WHERE lidnr = ?;";
 
+			selectRitten = currentCon.prepareStatement(queryString);
 
-        } catch (SQLException ex) {
-            Logger.getLogger(RitDao.class.getName()).log(Level.SEVERE, null, ex);
-        }
+			selectRitten.setInt(1, lidnr);
 
 
-        return getRittenLijst();
-    }
+		} catch (SQLException ex) {
+			Logger.getLogger(RitDao.class.getName()).log(Level.SEVERE, null, ex);
+		}
 
-    /**
-     * Haal een lijst van ritten per lid op
-     *
-     * @return
-     * @throws SQLException
-     */
-    public List<Rit> getAlleRitten(String startpunt, String eindpunt) throws SQLException {
-         Connection connection = null;
-        //PreparedStatement statement = null;
-        ResultSet resultSet = null;
-        List<Rit> ritten = new ArrayList<Rit>();
-        DatumConverter dc = new DatumConverter();
-        try {
-           
-            currentCon = ConnectionManager.getConnection();
-            PreparedStatement zoekritten;
-            String queryString = "SELECT * FROM Rit WHERE aangeboden = 1 AND LOWER(startpunt) LIKE LOWER(?) AND LOWER(eindpunt) LIKE LOWER(?);";
-            
-            zoekritten = currentCon.prepareStatement(queryString);
 
-            zoekritten.setString(1, "%"+startpunt+"%");
+		return getRittenLijst();
+	}
 
-            zoekritten.setString(2, "%"+eindpunt+"%");
-            
-            resultSet = zoekritten.executeQuery();
-            
-            while (resultSet.next()) {
-                
-                Rit rit = new Rit();
-                rit.setRitnr(resultSet.getInt("ritnr"));
-                rit.setStartpunt(resultSet.getString("startpunt"));
-                
-                String[] arrSplit = rit.getStartpunt().split(", ");
-                
-                rit.setStraatnummer(arrSplit[0]);
-                rit.setPostcodeplaats(arrSplit[1].substring(5));
-                rit.setLand(arrSplit[2]);
-                
-                rit.setEindpunt(resultSet.getString("eindpunt"));
-                
-                String[] arrSplit2 = rit.getEindpunt().split(", ");
-                
-                rit.setStraatnummerEnd(arrSplit2[0]);
-                rit.setPostcodeplaatsEnd(arrSplit2[1].substring(5));
-                rit.setLandEnd(arrSplit[2]);
-                
-                rit.setPrijs(resultSet.getDouble("prijs"));
+	/**
+	 * Haal een lijst van ritten per lid op
+	 *
+	 * @return
+	 * @throws SQLException
+	 */
+	public List<Rit> getAlleRitten(String startpunt, String eindpunt) throws SQLException {
+		Connection connection = null;
+		//PreparedStatement statement = null;
+		ResultSet resultSet = null;
+		List<Rit> ritten = new ArrayList<Rit>();
+		DatumConverter dc = new DatumConverter();
+		try {
+
+			currentCon = ConnectionManager.getConnection();
+			PreparedStatement zoekritten;
+			String queryString = "SELECT * FROM Rit WHERE aangeboden = 1 AND LOWER(startpunt) LIKE LOWER(?) AND LOWER(eindpunt) LIKE LOWER(?);";
+
+			zoekritten = currentCon.prepareStatement(queryString);
+
+			zoekritten.setString(1, "%" + startpunt + "%");
+
+			zoekritten.setString(2, "%" + eindpunt + "%");
+
+			resultSet = zoekritten.executeQuery();
+
+			while (resultSet.next()) {
+
+				Rit rit = new Rit();
+				rit.setRitnr(resultSet.getInt("ritnr"));
+				rit.setStartpunt(resultSet.getString("startpunt"));
+
+				String[] arrSplit = rit.getStartpunt().split(", ");
+
+				rit.setStraatnummer(arrSplit[0]);
+				rit.setPostcodeplaats(arrSplit[1].substring(5));
+				rit.setLand(arrSplit[2]);
+
+				rit.setEindpunt(resultSet.getString("eindpunt"));
+
+				String[] arrSplit2 = rit.getEindpunt().split(", ");
+
+				rit.setStraatnummerEnd(arrSplit2[0]);
+				rit.setPostcodeplaatsEnd(arrSplit2[1].substring(5));
+				rit.setLandEnd(arrSplit[2]);
+
+				rit.setPrijs(resultSet.getDouble("prijs"));
 				rit.setDatum(resultSet.getTimestamp("datum"));
-				
+
 				rit.setDatumkort(dc.korteDatum(resultSet.getTimestamp("datum")));
 				rit.setTijd(dc.korteTijd(resultSet.getTimestamp("datum")));
-	
-                ritten.add(rit);
-            }
-        }catch (SQLException ex) {
+
+				ritten.add(rit);
+			}
+		} catch (SQLException ex) {
 			Logger.getLogger(RitDao.class.getName()).log(Level.SEVERE, null, ex);
 
-		}
-            finally {
+		} finally {
 //            if (resultSet != null) try { resultSet.close(); } catch (SQLException ignore) {}
 //            if (statement != null) try { statement.close(); } catch (SQLException ignore) {}
 //            if (connection != null) try { connection.close(); } catch (SQLException ignore) {}
 //        }
-        }
-        return ritten;
-        
-    }
+		}
+		return ritten;
 
+	}
 
 	/**
 	 * Ophalen van een enkele rit
+	 *
 	 * @param ritnr
 	 * @param bean
 	 * @return rit object
@@ -393,7 +398,7 @@ public class RitDao {
 
 		try {
 			currentCon = ConnectionManager.getConnection();
-                        
+
 			PreparedStatement select1Rit;
 			String queryString = ("SELECT * FROM Rit WHERE ritnr = ?;");
 
@@ -401,25 +406,25 @@ public class RitDao {
 
 			select1Rit.setInt(1, ritnr);
 			System.out.println("De query is: " + select1Rit);
-                        
+
 			rs = select1Rit.executeQuery();
-                        
-                        while(rs.next()){
-						bean.setLidnr(rs.getInt("lidnr"));
-                        bean.setRitnr(rs.getInt("ritnr"));
-                        bean.setStartpunt(rs.getString("startpunt"));
-                        bean.setEindpunt(rs.getString("eindpunt"));
-                        bean.setPrijs(rs.getDouble("prijs"));
-                        bean.setWaypoint(rs.getString("waypoint"));
-                        bean.setAfstand(rs.getDouble("afstand"));
-                        bean.setDatum(rs.getTimestamp("datum"));
-                        bean.setZitplaatsen(rs.getInt("zitplaatsen"));
-                        bean.setBrandstof(rs.getString("brandstof"));
-                        bean.setAangeboden(rs.getInt("aangeboden"));
-                        }
-                       
-                        
-                        
+
+			while (rs.next()) {
+				bean.setLidnr(rs.getInt("lidnr"));
+				bean.setRitnr(rs.getInt("ritnr"));
+				bean.setStartpunt(rs.getString("startpunt"));
+				bean.setEindpunt(rs.getString("eindpunt"));
+				bean.setPrijs(rs.getDouble("prijs"));
+				bean.setWaypoint(rs.getString("waypoint"));
+				bean.setAfstand(rs.getDouble("afstand"));
+				bean.setDatum(rs.getTimestamp("datum"));
+				bean.setZitplaatsen(rs.getInt("zitplaatsen"));
+				bean.setBrandstof(rs.getString("brandstof"));
+				bean.setAangeboden(rs.getInt("aangeboden"));
+			}
+
+
+
 		} catch (SQLException ex) {
 			Logger.getLogger(RitDao.class.getName()).log(Level.SEVERE, null, ex);
 
@@ -432,6 +437,7 @@ public class RitDao {
 
 	/**
 	 * Updaten van een rit, wijzigingen opslaan
+	 *
 	 * @param ritnr
 	 * @return true of false
 	 */
@@ -461,10 +467,10 @@ public class RitDao {
 			updateRit.setString(1, startpunt);
 			updateRit.setString(2, eindpunt);
 			if (!waypoints.isEmpty()) {
-					updateRit.setString(3, waypoints);
-				} else {
-					updateRit.setString(3, null);
-				}
+				updateRit.setString(3, waypoints);
+			} else {
+				updateRit.setString(3, null);
+			}
 			updateRit.setDouble(4, afstand);
 			updateRit.setDouble(5, prijs);
 			updateRit.setInt(6, gekocht);
@@ -486,19 +492,19 @@ public class RitDao {
 		return true;
 
 
-    }
+	}
 
-    public static Connection getCurrentCon() {
-        return currentCon;
-    }
+	public static Connection getCurrentCon() {
+		return currentCon;
+	}
 
-    public static void setCurrentCon(Connection currentCon) {
-        RitDao.currentCon = currentCon;
-    }
+	public static void setCurrentCon(Connection currentCon) {
+		RitDao.currentCon = currentCon;
+	}
 
-    public static ResultSet getRs() {
-        return rs;
-    }
+	public static ResultSet getRs() {
+		return rs;
+	}
 
 	public static void setRs(ResultSet rs) {
 		RitDao.rs = rs;
@@ -512,177 +518,177 @@ public class RitDao {
 		this.ritnr = ritnr;
 	}
 
-    public int getLidnr() {
-        return lidnr;
-    }
+	public int getLidnr() {
+		return lidnr;
+	}
 
-    public void setLidnr(int lidnr) {
-        this.lidnr = lidnr;
-    }
+	public void setLidnr(int lidnr) {
+		this.lidnr = lidnr;
+	}
 
-    public String getStartpunt() {
-        return startpunt;
-    }
+	public String getStartpunt() {
+		return startpunt;
+	}
 
-    public void setStartpunt(String startpunt) {
-        this.startpunt = startpunt;
-    }
+	public void setStartpunt(String startpunt) {
+		this.startpunt = startpunt;
+	}
 
-    public String getEindpunt() {
-        return eindpunt;
-    }
+	public String getEindpunt() {
+		return eindpunt;
+	}
 
-    public void setEindpunt(String eindpunt) {
-        this.eindpunt = eindpunt;
-    }
+	public void setEindpunt(String eindpunt) {
+		this.eindpunt = eindpunt;
+	}
 
-    public String getWaypoints() {
-        return waypoints;
-    }
+	public String getWaypoints() {
+		return waypoints;
+	}
 
-    public void setWaypoints(String waypoints) {
-        this.waypoints = waypoints;
-    }
+	public void setWaypoints(String waypoints) {
+		this.waypoints = waypoints;
+	}
 
-    public Double getAfstand() {
-        return afstand;
-    }
+	public Double getAfstand() {
+		return afstand;
+	}
 
-    public void setAfstand(Double afstand) {
-        this.afstand = afstand;
-    }
+	public void setAfstand(Double afstand) {
+		this.afstand = afstand;
+	}
 
-    public Double getPrijs() {
-        return prijs;
-    }
+	public Double getPrijs() {
+		return prijs;
+	}
 
-    public void setPrijs(Double prijs) {
-        this.prijs = prijs;
-    }
+	public void setPrijs(Double prijs) {
+		this.prijs = prijs;
+	}
 
-    public int getGekocht() {
-        return gekocht;
-    }
+	public int getGekocht() {
+		return gekocht;
+	}
 
-    public void setGekocht(int gekocht) {
-        this.gekocht = gekocht;
-    }
+	public void setGekocht(int gekocht) {
+		this.gekocht = gekocht;
+	}
 
-    public Timestamp getDatum() {
-        return datum;
-    }
+	public Timestamp getDatum() {
+		return datum;
+	}
 
-    public void setDatum(Timestamp datum) {
-        this.datum = datum;
-    }
+	public void setDatum(Timestamp datum) {
+		this.datum = datum;
+	}
 
-    public DateTime getBegindatum() {
-        return begindatum;
-    }
+	public DateTime getBegindatum() {
+		return begindatum;
+	}
 
-    public void setBegindatum(DateTime begindatum) {
-        this.begindatum = begindatum;
-    }
+	public void setBegindatum(DateTime begindatum) {
+		this.begindatum = begindatum;
+	}
 
-    public DateTime getEinddatum() {
-        return einddatum;
-    }
+	public DateTime getEinddatum() {
+		return einddatum;
+	}
 
-    public void setEinddatum(DateTime einddatum) {
-        this.einddatum = einddatum;
-    }
+	public void setEinddatum(DateTime einddatum) {
+		this.einddatum = einddatum;
+	}
 
-    public int getZitplaatsen() {
-        return zitplaatsen;
-    }
+	public int getZitplaatsen() {
+		return zitplaatsen;
+	}
 
-    public void setZitplaatsen(int zitplaatsen) {
-        this.zitplaatsen = zitplaatsen;
-    }
+	public void setZitplaatsen(int zitplaatsen) {
+		this.zitplaatsen = zitplaatsen;
+	}
 
-    public int getAangeboden() {
-        return aangeboden;
-    }
+	public int getAangeboden() {
+		return aangeboden;
+	}
 
-    public void setAangeboden(int aangeboden) {
-        this.aangeboden = aangeboden;
-    }
+	public void setAangeboden(int aangeboden) {
+		this.aangeboden = aangeboden;
+	}
 
-    public String getBrandstof() {
-        return brandstof;
-    }
+	public String getBrandstof() {
+		return brandstof;
+	}
 
-    public void setBrandstof(String brandstof) {
-        this.brandstof = brandstof;
-    }
+	public void setBrandstof(String brandstof) {
+		this.brandstof = brandstof;
+	}
 
-    public Boolean getSuccess() {
-        return success;
-    }
+	public Boolean getSuccess() {
+		return success;
+	}
 
-    public void setSuccess(Boolean success) {
-        this.success = success;
-    }
+	public void setSuccess(Boolean success) {
+		this.success = success;
+	}
 
-    public int getMa() {
-        return ma;
-    }
+	public int getMa() {
+		return ma;
+	}
 
-    public void setMa(int ma) {
-        this.ma = ma;
-    }
+	public void setMa(int ma) {
+		this.ma = ma;
+	}
 
-    public int getDi() {
-        return di;
-    }
+	public int getDi() {
+		return di;
+	}
 
-    public void setDi(int di) {
-        this.di = di;
-    }
+	public void setDi(int di) {
+		this.di = di;
+	}
 
-    public int getWo() {
-        return wo;
-    }
+	public int getWo() {
+		return wo;
+	}
 
-    public void setWo(int wo) {
-        this.wo = wo;
-    }
+	public void setWo(int wo) {
+		this.wo = wo;
+	}
 
-    public int getDon() {
-        return don;
-    }
+	public int getDon() {
+		return don;
+	}
 
-    public void setDon(int don) {
-        this.don = don;
-    }
+	public void setDon(int don) {
+		this.don = don;
+	}
 
-    public int getVr() {
-        return vr;
-    }
+	public int getVr() {
+		return vr;
+	}
 
-    public void setVr(int vr) {
-        this.vr = vr;
-    }
+	public void setVr(int vr) {
+		this.vr = vr;
+	}
 
-    public int getZa() {
-        return za;
-    }
+	public int getZa() {
+		return za;
+	}
 
-    public void setZa(int za) {
-        this.za = za;
-    }
+	public void setZa(int za) {
+		this.za = za;
+	}
 
-    public int getZo() {
-        return zo;
-    }
+	public int getZo() {
+		return zo;
+	}
 
-    public void setZo(int zo) {
-        this.zo = zo;
-    }
+	public void setZo(int zo) {
+		this.zo = zo;
+	}
 
-    public int getMeerdere() {
-        return meerdere;
-    }
+	public int getMeerdere() {
+		return meerdere;
+	}
 
 	public void setMeerdere(int meerdere) {
 		this.meerdere = meerdere;

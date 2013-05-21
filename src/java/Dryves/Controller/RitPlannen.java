@@ -148,31 +148,47 @@ public class RitPlannen extends HttpServlet {
 //            System.out.println("************ Programma snapt Timestamp niet!");
 //        }
 		System.out.println("request.getParameter(\"begindatum\") = " + request.getParameter("begindatum"));
+
 		ritDao.setBegindatum(dc.convertTimestamp(request.getParameter("begindatum"), request.getParameter("tijd")));
+
+		ritDao.setEinddatum(dc.convertTimestamp(request.getParameter("einddatum"), "23:59"));
 
 		//Checken of herhaling aangevinkt is, zo ja vul de dagen van de week
 		if (request.getParameter("herhaling") != null && !request.getParameter("einddatum").isEmpty()) {
 
 			if (!request.getParameter("ma").isEmpty()) {
 				ritDao.setMa(1);
+				System.out.println("ma:" + ritDao.getMa());
 				ritDao.setMeerdere(1);
-			} else if (!request.getParameter("di").isEmpty()) {
+			}
+			if (!request.getParameter("di").isEmpty()) {
 				ritDao.setDi(2);
+				System.out.println("di:" + ritDao.getDi());
 				ritDao.setMeerdere(1);
-			} else if (!request.getParameter("wo").isEmpty()) {
+			}
+			if (!request.getParameter("wo").isEmpty()) {
 				ritDao.setWo(3);
+				System.out.println("wo:" + ritDao.getWo());
 				ritDao.setMeerdere(1);
-			} else if (!request.getParameter("don").isEmpty()) {
+			}
+			if (!request.getParameter("don").isEmpty()) {
 				ritDao.setDon(4);
+				System.out.println("don:" + ritDao.getDon());
 				ritDao.setMeerdere(1);
-			} else if (!request.getParameter("vr").isEmpty()) {
+			}
+			if (!request.getParameter("vr").isEmpty()) {
 				ritDao.setVr(5);
+				System.out.println("vr:" + ritDao.getVr());
 				ritDao.setMeerdere(1);
-			} else if (!request.getParameter("za").isEmpty()) {
+			}
+			if (!request.getParameter("za").isEmpty()) {
 				ritDao.setZa(6);
+				System.out.println("za:" + ritDao.getZa());
 				ritDao.setMeerdere(1);
-			} else if (!request.getParameter("zo").isEmpty()) {
+			}
+			if (!request.getParameter("zo").isEmpty()) {
 				ritDao.setZo(7);
+				System.out.println("zo:" + ritDao.getZo());
 				ritDao.setMeerdere(1);
 			}
 
@@ -221,10 +237,10 @@ public class RitPlannen extends HttpServlet {
 			if (ritDao.updateRit(Integer.parseInt(request.getParameter("ritnr")))) {
 				response.sendRedirect("MijnRitten");
 
-			}else {
-					RequestDispatcher dispatcher = request.getRequestDispatcher("/oops.jsp");
-					dispatcher.forward(request, response);
-				}
+			} else {
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/oops.jsp");
+				dispatcher.forward(request, response);
+			}
 
 		} else {
 			if (ritDao.getMeerdere() == 0) {
@@ -239,7 +255,7 @@ public class RitPlannen extends HttpServlet {
 				//ritDao.saveMeerdereRitten();
 				if (ritDao.saveMeerdereRitten()) {
 					response.sendRedirect("MijnRitten");
-				}else {
+				} else {
 					RequestDispatcher dispatcher = request.getRequestDispatcher("/oops.jsp");
 					dispatcher.forward(request, response);
 				}
