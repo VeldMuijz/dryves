@@ -149,13 +149,13 @@ public class RitPlannen extends HttpServlet {
 //        }
 		System.out.println("request.getParameter(\"begindatum\") = " + request.getParameter("begindatum"));
 
-		ritDao.setBegindatum(dc.convertTimestamp(request.getParameter("begindatum"), request.getParameter("tijd")));
+		ritDao.setBegindatum(dc.convertUSTimestamp(request.getParameter("begindatum"), request.getParameter("tijd")));
 
-		ritDao.setEinddatum(dc.convertTimestamp(request.getParameter("einddatum"), "23:59"));
+		
 
 		//Checken of herhaling aangevinkt is, zo ja vul de dagen van de week
 		if (request.getParameter("herhaling") != null && !request.getParameter("einddatum").isEmpty()) {
-
+			ritDao.setEinddatum(dc.convertTimestamp(request.getParameter("einddatum"), "23:59"));
 			if (!request.getParameter("ma").isEmpty()) {
 				ritDao.setMa(1);
 				System.out.println("ma:" + ritDao.getMa());

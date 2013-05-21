@@ -84,6 +84,24 @@ public class DatumConverter {
 		return timestamp;
 	}
 
+	public DateTime convertUSTimestamp(String stringdatum, String tijd) {
+
+		SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy'T'HH:mm");
+		SimpleDateFormat timestampFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
+
+		try {
+			datum = dateFormat.parse(stringdatum + 'T' + tijd);
+			timestamp = DateTime.parse(timestampFormat.format(datum));
+			System.out.println("++++++++++++++DatumConverter+++++++++++++++++\n"
+					+ " Dit is timestamp na conversie: " + timestamp);
+
+		} catch (ParseException ex) {
+			Logger.getLogger(RitPlannen.class.getName()).log(Level.SEVERE, null, ex);
+			System.out.println("************ Programma snapt Timestamp niet!");
+		}
+		return timestamp;
+	}
+	
 	public Date getDatum() {
 		return datum;
 	}
