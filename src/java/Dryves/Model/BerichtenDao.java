@@ -112,7 +112,8 @@ public class BerichtenDao {
 			verstuurbericht.setInt(4, lidnreigenaar);
 			verstuurbericht.setInt(5, 1);
 			verstuurbericht.setInt(6, bean.getRitnr());
-			resultSet = verstuurbericht.executeQuery();
+			verstuurbericht.executeUpdate();
+//			resultSet = verstuurbericht.executeQuery();
 
 
 			more = true;
