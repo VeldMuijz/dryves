@@ -41,9 +41,6 @@ Document : mijn_ritten
 
 
             <div class="contentPanel">         
-                <button onclick="window.location = '/Dryves/RitPlannen';"><fmt:message bundle="${rb}" key="planrit" /></button> <br />
-
-                
                 
                 <c:forEach items="${aankopen}" var="aankoop">
                     <div class="rittenlijst">

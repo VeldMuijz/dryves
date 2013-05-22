@@ -42,7 +42,7 @@
 
 
             <div class="contentPanel">         
-				
+
 				<c:choose>
 					<c:when test="${empty berichten}"> 
 						<h2>Er zijn geen berichten voor u</h2>
@@ -53,26 +53,24 @@
 						<c:set var="counter" value="0"/>
 						<c:forEach items="${berichten}" var="bericht">
 							<div class="rittenlijst">
-								
+
 								<table>
 									<td>
-									<c:choose>
+										<c:choose>
 											<c:when test="${bericht.ongelezen==1}"><img src="images/envelope.png" /></c:when>
-										<c:when test="${bericht.ongelezen==0}"></c:when>
-									</c:choose>
+											<c:when test="${bericht.ongelezen==0}"></c:when>
+										</c:choose>
 									</td>
-									
-										<td>Bericht van: ${afzender[counter].vnaam} ${afzender[counter].anaam} <br/> <fmt:message bundle="${rb}" key="datum" />  ${bericht.stringDatum} ${bericht.stringTijd}</td>
-										<td></td>  
-										
-								
-									<td><button onclick="window.location = 'BerichtLezen?berichtid=${bericht.berichtid}';"><fmt:message bundle="${rb}" key="bekijkbericht" /></button></td>
-									<c:set var="counter" value="${counter + 1 }"/>
 
-									
+									<td	>Bericht van: ${afzender[counter].vnaam} ${afzender[counter].anaam} <br/> <fmt:message bundle="${rb}" key="datum" />  ${bericht.stringDatum} ${bericht.stringTijd}</td>
+									<td></td>  
+									<td><button onclick="window.location = 'BerichtLezen?berichtid=${bericht.berichtid}';"><fmt:message bundle="${rb}" key="bekijkbericht" /></button></td>
+										<c:set var="counter" value="${counter + 1 }"/>
+
+
 								</table>
-								
-								
+
+
 							</div>
 
 						</c:forEach>
@@ -80,10 +78,10 @@
 				</c:choose>
 
 
-				</div>
 			</div>
+		</div>
 
 
-		</body>
-	</html>
+	</body>
+</html>
 
