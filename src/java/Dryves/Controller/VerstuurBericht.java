@@ -6,6 +6,7 @@ package Dryves.Controller;
 
 import Dryves.Model.Berichten;
 import Dryves.Model.BerichtenDao;
+import Dryves.Model.verstuurEmail;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -59,6 +60,7 @@ public class VerstuurBericht extends HttpServlet {
         
         bericht.setRitnr(Integer.parseInt(request.getParameter("ritnr")));
         bericht.setLidnr(Integer.parseInt(request.getParameter("lidnr")));
+        System.out.println("Bericht lidnummer: " + bericht.getLidnr());
         bericht.setInhoud(request.getParameter("inhoud"));
         bericht.setDatum(new Timestamp(datum.getTime()));
         System.out.println(bericht.getInhoud());
@@ -66,6 +68,21 @@ public class VerstuurBericht extends HttpServlet {
         
         try {
             berichtDao.BerichtVersturen(bericht);
+            
+            verstuurEmail ve = new verstuurEmail();
+            
+            String naar = "";
+            String onderwerp = "U heeft een nieuw bericht!";
+            String mail = "Dit is een test!";
+            
+            System.out.println("Dit is de afzender: " + bericht.getAfzender());
+            
+            //ve.verstuurEmailZonderBijlage(naar, onderwerp, mail);
+            
+            
+            
+            
+            
             response.sendRedirect("succesvol.jsp");
         } catch (SQLException ex) {
             Logger.getLogger(Berichtverzenden.class.getName()).log(Level.SEVERE, null, ex);

@@ -64,13 +64,9 @@
          
         </div>
 
- <div class="contentPanel">
+ <div class="contentPanelSearch">
 
-                <jsp:include page="zoekrit.jsp" flush="true" ></jsp:include> 
-
-                <br /><br />
-
-                <div class="contentPanelBackground"></div>
+                <jsp:include page="zoekrit.jsp" flush="true" ></jsp:include>
 
             </div>
 

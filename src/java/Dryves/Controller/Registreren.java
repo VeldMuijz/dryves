@@ -6,6 +6,7 @@ package Dryves.Controller;
 
 import Dryves.Model.Lid;
 import Dryves.Model.LidDao;
+import Dryves.Model.verstuurEmail;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Hashtable;
@@ -166,7 +167,25 @@ public class Registreren extends HttpServlet {
 			lidDao.vulLidDao(lid);
 			// hier wordt de gebruiker in de database opgeslagen
 			lidDao.saveRegistratie();
-
+                        
+                        
+                        //Wanneer het registreren van een Lid, succesvol is volbracht, dan zal er een mail verstuurd worden.
+                        
+                        String naar = lid.getEmail();
+                        String onderwerp = "Welkom bij de Dryves Community!";
+                        String bericht = "Hoi " + lid.getVnaam() +
+                                         "\n" + "Wat ontzettend leuk dat je onze community komt versterken." +
+                                         "\n" + "Je kunt inloggen op de website, met onderstaande gegevens" +
+                                         "\n" + 
+                                         "\n" + "Gebruikersnaam: " + lid.getEmail() +
+                                         "\n" + "Wachtwoord: " + lid.getWachtwoord() +
+                                         "\n" + 
+                                         "\n" + "Veel plezier!";
+                        
+                        verstuurEmail ve = new verstuurEmail();
+                        
+                        ve.verstuurEmailZonderBijlage(naar, onderwerp, bericht);
+                        
 //           //Hier maken we een nieuwe sessie voor de nieuwe gebruiker
 //          HttpSession session = request.getSession(true);       
 //          session.setAttribute("currentSessionUser",lid); 
