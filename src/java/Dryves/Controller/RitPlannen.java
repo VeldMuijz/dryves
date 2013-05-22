@@ -151,42 +151,49 @@ public class RitPlannen extends HttpServlet {
 
 		ritDao.setBegindatum(dc.convertUSTimestamp(request.getParameter("begindatum"), request.getParameter("tijd")));
 
+		String ma = request.getParameter("ma");
+		String di = request.getParameter("di");
+		String wo = request.getParameter("wo");
+		String don = request.getParameter("don");
+		String vr = request.getParameter("vr");
+		String za = request.getParameter("za");
+		String zo = request.getParameter("zo");
 		
 
 		//Checken of herhaling aangevinkt is, zo ja vul de dagen van de week
 		if (request.getParameter("herhaling") != null && !request.getParameter("einddatum").isEmpty()) {
 			ritDao.setEinddatum(dc.convertTimestamp(request.getParameter("einddatum"), "23:59"));
-			if (!request.getParameter("ma").isEmpty()) {
+			if (ma!= null && !ma.isEmpty()) {
 				ritDao.setMa(1);
 				System.out.println("ma:" + ritDao.getMa());
 				ritDao.setMeerdere(1);
 			}
-			if (!request.getParameter("di").isEmpty()) {
+			if (di != null && !di.isEmpty()) {
 				ritDao.setDi(2);
 				System.out.println("di:" + ritDao.getDi());
 				ritDao.setMeerdere(1);
 			}
-			if (!request.getParameter("wo").isEmpty()) {
+			if (wo != null && !wo.isEmpty()) {
 				ritDao.setWo(3);
 				System.out.println("wo:" + ritDao.getWo());
 				ritDao.setMeerdere(1);
 			}
-			if (!request.getParameter("don").isEmpty()) {
+			if (don != null && !don.isEmpty()) {
 				ritDao.setDon(4);
 				System.out.println("don:" + ritDao.getDon());
 				ritDao.setMeerdere(1);
 			}
-			if (!request.getParameter("vr").isEmpty()) {
+			if (vr != null && !vr.isEmpty()) {
 				ritDao.setVr(5);
 				System.out.println("vr:" + ritDao.getVr());
 				ritDao.setMeerdere(1);
 			}
-			if (!request.getParameter("za").isEmpty()) {
+			if (za != null && !za.isEmpty()) {
 				ritDao.setZa(6);
 				System.out.println("za:" + ritDao.getZa());
 				ritDao.setMeerdere(1);
 			}
-			if (!request.getParameter("zo").isEmpty()) {
+			if (zo != null && !zo.isEmpty()) {
 				ritDao.setZo(7);
 				System.out.println("zo:" + ritDao.getZo());
 				ritDao.setMeerdere(1);
