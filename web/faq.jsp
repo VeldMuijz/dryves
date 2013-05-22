@@ -183,9 +183,9 @@
 							<div>
 								<p><fmt:message bundle="${rb}" key="zoherhalenderitten" /></p>
 							</div>
-							<h3><fmt:message bundle="${rb}" key="hoeverlengrit" /></h3>
+							<h3><fmt:message bundle="${rb}" key="ontvangfactuur" /></h3>
 							<div>
-								<p><fmt:message bundle="${rb}" key="zoverlengrit" /></p>
+								<p><fmt:message bundle="${rb}" key="zoontvangfactuur" /></p>
 							</div>
 							<h3><fmt:message bundle="${rb}" key="geenritgetoond" /></h3>
 							<div>
