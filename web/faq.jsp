@@ -93,7 +93,7 @@
 
         <style>
 
-			.pageContent { width: 400px; }
+			.pageContent { width: 100px; }
 			.accordion { list-style-type: none; padding: 0; margin: 0 0 30px; border: 1px solid #17a; border-top: none; border-left: none; }
 			.accordion ul { padding: 0; margin: 0; float: left; display: block; width: 100%; }
 			.accordion li { background: #3cf; cursor: pointer; list-style-type: none; padding: 0; margin: 0; float: left; display: block; width: 100%;}
@@ -175,13 +175,13 @@
 							<div>
 								<p><fmt:message bundle="${rb}" key="faqinloggenshow" /></p>
 							</div>
-							<h3><fmt:message bundle="${rb}" key="hoeontmoetingsplek" /></h3>
+							<h3><fmt:message bundle="${rb}" key="faqmijngegevens" /></h3>
 							<div>
-								<p><fmt:message bundle="${rb}" key="zohoeontmoetingsplek" /></p>
+								<p><fmt:message bundle="${rb}" key="faqmijngegevensshow" /></p>
 							</div>
-							<h3><fmt:message bundle="${rb}" key="hoeherhalenderit" /></h3>
+							<h3><fmt:message bundle="${rb}" key="faqmijnritten" /></h3>
 							<div>
-								<p><fmt:message bundle="${rb}" key="zoherhalenderitten" /></p>
+								<p><fmt:message bundle="${rb}" key="faqmijnrittenshow" /></p>
 							</div>
 							<h3><fmt:message bundle="${rb}" key="ontvangfactuur" /></h3>
 							<div>
