@@ -153,27 +153,27 @@
 
 					<body>
 						<div id="accordion">
-							<h3><fmt:message bundle="${rb}" key="hoeplanikeenrit" /></h3>
+							<h3><fmt:message bundle="${rb}" key="navibalk" /></h3>
 
 							<div>
 
 								<p>
 
-                                                        <fmt:message bundle="${rb}" key="zoplanikeenrit" />
+                                                        <fmt:message bundle="${rb}" key="navibalkshow" />
 									
 
 								</p>
 
 							</div>
-							<h3><fmt:message bundle="${rb}" key="hoezetikeenritonline" /></h3>
+							<h3><fmt:message bundle="${rb}" key="faqregistreren" /></h3>
 
 							<div>
-								<p><fmt:message bundle="${rb}" key="zozetikeenritonline" /></p>
+								<p><fmt:message bundle="${rb}" key="faqregistrerenshow" /></p>
 							</div>
-							<h3><fmt:message bundle="${rb}" key="hoeverwijderikeenrit" /></h3>
+							<h3><fmt:message bundle="${rb}" key="faqinloggen" /></h3>
 
 							<div>
-								<p><fmt:message bundle="${rb}" key="zoverwijderrit" /></p>
+								<p><fmt:message bundle="${rb}" key="faqinloggenshow" /></p>
 							</div>
 							<h3><fmt:message bundle="${rb}" key="hoeontmoetingsplek" /></h3>
 							<div>
