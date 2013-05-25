@@ -64,6 +64,10 @@
         <servlet-name>RitBeschikbaarCheck</servlet-name>
         <servlet-class>Dryves.Controller.RitBeschikbaarCheck</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RitNietKopen</servlet-name>
+        <servlet-class>Dryves.Controller.RitNietKopen</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LidWijzigen</servlet-name>
         <url-pattern>/LidWijzigen</url-pattern>
@@ -147,6 +151,10 @@
     <servlet-mapping>
         <servlet-name>RitBeschikbaarCheck</servlet-name>
         <url-pattern>/RitBeschikbaarCheck</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RitNietKopen</servlet-name>
+        <url-pattern>/RitNietKopen</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>

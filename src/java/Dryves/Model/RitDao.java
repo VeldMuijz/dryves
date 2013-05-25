@@ -355,8 +355,14 @@ public class RitDao {
 		return beschikbaar;
 
 	}
-
-	public Boolean updateZitplaats(int ritnr) {
+	
+	/**
+ * 
+ * @param ritnr
+ * @param updatewaarde
+ * @return 
+ */
+	public Boolean updateZitplaatsOphogen(int ritnr, int updatewaarde) {
 		ResultSet rs;
 		Boolean beschikbaar = false;
 		PreparedStatement updateZitplaats;
@@ -365,17 +371,51 @@ public class RitDao {
 			currentCon = ConnectionManager.getConnection();
 			String updateQueryString = (""
 					+ "UPDATE rit "
-					+ "SET zitplaatsen = zitplaatsen -1 "
+					+ "SET zitplaatsen = zitplaatsen + ? "
 					+ "WHERE ritnr = ? "
 					+ "AND zitplaatsen > 0;");
 			
 			updateZitplaats = currentCon.prepareStatement(updateQueryString);
 
-			updateZitplaats.setInt(1, ritnr);
+			updateZitplaats.setInt(1, updatewaarde);
+			updateZitplaats.setInt(2, ritnr);
 			updateZitplaats.executeUpdate();
 
 		} catch (SQLException ex) {
 			Logger.getLogger(RitDao.class.getName()).log(Level.SEVERE, null, ex);
+			return false;
+		}
+		return true;
+	}
+	
+/**
+ * 
+ * @param ritnr
+ * @param updatewaarde
+ * @return 
+ */
+	public Boolean updateZitplaatsVerlagen(int ritnr, int updatewaarde) {
+		ResultSet rs;
+		Boolean beschikbaar = false;
+		PreparedStatement updateZitplaats;
+		try {
+
+			currentCon = ConnectionManager.getConnection();
+			String updateQueryString = (""
+					+ "UPDATE rit "
+					+ "SET zitplaatsen = zitplaatsen - ? "
+					+ "WHERE ritnr = ? "
+					+ "AND zitplaatsen > 0;");
+			
+			updateZitplaats = currentCon.prepareStatement(updateQueryString);
+
+			updateZitplaats.setInt(1, updatewaarde);
+			updateZitplaats.setInt(2, ritnr);
+			updateZitplaats.executeUpdate();
+
+		} catch (SQLException ex) {
+			Logger.getLogger(RitDao.class.getName()).log(Level.SEVERE, null, ex);
+			return false;
 		}
 		return true;
 	}

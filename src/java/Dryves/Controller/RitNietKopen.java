@@ -21,7 +21,10 @@ import javax.servlet.http.HttpSession;
  *
  * @author jeroen
  */
-public class RitBeschikbaarCheck extends HttpServlet {
+public class RitNietKopen extends HttpServlet {
+
+	
+	
 
 	/**
 	 * Handles the HTTP
@@ -35,36 +38,24 @@ public class RitBeschikbaarCheck extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
 		// Instantieren van objecten
-		Rit rit = new Rit();
 		RitDao ritDao = new RitDao();
 		Aankoop aankoop = new Aankoop();
 		AankoopDao aankoopDao = new AankoopDao();
 
 		// Haal de huidige sessie op
 		HttpSession session = request.getSession();
-		// Maak in de sessie een object rit aan met naam sessieRit
-		session.setAttribute("sessieRit", rit);
 		//Haal de userbean (dit moet sessiebean worden) op uit de sessie
 		Lid user = (Lid) session.getAttribute("currentSessionUser");
-
-		rit.setRitnr(Integer.parseInt(request.getParameter("ritnr")));
-
-		//check of dit lid wel bij deze rit hoort
-		if (!ritDao.checkBeschikbaarheidRit(rit.getRitnr())) {
-
-			System.out.println("Deze rit is uitverkocht!");
-			response.sendRedirect("ritnietbeschikbaar.jsp");
-
-		} else if(ritDao.updateZitplaatsVerlagen(rit.getRitnr(), 1)) {
-			System.out.println("Rit is beschikbaar en kan gekocht worden, door naar RitKopen servlet");
-			response.sendRedirect("RitKopen");
-
-		}else{
-			System.out.println("Deze rit is uitverkocht!");
-			response.sendRedirect("ritnietbeschikbaar.jsp");
-		}
+		Rit rit = (Rit) session.getAttribute("sessieRit");
+		
+		//String vorigepagina = request.getParameter("vorigepagina");
+		
+		//System.out.println("Dit is de vorige pagina: " + vorigepagina);
+		if(ritDao.updateZitplaatsOphogen(rit.getRitnr(), 1)){
+			response.sendRedirect("MijnDryves");
+		};
+		
 	}
 
 	/**
@@ -79,6 +70,7 @@ public class RitBeschikbaarCheck extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
 	}
 
 	/**

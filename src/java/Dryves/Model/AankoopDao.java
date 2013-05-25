@@ -187,7 +187,7 @@ public class AankoopDao {
 
 		} catch (SQLException ex) {
 			Logger.getLogger(RitDao.class.getName()).log(Level.SEVERE, null, ex);
-			ritDao.updateZitplaats(ritnr, +1);
+			ritDao.updateZitplaatsOphogen(ritnr, 1);
 			return false;
 		}
 		return true;
