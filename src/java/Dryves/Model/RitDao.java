@@ -228,9 +228,9 @@ public class RitDao {
 		PreparedStatement statement = null;
 		ResultSet resultSet = null;
 		List<Rit> ritten = new ArrayList<Rit>();
-
+                DatumConverter datumconverter= new DatumConverter();
 		try {
-
+                    
 			currentCon = ConnectionManager.getConnection();
 			PreparedStatement zoekritten;
 			String queryString = "SELECT * FROM Rit WHERE lidnr = ?;";
@@ -245,6 +245,7 @@ public class RitDao {
 				rit.setStartpunt(resultSet.getString("startpunt"));
 				rit.setEindpunt(resultSet.getString("eindpunt"));
 				rit.setPrijs(resultSet.getDouble("prijs"));
+                                rit.setDatumkort(  datumconverter.korteDatum(resultSet.getTimestamp("datum")));
 				ritten.add(rit);
 			}
 		} finally {
