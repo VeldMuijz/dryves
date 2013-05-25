@@ -321,6 +321,41 @@ public class RitDao {
 	}
 
 	/**
+	 * Checkt of er een zitplaats beschikbaar is, wanneer er een zitplaats beschikbaar
+	 * is dan zou deze zitplaats gekocht kunnen worden
+	 * @param ritnr
+	 * @return 
+	 */
+	public Boolean checkBeschikbaarheidRit(int ritnr) {
+		ResultSet rs;
+		Boolean beschikbaar = false;
+		try {
+			currentCon = ConnectionManager.getConnection();
+			PreparedStatement zitplaatsCheck;
+
+			String queryString = "SELECT zitplaatsen FROM rit WHERE ritnr = ? AND zitplaatsen > 0 LIMIT 1;";
+
+			zitplaatsCheck = currentCon.prepareStatement(queryString);
+			zitplaatsCheck.setInt(1, ritnr);
+
+			 rs = zitplaatsCheck.executeQuery();
+			
+			if(rs.next()){
+				
+				beschikbaar = true;
+			} else{
+				beschikbaar = false;
+			}
+			
+		} catch (SQLException ex) {
+			Logger.getLogger(RitDao.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		System.out.println("Beschikbaar = " + beschikbaar);
+		return beschikbaar;
+		
+	}
+
+	/**
 	 * Haal een lijst van ritten per lid op
 	 *
 	 * @return
@@ -336,7 +371,13 @@ public class RitDao {
 
 			currentCon = ConnectionManager.getConnection();
 			PreparedStatement zoekritten;
-			String queryString = "SELECT * FROM Rit WHERE aangeboden = 1 AND LOWER(startpunt) LIKE LOWER(?) AND LOWER(eindpunt) LIKE LOWER(?);";
+			String queryString = "SELECT * "
+					+ "FROM Rit "
+					+ "WHERE aangeboden = 1 "
+					+ "AND zitplaatsen > 0 "
+					+ "AND LOWER(startpunt) LIKE LOWER(?) "
+					+ "AND LOWER(eindpunt) LIKE LOWER(?) "
+					+ "AND datum > DATE(NOW());";
 
 			zoekritten = currentCon.prepareStatement(queryString);
 
@@ -368,6 +409,7 @@ public class RitDao {
 
 				rit.setPrijs(resultSet.getDouble("prijs"));
 				rit.setDatum(resultSet.getTimestamp("datum"));
+				rit.setZitplaatsen(resultSet.getInt("zitplaatsen"));
 
 				rit.setDatumkort(dc.korteDatum(resultSet.getTimestamp("datum")));
 				rit.setTijd(dc.korteTijd(resultSet.getTimestamp("datum")));

@@ -232,6 +232,10 @@ public class Rit implements java.io.Serializable {
         this.landEnd = landEnd;
     }
 
+	public int setRitnr() {
+		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+	}
+
 
 	
 }
