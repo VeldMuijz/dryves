@@ -321,10 +321,11 @@ public class RitDao {
 	}
 
 	/**
-	 * Checkt of er een zitplaats beschikbaar is, wanneer er een zitplaats beschikbaar
-	 * is dan zou deze zitplaats gekocht kunnen worden
+	 * Checkt of er een zitplaats beschikbaar is, wanneer er een zitplaats
+	 * beschikbaar is dan zou deze zitplaats gekocht kunnen worden
+	 *
 	 * @param ritnr
-	 * @return 
+	 * @return
 	 */
 	public Boolean checkBeschikbaarheidRit(int ritnr) {
 		ResultSet rs;
@@ -338,21 +339,45 @@ public class RitDao {
 			zitplaatsCheck = currentCon.prepareStatement(queryString);
 			zitplaatsCheck.setInt(1, ritnr);
 
-			 rs = zitplaatsCheck.executeQuery();
-			
-			if(rs.next()){
-				
+			rs = zitplaatsCheck.executeQuery();
+
+			if (rs.next()) {
+
 				beschikbaar = true;
-			} else{
+			} else {
 				beschikbaar = false;
 			}
-			
+
 		} catch (SQLException ex) {
 			Logger.getLogger(RitDao.class.getName()).log(Level.SEVERE, null, ex);
 		}
 		System.out.println("Beschikbaar = " + beschikbaar);
 		return beschikbaar;
-		
+
+	}
+
+	public Boolean updateZitplaats(int ritnr) {
+		ResultSet rs;
+		Boolean beschikbaar = false;
+		PreparedStatement updateZitplaats;
+		try {
+
+			currentCon = ConnectionManager.getConnection();
+			String updateQueryString = (""
+					+ "UPDATE rit "
+					+ "SET zitplaatsen = zitplaatsen -1 "
+					+ "WHERE ritnr = ? "
+					+ "AND zitplaatsen > 0;");
+			
+			updateZitplaats = currentCon.prepareStatement(updateQueryString);
+
+			updateZitplaats.setInt(1, ritnr);
+			updateZitplaats.executeUpdate();
+
+		} catch (SQLException ex) {
+			Logger.getLogger(RitDao.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		return true;
 	}
 
 	/**

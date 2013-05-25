@@ -57,9 +57,13 @@ public class RitBeschikbaarCheck extends HttpServlet {
 			System.out.println("Deze rit is uitverkocht!");
 			response.sendRedirect("ritnietbeschikbaar.jsp");
 
-		} else {
+		} else if(ritDao.updateZitplaats(rit.getRitnr(), -1)) {
+			System.out.println("Rit is beschikbaar en kan gekocht worden, door naar RitKopen servlet");
 			response.sendRedirect("RitKopen");
 
+		}else{
+			System.out.println("Deze rit is uitverkocht!");
+			response.sendRedirect("ritnietbeschikbaar.jsp");
 		}
 	}
 

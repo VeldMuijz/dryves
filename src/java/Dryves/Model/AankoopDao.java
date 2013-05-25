@@ -156,7 +156,7 @@ public class AankoopDao {
 	 * @return
 	 */
 	public Boolean aankoopDoen() {
-
+		RitDao ritDao = new RitDao();
 
 		try {
 			currentCon = ConnectionManager.getConnection();
@@ -187,6 +187,7 @@ public class AankoopDao {
 
 		} catch (SQLException ex) {
 			Logger.getLogger(RitDao.class.getName()).log(Level.SEVERE, null, ex);
+			ritDao.updateZitplaats(ritnr, +1);
 			return false;
 		}
 		return true;
