@@ -228,6 +228,7 @@ public class RitDao {
 		PreparedStatement statement = null;
 		ResultSet resultSet = null;
 		List<Rit> ritten = new ArrayList<Rit>();
+		DatumConverter dc = new DatumConverter();
 
 		try {
 
@@ -245,6 +246,8 @@ public class RitDao {
 				rit.setStartpunt(resultSet.getString("startpunt"));
 				rit.setEindpunt(resultSet.getString("eindpunt"));
 				rit.setPrijs(resultSet.getDouble("prijs"));
+				rit.setDatumkort(dc.korteDatum(resultSet.getTimestamp("datum")));
+				rit.setTijd(dc.korteTijd(resultSet.getTimestamp("datum")));
 				ritten.add(rit);
 			}
 		} finally {

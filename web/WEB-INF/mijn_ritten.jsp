@@ -53,6 +53,7 @@ Document : mijn_ritten
                                 <td><img src ="images/pijl.jpg" /></td>
                                 <td>${rit.eindpunt}</td>
                                 <td>${rit.prijs}</td>
+								<td>${rit.datumkort} ${rit.tijd}</td>
                                 <td><button onclick="window.location = 'RitWijzigen?ritnr=${rit.ritnr}';"><fmt:message bundle="${rb}" key="ritwijzigen" /></button></td>
                                 
                                 </tr> 
