@@ -209,6 +209,9 @@
                             <td></td>
                             <td></td>
                             <td></td>
+                            
+                          
+                            
                         </tr>
                         <tr>
                             <td><button type ="submit"><fmt:message bundle="${rb}" key="wijzigen" /></button></td>

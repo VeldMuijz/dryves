@@ -61,6 +61,9 @@
                 </div>
             </c:if>
             
+            <a href="WijzigTaal?land=NL&lidnr=${currentSessionUser.lidnr}"> <img src="images/nl_NL.png" /></a>
+            <a href="WijzigTaal?land=EN&lidnr=${currentSessionUser.lidnr}"> <img src="images/en_EN.png" /></a>
+              
          
         </div>
 

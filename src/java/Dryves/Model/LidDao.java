@@ -546,6 +546,13 @@ public class LidDao {
 		return bean;
 	}
 
+        
+      
+        
+        
+        
+        
+        
 	public Lid loginFacebook(String facebookid) {
 
 		Connection con = Dryves.ConnectionManager.getConnection();
@@ -667,8 +674,40 @@ public class LidDao {
     }
        
         
+        // met deze functie wijzigen we de taal instellingen
+        // en= Engels nl= Nederlands
+        public void wijzigtaal(String taal, int lidnr){
+        
+            try {
+			currentCon = ConnectionManager.getConnection();
+
+			PreparedStatement updateLid;
+			String queryString = ("UPDATE lid "
+					+ "SET"
+					+ " langnotify = ?"
+					
+					+ " WHERE lidnr = ?");
+
+			updateLid = currentCon.prepareStatement(queryString);
+
+			updateLid.setString(1, taal);
+                        updateLid.setInt(2, lidnr);
+			
+
+			System.out.println("De query is: " + updateLid);
+
+			updateLid.executeUpdate();
+
+		} catch (SQLException ex) {
+			Logger.getLogger(LidDao.class.getName()).log(Level.SEVERE, null, ex);
+
+		}
+
+		
+            
         
         
+        }
 
 	private static Locale toString(String locale) {
 		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
