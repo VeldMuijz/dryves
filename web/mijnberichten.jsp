@@ -69,6 +69,8 @@
 								
 									<td><button onclick="window.location = 'BerichtLezen?berichtid=${bericht.berichtid}';"><fmt:message bundle="${rb}" key="bekijkbericht" /></button></td>
 									<c:set var="counter" value="${counter + 1 }"/>
+                                                                        
+                                                                      
 
 									</tr> 
 

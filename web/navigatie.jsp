@@ -23,6 +23,8 @@
     <c:choose>
         <c:when test="${currentSessionUser.lidnr > 0}"> 
             <button onclick="window.location = 'index.jsp';" <% if (request.getParameter("menu_active").equals("home")) {%> class="active" <% }%> >Home</button><button onclick="window.location = 'watisdryves.jsp';" <% if (request.getParameter("menu_active").equals("watisdryves")) {%> class="active" <% }%> ><fmt:message bundle="${rb}" key="watisdryvesnav" /></button><button onclick="window.location = 'faq.jsp';" <% if (request.getParameter("menu_active").equals("faq")) {%> class="active" <% }%> >FAQ</button><button onclick="window.location = '/Dryves/MijnDryves';" <% if (request.getParameter("menu_active").equals("mijndryves")) {%> class="active" <% }%> ><fmt:message bundle="${rb}" key="mijndryvesnav" /></button>
+            <a href="WijzigTaal?land=NL&lidnr=${currentSessionUser.lidnr}"> <img src="images/nl_NL.png" /></a>
+            <a href="WijzigTaal?land=EN&lidnr=${currentSessionUser.lidnr}"> <img src="images/en_EN.png" /></a>
         </c:when>
         <c:otherwise>
             <button onclick="window.location = 'index.jsp';" <% if (request.getParameter("menu_active").equals("home")) {%> class="active" <% }%> >Home</button><button onclick="window.location = 'watisdryves.jsp';" <% if (request.getParameter("menu_active").equals("watisdryves")) {%> class="active" <% }%> ><fmt:message bundle="${rb}" key="watisdryvesnav" /></button><button onclick="window.location = 'faq.jsp';" <% if (request.getParameter("menu_active").equals("faq")) {%> class="active" <% }%> >FAQ</button><button onclick="window.location = 'registratie.jsp';" <% if (request.getParameter("menu_active").equals("registratie")) {%> class="active" <% }%> ><fmt:message bundle="${rb}" key="registreernav" /></button><button  class="loginButton" onclick="window.location = 'login.jsp';">Login</button>
@@ -47,11 +49,13 @@
        int aantalberichten= berichtDao.statusbalk(lidnr);  %>
   <% out.println( aantalberichten );  %></a><fmt:message bundle="${rb}" key="nieuweberichtennav" /><br/> 
                 <a href="Uitloggen" style="float: right;"><fmt:message bundle="${rb}" key="uitlognav" /></a>
+                
+           
             </div>
 
         </div>
     </c:if>
-
+            
 </div>
 
             <div class="contentPanel">

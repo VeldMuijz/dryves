@@ -172,7 +172,7 @@ public class BerichtenDao {
 			System.out.println("Lidnummer:" + lidnummer);
 			currentCon = ConnectionManager.getConnection();
 			PreparedStatement HaalAlleBerichten;
-			String queryString = "SELECT * FROM berichten WHERE lidnr=?;";
+			String queryString = "SELECT * FROM berichten WHERE lidnr=? ORDER BY datum DESC;";
 			//String queryString = "select berichtnr, DATUM ,ritnm,gelezen from BERICHTEN  where lidnr=?;";
 
 			HaalAlleBerichten = currentCon.prepareStatement(queryString);
