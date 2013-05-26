@@ -232,7 +232,7 @@ public class BerichtenDao {
 		PreparedStatement statement = null;
 		ResultSet resultSet = null;
 		List<Berichten> berichtlijst = new ArrayList<Berichten>();
-
+		DatumConverter dc = new DatumConverter();
 		try {
 
 			currentCon = ConnectionManager.getConnection();
@@ -248,6 +248,8 @@ public class BerichtenDao {
 				bericht.setBerichtid(resultSet.getInt(1));
 				bericht.setInhoud(resultSet.getString(2));
 				bericht.setDatum(resultSet.getTimestamp(3));
+				bericht.setStringDatum(dc.korteDatum(bericht.getDatum()));
+				bericht.setStringTijd(dc.korteTijd(bericht.getDatum()));
 
 				bericht.setRitnr(resultSet.getInt(4));
 				bericht.setLidnr(resultSet.getInt(5));
