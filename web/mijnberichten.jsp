@@ -65,7 +65,9 @@
 									<td	>Bericht van: ${afzender[counter].vnaam} ${afzender[counter].anaam} <br/> <fmt:message bundle="${rb}" key="datum" />  ${bericht.stringDatum} ${bericht.stringTijd}</td>
 									<td></td>  
 									<td><button onclick="window.location = 'BerichtLezen?berichtid=${bericht.berichtid}';"><fmt:message bundle="${rb}" key="bekijkbericht" /></button></td>
-										<c:set var="counter" value="${counter + 1 }"/>
+									<c:set var="counter" value="${counter + 1 }"/>
+                                                                        
+                                                                      
 
 
 								</table>
