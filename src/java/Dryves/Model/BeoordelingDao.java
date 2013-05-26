@@ -158,14 +158,8 @@ public class BeoordelingDao {
 			System.out.println("+++++++++++++BeoordelingAanmaken+++++++++++++++\n  Query = " + beoordeelLid + "\n");
 			beoordeelLid.executeUpdate();
 
-
-
-
 		} catch (SQLException ex) {
-			Logger.getLogger(LidDao.class
-					.getName()).log(Level.SEVERE, null, ex);
-
-
+			Logger.getLogger(LidDao.class.getName()).log(Level.SEVERE, null, ex);
 			return false;
 		}
 		return true;
