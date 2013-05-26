@@ -39,23 +39,33 @@ Document : mijn_ritten
 
 
 
-            <div class="contentPanel">         
+            <div class="contentPanel">
+				<c:choose>
+					<c:when test="${empty beoordelingen}"> 
+						<h2>U bent nog niet beoordeeld</h2>
+						<p>Kom hier later nog eens terug</p>
+					</c:when>
+					<c:otherwise>
+						<c:set var="counter" value="0"/>
+						<c:forEach items="${beoordelingen}" var="beoordeling">
+							<div class="rittenlijst">
 
-                <c:forEach items="${beoordelingen}" var="beoordeling">
-                    <div class="rittenlijst">
+								<table>
+									<tr><td>Beoordeeld door: </td> <td> ${beoordelaars[counter].vnaam} ${beoordelaars[counter].tvoegsel} ${beoordelaars[counter].anaam}</tr>
+									<tr><td>Gezelligheid: </td> <td>${beoordeling.gezelligheid}</td></tr>
+									<tr><td>Rijstijl: </td><td>${beoordeling.rijstijl}</td></tr>
+									<tr><td>Betrouwbaarheid: </td><td>${beoordeling.betrouwbaarheid}</td> </tr>
+									<tr><td>Stiptheid: </td><td>${beoordeling.stiptheid}</td></tr>
+									<tr><td>Commentaar: </td><td>${beoordeling.commentaar}</td></tr>
+									<tr style="font-size: 25px;"><td>Eindbeoordeling: </td><td>${beoordeling.waardering}</td></tr>
+								</table>
 
-                        <table>
-							<tr><td>Gezelligheid: ${beoordeling.gezelligheid}</td></tr>
-							<tr><td>Rijstijl: ${beoordeling.rijstijl}</td></tr>
-                            <tr><td>Betrouwbaarheid: ${beoordeling.betrouwbaarheid}</td> </tr>
-							<tr><td>Stiptheid: ${beoordeling.stiptheid}</td></tr>
-							<tr><td>Commentaar: ${beoordeling.commentaar}</td></tr>
-							<tr><td>Eindbeoordeling: ${beoordeling.waardering}</td></tr>
-                        </table>
+							</div>
+							<c:set var="counter" value="${counter + 1 }"/>
+						</c:forEach>
 
-                    </div>
-                </c:forEach>
-
+					</c:otherwise>
+				</c:choose>
 
             </div>
         </div>

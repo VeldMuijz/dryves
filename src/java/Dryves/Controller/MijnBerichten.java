@@ -43,9 +43,6 @@ public class MijnBerichten extends HttpServlet {
 
 		// Haal de huidige sessie op
 		HttpSession session = request.getSession();
-		// Maak in de sessie een object rit aan met naam sessieRit
-
-		// session.setAttribute("sessieRit", berichten);
 		//Haal de userbean (dit moet sessiebean worden) op uit de sessie
 		Lid user = (Lid) session.getAttribute("currentSessionUser");
 
@@ -56,19 +53,18 @@ public class MijnBerichten extends HttpServlet {
 			ArrayList<Lid> afzender = new ArrayList<Lid>();
 
 			bericht = berichtendao.haalberichten(userid);
-				request.setAttribute("berichten", bericht);
+			request.setAttribute("berichten", bericht);
 
 			for (int i = 0; i < bericht.size(); i++) {
 				Berichten berichtobject;
 				berichtobject = bericht.get(i);
-
-				System.out.println("berichtobject Afzender = " + berichtobject.getAfzender());
-//				System.out.println("soutje van berichtendao.afzender(berichtobject.getAfzender())" + berichtendao.afzender(berichtobject.getAfzender(), afzenderObject));
 				int afzenderint;
+				System.out.println("berichtobject Afzender = " + berichtobject.getAfzender());
+
 				afzenderint = berichtobject.getAfzender();
-				
+
 				afzender.add(berichtendao.afzender(afzenderint));
-				System.out.println("dit is i =" +i);
+				System.out.println("dit is i =" + i);
 			}
 			request.setAttribute("afzender", afzender);
 
@@ -85,7 +81,6 @@ public class MijnBerichten extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-	
 	}
 
 	/**

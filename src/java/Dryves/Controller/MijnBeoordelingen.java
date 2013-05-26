@@ -7,8 +7,10 @@ package Dryves.Controller;
 import Dryves.Model.Beoordeling;
 import Dryves.Model.BeoordelingDao;
 import Dryves.Model.Lid;
+import Dryves.Model.LidDao;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -40,16 +42,29 @@ public class MijnBeoordelingen extends HttpServlet {
 		// Instantieren van objecten
 		Beoordeling beoordeling = new Beoordeling();
 		BeoordelingDao beoordelingDao = new BeoordelingDao();
-
+		LidDao lidDao = new LidDao();
+		Lid beoordelaar = new Lid();
 		// Haal de huidige sessie op
 		HttpSession session = request.getSession();
-
 		//Haal de userbean (dit moet sessiebean worden) op uit de sessie
 		Lid user = (Lid) session.getAttribute("currentSessionUser");
+		
 		try {
+			ArrayList<Lid> beoordelaars = new ArrayList<Lid>();
 			List<Beoordeling> beoordelingen;
 			beoordelingen = beoordelingDao.getAlleBeoordelingenPerLid(user.getLidnr());
 			request.setAttribute("beoordelingen", beoordelingen);
+			
+			for(int i = 0; i < beoordelingen.size(); i++){
+				Beoordeling beoordeel;
+				beoordeel =	beoordelingen.get(i);
+				
+				lidDao.enkelLidOphalen(beoordeel.getLidnr(), beoordelaar);
+				
+				beoordelaars.add(beoordelaar);
+				
+			}
+			request.setAttribute("beoordelaars", beoordelaars);
 			
 		} catch (SQLException ex) {
 			Logger.getLogger(MijnBeoordelingen.class.getName()).log(Level.SEVERE, null, ex);
