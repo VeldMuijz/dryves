@@ -42,8 +42,7 @@ Document : mijn_ritten
             <div class="contentPanel">
 				<c:choose>
 					<c:when test="${empty beoordelingen}"> 
-						<h2>U bent nog niet beoordeeld</h2>
-						<p>Kom hier later nog eens terug</p>
+						<fmt:message bundle="${rb}" key="geenbeoordeling" />
 					</c:when>
 					<c:otherwise>
 						<c:set var="counter" value="0"/>
@@ -52,14 +51,14 @@ Document : mijn_ritten
 							<div class="rittenlijst">
 
 								<table>
-									<tr><td>Beoordeeld door: </td> <td> ${beoordelaars[counter].vnaam} ${beoordelaars[counter].tvoegsel} ${beoordelaars[counter].anaam}</tr>
-									<tr><td>Beoordeeld op: </td> <td>${beoordeling.korteDatum} ${beoordeling.korteTijd}</td></tr>
-									<tr><td>Gezelligheid: </td> <td>${beoordeling.gezelligheid}</td></tr>
-									<tr><td>Rijstijl: </td><td>${beoordeling.rijstijl}</td></tr>
-									<tr><td>Betrouwbaarheid: </td><td>${beoordeling.betrouwbaarheid}</td> </tr>
-									<tr><td>Stiptheid: </td><td>${beoordeling.stiptheid}</td></tr>
-									<tr><td>Commentaar: </td><td>${beoordeling.commentaar}</td></tr>
-									<tr style="font-size: 25px;"><td>Eindbeoordeling: </td><td>${beoordeling.waardering}</td></tr>
+									<tr><td><fmt:message bundle="${rb}" key="beoordeelddoor" /></td> <td> ${beoordelaars[counter].vnaam} ${beoordelaars[counter].tvoegsel} ${beoordelaars[counter].anaam}</tr>
+									<tr><td><fmt:message bundle="${rb}" key="beoordeeldop" /></td> <td>${beoordeling.korteDatum} ${beoordeling.korteTijd}</td></tr>
+									<tr><td><fmt:message bundle="${rb}" key="gezelligheid" /></td> <td>${beoordeling.gezelligheid}</td></tr>
+									<tr><td><fmt:message bundle="${rb}" key="rijstijl" /></td><td>${beoordeling.rijstijl}</td></tr>
+									<tr><td><fmt:message bundle="${rb}" key="betrouwbaarheid" /></td><td>${beoordeling.betrouwbaarheid}</td> </tr>
+									<tr><td><fmt:message bundle="${rb}" key="stiptheid" /></td><td>${beoordeling.stiptheid}</td></tr>
+									<tr><td><fmt:message bundle="${rb}" key="opmerking" /></td><td>${beoordeling.commentaar}</td></tr>
+									<tr style="font-size: 25px;"><td><fmt:message bundle="${rb}" key="eindbeoordeling" /></td><td>${beoordeling.waardering}</td></tr>
 								</table>
 
 							</div>
