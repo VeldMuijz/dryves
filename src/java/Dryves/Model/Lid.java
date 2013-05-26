@@ -27,7 +27,7 @@ public class Lid  implements java.io.Serializable {
      private String email;
      private String wachtwoord;
      private String wachtwoord2;
-     private int beoordeling;
+     private double beoordeling;
      private String fotoUrl;
      private String tvoegsel;
      private Hashtable errors;
@@ -51,7 +51,7 @@ public class Lid  implements java.io.Serializable {
     
 
 	
-    public Lid(int lidnr, String vnaam, String anaam, String geslacht, String straat, String huisnummer, String reknr, String telnr, String postcode, String stad, String email, String wachtwoord, String wachtwoord2, int beoordeling, String fotoUrl, String tvoegsel, String langnotify, int rol) {
+    public Lid(int lidnr, String vnaam, String anaam, String geslacht, String straat, String huisnummer, String reknr, String telnr, String postcode, String stad, String email, String wachtwoord, String wachtwoord2, double beoordeling, String fotoUrl, String tvoegsel, String langnotify, int rol) {
         this.lidnr = lidnr;
         this.vnaam = vnaam;
         this.anaam = anaam;
@@ -268,11 +268,11 @@ public class Lid  implements java.io.Serializable {
     public void setWachtwoord2(String wachtwoord) {
         this.wachtwoord2 = wachtwoord;
     }
-    public int getBeoordeling() {
+    public double getBeoordeling() {
         return this.beoordeling;
     }
     
-    public void setBeoordeling(int beoordeling) {
+    public void setBeoordeling(double beoordeling) {
         this.beoordeling = beoordeling;
     }
     public String getFotoUrl() {

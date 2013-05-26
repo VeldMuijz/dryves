@@ -153,7 +153,7 @@ public class LidDao {
 					bean.setTelnr(rs.getString(8));
 					bean.setReknr(rs.getString(9));
 					bean.setEmail(rs.getString(10));
-					bean.setBeoordeling(rs.getInt(11));
+					bean.setBeoordeling(rs.getDouble(11));
 					bean.setFotoUrl(rs.getString(12));
 					bean.setTvoegsel(rs.getString(13));;
 					bean.setWachtwoord(rs.getString(14));

@@ -49,6 +49,7 @@ public class MijnBeoordelingen extends HttpServlet {
 		//Haal de userbean (dit moet sessiebean worden) op uit de sessie
 		Lid user = (Lid) session.getAttribute("currentSessionUser");
 		
+		
 		try {
 			ArrayList<Lid> beoordelaars = new ArrayList<Lid>();
 			List<Beoordeling> beoordelingen;

@@ -47,6 +47,7 @@ Document : mijn_ritten
 					</c:when>
 					<c:otherwise>
 						<c:set var="counter" value="0"/>
+						Jouw huidige beoordeling door andere leden: <div>${currentSessionUser.beoordeling}
 						<c:forEach items="${beoordelingen}" var="beoordeling">
 							<div class="rittenlijst">
 
