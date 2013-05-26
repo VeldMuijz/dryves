@@ -1,0 +1,65 @@
+<%-- 
+Document : mijn_ritten
+ Created on : 15-apr-2013, 21:23:53
+ Author : Vincent
+--%>
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+
+<fmt:setLocale value="${locale}" />
+
+<fmt:setBundle basename="ResourceBundles.Dryves" scope="request" var="rb" />
+<!DOCTYPE html> 
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link type="text/css" rel="stylesheet" href="css/dryver.css"/>
+        <title>Mijn beoordelingen</title>
+
+    </head>
+    <body>
+
+
+        <div class="background">
+
+            <img src="${currentSessionUser.getAchtergrond()}" />
+
+        </div>
+        <div class="drvyesWrapper">
+            <div class="logo">    
+                <img src="images/Logo_Dryves.png" />
+            </div>
+			<jsp:include page="navigatie.jsp" flush="true">
+                <jsp:param name="menu_active" value="mijndryves"></jsp:param>
+            </jsp:include>
+
+
+
+
+            <div class="contentPanel">         
+
+                <c:forEach items="${beoordelingen}" var="beoordeling">
+                    <div class="rittenlijst">
+
+                        <table>
+							<tr><td>Gezelligheid: ${beoordeling.gezelligheid}</td></tr>
+							<tr><td>Rijstijl: ${beoordeling.rijstijl}</td></tr>
+                            <tr><td>Betrouwbaarheid: ${beoordeling.betrouwbaarheid}</td> </tr>
+							<tr><td>Stiptheid: ${beoordeling.stiptheid}</td></tr>
+							<tr><td>Commentaar: ${beoordeling.commentaar}</td></tr>
+							<tr><td>Eindbeoordeling: ${beoordeling.waardering}</td></tr>
+                        </table>
+
+                    </div>
+                </c:forEach>
+
+
+            </div>
+        </div>
+
+
+    </body>
+</html>

@@ -5,9 +5,13 @@
 package Dryves.Model;
 
 import Dryves.ConnectionManager;
-import static Dryves.Model.LidDao.currentCon;
+import Dryves.DatumConverter;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -17,6 +21,7 @@ import java.util.logging.Logger;
  */
 public class BeoordelingDao {
 
+	static Connection currentCon;
 	private int beoordelingnr;
 	private int waardering;
 	private int stiptheid;
@@ -41,6 +46,83 @@ public class BeoordelingDao {
 		return bean;
 	}
 
+	/**
+	 * Haal een lijst van beoordelingen per lid op
+	 *	 
+	 * @return
+	 * @throws SQLException
+	 */
+	public List<Beoordeling> getAlleBeoordelingenPerLid(int lidnr) throws SQLException {
+		ResultSet resultSet = null;
+		List<Beoordeling> beoordelingen = new ArrayList<Beoordeling>();
+		DatumConverter dc = new DatumConverter();
+		currentCon = ConnectionManager.getConnection();
+		PreparedStatement getBeoordelingen = null;
+		String queryString = ""
+				+ "SELECT b.*, l.* "
+				+ "FROM beoordeling as b, aankoop as a, rit as r, lid as l "
+				+ "WHERE b.aankoopnr = a.aankoopnr "
+				+ "AND a.ritnr = r.ritnr "
+				+ "AND b.lidnr = l.lidnr "
+				+ "AND r.lidnr = ?;";
+
+		try {
+			getBeoordelingen = currentCon.prepareStatement(queryString);
+			getBeoordelingen.setInt(1, lidnr);
+			resultSet = getBeoordelingen.executeQuery();
+
+			while (resultSet.next()) {
+				Beoordeling beoordeling = new Beoordeling();
+				beoordeling.setBetrouwbaarheid(resultSet.getInt("betrouwbaarheid"));
+				beoordeling.setCommentaar(resultSet.getString("commentaar"));
+				beoordeling.setGezelligheid(resultSet.getInt("gezelligheid"));
+				beoordeling.setLidnr(resultSet.getInt("lidnr"));
+				beoordeling.setRijstijl(resultSet.getInt("rijstijl"));
+				beoordeling.setStiptheid(resultSet.getInt("stiptheid"));
+				beoordeling.setWaardering(resultSet.getInt("waardering"));
+
+				//zet alles in de beoordelingen array
+				beoordelingen.add(beoordeling);
+			}
+		} catch (SQLException ex) {
+			Logger.getLogger(RitDao.class.getName()).log(Level.SEVERE, null, ex);
+
+		} finally {
+			if (resultSet != null) {
+				try {
+					resultSet.close();
+				} catch (SQLException ignore) {
+				}
+			}
+			if (getBeoordelingen != null) {
+				try {
+					getBeoordelingen.close();
+				} catch (SQLException ignore) {
+				}
+			}
+			if (currentCon != null) {
+				try {
+					currentCon.close();
+				} catch (SQLException ignore) {
+				}
+			}
+		}
+
+		return beoordelingen;
+	}
+
+	/**
+	 *
+	 * @param waardering
+	 * @param stiptheid
+	 * @param rijstijl
+	 * @param gezelligheid
+	 * @param betrouwbaarheid
+	 * @param commentaar
+	 * @param lidnr
+	 * @param aankoopnr
+	 * @return
+	 */
 	public Boolean beoordelingAanmaken(int waardering, int stiptheid, int rijstijl, int gezelligheid, int betrouwbaarheid, String commentaar, int lidnr, int aankoopnr) {
 		try {
 			currentCon = ConnectionManager.getConnection();
@@ -70,8 +152,15 @@ public class BeoordelingDao {
 
 			System.out.println("+++++++++++++BeoordelingAanmaken+++++++++++++++\n  Query = " + beoordeelLid + "\n");
 			beoordeelLid.executeUpdate();
+
+
+
+
 		} catch (SQLException ex) {
-			Logger.getLogger(LidDao.class.getName()).log(Level.SEVERE, null, ex);
+			Logger.getLogger(LidDao.class
+					.getName()).log(Level.SEVERE, null, ex);
+
+
 			return false;
 		}
 		return true;

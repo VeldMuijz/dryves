@@ -4,14 +4,14 @@
  */
 package Dryves.Controller;
 
-import Dryves.Model.Berichten;
-import Dryves.Model.BerichtenDao;
+import Dryves.Model.Beoordeling;
+import Dryves.Model.BeoordelingDao;
 import Dryves.Model.Lid;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -21,9 +21,9 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author H
+ * @author jeroen
  */
-public class MijnBerichten extends HttpServlet {
+public class MijnBeoordelingen extends HttpServlet {
 
 	/**
 	 * Handles the HTTP
@@ -38,54 +38,40 @@ public class MijnBerichten extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// Instantieren van objecten
-		Berichten berichten = new Berichten();
-		BerichtenDao berichtendao = new BerichtenDao();
+		Beoordeling beoordeling = new Beoordeling();
+		BeoordelingDao beoordelingDao = new BeoordelingDao();
 
 		// Haal de huidige sessie op
 		HttpSession session = request.getSession();
-		// Maak in de sessie een object rit aan met naam sessieRit
 
-		// session.setAttribute("sessieRit", berichten);
 		//Haal de userbean (dit moet sessiebean worden) op uit de sessie
 		Lid user = (Lid) session.getAttribute("currentSessionUser");
-
-
 		try {
-			List<Berichten> bericht;
-			int userid = user.getLidnr();
-			ArrayList<Lid> afzender = new ArrayList<Lid>();
-
-			bericht = berichtendao.haalberichten(userid);
-				request.setAttribute("berichten", bericht);
-
-			for (int i = 0; i < bericht.size(); i++) {
-				Berichten berichtobject;
-				berichtobject = bericht.get(i);
-
-				System.out.println("berichtobject Afzender = " + berichtobject.getAfzender());
-//				System.out.println("soutje van berichtendao.afzender(berichtobject.getAfzender())" + berichtendao.afzender(berichtobject.getAfzender(), afzenderObject));
-				int afzenderint;
-				afzenderint = berichtobject.getAfzender();
-				
-				afzender.add(berichtendao.afzender(afzenderint));
-				System.out.println("dit is i =" +i);
-			}
-			request.setAttribute("afzender", afzender);
-
-			RequestDispatcher dispatcher = request.getRequestDispatcher("mijnberichten.jsp");
-			dispatcher.forward(request, response);
-
-		} catch (SQLException e) {
-			throw new ServletException("Kan gegevens niet ophalen van database.", e);
-
+			List<Beoordeling> beoordelingen;
+			beoordelingen = beoordelingDao.getAlleBeoordelingenPerLid(user.getLidnr());
+			request.setAttribute("beoordelingen", beoordelingen);
+			
+		} catch (SQLException ex) {
+			Logger.getLogger(MijnBeoordelingen.class.getName()).log(Level.SEVERE, null, ex);
+			throw new ServletException("Kan gegevens niet ophalen uit database", ex);
 		}
-
+//		response.sendRedirect("WEB-INF/mijnbeoordelingen.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/mijnbeoordelingen.jsp");
+			dispatcher.forward(request, response);
 	}
 
+	/**
+	 * Handles the HTTP
+	 * <code>POST</code> method.
+	 *
+	 * @param request servlet request
+	 * @param response servlet response
+	 * @throws ServletException if a servlet-specific error occurs
+	 * @throws IOException if an I/O error occurs
+	 */
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-	
 	}
 
 	/**
