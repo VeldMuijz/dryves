@@ -4,6 +4,8 @@
  */
 package Dryves.Model;
 
+import java.sql.Timestamp;
+
 /**
  *
  * @author jeroen
@@ -19,6 +21,10 @@ public class Beoordeling {
 	private String commentaar;
 	private int lidnr;
 	private int aankoopnr;
+	private Timestamp datum;
+	private String korteDatum;
+	private String korteTijd;
+	
 
 	public Beoordeling() {
 	}
@@ -94,4 +100,29 @@ public class Beoordeling {
 	public void setAankoopnr(int aankoopnr) {
 		this.aankoopnr = aankoopnr;
 	}
+
+	public Timestamp getDatum() {
+		return datum;
+	}
+
+	public void setDatum(Timestamp datum) {
+		this.datum = datum;
+	}
+
+	public String getKorteDatum() {
+		return korteDatum;
+	}
+
+	public void setKorteDatum(String korteDatum) {
+		this.korteDatum = korteDatum;
+	}
+
+	public String getKorteTijd() {
+		return korteTijd;
+	}
+
+	public void setKorteTijd(String korteTijd) {
+		this.korteTijd = korteTijd;
+	}
+	
 }

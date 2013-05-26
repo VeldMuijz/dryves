@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -31,6 +32,7 @@ public class BeoordelingDao {
 	private String commentaar;
 	private int lidnr;
 	private int aankoopnr;
+	private Timestamp datum;
 
 	public Beoordeling vulBeoordeling(Beoordeling bean) {
 		beoordelingnr = bean.getBeoordelingnr();
@@ -42,6 +44,7 @@ public class BeoordelingDao {
 		commentaar = bean.getCommentaar();
 		lidnr = bean.getLidnr();
 		aankoopnr = bean.getAankoopnr();
+		datum = bean.getDatum();
 
 		return bean;
 	}
@@ -80,7 +83,9 @@ public class BeoordelingDao {
 				beoordeling.setRijstijl(resultSet.getInt("rijstijl"));
 				beoordeling.setStiptheid(resultSet.getInt("stiptheid"));
 				beoordeling.setWaardering(resultSet.getInt("waardering"));
-
+				beoordeling.setDatum(resultSet.getTimestamp("datum"));
+				beoordeling.setKorteDatum(dc.korteDatum(beoordeling.getDatum()));
+				beoordeling.setKorteTijd(dc.korteTijd(beoordeling.getDatum()));
 				//zet alles in de beoordelingen array
 				beoordelingen.add(beoordeling);
 			}
@@ -136,9 +141,9 @@ public class BeoordelingDao {
 					+ " betrouwbaarheid,"
 					+ " commentaar,"
 					+ " lidnr,"
-					+ " aankoopnr"
-					+ " ) "
-					+ "VALUES(?,?,?,?,?,?,?,?);";
+					+ " aankoopnr,"
+					+ " datum) "
+					+ "VALUES(?,?,?,?,?,?,?,?, NOW());";
 
 			beoordeelLid = currentCon.prepareStatement(queryString);
 			beoordeelLid.setInt(1, waardering);

@@ -47,12 +47,13 @@ Document : mijn_ritten
 					</c:when>
 					<c:otherwise>
 						<c:set var="counter" value="0"/>
-						Jouw huidige beoordeling door andere leden: <div>${currentSessionUser.beoordeling}
+						<h2>Jouw huidige beoordeling door andere leden: ${currentSessionUser.beoordeling}</h2>
 						<c:forEach items="${beoordelingen}" var="beoordeling">
 							<div class="rittenlijst">
 
 								<table>
 									<tr><td>Beoordeeld door: </td> <td> ${beoordelaars[counter].vnaam} ${beoordelaars[counter].tvoegsel} ${beoordelaars[counter].anaam}</tr>
+									<tr><td>Beoordeeld op: </td> <td>${beoordeling.korteDatum} ${beoordeling.korteTijd}</td></tr>
 									<tr><td>Gezelligheid: </td> <td>${beoordeling.gezelligheid}</td></tr>
 									<tr><td>Rijstijl: </td><td>${beoordeling.rijstijl}</td></tr>
 									<tr><td>Betrouwbaarheid: </td><td>${beoordeling.betrouwbaarheid}</td> </tr>
