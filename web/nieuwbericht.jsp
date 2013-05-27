@@ -79,6 +79,10 @@
 
                                 <input type="hidden" name="ritnr" value="<% out.print(ritnr);%>" />
                                 <input type="hidden" name="lidnr" value="<% out.print(lidnr);%>" />
+                                
+                                <fmt:message bundle="${rb}" key="hieronderbericht" />
+                                
+                                <br /><br />
 
                                 <textarea placeholder="<fmt:message bundle="${rb}" key="schrijfjebericht" />" type="text" name="inhoud" rows="6" style="width:400px; padding: 6px;"></textarea>
 
