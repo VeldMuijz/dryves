@@ -63,7 +63,7 @@
 
 
             <div class="contentPanel">         
-                <input type="button"  value="Inbox" onclick="location.href = 'MijnBerichten'">
+                <button value="Inbox" onclick="location.href = 'MijnBerichten'">Inbox</button>
                 <button id="show"><fmt:message bundle="${rb}" key="berichtbeantwoorden" /></button>
                 <br />
                 <br><br>
@@ -74,29 +74,24 @@
                         <input type="hidden" name="afzender" value="${currentSessionUser.lidnr}"/>
                         <input type="hidden" name="naar" value="${bericht.afzender}"/>
                         <input type="hidden" name="ritnr" value="${bericht.ritnr}"/>
+                        
+                        <textarea placeholder="<fmt:message bundle="${rb}" key="typhieruwbericht" />" type="text" id="beantwoorden" name="inhoud" rows="6" style="width:600px; padding:6px;"></textarea>
 
-                        <br>
-                        <h1><fmt:message bundle="${rb}" key="typhieruwbericht" /></h1><br>
-                        <textarea type="text" id="beantwoorden" name="inhoud" rows="4"></textarea>
-
-                        <br>
+                        <br /><br />
 
                         <button><fmt:message bundle="${rb}" key="berichtverzenden" /></button>
 
 
                     </form>
 
-
-
-
-
-
-                    <h1><fmt:message bundle="${rb}" key="ritnummeris" /> ${bericht.ritnr}</h1>
-                    <p><fmt:message bundle="${rb}" key="lidnr" /> ${bericht.lidnr} </p>
-                    <p><fmt:message bundle="${rb}" key="afzender" /> ${bericht.afzender}</p>                         
+                    <p><fmt:message bundle="${rb}" key="ritnummeris" /> ${bericht.ritnr}</p>
+                    <div class="hidden"><p><fmt:message bundle="${rb}" key="lidnr" /> ${bericht.lidnr} </p>
+                    <p><fmt:message bundle="${rb}" key="afzender" /> ${bericht.afzender}</p> </div> 
+                    
+                    
                     <p><fmt:message bundle="${rb}" key="datum" /> ${bericht.stringDatum} ${bericht.stringTijd} </p> 
 
-                    <p><fmt:message bundle="${rb}" key="bericht" /> ${bericht.inhoud}</p>
+                    <p style="font-size: 12px; font-weight: bold;"><fmt:message bundle="${rb}" key="bericht" /> ${bericht.inhoud}</p>
 
 
                     <p> </p>
