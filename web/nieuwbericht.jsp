@@ -82,11 +82,13 @@
                              
                                 
 
-                                <h1><fmt:message bundle="${rb}" key="schrijfjebericht" /></h1>                        
+                                <fmt:message bundle="${rb}" key="schrijfjebericht" />
+                                
+                                <br /><br />
 
-                                <textarea type="text" name="inhoud" rows="4"></textarea>
+                                <textarea type="text" name="inhoud" rows="6" style="width:400px;"></textarea>
 
-                                <br>
+                                <br /><br />
 
                                 <button><fmt:message bundle="${rb}" key="berichtverzenden" /></button>
 

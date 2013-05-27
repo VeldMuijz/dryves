@@ -63,7 +63,7 @@
 
 
             <div class="contentPanel">         
-                <input type="button"  value="Inbox" onclick="location.href = 'MijnBerichten'">
+                <button value="Inbox" onclick="location.href = 'MijnBerichten'">Inbox</button>
                 <button id="show"><fmt:message bundle="${rb}" key="berichtbeantwoorden" /></button>
                 <br />
                 <br><br>
@@ -86,14 +86,11 @@
 
                     </form>
 
-
-
-
-
-
-                    <h1><fmt:message bundle="${rb}" key="ritnummeris" /> ${bericht.ritnr}</h1>
+<div class="hidden"><p><fmt:message bundle="${rb}" key="ritnummeris" /> ${bericht.ritnr}</p>
                     <p><fmt:message bundle="${rb}" key="lidnr" /> ${bericht.lidnr} </p>
-                    <p><fmt:message bundle="${rb}" key="afzender" /> ${bericht.afzender}</p>                         
+                    <p><fmt:message bundle="${rb}" key="afzender" /> ${bericht.afzender}</p> </div> 
+                    
+                    
                     <p><fmt:message bundle="${rb}" key="datum" /> ${bericht.stringDatum} ${bericht.stringTijd} </p> 
 
                     <p><fmt:message bundle="${rb}" key="bericht" /> ${bericht.inhoud}</p>
