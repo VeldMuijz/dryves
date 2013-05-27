@@ -25,6 +25,47 @@ public class DatumConverter {
 	private String korteDatum;
 	private DateTime timestamp;
 
+	public String longTimeStampKorteDatum(Date datum) {
+
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSSSSS");
+		SimpleDateFormat datumFormat = new SimpleDateFormat("dd/MM/yyyy");
+
+		try {
+			System.out.println(datum);
+			datum = dateFormat.parse(datum.toString());
+			korteDatum = datumFormat.format(datum);
+
+			System.out.println("++++++++++++++DatumConverter+++++++++++++++++\n"
+					+ " Dit is datum na conversie: " + korteDatum);
+
+		} catch (ParseException ex) {
+			Logger.getLogger(RitPlannen.class.getName()).log(Level.SEVERE, null, ex);
+			System.out.println("************ Programma snapt Timestamp niet!");
+		}
+		System.out.println("kortedatum in dc: " + korteDatum);
+		return korteDatum;
+	}
+	
+	public String longTimeStampKorteTijd(Date datum) {
+
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSSSSS");
+		SimpleDateFormat tijdFormat = new SimpleDateFormat("HH:mm");
+
+		try {
+			System.out.println(datum);
+			datum = dateFormat.parse(datum.toString());
+			korteTijd = tijdFormat.format(datum);
+
+			System.out.println("++++++++++++++DatumConverter+++++++++++++++++\n"
+					+ " Dit is tijd na conversie: " + korteTijd);
+
+		} catch (ParseException ex) {
+			Logger.getLogger(RitPlannen.class.getName()).log(Level.SEVERE, null, ex);
+			System.out.println("************ Programma snapt Timestamp niet!");
+		}
+		return korteTijd;
+	}
+	
 	public String korteDatum(Date datum) {
 
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");

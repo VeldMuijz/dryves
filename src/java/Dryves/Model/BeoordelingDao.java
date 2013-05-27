@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -67,7 +68,8 @@ public class BeoordelingDao {
 				+ "WHERE b.aankoopnr = a.aankoopnr "
 				+ "AND a.ritnr = r.ritnr "
 				+ "AND b.lidnr = l.lidnr "
-				+ "AND r.lidnr = ?;";
+				+ "AND r.lidnr = ?"
+				+ "ORDER BY b.datum DESC;";
 
 		try {
 			getBeoordelingen = currentCon.prepareStatement(queryString);
@@ -84,6 +86,7 @@ public class BeoordelingDao {
 				beoordeling.setStiptheid(resultSet.getInt("stiptheid"));
 				beoordeling.setWaardering(resultSet.getInt("waardering"));
 				beoordeling.setDatum(resultSet.getTimestamp("datum"));
+				System.out.println("DATUM: " + beoordeling.getDatum());
 				beoordeling.setKorteDatum(dc.korteDatum(beoordeling.getDatum()));
 				beoordeling.setKorteTijd(dc.korteTijd(beoordeling.getDatum()));
 				//zet alles in de beoordelingen array
@@ -129,6 +132,9 @@ public class BeoordelingDao {
 	 * @return
 	 */
 	public Boolean beoordelingAanmaken(int waardering, int stiptheid, int rijstijl, int gezelligheid, int betrouwbaarheid, String commentaar, int lidnr, int aankoopnr) {
+		Date datum = new Date();
+		Timestamp timestamp = new Timestamp(datum.getTime());
+		
 		try {
 			currentCon = ConnectionManager.getConnection();
 			PreparedStatement beoordeelLid;
@@ -143,7 +149,7 @@ public class BeoordelingDao {
 					+ " lidnr,"
 					+ " aankoopnr,"
 					+ " datum) "
-					+ "VALUES(?,?,?,?,?,?,?,?, NOW());";
+					+ "VALUES(?,?,?,?,?,?,?,?,?);";
 
 			beoordeelLid = currentCon.prepareStatement(queryString);
 			beoordeelLid.setInt(1, waardering);
@@ -154,6 +160,8 @@ public class BeoordelingDao {
 			beoordeelLid.setString(6, commentaar);
 			beoordeelLid.setInt(7, lidnr);
 			beoordeelLid.setInt(8, aankoopnr);
+			System.out.println("timestamp = " + timestamp);
+			beoordeelLid.setTimestamp(9, timestamp);
 
 			System.out.println("+++++++++++++BeoordelingAanmaken+++++++++++++++\n  Query = " + beoordeelLid + "\n");
 			beoordeelLid.executeUpdate();
@@ -161,6 +169,15 @@ public class BeoordelingDao {
 		} catch (SQLException ex) {
 			Logger.getLogger(LidDao.class.getName()).log(Level.SEVERE, null, ex);
 			return false;
+		}
+		finally {
+			
+			if (currentCon != null) {
+				try {
+					currentCon.close();
+				} catch (SQLException ignore) {
+				}
+			}
 		}
 		return true;
 	}
