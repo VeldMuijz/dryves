@@ -24,37 +24,7 @@ import javax.servlet.http.HttpSession;
  */
 public class LidBeoordelen extends HttpServlet {
 
-	/**
-	 * Processes requests for both HTTP
-	 * <code>GET</code> and
-	 * <code>POST</code> methods.
-	 *
-	 * @param request servlet request
-	 * @param response servlet response
-	 * @throws ServletException if a servlet-specific error occurs
-	 * @throws IOException if an I/O error occurs
-	 */
-	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		response.setContentType("text/html;charset=UTF-8");
-		PrintWriter out = response.getWriter();
-		try {
-			/* TODO output your page here. You may use following sample code. */
-			out.println("<!DOCTYPE html>");
-			out.println("<html>");
-			out.println("<head>");
-			out.println("<title>Servlet LidBeoordelen</title>");
-			out.println("</head>");
-			out.println("<body>");
-			out.println("<h1>Servlet LidBeoordelen at " + request.getContextPath() + "</h1>");
-			out.println("</body>");
-			out.println("</html>");
-		} finally {
-			out.close();
-		}
-	}
 
-	// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
 	/**
 	 * Handles the HTTP
 	 * <code>GET</code> method.
@@ -128,10 +98,10 @@ public class LidBeoordelen extends HttpServlet {
 		int betrouwbaarheid = Integer.parseInt(request.getParameter("betrouwbaarheid"));
 		int gezelligheid = Integer.parseInt(request.getParameter("gezelligheid"));
 		int rijstijl = Integer.parseInt(request.getParameter("rijstijl"));
-		int waardering = (stiptheid + betrouwbaarheid + gezelligheid + rijstijl) / 4;
+		double waardering = (stiptheid + betrouwbaarheid + gezelligheid + rijstijl) / 4;
 		
 		String opmerking = request.getParameter("opmerking");
-
+		System.out.println(waardering+","+stiptheid+","+rijstijl+","+gezelligheid+","+betrouwbaarheid+","+opmerking+","+user.getLidnr()+","+aankoopnr);
 		if(beoordelingDao.beoordelingAanmaken(waardering, stiptheid, rijstijl, gezelligheid, betrouwbaarheid, opmerking, user.getLidnr(), aankoopnr)){
 			System.out.println("Beoordeling aangemaakt");
 			response.sendRedirect("MijnAankopen");
@@ -139,10 +109,6 @@ public class LidBeoordelen extends HttpServlet {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/oops.jsp");
 			dispatcher.forward(request, response);
 		}
-		
-		
-
-		
 
 	}
 
@@ -154,5 +120,5 @@ public class LidBeoordelen extends HttpServlet {
 	@Override
 	public String getServletInfo() {
 		return "Short description";
-	}// </editor-fold>
+	}
 }
