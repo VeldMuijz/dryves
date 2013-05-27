@@ -184,6 +184,12 @@
 //}
 
 			google.maps.event.addDomListener(window, 'load', initialize);
+			
+			
+			function redirect() {
+				window.location = 'RitNietKopen';
+			}
+					setTimeout(redirect, 30000);		
 		</script>
     </head>
     <body onload="initialize();">

@@ -81,7 +81,7 @@ Document : mijn_ritten
                                     
                                     <tr>
                                         <td>Prijs: € ${rit.prijs}</td>
-                                        <td></td>
+                                        <td>Ritnr: ${rit.ritnr}</td>
                                         <td></td>
                                         <td></td>
                                     </tr>
@@ -90,12 +90,12 @@ Document : mijn_ritten
                                         <td>${rit.datumkort} ${rit.tijd}</td>
                                         <td></td>
                                         <td></td>
-                                        <td></td>
+                                        <td>Nog ${rit.zitplaatsen} beschikbaar</td>
                                         <td style="float:right;">
                                             <c:choose>
                                                 <c:when test="${currentSessionUser.lidnr > 0}"> 
-                                                    <button onclick="window.location = 'RitKopen?ritnr=${rit.ritnr}';"><fmt:message bundle="${rb}" key="ritkopen" /></button>
-                                                    <button onclick="window.location = 'nieuwbericht.jsp?ritnr=${rit.ritnr}&lidnr=${currentSessionUser.lidnr} ';"><fmt:message bundle="${rb}" key="berichtverzenden" /></button>
+                                                    <button onclick="window.location = 'RitBeschikbaarCheck?ritnr=${rit.ritnr}';"><fmt:message bundle="${rb}" key="ritkopen" /></button>
+												<button onclick="window.location = 'nieuwbericht.jsp?ritnr=${rit.ritnr}&lidnr=${currentSessionUser.lidnr} ';"><fmt:message bundle="${rb}" key="berichtverzenden" /></button>
                                                 </c:when>
                                                 <c:otherwise>
                                                     <button onclick="window.location = 'login.jsp';">Login/registreer <br>om te bekijken</button>

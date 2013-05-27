@@ -20,14 +20,6 @@
         <link type="text/css" rel="stylesheet" href="css/dryver.css"/>
         <title>Mijn berichten</title>
 
- <script type="text/javascript">
-     
-     
-     
-
-
-
- </script>
     </head>
     
     <body>
@@ -102,7 +94,7 @@
                     <h1><fmt:message bundle="${rb}" key="ritnummeris" /> ${bericht.ritnr}</h1>
                     <p><fmt:message bundle="${rb}" key="lidnr" /> ${bericht.lidnr} </p>
                     <p><fmt:message bundle="${rb}" key="afzender" /> ${bericht.afzender}</p>                         
-                    <p><fmt:message bundle="${rb}" key="datum" /> ${bericht.datum}</p> 
+                    <p><fmt:message bundle="${rb}" key="datum" /> ${bericht.stringDatum} ${bericht.stringTijd} </p> 
 
                     <p><fmt:message bundle="${rb}" key="bericht" /> ${bericht.inhoud}</p>
 

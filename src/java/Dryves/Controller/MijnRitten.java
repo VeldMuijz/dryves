@@ -29,37 +29,6 @@ import javax.servlet.http.HttpSession;
 public class MijnRitten extends HttpServlet {
 
 	/**
-	 * Processes requests for both HTTP
-	 * <code>GET</code> and
-	 * <code>POST</code> methods.
-	 *
-	 * @param request servlet request
-	 * @param response servlet response
-	 * @throws ServletException if a servlet-specific error occurs
-	 * @throws IOException if an I/O error occurs
-	 */
-	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		response.setContentType("text/html;charset=UTF-8");
-		PrintWriter out = response.getWriter();
-		try {
-			/* TODO output your page here. You may use following sample code. */
-			out.println("<!DOCTYPE html>");
-			out.println("<html>");
-			out.println("<head>");
-			out.println("<title></title>");
-			out.println("</head>");
-			out.println("<body>");
-			out.println("<h1></h1>");
-			out.println("</body>");
-			out.println("</html>");
-		} finally {
-			out.close();
-		}
-	}
-
-	// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-	/**
 	 * Handles the HTTP
 	 * <code>GET</code> method.
 	 *
@@ -71,15 +40,14 @@ public class MijnRitten extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		//processRequest(request, response);
-// Instantieren van objecten
+		// Instantieren van objecten
 		Rit rit = new Rit();
 		RitDao ritDao = new RitDao();
-// Haal de huidige sessie op
+		// Haal de huidige sessie op
 		HttpSession session = request.getSession();
-// Maak in de sessie een object rit aan met naam sessieRit
+		// Maak in de sessie een object rit aan met naam sessieRit
 		session.setAttribute("sessieRit", rit);
-//Haal de userbean (dit moet sessiebean worden) op uit de sessie
+		//Haal de userbean (dit moet sessiebean worden) op uit de sessie
 		Lid user = (Lid) session.getAttribute("currentSessionUser");
 		try {
 			List<Rit> ritten;
@@ -91,7 +59,7 @@ public class MijnRitten extends HttpServlet {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/mijn_ritten.jsp");
 			dispatcher.forward(request, response);
 		} catch (SQLException e) {
-			throw new ServletException("Cannot obtain products from DB", e);
+			throw new ServletException("Kan gegevens niet ophalen uit database", e);
 		}
 
 	}
@@ -108,7 +76,6 @@ public class MijnRitten extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		processRequest(request, response);
 	}
 
 	/**
@@ -119,5 +86,5 @@ public class MijnRitten extends HttpServlet {
 	@Override
 	public String getServletInfo() {
 		return "Short description";
-	}// </editor-fold>
+	}
 }
