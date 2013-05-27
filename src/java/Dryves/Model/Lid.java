@@ -315,7 +315,7 @@ public class Lid  implements java.io.Serializable {
         return Locale;
     }
 
-    void setLocale(String locale) {
+    public void setLocale(String locale) {
         this.locale = new Locale(locale);
     }
     
