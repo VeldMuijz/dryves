@@ -13,6 +13,9 @@ Document : mijn_ritten
 <%@page import="Dryves.Model.Lid"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<fmt:setLocale value="${locale}" />
+
+<fmt:setBundle basename="ResourceBundles.Dryves" scope="request" var="rb" />
 <!DOCTYPE html> 
 <html>
     <head>
@@ -112,7 +115,7 @@ Document : mijn_ritten
 
                                     </td>
                                     <td>
-                                        Lid nummer:<% out.println(rs.getString(1));%>, Aankoopnummer:<% out.println(rs.getString(3));%>   Datum: <% out.println(rs.getString(3));%> 
+                                        <fmt:message bundle="${rb}" key="lidnr" /><% out.println(rs.getString(1));%>, <fmt:message bundle="${rb}" key="aankoopnummer" /><% out.println(rs.getString(3));%>   <fmt:message bundle="${rb}" key="datum" /> <% out.println(rs.getString(3));%> 
 
 
 
@@ -120,8 +123,8 @@ Document : mijn_ritten
                                     </td>
                                     <% }%>
 
-                                    <td><button value="lidnr" name="lidnr" > Verstuur bericht</button></td>
-                                    <td><button onclick="window.location = 'RitKopen?ritnr=${rit.ritnr}';"> geen</button></td>
+                                    <td><button value="lidnr" name="lidnr" > <fmt:message bundle="${rb}" key="verstuurbericht" /></button></td>
+                                    <td><button onclick="window.location = 'RitKopen?ritnr=${rit.ritnr}';"> <fmt:message bundle="${rb}" key="geen" /></button></td>
                                 </tr> 
 
                             </table>

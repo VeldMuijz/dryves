@@ -85,7 +85,6 @@ public class AankoopDao {
 			
 			if(resultSet.next()){
 				System.out.println("resultSet = " + resultSet.getInt("aankoopnr"));
-				System.out.println("resultSet = leeg dus gebruiker mag niet beoordelen");
 				check = true;
 			}
 			
