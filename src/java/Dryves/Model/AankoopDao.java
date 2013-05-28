@@ -193,6 +193,7 @@ public class AankoopDao {
 				aankoop.setStringTijd(dc.korteTijd(rs.getTimestamp("datum")));
 				aankoop.setDatum(rs.getTimestamp("datum"));
 				aankoop.setLidnr(rs.getInt("lidnr"));
+				aankoop.setBeoordeeld(rs.getInt("beoordeeld"));
 
 				aankooplijst.add(aankoop);
 

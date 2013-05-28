@@ -37,9 +37,6 @@ Document : mijn_ritten
               <jsp:param name="menu_active" value="mijndryves"></jsp:param>
               </jsp:include>
 
-
-
-
             <div class="contentPanel">         
                 
                 <c:forEach items="${aankopen}" var="aankoop">
@@ -50,7 +47,17 @@ Document : mijn_ritten
 								<td><fmt:message bundle="${rb}" key="factuurnummer" /> ${aankoop.factuurnr}</td>
 								<td><fmt:message bundle="${rb}" key="ritnummer" /> ${aankoop.ritnr}</td>
                                 <td><fmt:message bundle="${rb}" key="datum" /> ${aankoop.stringTijd} ${aankoop.stringDatum}</td>
-                               <td><button onclick="window.location = 'LidBeoordelen?aankoopnr=${aankoop.aankoopnr}';"><fmt:message bundle="${rb}" key="beoordeelknop" /></button></td>
+								
+									<c:choose>
+										<c:when test="${aankoop.beoordeeld < 1}">
+										<td><button onclick="window.location = 'LidBeoordelen?aankoopnr=${aankoop.aankoopnr}';"><fmt:message bundle="${rb}" key="beoordeelknop" /></button></td>
+										</c:when>
+										<c:otherwise>
+										<td></td>
+										</c:otherwise>
+									</c:choose>
+								
+                               
                                 
                                 </tr> 
 
