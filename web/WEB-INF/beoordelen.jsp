@@ -40,41 +40,52 @@
 				<div class="invoerveld">
 					<form action="LidBeoordelen" method="post">
 						<input name="aankoopnr" hidden="true" value="${sessieBeoordeling.aankoopnr}"/>
-						<fmt:message bundle="${rb}" key="stiptheid" />
-						<select name="stiptheid" > 
-									<option value="5"> 5 </option>
-									<option value="4"> 4 </option> 
-									<option value="3"> 3 </option>
-									<option value="2"> 2 </option>
-									<option value="1"> 1 </option> 
-						</select>
-						<br/><br/>
-						<fmt:message bundle="${rb}" key="betrouwbaarheid" />
-						<select name="betrouwbaarheid" > <option value="5"> 5 </option>
-									<option value="4"> 4 </option> 
-									<option value="3"> 3 </option>
-									<option value="2"> 2 </option>
-									<option value="1"> 1 </option> 
-						</select>
-						<br/><br/>
-						<fmt:message bundle="${rb}" key="gezelligheid" />
-						<select name="gezelligheid" > <option value="5"> 5 </option>
-									<option value="4"> 4 </option> 
-									<option value="3"> 3 </option>
-									<option value="2"> 2 </option>
-									<option value="1"> 1 </option> 
-						</select>
-						<br/><br/>
-						<fmt:message bundle="${rb}" key="rijstijl" />
-						<select name="rijstijl" > <option value="5"> 5 </option>
-									<option value="4"> 4 </option> 
-									<option value="3"> 3 </option>
-									<option value="2"> 2 </option>
-									<option value="1"> 1 </option> 
-						</select>
+                                                <table>
+                                                    <tr>
+                                                        <td width="100px;">
+                                                            <fmt:message bundle="${rb}" key="stiptheid" />
+                                                        </td>
+                                                        <td><select name="stiptheid" > 
+                                                                <option value="5"> 5 </option>
+                                                                <option value="4"> 4 </option> 
+                                                                <option value="3"> 3 </option>
+                                                                <option value="2"> 2 </option>
+                                                                <option value="1"> 1 </option> 
+                                                            </select>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+
+                                                        <td><fmt:message bundle="${rb}" key="betrouwbaarheid" /></td>
+                                                        <td><select name="betrouwbaarheid" > <option value="5"> 5 </option>
+                                                                <option value="4"> 4 </option> 
+                                                                <option value="3"> 3 </option>
+                                                                <option value="2"> 2 </option>
+                                                                <option value="1"> 1 </option> 
+                                                            </select></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><fmt:message bundle="${rb}" key="gezelligheid" /></td>
+                                                        <td><select name="gezelligheid" > <option value="5"> 5 </option>
+                                                                <option value="4"> 4 </option> 
+                                                                <option value="3"> 3 </option>
+                                                                <option value="2"> 2 </option>
+                                                                <option value="1"> 1 </option> 
+                                                            </select></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><fmt:message bundle="${rb}" key="rijstijl" /></td>
+                                                        <td><select name="rijstijl" > <option value="5"> 5 </option>
+                                                                <option value="4"> 4 </option> 
+                                                                <option value="3"> 3 </option>
+                                                                <option value="2"> 2 </option>
+                                                                <option value="1"> 1 </option> 
+                                                            </select></td>
+                                                    </tr>
+                                                </table>
 						<br/><br/>
 						<fmt:message bundle="${rb}" key="opmerking" />
-						<textarea class="vrijtextinputveld" name="opmerking" maxlength="150" placeholder="<fmt:message bundle="${rb}" key="opmerkingveld" />"></textarea>
+						<textarea style="width:600px; padding:6px;" rows="4" name="opmerking" maxlength="150" placeholder="<fmt:message bundle="${rb}" key="opmerkingveld" />"></textarea>
 						<br/><br/>
 						<button type="submit"> <fmt:message bundle="${rb}" key="buttonBeoordelen"/></button> 
 					</form>

@@ -492,7 +492,7 @@ button.heliosActionBarIconButton:hover:before  {
 }
 
 .vrijtextinputveld {
-	border:1px solid #BBB;
+    border:1px solid #BBB;
     font: bold 11px  helvetica, arial, sans-serif;
     padding-right: 4px;
     padding-top: 4px;
