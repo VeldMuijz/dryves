@@ -113,6 +113,7 @@ public class BerichtenDao {
 	 * Markeer het berichten ongelezen in de tabel berichten
 	 *
 	 * @param berichtid
+	 * @return
 	 */
 	public boolean markeerBericht(int berichtid) {
 		currentCon = ConnectionManager.getConnection();

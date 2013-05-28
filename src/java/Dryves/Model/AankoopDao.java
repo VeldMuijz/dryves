@@ -34,8 +34,8 @@ public class AankoopDao {
 	/**
 	 * Ophalen van alle gegevens uit de servlet voor de AankoopDao klasse
 	 *
-	 * @param bean
-	 * @return bean (rit object)
+	 * @param bean, het object Aankoop
+	 * @return bean (Aankoop object)
 	 */
 	public Aankoop vulAankoopDao(Aankoop bean) {
 		Date date = new Date();
@@ -117,7 +117,7 @@ public class AankoopDao {
 	 * Update de waarde beoordeeld uit de tabel aankoop, deze waarde bevat een 1 of een 0.
 	 * 1 staat voor beoordeeld, 0 staat voor nog niet beoordeeld.
 	 * @param aankoopnr
-	 * @return 
+	 * @return True als het gelukt is om de aankoop te updaten, False als niet gelukt
 	 */
 	public Boolean setBeoordeeld(int aankoopnr) {
 		rs = null;
@@ -163,7 +163,7 @@ public class AankoopDao {
 	 *
 	 * Haal een lijst van aankopen per lid op en geef deze terug in een List van het object Aankoop
 	 *
-	 * @return
+	 * @return Lijst van Objecten van het type Aankoop
 	 * @throws SQLException
 	 */
 	public List<Aankoop> getAlleAankopenPerLid(int lidnr) throws SQLException {
@@ -233,7 +233,7 @@ public class AankoopDao {
 	/**
 	 * Maak een aankoop aan voor een lid
 	 *
-	 * @return
+	 * @return true als het gelukt is om een aankoop weg te schrijven, false als dat niet gelukt is
 	 */
 	public Boolean aankoopDoen() {
 		RitDao ritDao = new RitDao();
