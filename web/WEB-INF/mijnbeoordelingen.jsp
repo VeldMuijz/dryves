@@ -50,16 +50,36 @@ Document : mijn_ritten
 						<c:forEach items="${beoordelingen}" var="beoordeling">
 							<div class="rittenlijst">
 
-								<table>
-									<tr><td><fmt:message bundle="${rb}" key="beoordeelddoor" /></td> <td> ${beoordelaars[counter].vnaam} ${beoordelaars[counter].tvoegsel} ${beoordelaars[counter].anaam}</tr>
-									<tr><td><fmt:message bundle="${rb}" key="beoordeeldop" /></td> <td>${beoordeling.korteDatum} ${beoordeling.korteTijd}</td></tr>
-									<tr><td><fmt:message bundle="${rb}" key="gezelligheid" /></td> <td>${beoordeling.gezelligheid}</td></tr>
-									<tr><td><fmt:message bundle="${rb}" key="rijstijl" /></td><td>${beoordeling.rijstijl}</td></tr>
-									<tr><td><fmt:message bundle="${rb}" key="betrouwbaarheid" /></td><td>${beoordeling.betrouwbaarheid}</td> </tr>
-									<tr><td><fmt:message bundle="${rb}" key="stiptheid" /></td><td>${beoordeling.stiptheid}</td></tr>
-									<tr><td><fmt:message bundle="${rb}" key="opmerking" /></td><td>${beoordeling.commentaar}</td></tr>
-									<tr style="font-size: 25px;"><td><fmt:message bundle="${rb}" key="eindbeoordeling" /></td><td>${beoordeling.waardering}</td></tr>
-								</table>
+                                                            <table>
+                                                                <tr><td width="200px;"><fmt:message bundle="${rb}" key="beoordeelddoor" /></td> <td> ${beoordelaars[counter].vnaam} ${beoordelaars[counter].tvoegsel} ${beoordelaars[counter].anaam}</tr>
+                                                                <tr><td><fmt:message bundle="${rb}" key="beoordeeldop" /></td> <td>${beoordeling.korteDatum} ${beoordeling.korteTijd}</td></tr>
+                                                                <tr><td><fmt:message bundle="${rb}" key="gezelligheid" /></td> <td>${beoordeling.gezelligheid}</td></tr>
+                                                                <tr><td><fmt:message bundle="${rb}" key="rijstijl" /></td><td>${beoordeling.rijstijl}</td></tr>
+                                                                <tr><td><fmt:message bundle="${rb}" key="betrouwbaarheid" /></td><td>${beoordeling.betrouwbaarheid}</td> </tr>
+                                                                <tr><td><fmt:message bundle="${rb}" key="stiptheid" /></td><td>${beoordeling.stiptheid}</td></tr>
+                                                                <tr><td><fmt:message bundle="${rb}" key="opmerking" /></td><td>${beoordeling.commentaar}</td></tr>
+                                                                <tr height="20px;"><td></td></tr>
+                                                                <tr style="font-size: 20px;"><td><fmt:message bundle="${rb}" key="eindbeoordeling" /></td>
+                                                                    
+ 
+                                                                  <td>
+                                                                      
+                                                                      <c:choose>
+                                                                      
+                                                                          <c:when test="${beoordeling.waardering==1}"><img src="images/ratingstar.png" /></c:when>
+                                                                          <c:when test="${beoordeling.waardering==2}"><img src="images/ratingstar.png" /> <img src="images/ratingstar.png" /></c:when>
+                                                                          <c:when test="${beoordeling.waardering==3}"><img src="images/ratingstar.png" /> <img src="images/ratingstar.png" /> <img src="images/ratingstar.png" /></c:when>
+                                                                          <c:when test="${beoordeling.waardering==4}"><img src="images/ratingstar.png" /> <img src="images/ratingstar.png" /> <img src="images/ratingstar.png" /> <img src="images/ratingstar.png" /></c:when>
+                                                                          <c:when test="${beoordeling.waardering==5}"><img src="images/ratingstar.png" /> <img src="images/ratingstar.png" /> <img src="images/ratingstar.png" /> <img src="images/ratingstar.png" /> <img src="images/ratingstar.png" /></c:when>
+                                                                  
+                                                                      </c:choose>
+                                                                      
+                                                                  </td>
+                                                                    
+                                                                    
+                                                                    
+                                                                </tr>
+                                                            </table>
 
 							</div>
 							<c:set var="counter" value="${counter + 1 }"/>
