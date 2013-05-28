@@ -36,9 +36,6 @@ Document : mijn_ritten
                 <jsp:param name="menu_active" value="mijndryves"></jsp:param>
             </jsp:include>
 
-
-
-
             <div class="contentPanel">         
 
 

@@ -32,40 +32,48 @@ Document : mijn_ritten
             <div class="logo">    
                 <img src="images/Logo_Dryves.png" />
             </div>
-            
+
             <jsp:include page="/WEB-INF/navigatie.jsp"  flush="true">
-              <jsp:param name="menu_active" value="mijndryves"></jsp:param>
-              </jsp:include>
+				<jsp:param name="menu_active" value="mijndryves"></jsp:param>
+			</jsp:include>
 
-            <div class="contentPanel">         
-                
-                <c:forEach items="${aankopen}" var="aankoop">
-                    <div class="rittenlijst">
-                        <table>
-							<tr>
-                                <td><fmt:message bundle="${rb}" key="aankoopnummer" /> ${aankoop.aankoopnr}</td>
-								<td><fmt:message bundle="${rb}" key="factuurnummer" /> ${aankoop.factuurnr}</td>
-								<td><fmt:message bundle="${rb}" key="ritnummer" /> ${aankoop.ritnr}</td>
-                                <td><fmt:message bundle="${rb}" key="datum" /> ${aankoop.stringTijd} ${aankoop.stringDatum}</td>
-								
-									<c:choose>
-										<c:when test="${aankoop.beoordeeld < 1}">
-										<td><button onclick="window.location = 'LidBeoordelen?aankoopnr=${aankoop.aankoopnr}';"><fmt:message bundle="${rb}" key="beoordeelknop" /></button></td>
-										</c:when>
-										<c:otherwise>
-										<td></td>
-										</c:otherwise>
-									</c:choose>
-								
-                               
-                                
-                                </tr> 
+            <div class="contentPanel"> 
+				<c:choose>
+					<c:when test="${empty aankopen}">
+						<fmt:message bundle="${rb}" key="geenaankopen" />
+						</c:when>
+						<c:otherwise>
 
-                        </table>
-                    </div>
-                </c:forEach>
-                
-             
+
+						<c:forEach items="${aankopen}" var="aankoop">
+							<div class="rittenlijst">
+								<table>
+									<tr>
+										<td><fmt:message bundle="${rb}" key="aankoopnummer" /> ${aankoop.aankoopnr}</td>
+										<td><fmt:message bundle="${rb}" key="factuurnummer" /> ${aankoop.factuurnr}</td>
+										<td><fmt:message bundle="${rb}" key="ritnummer" /> ${aankoop.ritnr}</td>
+										<td><fmt:message bundle="${rb}" key="datum" /> ${aankoop.stringTijd} ${aankoop.stringDatum}</td>
+
+										<c:choose>
+											<c:when test="${aankoop.beoordeeld < 1}">
+												<td><button onclick="window.location = 'LidBeoordelen?aankoopnr=${aankoop.aankoopnr}';"><fmt:message bundle="${rb}" key="beoordeelknop" /></button></td>
+												</c:when>
+												<c:otherwise>
+												<td></td>
+											</c:otherwise>
+										</c:choose>
+
+
+
+									</tr> 
+
+								</table>
+							</div>
+						</c:forEach>
+					</c:otherwise>
+				</c:choose>
+
+
             </div>
         </div>
 
