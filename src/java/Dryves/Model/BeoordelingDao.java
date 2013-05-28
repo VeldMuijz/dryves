@@ -24,6 +24,7 @@ import java.util.logging.Logger;
 public class BeoordelingDao {
 
 	static Connection currentCon;
+	static ResultSet rs;
 	private int beoordelingnr;
 	private int waardering;
 	private int stiptheid;
@@ -57,7 +58,7 @@ public class BeoordelingDao {
 	 * @throws SQLException
 	 */
 	public List<Beoordeling> getAlleBeoordelingenPerLid(int lidnr) throws SQLException {
-		ResultSet resultSet = null;
+		rs = null;
 		List<Beoordeling> beoordelingen = new ArrayList<Beoordeling>();
 		DatumConverter dc = new DatumConverter();
 		currentCon = ConnectionManager.getConnection();
@@ -74,18 +75,18 @@ public class BeoordelingDao {
 		try {
 			getBeoordelingen = currentCon.prepareStatement(queryString);
 			getBeoordelingen.setInt(1, lidnr);
-			resultSet = getBeoordelingen.executeQuery();
+			rs = getBeoordelingen.executeQuery();
 
-			while (resultSet.next()) {
+			while (rs.next()) {
 				Beoordeling beoordeling = new Beoordeling();
-				beoordeling.setBetrouwbaarheid(resultSet.getInt("betrouwbaarheid"));
-				beoordeling.setCommentaar(resultSet.getString("commentaar"));
-				beoordeling.setGezelligheid(resultSet.getInt("gezelligheid"));
-				beoordeling.setLidnr(resultSet.getInt("lidnr"));
-				beoordeling.setRijstijl(resultSet.getInt("rijstijl"));
-				beoordeling.setStiptheid(resultSet.getInt("stiptheid"));
-				beoordeling.setWaardering(resultSet.getInt("waardering"));
-				beoordeling.setDatum(resultSet.getTimestamp("datum"));
+				beoordeling.setBetrouwbaarheid(rs.getInt("betrouwbaarheid"));
+				beoordeling.setCommentaar(rs.getString("commentaar"));
+				beoordeling.setGezelligheid(rs.getInt("gezelligheid"));
+				beoordeling.setLidnr(rs.getInt("lidnr"));
+				beoordeling.setRijstijl(rs.getInt("rijstijl"));
+				beoordeling.setStiptheid(rs.getInt("stiptheid"));
+				beoordeling.setWaardering(rs.getInt("waardering"));
+				beoordeling.setDatum(rs.getTimestamp("datum"));
 				System.out.println("DATUM: " + beoordeling.getDatum());
 				beoordeling.setKorteDatum(dc.korteDatum(beoordeling.getDatum()));
 				beoordeling.setKorteTijd(dc.korteTijd(beoordeling.getDatum()));
@@ -96,9 +97,9 @@ public class BeoordelingDao {
 			Logger.getLogger(RitDao.class.getName()).log(Level.SEVERE, null, ex);
 
 		} finally {
-			if (resultSet != null) {
+			if (rs != null) {
 				try {
-					resultSet.close();
+					rs.close();
 				} catch (SQLException ignore) {
 				}
 			}
@@ -120,6 +121,11 @@ public class BeoordelingDao {
 	}
 
 	/**
+	 * Deze methode maakt een beoordeling aan die een lid doet op een aankoop.
+	 * In deze methode worden 3 SQL statements uitgevoerd:
+	 * 1. Maak beoordeling aan in de tabel beoordeling
+	 * 2. Update de beoordeling voor een lid in de tabel lid
+	 * 3. Update de aankoop als beoordeeld, wanneer deze is beoordeeld kan deze niet meer beoordeeld worden
 	 *
 	 * @param waardering
 	 * @param stiptheid
@@ -135,7 +141,14 @@ public class BeoordelingDao {
 		Date datum = new Date();
 		Timestamp timestamp = new Timestamp(datum.getTime());
 		currentCon = ConnectionManager.getConnection();
-		PreparedStatement beoordeelLid, updateBeoordelingLid;
+		PreparedStatement beoordeelLid = null;
+		PreparedStatement updateBeoordelingLid = null;
+		PreparedStatement updateAankoop = null;
+		AankoopDao aankoopDao = new AankoopDao();
+		LidDao lidDao = new LidDao();
+		boolean check1 = false;
+		boolean check2 = false;
+		
 		String queryString =
 				"INSERT INTO beoordeling ("
 				+ " waardering,"
@@ -157,12 +170,17 @@ public class BeoordelingDao {
 				+ "AND a.ritnr = r.ritnr "
 				+ "AND b.lidnr = l.lidnr "
 				+ "AND a.aankoopnr = ? LIMIT 1);";
-
+		
+		String updateAankoopBeoordeeld = "UPDATE aankoop "
+				+ "SET beoordeeld = 1 "
+				+ "WHERE aankoopnr = ? "
+				+ "AND beoordeeld < 1;";
 
 		try {
 			currentCon.setAutoCommit(false);
 			beoordeelLid = currentCon.prepareStatement(queryString);
 			updateBeoordelingLid = currentCon.prepareStatement(updateBeoordeling);
+			updateAankoop = currentCon.prepareStatement(updateAankoopBeoordeeld);
 			
 			beoordeelLid.setDouble(1, waardering);
 			beoordeelLid.setInt(2, stiptheid);
@@ -176,20 +194,25 @@ public class BeoordelingDao {
 
 			updateBeoordelingLid.setDouble(1, waardering);
 			updateBeoordelingLid.setInt(2, aankoopnr);
+			
+			updateAankoop.setInt(1, aankoopnr);
 
 			System.out.println("+++++++++++++BeoordelingAanmaken+++++++++++++++\n  Query = " + beoordeelLid + "\n");
 			System.out.println("+++++++++++++LidBeoordelingUpdaten+++++++++++++++\n  Query = " + updateBeoordelingLid + "\n");
 			//Update de gegevens
 			beoordeelLid.executeUpdate();
 			updateBeoordelingLid.executeUpdate();
+			updateAankoop.executeUpdate();
 
 			//Commit de change
 			currentCon.commit();
 			currentCon.setAutoCommit(false);
 		} catch (SQLException ex) {
 			Logger.getLogger(LidDao.class.getName()).log(Level.SEVERE, null, ex);
+			System.out.println("Check1 = " +  check1);
+			System.out.println("Check1 = " +  check2);
 			if (currentCon != null) {
-				System.err.print("Transaction is being rolled back");
+				System.err.print("Transaction krijgt een rollback, alle veranderingen die deze query teweeg zou brengen worden teruggedraaid.");
 				try {
 					currentCon.rollback();
 				} catch (SQLException ex1) {
@@ -198,13 +221,38 @@ public class BeoordelingDao {
 			}
 			return false;
 		} finally {
+			//Doe dit altijd, als het goed gaat of wanneer het fout gaat
+			if (rs != null) {
+				try {
+					//sluit resultset af
+					rs.close();
+				} catch (SQLException ignore) {
+				}
+			}
+			if (beoordeelLid != null) {
+				//sluit preparedStatement
+				try {
+					beoordeelLid.close();
+				} catch (SQLException ignore) {
+				}
+			}
+//			if (updateBeoordelingLid != null) {
+//				//sluit preparedStatement
+//				try {
+//					updateBeoordelingLid.close();
+//				} catch (SQLException ignore) {
+//				}
+			}
+
 			if (currentCon != null) {
+				//sluit huidige verbinding
 				try {
 					currentCon.close();
 				} catch (SQLException ignore) {
 				}
 			}
-		}
 		return true;
 	}
-}
+		
+	}
+

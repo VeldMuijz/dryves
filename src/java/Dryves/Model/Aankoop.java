@@ -18,6 +18,7 @@ public class Aankoop  implements java.io.Serializable {
      private int factuurnr;
 	 private String stringTijd;
 	 private String stringDatum;
+	 private int beoordeeld;
 	 
 
     public Aankoop() {
@@ -32,7 +33,7 @@ public class Aankoop  implements java.io.Serializable {
         this.ontmoetingnr = ontmoetingnr;
         this.factuurnr = factuurnr;
     }
-    public Aankoop(int aankoopnr, int ritnr, int lidnr, int ontmoetingnr, String betaalwijze, Timestamp datum, int factuurnr) {
+    public Aankoop(int aankoopnr, int ritnr, int lidnr, int ontmoetingnr, String betaalwijze, Timestamp datum, int factuurnr, int beoordeeld) {
        this.aankoopnr = aankoopnr;
        this.ritnr = ritnr;
        this.lidnr = lidnr;
@@ -40,6 +41,7 @@ public class Aankoop  implements java.io.Serializable {
        this.betaalwijze = betaalwijze;
        this.datum = datum;
        this.factuurnr = factuurnr;
+	   this.beoordeeld = beoordeeld;
     }
    
     public int getAankoopnr() {
@@ -106,6 +108,14 @@ public class Aankoop  implements java.io.Serializable {
 
 	public void setStringDatum(String stringDatum) {
 		this.stringDatum = stringDatum;
+	}
+
+	public int getBeoordeeld() {
+		return beoordeeld;
+	}
+
+	public void setBeoordeeld(int beoordeeld) {
+		this.beoordeeld = beoordeeld;
 	}
 
 

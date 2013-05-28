@@ -20,6 +20,8 @@ import java.util.logging.Logger;
  */
 public class LidDao {
 
+	static Connection currentCon;
+	static ResultSet rs;
 	private String vnaam;
 	private String anaam;
 	private String geslacht;
@@ -37,12 +39,10 @@ public class LidDao {
 	private String langnotify;
 	private Hashtable errors;
 	private boolean success;
-	static Connection currentCon;
-	static ResultSet rs;
 	private String facebookid;
 
 	/**
-	 * Ophalen van alle gegevens uit de servlet voor de registreren.jsp
+	 * Ophalen van alle gegevens uit de servlet voor de klasse LidDao
 	 *
 	 * @param bean
 	 * @return
@@ -209,27 +209,57 @@ public class LidDao {
 	 * @param beoordeling
 	 * @return
 	 */
-	public Boolean updateBeoordelingLid(int beoordeelde, int beoordeling) {
+	public Boolean updateBeoordelingLid(int aankoopnr, double waardering) {
+		currentCon = ConnectionManager.getConnection();
+		PreparedStatement beoordeelLid = null;
 
 		try {
-			currentCon = ConnectionManager.getConnection();
-			PreparedStatement beoordeelLid;
-			String queryString =
-					"UPDATE lid "
-					+ "SET beoordeling = ("
-					+ "("
-					+ "		(SELECT beoordeling FROM lid WHERE lidnr = ?) + ? )/ 2"
-					+ ");";
+			
+			String updateBeoordeling = "Update lid SET beoordeling = (beoordeling + ?) / 2 "
+					+ "WHERE lidnr = ("
+					+ "SELECT r.lidnr "
+					+ "FROM beoordeling as b, aankoop as a, rit as r, lid as l "
+					+ "WHERE b.aankoopnr = a.aankoopnr "
+					+ "AND a.ritnr = r.ritnr "
+					+ "AND b.lidnr = l.lidnr "
+					+ "AND a.aankoopnr = ? LIMIT 1);";
 
-			beoordeelLid = currentCon.prepareStatement(queryString);
-			beoordeelLid.setInt(1, beoordeelde);
-			beoordeelLid.setInt(2, beoordeling);
+			beoordeelLid = currentCon.prepareStatement(updateBeoordeling);
+			beoordeelLid.setDouble(1, waardering);
+			beoordeelLid.setInt(2, aankoopnr);
 
-			System.out.println("+++++++++++++BeoordeelLid+++++++++++++++\n Query = " + queryString + "\n");
+			System.out.println("+++++++++++++BeoordeelLid+++++++++++++++\n Query = " + updateBeoordeling + "\n");
 			beoordeelLid.executeUpdate();
 
 		} catch (SQLException ex) {
 			Logger.getLogger(LidDao.class.getName()).log(Level.SEVERE, null, ex);
+			return false;
+			
+		} finally {
+			//Doe dit altijd, als het goed gaat of wanneer het fout gaat
+			if (rs != null) {
+				try {
+					//sluit resultset af
+					rs.close();
+				} catch (SQLException ignore) {
+				}
+			}
+			if (beoordeelLid != null) {
+				//sluit preparedStatement
+				try {
+					beoordeelLid.close();
+				} catch (SQLException ignore) {
+					
+				}
+			}
+			if (currentCon != null) {
+				//sluit huidige verbinding
+				try {
+					currentCon.close();
+				} catch (SQLException ignore) {
+					
+				}
+			}
 		}
 		return true;
 	}
@@ -458,7 +488,7 @@ public class LidDao {
 		PreparedStatement enkelLidOphalen = null;
 		String queryString;
 		ResultSet resultSet = null;
-	
+
 
 		try {
 
@@ -469,8 +499,8 @@ public class LidDao {
 
 			resultSet = enkelLidOphalen.executeQuery();
 
-		
-			if(resultSet.next()){
+
+			if (resultSet.next()) {
 				bean.setLidnr(resultSet.getInt("lidnr"));
 				bean.setVnaam(resultSet.getString("vnaam"));
 				bean.setAnaam(resultSet.getString("anaam"));
@@ -546,13 +576,6 @@ public class LidDao {
 		return bean;
 	}
 
-        
-      
-        
-        
-        
-        
-        
 	public Lid loginFacebook(String facebookid) {
 
 		Connection con = Dryves.ConnectionManager.getConnection();
@@ -624,75 +647,72 @@ public class LidDao {
 		return lidfacebook;
 
 	}
-        
-        
-    public Lid verstuurWachtwoord(Lid user) {
 
-        Statement stmt = null;
-        Connection connection = null;
-        ResultSet resultSet = null;
-        String email = user.getEmail();
-        
-        System.out.println("Dit is het email adres uit de lidDao: " + email);
+	public Lid verstuurWachtwoord(Lid user) {
 
-        try {
-            
-            currentCon = ConnectionManager.getConnection();
-            PreparedStatement verstuurwachtwoord;
-            String queryString = "SELECT vnaam, anaam, wachtwoord FROM lid WHERE email =?;";
-            
-            verstuurwachtwoord = currentCon.prepareStatement(queryString);
-            verstuurwachtwoord.setString(1, email);
-            resultSet = verstuurwachtwoord.executeQuery();
-            
-            while (resultSet.next()) {
-                
-                user.setVnaam(resultSet.getString(1));
-                
-                System.out.println("Vnaam wijzig wachtwoord: " + user.getVnaam());
-                
-                user.setAnaam(resultSet.getString(2));
-                
-                System.out.println("Anaam wijzig wachtwoord: " + user.getAnaam());
-                
-                user.setWachtwoord(resultSet.getString(3));
-                
-                System.out.println("Wwoord wijzig wachtwoord: " + user.getWachtwoord());
-            
-            }
+		Statement stmt = null;
+		Connection connection = null;
+		ResultSet resultSet = null;
+		String email = user.getEmail();
 
-        } catch (SQLException ex) {
+		System.out.println("Dit is het email adres uit de lidDao: " + email);
+
+		try {
+
+			currentCon = ConnectionManager.getConnection();
+			PreparedStatement verstuurwachtwoord;
+			String queryString = "SELECT vnaam, anaam, wachtwoord FROM lid WHERE email =?;";
+
+			verstuurwachtwoord = currentCon.prepareStatement(queryString);
+			verstuurwachtwoord.setString(1, email);
+			resultSet = verstuurwachtwoord.executeQuery();
+
+			while (resultSet.next()) {
+
+				user.setVnaam(resultSet.getString(1));
+
+				System.out.println("Vnaam wijzig wachtwoord: " + user.getVnaam());
+
+				user.setAnaam(resultSet.getString(2));
+
+				System.out.println("Anaam wijzig wachtwoord: " + user.getAnaam());
+
+				user.setWachtwoord(resultSet.getString(3));
+
+				System.out.println("Wwoord wijzig wachtwoord: " + user.getWachtwoord());
+
+			}
+
+		} catch (SQLException ex) {
 			Logger.getLogger(LidDao.class.getName()).log(Level.SEVERE, null, ex);
-                        System.out.println("Foutje, oeps!");
-            
-        }
+			System.out.println("Foutje, oeps!");
+
+		}
 
 
 
-        return user;
+		return user;
 
-    }
-       
-        
-        // met deze functie wijzigen we de taal instellingen
-        // en= Engels nl= Nederlands
-        public void wijzigtaal(String taal, int lidnr){
-        
-            try {
+	}
+
+	// met deze functie wijzigen we de taal instellingen
+	// en= Engels nl= Nederlands
+	public void wijzigtaal(String taal, int lidnr) {
+
+		try {
 			currentCon = ConnectionManager.getConnection();
 
 			PreparedStatement updateLid;
 			String queryString = ("UPDATE lid "
 					+ "SET"
 					+ " langnotify = ?"
-					
 					+ " WHERE lidnr = ?");
 
 			updateLid = currentCon.prepareStatement(queryString);
 
 			updateLid.setString(1, taal);
-                        updateLid.setInt(2, lidnr);
-			
+			updateLid.setInt(2, lidnr);
+
 
 			System.out.println("De query is: " + updateLid);
 
@@ -703,11 +723,11 @@ public class LidDao {
 
 		}
 
-		
-            
-        
-        
-        }
+
+
+
+
+	}
 
 	private static Locale toString(String locale) {
 		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
