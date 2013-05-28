@@ -20,282 +20,314 @@ import java.util.List;
  */
 public class BerichtenDao {
 
-	List<Lid> afzender = new ArrayList<Lid>();
-	static Connection currentCon;
-	static ResultSet rs;
-	private int lidnr;
-	private String onderwerp;
-	private Timestamp datum;
-	private String inhoud;
-	private int ritnr;
+    List<Lid> afzender = new ArrayList<Lid>();
+    static Connection currentCon;
+    static ResultSet resultSet;
+    static PreparedStatement statement;
+    private int lidnr;
+    private String onderwerp;
+    private Timestamp datum;
+    private String inhoud;
+    private int ritnr;
 
-	//achterhaal lid nr d.m.v berichtid
-	public int haalLidNr(int ritnr) {
+    //achterhaal lid nr d.m.v berichtid
+    public int haalLidNr(int ritnr) throws SQLException {
 
 
-		Connection connection = null;
-		PreparedStatement statement = null;
-		ResultSet resultSet = null;
-		int lidnr = 0;
 
-		try {
 
-			currentCon = ConnectionManager.getConnection();
-			PreparedStatement haallidnr;
-			String queryString = "SELECT lidnr FROM rit WHERE ritnr=?;";
 
-			haallidnr = currentCon.prepareStatement(queryString);
-			haallidnr.setInt(1, ritnr);
-			resultSet = haallidnr.executeQuery();
+        int lidnr = 0;
 
-			while (resultSet.next()) {
+        try {
 
-				lidnr = resultSet.getInt(1);
-				System.out.println("Lidnummer: " + lidnr);
-			}
-		} catch (Exception e) {
-			System.out.println(e);
+            currentCon = ConnectionManager.getConnection();
 
-		}
-		System.out.println("output van haallidnr: " + lidnr);
-		return lidnr;
+            String queryString = "SELECT lidnr FROM rit WHERE ritnr=?;";
 
+            statement = currentCon.prepareStatement(queryString);
+            statement.setInt(1, ritnr);
+            resultSet = statement.executeQuery();
 
-	}
+            while (resultSet.next()) {
 
-	//min 1 bij ongelezen berichten
-	public void markeerBericht(int berichtid) {
+                lidnr = resultSet.getInt(1);
+                System.out.println("Lidnummer: " + lidnr);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
 
+        } finally {
+            currentCon.close();
+            statement.close();
+            resultSet.close();
+        }
+        System.out.println("output van haallidnr: " + lidnr);
+        return lidnr;
 
 
-		ResultSet resultSet = null;
+    }
 
-		try {
-			currentCon = ConnectionManager.getConnection();
-			PreparedStatement updatestatus;
-			String queryString = "UPDATE berichten set gelezen=0 WHERE berichtnr =?;";
+    //min 1 bij ongelezen berichten
+    public void markeerBericht(int berichtid) throws SQLException {
 
-			updatestatus = currentCon.prepareStatement(queryString);
-			updatestatus.setInt(1, berichtid);
 
-			resultSet = updatestatus.executeQuery();
+        try {
+            currentCon = ConnectionManager.getConnection();
+            String queryString = "UPDATE berichten set gelezen=0 WHERE berichtnr =?;";
 
+            statement = currentCon.prepareStatement(queryString);
+            statement.setInt(1, berichtid);
 
+            resultSet = statement.executeQuery();
 
 
-		} catch (SQLException e) {
+        } catch (SQLException e) {
 
 
-			System.out.println(e);
-		}
+            System.out.println(e);
+        } finally {
 
-	}
-	/////verstuur bericht 
+            currentCon.close();
+            statement.close();
+            resultSet.close();
+        }
 
-	public boolean BerichtVersturen(Berichten bean) throws SQLException {
+    }
 
-		//Met deze functie komen we erachter wie
-		//de eigenaar is van de aangeboden rit d.m.v ritnr
-		int lidnreigenaar = haalLidNr(bean.getRitnr());
+    /////verstuur bericht 
+    public boolean BerichtVersturen(Berichten bean) throws SQLException {
 
-		ResultSet resultSet = null;
-		boolean more = false;
-		try {
-			currentCon = ConnectionManager.getConnection();
-			PreparedStatement verstuurbericht;
-			String queryString = "INSERT INTO berichten  (inhoudbericht,datum,afzender,lidnr,gelezen,ritnm)"
-					+ "VALUES (?,?,?,?,?,?)";
-			verstuurbericht = currentCon.prepareStatement(queryString);
-			verstuurbericht.setString(1, bean.getInhoud());
-			verstuurbericht.setTimestamp(2, bean.getDatum());
-			verstuurbericht.setInt(3, bean.getLidnr());
-			verstuurbericht.setInt(4, lidnreigenaar);
-			verstuurbericht.setInt(5, 1);
-			verstuurbericht.setInt(6, bean.getRitnr());
-			verstuurbericht.executeUpdate();
-//			resultSet = verstuurbericht.executeQuery();
+        //Met deze functie komen we erachter wie
+        //de eigenaar is van de aangeboden rit d.m.v ritnr
+        int lidnreigenaar = haalLidNr(bean.getRitnr());
 
 
-			more = true;
+        boolean more = false;
+        try {
+            currentCon = ConnectionManager.getConnection();
 
-		} catch (SQLException e) {
+            String queryString = "INSERT INTO berichten  (inhoudbericht,datum,afzender,lidnr,gelezen,ritnr)"
+                    + "VALUES (?,?,?,?,?,?)";
+            statement = currentCon.prepareStatement(queryString);
+            statement.setString(1, bean.getInhoud());
+            statement.setTimestamp(2, bean.getDatum());
+            statement.setInt(3, bean.getLidnr());
+            statement.setInt(4, lidnreigenaar);
+            statement.setInt(5, 1);
+            statement.setInt(6, bean.getRitnr());
+            statement.executeUpdate();
 
 
-			System.out.println(e);
-		}
 
-		return more;
-	}
+            more = true;
 
-	//beantwoord bericht
-	public boolean beantwoordBericht(Berichten bean) throws SQLException {
+        } catch (SQLException e) {
 
 
+            System.out.println(e);
+        } finally {
 
-		ResultSet resultSet = null;
-		boolean more = false;
-		try {
-			currentCon = ConnectionManager.getConnection();
-			PreparedStatement verstuurbericht;
-			String queryString = "INSERT INTO berichten  (inhoudbericht,datum,afzender,lidnr,gelezen,ritnm)"
-					+ "VALUES (?,?,?,?,?,?)";
-			verstuurbericht = currentCon.prepareStatement(queryString);
-			verstuurbericht.setString(1, bean.getInhoud());
-			verstuurbericht.setTimestamp(2, bean.getDatum());
-			verstuurbericht.setInt(3, bean.getAfzender());
-			verstuurbericht.setInt(4, bean.getLidnr());
-			verstuurbericht.setInt(5, 1);
-			verstuurbericht.setInt(6, bean.getRitnr());
-			resultSet = verstuurbericht.executeQuery();
+            currentCon.close();
+            statement.close();
+            resultSet.close();
+        }
 
+        return more;
+    }
 
-			more = true;
+    //beantwoord bericht
+    public boolean beantwoordBericht(Berichten bean) throws SQLException {
 
-		} catch (SQLException e) {
 
 
-			System.out.println(e);
-		}
 
-		return more;
-	}
-
-	//hiermee vullen we de inbox
-	public List<Berichten> haalberichten(int lidnummer) throws SQLException {
-		Connection connection = null;
-		PreparedStatement statement = null;
-		ResultSet resultSet = null;
-		List<Berichten> berichten = new ArrayList<Berichten>();
+        boolean more = false;
+        try {
+            currentCon = ConnectionManager.getConnection();
 
-		DatumConverter dc = new DatumConverter();
+            String queryString = "INSERT INTO berichten  (inhoudbericht,datum,afzender,lidnr,gelezen,ritnr)"
+                    + "VALUES (?,?,?,?,?,?)";
+            statement = currentCon.prepareStatement(queryString);
+            statement.setString(1, bean.getInhoud());
+            statement.setTimestamp(2, bean.getDatum());
+            statement.setInt(3, bean.getAfzender());
+            statement.setInt(4, bean.getLidnr());
+            statement.setInt(5, 1);
+            statement.setInt(6, bean.getRitnr());
+            resultSet = statement.executeQuery();
 
-		try {
-			System.out.println("Lidnummer:" + lidnummer);
-			currentCon = ConnectionManager.getConnection();
-			PreparedStatement HaalAlleBerichten;
-			String queryString = "SELECT * FROM berichten WHERE lidnr=? ORDER BY datum DESC;";
-			//String queryString = "select berichtnr, DATUM ,ritnm,gelezen from BERICHTEN  where lidnr=?;";
 
-			HaalAlleBerichten = currentCon.prepareStatement(queryString);
-			HaalAlleBerichten.setInt(1, lidnummer);
-			resultSet = HaalAlleBerichten.executeQuery();
+            more = true;
 
-			while (resultSet.next()) {
+        } catch (SQLException e) {
 
-				Berichten bericht = new Berichten();
-				bericht.setBerichtid(resultSet.getInt("berichtnr"));
-				bericht.setAfzender(resultSet.getInt("afzender"));
 
-				bericht.setDatum(resultSet.getTimestamp("datum"));
-				bericht.setStringTijd(dc.korteTijd(bericht.getDatum()));
-				bericht.setStringDatum(dc.korteDatum(bericht.getDatum()));
-				bericht.setRitnr(resultSet.getInt("ritnm"));
-				bericht.setOngelezen(resultSet.getInt("gelezen"));
-				
+            System.out.println(e);
+        } finally {
 
-				berichten.add(bericht);
-			}
-		} finally {
-		}
+            currentCon.close();
+            statement.close();
+            resultSet.close();
+        }
 
-		return berichten;
-	}
+        return more;
+    }
 
-	public Lid afzender(int afzenderLidnr) {
+    //hiermee vullen we de inbox
+    public List<Berichten> haalberichten(int lidnummer, int offset) throws SQLException {
 
-		Lid afzenderLid = new Lid();
-		LidDao lidDao = new LidDao();
-		
-		afzenderLid = lidDao.enkelLidOphalen(afzenderLidnr, afzenderLid);
-		System.out.println("afzenderlid na het ophalen van gegevens = " + afzenderLid.getLidnr());
-		System.out.println("Afzenderlid na het ophalen van gegevens = " +  afzenderLid.getAnaam());
-		
-		return afzenderLid;
 
-	}
 
-	public Berichten vulBerichtDao(Berichten bean) {
+        List<Berichten> berichten = new ArrayList<Berichten>();
 
-		lidnr = bean.getLidnr();
-		//onderwerp=bean.getOnderwerp();
-		datum = bean.getDatum();
-		inhoud = bean.getInhoud();
-		ritnr = bean.getRitnr();
+        DatumConverter dc = new DatumConverter();
 
+        try {
+            System.out.println("Lidnummer:" + lidnummer);
+            currentCon = ConnectionManager.getConnection();
 
-		return bean;
+            String queryString = "SELECT * FROM berichten WHERE lidnr=? ORDER BY datum DESC LIMIT 5 OFFSET ?;";
 
-	}
+            //String queryString = "select berichtnr, DATUM ,ritnm,gelezen from BERICHTEN  where lidnr=?;";
 
-	public List<Berichten> getAlleBerichtenbijId(int berichtid) throws SQLException {
-		Connection connection = null;
-		PreparedStatement statement = null;
-		ResultSet resultSet = null;
-		List<Berichten> berichtlijst = new ArrayList<Berichten>();
-		DatumConverter dc = new DatumConverter();
-		try {
+            statement = currentCon.prepareStatement(queryString);
+            statement.setInt(1, lidnummer);
+            statement.setInt(2, offset);
+            resultSet = statement.executeQuery();
 
-			currentCon = ConnectionManager.getConnection();
-			PreparedStatement selecteerbericht;
-			String queryString = "SELECT  berichtnr, INHOUDBERICHT, DATUM, Ritnm, lidnr, afzender FROM berichten WHERE berichtnr =?;";
+            while (resultSet.next()) {
 
-			selecteerbericht = currentCon.prepareStatement(queryString);
-			selecteerbericht.setInt(1, berichtid);
-			resultSet = selecteerbericht.executeQuery();
+                Berichten bericht = new Berichten();
+                bericht.setBerichtid(resultSet.getInt("berichtnr"));
+                bericht.setAfzender(resultSet.getInt("afzender"));
 
-			while (resultSet.next()) {
-				Berichten bericht = new Berichten();
-				bericht.setBerichtid(resultSet.getInt(1));
-				bericht.setInhoud(resultSet.getString(2));
-				bericht.setDatum(resultSet.getTimestamp(3));
-				bericht.setStringDatum(dc.korteDatum(bericht.getDatum()));
-				bericht.setStringTijd(dc.korteTijd(bericht.getDatum()));
+                bericht.setDatum(resultSet.getTimestamp("datum"));
+                bericht.setStringTijd(dc.korteTijd(bericht.getDatum()));
+                bericht.setStringDatum(dc.korteDatum(bericht.getDatum()));
+                bericht.setRitnr(resultSet.getInt("ritnr"));
+                bericht.setOngelezen(resultSet.getInt("gelezen"));
 
-				bericht.setRitnr(resultSet.getInt(4));
-				bericht.setLidnr(resultSet.getInt(5));
-				bericht.setAfzender(resultSet.getInt(6));
-				berichtlijst.add(bericht);
-			}
-		} finally {
-		}
-		return berichtlijst;
 
-	}
+                berichten.add(bericht);
+            }
 
-	public int statusbalk(int lidnummer) {
+        } catch (SQLException e) {
+            System.out.println("Functie haalberichten() en foutmelding: " + e);
 
+        } finally {
+            currentCon.close();
+            statement.close();
+            resultSet.close();
 
+        }
 
-		Connection con = Dryves.ConnectionManager.getConnection();
+        return berichten;
+    }
 
-		int aantal = 0;
+    public Lid afzender(int afzenderLidnr) {
 
-		try {
+        Lid afzenderLid = new Lid();
+        LidDao lidDao = new LidDao();
 
-			PreparedStatement pstmt = con.prepareStatement("SELECT  gelezen FROM berichten WHERE lidnr =? and gelezen=1");
+        afzenderLid = lidDao.enkelLidOphalen(afzenderLidnr, afzenderLid);
+        System.out.println("afzenderlid na het ophalen van gegevens = " + afzenderLid.getLidnr());
+        System.out.println("Afzenderlid na het ophalen van gegevens = " + afzenderLid.getAnaam());
 
-			pstmt.setInt(1, lidnummer);
-			rs = pstmt.executeQuery();
+        return afzenderLid;
 
-			while (rs.next()) {
+    }
 
-				rs.getInt(1);
-				aantal++;
+    public Berichten vulBerichtDao(Berichten bean) {
 
-			}
-			rs.close();
-			pstmt.close();
+        lidnr = bean.getLidnr();
+        //onderwerp=bean.getOnderwerp();
+        datum = bean.getDatum();
+        inhoud = bean.getInhoud();
+        ritnr = bean.getRitnr();
 
 
-		} catch (SQLException e) {
+        return bean;
 
+    }
 
-			System.out.println(e);
-		}
+    public List<Berichten> getAlleBerichtenbijId(int berichtid) throws SQLException {
 
-		return aantal;
 
 
+        List<Berichten> berichtlijst = new ArrayList<Berichten>();
+        DatumConverter dc = new DatumConverter();
+        try {
 
-	}
+            currentCon = ConnectionManager.getConnection();
+
+            String queryString = "SELECT  berichtnr, INHOUDBERICHT, DATUM, Ritnr, lidnr, afzender FROM berichten WHERE berichtnr =?;";
+
+            statement = currentCon.prepareStatement(queryString);
+            statement.setInt(1, berichtid);
+            resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                Berichten bericht = new Berichten();
+                bericht.setBerichtid(resultSet.getInt(1));
+                bericht.setInhoud(resultSet.getString(2));
+                bericht.setDatum(resultSet.getTimestamp(3));
+                bericht.setStringDatum(dc.korteDatum(bericht.getDatum()));
+                bericht.setStringTijd(dc.korteTijd(bericht.getDatum()));
+
+                bericht.setRitnr(resultSet.getInt(4));
+                bericht.setLidnr(resultSet.getInt(5));
+                bericht.setAfzender(resultSet.getInt(6));
+                berichtlijst.add(bericht);
+            }
+        } finally {
+            currentCon.close();
+            statement.close();
+            resultSet.close();
+        }
+        return berichtlijst;
+
+    }
+
+    public int statusbalk(int lidnummer) throws SQLException {
+
+
+
+
+        currentCon = ConnectionManager.getConnection();
+        int aantal = 0;
+
+        try {
+
+            statement = currentCon.prepareStatement("SELECT  gelezen FROM berichten WHERE lidnr =? and gelezen=1");
+
+            statement.setInt(1, lidnummer);
+            resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+
+                resultSet.getInt(1);
+                aantal++;
+
+            }
+
+
+
+
+        } catch (SQLException e) {
+
+
+            System.out.println("Error in Functie statusbalk: " + e);
+
+        } finally {
+            currentCon.close();
+            statement.close();
+            resultSet.close();
+        }
+
+        return aantal;
+
+
+
+    }
 }

@@ -38,7 +38,6 @@ public class MijnBerichten extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// Instantieren van objecten
-		Berichten berichten = new Berichten();
 		BerichtenDao berichtendao = new BerichtenDao();
 
 		// Haal de huidige sessie op
@@ -52,7 +51,7 @@ public class MijnBerichten extends HttpServlet {
 			int userid = user.getLidnr();
 			ArrayList<Lid> afzender = new ArrayList<Lid>();
 
-			bericht = berichtendao.haalberichten(userid);
+			bericht = berichtendao.haalberichten(userid, 0);
 			request.setAttribute("berichten", bericht);
 
 			for (int i = 0; i < bericht.size(); i++) {

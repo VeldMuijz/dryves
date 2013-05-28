@@ -12,6 +12,8 @@ import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -81,8 +83,13 @@ public class BerichtLezen extends HttpServlet {
 
         int berichtnr = Integer.parseInt(request.getParameter("berichtid"));
         System.out.println(berichtnr);
+       
         Lid user = (Lid) session.getAttribute("currentSessionUser");
-        berichtDao.markeerBericht(berichtnr);        
+        try {        
+            berichtDao.markeerBericht(berichtnr);
+        } catch (SQLException ex) {
+            Logger.getLogger(BerichtLezen.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         try {
             List<Berichten> ritten;
