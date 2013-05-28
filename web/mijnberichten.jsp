@@ -55,15 +55,15 @@
 							<div class="rittenlijst">
 
 								<table>
-									<td>
+									<td width="50px;">
 										<c:choose>
 											<c:when test="${bericht.ongelezen==1}"><img src="images/envelope.png" /></c:when>
 											<c:when test="${bericht.ongelezen==0}"></c:when>
 										</c:choose>
 									</td>
 
-									<td	><fmt:message bundle="${rb}" key="afzender" /> ${afzender[counter].vnaam} ${afzender[counter].anaam} <br/> <fmt:message bundle="${rb}" key="datum" />  ${bericht.stringDatum} ${bericht.stringTijd}</td>
-									<td></td>  
+									<td width="200px;"><fmt:message bundle="${rb}" key="afzender" /> ${afzender[counter].vnaam} ${afzender[counter].anaam} <br/> <fmt:message bundle="${rb}" key="datum" />  ${bericht.stringDatum} ${bericht.stringTijd}</td>
+									<td width="82px;"></td>  
 									<td><button onclick="window.location = 'BerichtLezen?berichtid=${bericht.berichtid}';"><fmt:message bundle="${rb}" key="bekijkbericht" /></button></td>
 									<c:set var="counter" value="${counter + 1 }"/>
                                                                         

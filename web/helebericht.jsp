@@ -91,7 +91,11 @@
                     
                     <p><fmt:message bundle="${rb}" key="datum" /> ${bericht.stringDatum} ${bericht.stringTijd} </p> 
 
-                    <p style="font-size: 12px; font-weight: bold;"><fmt:message bundle="${rb}" key="bericht" /> ${bericht.inhoud}</p>
+                    <p style="font-size: 12px; font-weight: bold;"><fmt:message bundle="${rb}" key="bericht" /> 
+                        
+                     <br /><br />   
+                        
+                     <textarea rows="6" style="width:600px; padding:6px;" readonly>${bericht.inhoud}</textarea></p>
 
 
                     <p> </p>
