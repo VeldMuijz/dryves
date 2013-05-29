@@ -18,12 +18,8 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Dryves</title>
+        <title>Nieuw bericht</title>
         <link type="text/css" rel="stylesheet" href="css/dryver.css"/>
-     
-
-       
-
     </head>
     <body>
 
@@ -48,51 +44,21 @@
             <div class="contentPanel">
 
 
+						<%--    <p><fmt:message bundle="${rb}" key="datum" /> <% out.print(datum);%> </p> --%>
 
 
-                <html lang="en">
+						<fmt:message bundle="${rb}" key="hieronderbericht" />
 
-                    <head>
-                        <meta charset="utf-8" />
-                        <title>Nieuw bericht</title>
+						<br /><br />
 
+						<textarea placeholder="<fmt:message bundle="${rb}" key="schrijfjebericht" />" type="text" name="inhoud" rows="6" style="width:400px; padding: 6px;"></textarea>
 
+						<br /><br />
 
-                    
-                        </head>
-
-                        <body>
-
+						<button onclick="window.location = 'VerstuurBericht?ritnr=${bericht.ritnr}&lidnr=${bericht.lidnr}';"><fmt:message bundle="${rb}" key="berichtverzenden" /></button>
 
 
 
-                            <%  
-                          String ritnr=  request.getParameter("ritnr");
-                          String lidnr=  request.getParameter("lidnr");
-                          String datum=  request.getParameter("datum");
-                            %>
-
-
-                            <form action="VerstuurBericht" method="get">
-
-                            <%--    <p><fmt:message bundle="${rb}" key="datum" /> <% out.print(datum);%> </p> --%>
-
-                                <input type="hidden" name="ritnr" value="<% out.print(ritnr);%>" />
-                                <input type="hidden" name="lidnr" value="<% out.print(lidnr);%>" />
-                                
-                                <fmt:message bundle="${rb}" key="hieronderbericht" />
-                                
-                                <br /><br />
-
-                                <textarea placeholder="<fmt:message bundle="${rb}" key="schrijfjebericht" />" type="text" name="inhoud" rows="6" style="width:400px; padding: 6px;"></textarea>
-
-                                <br /><br />
-
-                                <button><fmt:message bundle="${rb}" key="berichtverzenden" /></button>
-
-
-                            </form>
-
-
-                            </div>
-                        </body>
+			</div>
+	</body>
+		</html>

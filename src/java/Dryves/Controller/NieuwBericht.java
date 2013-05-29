@@ -5,15 +5,7 @@
 package Dryves.Controller;
 
 import Dryves.Model.Berichten;
-import Dryves.Model.BerichtenDao;
-import Dryves.Model.verstuurEmail;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -22,47 +14,33 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author H
+ * @author jeroen
  */
-public class VerstuurBericht extends HttpServlet {
+public class NieuwBericht extends HttpServlet {
 
+	/**
+	 * Handles the HTTP
+	 * <code>GET</code> method.
+	 *
+	 * @param request servlet request
+	 * @param response servlet response
+	 * @throws ServletException if a servlet-specific error occurs
+	 * @throws IOException if an I/O error occurs
+	 */
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		//Maak bericht object aan
 		Berichten bericht = new Berichten();
-		BerichtenDao berichtDao = new BerichtenDao();
-
-		//huidige tijdstip opvragen
-		Date datum = new Date();
-
+		
+		//set de benodigde attributen
 		bericht.setRitnr(Integer.parseInt(request.getParameter("ritnr")));
 		bericht.setLidnr(Integer.parseInt(request.getParameter("lidnr")));
-		System.out.println("Bericht lidnummer: " + bericht.getLidnr());
-		bericht.setInhoud(request.getParameter("inhoud"));
-		bericht.setDatum(new Timestamp(datum.getTime()));
-		System.out.println(bericht.getInhoud());
-
-
-		try {
-			berichtDao.BerichtVersturen(bericht);
-
-			verstuurEmail ve = new verstuurEmail();
-
-			String naar = "";
-			String onderwerp = "U heeft een nieuw bericht!";
-			String mail = "Dit is een test!";
-
-			System.out.println("Dit is de afzender: " + bericht.getAfzender());
-
-			//ve.verstuurEmailZonderBijlage(naar, onderwerp, mail);
-
-		} catch (SQLException ex) {
-			Logger.getLogger(Berichtverzenden.class.getName()).log(Level.SEVERE, null, ex);
-			response.sendRedirect("oops.jsp");
-
-		}
-
-		RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/succesvol.jsp");
+		
+		// geef bericht mee in de request zodat deze beschikbaar is op de pagina
+		request.setAttribute("bericht", bericht);
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/nieuwbericht.jsp");
 		dispatcher.forward(request, response);
 
 	}
