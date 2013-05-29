@@ -37,36 +37,6 @@ public class RitPlannen extends HttpServlet {
 	String eindTimestamp;
 
 	/**
-	 * Processes requests for both HTTP
-	 * <code>GET</code> and
-	 * <code>POST</code> methods.
-	 *
-	 * @param request servlet request
-	 * @param response servlet response
-	 * @throws ServletException if a servlet-specific error occurs
-	 * @throws IOException if an I/O error occurs
-	 */
-	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		response.setContentType("text/html;charset=UTF-8");
-		PrintWriter out = response.getWriter();
-		try {
-			/* TODO output your page here. You may use following sample code. */
-			out.println("<!DOCTYPE html>");
-			out.println("<html>");
-			out.println("<head>");
-			out.println("<title>Servlet RitPlannen</title>");
-			out.println("</head>");
-			out.println("<body>");
-			out.println("<h1>Servlet RitPlannen at " + request.getContextPath() + "</h1>");
-			out.println("</body>");
-			out.println("</html>");
-		} finally {
-			out.close();
-		}
-	}
-
-	/**
 	 * Handles the HTTP
 	 * <code>GET</code> method.
 	 *
@@ -78,23 +48,6 @@ public class RitPlannen extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-//        // Instantieren van objecten
-//        Rit rit = new Rit();
-//        RitDao ritDao = new RitDao();
-//
-//        // Haal de huidige sessie op
-//        HttpSession session = request.getSession();
-//        // Maak in de sessie een object rit aan met naam sessieRit
-//        session.setAttribute("sessieRit", rit);
-//        //Haal de userbean (dit moet sessiebean worden) op uit de sessie
-//        Lid user = (Lid) session.getAttribute("currentSessionUser");
-//
-//        System.out.println("**************** \n dit is rinr:   " + request.getParameter("ritnr"));
-//
-//        rit.setRitnr(Integer.parseInt(request.getParameter("ritnr")));
-//        System.out.println("Dit is het ritnummer± " + rit.getRitnr());
-//        ritDao.enkeleRitOphalen(rit.getRitnr(), rit);
-//        System.out.println("dit is het eindpunt" + rit.getEindpunt());
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/rit_plannen.jsp");
 		dispatcher.forward(request, response);
@@ -127,28 +80,8 @@ public class RitPlannen extends HttpServlet {
 
 
 		//Haal alle gegevens op en zet ze in Rit
-		//Bouw ingevoerde datum om naar een timestamp
-//        Date datum;
-//        Date einddatum;
-//        stringDatum = request.getParameter("begindatum");
-//		System.out.println("Dit is begindatum met het keuze menu'tje: "+ stringDatum);
-//        stringTijd = request.getParameter("tijd");
-//
-//        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy'T'HH:mm");
-//        SimpleDateFormat timestampFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
-//
-//        try {
-//            datum = dateFormat.parse(stringDatum + 'T' + stringTijd);
-//            timestamp = timestampFormat.format(datum);
-//
-//            ritDao.setBegindatum(DateTime.parse(timestamp));
-//
-//        } catch (ParseException ex) {
-//            Logger.getLogger(RitPlannen.class.getName()).log(Level.SEVERE, null, ex);
-//            System.out.println("************ Programma snapt Timestamp niet!");
-//        }
 		System.out.println("request.getParameter(\"begindatum\") = " + request.getParameter("begindatum"));
-
+		// Bouw de timestamp om naar een US timestamp
 		ritDao.setBegindatum(dc.convertUSTimestamp(request.getParameter("begindatum"), request.getParameter("tijd")));
 
 		String ma = request.getParameter("ma");

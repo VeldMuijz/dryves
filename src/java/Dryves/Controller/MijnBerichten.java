@@ -46,7 +46,6 @@ public class MijnBerichten extends HttpServlet {
 		//Haal de userbean (dit moet sessiebean worden) op uit de sessie
 		Lid user = (Lid) session.getAttribute("currentSessionUser");
 
-
 		try {
 			List<Berichten> bericht;
 			int userid = user.getLidnr();
@@ -68,13 +67,13 @@ public class MijnBerichten extends HttpServlet {
 			}
 			request.setAttribute("afzender", afzender);
 
-			RequestDispatcher dispatcher = request.getRequestDispatcher("mijnberichten.jsp");
-			dispatcher.forward(request, response);
-
 		} catch (SQLException e) {
 			throw new ServletException("Kan gegevens niet ophalen van database.", e);
 
 		}
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/mijnberichten.jsp");
+		dispatcher.forward(request, response);
 
 	}
 
