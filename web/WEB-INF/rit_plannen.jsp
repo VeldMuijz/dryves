@@ -219,18 +219,33 @@
 
 				<div class="invoerveld">
 					<form action="RitPlannen" method="post" onsubmit="return isCompleet();">
-						<fmt:message bundle="${rb}" key="startadres" /><br/>
-						<input type="text" id="start" name="start" onchange="calcRoute();" style ="width: 350; float: right:"><br />
-						<fmt:message bundle="${rb}" key="eindadres" /> <br/>
-						<input type="text" id="end" name="end" onchange="calcRoute();" style ="width: 350; float: right:"> <br />	
+						
+						<input placeholder="<fmt:message bundle="${rb}" key="startadres" />" class="ritplannenZoekveld" type="text" id="start" name="start" onchange="calcRoute();" style ="width: 350; float: right:">
+						
+						<input placeholder="<fmt:message bundle="${rb}" key="eindadres" />" class="ritplannenZoekveld" type="text" id="end" name="end" onchange="calcRoute();" style ="width: 350; float: right:">	
 
-						<fmt:message bundle="${rb}" key="begindatum" /><br/> <input type="date" id="begindatum" name="begindatum"> <br/>
-						<fmt:message bundle="${rb}" key="tijd" /> <br/> <input type="text" id="tijd" name="tijd"> <br/><br/>
-						<td> <fmt:message bundle="${rb}" key="herhaling" />
-							<input type="checkbox" id="herhaling" name="herhaling" onclick="isChecked(this.checked);"> </td>
-						<br/><br/>
+                                                <input placeholder="<fmt:message bundle="${rb}" key="begindatum" />" class="ritplannenZoekveld" type="date" id="begindatum" name="begindatum">
+                                                
+                                                <input placeholder="<fmt:message bundle="${rb}" key="tijd" />" class="ritplannenZoekveld" type="text" id="tijd" name="tijd">
+                                                
+                                                <br />
+						
+                                                
+                                                <td>
+                                                    
+                                                    <input type="checkbox" id="herhaling" name="herhaling" onclick="isChecked(this.checked);"> <fmt:message bundle="${rb}" key="herhaling" />
+                                                
+                                                </td>
+                                                
+						
 						<div id="dagenCheckBox" style="display: none;">
-							<fmt:message bundle="${rb}" key="selectherhaaldagen" /> <br/>
+                                                    
+                                                    <br />
+                                                    
+							<fmt:message bundle="${rb}" key="selectherhaaldagen" /> 
+                                                        
+                                                        <br /><br />
+                                                        
 							<table>
 								<td><input type="checkbox" name="ma" value="ma"> <fmt:message bundle="${rb}" key="ma" /> </input> </td>
 								<td><input type="checkbox" name="di" value="di"> <fmt:message bundle="${rb}" key="di" /> </input> </td>
@@ -240,32 +255,52 @@
 								<td><input type="checkbox" name="za" value="za"> <fmt:message bundle="${rb}" key="za" /> </input> </td>
 								<td><input type="checkbox" name="zo" value="zo"> <fmt:message bundle="${rb}" key="zo" /> </input> </td>
 							</table>
-							<br/>
-							<fmt:message bundle="${rb}" key="einddatum" /> <input type="date" id="einddatum" name="einddatum"> </div>
+							
+                                                        <br />
+							 
+                                                        <input placeholder="<fmt:message bundle="${rb}" key="einddatum" />" class="ritplannenZoekveld" type="date" id="einddatum" name="einddatum"> </div>
 
+                                                        <br /><br />
+														
+                                                <table>
+                                                    <tr>
+                                                        <td width="150px;">
+                                                            <fmt:message bundle="${rb}" key="aantalzit" /> 
 
-						<br /> <br />
+                                                        </td>
+                                                        <td>
+                                                            <select style="width:85px;" name="aantalZitplaatsen">	
+                                                                <option value="1"> 1 </option>
+                                                                <option value="2"> 2 </option> 
+                                                                <option value="3"> 3 </option>
+                                                                <option value="4"> 4 </option>
+                                                                <option value="5"> 5 </option>
+                                                                <option value="6"> 6 </option>
+                                                            </select>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
 
-						<fmt:message bundle="${rb}" key="selectautogegevens" /> <br/>								
-						<table><td><fmt:message bundle="${rb}" key="aantalzit" /> <select name="aantalZitplaatsen">	
-									<option value="1"> 1 </option>
-									<option value="2"> 2 </option> 
-									<option value="3"> 3 </option>
-									<option value="4"> 4 </option>
-									<option value="5"> 5 </option>
-									<option value="6"> 6 </option>
-								</select></td>
+                                                        <td>
+                                                            <fmt:message bundle="${rb}" key="soortbrandstof" /> 
+                                                        </td>
+                                                        <td>
+                                                            <select id="soortBrandstof" name="soortBrandstof">
+                                                                <option value="benzine"> <fmt:message bundle="${rb}" key="benzine" /> </option>
+                                                                <option value="diesel"> <fmt:message bundle="${rb}" key="diesel" /> </option>
+                                                                <option value="gas/lpg"> <fmt:message bundle="${rb}" key="gas" /> </option>						
+                                                                <option value="electrisch"> <fmt:message bundle="${rb}" key="electrisch" /> </option>
+                                                                <option value="hybride"> <fmt:message bundle="${rb}" key="hybride" /> </option>
+                                                            </select>
+                                                        </td>
+                                                    </tr>
+                                                </table> <br/><br/>
 
-							<td><fmt:message bundle="${rb}" key="soortbrandstof" /> <select id="soortBrandstof" name="soortBrandstof">
-									<option value="benzine"> <fmt:message bundle="${rb}" key="benzine" /> </option>
-									<option value="diesel"> <fmt:message bundle="${rb}" key="diesel" /> </option>
-									<option value="gas/lpg"> <fmt:message bundle="${rb}" key="gas" /> </option>						
-									<option value="electrisch"> <fmt:message bundle="${rb}" key="electrisch" /> </option>
-									<option value="hybride"> <fmt:message bundle="${rb}" key="hybride" /> </option>
-								</select></td></table> <br/><br/>
-
-						<input type="checkbox" name="aanbieden"><fmt:message bundle="${rb}" key="directaanbieden" /></input>			
-						<button type="submit"><fmt:message bundle="${rb}" key="klik" /></button>
+						<input type="checkbox" name="aanbieden"><fmt:message bundle="${rb}" key="directaanbieden" /></input>
+                                                
+                                                <br /><br />
+                                                
+						<button style="width:289px" type="submit"><fmt:message bundle="${rb}" key="klik" /></button>
 
 						<input id="hiddenstart" name="hiddenstart" style="display: none;" ></input>
 						<input id="hiddenend" name="hiddenend" style="display: none;"></input>
