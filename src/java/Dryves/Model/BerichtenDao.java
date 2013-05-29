@@ -289,7 +289,7 @@ public class BerichtenDao {
 				bericht.setDatum(rs.getTimestamp("datum"));
 				bericht.setStringTijd(dc.korteTijd(bericht.getDatum()));
 				bericht.setStringDatum(dc.korteDatum(bericht.getDatum()));
-				bericht.setRitnr(rs.getInt("ritnm"));
+				bericht.setRitnr(rs.getInt("ritnr"));
 				bericht.setOngelezen(rs.getInt("gelezen"));
 
 				berichten.add(bericht);
