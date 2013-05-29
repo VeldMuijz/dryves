@@ -4,6 +4,9 @@
     Author     : jeroen
 --%>
 
+<%@page import="Dryves.Model.Rit"%>
+<%@page import="Dryves.Model.RitDao"%>
+<%@page import="Dryves.Model.AankoopDao"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
@@ -18,6 +21,9 @@
         <title>Rit Kopen</title>
 		<script type="text/javascript"
 				src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAQ5JCTE_OQi2SCYXO6urNY17FW5DaOVvU&sensor=false">
+		</script>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript">
+
 		</script>
 		<script type="text/javascript">
 			var map;
@@ -85,8 +91,8 @@
 				// function to create markers for each step.
 				directionsService.route(request, function(result, status) {
 					if (status == google.maps.DirectionsStatus.OK) {
-						var warnings = document.getElementById("warnings_panel");
-						warnings.innerHTML = "" + result.routes[0].warnings + "";
+						//var warnings = document.getElementById("warnings_panel");
+						//warnings.innerHTML = "" + result.routes[0].warnings + "";
 						directionsDisplay.setDirections(result);
 						setRouteInfo();
 					}
@@ -184,19 +190,50 @@
 //}
 
 			google.maps.event.addDomListener(window, 'load', initialize);
-			
-			
-			function redirect() {
-				window.location = 'RitNietKopen';
+
+//			$(window).unload(function() {
+//				alert("hoi");
+//				$.ajax({
+//					type: 'GET',
+//					async: false,
+//					url: '/Dryves/RitBeschikbaarCheck?ritnr=${sessieRit.ritnr}'
+//				});
+//			});
+
+
+	// deze functie zorgt voor een pause effect
+			function sleep(milliseconds) {
+				var start = new Date().getTime();
+				for (var i = 0; i < 1e7; i++) {
+					if ((new Date().getTime() - start) > milliseconds) {
+						break;
+					}
+				}
 			}
-					setTimeout(redirect, 30000);		
+
+
+			//verhoog de zitplaats met 1 en verwijder daarmee de reservering op een rit
+			function zitplaatsverhogen() {
+
+				$.ajax({
+					type: 'GET',
+					async: false,
+					url: '/Dryves/RitBeschikbaarCheck?ritnr=${sessieRit.ritnr}'
+				});
+				sleep(1000);
+			}
+			
+			window.onbeforeunload = zitplaatsverhogen;
+
+			setTimeout(zitplaatsverhogen, 30000);
 		</script>
     </head>
     <body onload="initialize();">
 
-		<div id="warnings_panel" style="width:100%;height:10%;text-align:center">
-			<b>Walking directions are in beta. Use caution – This route may be missing sidewalks or pedestrian paths.</b>
-		</div>
+
+		<!--		<div id="warnings_panel" style="width:100%;height:10%;text-align:center">
+					<b>Walking directions are in beta. Use caution – This route may be missing sidewalks or pedestrian paths.</b>
+				</div>-->
 
 
 		<div class="background">
@@ -221,7 +258,7 @@
 
 				<div class="invoerveld">
 					<form action="RitKopen" method="post" onsubmit="return isCompleet();">
-                        <input type="text" hidden ="true" id="ritnr" name="ritnr" value="${sessieRit.ritnr}"></input>                                               
+                        <input type="text" hidden ="false" id="ritnr" name="ritnr" value="${sessieRit.ritnr}"></input>                                               
 						<br><fmt:message bundle="${rb}" key="startadres" /><br/> 
 						<input type="text" id="start" name="start" disabled="true" style ="width: 350; float: right:" value="${sessieRit.startpunt}"><br />
 						<fmt:message bundle="${rb}" key="hierwilikopgehaaldworden" /><br/>
