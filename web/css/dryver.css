@@ -76,6 +76,22 @@ button {
 
 }
 
+.navigation a:link {
+    color: #000;
+}
+
+.navigation a:active {
+    color: #000;
+}
+
+.navigation a:hover {
+    color: #000;
+}
+
+.navigation a:visited {
+    color: #000;
+}
+
 
 .navigation button {
 
