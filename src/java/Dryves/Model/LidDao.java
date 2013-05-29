@@ -89,58 +89,45 @@ public class LidDao {
 		return bean;
 	}
 
+	/**
+	 *
+	 * @param bean2
+	 * @return
+	 */
 	public static Lid login(Lid bean2) {
-		//preparing some objects for connection 
-		Statement stmt = null;
-
+		//Bereid de database connectie voor
+		PreparedStatement stmt = null;
+		currentCon = ConnectionManager.getConnection();
+		rs = null;
 		String email = bean2.getEmail();
 		String wachtwoord = bean2.getWachtwoord();
-
-		ResultSet rs;
-		Connection con = Dryves.ConnectionManager.getConnection();
 		Lid bean = new Lid();
-
+		String queryString = "SELECT lidnr, vnaam, anaam, geslacht, straat, postcode, stad, telnr, reknr, email, beoordeling, fotourl, tvoegsel, wachtwoord, langnotify, rol "
+				+ "FROM lid "
+				+ "WHERE email = ?";
 
 		// "System.out.println" prints in the console; Normally used to trace the process
 		System.out.println("Your user name is " + email);
 		System.out.println("Your wachtwoord is " + wachtwoord);
-		// System.out.println("Query: " + zoekQuery);
 
 		try {
-			PreparedStatement pstmt = con.prepareStatement("SELECT lidnr ,vnaam,anaam,geslacht,straat,postcode, stad,telnr,reknr,email,beoordeling,fotourl,tvoegsel,wachtwoord,langnotify,rol FROM lid WHERE email = ?");
-			pstmt.setString(1, email);
-			//connect to DB 
-			con = ConnectionManager.getConnection();
-			stmt = con.createStatement();
+			stmt = currentCon.prepareStatement(queryString);
+			stmt.setString(1, email);
+			rs = stmt.executeQuery();
 
-
-
-
-			rs = pstmt.executeQuery();
-
-			//rs = stmt.executeQuery(zoekQuery);           
 			boolean more = rs.next();
 
 			// if user does not exist set the isValid variable to false
 			if (!more) {
-				System.out.println("Sorry, je bent niet geregistreerd. Registreer eerst alstublieft.");
+				System.out.println("Sorry, je bent niet ingelogd. Registreer eerst alstublieft.");
 				bean.setValid(false);
 			} //if user exists set the isValid variable to true
 			else if (more) {
 				//Hieronder wordt het wachtwoord van de user opgehaald uit de database 
 				String wachtwoordUser = rs.getString(14);
 
-				//Hieronder worden de wachtwoorden geprint in de console
-				System.out.println("Dit is het ww uit de DB: " + wachtwoordUser);
-
-				System.out.println("Dit is het ww van de JSP: " + wachtwoord);
-
-				//Hieronder wordt de locale opgehaald uit de database
-				// String locale = rs.getString(5);
-
-				//Hieronder wordt de locale naar de console geprint
-				//System.out.println("Dit is de locale van het lid: " + locale);
-
+				//Wanneer het wachtwoord overenkomt met het wachtwoord in de database
+				//vult deze if methode het lidobject
 				if (wachtwoord.equals(wachtwoordUser)) {
 
 					bean.setLidnr(rs.getInt(1));
@@ -163,78 +150,68 @@ public class LidDao {
 					bean.setRol(rs.getInt(16));
 					bean.setValid(true);
 
-
-					//Hieronder wordt de locale vanuit de getter geprint naar de console
-					System.out.println("Dit is de locale vanuit de getter van sessie :" + bean.getLocaleStr());
-
-
-					System.out.println("Dit is de rol van de gebruiker: " + bean.getRol());
-
 				} else {
-					System.out.println("Sorry, you are not a registered user! Please sign up first");
+					System.out.println("Sorry u bent niet geregistreerd.");
 					bean.setValid(false);
 				}
 			}
 		} catch (Exception ex) {
 			System.out.println("Log In failed: An Exception has occurred! " + ex);
-		} //some exception handling
-		finally {
-
-			if (stmt != null) {
-				try {
-					stmt.close();
-				} catch (Exception e) {
-				}
-				stmt = null;
-			}
-
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-				}
-
-				con = null;
+		}
+		//Doe dit altijd, als het goed gaat of wanneer het fout gaat
+		if (rs != null) {
+			try {
+				//sluit resultset af
+				rs.close();
+			} catch (SQLException ignore) {
 			}
 		}
-
+		if (stmt != null) {
+			//sluit preparedStatement
+			try {
+				stmt.close();
+			} catch (SQLException ignore) {
+			}
+		}
+		if (currentCon != null) {
+			//sluit huidige verbinding
+			try {
+				currentCon.close();
+			} catch (SQLException ignore) {
+			}
+		}
+		//geef het lidobject terug
 		return bean;
-
 	}
 
+	//Hier kijken of de gebruiker al bestaat met behyulp van een facebookid
 	/**
-	 * Beoordeling voor een lid updaten
+	 * Deze methode controleert of dit facebookid al bekend is in de database
 	 *
-	 * @param beoordeelde
-	 * @param beoordeling
-	 * @return
+	 * @param facebookid
+	 * @return True als dit facebookid al bestaat
 	 */
-	public Boolean updateBeoordelingLid(int aankoopnr, double waardering) {
+	public Boolean checkDuplicateFacebookID(String facebookid) {
+		//Bereid de database connectie voor
+		PreparedStatement stmt = null;
 		currentCon = ConnectionManager.getConnection();
-		PreparedStatement beoordeelLid = null;
+		rs = null;
+		String queryString = "SELECT facebookid FROM lid  WHERE facebookid = ?";
+		boolean idCheck = false;
 
 		try {
-			
-			String updateBeoordeling = "Update lid SET beoordeling = (beoordeling + ?) / 2 "
-					+ "WHERE lidnr = ("
-					+ "SELECT r.lidnr "
-					+ "FROM beoordeling as b, aankoop as a, rit as r, lid as l "
-					+ "WHERE b.aankoopnr = a.aankoopnr "
-					+ "AND a.ritnr = r.ritnr "
-					+ "AND b.lidnr = l.lidnr "
-					+ "AND a.aankoopnr = ? LIMIT 1);";
+			stmt = currentCon.prepareStatement(queryString);
 
-			beoordeelLid = currentCon.prepareStatement(updateBeoordeling);
-			beoordeelLid.setDouble(1, waardering);
-			beoordeelLid.setInt(2, aankoopnr);
+			stmt.setString(1, facebookid);
 
-			System.out.println("+++++++++++++BeoordeelLid+++++++++++++++\n Query = " + updateBeoordeling + "\n");
-			beoordeelLid.executeUpdate();
+			rs = stmt.executeQuery();
+			if (rs.next()) {
 
-		} catch (SQLException ex) {
-			Logger.getLogger(LidDao.class.getName()).log(Level.SEVERE, null, ex);
-			return false;
-			
+				idCheck = true;
+			}
+
+		} catch (SQLException e) {
+			Logger.getLogger(LidDao.class.getName()).log(Level.SEVERE, null, e);
 		} finally {
 			//Doe dit altijd, als het goed gaat of wanneer het fout gaat
 			if (rs != null) {
@@ -244,12 +221,11 @@ public class LidDao {
 				} catch (SQLException ignore) {
 				}
 			}
-			if (beoordeelLid != null) {
+			if (stmt != null) {
 				//sluit preparedStatement
 				try {
-					beoordeelLid.close();
+					stmt.close();
 				} catch (SQLException ignore) {
-					
 				}
 			}
 			if (currentCon != null) {
@@ -257,55 +233,35 @@ public class LidDao {
 				try {
 					currentCon.close();
 				} catch (SQLException ignore) {
-					
 				}
 			}
 		}
-		return true;
-	}
-
-	//Hier kijken of de gebruiker al bestaat met behyulp van een facebookid
-	public Boolean checkDuplicateFacebookID(String facebookid) {
-
-		boolean more = false;
-
-		try {
 
 
-			Connection con = Dryves.ConnectionManager.getConnection();
-
-			ResultSet rs;
-			PreparedStatement pstmt = con.prepareStatement("SELECT facebookid FROM lid  WHERE facebookid=?");
-
-			pstmt.setString(1, facebookid);
-
-			rs = pstmt.executeQuery();
-			if (rs.next()) {
-
-				more = true;
-			}
-
-
-
-		} catch (SQLException e) {
-			System.out.println();
-		}
-
-
-		return more;
+		return idCheck;
 
 	}
 
 	// in deze functie kijken we of de email bestaat
+	/**
+	 * Deze methode controleert of een emailadres al in de database voorkomt
+	 *
+	 * @param email string die het emailadres bevat
+	 * @return True als het emailadres voorkomt, false wanneer deze niet
+	 * voorkomt
+	 */
 	public Boolean checkDuplicate(String email) {
 		currentCon = ConnectionManager.getConnection();
+		rs = null;
 		Boolean more = null;
-		Statement stmt = null;
+		PreparedStatement stmt = null;
 
+		String queryString = "SELECT email "
+				+ "FROM Lid "
+				+ "WHERE email='" + email + "'";
 		try {
-			stmt = currentCon.createStatement();
-			String query = "SELECT email FROM Lid WHERE email='" + email + "'";
-			ResultSet rs = stmt.executeQuery(query);
+			stmt = currentCon.prepareStatement(queryString);
+			rs = stmt.executeQuery(queryString);
 
 			if (rs.next()) {
 				more = true;
@@ -313,19 +269,46 @@ public class LidDao {
 				more = false;
 			}
 			currentCon.close();
-		} catch (SQLException s) {
-			System.out.println("Er kan geen vebinding worden gemaakt met de database." + s);
+		} catch (SQLException e) {
+			Logger.getLogger(LidDao.class.getName()).log(Level.SEVERE, null, e);
+
+		} finally {
+			//Doe dit altijd, als het goed gaat of wanneer het fout gaat
+			if (rs != null) {
+				try {
+					//sluit resultset af
+					rs.close();
+				} catch (SQLException ignore) {
+				}
+			}
+			if (stmt != null) {
+				//sluit preparedStatement
+				try {
+					stmt.close();
+				} catch (SQLException ignore) {
+				}
+			}
+			if (currentCon != null) {
+				//sluit huidige verbinding
+				try {
+					currentCon.close();
+				} catch (SQLException ignore) {
+				}
+			}
 		}
 		return more;
 	}
 
 	/**
-	 * Opslaan van registratie in de database
+	 * Opslaan van lidgegevens in de tabel lid.
+	 *
+	 * @return True als registratie gelukt is, false wanneer dit mislukt
 	 */
 	public Boolean saveRegistratie() {
+		currentCon = ConnectionManager.getConnection();
+		PreparedStatement insertLid = null;
+
 		try {
-			currentCon = ConnectionManager.getConnection();
-			PreparedStatement insertLid;
 
 			String queryString = ("INSERT INTO Lid ("
 					+ " vnaam,"
@@ -366,75 +349,140 @@ public class LidDao {
 		} catch (SQLException ex) {
 			Logger.getLogger(LidDao.class.getName()).log(Level.SEVERE, null, ex);
 			return false;
-
+		} finally {
+			//Doe dit altijd, als het goed gaat of wanneer het fout gaat
+			if (rs != null) {
+				try {
+					//sluit resultset af
+					rs.close();
+				} catch (SQLException ignore) {
+				}
+			}
+			if (insertLid != null) {
+				//sluit preparedStatement
+				try {
+					insertLid.close();
+				} catch (SQLException ignore) {
+				}
+			}
+			if (currentCon != null) {
+				//sluit huidige verbinding
+				try {
+					currentCon.close();
+				} catch (SQLException ignore) {
+				}
+			}
 		}
 		return true;
 
 	}
 
+	/**
+	 * Voeg een lid in de database to die inlogt met een Facebook account
+	 *
+	 * @return True als registratie gelukt is, false wanneer dit mislukt is
+	 */
 	public Boolean addFacebookLid() {
+		currentCon = ConnectionManager.getConnection();
+		PreparedStatement addFacebook = null;
+
+		String queryString = ("INSERT INTO lid ( vnaam,"
+				+ " anaam,"
+				+ "geslacht,"
+				+ "straat,"
+				+ "postcode,"
+				+ "stad,"
+				+ "telnr,"
+				+ "reknr,"
+				+ "email, "
+				+ "beoordeling,"
+				+ "fotourl,"
+				+ "tvoegsel,"
+				+ "wachtwoord,"
+				+ "langnotify,"
+				+ "rol,"
+				+ "facebookid)"
+				+ "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+
 
 		try {
-			currentCon = ConnectionManager.getConnection();
-			PreparedStatement addfacebook;
 
-			String queryString = ("INSERT INTO lid ( vnaam, anaam,geslacht,straat,postcode,stad,telnr,reknr,email, beoordeling,fotourl,tvoegsel,wachtwoord,langnotify,rol,facebookid)VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+			addFacebook = currentCon.prepareStatement(queryString);
 
-			addfacebook = currentCon.prepareStatement(queryString);
+			addFacebook.setString(1, vnaam);
+			addFacebook.setString(2, anaam);
+			addFacebook.setString(3, "");
+			addFacebook.setString(4, "");
+			addFacebook.setString(5, "");
+			addFacebook.setString(6, "");
+			addFacebook.setInt(7, 0);
+			addFacebook.setInt(8, 0);
+			addFacebook.setString(9, email);
+			addFacebook.setInt(10, 0);
+			addFacebook.setString(11, "");
+			addFacebook.setString(12, "");
+			addFacebook.setString(13, "");
+			addFacebook.setString(14, "nl_NL");
+			addFacebook.setInt(15, 1);
+			addFacebook.setString(16, facebookid);
 
-			addfacebook.setString(1, vnaam);
-			addfacebook.setString(2, anaam);
-			addfacebook.setString(3, "");
-			addfacebook.setString(4, "");
-			addfacebook.setString(5, "");
-			addfacebook.setString(6, "");
-			addfacebook.setInt(7, 0);
-			addfacebook.setInt(8, 0);
-			addfacebook.setString(9, email);
-			addfacebook.setInt(10, 0);
-			addfacebook.setString(11, "");
-			addfacebook.setString(12, "");
-			addfacebook.setString(13, "");
-			addfacebook.setString(14, "nl_NL");
-			addfacebook.setInt(15, 1);
-			addfacebook.setString(16, facebookid);
+			System.out.println("De query is: " + addFacebook);
 
-			System.out.println("De query is: " + addfacebook);
-
-			addfacebook.executeUpdate();
+			addFacebook.executeUpdate();
 
 		} catch (SQLException ex) {
-			System.out.println(ex);
+			Logger.getLogger(LidDao.class.getName()).log(Level.SEVERE, null, ex);
 			return false;
+
+		} finally {
+			//Doe dit altijd, als het goed gaat of wanneer het fout gaat
+			if (rs != null) {
+				try {
+					//sluit resultset af
+					rs.close();
+				} catch (SQLException ignore) {
+				}
+			}
+			if (addFacebook != null) {
+				//sluit preparedStatement
+				try {
+					addFacebook.close();
+				} catch (SQLException ignore) {
+				}
+			}
+			if (currentCon != null) {
+				//sluit huidige verbinding
+				try {
+					currentCon.close();
+				} catch (SQLException ignore) {
+				}
+			}
 		}
 		return true;
 	}
 
 	/**
+	 * Deze methode verzorgt het inloggen als een admin
 	 *
-	 * @param beanadmin
-	 * @return
+	 * @param bean Lid object met admin attributen
+	 *
 	 */
 	public void adminLogin(Lid bean) {
 
 		//preparing some objects for connection 
 		Statement stmt = null;
 
-		Connection currentCon = Dryves.ConnectionManager.getConnection();
-
+		currentCon = ConnectionManager.getConnection();
+		PreparedStatement pstmtadmin = null;
+		String queryString = "SELECT * "
+				+ "FROM configuratie "
+				+ "WHERE confnr = 1;";
 		try {
 
-			PreparedStatement pstmtadmin = currentCon.prepareStatement("SELECT * FROM configuratie WHERE confnr = 1");
-
-			//connect to DB 
-			currentCon = ConnectionManager.getConnection();
-
-
-			stmt = currentCon.createStatement();
+			pstmtadmin = currentCon.prepareStatement(queryString);
 
 			rs = pstmtadmin.executeQuery();
 
-			//rs = stmt.executeQuery(zoekQuery);           
 			boolean more = rs.next();
 
 			// if user does not exist set the isValid variable to false
@@ -457,7 +505,8 @@ public class LidDao {
 
 			}
 		} catch (Exception ex) {
-			System.out.println("Gegevens ophalen uit de configuratietabel is niet gelukt!" + ex);
+			System.out.println("Gegevens ophalen uit de configuratietabel is niet gelukt!");
+			Logger.getLogger(LidDao.class.getName()).log(Level.SEVERE, null, ex);
 		} //some exception handling
 		finally {
 
@@ -479,74 +528,104 @@ public class LidDao {
 			}
 		}
 
-
 	}
 
+	/**
+	 * Deze methode haalt een lid met de waardes die meegegeven worden in de
+	 * bean
+	 *
+	 * @param lidnr bevat integer lidnr
+	 * @param bean bevat het object lid
+	 * @return object lid
+	 */
 	public Lid enkelLidOphalen(int lidnr, Lid bean) {
 		currentCon = ConnectionManager.getConnection();
-
 		PreparedStatement enkelLidOphalen = null;
 		String queryString;
-		ResultSet resultSet = null;
-
+		rs = null;
 
 		try {
 
-			queryString = "SELECT * FROM lid WHERE lidnr = ?";
+			queryString = "SELECT * "
+					+ "FROM lid "
+					+ "WHERE lidnr = ?";
 
 			enkelLidOphalen = currentCon.prepareStatement(queryString);
 			enkelLidOphalen.setInt(1, lidnr);
 
-			resultSet = enkelLidOphalen.executeQuery();
+			rs = enkelLidOphalen.executeQuery();
 
-
-			if (resultSet.next()) {
-				bean.setLidnr(resultSet.getInt("lidnr"));
-				bean.setVnaam(resultSet.getString("vnaam"));
-				bean.setAnaam(resultSet.getString("anaam"));
-				bean.setGeslacht(resultSet.getString("geslacht"));
-				bean.setStraat(resultSet.getString("straat"));
-				bean.setPostcode(resultSet.getString("postcode"));
-				bean.setStad(resultSet.getString("stad"));
-				bean.setTelnr(resultSet.getString("telnr"));
-				bean.setReknr(resultSet.getString("reknr"));
-				bean.setEmail(resultSet.getString("email"));
-				bean.setBeoordeling(resultSet.getDouble("beoordeling"));
-				bean.setFotoUrl(resultSet.getString("fotourl"));
-				bean.setTvoegsel(resultSet.getString("tvoegsel"));;
-				bean.setWachtwoord(resultSet.getString("wachtwoord"));
-				bean.setLangnotify(resultSet.getString("langnotify"));
-				bean.setRol(resultSet.getInt("rol"));
+			if (rs.next()) {
+				bean.setLidnr(rs.getInt("lidnr"));
+				bean.setVnaam(rs.getString("vnaam"));
+				bean.setAnaam(rs.getString("anaam"));
+				bean.setGeslacht(rs.getString("geslacht"));
+				bean.setStraat(rs.getString("straat"));
+				bean.setPostcode(rs.getString("postcode"));
+				bean.setStad(rs.getString("stad"));
+				bean.setTelnr(rs.getString("telnr"));
+				bean.setReknr(rs.getString("reknr"));
+				bean.setEmail(rs.getString("email"));
+				bean.setBeoordeling(rs.getDouble("beoordeling"));
+				bean.setFotoUrl(rs.getString("fotourl"));
+				bean.setTvoegsel(rs.getString("tvoegsel"));;
+				bean.setWachtwoord(rs.getString("wachtwoord"));
+				bean.setLangnotify(rs.getString("langnotify"));
+				bean.setRol(rs.getInt("rol"));
 			}
 
-
-
-		} catch (SQLException ex) {
+		} catch (Exception ex) {
+			System.out.println("Gegevens ophalen uit de configuratietabel is niet gelukt!");
 			Logger.getLogger(LidDao.class.getName()).log(Level.SEVERE, null, ex);
+		} //some exception handling
+		finally {
+
+			if (enkelLidOphalen != null) {
+				try {
+					enkelLidOphalen.close();
+				} catch (Exception e) {
+				}
+				enkelLidOphalen = null;
+			}
+
+			if (currentCon != null) {
+				try {
+					currentCon.close();
+				} catch (Exception e) {
+				}
+
+				currentCon = null;
+			}
 		}
 		return bean;
 	}
 
+	/**
+	 * Deze methode update een lid in de database
+	 *
+	 * @param bean object lid met alle waardes voor een lid
+	 * @return het object lid met de laatste waardes
+	 */
 	public Lid enkelLidUpdaten(Lid bean) {
-		try {
-			currentCon = ConnectionManager.getConnection();
+		currentCon = ConnectionManager.getConnection();
+		PreparedStatement updateLid = null;
+		String queryString = ("UPDATE lid "
+				+ "SET"
+				+ " vnaam = ?,"
+				+ " anaam = ?,"
+				+ " tvoegsel =?,"
+				+ " straat = ?,"
+				+ " postcode = ?,"
+				+ " reknr =?,"
+				+ " telnr =?,"
+				+ " wachtwoord =?,"
+				+ " email =?,"
+				+ " stad = ?,"
+				+ " geslacht =?,"
+				+ " langnotify = ?"
+				+ " WHERE lidnr = ?");
 
-			PreparedStatement updateLid;
-			String queryString = ("UPDATE lid "
-					+ "SET"
-					+ " vnaam = ?,"
-					+ " anaam = ?,"
-					+ " tvoegsel =?,"
-					+ " straat = ?,"
-					+ " postcode = ?,"
-					+ " reknr =?,"
-					+ " telnr =?,"
-					+ " wachtwoord =?,"
-					+ " email =?,"
-					+ " stad = ?,"
-					+ " geslacht =?,"
-					+ " langnotify = ?"
-					+ " WHERE lidnr = ?");
+		try {
 
 			updateLid = currentCon.prepareStatement(queryString);
 
@@ -568,29 +647,59 @@ public class LidDao {
 
 			updateLid.executeUpdate();
 
-		} catch (SQLException ex) {
+		} catch (Exception ex) {
+			System.out.println("Gegevens ophalen uit de configuratietabel is niet gelukt!");
 			Logger.getLogger(LidDao.class.getName()).log(Level.SEVERE, null, ex);
+		} //some exception handling
+		finally {
 
+			if (updateLid != null) {
+				try {
+					updateLid.close();
+				} catch (Exception e) {
+				}
+				updateLid = null;
+			}
+
+			if (currentCon != null) {
+				try {
+					currentCon.close();
+				} catch (Exception e) {
+				}
+
+				currentCon = null;
+			}
 		}
 
 		return bean;
 	}
 
+	/**
+	 * Deze methode verzorgt het inloggen met een facebookID
+	 *
+	 * @param facebookid het facebookid voor een user
+	 * @return het object lid met alle waardes voor een facebookaccount
+	 */
 	public Lid loginFacebook(String facebookid) {
 
-		Connection con = Dryves.ConnectionManager.getConnection();
-		Statement stmt = null;
-		ResultSet rs;
+		currentCon = ConnectionManager.getConnection();
+
+		PreparedStatement pstmt = null;
+		rs = null;
+		String queryString = "SELECT lidnr,vnaam,anaam,geslacht,straat,postcode,"
+				+ " stad,telnr,reknr,email,beoordeling,fotourl,tvoegsel,"
+				+ "wachtwoord,langnotify "
+				+ "FROM lid "
+				+ "WHERE facebookid = ?";
 
 		Lid lidfacebook = new Lid();
 
 
 		try {
-			PreparedStatement pstmt = con.prepareStatement("SELECT lidnr ,vnaam,anaam,geslacht,straat,postcode, stad,telnr,reknr,email,beoordeling,fotourl,tvoegsel,wachtwoord,langnotify FROM lid WHERE facebookid = ?");
+			pstmt = currentCon.prepareStatement(queryString);
 			pstmt.setString(1, facebookid);
-			//connect to DB 
-			con = ConnectionManager.getConnection();
-			stmt = con.createStatement();
+
+
 			rs = pstmt.executeQuery();
 
 
@@ -622,25 +731,26 @@ public class LidDao {
 
 			}
 		} catch (Exception ex) {
-			System.out.println("Log In failed: An Exception has occurred! " + ex);
+			System.out.println("Log In failed: An Exception has occurred! ");
+			Logger.getLogger(LidDao.class.getName()).log(Level.SEVERE, null, ex);
 		} //some exception handling
 		finally {
 
-			if (stmt != null) {
+			if (pstmt != null) {
 				try {
-					stmt.close();
+					pstmt.close();
 				} catch (Exception e) {
 				}
-				stmt = null;
+				pstmt = null;
 			}
 
-			if (con != null) {
+			if (currentCon != null) {
 				try {
-					con.close();
+					currentCon.close();
 				} catch (Exception e) {
 				}
 
-				con = null;
+				currentCon = null;
 			}
 		}
 
@@ -648,47 +758,65 @@ public class LidDao {
 
 	}
 
+	/**
+	 * Deze methode haalt het wachtwoord van een user op dit wordt bijvoorbeeld
+	 * gebruikt om bij een wachtwoord vergeten functie
+	 *
+	 * @param user het object Lid
+	 * @return geef het object Lid terug
+	 */
 	public Lid verstuurWachtwoord(Lid user) {
-
-		Statement stmt = null;
-		Connection connection = null;
-		ResultSet resultSet = null;
+		currentCon = ConnectionManager.getConnection();
+		PreparedStatement verstuurwachtwoord = null;
+		String queryString = "SELECT vnaam, anaam, wachtwoord FROM lid WHERE email =?;";
+		rs = null;
 		String email = user.getEmail();
-
-		System.out.println("Dit is het email adres uit de lidDao: " + email);
 
 		try {
 
-			currentCon = ConnectionManager.getConnection();
-			PreparedStatement verstuurwachtwoord;
-			String queryString = "SELECT vnaam, anaam, wachtwoord FROM lid WHERE email =?;";
-
 			verstuurwachtwoord = currentCon.prepareStatement(queryString);
 			verstuurwachtwoord.setString(1, email);
-			resultSet = verstuurwachtwoord.executeQuery();
+			rs = verstuurwachtwoord.executeQuery();
 
-			while (resultSet.next()) {
+			while (rs.next()) {
 
-				user.setVnaam(resultSet.getString(1));
+				user.setVnaam(rs.getString(1));
 
 				System.out.println("Vnaam wijzig wachtwoord: " + user.getVnaam());
 
-				user.setAnaam(resultSet.getString(2));
+				user.setAnaam(rs.getString(2));
 
 				System.out.println("Anaam wijzig wachtwoord: " + user.getAnaam());
 
-				user.setWachtwoord(resultSet.getString(3));
+				user.setWachtwoord(rs.getString(3));
 
 				System.out.println("Wwoord wijzig wachtwoord: " + user.getWachtwoord());
 
 			}
 
-		} catch (SQLException ex) {
+		} catch (Exception ex) {
+			System.out.println("Log In failed: An Exception has occurred! ");
 			Logger.getLogger(LidDao.class.getName()).log(Level.SEVERE, null, ex);
-			System.out.println("Foutje, oeps!");
+		} //some exception handling
+		finally {
 
+			if (verstuurwachtwoord != null) {
+				try {
+					verstuurwachtwoord.close();
+				} catch (Exception e) {
+				}
+				verstuurwachtwoord = null;
+			}
+
+			if (currentCon != null) {
+				try {
+					currentCon.close();
+				} catch (Exception e) {
+				}
+
+				currentCon = null;
+			}
 		}
-
 
 
 		return user;
@@ -696,37 +824,59 @@ public class LidDao {
 	}
 
 	// met deze functie wijzigen we de taal instellingen
-	// en= Engels nl= Nederlands
+	// en= Engels nl= Nederlands/**
+	/**
+	 * Deze methode wijzig de taal voor een user
+	 * Deze methode wordt gebruikt als er op een vlaggetje gedrukt wordt 
+	 * om de taal op een pagina en in de database voor een lid aan te passen
+	 * @param taal locale voor een user, nl_NL of en_GB
+	 * @param lidnr lidnummer voor een lid
+	 */
 	public void wijzigtaal(String taal, int lidnr) {
 
-		try {
-			currentCon = ConnectionManager.getConnection();
+		currentCon = ConnectionManager.getConnection();
 
-			PreparedStatement updateLid;
+			PreparedStatement wijzigTaal = null;
 			String queryString = ("UPDATE lid "
 					+ "SET"
 					+ " langnotify = ?"
 					+ " WHERE lidnr = ?");
 
-			updateLid = currentCon.prepareStatement(queryString);
+		try {
+			
+			wijzigTaal = currentCon.prepareStatement(queryString);
 
-			updateLid.setString(1, taal);
-			updateLid.setInt(2, lidnr);
+			wijzigTaal.setString(1, taal);
+			wijzigTaal.setInt(2, lidnr);
 
 
-			System.out.println("De query is: " + updateLid);
+			System.out.println("De query is: " + wijzigTaal);
 
-			updateLid.executeUpdate();
+			wijzigTaal.executeUpdate();
 
-		} catch (SQLException ex) {
+		} catch (Exception ex) {
+			System.out.println("Log In failed: An Exception has occurred! ");
 			Logger.getLogger(LidDao.class.getName()).log(Level.SEVERE, null, ex);
+		} //some exception handling
+		finally {
 
+			if (wijzigTaal != null) {
+				try {
+					wijzigTaal.close();
+				} catch (Exception e) {
+				}
+				wijzigTaal = null;
+			}
+
+			if (currentCon != null) {
+				try {
+					currentCon.close();
+				} catch (Exception e) {
+				}
+
+				currentCon = null;
+			}
 		}
-
-
-
-
-
 	}
 
 	private static Locale toString(String locale) {
