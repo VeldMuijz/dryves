@@ -78,9 +78,23 @@
 						</c:forEach>
 					</c:otherwise>
 				</c:choose>
-
-
+                                                  
+      
+ ${pager.offset}
 			</div>
+            <c:choose>
+                <c:when test="${pager.aantalberichten > 5 &&  pager.maxPositie >= pager.offset}"> 
+                    <input type="button" onclick="window.location = 'PagerServlet?offset=${pager.offset}&knop=volgende';" value="Volgende"/></c:when>
+              
+            </c:choose>
+
+                     
+                     <c:choose>
+                <c:when test="${pager.offset>=5}"> 
+                    <input type="button" onclick="window.location = 'PagerServlet?offset=${pager.offset}&knop=vorige';" value="Vorige"/></c:when>
+               
+            </c:choose> 
+                    
 		</div>
 
 

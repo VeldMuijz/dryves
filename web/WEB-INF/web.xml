@@ -84,6 +84,14 @@
         <servlet-name>NieuwBericht</servlet-name>
         <servlet-class>Dryves.Controller.NieuwBericht</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>VolgenderijBerichten</servlet-name>
+        <servlet-class>Dryves.Controller.VolgenderijBerichten</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PagerServlet</servlet-name>
+        <servlet-class>Dryves.Controller.PagerServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LidWijzigen</servlet-name>
         <url-pattern>/LidWijzigen</url-pattern>
@@ -187,6 +195,14 @@
     <servlet-mapping>
         <servlet-name>NieuwBericht</servlet-name>
         <url-pattern>/NieuwBericht</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>VolgenderijBerichten</servlet-name>
+        <url-pattern>/VolgenderijBerichten</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PagerServlet</servlet-name>
+        <url-pattern>/PagerServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>

@@ -7,6 +7,7 @@ package Dryves.Controller;
 import Dryves.Model.Berichten;
 import Dryves.Model.BerichtenDao;
 import Dryves.Model.Lid;
+import Dryves.Pager;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -40,7 +41,7 @@ public class MijnBerichten extends HttpServlet {
 		// Instantieren van objecten
 		Berichten berichten = new Berichten();
 		BerichtenDao berichtendao = new BerichtenDao();
-
+                Pager pager = new Pager();
 		// Haal de huidige sessie op
 		HttpSession session = request.getSession();
 		//Haal de userbean (dit moet sessiebean worden) op uit de sessie
@@ -50,8 +51,8 @@ public class MijnBerichten extends HttpServlet {
 			List<Berichten> bericht;
 			int userid = user.getLidnr();
 			ArrayList<Lid> afzender = new ArrayList<Lid>();
-
-			bericht = berichtendao.haalberichten(userid);
+                        pager.setOffset(0);
+			bericht = berichtendao.haalberichten(userid, pager.getOffset());
 			request.setAttribute("berichten", bericht);
 
 			for (int i = 0; i < bericht.size(); i++) {
@@ -65,7 +66,10 @@ public class MijnBerichten extends HttpServlet {
 				afzender.add(berichtendao.afzender(afzenderint));
 				System.out.println("dit is i =" + i);
 			}
+                        pager.setAantalberichten(berichtendao.aantalBerichten(userid));
+                        pager.setMaxPositie(pager.getAantalberichten()-5);
 			request.setAttribute("afzender", afzender);
+                       session.setAttribute("pager", pager);
 
 		} catch (SQLException e) {
 			throw new ServletException("Kan gegevens niet ophalen van database.", e);

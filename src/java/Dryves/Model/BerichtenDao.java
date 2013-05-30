@@ -263,15 +263,12 @@ public class BerichtenDao {
 	 * @return Lijst van het object Berichten
 	 * @throws SQLException
 	 */
-	public List<Berichten> haalberichten(int lidnr) throws SQLException {
+	public List<Berichten> haalberichten(int lidnr, int offset) throws SQLException {
 		System.out.println("Lidnummer:" + lidnr);
 		currentCon = ConnectionManager.getConnection();
 		rs = null;
 		PreparedStatement haalAlleBerichten = null;
-		String queryString = "SELECT * "
-				+ "FROM berichten "
-				+ "WHERE lidnr = ? "
-				+ "ORDER BY datum DESC;";
+		String queryString = "SELECT * FROM berichten WHERE lidnr=? ORDER BY datum DESC LIMIT 5 OFFSET ?;";
 		List<Berichten> berichten = new ArrayList<Berichten>();
 
 		DatumConverter dc = new DatumConverter();
@@ -279,6 +276,7 @@ public class BerichtenDao {
 		try {
 			haalAlleBerichten = currentCon.prepareStatement(queryString);
 			haalAlleBerichten.setInt(1, lidnr);
+                        haalAlleBerichten.setInt(2, offset);
 			rs = haalAlleBerichten.executeQuery();
 
 			while (rs.next()) {
@@ -470,4 +468,38 @@ public class BerichtenDao {
 		return aantal;
 
 	}
+          public int aantalBerichten(int lidnummer) throws SQLException{
+          PreparedStatement statement = null;
+          ResultSet  resultSet = null;
+          int aantal=0;
+         try {
+            System.out.println("Lidnummer:" + lidnummer);
+            currentCon = ConnectionManager.getConnection();
+          
+            String queryString = "SELECT * FROM berichten WHERE lidnr=? ;";
+
+            statement = currentCon.prepareStatement(queryString);
+            statement.setInt(1, lidnummer);
+            resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+
+                aantal++;
+
+
+                
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Functie aantalBerichten en de foutmelding: " + e);
+
+        } finally {
+            currentCon.close();
+            statement.close();
+            resultSet.close();
+
+        }
+
+        return aantal;
+    }
 }
