@@ -231,7 +231,7 @@ public class RitDao {
 		DatumConverter dc = new DatumConverter();
 
 		try {
-
+                    
 			currentCon = ConnectionManager.getConnection();
 			PreparedStatement zoekritten;
 			String queryString = "SELECT * FROM Rit WHERE lidnr = ?;";

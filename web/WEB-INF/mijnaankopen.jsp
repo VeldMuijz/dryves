@@ -46,10 +46,10 @@ Document : mijn_ritten
                     <div class="rittenlijst">
                         <table>
 							<tr>
-                                <td>Aankoopnummmer: ${aankoop.aankoopnr}</td>
-								<td>Factuurnr: ${aankoop.factuurnr}</td>
-								<td>Ritnummer: ${aankoop.ritnr}</td>
-                                <td>Datum: ${aankoop.stringTijd} ${aankoop.stringDatum}</td>
+                                <td><fmt:message bundle="${rb}" key="aankoopnummer" /> ${aankoop.aankoopnr}</td>
+								<td><fmt:message bundle="${rb}" key="factuurnummer" /> ${aankoop.factuurnr}</td>
+								<td><fmt:message bundle="${rb}" key="ritnummer" /> ${aankoop.ritnr}</td>
+                                <td><fmt:message bundle="${rb}" key="datum" /> ${aankoop.stringTijd} ${aankoop.stringDatum}</td>
                                <td><button onclick="window.location = 'LidBeoordelen?aankoopnr=${aankoop.aankoopnr}';"><fmt:message bundle="${rb}" key="beoordeelknop" /></button></td>
                                 
                                 </tr> 
