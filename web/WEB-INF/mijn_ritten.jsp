@@ -32,6 +32,8 @@ Document : mijn_ritten
             <div class="logo">    
                 <img src="images/Logo_Dryves.png" />
             </div>
+            
+            <!-- Hier wordt de navigatie ingeladen -->
 			<jsp:include page="navigatie.jsp" flush="true">
                 <jsp:param name="menu_active" value="mijndryves"></jsp:param>
             </jsp:include>
@@ -44,6 +46,8 @@ Document : mijn_ritten
 						<fmt:message bundle="${rb}" key="geenritten" />
 					</c:when>
 					<c:otherwise>
+                                            
+                                            <!-- Hier wordt de rittenlijst ingeladen -->
 
 						<c:forEach items="${ritten}" var="rit">
 							<div class="rittenlijst">

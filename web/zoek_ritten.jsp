@@ -31,6 +31,8 @@ Document : mijn_ritten
             <div class="logo">    
                 <img src="images/Logo_Dryves.png" />
             </div>
+            
+             <!-- Hier wordt de navigatie ingeladen -->
 
             <jsp:include page="/WEB-INF/navigatie.jsp"  flush="true">
                 <jsp:param name="menu_active" value="home"></jsp:param>
@@ -51,7 +53,7 @@ Document : mijn_ritten
                     <c:otherwise>
                         <h2>Gevonden ritten</h2>
 
-
+ <!-- Hier wordt de rittenlijst ingeladen -->
 
                         <c:forEach items="${ritten}" var="rit">
                             <div class="rittenlijst">

@@ -19,15 +19,16 @@
 
 <div class="navigation">
 
-<!--    check of er een ingelogde gebruiker is, zo ja dan toon je dit menu zonder registratie en login:-->
+    <!--    check of er een ingelogde gebruiker is, zo ja dan toon je dit menu zonder registratie en login:-->
+
     <c:choose>
         <c:when test="${currentSessionUser.lidnr > 0}"> 
             <button onclick="window.location = 'index.jsp';" <% if (request.getParameter("menu_active").equals("home")) {%> class="active" <% }%> >Home</button><button onclick="window.location = 'watisdryves.jsp';" <% if (request.getParameter("menu_active").equals("watisdryves")) {%> class="active" <% }%> ><fmt:message bundle="${rb}" key="watisdryvesnav" /></button><button onclick="window.location = 'faq.jsp';" <% if (request.getParameter("menu_active").equals("faq")) {%> class="active" <% }%> >FAQ</button><button onclick="window.location = '/Dryves/MijnDryves';" <% if (request.getParameter("menu_active").equals("mijndryves")) {%> class="active" <% }%> ><fmt:message bundle="${rb}" key="mijndryvesnav" /></button>
-        </c:when>
-        <c:otherwise>
+            </c:when>
+            <c:otherwise>
             <button onclick="window.location = 'index.jsp';" <% if (request.getParameter("menu_active").equals("home")) {%> class="active" <% }%> >Home</button><button onclick="window.location = 'watisdryves.jsp';" <% if (request.getParameter("menu_active").equals("watisdryves")) {%> class="active" <% }%> ><fmt:message bundle="${rb}" key="watisdryvesnav" /></button><button onclick="window.location = 'faq.jsp';" <% if (request.getParameter("menu_active").equals("faq")) {%> class="active" <% }%> >FAQ</button><button onclick="window.location = 'registratie.jsp';" <% if (request.getParameter("menu_active").equals("registratie")) {%> class="active" <% }%> ><fmt:message bundle="${rb}" key="registreernav" /></button><button  class="loginButton" onclick="window.location = 'login.jsp';">Login</button>
-        </c:otherwise>
-    </c:choose>
+            </c:otherwise>
+        </c:choose>
 
     <c:if test="${currentSessionUser.lidnr > 0}"> 
         <div class="welkom" id="welkom" style=" float: right; width: 300px; height: 100%;">
@@ -36,32 +37,33 @@
                 <div id="anaam"> <label id="vnaam"></label></div>
                 <c:out value="${currentSessionUser.vnaam}"/> <c:out value="${currentSessionUser.anaam}"/></div> 
 
-            <!--					TODO Hier nog de actuele aantal ongelezen berichten ophalen-->
+            <!-- Hier wordt het actuele aantal ongelezen berichten opgehaald -->
             <div style="float: right; margin-right: 5px;"> 
                 <a href="MijnBerichten"> <%
-            Lid user = (Lid) session.getAttribute("currentSessionUser");
-        int lidnr=user.getLidnr();
-        
-        BerichtenDao berichtDao= new BerichtenDao();
-        
-       int aantalberichten= berichtDao.statusbalk(lidnr);  %>
-  <% out.println( aantalberichten );  %></a><fmt:message bundle="${rb}" key="nieuweberichtennav" /><br/> 
+                    Lid user = (Lid) session.getAttribute("currentSessionUser");
+                    int lidnr = user.getLidnr();
+
+                    BerichtenDao berichtDao = new BerichtenDao();
+
+                    int aantalberichten = berichtDao.statusbalk(lidnr);%>
+                    <% out.println(aantalberichten);%></a><fmt:message bundle="${rb}" key="nieuweberichtennav" /><br/> 
                 <a href="Uitloggen" style="float: right;"><fmt:message bundle="${rb}" key="uitlognav" /></a>
-                
-           
+
+
             </div>
 
         </div>
     </c:if>
 
     <a href="WijzigTaal?land=nl_NL&lidnr=${currentSessionUser.lidnr}"><img src="images/nl_NL.png" /></a> <a href="WijzigTaal?land=en_GB&lidnr=${currentSessionUser.lidnr}"><img src="images/en_EN.png" /></a>
-            
+
 </div>
+<!-- Hier wordt de zoekfunctie in de navigatie pagina geladen -->
 
-            <div class="contentPanelSearch">
+<div class="contentPanelSearch">
 
-                <jsp:include page="zoekrit.jsp" flush="true" ></jsp:include>
+    <jsp:include page="zoekrit.jsp" flush="true" ></jsp:include>
 
-            </div>
+</div>
 
 

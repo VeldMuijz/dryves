@@ -82,7 +82,7 @@ public class LidWijzigen extends HttpServlet {
         System.out.println("Dit is het geslacht: " + lid.getGeslacht());
         
         //Zet de straat
-        lid.setStraat(request.getParameter("straat") + " " + request.getParameter("huisnummer"));
+        lid.setStraat(request.getParameter("straat"));
         //Print de straat naar de console
         System.out.println("Dit is de straat: " + lid.getStraat());
         

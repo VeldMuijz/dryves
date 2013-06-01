@@ -164,8 +164,9 @@ public class RitDao {
 	}
 
 	/**
-	 *
-	 */
+         * Opslaan van een rit in de db
+         * @return 
+         */
 	public Boolean saveRit() {
 
 		datum = new Timestamp(begindatum.getMillis());
@@ -302,6 +303,10 @@ public class RitDao {
 
 	}
 
+        /**
+         * Haal de lijst ritten van een lid op
+         * @return 
+         */
 	public List<Rit> getRittenLijst() {
 
 		try {
@@ -360,7 +365,7 @@ public class RitDao {
 	}
 	
 	/**
- * 
+ * Verhoog het aantal zitplaatsen met 1
  * @param ritnr
  * @param updatewaarde
  * @return 
@@ -392,7 +397,7 @@ public class RitDao {
 	}
 	
 /**
- * 
+ * Verlaag het aantal zitplaatsen na het kiezen van een rit
  * @param ritnr
  * @param updatewaarde
  * @return 
@@ -425,7 +430,7 @@ public class RitDao {
 	}
 
 	/**
-	 * Haal een lijst van ritten per lid op
+	 * Haal een lijst van ritten per zoekopdracht op
 	 *
 	 * @return
 	 * @throws SQLException
