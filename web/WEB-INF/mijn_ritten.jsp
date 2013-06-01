@@ -57,14 +57,12 @@ Document : mijn_ritten
                                         
                                     </tr> 
                                     <tr>
-                                        <td><img src="images/to_icon.png" /> ${rit.eindpunt}</td>
+                                        <td><img src="images/arrow_icon.png" /> ${rit.eindpunt}</td>
                                     </tr>
                                     <tr>
                                         <td>
                                             <img src="images/calendar_icon.png" /> ${rit.datumkort} <img src="images/clock_icon.png" /> ${rit.tijd} <img src="images/money_icon.png" /> ${rit.prijs}
                                         </td>
-                                    </tr>
-                                    <tr>
                                         <td style="float:right;"><button onclick="window.location = 'RitWijzigen?ritnr=${rit.ritnr}';"><fmt:message bundle="${rb}" key="ritwijzigen" /></button></td>
                                     </tr>
 
