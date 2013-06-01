@@ -141,20 +141,20 @@
                 <div style="float:left; margin-right:50px;">
 
                 <form action="LoginServlet" method="post">
-                    <table style="width:320px;">
+                    <table style="width:340px;">
                         <tr>
                             <td>
                                 <fmt:message bundle="${rb}" key="gebruikersnaam" />
                             </td>
                             <td>
-                                <input type="text" id="email" name="email" style="width:205px;"/>  
+                                <input type="text" id="email" name="email" style="width:225px;"/>  
                             </td>
                         </tr>
                         <tr>
                             <td>
                                 <fmt:message bundle="${rb}" key="wachtwoordlogin" />
                             </td>
-                            <td><input type="password" id="wachtwoord" name="wachtwoord" style="width:205px;" /></td>
+                            <td><input type="password" id="wachtwoord" name="wachtwoord" style="width:225px;" /></td>
                         </tr>
                         <tr>
                             <td>
@@ -165,16 +165,12 @@
                             <td>
 
                             </td>
-                            <td><button type="submit" style="float:right;" />Login</button></td>
+                            <td><button type="submit" style="float:right;" />Login</button><button style="float:right;" type="button" onclick="window.location = 'wwvergeten.jsp'"><fmt:message bundle="${rb}" key="wwvergeten" /></button></td>
                         </tr>
                     </table>
                         
                 </form>
                             <br />
-                            
-                            <button onclick="window.location = 'wwvergeten.jsp'"><fmt:message bundle="${rb}" key="wwvergeten" /></button>
-                            
-                            <br /><br />
                         
                             Nog geen lid? Klik <a href="registratie.jsp">hier</a> om u gratis te registreren<br />
                             of login met uw Facebook account.
