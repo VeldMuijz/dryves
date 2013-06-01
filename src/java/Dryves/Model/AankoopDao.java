@@ -243,6 +243,9 @@ public class AankoopDao {
      */
     public Boolean aankoopDoen() {
         RitDao ritDao = new RitDao();
+        Rit rit = new Rit();
+        Aankoop aankoop = new Aankoop();
+        
         currentCon = ConnectionManager.getConnection();
         PreparedStatement insertAankoop = null;
         PreparedStatement insertFactuur = null;
@@ -252,7 +255,7 @@ public class AankoopDao {
                 + " lidnr,"
                 + " ontmoetingnr,"
                 + " betaalwijze,"
-                + " datum,"
+                + " datum)"
                 + "VALUES(?,?,?,?,?);");
 
         String insertString = ("INSERT INTO factuur ("
@@ -260,7 +263,8 @@ public class AankoopDao {
                 + " datum,"
                 + " totaalbedrag,"
                 + " totaalbedragexbtw,"
-                + "VALUES(?,?,?,?);");
+                + " aankoopnr)"                
+                + "VALUES(?,?,?,?,?);");
 
         try {
             currentCon.setAutoCommit(false);
@@ -275,8 +279,9 @@ public class AankoopDao {
 
             insertFactuur.setInt(1, factuurnr);
             insertFactuur.setTimestamp(2, datum);
-            insertFactuur.setDouble(3, prijs);
-            insertFactuur.setDouble(4, totaalbedragexbtw);
+            insertFactuur.setDouble(3, rit.getPrijs());
+            insertFactuur.setDouble (4, rit.getPrijs());
+            insertFactuur.setInt(5, aankoop.getAankoopnr());
 
 
             System.out.println("De query is: " + insertAankoop);
