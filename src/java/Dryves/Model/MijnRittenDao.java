@@ -20,7 +20,7 @@ import java.util.List;
 public class MijnRittenDao {
     
     /**
-     *
+     * Functie om alle ritten van een lid op te halen
      * @return
      * @throws SQLException
      */

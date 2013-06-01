@@ -55,20 +55,21 @@ public class RitDao {
      */
     public Rit vulRitDao(Rit bean) {
 
-        lidnr = bean.getLidnr();
-        startpunt = bean.getStartpunt();
-        eindpunt = bean.getEindpunt();
-        waypoints = bean.getWaypoint();
-        afstand = bean.getAfstand();
-        prijs = bean.getPrijs();
-        gekocht = bean.getGekocht();
-        datum = bean.getDatum();
-        zitplaatsen = bean.getZitplaatsen();
-        aangeboden = bean.getAangeboden();
-        brandstof = bean.getBrandstof();
-        return bean;
+		lidnr = bean.getLidnr();             
+                startpunt = bean.getStartpunt();
+		eindpunt = bean.getEindpunt();
+		waypoints = bean.getWaypoint();
+		afstand = bean.getAfstand();
+		prijs = bean.getPrijs();
+		gekocht = bean.getGekocht();
+		datum = bean.getDatum();
+		zitplaatsen = bean.getZitplaatsen();
+		aangeboden = bean.getAangeboden();
+		brandstof = bean.getBrandstof();
+		return bean;
 
-    }
+	}
+        
 
     /**
      * Opslaan van rit in de database
@@ -188,21 +189,22 @@ public class RitDao {
                     + "(?,?,?,?,?,?,?,?,?,?,?);");
             insertRit = currentCon.prepareStatement(queryString);
 
-            insertRit.setInt(1, lidnr);
-            insertRit.setString(2, startpunt);
-            insertRit.setString(3, eindpunt);
-            if (waypoints.equals("")) {
-                insertRit.setString(4, null);
-            } else {
-                insertRit.setString(4, waypoints);
-            }
-            insertRit.setDouble(5, afstand);
-            insertRit.setDouble(6, prijs);
-            insertRit.setInt(7, gekocht);
-            insertRit.setTimestamp(8, datum);
-            insertRit.setInt(9, zitplaatsen);
-            insertRit.setString(10, brandstof);
-            insertRit.setInt(11, aangeboden);
+			insertRit.setInt(1, lidnr);
+                        
+			insertRit.setString(2, startpunt);
+			insertRit.setString(3, eindpunt);
+			if (waypoints.equals("")) {
+				insertRit.setString(4, null);
+			} else {
+				insertRit.setString(4, waypoints);
+			}
+			insertRit.setDouble(5, afstand);
+			insertRit.setDouble(6, prijs);
+			insertRit.setInt(7, gekocht);
+			insertRit.setTimestamp(8, datum);
+			insertRit.setInt(9, zitplaatsen);
+			insertRit.setString(10, brandstof);
+			insertRit.setInt(11, aangeboden);
 
             System.out.println("De query is: " + insertRit);
 
@@ -854,13 +856,30 @@ public class RitDao {
 
     }
 
-    /**
-     * Updaten van een rit, wijzigingen opslaan
-     *
-     * @param ritnr
-     * @return true of false
-     */
-    public Boolean updateRit(int ritnr) {
+	/**
+	 * Haal een lijst van ritten per zoekopdracht op
+	 *
+	 * @return
+	 * @throws SQLException
+	 */
+	public List<Rit> getAlleRitten(String startpunt, String eindpunt){
+		Connection connection = null;
+		//PreparedStatement statement = null;
+		rs = null;
+		List<Rit> ritten = new ArrayList<Rit>();
+		DatumConverter dc = new DatumConverter();
+		currentCon = ConnectionManager.getConnection();
+		PreparedStatement zoekritten = null;
+		String queryString = "SELECT * "
+					+ "FROM Rit "
+					+ "WHERE aangeboden = 1 "
+					+ "AND zitplaatsen > 0 "
+					+ "AND LOWER(startpunt) LIKE LOWER(?) "
+					+ "AND LOWER(eindpunt) LIKE LOWER(?) "
+					+ "AND datum > DATE(NOW());";
+		String[] arrSplit, arrSplit2;
+		try {
+			
 
         datum = new Timestamp(begindatum.getMillis());
         rs = null;
@@ -882,64 +901,229 @@ public class RitDao {
                     + " aangeboden = ?"
                     + "WHERE ritnr = ?;");
 
-            updateRit = currentCon.prepareStatement(queryString);
+			rs = zoekritten.executeQuery();
 
+			while (rs.next()) {
 
-            updateRit.setString(1, startpunt);
-            updateRit.setString(2, eindpunt);
-            if (!waypoints.isEmpty()) {
-                updateRit.setString(3, waypoints);
-            } else {
-                updateRit.setString(3, null);
-            }
-            updateRit.setDouble(4, afstand);
-            updateRit.setDouble(5, prijs);
-            updateRit.setInt(6, gekocht);
-            updateRit.setTimestamp(7, datum);
-            updateRit.setInt(8, zitplaatsen);
-            updateRit.setString(9, brandstof);
-            updateRit.setInt(10, aangeboden);
-            updateRit.setInt(11, ritnr);
+				Rit rit = new Rit();
+				rit.setRitnr(rs.getInt("ritnr"));
+				rit.setStartpunt(rs.getString("startpunt"));
 
-            System.out.println("De query is: " + updateRit);
+				arrSplit = rit.getStartpunt().split(", ");
+				
+				rit.setStraatnummer(arrSplit[0]);
+				rit.setPostcodeplaats(arrSplit[1].substring(5));
+                                
+				rit.setLand(arrSplit[2]);
 
-            updateRit.executeUpdate();
+				rit.setEindpunt(rs.getString("eindpunt"));
 
-        } catch (SQLException ex) {
-            Logger.getLogger(RitDao.class
-                    .getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            //Doe dit altijd, als het goed gaat én wanneer het fout gaat
-            if (rs != null) {
-                try {
-                    //sluit resultset af
-                    rs.close();
-                } catch (SQLException ignore) {
-                }
-            }
-            if (updateRit != null) {
-                //sluit preparedStatement
-                try {
-                    updateRit.close();
-                } catch (SQLException ignore) {
-                }
-            }
-            if (currentCon != null) {
-                //sluit huidige verbinding
-                try {
-                    currentCon.close();
-                } catch (SQLException ignore) {
-                }
-            }
-        }
-        return true;
-
+				arrSplit2 = rit.getEindpunt().split(", ");
 
     }
 
-    public static Connection getCurrentCon() {
-        return currentCon;
-    }
+				rit.setPrijs(rs.getDouble("prijs"));
+				rit.setDatum(rs.getTimestamp("datum"));
+				rit.setZitplaatsen(rs.getInt("zitplaatsen"));
+
+				rit.setDatumkort(dc.korteDatum(rs.getTimestamp("datum")));
+				rit.setTijd(dc.korteTijd(rs.getTimestamp("datum")));
+
+				ritten.add(rit);
+				
+				arrSplit = null;
+				arrSplit2 = null;
+			}
+			
+		} catch (SQLException ex) {
+			Logger.getLogger(RitDao.class
+					.getName()).log(Level.SEVERE, null, ex);
+		} finally {
+			//Doe dit altijd, als het goed gaat én wanneer het fout gaat
+			if (rs != null) {
+				try {
+					//sluit resultset af
+					rs.close();
+				} catch (SQLException ignore) {
+				}
+			}
+			if (zoekritten != null) {
+				//sluit preparedStatement
+				try {
+					zoekritten.close();
+				} catch (SQLException ignore) {
+				}
+			}
+			if (currentCon != null) {
+				//sluit huidige verbinding
+				try {
+					currentCon.close();
+				} catch (SQLException ignore) {
+				}
+			}
+		}
+		return ritten;
+
+	}
+
+	/**
+	 * Ophalen van een enkele rit
+	 *
+	 * @param ritnr
+	 * @param bean
+	 * @return rit object
+	 */
+	public Rit enkeleRitOphalen(int ritnr, Rit bean) {
+		rs = null;
+		currentCon = ConnectionManager.getConnection();
+
+			PreparedStatement select1Rit = null;
+			String queryString = ("SELECT * FROM Rit WHERE ritnr = ?;");
+		try {
+			
+
+			select1Rit = currentCon.prepareStatement(queryString);
+
+			select1Rit.setInt(1, ritnr);
+			System.out.println("De query is: " + select1Rit);
+
+			rs = select1Rit.executeQuery();
+
+			while (rs.next()) {
+				bean.setLidnr(rs.getInt("lidnr"));
+				bean.setRitnr(rs.getInt("ritnr"));
+				bean.setStartpunt(rs.getString("startpunt"));
+				bean.setEindpunt(rs.getString("eindpunt"));
+				bean.setPrijs(rs.getDouble("prijs"));
+				bean.setWaypoint(rs.getString("waypoint"));
+				bean.setAfstand(rs.getDouble("afstand"));
+				bean.setDatum(rs.getTimestamp("datum"));
+				bean.setZitplaatsen(rs.getInt("zitplaatsen"));
+				bean.setBrandstof(rs.getString("brandstof"));
+				bean.setAangeboden(rs.getInt("aangeboden"));
+			}
+
+
+
+		} catch (SQLException ex) {
+			Logger.getLogger(RitDao.class
+					.getName()).log(Level.SEVERE, null, ex);
+		} finally {
+			//Doe dit altijd, als het goed gaat én wanneer het fout gaat
+			if (rs != null) {
+				try {
+					//sluit resultset af
+					rs.close();
+				} catch (SQLException ignore) {
+				}
+			}
+			if (select1Rit != null) {
+				//sluit preparedStatement
+				try {
+					select1Rit.close();
+				} catch (SQLException ignore) {
+				}
+			}
+			if (currentCon != null) {
+				//sluit huidige verbinding
+				try {
+					currentCon.close();
+				} catch (SQLException ignore) {
+				}
+			}
+		}
+
+		System.out.println(bean.getRitnr());
+		return bean;
+
+	}
+
+	/**
+	 * Updaten van een rit, wijzigingen opslaan
+	 *
+	 * @param ritnr
+	 * @return true of false
+	 */
+	public Boolean updateRit(int ritnr) {
+
+		datum = new Timestamp(begindatum.getMillis());
+		rs = null;
+		currentCon = ConnectionManager.getConnection();
+			PreparedStatement updateRit = null;
+		try {
+			
+
+			String queryString = ("Update Rit SET"
+					+ " startpunt = ?,"
+					+ " eindpunt = ?,"
+					+ " waypoint = ?,"
+					+ " afstand = ?,"
+					+ " prijs = ?,"
+					+ " gekocht = ?,"
+					+ " datum = ?,"
+					+ " zitplaatsen = ?,"
+					+ " brandstof = ?,"
+					+ " aangeboden = ?"
+					+ "WHERE ritnr = ?;");
+
+			updateRit = currentCon.prepareStatement(queryString);
+
+
+			updateRit.setString(1, startpunt);
+			updateRit.setString(2, eindpunt);
+			if (!waypoints.isEmpty()) {
+				updateRit.setString(3, waypoints);
+			} else {
+				updateRit.setString(3, null);
+			}
+			updateRit.setDouble(4, afstand);
+			updateRit.setDouble(5, prijs);
+			updateRit.setInt(6, gekocht);
+			updateRit.setTimestamp(7, datum);
+			updateRit.setInt(8, zitplaatsen);
+			updateRit.setString(9, brandstof);
+			updateRit.setInt(10, aangeboden);
+			updateRit.setInt(11, ritnr);
+
+			System.out.println("De query is: " + updateRit);
+
+			updateRit.executeUpdate();
+
+		} catch (SQLException ex) {
+			Logger.getLogger(RitDao.class
+					.getName()).log(Level.SEVERE, null, ex);
+		} finally {
+			//Doe dit altijd, als het goed gaat én wanneer het fout gaat
+			if (rs != null) {
+				try {
+					//sluit resultset af
+					rs.close();
+				} catch (SQLException ignore) {
+				}
+			}
+			if (updateRit != null) {
+				//sluit preparedStatement
+				try {
+					updateRit.close();
+				} catch (SQLException ignore) {
+				}
+			}
+			if (currentCon != null) {
+				//sluit huidige verbinding
+				try {
+					currentCon.close();
+				} catch (SQLException ignore) {
+				}
+			}
+		}
+		return true;
+
+
+	}
+
+	public static Connection getCurrentCon() {
+		return currentCon;
+	}
 
     public static void setCurrentCon(Connection currentCon) {
         RitDao.currentCon = currentCon;
