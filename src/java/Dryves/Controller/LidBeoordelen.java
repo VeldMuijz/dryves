@@ -24,7 +24,6 @@ import javax.servlet.http.HttpSession;
  */
 public class LidBeoordelen extends HttpServlet {
 
-
 	/**
 	 * Handles the HTTP
 	 * <code>GET</code> method.
@@ -44,28 +43,37 @@ public class LidBeoordelen extends HttpServlet {
 		DatumConverter dc = new DatumConverter();
 		// Haal de huidige sessie op
 		HttpSession session = request.getSession();
-		// Maak in de sessie een object rit aan met naam sessieRit
-		session.setAttribute("sessieBeoordeling", beoordeling);
-		//Haal de userbean (dit moet sessiebean worden) op uit de sessie
-		Lid user = (Lid) session.getAttribute("currentSessionUser");
-		Beoordeling sessieBeoordeling = (Beoordeling) session.getAttribute("sessieBeoordeling");
-		System.out.println("Dit gaat in sessiBeoordeling: " + request.getParameter("aankoopnr"));
-		sessieBeoordeling.setAankoopnr(Integer.parseInt(request.getParameter("aankoopnr")));
-		sessieBeoordeling.setLidnr(user.getLidnr());
-		
-		System.out.println("+++++++++++++Security Check++++++++++++++++++\n Aankoopnr: " + beoordeling.getAankoopnr() + " Lidnr: " + user.getLidnr());
-		//check of dit lid wel bij deze rit hoort
-		if (!aankoopDao.checkBestaanAankoop(sessieBeoordeling.getAankoopnr(), user.getLidnr())) {
-			System.out.println("Er zijn geen aankopen gevonden voor lid" + user.getLidnr() + " en aankoopnr: " + beoordeling.getAankoopnr());
-			System.out.println("Dit lid mag deze aankoop niet beoordelen, terug naar MijnAankopen!");
-			response.sendRedirect("MijnAankopen");
 
-		}else{
-			System.out.println("Lid mag deze aankoop beoordelen");
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/beoordelen.jsp");
-		dispatcher.forward(request, response);
-			
+		//Als een ingelogd lid naar een servlet gaat doe het volgende:
+		if (session.getAttribute("currentSessionUser") != null) {
+
+			// Maak in de sessie een object rit aan met naam sessieRit
+			session.setAttribute("sessieBeoordeling", beoordeling);
+			//Haal de userbean (dit moet sessiebean worden) op uit de sessie
+			Lid user = (Lid) session.getAttribute("currentSessionUser");
+			Beoordeling sessieBeoordeling = (Beoordeling) session.getAttribute("sessieBeoordeling");
+			System.out.println("Dit gaat in sessiBeoordeling: " + request.getParameter("aankoopnr"));
+			sessieBeoordeling.setAankoopnr(Integer.parseInt(request.getParameter("aankoopnr")));
+			sessieBeoordeling.setLidnr(user.getLidnr());
+
+			System.out.println("+++++++++++++Security Check++++++++++++++++++\n Aankoopnr: " + beoordeling.getAankoopnr() + " Lidnr: " + user.getLidnr());
+			//check of dit lid wel bij deze rit hoort
+			if (!aankoopDao.checkBestaanAankoop(sessieBeoordeling.getAankoopnr(), user.getLidnr())) {
+				System.out.println("Er zijn geen aankopen gevonden voor lid" + user.getLidnr() + " en aankoopnr: " + beoordeling.getAankoopnr());
+				System.out.println("Dit lid mag deze aankoop niet beoordelen, terug naar MijnAankopen!");
+				response.sendRedirect("MijnAankopen");
+
+			} else {
+				System.out.println("Lid mag deze aankoop beoordelen");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/beoordelen.jsp");
+				dispatcher.forward(request, response);
+
+			}
+		} else {
+			//niet ingelogd dus naar login pagina
+			request.getRequestDispatcher("login.jsp").forward(request, response);
 		}
+
 
 	}
 
@@ -87,27 +95,34 @@ public class LidBeoordelen extends HttpServlet {
 		DatumConverter dc = new DatumConverter();
 		// Haal de huidige sessie op
 		HttpSession session = request.getSession();
-		// Maak in de sessie een object rit aan met naam sessieRit
-		session.setAttribute("sessieBeoordeling", beoordeling);
-		//Haal de userbean (dit moet sessiebean worden) op uit de sessie
-		Lid user = (Lid) session.getAttribute("currentSessionUser");
 
-		System.out.println("Dit is sessie aankoopnr: " + beoordeling.getAankoopnr());
-		int aankoopnr = Integer.parseInt(request.getParameter("aankoopnr"));
-		int stiptheid = Integer.parseInt(request.getParameter("stiptheid"));
-		int betrouwbaarheid = Integer.parseInt(request.getParameter("betrouwbaarheid"));
-		int gezelligheid = Integer.parseInt(request.getParameter("gezelligheid"));
-		int rijstijl = Integer.parseInt(request.getParameter("rijstijl"));
-		double waardering = (stiptheid + betrouwbaarheid + gezelligheid + rijstijl) / 4;
-		
-		String opmerking = request.getParameter("opmerking");
-		System.out.println(waardering+","+stiptheid+","+rijstijl+","+gezelligheid+","+betrouwbaarheid+","+opmerking+","+user.getLidnr()+","+aankoopnr);
-		if(beoordelingDao.beoordelingAanmaken(waardering, stiptheid, rijstijl, gezelligheid, betrouwbaarheid, opmerking, user.getLidnr(), aankoopnr)){
-			System.out.println("Beoordeling aangemaakt");
-			response.sendRedirect("MijnAankopen");
+		//Als een ingelogd lid naar een servlet gaat doe het volgende:
+		if (session.getAttribute("currentSessionUser") != null) {
+			// Maak in de sessie een object rit aan met naam sessieRit
+			session.setAttribute("sessieBeoordeling", beoordeling);
+			//Haal de userbean (dit moet sessiebean worden) op uit de sessie
+			Lid user = (Lid) session.getAttribute("currentSessionUser");
+
+			System.out.println("Dit is sessie aankoopnr: " + beoordeling.getAankoopnr());
+			int aankoopnr = Integer.parseInt(request.getParameter("aankoopnr"));
+			int stiptheid = Integer.parseInt(request.getParameter("stiptheid"));
+			int betrouwbaarheid = Integer.parseInt(request.getParameter("betrouwbaarheid"));
+			int gezelligheid = Integer.parseInt(request.getParameter("gezelligheid"));
+			int rijstijl = Integer.parseInt(request.getParameter("rijstijl"));
+			double waardering = (stiptheid + betrouwbaarheid + gezelligheid + rijstijl) / 4;
+
+			String opmerking = request.getParameter("opmerking");
+			System.out.println(waardering + "," + stiptheid + "," + rijstijl + "," + gezelligheid + "," + betrouwbaarheid + "," + opmerking + "," + user.getLidnr() + "," + aankoopnr);
+			if (beoordelingDao.beoordelingAanmaken(waardering, stiptheid, rijstijl, gezelligheid, betrouwbaarheid, opmerking, user.getLidnr(), aankoopnr)) {
+				System.out.println("Beoordeling aangemaakt");
+				response.sendRedirect("MijnAankopen");
+			} else {
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/oops.jsp");
+				dispatcher.forward(request, response);
+			}
 		} else {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/oops.jsp");
-			dispatcher.forward(request, response);
+			//niet ingelogd dus naar login pagina
+			request.getRequestDispatcher("login.jsp").forward(request, response);
 		}
 
 	}

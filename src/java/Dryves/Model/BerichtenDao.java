@@ -214,7 +214,7 @@ public class BerichtenDao {
 	 * @return
 	 * @throws SQLException
 	 */
-	public boolean beantwoordBericht(Berichten bean) throws SQLException {
+	public boolean beantwoordBericht(Berichten bean){
 		currentCon = ConnectionManager.getConnection();
 		PreparedStatement verstuurBericht = null;
 		String queryString = "INSERT INTO berichten  (inhoudbericht,datum,afzender,lidnr,gelezen,ritnm)"
@@ -352,7 +352,7 @@ public class BerichtenDao {
 	 * @return Lijst van object Berichten
 	 * @throws SQLException
 	 */
-	public List<Berichten> getAlleBerichtenbijId(int berichtid) throws SQLException {
+	public List<Berichten> getAlleBerichtenbijId(int berichtid) {
 		List<Berichten> berichtlijst = new ArrayList<Berichten>();
 		DatumConverter dc = new DatumConverter();
 		rs = null;
