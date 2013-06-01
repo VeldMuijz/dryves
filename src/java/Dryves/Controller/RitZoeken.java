@@ -41,7 +41,6 @@ public class RitZoeken extends HttpServlet {
 		// Haal de huidige sessie op
 		HttpSession session = request.getSession();
 
-		if (session.getAttribute("currentSessionUser") != null) {
 			// Maak in de sessie een object rit aan met naam sessieRit
 			session.setAttribute("sessieRit", rit);
 			//   Lid user = (Lid) session.getAttribute("currentSessionUser");
@@ -64,10 +63,7 @@ public class RitZoeken extends HttpServlet {
 
 
 
-		} else {
-			//niet ingelogd dus naar login pagina
-			request.getRequestDispatcher("login.jsp").forward(request, response);
-		}
+
 	}
 
 	/**
