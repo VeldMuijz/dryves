@@ -382,6 +382,10 @@ button {
     filter: dropshadow(color=#919191, offx=1, offy=1);
 }
 
+.rittenlijst img{
+    margin-right: 4px;
+}
+
 .rittenlijst h1 {
     font-size: 14px;
 

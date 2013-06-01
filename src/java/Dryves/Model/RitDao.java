@@ -465,6 +465,7 @@ public class RitDao {
 
 				rit.setStraatnummer(arrSplit[0]);
 				rit.setPostcodeplaats(arrSplit[1].substring(5));
+                                
 				rit.setLand(arrSplit[2]);
 
 				rit.setEindpunt(resultSet.getString("eindpunt"));
