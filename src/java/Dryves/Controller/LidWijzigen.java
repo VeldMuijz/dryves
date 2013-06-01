@@ -18,7 +18,7 @@ import javax.servlet.http.HttpSession;
  * @author heuvenk
  */
 public class LidWijzigen extends HttpServlet {
-
+	
 	/**
 	 * Handles the HTTP
 	 * <code>GET</code> method.
@@ -44,7 +44,6 @@ public class LidWijzigen extends HttpServlet {
 			request.getRequestDispatcher("login.jsp").forward(request, response);
 		}
 
-
 	}
 
 	/**
@@ -59,15 +58,15 @@ public class LidWijzigen extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		LidDao lidDao = new LidDao();
 
 		// Haal de huidige sessie op
 		HttpSession session = request.getSession();
-
-		//Als een ingelogd lid naar een servlet gaat doe het volgende:
 		if (session.getAttribute("currentSessionUser") != null) {
 			//Haal de userbean (dit moet sessiebean worden) op uit de sessie
 			Lid lid = (Lid) session.getAttribute("currentSessionUser");
+
+			//check of de email bestaat, zo niet dan wordt de gebruiker toegevoegd in de database
+			//email komt niet in de database voor
 
 			//Zet de voornaam
 			lid.setVnaam(request.getParameter("vnaam"));
@@ -90,7 +89,7 @@ public class LidWijzigen extends HttpServlet {
 			System.out.println("Dit is het geslacht: " + lid.getGeslacht());
 
 			//Zet de straat
-			lid.setStraat(request.getParameter("straat") + " " + request.getParameter("huisnummer"));
+			lid.setStraat(request.getParameter("straat"));
 			//Print de straat naar de console
 			System.out.println("Dit is de straat: " + lid.getStraat());
 
@@ -134,22 +133,21 @@ public class LidWijzigen extends HttpServlet {
 			//Schrijf langnotify naar de console
 			System.out.println("Dit is de langnotify: " + lid.getLangnotify());
 
-			// hier wordt de gebruiker in de database opgeslagen
-			lid = lidDao.enkelLidUpdaten(lid);
+			LidDao lidDao = new LidDao();
 
-			if (lid == null) {
-				session.setAttribute("currentSesionUser", lid);
-				// en hier wordt de gebruiker door gelinked naar mijndryves
-				response.sendRedirect("MijnDryves"); //logged-in page  
-			} else {
-				request.getRequestDispatcher("oops.jsp").forward(request, response);
-			}
+			// hier wordt de gebruiker in de database opgeslagen
+			lidDao.enkelLidUpdaten(lid);
+
+			// en hier wordt de gebruiker door gelinked naar mijndryves
+			response.sendRedirect("MijnDryves"); //logged-in page  
 
 		} else {
-			//niet ingelogd dus naar login pagina
+			//Lid is niet ingelogd konden niet opgehaald worden
 			request.getRequestDispatcher("login.jsp").forward(request, response);
 		}
+
 	}
+
 
 	/**
 	 * Returns a short description of the servlet.

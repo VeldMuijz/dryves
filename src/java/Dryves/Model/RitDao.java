@@ -161,8 +161,9 @@ public class RitDao {
 	}
 
 	/**
-	 *
-	 */
+         * Opslaan van een rit in de db
+         * @return 
+         */
 	public Boolean saveRit() {
 
 		datum = new Timestamp(begindatum.getMillis());
@@ -335,6 +336,10 @@ public class RitDao {
 
 	}
 
+        /**
+         * Haal de lijst ritten van een lid op
+         * @return 
+         */
 	public List<Rit> getRittenLijst() {
 		currentCon = ConnectionManager.getConnection();
 		PreparedStatement selectRitten = null;
@@ -438,11 +443,11 @@ public class RitDao {
 	}
 
 	/**
-	 *
-	 * @param ritnr
-	 * @param updatewaarde
-	 * @return
-	 */
+ * Verhoog het aantal zitplaatsen met 1
+ * @param ritnr
+ * @param updatewaarde
+ * @return 
+ */
 	public Boolean updateZitplaatsOphogen(int ritnr, int updatewaarde) {
 		rs = null;
 		Boolean beschikbaar = false;
@@ -492,13 +497,13 @@ public class RitDao {
 		}
 		return true;
 	}
-
-	/**
-	 *
-	 * @param ritnr
-	 * @param updatewaarde
-	 * @return
-	 */
+	
+/**
+ * Verlaag het aantal zitplaatsen na het kiezen van een rit
+ * @param ritnr
+ * @param updatewaarde
+ * @return 
+ */
 	public Boolean updateZitplaatsVerlagen(int ritnr, int updatewaarde) {
 		rs = null;
 		Boolean beschikbaar = false;
@@ -548,7 +553,7 @@ public class RitDao {
 	}
 
 	/**
-	 * Haal een lijst van ritten per lid op
+	 * Haal een lijst van ritten per zoekopdracht op
 	 *
 	 * @return
 	 * @throws SQLException

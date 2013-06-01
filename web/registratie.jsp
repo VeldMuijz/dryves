@@ -183,7 +183,7 @@
                         <tr>
                             <td><input class="zoektextveld" type="text" name="anaam" value="" size=15 maxlength=20 placeholder="<fmt:message bundle="${rb}" key="achternaam" />"></td>
                             <td><font id="anaamerror" size=1 color="red"> </font></td>
-                            <td><input class="zoektextveld" placeholder="<fmt:message bundle="${rb}" key="stad" />" type="text" name="stad" value="" size=15 maxlength=20></td>
+                            <td><input class="zoektextveld" placeholder="<fmt:message bundle="${rb}" key="stad" />" type="text" name="stad" value="" size=15 maxlength=30></td>
                             <td><font id="staderror" size=1 color="red"> </font></td>
                         </tr>
                         <tr>
