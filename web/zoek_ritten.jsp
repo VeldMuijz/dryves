@@ -95,7 +95,7 @@ Document : mijn_ritten
                                             <c:choose>
                                                 <c:when test="${currentSessionUser.lidnr > 0}"> 
                                                     <button onclick="window.location = 'RitBeschikbaarCheck?ritnr=${rit.ritnr}';"><fmt:message bundle="${rb}" key="ritkopen" /></button>
-												<button onclick="window.location = 'nieuwbericht.jsp?ritnr=${rit.ritnr}&lidnr=${currentSessionUser.lidnr} ';"><fmt:message bundle="${rb}" key="berichtverzenden" /></button>
+												<button onclick="window.location = 'NieuwBericht?ritnr=${rit.ritnr}&lidnr=${currentSessionUser.lidnr} ';"><fmt:message bundle="${rb}" key="berichtverzenden" /></button>
                                                 </c:when>
                                                 <c:otherwise>
                                                     <button onclick="window.location = 'login.jsp';">Login/registreer <br>om te bekijken</button>

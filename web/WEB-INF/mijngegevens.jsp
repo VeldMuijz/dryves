@@ -1,6 +1,6 @@
 
 <%-- 
-    Document   : mijndryves_gegevens.jsp
+    Document   : mijngegevens.jsp
     Created on : 24-mrt-2013, 19:59:48
     Author     : Kees van Heuven
 --%>

@@ -11,11 +11,13 @@ import Dryves.Model.Rit;
 import Dryves.Model.RitDao;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.ws.rs.HEAD;
 
 /**
  *
@@ -42,6 +44,7 @@ public class RitBeschikbaarCheck extends HttpServlet {
 		Aankoop aankoop = new Aankoop();
 		AankoopDao aankoopDao = new AankoopDao();
 
+
 		// Haal de huidige sessie op
 		HttpSession session = request.getSession();
 		// Maak in de sessie een object rit aan met naam sessieRit
@@ -51,19 +54,24 @@ public class RitBeschikbaarCheck extends HttpServlet {
 
 		rit.setRitnr(Integer.parseInt(request.getParameter("ritnr")));
 
+		String referer = request.getHeader("Referer");
+
 		//check of dit lid wel bij deze rit hoort
 		if (!ritDao.checkBeschikbaarheidRit(rit.getRitnr())) {
 
 			System.out.println("Deze rit is uitverkocht!");
 			response.sendRedirect("ritnietbeschikbaar.jsp");
 
-		} else if(ritDao.updateZitplaatsVerlagen(rit.getRitnr(), 1)) {
+		} else if (!referer.contains("RitKopen") && ritDao.updateZitplaatsVerlagen(rit.getRitnr(), 1)) {
 			System.out.println("Rit is beschikbaar en kan gekocht worden, door naar RitKopen servlet");
 			response.sendRedirect("RitKopen");
 
-		}else{
+		} else if (referer.contains("RitKopen") && ritDao.updateZitplaatsOphogen(rit.getRitnr(), 1)) {
+		} else {
 			System.out.println("Deze rit is uitverkocht!");
-			response.sendRedirect("ritnietbeschikbaar.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/ritnietbeschikbaar.jsp");
+			dispatcher.forward(request, response);
+
 		}
 	}
 

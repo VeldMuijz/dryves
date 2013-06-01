@@ -4,24 +4,19 @@
  */
 package Dryves.Controller;
 
-import Dryves.Model.Berichten;
-import Dryves.Model.BerichtenDao;
-import Dryves.Model.Lid;
 import java.io.IOException;
-import java.sql.SQLException;
-import java.util.List;
+import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author H
+ * @author jeroen
  */
-public class BerichtLezen extends HttpServlet {
+public class MijnGegevens extends HttpServlet {
 
 	/**
 	 * Handles the HTTP
@@ -35,38 +30,9 @@ public class BerichtLezen extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		//processRequest(request, response);
-		// Instantieren van objecten
-		Berichten bericht = new Berichten();
-		BerichtenDao berichtDao = new BerichtenDao();
-		// Haal de huidige sessie op
-		HttpSession session = request.getSession();
-		// Maak in de sessie een object rit aan met naam sessieRit
-		session.setAttribute("sessieRit", bericht);
-		//Haal de userbean (dit moet sessiebean worden) op uit de sessie
-
-		int berichtnr = Integer.parseInt(request.getParameter("berichtid"));
-		System.out.println(berichtnr);
-		Lid user = (Lid) session.getAttribute("currentSessionUser");
-		berichtDao.markeerBericht(berichtnr);
-
-		try {
-			List<Berichten> ritten;
-			bericht.setLidnr(user.getLidnr());
-			berichtDao.vulBerichtDao(bericht);
-			ritten = berichtDao.getAlleBerichtenbijId(berichtnr);
-
-
-			request.setAttribute("berichten", ritten);
-
-
-		} catch (SQLException e) {
-			throw new ServletException("Cannot obtain products from DB", e);
-		}
-		RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/helebericht.jsp");
-		dispatcher.forward(request, response);
-
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/mijngegevens.jsp");
+        dispatcher.forward(request, response);
 	}
 
 	/**

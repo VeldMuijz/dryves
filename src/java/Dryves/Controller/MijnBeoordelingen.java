@@ -74,7 +74,6 @@ public class MijnBeoordelingen extends HttpServlet {
 			Logger.getLogger(MijnBeoordelingen.class.getName()).log(Level.SEVERE, null, ex);
 			throw new ServletException("Kan gegevens niet ophalen uit database", ex);
 		}
-//		response.sendRedirect("WEB-INF/mijnbeoordelingen.jsp");
 		RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/mijnbeoordelingen.jsp");
 			dispatcher.forward(request, response);
 	}
