@@ -18,6 +18,7 @@ public class Aankoop  implements java.io.Serializable {
      private int factuurnr;
 	 private String stringTijd;
 	 private String stringDatum;
+         private int beoordeeld;
 	 
 
     public Aankoop() {
@@ -107,6 +108,16 @@ public class Aankoop  implements java.io.Serializable {
 	public void setStringDatum(String stringDatum) {
 		this.stringDatum = stringDatum;
 	}
+
+    public int getBeoordeeld() {
+        return beoordeeld;
+    }
+
+    public void setBeoordeeld(int beoordeeld) {
+        this.beoordeeld = beoordeeld;
+    }
+        
+        
 
 
 }
