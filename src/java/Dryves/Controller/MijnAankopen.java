@@ -70,36 +70,47 @@ public class MijnAankopen extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-	// Instantieren van objecten
+		// Instantieren van objecten
 		Rit rit = new Rit();
 		RitDao ritDao = new RitDao();
 		Aankoop aankoop = new Aankoop();
 		AankoopDao aankoopDao = new AankoopDao();
 		// Haal de huidige sessie op
 		HttpSession session = request.getSession();
-		// Maak in de sessie een object rit aan met naam sessieRit, en sessieAankoop
-		session.setAttribute("sessieRit", rit);
-		session.setAttribute("sessieAankoop", aankoop);
-		//Haal de userbean (dit moet sessiebean worden) op uit de sessie
-		Lid user = (Lid) session.getAttribute("currentSessionUser");
-		try {
+
+		if (session.getAttribute("currentSessionUser") != null) {
+			// Maak in de sessie een object rit aan met naam sessieRit, en sessieAankoop
+			session.setAttribute("sessieRit", rit);
+			session.setAttribute("sessieAankoop", aankoop);
+			//Haal de userbean (dit moet sessiebean worden) op uit de sessie
+			Lid user = (Lid) session.getAttribute("currentSessionUser");
+
 			List<Rit> ritten;
 			rit.setLidnr(user.getLidnr());
 			ritDao.vulRitDao(rit);
+			
+			//haal alle gekochte ritten op uit database
 			ritten = ritDao.getAlleGekochteRittenPerLid();
 			
+			//maak een lijst van aankopen aan vanuit de database
 			List<Aankoop> aankopen;
 			aankopen = aankoopDao.getAlleAankopenPerLid(user.getLidnr());
-			
+			if(aankopen != null){
 			request.setAttribute("ritten", ritten);
 			request.setAttribute("aankopen", aankopen);
-			
+
 			RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/mijnaankopen.jsp");
 			dispatcher.forward(request, response);
-		} catch (SQLException e) {
-			throw new ServletException("Cannot obtain products from DB", e);
-		}
 
+			}else{
+				//ophalen van aankopen is mislukt
+				RequestDispatcher dispatcher = request.getRequestDispatcher("oops.jsp");
+			dispatcher.forward(request, response);
+			}
+		} else {
+			//niet ingelogd dus naar login pagina
+			request.getRequestDispatcher("login.jsp").forward(request, response);
+		}
 	}
 
 	/**
@@ -114,7 +125,6 @@ public class MijnAankopen extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		processRequest(request, response);
 	}
 
 	/**
@@ -125,5 +135,5 @@ public class MijnAankopen extends HttpServlet {
 	@Override
 	public String getServletInfo() {
 		return "Short description";
-	}// </editor-fold>
+	}
 }

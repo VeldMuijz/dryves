@@ -8,17 +8,14 @@ import Dryves.Model.Berichten;
 import Dryves.Model.BerichtenDao;
 import Dryves.Model.verstuurEmail;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -29,42 +26,45 @@ public class VerstuurBericht extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		Berichten bericht = new Berichten();
-		BerichtenDao berichtDao = new BerichtenDao();
+		HttpSession session = request.getSession();
 
-		//huidige tijdstip opvragen
-		Date datum = new Date();
+		if (session.getAttribute("currentSessionUser") != null) {
+			Berichten bericht = new Berichten();
+			BerichtenDao berichtDao = new BerichtenDao();
 
-		bericht.setRitnr(Integer.parseInt(request.getParameter("ritnr")));
-		bericht.setLidnr(Integer.parseInt(request.getParameter("lidnr")));
-		System.out.println("Bericht lidnummer: " + bericht.getLidnr());
-		bericht.setInhoud(request.getParameter("inhoud"));
-		bericht.setDatum(new Timestamp(datum.getTime()));
-		System.out.println(bericht.getInhoud());
+			//huidige tijdstip opvragen
+			Date datum = new Date();
 
+			bericht.setRitnr(Integer.parseInt(request.getParameter("ritnr")));
+			bericht.setLidnr(Integer.parseInt(request.getParameter("lidnr")));
+			System.out.println("Bericht lidnummer: " + bericht.getLidnr());
+			bericht.setInhoud(request.getParameter("inhoud"));
+			bericht.setDatum(new Timestamp(datum.getTime()));
+			System.out.println(bericht.getInhoud());
 
-		try {
-			berichtDao.BerichtVersturen(bericht);
+			if (berichtDao.BerichtVersturen(bericht)) {
 
-			verstuurEmail ve = new verstuurEmail();
+				verstuurEmail ve = new verstuurEmail();
 
-			String naar = "";
-			String onderwerp = "U heeft een nieuw bericht!";
-			String mail = "Dit is een test!";
+				String naar = "";
+				String onderwerp = "U heeft een nieuw bericht!";
+				String mail = "Dit is een test!";
 
-			System.out.println("Dit is de afzender: " + bericht.getAfzender());
+				System.out.println("Dit is de afzender: " + bericht.getAfzender());
 
-			//ve.verstuurEmailZonderBijlage(naar, onderwerp, mail);
+				//ve.verstuurEmailZonderBijlage(naar, onderwerp, mail);
+				RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/succesvol.jsp");
+				dispatcher.forward(request, response);
 
-		} catch (SQLException ex) {
-			Logger.getLogger(Berichtverzenden.class.getName()).log(Level.SEVERE, null, ex);
-			response.sendRedirect("oops.jsp");
-
+			} else {
+				//Bericht versturen is niet gelukt
+				response.sendRedirect("oops.jsp");
+			}
+		} else {
+			//Lid is niet ingelogd konden niet opgehaald worden
+			request.getRequestDispatcher("login.jsp").forward(request, response);
 		}
-
-		RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/succesvol.jsp");
-		dispatcher.forward(request, response);
-
+		
 	}
 
 	/**

@@ -15,19 +15,19 @@
 
 <fmt:setBundle basename="ResourceBundles.Dryves" scope="request" var="rb" />
 <%
-  // Get the session object. If the incoming connection
-  // is not associated with any existing session, the 
-  // container constructs a new session object.
-  HttpSession sess = request.getSession(true);
-  // Session never expires. The expiration date/time can also 
-  // be set in the servlet container's config file.
-  sess.setMaxInactiveInterval(-1);
+    // Get the session object. If the incoming connection
+    // is not associated with any existing session, the 
+    // container constructs a new session object.
+    HttpSession sess = request.getSession(true);
+    // Session never expires. The expiration date/time can also 
+    // be set in the servlet container's config file.
+    sess.setMaxInactiveInterval(-1);
 
-  // Get username. If no username is found, set it to "anonymous".
-  String username = (String) sess.getAttribute("Username");
-  if ( username == null ) {
-    username = "anonymous";
-  }
+    // Get username. If no username is found, set it to "anonymous".
+    String username = (String) sess.getAttribute("Username");
+    if (username == null) {
+        username = "anonymous";
+    }
 %>
 <!DOCTYPE html>
 <html>
@@ -57,6 +57,8 @@
                 <img src="images/Logo_Dryves.png" />
             </div>
 
+            <!-- Hier wordt het navigatie menu ingeladen -->
+
             <jsp:include page="navigatie.jsp" flush="true">
                 <jsp:param name="menu_active" value="home"></jsp:param>
             </jsp:include>
@@ -66,13 +68,11 @@
 
 
 
-            <!--                <form action="RitZoeken" method="get" >
-                                <b>Zoek rit: <b> <input id='zoekveld' name="zoekrit" onchange="RitZoeken" placeholder="Zoek op adres, stad, postcode" ></input> 
-                                        <button onclick="RitZoeken">Uitvoeren</button>
-                                        </form>      -->
+
 
             <br /> <br />  
 
+            <!-- Hier wordt de slider ingeladen -->
 
             <div class="slider-wrapper theme-default">
                 <div id="slider" class="nivoSlider">

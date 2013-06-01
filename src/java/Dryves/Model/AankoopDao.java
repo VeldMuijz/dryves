@@ -170,7 +170,7 @@ public class AankoopDao {
      * @return Lijst van Objecten van het type Aankoop
      * @throws SQLException
      */
-    public List<Aankoop> getAlleAankopenPerLid(int lidnr) throws SQLException {
+    public List<Aankoop> getAlleAankopenPerLid(int lidnr){
         Connection connection = null;
         PreparedStatement statement = null;
         ResultSet rs = null;

@@ -68,7 +68,7 @@
                     check = false;
                 }
                 ;
-                rExp = /^([\u00c0-\u01ffa-zA-Z'\- ]{3,})+$/;
+                rExp = /^([\u00c0-\u01ffa-zA-Z'\- ]{3,}[0-9]{1,}[a-z]{0,})+$/;
                 if (!rExp.exec(straat)) {
                     document.getElementById("straaterror").innerHTML = "Geen straatnaam ingevuld!";
                     check = false;
@@ -142,13 +142,13 @@
                         <tr>
                             <td><input class="zoektextveld" placeholder="<fmt:message bundle="${rb}" key="tussenvoegsel" />" type="text" name="tvoegsel" value="${currentSessionUser.tvoegsel}" size=5 maxlength=20></td>
                             <td></td>
-                            <td><input class="zoektextveld" type="text" name="stad" value="${currentSessionUser.stad}" size=15 maxlength=20></td>
+                            <td><input class="zoektextveld" type="text" name="stad" value="${currentSessionUser.stad}" size=15 maxlength=30></td>
                             <td><font id="staderror" size=1 color="red"> </font></td>
                         </tr>
                         <tr>
                             <td><input class="zoektextveld" type="text" name="anaam" value="${currentSessionUser.anaam}" size=15 maxlength=20></td>
                             <td><font id="anaamerror" size=1 color="red"> </font></td>
-                            <td><input class="zoektextveld" key="rekeningnummer" type="text" name="reknr" value="${currentSessionUser.reknr}" size=10  maxlength=8></td>
+                            <td><input class="zoektextveld" key="rekeningnummer" type="text" name="reknr" value="${currentSessionUser.reknr}" size=10  maxlength=10></td>
                             <td><font id="reknrerror" size=1 color="red"> </font></td>
                         </tr>
                         <tr>

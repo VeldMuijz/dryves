@@ -6,6 +6,7 @@ package Dryves.Model;
 
 import Dryves.ConnectionManager;
 import Dryves.DatumConverter;
+import static Dryves.Model.BerichtenDao.rs;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -24,6 +25,7 @@ import java.util.logging.Logger;
 public class BeoordelingDao {
 
 	static Connection currentCon;
+	static ResultSet rs;
 	private int beoordelingnr;
 	private int waardering;
 	private int stiptheid;
@@ -56,8 +58,8 @@ public class BeoordelingDao {
 	 * @return
 	 * @throws SQLException
 	 */
-	public List<Beoordeling> getAlleBeoordelingenPerLid(int lidnr) throws SQLException {
-		ResultSet resultSet = null;
+	public List<Beoordeling> getAlleBeoordelingenPerLid(int lidnr) {
+		rs = null;
 		List<Beoordeling> beoordelingen = new ArrayList<Beoordeling>();
 		DatumConverter dc = new DatumConverter();
 		currentCon = ConnectionManager.getConnection();
@@ -74,18 +76,18 @@ public class BeoordelingDao {
 		try {
 			getBeoordelingen = currentCon.prepareStatement(queryString);
 			getBeoordelingen.setInt(1, lidnr);
-			resultSet = getBeoordelingen.executeQuery();
+			rs = getBeoordelingen.executeQuery();
 
-			while (resultSet.next()) {
+			while (rs.next()) {
 				Beoordeling beoordeling = new Beoordeling();
-				beoordeling.setBetrouwbaarheid(resultSet.getInt("betrouwbaarheid"));
-				beoordeling.setCommentaar(resultSet.getString("commentaar"));
-				beoordeling.setGezelligheid(resultSet.getInt("gezelligheid"));
-				beoordeling.setLidnr(resultSet.getInt("lidnr"));
-				beoordeling.setRijstijl(resultSet.getInt("rijstijl"));
-				beoordeling.setStiptheid(resultSet.getInt("stiptheid"));
-				beoordeling.setWaardering(resultSet.getInt("waardering"));
-				beoordeling.setDatum(resultSet.getTimestamp("datum"));
+				beoordeling.setBetrouwbaarheid(rs.getInt("betrouwbaarheid"));
+				beoordeling.setCommentaar(rs.getString("commentaar"));
+				beoordeling.setGezelligheid(rs.getInt("gezelligheid"));
+				beoordeling.setLidnr(rs.getInt("lidnr"));
+				beoordeling.setRijstijl(rs.getInt("rijstijl"));
+				beoordeling.setStiptheid(rs.getInt("stiptheid"));
+				beoordeling.setWaardering(rs.getInt("waardering"));
+				beoordeling.setDatum(rs.getTimestamp("datum"));
 				System.out.println("DATUM: " + beoordeling.getDatum());
 				beoordeling.setKorteDatum(dc.korteDatum(beoordeling.getDatum()));
 				beoordeling.setKorteTijd(dc.korteTijd(beoordeling.getDatum()));
@@ -93,15 +95,16 @@ public class BeoordelingDao {
 				beoordelingen.add(beoordeling);
 			}
 		} catch (SQLException ex) {
-			Logger.getLogger(RitDao.class.getName()).log(Level.SEVERE, null, ex);
+			Logger.getLogger(BeoordelingDao.class.getName()).log(Level.SEVERE, null, ex);
 
 		} finally {
-			if (resultSet != null) {
+			
+			if (rs != null) {
 				try {
-					resultSet.close();
+					//sluit resultset af
+					rs.close();
 				} catch (SQLException ignore) {
 				}
-			}
 			if (getBeoordelingen != null) {
 				try {
 					getBeoordelingen.close();
@@ -117,6 +120,7 @@ public class BeoordelingDao {
 		}
 
 		return beoordelingen;
+	}
 	}
 
 	/**

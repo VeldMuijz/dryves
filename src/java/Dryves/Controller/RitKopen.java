@@ -50,33 +50,37 @@ public class RitKopen extends HttpServlet {
 
 		// Haal de huidige sessie op
 		HttpSession session = request.getSession();
-		//Haal de userbean (dit moet sessiebean worden) op uit de sessie
-		Lid user = (Lid) session.getAttribute("currentSessionUser");
-		//Haal de ritbean op uit de sessie
-		Rit rit = (Rit) session.getAttribute("sessieRit");
 
-		int ritnr = rit.getRitnr();
+		if (session.getAttribute("currentSessionUser") != null) {
+			//Haal de userbean (dit moet sessiebean worden) op uit de sessie
+			Lid user = (Lid) session.getAttribute("currentSessionUser");
+			//Haal de ritbean op uit de sessie
+			Rit rit = (Rit) session.getAttribute("sessieRit");
 
-		ritDao.enkeleRitOphalen(ritnr, rit);
+			int ritnr = rit.getRitnr();
 
-		//check of dit lid wel bij deze rit hoort
-		if (rit.getAangeboden() < 1) {
+			ritDao.enkeleRitOphalen(ritnr, rit);
 
-			System.out.println("Dit lid mag deze rit niet kopen, terug naar MijnRitten!");
-			response.sendRedirect("MijnRitten");
+			//check of dit lid wel bij deze rit hoort
+			if (rit.getAangeboden() < 1) {
 
+				System.out.println("Dit lid mag deze rit niet kopen, terug naar MijnRitten!");
+				response.sendRedirect("MijnRitten");
+
+			} else {
+
+				DatumConverter dc = new DatumConverter();
+
+				rit.setDatumkort(dc.korteDatum(rit.getDatum()));
+				rit.setTijd(dc.korteTijd(rit.getDatum()));
+
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/ritkopen.jsp");
+				dispatcher.forward(request, response);
+			}
 		} else {
-
-			DatumConverter dc = new DatumConverter();
-
-			rit.setDatumkort(dc.korteDatum(rit.getDatum()));
-			rit.setTijd(dc.korteTijd(rit.getDatum()));
-
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/ritkopen.jsp");
-			dispatcher.forward(request, response);
+			//niet ingelogd dus naar login pagina
+			request.getRequestDispatcher("login.jsp").forward(request, response);
 		}
-
-
 	}
 
 	/**
@@ -119,7 +123,7 @@ public class RitKopen extends HttpServlet {
 		//Voer aankoop uit
 		aankoopDao.vulAankoopDao(aankoop);
 		if (!aankoopDao.aankoopDoen(rit.getPrijs())) {
-			
+
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/oops.jsp");
 			dispatcher.forward(request, response);
 		} else {

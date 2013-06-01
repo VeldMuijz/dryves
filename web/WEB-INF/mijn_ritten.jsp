@@ -32,10 +32,30 @@ Document : mijn_ritten
             <div class="logo">    
                 <img src="images/Logo_Dryves.png" />
             </div>
-       	<jsp:include page="navigatie.jsp" flush="true">
+            
+            <!-- Hier wordt de navigatie ingeladen -->
+			<jsp:include page="navigatie.jsp" flush="true">
                 <jsp:param name="menu_active" value="mijndryves"></jsp:param>
             </jsp:include>
 
+            <div class="contentPanel">         
+
+
+                <c:choose>
+					<c:when test="${empty ritten}">
+						<fmt:message bundle="${rb}" key="geenritten" />
+					</c:when>
+					<c:otherwise>
+                                            
+                                            <!-- Hier wordt de rittenlijst ingeladen -->
+
+						<c:forEach items="${ritten}" var="rit">
+							<div class="rittenlijst">
+								<table>
+
+									<tr>${rit.datumkort}
+										<td>${rit.startpunt}</td>
+										<td><img src ="images/pijl.jpg" /></td>
 
 
 

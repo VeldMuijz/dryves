@@ -8,8 +8,6 @@ import Dryves.Model.Berichten;
 import Dryves.Model.BerichtenDao;
 import Dryves.Model.Lid;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
@@ -43,15 +41,19 @@ public class MijnBerichten extends HttpServlet {
 
 		// Haal de huidige sessie op
 		HttpSession session = request.getSession();
-		//Haal de userbean (dit moet sessiebean worden) op uit de sessie
-		Lid user = (Lid) session.getAttribute("currentSessionUser");
 
-		try {
+		if (session.getAttribute("currentSessionUser") != null) {
+			//Haal de userbean (dit moet sessiebean worden) op uit de sessie
+			Lid user = (Lid) session.getAttribute("currentSessionUser");
+
 			List<Berichten> bericht;
 			int userid = user.getLidnr();
 			ArrayList<Lid> afzender = new ArrayList<Lid>();
 
 			bericht = berichtendao.haalberichten(userid);
+			if(bericht != null){
+				
+			
 			request.setAttribute("berichten", bericht);
 
 			for (int i = 0; i < bericht.size(); i++) {
@@ -65,16 +67,21 @@ public class MijnBerichten extends HttpServlet {
 				afzender.add(berichtendao.afzender(afzenderint));
 				System.out.println("dit is i =" + i);
 			}
-			request.setAttribute("afzender", afzender);
+			
+				request.setAttribute("afzender", afzender);
 
-		} catch (SQLException e) {
-			throw new ServletException("Kan gegevens niet ophalen van database.", e);
-
+			RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/mijnberichten.jsp");
+			dispatcher.forward(request, response);
+			}else {
+				//ophalen van berichten is mislukt
+				RequestDispatcher dispatcher = request.getRequestDispatcher("oops.jsp");
+				dispatcher.forward(request, response);
+			}
+			
+		} else {
+			//niet ingelogd dus naar login pagina
+			request.getRequestDispatcher("login.jsp").forward(request, response);
 		}
-		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/mijnberichten.jsp");
-		dispatcher.forward(request, response);
-
 	}
 
 	@Override
