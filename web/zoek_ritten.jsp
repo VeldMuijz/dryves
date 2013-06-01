@@ -55,39 +55,33 @@ Document : mijn_ritten
 
                         <c:forEach items="${ritten}" var="rit">
                             <div class="rittenlijst">
+                                
                                 <table width="100%">
-
                                     <tr>
-                                        <td>Van:</td>
-                                        <td>${rit.straatnummer}</td>
-                                        <td><img src ="images/pijl.jpg" /></td>
-                                        <td>Naar:</td>
-                                        <td>${rit.straatnummerEnd}</td>
+                                        <td>
+                                            <img src="images/from_icon.png" /> ${rit.straatnummer} - ${rit.postcodeplaats} -  ${rit.land}
+                                        </td>
                                     </tr>
                                     <tr>
-                                        <td></td>
-                                        <td>${rit.postcodeplaats}</td>
-                                        <td></td>
-                                        <td></td>
-                                        <td>${rit.postcodeplaatsEnd}</td>
+                                        <td>
+                                         
+                                            <img src="images/to_icon.png" /> ${rit.straatnummerEnd} - ${rit.postcodeplaatsEnd} -  ${rit.landEnd}
+                                        </td>
                                     </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td>${rit.land}</td>
-                                        <td></td>
-                                        <td></td>
-                                        <td>${rit.landEnd}</td>
-                                    </tr>
+                                </table>
+                                
+                                
+                                <table width="100%">
                                     
                                     <tr>
-                                        <td>Prijs: € ${rit.prijs}</td>
+                                        <td><img src="images/money_icon.png" /> € ${rit.prijs}</td>
                                         <td>Ritnr: ${rit.ritnr}</td>
                                         <td></td>
                                         <td></td>
                                     </tr>
 
                                     <tr>
-                                        <td>${rit.datumkort} ${rit.tijd}</td>
+                                        <td><img src="images/calendar_icon.png" /> ${rit.datumkort} <img src="images/clock_icon.png" /> ${rit.tijd}</td>
                                         <td></td>
                                         <td></td>
                                         <td>Nog ${rit.zitplaatsen} beschikbaar</td>
