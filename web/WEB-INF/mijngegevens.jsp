@@ -154,21 +154,9 @@
                         <tr>
                             <td><input class="zoektextveld" type="text" name="email" value="${currentSessionUser.email}" size=25  maxlength=25></td>
                             <td><font id="emailerror" size=1 color="red"> </font></td>
-                            <td><input class="zoektextveld" type="password" name="wachtwoord" size=10 value="${currentSessionUser.wachtwoord}" maxlength=30></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td><input class="zoektextveld" type="text" name="telnr" value="${currentSessionUser.telnr}" size=15  maxlength=15></td>
-                            <td><font id="telnrerror" size=1 color="red"> </font></td>
-                            <td><input class="zoektextveld" type="password" name="wachtwoord2" size=10 value="${currentSessionUser.wachtwoord}" maxlength=30></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td><input class="zoektextveld" type="text" name="postcode" value="${currentSessionUser.postcode}" size=5  maxlength=8></td>
-                            <td><font id="postcodeerror" size=1 color="red"> </font></td>
-                            <td>                                    
-                               
-                                <fieldset style="width: 198px;">
+                            <td>
+                                
+                                                                <fieldset style="width: 198px;">
                                     <legend><fmt:message bundle="${rb}" key="geslacht" /></legend>
                                     <c:choose>
                                         <c:when test="${currentSessionUser.geslacht == 'M'}"> 
@@ -181,16 +169,16 @@
                                         </c:otherwise>
                                     </c:choose>
                                 </fieldset>
-
+                                
                             </td>
                             <td></td>
                         </tr>
                         <tr>
-                            <td></td>
-                            <td></td>
-                            <td>                        
-
-                                <fieldset style="width: 198px;">
+                            <td><input class="zoektextveld" type="text" name="telnr" value="${currentSessionUser.telnr}" size=15  maxlength=15></td>
+                            <td><font id="telnrerror" size=1 color="red"> </font></td>
+                            <td>
+                                
+                                                                <fieldset style="width: 198px;">
                                     <legend><fmt:message bundle="${rb}" key="taal" /></legend>
                                <c:choose>
                                     <c:when test="${currentSessionUser.langnotify == 'nl_NL'}"> 
@@ -205,16 +193,26 @@
                                 </fieldset>
 <!--                                <input type="radio" name="locale" value="nl_NL" checked> <img src="images/nl_NL.png" />
                                 <input type="radio" name="locale" value="en_GB"> <img src="images/en_EN.png" /></td>-->
+                                
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><input class="zoektextveld" type="text" name="postcode" value="${currentSessionUser.postcode}" size=5  maxlength=8></td>
+                            <td><font id="postcodeerror" size=1 color="red"> </font></td>
+                            <td>                                                                   
+                                <input class="zoektextveld" type="password" name="wachtwoord" size=10 value="${currentSessionUser.wachtwoord}" maxlength=30>
+
+                            </td>
                             <td></td>
                         </tr>
                         <tr>
                             <td></td>
                             <td></td>
+                            <td>                        
+                                <input class="zoektextveld" type="password" name="wachtwoord2" size=10 value="${currentSessionUser.wachtwoord}" maxlength=30>
+
                             <td></td>
-                            <td></td>
-                            
-                          
-                            
                         </tr>
                         <tr>
                             <td><button type ="submit"><fmt:message bundle="${rb}" key="wijzigen" /></button></td>
