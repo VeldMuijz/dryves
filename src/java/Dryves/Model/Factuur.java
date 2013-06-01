@@ -19,6 +19,15 @@ public class Factuur  implements java.io.Serializable {
 
     public Factuur() {
     }
+    
+/**
+ * 
+ * @param factuurnr
+ * @param aankoopnr
+ * @param datum
+ * @param totaalbedrag
+ * @param totaalbedragexbtw 
+ */
 
     public Factuur(int factuurnr, int aankoopnr, Date datum, BigDecimal totaalbedrag, BigDecimal totaalbedragexbtw) {
        this.factuurnr = factuurnr;
