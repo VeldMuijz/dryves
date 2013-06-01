@@ -167,18 +167,20 @@
                             <td><input class="zoektextveld" type="text" name="postcode" value="${currentSessionUser.postcode}" size=5  maxlength=8></td>
                             <td><font id="postcodeerror" size=1 color="red"> </font></td>
                             <td>                                    
-                                <fmt:message bundle="${rb}" key="geslacht" />
-                                <br>
-                                <c:choose>
-                                    <c:when test="${currentSessionUser.geslacht == 'M'}"> 
+                               
+                                <fieldset style="width: 198px;">
+                                    <legend><fmt:message bundle="${rb}" key="geslacht" /></legend>
+                                    <c:choose>
+                                        <c:when test="${currentSessionUser.geslacht == 'M'}"> 
                                         <input type="radio" name="geslacht" value="M" checked > M 
                                         <input type="radio" name="geslacht" value="V"> V
-                                    </c:when>
-                                    <c:otherwise>
+                                        </c:when>
+                                        <c:otherwise>
                                         <input type="radio" name="geslacht" value="M" > M 
                                         <input type="radio" name="geslacht" value="V" checked > V
-                                    </c:otherwise>
-                                </c:choose>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </fieldset>
 
                             </td>
                             <td></td>
@@ -187,9 +189,9 @@
                             <td></td>
                             <td></td>
                             <td>                        
-                                <fmt:message bundle="${rb}" key="taal" />
-                                <br>
-                               
+
+                                <fieldset style="width: 198px;">
+                                    <legend><fmt:message bundle="${rb}" key="taal" /></legend>
                                <c:choose>
                                     <c:when test="${currentSessionUser.langnotify == 'nl_NL'}"> 
                                         <input type="radio" name="locale" value="nl_NL" checked ><img src="images/nl_NL.png" />
@@ -200,6 +202,7 @@
                                         <input type="radio" name="locale" value="en_GB" checked ><img src="images/en_EN.png" />
                                     </c:otherwise>
                                 </c:choose>
+                                </fieldset>
 <!--                                <input type="radio" name="locale" value="nl_NL" checked> <img src="images/nl_NL.png" />
                                 <input type="radio" name="locale" value="en_GB"> <img src="images/en_EN.png" /></td>-->
                             <td></td>
