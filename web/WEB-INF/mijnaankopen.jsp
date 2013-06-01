@@ -50,7 +50,6 @@ Document : mijn_ritten
 								<table>
 									<tr>
 										<td><fmt:message bundle="${rb}" key="aankoopnummer" /> ${aankoop.aankoopnr}</td>
-										<td><fmt:message bundle="${rb}" key="factuurnummer" /> ${aankoop.factuurnr}</td>
 										<td><fmt:message bundle="${rb}" key="ritnummer" /> ${aankoop.ritnr}</td>
 										<td><fmt:message bundle="${rb}" key="datum" /> ${aankoop.stringTijd} ${aankoop.stringDatum}</td>
 
