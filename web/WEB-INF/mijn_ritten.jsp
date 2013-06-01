@@ -32,7 +32,7 @@ Document : mijn_ritten
             <div class="logo">    
                 <img src="images/Logo_Dryves.png" />
             </div>
-            
+
             <!-- Hier wordt de navigatie ingeladen -->
 			<jsp:include page="navigatie.jsp" flush="true">
                 <jsp:param name="menu_active" value="mijndryves"></jsp:param>
@@ -46,8 +46,7 @@ Document : mijn_ritten
 						<fmt:message bundle="${rb}" key="geenritten" />
 					</c:when>
 					<c:otherwise>
-                                            
-                                            <!-- Hier wordt de rittenlijst ingeladen -->
+						<!-- Hier wordt de rittenlijst ingeladen -->
 
 						<c:forEach items="${ritten}" var="rit">
 							<div class="rittenlijst">
@@ -57,38 +56,25 @@ Document : mijn_ritten
 										<td>${rit.startpunt}</td>
 										<td><img src ="images/pijl.jpg" /></td>
 
+										<td>${rit.eindpunt}</td>
 
 
-            <div class="contentPanel">         
-                
+										<td>${rit.prijs}</td>
+										<td>${rit.datumkort} ${rit.tijd}</td>
+										<td><button onclick="window.location = 'RitWijzigen?ritnr=${rit.ritnr}';"><fmt:message bundle="${rb}" key="ritwijzigen" /></button></td>
 
-                
-                
-                <c:forEach items="${ritten}" var="rit">
-                    <div class="rittenlijst">
-                        <table>
-                            
-                                <tr><img src="images/calendar_icon.png" /> ${rit.datumkort}
-                                <td>${rit.startpunt}</td>
-                                <td><img src ="images/pijl.jpg" /></td>
-                               
-                                <td>${rit.eindpunt}</td>
-                           
-                                
-                                <td><img src="images/money_icon.png" /> ${rit.prijs}</td>
-				<td>${rit.datumkort} ${rit.tijd}</td>
-                                <td><button onclick="window.location = 'RitWijzigen?ritnr=${rit.ritnr}';"><fmt:message bundle="${rb}" key="ritwijzigen" /></button></td>
-                                
-                                </tr> 
+									</tr> 
 
-                        </table>
-                    </div>
-                </c:forEach>
-                
-             
-            </div>
-        </div>
+								</table>
+							</div>
+						</c:forEach>
+					</c:otherwise>
+				</c:choose>
 
 
-    </body>
+			</div>
+		</div>
+
+
+	</body>
 </html>
