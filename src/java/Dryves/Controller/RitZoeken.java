@@ -7,7 +7,6 @@ package Dryves.Controller;
 import Dryves.Model.Rit;
 import Dryves.Model.RitDao;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -40,25 +39,26 @@ public class RitZoeken extends HttpServlet {
 		RitDao ritDao = new RitDao();
 		// Haal de huidige sessie op
 		HttpSession session = request.getSession();
-			// Maak in de sessie een object rit aan met naam sessieRit
-			session.setAttribute("sessieRit", rit);
-			//   Lid user = (Lid) session.getAttribute("currentSessionUser");
-			String startpunt = request.getParameter("zoekritbegin");
-			String eindpunt = request.getParameter("zoekriteind");
+		// Maak in de sessie een object rit aan met naam sessieRit
+		session.setAttribute("sessieRit", rit);
+		//   Lid user = (Lid) session.getAttribute("currentSessionUser");
+		String startpunt = request.getParameter("zoekritbegin");
+		String eindpunt = request.getParameter("zoekriteind");
 
-			List<Rit> ritten;
-			// rit.setLidnr(user.getLidnr());
-			ritDao.vulRitDao(rit);
-			ritten = ritDao.getAlleRitten(startpunt, eindpunt);
-			if (ritten != null) {
-				request.setAttribute("ritten", ritten);
-
-				RequestDispatcher dispatcher = request.getRequestDispatcher("zoek_ritten.jsp");
-				dispatcher.forward(request, response);
-			}else {
-				//ritten konden niet opgehaald worden
-				request.getRequestDispatcher("oops.jsp").forward(request, response);
-			}
+		List<Rit> ritten;
+		// rit.setLidnr(user.getLidnr());
+		ritDao.vulRitDao(rit);
+		System.out.println("Startpunt = " + startpunt);
+		ritten = ritDao.getAlleRitten(startpunt, eindpunt);
+		
+		if (ritten != null) {
+			request.setAttribute("ritten", ritten);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("zoek_ritten.jsp");
+			dispatcher.forward(request, response);
+		} else {
+			//ritten konden niet opgehaald worden
+			request.getRequestDispatcher("oops.jsp").forward(request, response);
+		}
 
 	}
 

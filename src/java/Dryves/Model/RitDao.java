@@ -561,19 +561,21 @@ public class RitDao {
 	public List<Rit> getAlleRitten(String startpunt, String eindpunt){
 		Connection connection = null;
 		//PreparedStatement statement = null;
-		ResultSet resultSet = null;
+		rs = null;
 		List<Rit> ritten = new ArrayList<Rit>();
 		DatumConverter dc = new DatumConverter();
 		currentCon = ConnectionManager.getConnection();
 		PreparedStatement zoekritten = null;
-		try {
-			String queryString = "SELECT * "
+		String queryString = "SELECT * "
 					+ "FROM Rit "
 					+ "WHERE aangeboden = 1 "
 					+ "AND zitplaatsen > 0 "
 					+ "AND LOWER(startpunt) LIKE LOWER(?) "
 					+ "AND LOWER(eindpunt) LIKE LOWER(?) "
 					+ "AND datum > DATE(NOW());";
+		String[] arrSplit, arrSplit2;
+		try {
+			
 
 			zoekritten = currentCon.prepareStatement(queryString);
 
@@ -581,37 +583,41 @@ public class RitDao {
 
 			zoekritten.setString(2, "%" + eindpunt + "%");
 
-			resultSet = zoekritten.executeQuery();
+			rs = zoekritten.executeQuery();
 
-			while (resultSet.next()) {
+			while (rs.next()) {
 
 				Rit rit = new Rit();
-				rit.setRitnr(resultSet.getInt("ritnr"));
-				rit.setStartpunt(resultSet.getString("startpunt"));
+				rit.setRitnr(rs.getInt("ritnr"));
+				rit.setStartpunt(rs.getString("startpunt"));
 
-				String[] arrSplit = rit.getStartpunt().split(", ");
-
+				arrSplit = rit.getStartpunt().split(", ");
+				
 				rit.setStraatnummer(arrSplit[0]);
 				rit.setPostcodeplaats(arrSplit[1].substring(5));
 				rit.setLand(arrSplit[2]);
 
-				rit.setEindpunt(resultSet.getString("eindpunt"));
+				rit.setEindpunt(rs.getString("eindpunt"));
 
-				String[] arrSplit2 = rit.getEindpunt().split(", ");
+				arrSplit2 = rit.getEindpunt().split(", ");
 
 				rit.setStraatnummerEnd(arrSplit2[0]);
 				rit.setPostcodeplaatsEnd(arrSplit2[1].substring(5));
 				rit.setLandEnd(arrSplit[2]);
 
-				rit.setPrijs(resultSet.getDouble("prijs"));
-				rit.setDatum(resultSet.getTimestamp("datum"));
-				rit.setZitplaatsen(resultSet.getInt("zitplaatsen"));
+				rit.setPrijs(rs.getDouble("prijs"));
+				rit.setDatum(rs.getTimestamp("datum"));
+				rit.setZitplaatsen(rs.getInt("zitplaatsen"));
 
-				rit.setDatumkort(dc.korteDatum(resultSet.getTimestamp("datum")));
-				rit.setTijd(dc.korteTijd(resultSet.getTimestamp("datum")));
+				rit.setDatumkort(dc.korteDatum(rs.getTimestamp("datum")));
+				rit.setTijd(dc.korteTijd(rs.getTimestamp("datum")));
 
 				ritten.add(rit);
+				
+				arrSplit = null;
+				arrSplit2 = null;
 			}
+			
 		} catch (SQLException ex) {
 			Logger.getLogger(RitDao.class
 					.getName()).log(Level.SEVERE, null, ex);
