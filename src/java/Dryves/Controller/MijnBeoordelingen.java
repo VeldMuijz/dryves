@@ -8,6 +8,7 @@ import Dryves.Model.Beoordeling;
 import Dryves.Model.BeoordelingDao;
 import Dryves.Model.Lid;
 import Dryves.Model.LidDao;
+import Dryves.Pager;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -44,6 +45,7 @@ public class MijnBeoordelingen extends HttpServlet {
 		BeoordelingDao beoordelingDao = new BeoordelingDao();
 		LidDao lidDao = new LidDao();
 		Lid beoordelaar = new Lid();
+                Pager pager= new Pager();
 		// Haal de huidige sessie op
 		HttpSession session = request.getSession();
 		//Haal de userbean (dit moet sessiebean worden) op uit de sessie
@@ -51,12 +53,16 @@ public class MijnBeoordelingen extends HttpServlet {
 		
 		user = lidDao.enkelLidOphalen(user.getLidnr(), user);
 		session.setAttribute("currentSessionUser", user);
-		
+		pager.setOffset(0);
 		
 		try {
 			ArrayList<Lid> beoordelaars = new ArrayList<Lid>();
 			List<Beoordeling> beoordelingen;
-			beoordelingen = beoordelingDao.getAlleBeoordelingenPerLid(user.getLidnr());
+			beoordelingen = beoordelingDao.getAlleBeoordelingenPerLid(user.getLidnr(),pager.getOffset());
+                        pager.setAantalbeoordelingen(beoordelingDao.aantalBeoordelingen(user.getLidnr()));
+                        pager.setMaxPositie(pager.getAantalbeoordelingen()-5);
+                        pager.setStatusTotaalPager((int) Math.ceil(beoordelingDao.aantalBeoordelingen(user.getLidnr()) / 5.0));
+                        pager.setStatusHuidigePage((int) Math.ceil((pager.getOffset()+5) / 5.0));
 			request.setAttribute("beoordelingen", beoordelingen);
 			
 			for(int i = 0; i < beoordelingen.size(); i++){
@@ -68,12 +74,15 @@ public class MijnBeoordelingen extends HttpServlet {
 				beoordelaars.add(beoordelaar);
 				
 			}
+                        request.setAttribute("pager", pager);
 			request.setAttribute("beoordelaars", beoordelaars);
+                        
 			
 		} catch (SQLException ex) {
 			Logger.getLogger(MijnBeoordelingen.class.getName()).log(Level.SEVERE, null, ex);
 			throw new ServletException("Kan gegevens niet ophalen uit database", ex);
 		}
+                
 		RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/mijnbeoordelingen.jsp");
 			dispatcher.forward(request, response);
 	}

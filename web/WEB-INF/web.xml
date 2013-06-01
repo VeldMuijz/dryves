@@ -92,6 +92,30 @@
         <servlet-name>PagerServlet</servlet-name>
         <servlet-class>Dryves.Controller.PagerServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>BerichtenPager</servlet-name>
+        <servlet-class>Dryves.BerichtenPager</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RittePager</servlet-name>
+        <servlet-class>Dryves.RittenPager</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RitPager</servlet-name>
+        <servlet-class>Dryves.Controller.RitPager</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AankoopPager</servlet-name>
+        <servlet-class>Dryves.AankoopPager</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BeoordelingPager</servlet-name>
+        <servlet-class>Dryves.BeoordelingPager</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ZoekenPager</servlet-name>
+        <servlet-class>Dryves.ZoekenPager</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LidWijzigen</servlet-name>
         <url-pattern>/LidWijzigen</url-pattern>
@@ -203,6 +227,30 @@
     <servlet-mapping>
         <servlet-name>PagerServlet</servlet-name>
         <url-pattern>/PagerServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BerichtenPager</servlet-name>
+        <url-pattern>/BerichtenPager</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RittePager</servlet-name>
+        <url-pattern>/RittePager</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RitPager</servlet-name>
+        <url-pattern>/RitPager</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AankoopPager</servlet-name>
+        <url-pattern>/AankoopPager</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BeoordelingPager</servlet-name>
+        <url-pattern>/BeoordelingPager</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ZoekenPager</servlet-name>
+        <url-pattern>/ZoekenPager</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>

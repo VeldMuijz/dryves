@@ -7,6 +7,7 @@ package Dryves.Controller;
 import Dryves.Model.Lid;
 import Dryves.Model.Rit;
 import Dryves.Model.RitDao;
+import Dryves.Pager;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -43,6 +44,8 @@ public class MijnRitten extends HttpServlet {
 		// Instantieren van objecten
 		Rit rit = new Rit();
 		RitDao ritDao = new RitDao();
+                Pager pager = new Pager();
+                pager.setOffset(0);
 		// Haal de huidige sessie op
 		HttpSession session = request.getSession();
 		// Maak in de sessie een object rit aan met naam sessieRit
@@ -51,11 +54,17 @@ public class MijnRitten extends HttpServlet {
 		Lid user = (Lid) session.getAttribute("currentSessionUser");
 		try {
 			List<Rit> ritten;
+                        pager.setOffset(0);
 			rit.setLidnr(user.getLidnr());
 			ritDao.vulRitDao(rit);
-			ritten = ritDao.getAlleRittenPerLid();
+			ritten = ritDao.getAlleRittenPerLid(pager.getOffset());
+                        
+                        pager.setAantalritten(ritDao.aantalRitten(user.getLidnr()));
+                        pager.setMaxPositie(pager.getAantalritten()-5);
+                        pager.setStatusTotaalPager((int) Math.ceil(ritDao.aantalRitten(user.getLidnr()) / 5.0));
+                        pager.setStatusHuidigePage((int) Math.ceil((pager.getOffset()+5) / 5.0));
 			request.setAttribute("ritten", ritten);
-
+                        session.setAttribute("pager", pager);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/mijn_ritten.jsp");
 			dispatcher.forward(request, response);
 		} catch (SQLException e) {

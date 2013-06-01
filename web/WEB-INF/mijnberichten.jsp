@@ -42,7 +42,11 @@
 
 
             <div class="contentPanel">         
-
+ <c:choose>
+                <c:when test="${pager.statusTotaalPager !=0}"> 
+                   <p>Pagina ${pager.statusHuidigePage}  van de ${pager.statusTotaalPager}</p> </c:when>
+               
+            </c:choose> 
 				<c:choose>
 					<c:when test="${empty berichten}"> 
 						<h2>Er zijn geen berichten voor u</h2>
@@ -80,7 +84,7 @@
 				</c:choose>
                                                   
       
- ${pager.offset}
+
 			</div>
             <c:choose>
                 <c:when test="${pager.aantalberichten > 5 &&  pager.maxPositie >= pager.offset}"> 

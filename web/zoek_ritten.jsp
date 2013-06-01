@@ -40,7 +40,12 @@ Document : mijn_ritten
 
 
             <div class="contentPanel">  
-
+  <c:choose>
+                <c:when test="${pager.statusTotaalPager !=0}"> 
+                   <p>Pagina ${pager.statusHuidigePage}  van de ${pager.statusTotaalPager}</p> </c:when>
+               
+            </c:choose> 
+                
               
                     <br />
                 <c:choose>
@@ -112,6 +117,20 @@ Document : mijn_ritten
 
 
             </div>
+            
+           
+            <c:choose>
+                <c:when test="${pager.aantalZoekResultaten > 5 &&  pager.maxPositie >= pager.offset}"> 
+                    <input type="button" onclick="window.location = 'ZoekenPager?offset=${pager.offset}&knop=volgende&zoekritbegin=${pager.startpunt}&zoekriteind=${pager.eindpunt}';" value="Volgende"/></c:when>
+              
+            </c:choose>
+
+                     
+                     <c:choose>
+                <c:when test="${pager.offset>=5}"> 
+                    <input type="button" onclick="window.location = 'ZoekenPager?offset=${pager.offset}&knop=vorige&zoekritbegin=${pager.startpunt}&zoekriteind=${pager.eindpunt}';" value="Vorige"/></c:when>
+               
+            </c:choose> 
         </div>
 
 

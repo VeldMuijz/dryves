@@ -68,8 +68,10 @@ public class MijnBerichten extends HttpServlet {
 			}
                         pager.setAantalberichten(berichtendao.aantalBerichten(userid));
                         pager.setMaxPositie(pager.getAantalberichten()-5);
+                        pager.setStatusTotaalPager((int) Math.ceil(berichtendao.aantalBerichten(userid) / 5.0));
+                        pager.setStatusHuidigePage((int) Math.ceil((pager.getOffset()+5) / 5.0));
 			request.setAttribute("afzender", afzender);
-                       session.setAttribute("pager", pager);
+                        session.setAttribute("pager", pager);
 
 		} catch (SQLException e) {
 			throw new ServletException("Kan gegevens niet ophalen van database.", e);

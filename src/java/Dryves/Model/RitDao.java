@@ -72,6 +72,39 @@ public class RitDao {
 		return bean;
 
 	}
+        
+        /**
+	 * Geeft aan hoeveel ritten 
+	 *	 
+* @return
+	 * @throws SQLException
+	 */
+	public int aantalRitten(int lidnr) throws SQLException {
+		Connection connection = null;
+		PreparedStatement statement = null;
+		ResultSet resultSet = null;
+		List<Rit> ritten = new ArrayList<Rit>();
+		DatumConverter dc = new DatumConverter();
+                int aantalritten=0;
+		try {
+                    
+			currentCon = ConnectionManager.getConnection();
+			PreparedStatement zoekritten;
+			String queryString = "SELECT * FROM Rit WHERE lidnr = ?;";
+                        
+			zoekritten = currentCon.prepareStatement(queryString);
+			zoekritten.setInt(1, lidnr);
+                        resultSet = zoekritten.executeQuery();
+                        
+			while (resultSet.next()) {
+				aantalritten++;
+			}
+		} finally {
+		}
+		return aantalritten;
+
+	}
+        
 
 	/**
 	 * Opslaan van rit in de database
@@ -223,7 +256,7 @@ public class RitDao {
 * @return
 	 * @throws SQLException
 	 */
-	public List<Rit> getAlleRittenPerLid() throws SQLException {
+	public List<Rit> getAlleRittenPerLid(int offset) throws SQLException {
 		Connection connection = null;
 		PreparedStatement statement = null;
 		ResultSet resultSet = null;
@@ -234,10 +267,11 @@ public class RitDao {
                     
 			currentCon = ConnectionManager.getConnection();
 			PreparedStatement zoekritten;
-			String queryString = "SELECT * FROM Rit WHERE lidnr = ?;";
-
+			String queryString = "SELECT * FROM Rit WHERE lidnr = ? LIMIT 5 OFFSET ?;";
+                        
 			zoekritten = currentCon.prepareStatement(queryString);
 			zoekritten.setInt(1, lidnr);
+                        zoekritten.setInt(2, offset);
 			resultSet = zoekritten.executeQuery();
 
 			while (resultSet.next()) {
@@ -424,14 +458,17 @@ public class RitDao {
 		return true;
 	}
 
-	/**
-	 * Haal een lijst van ritten per lid op
+        //begin
+        
+        /**
+	 * Haal aantal ritten op 
 	 *
 	 * @return
 	 * @throws SQLException
 	 */
-	public List<Rit> getAlleRitten(String startpunt, String eindpunt) throws SQLException {
-		Connection connection = null;
+	public int aantalZoekRitten(String startpunt, String eindpunt) throws SQLException {
+		int aantal=0;
+                Connection connection = null;
 		//PreparedStatement statement = null;
 		ResultSet resultSet = null;
 		List<Rit> ritten = new ArrayList<Rit>();
@@ -453,7 +490,65 @@ public class RitDao {
 			zoekritten.setString(1, "%" + startpunt + "%");
 
 			zoekritten.setString(2, "%" + eindpunt + "%");
+                        
+                        
+                        
+			resultSet = zoekritten.executeQuery();
 
+			while (resultSet.next()) {
+                            aantal++;			
+
+				
+			}
+		} catch (SQLException ex) {
+			Logger.getLogger(RitDao.class.getName()).log(Level.SEVERE, null, ex);
+
+		} finally {
+//            if (resultSet != null) try { resultSet.close(); } catch (SQLException ignore) {}
+//            if (statement != null) try { statement.close(); } catch (SQLException ignore) {}
+//            if (connection != null) try { connection.close(); } catch (SQLException ignore) {}
+//        }
+		}
+		return aantal;
+
+	}
+        
+        
+        
+        
+        
+	/**
+	 * Haal een lijst van ritten per lid op
+	 *
+	 * @return
+	 * @throws SQLException
+	 */
+	public List<Rit> getAlleRitten(String startpunt, String eindpunt, int offset) throws SQLException {
+		Connection connection = null;
+		//PreparedStatement statement = null;
+		ResultSet resultSet = null;
+		List<Rit> ritten = new ArrayList<Rit>();
+		DatumConverter dc = new DatumConverter();
+		try {
+
+			currentCon = ConnectionManager.getConnection();
+			PreparedStatement zoekritten;
+			String queryString = "SELECT * "
+					+ "FROM Rit "
+					+ "WHERE aangeboden = 1 "
+					+ "AND zitplaatsen > 0 "
+					+ "AND LOWER(startpunt) LIKE LOWER(?) "
+					+ "AND LOWER(eindpunt) LIKE LOWER(?) "
+					+ "AND datum > DATE(NOW()) LIMIT 5 OFFSET ?;";
+
+			zoekritten = currentCon.prepareStatement(queryString);
+
+			zoekritten.setString(1, "%" + startpunt + "%");
+
+			zoekritten.setString(2, "%" + eindpunt + "%");
+                        
+                        zoekritten.setInt(3, offset);
+                        
 			resultSet = zoekritten.executeQuery();
 
 			while (resultSet.next()) {

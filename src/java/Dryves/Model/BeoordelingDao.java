@@ -51,13 +51,66 @@ public class BeoordelingDao {
 		return bean;
 	}
 
+        
+        
+        
+           
+        /**
+	 * Geeft aan hoeveel beoordelingen er in een database liggen
+	 *
+	 * @return
+	 * @throws SQLException
+	 */
+	public int aantalBeoordelingen(int lidnr) throws SQLException {
+		int aantal=0;
+                rs = null;
+		currentCon = ConnectionManager.getConnection();
+		PreparedStatement getBeoordelingen = null;
+		String queryString = ""
+				+ "SELECT b.*, l.* "
+				+ "FROM beoordeling as b, aankoop as a, rit as r, lid as l "
+				+ "WHERE b.aankoopnr = a.aankoopnr "
+				+ "AND a.ritnr = r.ritnr "
+				+ "AND b.lidnr = l.lidnr "
+				+ "AND r.lidnr = ?;";
+
+		try {
+			getBeoordelingen = currentCon.prepareStatement(queryString);
+			getBeoordelingen.setInt(1, lidnr);
+			rs = getBeoordelingen.executeQuery();
+
+			while (rs.next()) {
+				aantal++;
+				
+			}
+		} catch (SQLException ex) {
+			Logger.getLogger(RitDao.class.getName()).log(Level.SEVERE, null, ex);
+
+		} finally {
+				rs.close();
+                                currentCon.close();
+                               
+                }
+				
+			
+			
+		
+
+		return aantal;
+	}
+        
+        
+     
+        
+        
+        
 	/**
 	 * Haal een lijst van beoordelingen per lid op
 	 *
 	 * @return
 	 * @throws SQLException
 	 */
-	public List<Beoordeling> getAlleBeoordelingenPerLid(int lidnr) throws SQLException {
+	public List<Beoordeling> getAlleBeoordelingenPerLid(int lidnr, int offset) throws SQLException {
 		rs = null;
 		List<Beoordeling> beoordelingen = new ArrayList<Beoordeling>();
 		DatumConverter dc = new DatumConverter();
@@ -70,11 +123,12 @@ public class BeoordelingDao {
 				+ "AND a.ritnr = r.ritnr "
 				+ "AND b.lidnr = l.lidnr "
 				+ "AND r.lidnr = ?"
-				+ "ORDER BY b.datum DESC;";
+				+ "ORDER BY b.datum DESC LIMIT 5 OFFSET ?;";
 
 		try {
 			getBeoordelingen = currentCon.prepareStatement(queryString);
 			getBeoordelingen.setInt(1, lidnr);
+                        getBeoordelingen.setInt(2, offset);
 			rs = getBeoordelingen.executeQuery();
 
 			while (rs.next()) {

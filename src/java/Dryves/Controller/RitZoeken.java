@@ -6,6 +6,7 @@ package Dryves.Controller;
 
 import Dryves.Model.Rit;
 import Dryves.Model.RitDao;
+import Dryves.Pager;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -75,21 +76,30 @@ public class RitZoeken extends HttpServlet {
         
         	Rit rit = new Rit();
 		RitDao ritDao = new RitDao();
+                Pager pager = new Pager();
+                pager.setOffset(0);
 		// Haal de huidige sessie op
                 
 		HttpSession session = request.getSession(true);
 		// Maak in de sessie een object rit aan met naam sessieRit
 		session.setAttribute("sessieRit", rit);
 		//   Lid user = (Lid) session.getAttribute("currentSessionUser");
-                String startpunt = request.getParameter("zoekritbegin");
-                String eindpunt = request.getParameter("zoekriteind");
+                pager.setStartpunt(request.getParameter("zoekritbegin"));
+                pager.setEindpunt(request.getParameter("zoekriteind"));
         try {
             List<Rit> ritten;
            // rit.setLidnr(user.getLidnr());
             ritDao.vulRitDao(rit);
-            ritten = ritDao.getAlleRitten(startpunt, eindpunt);
-
-            request.setAttribute("ritten", ritten);
+            ritten = ritDao.getAlleRitten(pager.getStartpunt(),pager.getEindpunt(), pager.getOffset());
+             
+            
+             pager.setAantalritten(ritDao.aantalZoekRitten(pager.getStartpunt(),pager.getEindpunt()));
+             pager.setMaxPositie(ritDao.aantalZoekRitten(pager.getStartpunt(), pager.getEindpunt())-5);
+             pager.setStatusTotaalPager((int) Math.ceil(ritDao.aantalZoekRitten(pager.getStartpunt(), pager.getEindpunt()) / 5.0));
+             pager.setStatusHuidigePage((int) Math.ceil((pager.getOffset()+5) / 5.0));
+             pager.setAantalZoekResultaten(ritDao.aantalZoekRitten(pager.getStartpunt(), pager.getEindpunt()));
+             request.setAttribute("ritten", ritten);
+             session.setAttribute("pager", pager);
 //			String formatprijs = ritten.get(4).toString();
 //				String format = String.format("€ %.2f", formatprijs);
 //				String format1 = String.format("€ %.2f", ritten.get(4));

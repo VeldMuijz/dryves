@@ -2,12 +2,11 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package Dryves.Controller;
+package Dryves;
 
+import Dryves.Controller.PagerServlet;
 import Dryves.Model.Berichten;
 import Dryves.Model.BerichtenDao;
-import Dryves.Model.Lid;
-import Dryves.Pager;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -26,8 +25,9 @@ import javax.servlet.http.HttpSession;
  *
  * @author H
  */
-public class PagerServlet extends HttpServlet {
+public class BerichtenPager extends HttpServlet {
 
+  
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -37,28 +37,30 @@ public class PagerServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet PagerServlet</title>");
+            out.println("<title>Servlet BerichtenPager</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet PagerServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet BerichtenPager at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
-        } finally {
+        } finally {            
             out.close();
         }
     }
 
+   
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Instantieren van objecten
+        
+                 // Instantieren van objecten
          BerichtenDao berichtendao = new BerichtenDao();
          Pager pager = new Pager();
         // Haal de huidige sessie op
         HttpSession session = request.getSession();
         //Haal de userbean (dit moet sessiebean worden) op uit de sessie
-        Lid user = (Lid) session.getAttribute("currentSessionUser");
-
+        Dryves.Model.Lid user = (Dryves.Model.Lid) session.getAttribute("currentSessionUser");
+        
         int offset = Integer.parseInt(request.getParameter("offset"));
         String knop = request.getParameter("knop");
        
@@ -66,13 +68,19 @@ public class PagerServlet extends HttpServlet {
         
 
         if ("volgende".equals(knop)) {
-           pager.setOffset(offset+5);                      
-        }
+           pager.setOffset(offset+5); 
+             }
+           
+           
+        
         else if("vorige".equals(knop)){            
             pager.setOffset(offset-5 );
+        
         }
-
-        try {
+        
+        
+        
+         try {
             List<Berichten> bericht;
             int userid = user.getLidnr();
             ArrayList<Lid> afzender = new ArrayList<Lid>();
@@ -85,6 +93,7 @@ public class PagerServlet extends HttpServlet {
             pager.setMaxPositie(maximalePositie);
             pager.setStatusTotaalPager((int) Math.ceil(berichtendao.aantalBerichten(userid) / 5.0));
             pager.setStatusHuidigePage((int) Math.ceil((pager.getOffset()+5) / 5.0));
+            
             for (int i = 0; i < bericht.size(); i++) {
                 Berichten berichtobject;
                 berichtobject = bericht.get(i);
@@ -93,7 +102,7 @@ public class PagerServlet extends HttpServlet {
 
                 afzenderint = berichtobject.getAfzender();
 
-                afzender.add(berichtendao.afzender(afzenderint));
+                //afzender.add(berichtendao.afzender(afzenderint));
                 System.out.println("dit is i =" + i);
             }
             request.setAttribute("afzender", afzender);
@@ -102,20 +111,17 @@ public class PagerServlet extends HttpServlet {
             dispatcher.forward(request, response);
              }   catch (SQLException ex) {
             Logger.getLogger(PagerServlet.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
+            } 
     }
+
+   
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
+    
     @Override
     public String getServletInfo() {
         return "Short description";
