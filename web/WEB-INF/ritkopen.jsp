@@ -222,26 +222,36 @@
 				<div class="invoerveld">
 					<form action="RitKopen" method="post" onsubmit="return isCompleet();">
                         <input type="text" hidden ="true" id="ritnr" name="ritnr" value="${sessieRit.ritnr}"></input>                                               
-						<br><fmt:message bundle="${rb}" key="startadres" /><br/> 
-						<input type="text" id="start" name="start" disabled="true" style ="width: 350; float: right:" value="${sessieRit.startpunt}"><br />
-						<fmt:message bundle="${rb}" key="hierwilikopgehaaldworden" /><br/>
-						<input type="text" id="pickup" style="width: 350; float: right:"><br />
-						<fmt:message bundle="${rb}" key="eindadres" /> <br/>
-						<input type="text" id="end" name="end" disabled="true" style ="width: 350; float: right:" value="${sessieRit.eindpunt}"> <br />	
-						<fmt:message bundle="${rb}" key="datum" /><br/> <input type="date" id="begindatum" name="begindatum" value="${sessieRit.datumkort} ${sessieRit.tijd}"> <br/>
+						 
+						<input type="text" class="ritplannenZoekveld" style ="width: 350; float: right:" id="start" name="start" disabled="true" style ="width: 350; float: right:" value="${sessieRit.startpunt}">
+						
+						<input type="text" placeholder="<fmt:message bundle="${rb}" key="hierwilikopgehaaldworden" />" class="ritplannenZoekveld" style ="width: 350; float: right:" id="pickup" style="width: 350; float: right:">
+						
+						<input type="text" class="ritplannenZoekveld" style ="width: 350; float: right:" id="end" name="end" disabled="true" style ="width: 350; float: right:" value="${sessieRit.eindpunt}">	
+						<input type="date" class="ritplannenZoekveld" style ="width: 350; float: right:" id="begindatum" name="begindatum" value="${sessieRit.datumkort} ${sessieRit.tijd}"> <br/>
+                                                
+                                                <br />
+                                                
+                                                <img src="images/money_icon.png" /> € ${sessieRit.prijs}
+                                                
+                                                <br /><br />
 
-						<fmt:message bundle="${rb}" key="kostendezerit" /><input type="text" disabled ="true" id="kosten" name="kosten" value="${sessieRit.prijs}"><br/>
-
-						<fmt:message bundle="${rb}" key="prijsperkm" /> <div id ="prijs" name="prijs">0.21</div>
+                                                <div style="font-size: 9px;"><fmt:message bundle="${rb}" key="prijsperkm" /> 0.21 </div>
+                                                
+                                                <br />
+                                                
+                                                <fieldset style="width:269px;">
+                                                    
+                                                    <legend><fmt:message bundle="${rb}" key="betaalwijze" /></legend>
+                                                
 
 						<input type="radio" name="betaalwijze" value ="ideal">iDEAL <br/>
 						<input type="radio" name="betaalwijze" value ="creditcard">Credit Card <br/>
+                                                
+                                                </fieldset>
 						<br/>
-						<br/>
 
-
-
-						<button action="submit"><strong><fmt:message bundle="${rb}" key="ritkopen" /></strong></button>
+						<button action="submit" style="width:289px;"><strong><fmt:message bundle="${rb}" key="ritkopen" /></strong></button>
 
 					</form>
 
