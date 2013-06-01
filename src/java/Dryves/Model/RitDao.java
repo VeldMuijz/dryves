@@ -554,7 +554,7 @@ public class RitDao {
 	 * @return
 	 * @throws SQLException
 	 */
-	public List<Rit> getAlleRitten(String startpunt, String eindpunt) throws SQLException {
+	public List<Rit> getAlleRitten(String startpunt, String eindpunt){
 		Connection connection = null;
 		//PreparedStatement statement = null;
 		ResultSet resultSet = null;

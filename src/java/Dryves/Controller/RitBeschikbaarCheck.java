@@ -10,7 +10,6 @@ import Dryves.Model.Lid;
 import Dryves.Model.Rit;
 import Dryves.Model.RitDao;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -46,6 +45,7 @@ public class RitBeschikbaarCheck extends HttpServlet {
 
 		// Haal de huidige sessie op
 		HttpSession session = request.getSession();
+		if (session.getAttribute("currentSessionUser") != null) {
 		// Maak in de sessie een object rit aan met naam sessieRit
 		session.setAttribute("sessieRit", rit);
 		//Haal de userbean (dit moet sessiebean worden) op uit de sessie
@@ -71,6 +71,10 @@ public class RitBeschikbaarCheck extends HttpServlet {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/ritnietbeschikbaar.jsp");
 			dispatcher.forward(request, response);
 
+		}
+		}else {
+			//niet ingelogd dus naar login pagina
+			request.getRequestDispatcher("login.jsp").forward(request, response);
 		}
 	}
 

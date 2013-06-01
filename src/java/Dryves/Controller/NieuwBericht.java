@@ -33,20 +33,20 @@ public class NieuwBericht extends HttpServlet {
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		if (session.getAttribute("currentSessionUser") != null) {
-					//Maak bericht object aan
-		Berichten bericht = new Berichten();
-		
-		//set de benodigde attributen
-		bericht.setRitnr(Integer.parseInt(request.getParameter("ritnr")));
-		bericht.setLidnr(Integer.parseInt(request.getParameter("lidnr")));
-		
-		// geef bericht mee in de request zodat deze beschikbaar is op de pagina
-		request.setAttribute("bericht", bericht);
-		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/nieuwbericht.jsp");
-		dispatcher.forward(request, response);
-		
-		}else {
+			//Maak bericht object aan
+			Berichten bericht = new Berichten();
+
+			//set de benodigde attributen
+			bericht.setRitnr(Integer.parseInt(request.getParameter("ritnr")));
+			bericht.setLidnr(Integer.parseInt(request.getParameter("lidnr")));
+
+			// geef bericht mee in de request zodat deze beschikbaar is op de pagina
+			request.setAttribute("bericht", bericht);
+
+			RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/nieuwbericht.jsp");
+			dispatcher.forward(request, response);
+
+		} else {
 			//niet ingelogd dus naar login pagina
 			request.getRequestDispatcher("login.jsp").forward(request, response);
 		}
