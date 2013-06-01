@@ -240,9 +240,7 @@ public class AankoopDao {
      * dat niet gelukt is
      */
     public Boolean aankoopDoen(double ritPrijs) {
-        RitDao ritDao = new RitDao();
-        Rit rit = new Rit();
-        Aankoop aankoop = new Aankoop();
+		RitDao ritDao = new RitDao();
         
         currentCon = ConnectionManager.getConnection();
         PreparedStatement insertAankoop = null;

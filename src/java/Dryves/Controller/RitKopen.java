@@ -3,6 +3,7 @@
  * and open the template in the editor.
  */
 package Dryves.Controller;
+
 import Dryves.Model.PDF;
 import Dryves.Model.Aankoop;
 import Dryves.DatumConverter;
@@ -28,8 +29,6 @@ import javax.servlet.http.HttpSession;
  */
 public class RitKopen extends HttpServlet {
 
-
-
 	/**
 	 * Handles the HTTP
 	 * <code>GET</code> method.
@@ -43,41 +42,41 @@ public class RitKopen extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		//processRequest(request, response);
-		
+
 		// Instantieren van objecten
-        RitDao ritDao = new RitDao();
+		RitDao ritDao = new RitDao();
 		Aankoop aankoop = new Aankoop();
 		AankoopDao aankoopDao = new AankoopDao();
-		
-        // Haal de huidige sessie op
-        HttpSession session = request.getSession();
-        //Haal de userbean (dit moet sessiebean worden) op uit de sessie
-        Lid user = (Lid) session.getAttribute("currentSessionUser");
+
+		// Haal de huidige sessie op
+		HttpSession session = request.getSession();
+		//Haal de userbean (dit moet sessiebean worden) op uit de sessie
+		Lid user = (Lid) session.getAttribute("currentSessionUser");
 		//Haal de ritbean op uit de sessie
 		Rit rit = (Rit) session.getAttribute("sessieRit");
-		
+
 		int ritnr = rit.getRitnr();
-		
-		ritDao.enkeleRitOphalen(ritnr, rit);		
-		
+
+		ritDao.enkeleRitOphalen(ritnr, rit);
+
 		//check of dit lid wel bij deze rit hoort
 		if (rit.getAangeboden() < 1) {
-			
+
 			System.out.println("Dit lid mag deze rit niet kopen, terug naar MijnRitten!");
 			response.sendRedirect("MijnRitten");
 
-		}else{
+		} else {
 
 			DatumConverter dc = new DatumConverter();
 
 			rit.setDatumkort(dc.korteDatum(rit.getDatum()));
 			rit.setTijd(dc.korteTijd(rit.getDatum()));
 
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/ritkopen.jsp");
-            dispatcher.forward(request, response);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/ritkopen.jsp");
+			dispatcher.forward(request, response);
 		}
 
-		
+
 	}
 
 	/**
@@ -94,18 +93,18 @@ public class RitKopen extends HttpServlet {
 			throws ServletException, IOException {
 		//processRequest(request, response);
 		// Instantieren van objecten
-        Rit rit = new Rit();
-        RitDao ritDao = new RitDao();
+		Rit rit = new Rit();
+		RitDao ritDao = new RitDao();
 		Aankoop aankoop = new Aankoop();
 		AankoopDao aankoopDao = new AankoopDao();
-		
-        // Haal de huidige sessie op
-        HttpSession session = request.getSession();
-        // Maak in de sessie een object rit aan met naam sessieRit
-        session.setAttribute("sessieRit", rit);
-        //Haal de userbean (dit moet sessiebean worden) op uit de sessie
-        Lid lid = (Lid) session.getAttribute("currentSessionUser");
-		
+
+		// Haal de huidige sessie op
+		HttpSession session = request.getSession();
+		// Maak in de sessie een object rit aan met naam sessieRit
+		session.setAttribute("sessieRit", rit);
+		//Haal de userbean (dit moet sessiebean worden) op uit de sessie
+		Lid lid = (Lid) session.getAttribute("currentSessionUser");
+
 		aankoop.setRitnr(Integer.parseInt(request.getParameter("ritnr")));
 		aankoop.setBetaalwijze(request.getParameter("betaalwijze"));
 		Date date = new Date();
@@ -113,68 +112,73 @@ public class RitKopen extends HttpServlet {
 		aankoop.setOntmoetingnr(1);
 		aankoop.setFactuurnr(1);
 		aankoop.setLidnr(lid.getLidnr());
-		
+
 		//Haal rit op
 		ritDao.enkeleRitOphalen(aankoop.getRitnr(), rit);
-		
+
 		//Voer aankoop uit
 		aankoopDao.vulAankoopDao(aankoop);
-		aankoopDao.aankoopDoen(rit.getPrijs());
-                
-                PDF pdf = new PDF();
-                
-                //Vullen van de gegevens, in de PDF
-                pdf.vulDePDF(lid.getVnaam(), lid.getAnaam(), lid.getEmail(), rit.getRitnr(), aankoop.getBetaalwijze(), aankoop.getFactuurnr());
-                
-                //Hier wordt de PDF opgesteld. 
-                //TODO PDF wordt nog niet meegegeven in de mail, vandaar uitgeremd.
-                //pdf.bouwPDF();
-                
-                String[] arrSplit = rit.getStartpunt().split(", ");
-                
-                rit.setStraatnummer(arrSplit[0]);
-                rit.setPostcodeplaats(arrSplit[1].substring(5));
-                rit.setLand(arrSplit[2]);
-                
-                String[] arrSplit2 = rit.getEindpunt().split(", ");
-                
-                rit.setStraatnummerEnd(arrSplit2[0]);
-                rit.setPostcodeplaatsEnd(arrSplit2[1].substring(5));
-                rit.setLandEnd(arrSplit[2]);
-                
-                //Mailfunctie! Hier moet alleen nog de PDf aan toegevoegd worden.
-                //TODO PDF toevoegen aan de mail.
-                String van = "dryveseu@gmail.com";
-                String naar = lid.getEmail();
-                String onderwerp = "Dryves factuurnummer " + aankoop.getFactuurnr();
-                String bericht = "Ritnummer: " + rit.getRitnr() +
-                        "\n" + "Factuurnummer: " + aankoop.getFactuurnr() +
-                        "\n" +
-                        "\n" + "Van: " + 
-                        "\n" + rit.getStraatnummer() +
-                        "\n" + rit.getPostcodeplaats() +
-                        "\n" + rit.getLand() +
-                        "\n" +
-                        "\n" + "Naar: " +
-                        "\n" + rit.getStraatnummerEnd() +
-                        "\n" + rit.getPostcodeplaatsEnd() +
-                        "\n" + rit.getLandEnd() +
-                        "\n" + 
-                        "\n" + "Datum & Tijd: " + rit.getDatum() +
-                        "\n" +
-                        "\n" + "U heeft deze rit gekocht via: " + aankoop.getBetaalwijze() +
-                        "\n" + "Totaalbedrag: " + rit.getPrijs() +
-                        "\n" + 
-                        "\n" + "Bedankt voor uw aankoop en graag tot ziens!";
-                
-                String attachment = "/Users/RickSpijker/Desktop/FirstPdf.pdf";
-                String attachmentName = "Dryves Factuur: " + aankoop.getFactuurnr() +".pdf";
- 
-                verstuurEmail ve = new verstuurEmail();
-            
-                ve.verstuurEmail(van, naar, onderwerp, bericht, attachment, attachmentName);
+		if (!aankoopDao.aankoopDoen(rit.getPrijs())) {
+			
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/oops.jsp");
+			dispatcher.forward(request, response);
+		} else {
 
-		response.sendRedirect("MijnDryves");
+			PDF pdf = new PDF();
+
+			//Vullen van de gegevens, in de PDF
+			pdf.vulDePDF(lid.getVnaam(), lid.getAnaam(), lid.getEmail(), rit.getRitnr(), aankoop.getBetaalwijze(), aankoop.getFactuurnr());
+
+			//Hier wordt de PDF opgesteld. 
+			//TODO PDF wordt nog niet meegegeven in de mail, vandaar uitgeremd.
+			//pdf.bouwPDF();
+
+			String[] arrSplit = rit.getStartpunt().split(", ");
+
+			rit.setStraatnummer(arrSplit[0]);
+			rit.setPostcodeplaats(arrSplit[1].substring(5));
+			rit.setLand(arrSplit[2]);
+
+			String[] arrSplit2 = rit.getEindpunt().split(", ");
+
+			rit.setStraatnummerEnd(arrSplit2[0]);
+			rit.setPostcodeplaatsEnd(arrSplit2[1].substring(5));
+			rit.setLandEnd(arrSplit[2]);
+
+			//Mailfunctie! Hier moet alleen nog de PDf aan toegevoegd worden.
+			//TODO PDF toevoegen aan de mail.
+			String van = "dryveseu@gmail.com";
+			String naar = lid.getEmail();
+			String onderwerp = "Dryves factuurnummer " + aankoop.getFactuurnr();
+			String bericht = "Ritnummer: " + rit.getRitnr()
+					+ "\n" + "Factuurnummer: " + aankoop.getFactuurnr()
+					+ "\n"
+					+ "\n" + "Van: "
+					+ "\n" + rit.getStraatnummer()
+					+ "\n" + rit.getPostcodeplaats()
+					+ "\n" + rit.getLand()
+					+ "\n"
+					+ "\n" + "Naar: "
+					+ "\n" + rit.getStraatnummerEnd()
+					+ "\n" + rit.getPostcodeplaatsEnd()
+					+ "\n" + rit.getLandEnd()
+					+ "\n"
+					+ "\n" + "Datum & Tijd: " + rit.getDatum()
+					+ "\n"
+					+ "\n" + "U heeft deze rit gekocht via: " + aankoop.getBetaalwijze()
+					+ "\n" + "Totaalbedrag: " + rit.getPrijs()
+					+ "\n"
+					+ "\n" + "Bedankt voor uw aankoop en graag tot ziens!";
+
+			String attachment = "/Users/RickSpijker/Desktop/FirstPdf.pdf";
+			String attachmentName = "Dryves Factuur: " + aankoop.getFactuurnr() + ".pdf";
+
+			verstuurEmail ve = new verstuurEmail();
+
+			ve.verstuurEmail(van, naar, onderwerp, bericht, attachment, attachmentName);
+
+			response.sendRedirect("MijnAankopen");
+		}
 	}
 
 	/**
