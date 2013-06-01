@@ -41,37 +41,6 @@ public class Registreren extends HttpServlet {
 	}
 
 	/**
-	 * Processes requests for both HTTP
-	 * <code>GET</code> and
-	 * <code>POST</code> methods.
-	 *
-	 * @param request servlet request
-	 * @param response servlet response
-	 * @throws ServletException if a servlet-specific error occurs
-	 * @throws IOException if an I/O error occurs
-	 */
-	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		response.setContentType("text/html;charset=UTF-8");
-		PrintWriter out = response.getWriter();
-		try {
-			/* TODO output your page here. You may use following sample code. */
-			out.println("<!DOCTYPE html>");
-			out.println("<html>");
-			out.println("<head>");
-			out.println("<title>Servlet Registreren</title>");
-			out.println("</head>");
-			out.println("<body>");
-			out.println("<h1>Servlet Registreren at " + request.getContextPath() + "</h1>");
-			out.println("</body>");
-			out.println("</html>");
-		} finally {
-			out.close();
-		}
-	}
-
-	// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-	/**
 	 * Handles the HTTP
 	 * <code>GET</code> method.
 	 *
@@ -166,7 +135,7 @@ public class Registreren extends HttpServlet {
 		
 			lidDao.vulLidDao(lid);
 			// hier wordt de gebruiker in de database opgeslagen
-			lidDao.saveRegistratie();
+			if(lidDao.saveRegistratie()){
                         
                         
                         //Wanneer het registreren van een Lid, succesvol is volbracht, dan zal er een mail verstuurd worden.
@@ -186,18 +155,13 @@ public class Registreren extends HttpServlet {
                         
                         ve.verstuurEmailZonderBijlage(naar, onderwerp, bericht);
                         
-//           //Hier maken we een nieuwe sessie voor de nieuwe gebruiker
-//          HttpSession session = request.getSession(true);       
-//          session.setAttribute("currentSessionUser",lid); 
-
 			// en hier wordt de gebruiker door gelinked naar mijndryves
-			response.sendRedirect("login.jsp"); //logged-in page  
+			response.sendRedirect("oops.jsp"); //logged-in page  
 
-
+			}	
 		} else {
 			//Indien het email bestaat wordt er een melding weergegeven.
-			// Moet nog gedaan worden    
-			response.sendRedirect("login_error.jsp");
+			response.sendRedirect("oops_email_exists.jsp");
 		}
 
 	}
@@ -220,7 +184,7 @@ public class Registreren extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		processRequest(request, response);
+		
 	}
 
 	/**
@@ -231,5 +195,5 @@ public class Registreren extends HttpServlet {
 	@Override
 	public String getServletInfo() {
 		return "Short description";
-	}// </editor-fold>
+	}
 }
