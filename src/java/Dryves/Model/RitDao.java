@@ -55,8 +55,8 @@ public class RitDao {
 	 */
 	public Rit vulRitDao(Rit bean) {
 
-		lidnr = bean.getLidnr();
-		startpunt = bean.getStartpunt();
+		lidnr = bean.getLidnr();             
+                startpunt = bean.getStartpunt();
 		eindpunt = bean.getEindpunt();
 		waypoints = bean.getWaypoint();
 		afstand = bean.getAfstand();
@@ -69,6 +69,7 @@ public class RitDao {
 		return bean;
 
 	}
+        
 
 	/**
 	 * Opslaan van rit in de database
@@ -188,6 +189,7 @@ public class RitDao {
 			insertRit = currentCon.prepareStatement(queryString);
 
 			insertRit.setInt(1, lidnr);
+                        
 			insertRit.setString(2, startpunt);
 			insertRit.setString(3, eindpunt);
 			if (waypoints.equals("")) {
@@ -595,6 +597,7 @@ public class RitDao {
 				
 				rit.setStraatnummer(arrSplit[0]);
 				rit.setPostcodeplaats(arrSplit[1].substring(5));
+                                
 				rit.setLand(arrSplit[2]);
 
 				rit.setEindpunt(rs.getString("eindpunt"));

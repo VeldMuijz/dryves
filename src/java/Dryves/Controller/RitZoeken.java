@@ -45,20 +45,19 @@ public class RitZoeken extends HttpServlet {
 		String startpunt = request.getParameter("zoekritbegin");
 		String eindpunt = request.getParameter("zoekriteind");
 
-		List<Rit> ritten;
-		// rit.setLidnr(user.getLidnr());
-		ritDao.vulRitDao(rit);
-		System.out.println("Startpunt = " + startpunt);
-		ritten = ritDao.getAlleRitten(startpunt, eindpunt);
-		
-		if (ritten != null) {
-			request.setAttribute("ritten", ritten);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("zoek_ritten.jsp");
-			dispatcher.forward(request, response);
-		} else {
-			//ritten konden niet opgehaald worden
-			request.getRequestDispatcher("oops.jsp").forward(request, response);
-		}
+			List<Rit> ritten;
+			// rit.setLidnr(user.getLidnr());
+			ritDao.vulRitDao(rit);
+			ritten = ritDao.getAlleRitten(startpunt, eindpunt);
+			if (ritten != null) {
+				request.setAttribute("ritten", ritten);
+
+				RequestDispatcher dispatcher = request.getRequestDispatcher("zoek_ritten.jsp");
+				dispatcher.forward(request, response);
+			}else {
+				//ritten konden niet opgehaald worden
+				request.getRequestDispatcher("oops.jsp").forward(request, response);
+			}
 
 	}
 

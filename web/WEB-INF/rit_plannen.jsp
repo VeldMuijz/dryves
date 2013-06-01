@@ -107,7 +107,7 @@
 				var endaddress;
 				var waypoints;
 
-
+                                
 				startaddress = directionsDisplay.directions.routes[0].legs[0].start_address;
 				endaddress = directionsDisplay.directions.routes[0].legs[0].end_address;
 				waypoints = directionsDisplay.directions.routes[0].legs[0].via_waypoints;
