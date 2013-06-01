@@ -8,11 +8,8 @@ import Dryves.Model.Lid;
 import Dryves.Model.Rit;
 import Dryves.Model.RitDao;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -37,8 +34,6 @@ public class MijnRitten extends HttpServlet {
 	 * @throws ServletException if a servlet-specific error occurs
 	 * @throws IOException if an I/O error occurs
 	 */
-    
-    
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -47,21 +42,32 @@ public class MijnRitten extends HttpServlet {
 		RitDao ritDao = new RitDao();
 		// Haal de huidige sessie op
 		HttpSession session = request.getSession();
-		// Maak in de sessie een object rit aan met naam sessieRit
-		session.setAttribute("sessieRit", rit);
-		//Haal de userbean (dit moet sessiebean worden) op uit de sessie
-		Lid user = (Lid) session.getAttribute("currentSessionUser");
-		try {
+
+		if (session.getAttribute("currentSessionUser") != null) {
+			// Maak in de sessie een object rit aan met naam sessieRit
+			session.setAttribute("sessieRit", rit);
+			//Haal de userbean (dit moet sessiebean worden) op uit de sessie
+			Lid user = (Lid) session.getAttribute("currentSessionUser");
+
 			List<Rit> ritten;
 			rit.setLidnr(user.getLidnr());
 			ritDao.vulRitDao(rit);
 			ritten = ritDao.getAlleRittenPerLid();
-			request.setAttribute("ritten", ritten);
 
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/mijn_ritten.jsp");
-			dispatcher.forward(request, response);
-		} catch (SQLException e) {
-			throw new ServletException("Kan gegevens niet ophalen uit database", e);
+			if (ritten != null) {
+				request.setAttribute("ritten", ritten);
+
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/mijn_ritten.jsp");
+				dispatcher.forward(request, response);
+			}else {
+				//ophalen van ritten is mislukt
+				RequestDispatcher dispatcher = request.getRequestDispatcher("oops.jsp");
+				dispatcher.forward(request, response);
+			}
+
+		} else {
+			//niet ingelogd dus naar login pagina
+			request.getRequestDispatcher("login.jsp").forward(request, response);
 		}
 
 	}

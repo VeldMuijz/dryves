@@ -11,6 +11,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -30,7 +31,9 @@ public class NieuwBericht extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		//Maak bericht object aan
+		HttpSession session = request.getSession();
+		if (session.getAttribute("currentSessionUser") != null) {
+					//Maak bericht object aan
 		Berichten bericht = new Berichten();
 		
 		//set de benodigde attributen
@@ -42,6 +45,11 @@ public class NieuwBericht extends HttpServlet {
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/nieuwbericht.jsp");
 		dispatcher.forward(request, response);
+		
+		}else {
+			//niet ingelogd dus naar login pagina
+			request.getRequestDispatcher("login.jsp").forward(request, response);
+		}
 
 	}
 

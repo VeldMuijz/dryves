@@ -220,7 +220,7 @@ public class RitDao {
 * @return
 	 * @throws SQLException
 	 */
-	public List<Rit> getAlleRittenPerLid() throws SQLException {
+	public List<Rit> getAlleRittenPerLid() {
 		ResultSet resultSet = null;
 		List<Rit> ritten = new ArrayList<Rit>();
 		DatumConverter dc = new DatumConverter();
