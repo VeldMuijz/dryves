@@ -119,7 +119,7 @@ public class RitKopen extends HttpServlet {
 		
 		//Voer aankoop uit
 		aankoopDao.vulAankoopDao(aankoop);
-		aankoopDao.aankoopDoen();
+		aankoopDao.aankoopDoen(rit.getPrijs());
                 
                 PDF pdf = new PDF();
                 

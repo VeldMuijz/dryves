@@ -2,8 +2,6 @@ package Dryves.Model;
 
 import Dryves.ConnectionManager;
 import Dryves.DatumConverter;
-import static Dryves.Model.BeoordelingDao.currentCon;
-import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -241,7 +239,7 @@ public class AankoopDao {
      * @return true als het gelukt is om een aankoop weg te schrijven, false als
      * dat niet gelukt is
      */
-    public Boolean aankoopDoen() {
+    public Boolean aankoopDoen(double ritPrijs) {
         RitDao ritDao = new RitDao();
         Rit rit = new Rit();
         Aankoop aankoop = new Aankoop();
@@ -253,18 +251,16 @@ public class AankoopDao {
         String queryString = ("INSERT INTO aankoop ("
                 + " ritnr,"
                 + " lidnr,"
-                + " ontmoetingnr,"
                 + " betaalwijze,"
                 + " datum)"
-                + "VALUES(?,?,?,?,?);");
+                + "VALUES(?,?,?,?);");
 
         String insertString = ("INSERT INTO factuur ("
-                + " factuurnr,"
                 + " datum,"
                 + " totaalbedrag,"
                 + " totaalbedragexbtw,"
                 + " aankoopnr)"                
-                + "VALUES(?,?,?,?,?);");
+                + "VALUES(?,?,?,(SELECT MAX(aankoopnr) FROM aankoop WHERE lidnr = ? LIMIT 1));");
 
         try {
             currentCon.setAutoCommit(false);
@@ -273,15 +269,14 @@ public class AankoopDao {
 
             insertAankoop.setInt(1, ritnr);
             insertAankoop.setInt(2, lidnr);
-            insertAankoop.setInt(3, ontmoetingnr);
-            insertAankoop.setString(4, betaalwijze);
-            insertAankoop.setTimestamp(5, datum);
+            insertAankoop.setString(3, betaalwijze);
+            insertAankoop.setTimestamp(4, datum);
 
-            insertFactuur.setInt(1, factuurnr);
-            insertFactuur.setTimestamp(2, datum);
-            insertFactuur.setDouble(3, rit.getPrijs());
-            insertFactuur.setDouble (4, rit.getPrijs());
-            insertFactuur.setInt(5, aankoop.getAankoopnr());
+            
+            insertFactuur.setTimestamp(1, datum);
+            insertFactuur.setDouble(2, ritPrijs);
+            insertFactuur.setDouble (3, ritPrijs*0.79);
+            insertFactuur.setInt(4, lidnr);
 
 
             System.out.println("De query is: " + insertAankoop);
