@@ -42,34 +42,34 @@ Document : mijn_ritten
 
 
                 <c:choose>
-					<c:when test="${empty ritten}">
-						<fmt:message bundle="${rb}" key="geenritten" />
-					</c:when>
-					<c:otherwise>
-						<!-- Hier wordt de rittenlijst ingeladen -->
+                    <c:when test="${empty ritten}">
+                        <fmt:message bundle="${rb}" key="geenritten" />
+                    </c:when>
+                    <c:otherwise>
+                        <!-- Hier wordt de rittenlijst ingeladen -->
 
-						<c:forEach items="${ritten}" var="rit">
-							<div class="rittenlijst">
-								<table>
+                        <c:forEach items="${ritten}" var="rit">
+                            <div class="rittenlijst">
+                                <table>
 
-									<tr>${rit.datumkort}
-										<td>${rit.startpunt}</td>
-										<td><img src ="images/pijl.jpg" /></td>
+                                    <tr>${rit.datumkort}
+                                        <td>${rit.startpunt}</td>
+                                        <td><img src ="images/pijl.jpg" /></td>
 
-										<td>${rit.eindpunt}</td>
+                                        <td>${rit.eindpunt}</td>
 
 
-										<td>${rit.prijs}</td>
-										<td>${rit.datumkort} ${rit.tijd}</td>
-										<td><button onclick="window.location = 'RitWijzigen?ritnr=${rit.ritnr}';"><fmt:message bundle="${rb}" key="ritwijzigen" /></button></td>
+                                        <td>${rit.prijs}</td>
+                                        <td>${rit.datumkort} ${rit.tijd}</td>
+                                        <td><button onclick="window.location = 'RitWijzigen?ritnr=${rit.ritnr}';"><fmt:message bundle="${rb}" key="ritwijzigen" /></button></td>
 
-									</tr> 
+                                    </tr> 
 
-								</table>
-							</div>
-						</c:forEach>
-					</c:otherwise>
-				</c:choose>
+                                </table>
+                            </div>
+                        </c:forEach>
+                    </c:otherwise>
+                </c:choose>
 
 
 			</div>
