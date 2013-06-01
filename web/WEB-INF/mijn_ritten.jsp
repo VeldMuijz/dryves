@@ -69,7 +69,7 @@ Document : mijn_ritten
 							</div>
 						</c:forEach>
 					</c:otherwise>
-				</c:choose>
+				</c:choose>	
 
 
 			</div>
