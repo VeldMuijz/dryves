@@ -23,9 +23,6 @@ import javax.servlet.http.HttpSession;
  */
 public class RitNietKopen extends HttpServlet {
 
-	
-	
-
 	/**
 	 * Handles the HTTP
 	 * <code>GET</code> method.
@@ -42,20 +39,27 @@ public class RitNietKopen extends HttpServlet {
 		RitDao ritDao = new RitDao();
 		Aankoop aankoop = new Aankoop();
 		AankoopDao aankoopDao = new AankoopDao();
-
 		// Haal de huidige sessie op
 		HttpSession session = request.getSession();
-		//Haal de userbean (dit moet sessiebean worden) op uit de sessie
-		Lid user = (Lid) session.getAttribute("currentSessionUser");
-		Rit rit = (Rit) session.getAttribute("sessieRit");
-		
-		//String vorigepagina = request.getParameter("vorigepagina");
-		
-		//System.out.println("Dit is de vorige pagina: " + vorigepagina);
-		if(ritDao.updateZitplaatsOphogen(rit.getRitnr(), 1)){
-			response.sendRedirect("MijnDryves");
-		};
-		
+
+		if (session.getAttribute("currentSessionUser") != null) {
+
+			//Haal de userbean (dit moet sessiebean worden) op uit de sessie
+			Lid user = (Lid) session.getAttribute("currentSessionUser");
+			Rit rit = (Rit) session.getAttribute("sessieRit");
+
+			//String vorigepagina = request.getParameter("vorigepagina");
+
+			//System.out.println("Dit is de vorige pagina: " + vorigepagina);
+			if (ritDao.updateZitplaatsOphogen(rit.getRitnr(), 1)) {
+				response.sendRedirect("MijnDryves");
+			}
+		} else {
+			//niet ingelogd dus naar login pagina
+			request.getRequestDispatcher("login.jsp").forward(request, response);
+		}
+
+
 	}
 
 	/**
@@ -70,7 +74,6 @@ public class RitNietKopen extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
 	}
 
 	/**

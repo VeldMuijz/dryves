@@ -42,30 +42,36 @@ public class BerichtLezen extends HttpServlet {
 		BerichtenDao berichtDao = new BerichtenDao();
 		// Haal de huidige sessie op
 		HttpSession session = request.getSession();
-		// Maak in de sessie een object rit aan met naam sessieRit
-		session.setAttribute("sessieRit", bericht);
-		//Haal de userbean (dit moet sessiebean worden) op uit de sessie
 
-		int berichtnr = Integer.parseInt(request.getParameter("berichtid"));
-		System.out.println(berichtnr);
-		Lid user = (Lid) session.getAttribute("currentSessionUser");
-		berichtDao.markeerBericht(berichtnr);
+		if (session.getAttribute("currentSessionUser") != null) {
+			// Maak in de sessie een object rit aan met naam sessieRit
+			session.setAttribute("sessieRit", bericht);
+			//Haal de userbean (dit moet sessiebean worden) op uit de sessie
 
-		try {
+			int berichtnr = Integer.parseInt(request.getParameter("berichtid"));
+			System.out.println(berichtnr);
+			Lid user = (Lid) session.getAttribute("currentSessionUser");
+			berichtDao.markeerBericht(berichtnr);
+
 			List<Berichten> ritten;
 			bericht.setLidnr(user.getLidnr());
 			berichtDao.vulBerichtDao(bericht);
 			ritten = berichtDao.getAlleBerichtenbijId(berichtnr);
+			
+			if (ritten == null) {
+				//Wanneer er iets fout gaat bij het vullen van het object ga naar oops-pagina
+				request.getRequestDispatcher("oops.jsp").forward(request, response);
 
+			} else {
+				request.setAttribute("berichten", ritten);
 
-			request.setAttribute("berichten", ritten);
-
-
-		} catch (SQLException e) {
-			throw new ServletException("Cannot obtain products from DB", e);
+				RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/helebericht.jsp");
+				dispatcher.forward(request, response);
+			}
+		} else {
+			//niet ingelogd dus naar login pagina
+			request.getRequestDispatcher("login.jsp").forward(request, response);
 		}
-		RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/helebericht.jsp");
-		dispatcher.forward(request, response);
 
 	}
 

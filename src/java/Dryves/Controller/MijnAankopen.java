@@ -27,6 +27,37 @@ import javax.servlet.http.HttpSession;
 public class MijnAankopen extends HttpServlet {
 
 	/**
+	 * Processes requests for both HTTP
+	 * <code>GET</code> and
+	 * <code>POST</code> methods.
+	 *
+	 * @param request servlet request
+	 * @param response servlet response
+	 * @throws ServletException if a servlet-specific error occurs
+	 * @throws IOException if an I/O error occurs
+	 */
+	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		response.setContentType("text/html;charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		try {
+			/* TODO output your page here. You may use following sample code. */
+			out.println("<!DOCTYPE html>");
+			out.println("<html>");
+			out.println("<head>");
+			out.println("<title>Servlet MijnGekochteRitten</title>");			
+			out.println("</head>");
+			out.println("<body>");
+			out.println("<h1>Servlet MijnGekochteRitten at " + request.getContextPath() + "</h1>");
+			out.println("</body>");
+			out.println("</html>");
+		} finally {			
+			out.close();
+		}
+	}
+
+	// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+	/**
 	 * Handles the HTTP
 	 * <code>GET</code> method.
 	 *
@@ -39,36 +70,47 @@ public class MijnAankopen extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-	// Instantieren van objecten
+		// Instantieren van objecten
 		Rit rit = new Rit();
 		RitDao ritDao = new RitDao();
 		Aankoop aankoop = new Aankoop();
 		AankoopDao aankoopDao = new AankoopDao();
 		// Haal de huidige sessie op
 		HttpSession session = request.getSession();
-		// Maak in de sessie een object rit aan met naam sessieRit, en sessieAankoop
-		session.setAttribute("sessieRit", rit);
-		session.setAttribute("sessieAankoop", aankoop);
-		//Haal de userbean (dit moet sessiebean worden) op uit de sessie
-		Lid user = (Lid) session.getAttribute("currentSessionUser");
-		try {
+
+		if (session.getAttribute("currentSessionUser") != null) {
+			// Maak in de sessie een object rit aan met naam sessieRit, en sessieAankoop
+			session.setAttribute("sessieRit", rit);
+			session.setAttribute("sessieAankoop", aankoop);
+			//Haal de userbean (dit moet sessiebean worden) op uit de sessie
+			Lid user = (Lid) session.getAttribute("currentSessionUser");
+
 			List<Rit> ritten;
 			rit.setLidnr(user.getLidnr());
 			ritDao.vulRitDao(rit);
+			
+			//haal alle gekochte ritten op uit database
 			ritten = ritDao.getAlleGekochteRittenPerLid();
 			
+			//maak een lijst van aankopen aan vanuit de database
 			List<Aankoop> aankopen;
 			aankopen = aankoopDao.getAlleAankopenPerLid(user.getLidnr());
-			
+			if(aankopen != null){
 			request.setAttribute("ritten", ritten);
 			request.setAttribute("aankopen", aankopen);
-			
+
 			RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/mijnaankopen.jsp");
 			dispatcher.forward(request, response);
-		} catch (SQLException e) {
-			throw new ServletException("Cannot obtain products from DB", e);
-		}
 
+			}else{
+				//ophalen van aankopen is mislukt
+				RequestDispatcher dispatcher = request.getRequestDispatcher("oops.jsp");
+			dispatcher.forward(request, response);
+			}
+		} else {
+			//niet ingelogd dus naar login pagina
+			request.getRequestDispatcher("login.jsp").forward(request, response);
+		}
 	}
 
 	/**
@@ -83,7 +125,6 @@ public class MijnAankopen extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-	
 	}
 
 	/**
@@ -94,5 +135,5 @@ public class MijnAankopen extends HttpServlet {
 	@Override
 	public String getServletInfo() {
 		return "Short description";
-}
+	}
 }

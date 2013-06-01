@@ -76,6 +76,22 @@ button {
 
 }
 
+.navigation a:link{
+    color: #000;
+}
+
+.navigation a:active {
+    color: #000;
+}
+
+.navigation a:hover {
+    color: #000;
+}
+
+.navigation a:visited {
+    color: #000;
+}
+
 
 .navigation button {
 
@@ -142,6 +158,11 @@ button {
     box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.1);
     padding: 10px;
 
+}
+
+.contentPanel h2 {
+    font-size: 12px;
+    font-weight: bold;
 }
 
 .contentPanelSearch{
@@ -353,10 +374,16 @@ button {
 }
 
 .rittenlijst{
-    background: #F2F2F2;
+    background-image: URL(../images/rit_achtergrond.png);
     margin-bottom: 10px;
     padding: 20px;
-    border: 1px solid #BBB;
+    border: 1px solid #919191;
+    text-shadow: 0px 0px 1px #919191;
+    filter: dropshadow(color=#919191, offx=1, offy=1);
+}
+
+.rittenlijst img{
+    margin-right: 4px;
 }
 
 .rittenlijst h1 {
@@ -367,7 +394,7 @@ button {
 .rittenlijst button {
     
     display:inline;
-    height: 60px;
+    height: 40px;
     width: 100px;
     border: 1px solid #BBB;
     border-left: 1px solid #cfcfcf;
@@ -575,4 +602,26 @@ button.heliosActionBarIconButton:hover:before  {
     box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.1);
     padding: 10px;
 
+}
+
+.ritplannenZoekveld {
+    
+    border:1px solid #BBB;
+    font: bold 11px  helvetica, arial, sans-serif;
+    padding-right: 4px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-left: 10px;
+    height:25px;
+    width: 272px;
+    color: #666;
+    font-style: italic;
+    box-shadow: inset 0px -2px 5px 0px RGBA(0,0,0,0.1);
+    border-radius: 2px;
+    margin-top: 4px;
+    margin-bottom: 4px;
+    margin-right: -1px;
+    background: linear-gradient(180deg, #F0F0F0, #FFFFFF);
+    z-index: 5;
+    
 }

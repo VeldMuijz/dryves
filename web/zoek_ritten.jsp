@@ -51,48 +51,67 @@ Document : mijn_ritten
                         <p>Probeert u alstublieft opnieuw met andere zoekcriteria</p>
                     </c:when>
                     <c:otherwise>
-                        <h2>Gevonden ritten</h2>
+                        <h2>Uw zoekopdracht heeft de volgende resultaten opgeleverd.</h2>
 
  <!-- Hier wordt de rittenlijst ingeladen -->
 
                         <c:forEach items="${ritten}" var="rit">
                             <div class="rittenlijst">
+                                
                                 <table width="100%">
-
                                     <tr>
-                                        <td>Van:</td>
-                                        <td>${rit.straatnummer}</td>
-                                        <td><img src ="images/pijl.jpg" /></td>
-                                        <td>Naar:</td>
-                                        <td>${rit.straatnummerEnd}</td>
+                                        <td width="500px">
+                                            <img src="images/from_icon.png" /> ${rit.straatnummer} - ${rit.postcodeplaats} -  ${rit.land}
+                                        </td>
+                                        <td>
+                                            
+                                        </td>
+                                        <td>
+                                            
+                                        </td>
+                                        <td style="float:right;">
+                                            Nog <b>${rit.zitplaatsen}</b> beschikbaar
+                                        </td>
+           
                                     </tr>
                                     <tr>
-                                        <td></td>
-                                        <td>${rit.postcodeplaats}</td>
-                                        <td></td>
-                                        <td></td>
-                                        <td>${rit.postcodeplaatsEnd}</td>
+                                        <td>
+                                            <img src="images/arrow_icon.png" /> ${rit.straatnummerEnd} - ${rit.postcodeplaatsEnd} -  ${rit.landEnd}
+                                        </td>
+                                        <td>
+                                            
+                                        </td>
+                                        <td>
+                                            
+                                        </td>
+                                        <td>
+                                            
+                                        </td>
                                     </tr>
                                     <tr>
-                                        <td></td>
-                                        <td>${rit.land}</td>
-                                        <td></td>
-                                        <td></td>
-                                        <td>${rit.landEnd}</td>
+                                        <td>
+                                            
+                                        </td>
+                                        <td>
+                                            
+                                        </td>
+                                        <td>
+                                            
+                                        </td>
+                                        <td>
+                                            
+                                        </td>
                                     </tr>
-                                    
                                     <tr>
-                                        <td>Prijs: € ${rit.prijs}</td>
-                                        <td>Ritnr: ${rit.ritnr}</td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>${rit.datumkort} ${rit.tijd}</td>
-                                        <td></td>
-                                        <td></td>
-                                        <td>Nog ${rit.zitplaatsen} beschikbaar</td>
+                                        <td>
+                                            <img src="images/calendar_icon.png" /> ${rit.datumkort} <img src="images/clock_icon.png" /> ${rit.tijd} <img src="images/money_icon.png" /> € ${rit.prijs}
+                                        </td>
+                                        <td>
+                                            
+                                        </td>
+                                        <td>
+                                            
+                                        </td>
                                         <td style="float:right;">
                                             <c:choose>
                                                 <c:when test="${currentSessionUser.lidnr > 0}"> 
@@ -100,13 +119,15 @@ Document : mijn_ritten
 												<button onclick="window.location = 'NieuwBericht?ritnr=${rit.ritnr}&lidnr=${currentSessionUser.lidnr} ';"><fmt:message bundle="${rb}" key="berichtverzenden" /></button>
                                                 </c:when>
                                                 <c:otherwise>
-                                                    <button onclick="window.location = 'login.jsp';">Login/registreer <br>om te bekijken</button>
+                                                    <button onclick="window.location = 'login.jsp';">Login/registreer om te bekijken</button>
                                                     </c:otherwise>
                                                 </c:choose>
+                                            
                                         </td>
-                                    </tr> 
-
+                                        
+                                    </tr>
                                 </table>
+                                
                             </div>
                         </c:forEach>
                     </c:otherwise>

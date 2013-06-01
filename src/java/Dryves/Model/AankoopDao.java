@@ -2,6 +2,7 @@ package Dryves.Model;
 
 import Dryves.ConnectionManager;
 import Dryves.DatumConverter;
+import static Dryves.Model.RitDao.currentCon;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -169,7 +170,7 @@ public class AankoopDao {
      * @return Lijst van Objecten van het type Aankoop
      * @throws SQLException
      */
-    public List<Aankoop> getAlleAankopenPerLid(int lidnr) throws SQLException {
+    public List<Aankoop> getAlleAankopenPerLid(int lidnr){
         Connection connection = null;
         PreparedStatement statement = null;
         ResultSet rs = null;

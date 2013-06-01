@@ -32,7 +32,7 @@ Document : mijn_ritten
             <div class="logo">    
                 <img src="images/Logo_Dryves.png" />
             </div>
-            
+
             <!-- Hier wordt de navigatie ingeladen -->
 			<jsp:include page="navigatie.jsp" flush="true">
                 <jsp:param name="menu_active" value="mijndryves"></jsp:param>
@@ -42,39 +42,42 @@ Document : mijn_ritten
 
 
                 <c:choose>
-					<c:when test="${empty ritten}">
-						<fmt:message bundle="${rb}" key="geenritten" />
-					</c:when>
-					<c:otherwise>
-                                            
-                                            <!-- Hier wordt de rittenlijst ingeladen -->
+                    <c:when test="${empty ritten}">
+                        <fmt:message bundle="${rb}" key="geenritten" />
+                    </c:when>
+                    <c:otherwise>
+                        <!-- Hier wordt de rittenlijst ingeladen -->
 
-						<c:forEach items="${ritten}" var="rit">
-							<div class="rittenlijst">
-								<table>
+                        <c:forEach items="${ritten}" var="rit">
+                            <div class="rittenlijst">
+                                <table width="100%">
 
-									<tr>${rit.datumkort}
-										<td>${rit.startpunt}</td>
-										<td><img src ="images/pijl.jpg" /></td>
+                                    <tr>
+                                        <td><img src="images/from_icon.png" /> ${rit.startpunt}</td>
+                                        
+                                    </tr> 
+                                    <tr>
+                                        <td><img src="images/to_icon.png" /> ${rit.eindpunt}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <img src="images/calendar_icon.png" /> ${rit.datumkort} <img src="images/clock_icon.png" /> ${rit.tijd} <img src="images/money_icon.png" /> ${rit.prijs}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="float:right;"><button onclick="window.location = 'RitWijzigen?ritnr=${rit.ritnr}';"><fmt:message bundle="${rb}" key="ritwijzigen" /></button></td>
+                                    </tr>
 
-										<td>${rit.eindpunt}</td>
+                                </table>
+                            </div>
+                        </c:forEach>
+                    </c:otherwise>
+                </c:choose>
 
 
-										<td>${rit.prijs}</td>
-										<td>${rit.datumkort} ${rit.tijd}</td>
-										<td><button onclick="window.location = 'RitWijzigen?ritnr=${rit.ritnr}';"><fmt:message bundle="${rb}" key="ritwijzigen" /></button></td>
-
-									</tr> 
-
-								</table>
-							</div>
-						</c:forEach>
-					</c:otherwise>
-				</c:choose>	
-
-            </div>
-        </div>
+			</div>
+		</div>
 
 
-    </body>
+	</body>
 </html>

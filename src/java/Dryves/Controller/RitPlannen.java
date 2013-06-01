@@ -9,20 +9,12 @@ import Dryves.Model.Lid;
 import Dryves.Model.Rit;
 import Dryves.Model.RitDao;
 import java.io.IOException;
-import java.io.PrintWriter;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import org.joda.time.DateTime;
 
 /**
  *
@@ -48,10 +40,16 @@ public class RitPlannen extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		HttpSession session = request.getSession();
 
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/rit_plannen.jsp");
-		dispatcher.forward(request, response);
+		if (session.getAttribute("currentSessionUser") != null) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/rit_plannen.jsp");
+			dispatcher.forward(request, response);
 
+		}else {
+			//niet ingelogd dus naar login pagina
+			request.getRequestDispatcher("login.jsp").forward(request, response);
+		}
 	}
 
 	/**
@@ -91,12 +89,12 @@ public class RitPlannen extends HttpServlet {
 		String vr = request.getParameter("vr");
 		String za = request.getParameter("za");
 		String zo = request.getParameter("zo");
-		
+
 
 		//Checken of herhaling aangevinkt is, zo ja vul de dagen van de week
 		if (request.getParameter("herhaling") != null && !request.getParameter("einddatum").isEmpty()) {
 			ritDao.setEinddatum(dc.convertTimestamp(request.getParameter("einddatum"), "23:59"));
-			if (ma!= null && !ma.isEmpty()) {
+			if (ma != null && !ma.isEmpty()) {
 				ritDao.setMa(1);
 				System.out.println("ma:" + ritDao.getMa());
 				ritDao.setMeerdere(1);

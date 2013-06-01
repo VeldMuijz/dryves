@@ -3,9 +3,6 @@ package Dryves.Model;
 import Dryves.ConnectionManager;
 import Dryves.DatumConverter;
 import Dryves.DayOfWeekIterator;
-
-
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -58,8 +55,8 @@ public class RitDao {
 	 */
 	public Rit vulRitDao(Rit bean) {
 
-		lidnr = bean.getLidnr();
-		startpunt = bean.getStartpunt();
+		lidnr = bean.getLidnr();             
+                startpunt = bean.getStartpunt();
 		eindpunt = bean.getEindpunt();
 		waypoints = bean.getWaypoint();
 		afstand = bean.getAfstand();
@@ -72,6 +69,7 @@ public class RitDao {
 		return bean;
 
 	}
+        
 
 	/**
 	 * Opslaan van rit in de database
@@ -191,6 +189,7 @@ public class RitDao {
 			insertRit = currentCon.prepareStatement(queryString);
 
 			insertRit.setInt(1, lidnr);
+                        
 			insertRit.setString(2, startpunt);
 			insertRit.setString(3, eindpunt);
 			if (waypoints.equals("")) {
@@ -224,18 +223,14 @@ public class RitDao {
 * @return
 	 * @throws SQLException
 	 */
-	public List<Rit> getAlleRittenPerLid() throws SQLException {
-		Connection connection = null;
-		PreparedStatement statement = null;
+	public List<Rit> getAlleRittenPerLid() {
 		ResultSet resultSet = null;
 		List<Rit> ritten = new ArrayList<Rit>();
 		DatumConverter dc = new DatumConverter();
-
+		currentCon = ConnectionManager.getConnection();
+		PreparedStatement zoekritten = null;
+		String queryString = "SELECT * FROM Rit WHERE lidnr = ?;";
 		try {
-                    
-			currentCon = ConnectionManager.getConnection();
-			PreparedStatement zoekritten;
-			String queryString = "SELECT * FROM Rit WHERE lidnr = ?;";
 
 			zoekritten = currentCon.prepareStatement(queryString);
 			zoekritten.setInt(1, lidnr);
@@ -251,11 +246,32 @@ public class RitDao {
 				rit.setTijd(dc.korteTijd(resultSet.getTimestamp("datum")));
 				ritten.add(rit);
 			}
+		} catch (SQLException ex) {
+			Logger.getLogger(RitDao.class
+					.getName()).log(Level.SEVERE, null, ex);
 		} finally {
-// if (resultSet != null) try { resultSet.close(); } catch (SQLException ignore) {}
-// if (statement != null) try { statement.close(); } catch (SQLException ignore) {}
-// if (connection != null) try { connection.close(); } catch (SQLException ignore) {}
-// }
+			//Doe dit altijd, als het goed gaat én wanneer het fout gaat
+			if (rs != null) {
+				try {
+					//sluit resultset af
+					rs.close();
+				} catch (SQLException ignore) {
+				}
+			}
+			if (zoekritten != null) {
+				//sluit preparedStatement
+				try {
+					zoekritten.close();
+				} catch (SQLException ignore) {
+				}
+			}
+			if (currentCon != null) {
+				//sluit huidige verbinding
+				try {
+					currentCon.close();
+				} catch (SQLException ignore) {
+				}
+			}
 		}
 		return ritten;
 
@@ -267,19 +283,17 @@ public class RitDao {
 * @return
 	 * @throws SQLException
 	 */
-	public List<Rit> getAlleGekochteRittenPerLid() throws SQLException {
-		Connection connection = null;
-		PreparedStatement statement = null;
+	public List<Rit> getAlleGekochteRittenPerLid() {
 		ResultSet resultSet = null;
 		List<Rit> ritten = new ArrayList<Rit>();
 
-		try {
+		currentCon = ConnectionManager.getConnection();
+		PreparedStatement gekochteritten = null;
+		String queryString = "SELECT r.* "
+				+ "FROM rit AS r, aankoop AS a "
+				+ "WHERE r.ritnr = a.ritnr AND a.lidnr = ?;";
 
-			currentCon = ConnectionManager.getConnection();
-			PreparedStatement gekochteritten;
-			String queryString = "SELECT r.* "
-					+ "FROM rit AS r, aankoop AS a "
-					+ "WHERE r.ritnr = a.ritnr AND a.lidnr = ?;";
+		try {
 
 			gekochteritten = currentCon.prepareStatement(queryString);
 			gekochteritten.setInt(1, lidnr);
@@ -293,11 +307,32 @@ public class RitDao {
 				rit.setPrijs(resultSet.getDouble("prijs"));
 				ritten.add(rit);
 			}
+		} catch (SQLException ex) {
+			Logger.getLogger(RitDao.class
+					.getName()).log(Level.SEVERE, null, ex);
 		} finally {
-// if (resultSet != null) try { resultSet.close(); } catch (SQLException ignore) {}
-// if (statement != null) try { statement.close(); } catch (SQLException ignore) {}
-// if (connection != null) try { connection.close(); } catch (SQLException ignore) {}
-// }
+			//Doe dit altijd, als het goed gaat én wanneer het fout gaat
+			if (rs != null) {
+				try {
+					//sluit resultset af
+					rs.close();
+				} catch (SQLException ignore) {
+				}
+			}
+			if (gekochteritten != null) {
+				//sluit preparedStatement
+				try {
+					gekochteritten.close();
+				} catch (SQLException ignore) {
+				}
+			}
+			if (currentCon != null) {
+				//sluit huidige verbinding
+				try {
+					currentCon.close();
+				} catch (SQLException ignore) {
+				}
+			}
 		}
 		return ritten;
 
@@ -308,22 +343,43 @@ public class RitDao {
          * @return 
          */
 	public List<Rit> getRittenLijst() {
+		currentCon = ConnectionManager.getConnection();
+		PreparedStatement selectRitten = null;
+		String queryString = "SELECT * FROM rit WHERE lidnr = ?;";
 
 		try {
-			currentCon = ConnectionManager.getConnection();
-			PreparedStatement selectRitten;
-
-			String queryString = "SELECT * FROM rit WHERE lidnr = ?;";
-
 			selectRitten = currentCon.prepareStatement(queryString);
 
 			selectRitten.setInt(1, lidnr);
 
 
 		} catch (SQLException ex) {
-			Logger.getLogger(RitDao.class.getName()).log(Level.SEVERE, null, ex);
+			Logger.getLogger(RitDao.class
+					.getName()).log(Level.SEVERE, null, ex);
+		} finally {
+			//Doe dit altijd, als het goed gaat én wanneer het fout gaat
+			if (rs != null) {
+				try {
+					//sluit resultset af
+					rs.close();
+				} catch (SQLException ignore) {
+				}
+			}
+			if (selectRitten != null) {
+				//sluit preparedStatement
+				try {
+					selectRitten.close();
+				} catch (SQLException ignore) {
+				}
+			}
+			if (currentCon != null) {
+				//sluit huidige verbinding
+				try {
+					currentCon.close();
+				} catch (SQLException ignore) {
+				}
+			}
 		}
-
 
 		return getRittenLijst();
 	}
@@ -336,13 +392,13 @@ public class RitDao {
 	 * @return
 	 */
 	public Boolean checkBeschikbaarheidRit(int ritnr) {
-		ResultSet rs;
+		rs = null;
+		currentCon = ConnectionManager.getConnection();
 		Boolean beschikbaar = false;
-		try {
-			currentCon = ConnectionManager.getConnection();
-			PreparedStatement zitplaatsCheck;
+		PreparedStatement zitplaatsCheck = null;
+		String queryString = "SELECT zitplaatsen FROM rit WHERE ritnr = ? AND zitplaatsen > 0 LIMIT 1;";
 
-			String queryString = "SELECT zitplaatsen FROM rit WHERE ritnr = ? AND zitplaatsen > 0 LIMIT 1;";
+		try {
 
 			zitplaatsCheck = currentCon.prepareStatement(queryString);
 			zitplaatsCheck.setInt(1, ritnr);
@@ -357,13 +413,37 @@ public class RitDao {
 			}
 
 		} catch (SQLException ex) {
-			Logger.getLogger(RitDao.class.getName()).log(Level.SEVERE, null, ex);
+			Logger.getLogger(RitDao.class
+					.getName()).log(Level.SEVERE, null, ex);
+		} finally {
+			//Doe dit altijd, als het goed gaat én wanneer het fout gaat
+			if (rs != null) {
+				try {
+					//sluit resultset af
+					rs.close();
+				} catch (SQLException ignore) {
+				}
+			}
+			if (zitplaatsCheck != null) {
+				//sluit preparedStatement
+				try {
+					zitplaatsCheck.close();
+				} catch (SQLException ignore) {
+				}
+			}
+			if (currentCon != null) {
+				//sluit huidige verbinding
+				try {
+					currentCon.close();
+				} catch (SQLException ignore) {
+				}
+			}
 		}
 		System.out.println("Beschikbaar = " + beschikbaar);
 		return beschikbaar;
 
 	}
-	
+
 	/**
  * Verhoog het aantal zitplaatsen met 1
  * @param ritnr
@@ -371,18 +451,19 @@ public class RitDao {
  * @return 
  */
 	public Boolean updateZitplaatsOphogen(int ritnr, int updatewaarde) {
-		ResultSet rs;
+		rs = null;
 		Boolean beschikbaar = false;
-		PreparedStatement updateZitplaats;
+		PreparedStatement updateZitplaats = null;
+		currentCon = ConnectionManager.getConnection();
+		String updateQueryString = (""
+				+ "UPDATE rit "
+				+ "SET zitplaatsen = zitplaatsen + ? "
+				+ "WHERE ritnr = ? "
+				+ "AND zitplaatsen > 0;");
+
 		try {
 
-			currentCon = ConnectionManager.getConnection();
-			String updateQueryString = (""
-					+ "UPDATE rit "
-					+ "SET zitplaatsen = zitplaatsen + ? "
-					+ "WHERE ritnr = ? "
-					+ "AND zitplaatsen > 0;");
-			
+
 			updateZitplaats = currentCon.prepareStatement(updateQueryString);
 
 			updateZitplaats.setInt(1, updatewaarde);
@@ -390,8 +471,31 @@ public class RitDao {
 			updateZitplaats.executeUpdate();
 
 		} catch (SQLException ex) {
-			Logger.getLogger(RitDao.class.getName()).log(Level.SEVERE, null, ex);
-			return false;
+			Logger.getLogger(RitDao.class
+					.getName()).log(Level.SEVERE, null, ex);
+		} finally {
+			//Doe dit altijd, als het goed gaat én wanneer het fout gaat
+			if (rs != null) {
+				try {
+					//sluit resultset af
+					rs.close();
+				} catch (SQLException ignore) {
+				}
+			}
+			if (updateZitplaats != null) {
+				//sluit preparedStatement
+				try {
+					updateZitplaats.close();
+				} catch (SQLException ignore) {
+				}
+			}
+			if (currentCon != null) {
+				//sluit huidige verbinding
+				try {
+					currentCon.close();
+				} catch (SQLException ignore) {
+				}
+			}
 		}
 		return true;
 	}
@@ -403,28 +507,49 @@ public class RitDao {
  * @return 
  */
 	public Boolean updateZitplaatsVerlagen(int ritnr, int updatewaarde) {
-		ResultSet rs;
+		rs = null;
 		Boolean beschikbaar = false;
-		PreparedStatement updateZitplaats;
-		try {
+		PreparedStatement updateZitplaats = null;
 
-			currentCon = ConnectionManager.getConnection();
-			String updateQueryString = (""
-					+ "UPDATE rit "
-					+ "SET zitplaatsen = zitplaatsen - ? "
-					+ "WHERE ritnr = ? "
-					+ "AND zitplaatsen > 0;");
-			
+		currentCon = ConnectionManager.getConnection();
+		String updateQueryString = (""
+				+ "UPDATE rit "
+				+ "SET zitplaatsen = zitplaatsen - ? "
+				+ "WHERE ritnr = ? "
+				+ "AND zitplaatsen > 0;");
+		try {
 			updateZitplaats = currentCon.prepareStatement(updateQueryString);
 
 			updateZitplaats.setInt(1, updatewaarde);
 			updateZitplaats.setInt(2, ritnr);
-			System.out.println("Query = " + updateZitplaats);
 			updateZitplaats.executeUpdate();
 
 		} catch (SQLException ex) {
-			Logger.getLogger(RitDao.class.getName()).log(Level.SEVERE, null, ex);
-			return false;
+			Logger.getLogger(RitDao.class
+					.getName()).log(Level.SEVERE, null, ex);
+		} finally {
+			//Doe dit altijd, als het goed gaat én wanneer het fout gaat
+			if (rs != null) {
+				try {
+					//sluit resultset af
+					rs.close();
+				} catch (SQLException ignore) {
+				}
+			}
+			if (updateZitplaats != null) {
+				//sluit preparedStatement
+				try {
+					updateZitplaats.close();
+				} catch (SQLException ignore) {
+				}
+			}
+			if (currentCon != null) {
+				//sluit huidige verbinding
+				try {
+					currentCon.close();
+				} catch (SQLException ignore) {
+				}
+			}
 		}
 		return true;
 	}
@@ -435,23 +560,24 @@ public class RitDao {
 	 * @return
 	 * @throws SQLException
 	 */
-	public List<Rit> getAlleRitten(String startpunt, String eindpunt) throws SQLException {
+	public List<Rit> getAlleRitten(String startpunt, String eindpunt){
 		Connection connection = null;
 		//PreparedStatement statement = null;
-		ResultSet resultSet = null;
+		rs = null;
 		List<Rit> ritten = new ArrayList<Rit>();
 		DatumConverter dc = new DatumConverter();
-		try {
-
-			currentCon = ConnectionManager.getConnection();
-			PreparedStatement zoekritten;
-			String queryString = "SELECT * "
+		currentCon = ConnectionManager.getConnection();
+		PreparedStatement zoekritten = null;
+		String queryString = "SELECT * "
 					+ "FROM Rit "
 					+ "WHERE aangeboden = 1 "
 					+ "AND zitplaatsen > 0 "
 					+ "AND LOWER(startpunt) LIKE LOWER(?) "
 					+ "AND LOWER(eindpunt) LIKE LOWER(?) "
 					+ "AND datum > DATE(NOW());";
+		String[] arrSplit, arrSplit2;
+		try {
+			
 
 			zoekritten = currentCon.prepareStatement(queryString);
 
@@ -459,45 +585,68 @@ public class RitDao {
 
 			zoekritten.setString(2, "%" + eindpunt + "%");
 
-			resultSet = zoekritten.executeQuery();
+			rs = zoekritten.executeQuery();
 
-			while (resultSet.next()) {
+			while (rs.next()) {
 
 				Rit rit = new Rit();
-				rit.setRitnr(resultSet.getInt("ritnr"));
-				rit.setStartpunt(resultSet.getString("startpunt"));
+				rit.setRitnr(rs.getInt("ritnr"));
+				rit.setStartpunt(rs.getString("startpunt"));
 
-				String[] arrSplit = rit.getStartpunt().split(", ");
-
+				arrSplit = rit.getStartpunt().split(", ");
+				
 				rit.setStraatnummer(arrSplit[0]);
 				rit.setPostcodeplaats(arrSplit[1].substring(5));
+                                
 				rit.setLand(arrSplit[2]);
 
-				rit.setEindpunt(resultSet.getString("eindpunt"));
+				rit.setEindpunt(rs.getString("eindpunt"));
 
-				String[] arrSplit2 = rit.getEindpunt().split(", ");
+				arrSplit2 = rit.getEindpunt().split(", ");
 
 				rit.setStraatnummerEnd(arrSplit2[0]);
 				rit.setPostcodeplaatsEnd(arrSplit2[1].substring(5));
 				rit.setLandEnd(arrSplit[2]);
 
-				rit.setPrijs(resultSet.getDouble("prijs"));
-				rit.setDatum(resultSet.getTimestamp("datum"));
-				rit.setZitplaatsen(resultSet.getInt("zitplaatsen"));
+				rit.setPrijs(rs.getDouble("prijs"));
+				rit.setDatum(rs.getTimestamp("datum"));
+				rit.setZitplaatsen(rs.getInt("zitplaatsen"));
 
-				rit.setDatumkort(dc.korteDatum(resultSet.getTimestamp("datum")));
-				rit.setTijd(dc.korteTijd(resultSet.getTimestamp("datum")));
+				rit.setDatumkort(dc.korteDatum(rs.getTimestamp("datum")));
+				rit.setTijd(dc.korteTijd(rs.getTimestamp("datum")));
 
 				ritten.add(rit);
+				
+				arrSplit = null;
+				arrSplit2 = null;
 			}
+			
 		} catch (SQLException ex) {
-			Logger.getLogger(RitDao.class.getName()).log(Level.SEVERE, null, ex);
-
+			Logger.getLogger(RitDao.class
+					.getName()).log(Level.SEVERE, null, ex);
 		} finally {
-//            if (resultSet != null) try { resultSet.close(); } catch (SQLException ignore) {}
-//            if (statement != null) try { statement.close(); } catch (SQLException ignore) {}
-//            if (connection != null) try { connection.close(); } catch (SQLException ignore) {}
-//        }
+			//Doe dit altijd, als het goed gaat én wanneer het fout gaat
+			if (rs != null) {
+				try {
+					//sluit resultset af
+					rs.close();
+				} catch (SQLException ignore) {
+				}
+			}
+			if (zoekritten != null) {
+				//sluit preparedStatement
+				try {
+					zoekritten.close();
+				} catch (SQLException ignore) {
+				}
+			}
+			if (currentCon != null) {
+				//sluit huidige verbinding
+				try {
+					currentCon.close();
+				} catch (SQLException ignore) {
+				}
+			}
 		}
 		return ritten;
 
@@ -511,12 +660,13 @@ public class RitDao {
 	 * @return rit object
 	 */
 	public Rit enkeleRitOphalen(int ritnr, Rit bean) {
+		rs = null;
+		currentCon = ConnectionManager.getConnection();
 
-		try {
-			currentCon = ConnectionManager.getConnection();
-
-			PreparedStatement select1Rit;
+			PreparedStatement select1Rit = null;
 			String queryString = ("SELECT * FROM Rit WHERE ritnr = ?;");
+		try {
+			
 
 			select1Rit = currentCon.prepareStatement(queryString);
 
@@ -542,8 +692,31 @@ public class RitDao {
 
 
 		} catch (SQLException ex) {
-			Logger.getLogger(RitDao.class.getName()).log(Level.SEVERE, null, ex);
-
+			Logger.getLogger(RitDao.class
+					.getName()).log(Level.SEVERE, null, ex);
+		} finally {
+			//Doe dit altijd, als het goed gaat én wanneer het fout gaat
+			if (rs != null) {
+				try {
+					//sluit resultset af
+					rs.close();
+				} catch (SQLException ignore) {
+				}
+			}
+			if (select1Rit != null) {
+				//sluit preparedStatement
+				try {
+					select1Rit.close();
+				} catch (SQLException ignore) {
+				}
+			}
+			if (currentCon != null) {
+				//sluit huidige verbinding
+				try {
+					currentCon.close();
+				} catch (SQLException ignore) {
+				}
+			}
 		}
 
 		System.out.println(bean.getRitnr());
@@ -560,9 +733,11 @@ public class RitDao {
 	public Boolean updateRit(int ritnr) {
 
 		datum = new Timestamp(begindatum.getMillis());
+		rs = null;
+		currentCon = ConnectionManager.getConnection();
+			PreparedStatement updateRit = null;
 		try {
-			currentCon = ConnectionManager.getConnection();
-			PreparedStatement updateRit;
+			
 
 			String queryString = ("Update Rit SET"
 					+ " startpunt = ?,"
@@ -601,9 +776,31 @@ public class RitDao {
 			updateRit.executeUpdate();
 
 		} catch (SQLException ex) {
-			Logger.getLogger(RitDao.class.getName()).log(Level.SEVERE, null, ex);
-			return false;
-
+			Logger.getLogger(RitDao.class
+					.getName()).log(Level.SEVERE, null, ex);
+		} finally {
+			//Doe dit altijd, als het goed gaat én wanneer het fout gaat
+			if (rs != null) {
+				try {
+					//sluit resultset af
+					rs.close();
+				} catch (SQLException ignore) {
+				}
+			}
+			if (updateRit != null) {
+				//sluit preparedStatement
+				try {
+					updateRit.close();
+				} catch (SQLException ignore) {
+				}
+			}
+			if (currentCon != null) {
+				//sluit huidige verbinding
+				try {
+					currentCon.close();
+				} catch (SQLException ignore) {
+				}
+			}
 		}
 		return true;
 

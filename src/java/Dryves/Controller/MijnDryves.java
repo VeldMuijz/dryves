@@ -19,51 +19,51 @@ import javax.servlet.http.HttpSession;
  */
 public class MijnDryves extends HttpServlet {
 
-
-    /**
-     * Handles the HTTP
-     * <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+	/**
+	 * Handles the HTTP
+	 * <code>GET</code> method.
+	 *
+	 * @param request servlet request
+	 * @param response servlet response
+	 * @throws ServletException if a servlet-specific error occurs
+	 * @throws IOException if an I/O error occurs
+	 */
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 //             // Haal de huidige sessie op
-//        HttpSession session = request.getSession();
-//        
-//        //Haal de userbean (dit moet sessiebean worden) op uit de sessie
-//        Lid user = (Lid) session.getAttribute("currentSessionUser");
-//        
-        RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/mijndryves.jsp");
-        dispatcher.forward(request, response);
-    }
+		HttpSession session = request.getSession();
 
-    /**
-     * Handles the HTTP
-     * <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-     
-    }
+		if (session.getAttribute("currentSessionUser") != null) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/mijndryves.jsp");
+			dispatcher.forward(request, response);
+		} else {
+			//niet ingelogd dus naar login pagina
+			request.getRequestDispatcher("login.jsp").forward(request, response);
+		}
+	}
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }
+	/**
+	 * Handles the HTTP
+	 * <code>POST</code> method.
+	 *
+	 * @param request servlet request
+	 * @param response servlet response
+	 * @throws ServletException if a servlet-specific error occurs
+	 * @throws IOException if an I/O error occurs
+	 */
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+	}
+
+	/**
+	 * Returns a short description of the servlet.
+	 *
+	 * @return a String containing servlet description
+	 */
+	@Override
+	public String getServletInfo() {
+		return "Short description";
+	}
 }

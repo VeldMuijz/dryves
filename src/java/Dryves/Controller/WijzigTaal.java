@@ -38,12 +38,12 @@ public class WijzigTaal extends HttpServlet {
 		LidDao lidDao = new LidDao();
 		HttpSession session = request.getSession();
 		Lid user;
-		String taal = request.getParameter("land");
 		if (session.getAttribute("currentSessionUser") != null){
 			user = (Lid) session.getAttribute("currentSessionUser");
 		}else{
 			user = new Lid();
 		}
+		String taal = request.getParameter("land");
 
 		if (user.getLidnr() > 0 ) {
 			System.out.println("SESSIE OBJECT IS GEVULD");

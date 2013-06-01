@@ -9,11 +9,8 @@ import Dryves.Model.BeoordelingDao;
 import Dryves.Model.Lid;
 import Dryves.Model.LidDao;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -46,36 +43,50 @@ public class MijnBeoordelingen extends HttpServlet {
 		Lid beoordelaar = new Lid();
 		// Haal de huidige sessie op
 		HttpSession session = request.getSession();
-		//Haal de userbean (dit moet sessiebean worden) op uit de sessie
-		Lid user = (Lid) session.getAttribute("currentSessionUser");
 		
-		user = lidDao.enkelLidOphalen(user.getLidnr(), user);
-		session.setAttribute("currentSessionUser", user);
-		
-		
-		try {
-			ArrayList<Lid> beoordelaars = new ArrayList<Lid>();
-			List<Beoordeling> beoordelingen;
-			beoordelingen = beoordelingDao.getAlleBeoordelingenPerLid(user.getLidnr());
-			request.setAttribute("beoordelingen", beoordelingen);
-			
-			for(int i = 0; i < beoordelingen.size(); i++){
-				Beoordeling beoordeel;
-				beoordeel =	beoordelingen.get(i);
-				
-				lidDao.enkelLidOphalen(beoordeel.getLidnr(), beoordelaar);
-				
-				beoordelaars.add(beoordelaar);
-				
+		if (session.getAttribute("currentSessionUser") != null) {
+			//Haal de userbean (dit moet sessiebean worden) op uit de sessie
+			Lid user = (Lid) session.getAttribute("currentSessionUser");
+
+			user = lidDao.enkelLidOphalen(user.getLidnr(), user);
+			if (user != null) {
+				session.setAttribute("currentSessionUser", user);
+
+				ArrayList<Lid> beoordelaars = new ArrayList<Lid>();
+				List<Beoordeling> beoordelingen;
+				beoordelingen = beoordelingDao.getAlleBeoordelingenPerLid(user.getLidnr());
+
+				if (beoordelingen != null) {
+					request.setAttribute("beoordelingen", beoordelingen);
+
+					for (int i = 0; i < beoordelingen.size(); i++) {
+						Beoordeling beoordeel;
+						beoordeel = beoordelingen.get(i);
+
+						lidDao.enkelLidOphalen(beoordeel.getLidnr(), beoordelaar);
+						beoordelaars.add(beoordelaar);
+
+					}
+
+					request.setAttribute("beoordelaars", beoordelaars);
+
+					RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/mijnbeoordelingen.jsp");
+					dispatcher.forward(request, response);
+				} else {
+					//ophalen van beoordelingen is mislukt
+					RequestDispatcher dispatcher = request.getRequestDispatcher("oops.jsp");
+					dispatcher.forward(request, response);
+				}
+
+			} else {
+				//ophalen van lid is mislukt
+				RequestDispatcher dispatcher = request.getRequestDispatcher("oops.jsp");
+				dispatcher.forward(request, response);
 			}
-			request.setAttribute("beoordelaars", beoordelaars);
-			
-		} catch (SQLException ex) {
-			Logger.getLogger(MijnBeoordelingen.class.getName()).log(Level.SEVERE, null, ex);
-			throw new ServletException("Kan gegevens niet ophalen uit database", ex);
+		} else {
+			//niet ingelogd dus naar login pagina
+			request.getRequestDispatcher("login.jsp").forward(request, response);
 		}
-		RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/mijnbeoordelingen.jsp");
-			dispatcher.forward(request, response);
 	}
 
 	/**

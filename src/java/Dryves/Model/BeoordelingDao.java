@@ -6,6 +6,7 @@ package Dryves.Model;
 
 import Dryves.ConnectionManager;
 import Dryves.DatumConverter;
+import static Dryves.Model.BerichtenDao.rs;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -57,7 +58,7 @@ public class BeoordelingDao {
 	 * @return
 	 * @throws SQLException
 	 */
-	public List<Beoordeling> getAlleBeoordelingenPerLid(int lidnr) throws SQLException {
+	public List<Beoordeling> getAlleBeoordelingenPerLid(int lidnr) {
 		rs = null;
 		List<Beoordeling> beoordelingen = new ArrayList<Beoordeling>();
 		DatumConverter dc = new DatumConverter();
@@ -94,15 +95,16 @@ public class BeoordelingDao {
 				beoordelingen.add(beoordeling);
 			}
 		} catch (SQLException ex) {
-			Logger.getLogger(RitDao.class.getName()).log(Level.SEVERE, null, ex);
+			Logger.getLogger(BeoordelingDao.class.getName()).log(Level.SEVERE, null, ex);
 
 		} finally {
+			
 			if (rs != null) {
 				try {
+					//sluit resultset af
 					rs.close();
 				} catch (SQLException ignore) {
 				}
-			}
 			if (getBeoordelingen != null) {
 				try {
 					getBeoordelingen.close();
@@ -119,14 +121,9 @@ public class BeoordelingDao {
 
 		return beoordelingen;
 	}
+	}
 
 	/**
-	 * Deze methode maakt een beoordeling aan die een lid doet op een aankoop.
-	 * In deze methode worden 3 SQL statements uitgevoerd: 1. Maak beoordeling
-	 * aan in de tabel beoordeling 2. Update de beoordeling voor een lid in de
-	 * tabel lid 3. Update de aankoop als beoordeeld, wanneer deze is beoordeeld
-	 * kan deze niet meer beoordeeld worden Wanneer een van de statements faalt
-	 * zal de gehele transactie worden teruggedraait.
 	 *
 	 * @param waardering waardering voor een rit
 	 * @param stiptheid stiptheid van de aanbieder van de rit
@@ -138,27 +135,11 @@ public class BeoordelingDao {
 	 * @param aankoopnr unieke identifier van een aankoop
 	 * @return
 	 */
-	public Boolean beoordelingAanmaken(
-			double waardering,
-			int stiptheid,
-			int rijstijl,
-			int gezelligheid,
-			int betrouwbaarheid,
-			String commentaar,
-			int lidnr,
-			int aankoopnr) {
-
+	public Boolean beoordelingAanmaken(double waardering, int stiptheid, int rijstijl, int gezelligheid, int betrouwbaarheid, String commentaar, int lidnr, int aankoopnr) {
 		Date datum = new Date();
 		Timestamp timestamp = new Timestamp(datum.getTime());
 		currentCon = ConnectionManager.getConnection();
-		PreparedStatement beoordeelLid = null;
-		PreparedStatement updateBeoordelingLid = null;
-		PreparedStatement updateAankoop = null;
-		AankoopDao aankoopDao = new AankoopDao();
-		LidDao lidDao = new LidDao();
-		boolean check1 = false;
-		boolean check2 = false;
-
+		PreparedStatement beoordeelLid, updateBeoordelingLid;
 		String queryString =
 				"INSERT INTO beoordeling ("
 				+ " waardering,"
@@ -181,17 +162,12 @@ public class BeoordelingDao {
 				+ "AND b.lidnr = l.lidnr "
 				+ "AND a.aankoopnr = ? LIMIT 1);";
 
-		String updateAankoopBeoordeeld = "UPDATE aankoop "
-				+ "SET beoordeeld = 1 "
-				+ "WHERE aankoopnr = ? "
-				+ "AND beoordeeld < 1;";
 
 		try {
 			currentCon.setAutoCommit(false);
 			beoordeelLid = currentCon.prepareStatement(queryString);
 			updateBeoordelingLid = currentCon.prepareStatement(updateBeoordeling);
-			updateAankoop = currentCon.prepareStatement(updateAankoopBeoordeeld);
-
+			
 			beoordeelLid.setDouble(1, waardering);
 			beoordeelLid.setInt(2, stiptheid);
 			beoordeelLid.setInt(3, rijstijl);
@@ -205,24 +181,19 @@ public class BeoordelingDao {
 			updateBeoordelingLid.setDouble(1, waardering);
 			updateBeoordelingLid.setInt(2, aankoopnr);
 
-			updateAankoop.setInt(1, aankoopnr);
-
 			System.out.println("+++++++++++++BeoordelingAanmaken+++++++++++++++\n  Query = " + beoordeelLid + "\n");
 			System.out.println("+++++++++++++LidBeoordelingUpdaten+++++++++++++++\n  Query = " + updateBeoordelingLid + "\n");
 			//Update de gegevens
 			beoordeelLid.executeUpdate();
 			updateBeoordelingLid.executeUpdate();
-			updateAankoop.executeUpdate();
 
 			//Commit de change
 			currentCon.commit();
 			currentCon.setAutoCommit(false);
 		} catch (SQLException ex) {
 			Logger.getLogger(LidDao.class.getName()).log(Level.SEVERE, null, ex);
-			System.out.println("Check1 = " + check1);
-			System.out.println("Check1 = " + check2);
 			if (currentCon != null) {
-				System.err.print("Transaction krijgt een rollback, alle veranderingen die deze query teweeg zou brengen worden teruggedraaid.");
+				System.err.print("Transaction is being rolled back");
 				try {
 					currentCon.rollback();
 				} catch (SQLException ex1) {
@@ -231,40 +202,7 @@ public class BeoordelingDao {
 			}
 			return false;
 		} finally {
-			//Doe dit altijd, als het goed gaat of wanneer het fout gaat
-			if (rs != null) {
-				try {
-					//sluit resultset af
-					rs.close();
-				} catch (SQLException ignore) {
-				}
-			}
-			if (beoordeelLid != null) {
-				//sluit preparedStatement
-				try {
-					beoordeelLid.close();
-				} catch (SQLException ignore) {
-				}
-			}
-			if (updateBeoordelingLid != null) {
-				//sluit preparedStatement
-				try {
-					updateBeoordelingLid.close();
-				} catch (SQLException ignore) {
-				}
-
-			}
-			if (updateAankoop != null) {
-				//sluit preparedStatement
-				try {
-					updateAankoop.close();
-				} catch (SQLException ignore) {
-				}
-
-			}
-
 			if (currentCon != null) {
-				//sluit huidige verbinding
 				try {
 					currentCon.close();
 				} catch (SQLException ignore) {

@@ -48,13 +48,13 @@
                     <!--					TODO Hier nog de actuele aantal ongelezen berichten ophalen-->
                     <div style="float: right; margin-right: 5px;"> 
                         <a href="MijnBerichten"> <%
-            Lid user = (Lid) session.getAttribute("currentSessionUser");
-        int lidnr=user.getLidnr();
-        
-        BerichtenDao berichtDao= new BerichtenDao();
-        
-       int aantalberichten= berichtDao.statusbalk(lidnr);  %>
-  <% out.println( aantalberichten );  %></a><fmt:message bundle="${rb}" key="nieuweberichtennav" /><br/> 
+                            Lid user = (Lid) session.getAttribute("currentSessionUser");
+                            int lidnr = user.getLidnr();
+
+                            BerichtenDao berichtDao = new BerichtenDao();
+
+                            int aantalberichten = berichtDao.statusbalk(lidnr);%>
+                            <% out.println(aantalberichten);%></a><fmt:message bundle="${rb}" key="nieuweberichtennav" /><br/> 
                         <a href="Uitloggen" style="float: right;"><fmt:message bundle="${rb}" key="uitlognav" /></a>
                     </div>
 

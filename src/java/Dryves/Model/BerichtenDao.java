@@ -54,7 +54,7 @@ public class BerichtenDao {
 	/**
 	 * Haal lidnr op aan de hand van een berichtID
 	 *
-	 * @param ritnr unieke identifier van een rit
+	 * @param ritnr
 	 * @return
 	 */
 	public int haalLidNr(int ritnr) {
@@ -112,7 +112,7 @@ public class BerichtenDao {
 	/**
 	 * Markeer het berichten ongelezen in de tabel berichten
 	 *
-	 * @param berichtid unieke identifier van een bericht
+	 * @param berichtid
 	 * @return
 	 */
 	public boolean markeerBericht(int berichtid) {
@@ -161,7 +161,7 @@ public class BerichtenDao {
 	 * @return
 	 * @throws SQLException
 	 */
-	public boolean BerichtVersturen(Berichten bean) throws SQLException {
+	public boolean BerichtVersturen(Berichten bean) {
 
 		//Met deze functie komen we erachter wie
 		//de eigenaar is van de aangeboden rit d.m.v ritnr
@@ -214,7 +214,7 @@ public class BerichtenDao {
 	 * @return
 	 * @throws SQLException
 	 */
-	public boolean beantwoordBericht(Berichten bean) throws SQLException {
+	public boolean beantwoordBericht(Berichten bean){
 		currentCon = ConnectionManager.getConnection();
 		PreparedStatement verstuurBericht = null;
 		String queryString = "INSERT INTO berichten  (inhoudbericht,datum,afzender,lidnr,gelezen,ritnm)"
@@ -259,11 +259,11 @@ public class BerichtenDao {
 	 * Deze methode laadt de inbox van een gebruiker wanneer deze wordt
 	 * opgevraagd
 	 *
-	 * @param lidnr unieke identifier van een lid
+	 * @param lidnr
 	 * @return Lijst van het object Berichten
 	 * @throws SQLException
 	 */
-	public List<Berichten> haalberichten(int lidnr) throws SQLException {
+	public List<Berichten> haalberichten(int lidnr) {
 		System.out.println("Lidnummer:" + lidnr);
 		currentCon = ConnectionManager.getConnection();
 		rs = null;
@@ -329,7 +329,7 @@ public class BerichtenDao {
 	 * achternaam. Dit kan gebruikt worden om in de lijst van berichten een voor
 	 * en achternaam van een lid te zetten.
 	 *
-	 * @param afzenderLidnr lidnr van de afzender van een bericht
+	 * @param afzenderLidnr
 	 * @return
 	 */
 	public Lid afzender(int afzenderLidnr) {
@@ -348,11 +348,11 @@ public class BerichtenDao {
 	/**
 	 * Deze methode haalt alle berichten op voor een bepaald berichtnr
 	 *
-	 * @param berichtid unieke identifier van een bericht
+	 * @param berichtid
 	 * @return Lijst van object Berichten
 	 * @throws SQLException
 	 */
-	public List<Berichten> getAlleBerichtenbijId(int berichtid) throws SQLException {
+	public List<Berichten> getAlleBerichtenbijId(int berichtid) {
 		List<Berichten> berichtlijst = new ArrayList<Berichten>();
 		DatumConverter dc = new DatumConverter();
 		rs = null;
