@@ -27,11 +27,11 @@ public class Aankoop  implements java.io.Serializable {
 
     /**
      * 
-     * @param aankoopnr 
-     * @param ritnr
-     * @param lidnr
-     * @param ontmoetingnr
-     * @param factuurnr 
+     * @param aankoopnr unieke identifier van een aankoop
+     * @param ritnr unieke identifier van een rit
+     * @param lidnr unieke identifier van een lid
+     * @param ontmoetingnr unieke identifier van een ontmoeting
+     * @param factuurnr unieke identifier van een factuur
      */
     public Aankoop(int aankoopnr, int ritnr, int lidnr, int ontmoetingnr, int factuurnr) {
         this.aankoopnr = aankoopnr;
@@ -40,6 +40,19 @@ public class Aankoop  implements java.io.Serializable {
         this.ontmoetingnr = ontmoetingnr;
         this.factuurnr = factuurnr;
     }
+    
+    /**
+     * 
+     * @param aankoopnr unieke identifier van een aankoop
+     * @param ritnr unieke identifier van een rit
+     * @param lidnr unieke identifier van een lid
+     * @param ontmoetingnr unieke identifier van een ontmoeting
+     * @param betaalwijze wijze van betalen
+     * @param datum datum van de aankoop
+     * @param factuurnr unieke identifier van een factuur
+     * @param beoordeeld geeft aan of een aankoop is beoordeeld
+     */
+    
     public Aankoop(int aankoopnr, int ritnr, int lidnr, int ontmoetingnr, String betaalwijze, Timestamp datum, int factuurnr, int beoordeeld) {
        this.aankoopnr = aankoopnr;
        this.ritnr = ritnr;

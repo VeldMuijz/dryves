@@ -16,6 +16,13 @@ public class Configuratie  implements java.io.Serializable {
     public Configuratie() {
     }
 
+    /**
+     * 
+     * @param confnr unieke identifier van configuratie
+     * @param confnaam naam van het configuratie item
+     * @param confwaarde waarde van het configuratie item
+     */
+    
     public Configuratie(int confnr, String confnaam, String confwaarde) {
        this.confnr = confnr;
        this.confnaam = confnaam;

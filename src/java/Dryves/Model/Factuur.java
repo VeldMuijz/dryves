@@ -22,11 +22,11 @@ public class Factuur  implements java.io.Serializable {
     
 /**
  * 
- * @param factuurnr
- * @param aankoopnr
- * @param datum
- * @param totaalbedrag
- * @param totaalbedragexbtw 
+ * @param factuurnr unieke identifier van een factuur
+ * @param aankoopnr unieke identiefier van een aankoop
+ * @param datum datum van de factuur
+ * @param totaalbedrag totaalbedrag van de factuur
+ * @param totaalbedragexbtw totaalbedrag exclusief btw
  */
 
     public Factuur(int factuurnr, int aankoopnr, Date datum, BigDecimal totaalbedrag, BigDecimal totaalbedragexbtw) {

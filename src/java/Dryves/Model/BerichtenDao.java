@@ -54,7 +54,7 @@ public class BerichtenDao {
 	/**
 	 * Haal lidnr op aan de hand van een berichtID
 	 *
-	 * @param ritnr
+	 * @param ritnr unieke identifier van een rit
 	 * @return
 	 */
 	public int haalLidNr(int ritnr) {
@@ -112,7 +112,7 @@ public class BerichtenDao {
 	/**
 	 * Markeer het berichten ongelezen in de tabel berichten
 	 *
-	 * @param berichtid
+	 * @param berichtid unieke identifier van een bericht
 	 * @return
 	 */
 	public boolean markeerBericht(int berichtid) {
@@ -259,7 +259,7 @@ public class BerichtenDao {
 	 * Deze methode laadt de inbox van een gebruiker wanneer deze wordt
 	 * opgevraagd
 	 *
-	 * @param lidnr
+	 * @param lidnr unieke identifier van een lid
 	 * @return Lijst van het object Berichten
 	 * @throws SQLException
 	 */
@@ -329,7 +329,7 @@ public class BerichtenDao {
 	 * achternaam. Dit kan gebruikt worden om in de lijst van berichten een voor
 	 * en achternaam van een lid te zetten.
 	 *
-	 * @param afzenderLidnr
+	 * @param afzenderLidnr lidnr van de afzender van een bericht
 	 * @return
 	 */
 	public Lid afzender(int afzenderLidnr) {
@@ -348,7 +348,7 @@ public class BerichtenDao {
 	/**
 	 * Deze methode haalt alle berichten op voor een bepaald berichtnr
 	 *
-	 * @param berichtid
+	 * @param berichtid unieke identifier van een bericht
 	 * @return Lijst van object Berichten
 	 * @throws SQLException
 	 */

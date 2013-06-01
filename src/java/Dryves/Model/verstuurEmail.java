@@ -34,6 +34,16 @@ public class verstuurEmail {
     private String attachment;
     private String attachmentName;
     
+   /**
+    * 
+    * @param van afzender van de e-mail
+    * @param naar bestemming van de e-mail
+    * @param onderwerp onderwerp van de e-mail
+    * @param bericht inhoud van de e-mail
+    * @param attachment bijlage van de e-mail
+    * @param attachmentName naam van de bijlage van de e-mail  
+    */
+    
     public void verstuurEmail(String van, String naar, String onderwerp, String bericht, String attachment, String attachmentName){
     
         final String username = "dryveseu@gmail.com";

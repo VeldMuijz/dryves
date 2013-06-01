@@ -128,14 +128,14 @@ public class BeoordelingDao {
 	 * kan deze niet meer beoordeeld worden Wanneer een van de statements faalt
 	 * zal de gehele transactie worden teruggedraait.
 	 *
-	 * @param waardering
-	 * @param stiptheid
-	 * @param rijstijl
-	 * @param gezelligheid
-	 * @param betrouwbaarheid
-	 * @param commentaar
-	 * @param lidnr
-	 * @param aankoopnr
+	 * @param waardering waardering voor een rit
+	 * @param stiptheid stiptheid van de aanbieder van de rit
+	 * @param rijstijl waardering voor de rijstijl
+	 * @param gezelligheid gezelligheid van de aanbieder
+	 * @param betrouwbaarheid betrouwbaarheid van de aanbieder
+	 * @param commentaar los commentaar dat toegevoegd kan worden
+	 * @param lidnr unieke identifier van een lid
+	 * @param aankoopnr unieke identifier van een aankoop
 	 * @return
 	 */
 	public Boolean beoordelingAanmaken(
