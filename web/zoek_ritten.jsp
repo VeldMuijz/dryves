@@ -49,7 +49,7 @@ Document : mijn_ritten
                         <p>Probeert u alstublieft opnieuw met andere zoekcriteria</p>
                     </c:when>
                     <c:otherwise>
-                        <h2>Gevonden ritten</h2>
+                        <h2>Uw zoekopdracht heeft de volgende resultaten opgeleverd.</h2>
 
 
 

@@ -160,6 +160,11 @@ button {
 
 }
 
+.contentPanel h2 {
+    font-size: 12px;
+    font-weight: bold;
+}
+
 .contentPanelSearch{
     
     display: inline-block;
@@ -372,7 +377,7 @@ button {
     background-image: URL(../images/rit_achtergrond.png);
     margin-bottom: 10px;
     padding: 20px;
-    border: 1px solid #BBB;
+    border: 1px solid #919191;
     text-shadow: 0px 0px 1px #919191;
     filter: dropshadow(color=#919191, offx=1, offy=1);
 }
