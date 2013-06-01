@@ -51,7 +51,65 @@ public class BerichtenDao {
 
 	}
 
-	/**
+	
+        
+        
+    /**
+	 * Deze methode wordt gebruikt om het aantal berichten op te halen voor een bepaalde gebruiker door middel van een lid nummer.
+	 * @param lidnummer
+	 * @return Integer met het aantal berichten.
+	 */
+	
+    public int aantalBerichten(int lidnummer){
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+        int aantal = 0;
+        try {
+            System.out.println("Lidnummer:" + lidnummer);
+            currentCon = ConnectionManager.getConnection();
+
+            String queryString = "SELECT * FROM berichten WHERE lidnr=? ;";
+
+            statement = currentCon.prepareStatement(queryString);
+            statement.setInt(1, lidnummer);
+            resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+            aantal++;
+            }
+
+        } catch (SQLException ex) {
+			Logger.getLogger(BerichtenDao.class
+					.getName()).log(Level.SEVERE, null, ex);}
+                finally {
+                    //Doe dit altijd, als het goed gaat én wanneer het fout gaat
+			if (rs != null) {
+				try {
+					//sluit resultset af
+					rs.close();
+				} catch (SQLException ignore) {
+				}
+			}
+			if (statement != null) {
+				//sluit preparedStatement
+				try {
+					statement.close();
+				} catch (SQLException ignore) {
+				}
+			}
+			if (currentCon != null) {
+				//sluit huidige verbinding
+				try {
+					currentCon.close();
+				} catch (SQLException ignore) {
+                                
+                                }}}
+
+        return aantal;
+    }
+        
+        
+        /**
 	 * Haal lidnr op aan de hand van een berichtID
 	 *
 	 * @param ritnr
@@ -218,7 +276,7 @@ public class BerichtenDao {
 		currentCon = ConnectionManager.getConnection();
 		PreparedStatement verstuurBericht = null;
 		String queryString = "INSERT INTO berichten  (inhoudbericht,datum,afzender,lidnr,gelezen,ritnm)"
-				+ "VALUES (?,?,?,?,?,?)";
+				+ "VALUES (?,?,?,?,?,?);";
 		try {
 
 			verstuurBericht = currentCon.prepareStatement(queryString);
@@ -263,7 +321,7 @@ public class BerichtenDao {
 	 * @return Lijst van het object Berichten
 	 * @throws SQLException
 	 */
-	public List<Berichten> haalberichten(int lidnr) {
+	public List<Berichten> haalberichten(int lidnr, int offset) {
 		System.out.println("Lidnummer:" + lidnr);
 		currentCon = ConnectionManager.getConnection();
 		rs = null;
@@ -271,7 +329,10 @@ public class BerichtenDao {
 		String queryString = "SELECT * "
 				+ "FROM berichten "
 				+ "WHERE lidnr = ? "
-				+ "ORDER BY datum DESC;";
+				+ "ORDER BY datum DESC LIMIT 5 OFFSET ?;";
+                
+            
+            
 		List<Berichten> berichten = new ArrayList<Berichten>();
 
 		DatumConverter dc = new DatumConverter();
@@ -279,6 +340,7 @@ public class BerichtenDao {
 		try {
 			haalAlleBerichten = currentCon.prepareStatement(queryString);
 			haalAlleBerichten.setInt(1, lidnr);
+                        haalAlleBerichten.setInt(2, offset);
 			rs = haalAlleBerichten.executeQuery();
 
 			while (rs.next()) {
@@ -410,6 +472,9 @@ public class BerichtenDao {
 
 	}
 
+        
+        
+        
 	/**
 	 *	Deze methode wordt gebruikt om het aantal ongelezen berichten voor een lid te tonen
 	 * @param lidnummer

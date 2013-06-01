@@ -161,6 +161,68 @@ public class AankoopDao {
 
         return true;
     }
+    
+    /**
+	 * Deze methode haald een aantal aankopen op vanuit de database. 
+	 * @param lidnummer
+	 * @return Geeft een Integer terug met het aantal aankopen.
+	 * @throws SQLException
+	 */
+	public int aantalAankopen(int lidnr) {
+		Connection connection = null;
+		PreparedStatement statement = null;
+		ResultSet rs = null;
+                int aantal=0;
+		List<Aankoop> aankooplijst = new ArrayList<Aankoop>();
+		List<Rit> aankoopritten = new ArrayList<Rit>();
+		DatumConverter dc = new DatumConverter();
+		currentCon = ConnectionManager.getConnection();
+		PreparedStatement aankopen = null;
+		String queryString = "SELECT a.* "
+				+ "FROM rit AS r, aankoop AS a "
+				+ "WHERE r.ritnr = a.ritnr AND a.lidnr = ? ";
+
+		try {
+
+			aankopen = currentCon.prepareStatement(queryString);
+			aankopen.setInt(1, lidnr);
+			rs = aankopen.executeQuery();
+
+			while (rs.next()) {
+				aantal++;
+
+			}
+		} catch (SQLException ex) {
+			Logger.getLogger(AankoopDao.class
+					.getName()).log(Level.SEVERE, null, ex);
+		} finally {
+			//Doe dit altijd, als het goed gaat én wanneer het fout gaat
+			if (rs != null) {
+				try {
+					//sluit resultset af
+					rs.close();
+				} catch (SQLException ignore) {
+				}
+			}
+			if (aankopen != null) {
+				//sluit preparedStatement
+				try {
+					aankopen.close();
+				} catch (SQLException ignore) {
+				}
+			}
+			if (currentCon != null) {
+				//sluit huidige verbinding
+				try {
+					currentCon.close();
+				} catch (SQLException ignore) {
+				}
+			}
+		}
+
+		return aantal;
+
+	}
 
     /**
      *
@@ -170,7 +232,7 @@ public class AankoopDao {
      * @return Lijst van Objecten van het type Aankoop
      * @throws SQLException
      */
-    public List<Aankoop> getAlleAankopenPerLid(int lidnr){
+    public List<Aankoop> getAlleAankopenPerLid(int lidnr, int offset){
         Connection connection = null;
         PreparedStatement statement = null;
         ResultSet rs = null;
@@ -181,12 +243,13 @@ public class AankoopDao {
         PreparedStatement aankopen = null;
         String queryString = "SELECT a.* "
                 + "FROM rit AS r, aankoop AS a "
-                + "WHERE r.ritnr = a.ritnr AND a.lidnr = ?;";
+                + "WHERE r.ritnr = a.ritnr AND a.lidnr = ? LIMIT 5 OFFSET ?;";
 
         try {
 
             aankopen = currentCon.prepareStatement(queryString);
             aankopen.setInt(1, lidnr);
+            aankopen.setInt(2, offset);
             rs = aankopen.executeQuery();
 
             while (rs.next()) {

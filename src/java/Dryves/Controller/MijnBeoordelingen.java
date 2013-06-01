@@ -8,6 +8,7 @@ import Dryves.Model.Beoordeling;
 import Dryves.Model.BeoordelingDao;
 import Dryves.Model.Lid;
 import Dryves.Model.LidDao;
+import Dryves.Pager;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,12 +42,48 @@ public class MijnBeoordelingen extends HttpServlet {
 		BeoordelingDao beoordelingDao = new BeoordelingDao();
 		LidDao lidDao = new LidDao();
 		Lid beoordelaar = new Lid();
+                Pager pager= new Pager();
 		// Haal de huidige sessie op
 		HttpSession session = request.getSession();
+                
+                
+                
+                Lid user = (Lid) session.getAttribute("currentSessionUser");
 		
+		user = lidDao.enkelLidOphalen(user.getLidnr(), user);
+		session.setAttribute("currentSessionUser", user);
+		pager.setOffset(0);
+		
+                int offset = 0;
+        String knop = request.getParameter("knop");
+        
+        if (request.getParameter("offset") == null) {
+            pager.setOffset(0);
+
+        } else {
+
+            offset = Integer.parseInt(request.getParameter("offset"));
+        }      
+        
+        
+        if ("volgende".equals(knop)) {
+            pager.setOffset(offset + 5);
+        } else if ("vorige".equals(knop)) {
+            pager.setOffset(offset - 5);
+        }
+                
+                
+                ////
+                
+		// I
+		
+                
+                
+                ////
+                
 		if (session.getAttribute("currentSessionUser") != null) {
 			//Haal de userbean (dit moet sessiebean worden) op uit de sessie
-			Lid user = (Lid) session.getAttribute("currentSessionUser");
+	
 
 			user = lidDao.enkelLidOphalen(user.getLidnr(), user);
 			if (user != null) {
@@ -54,7 +91,37 @@ public class MijnBeoordelingen extends HttpServlet {
 
 				ArrayList<Lid> beoordelaars = new ArrayList<Lid>();
 				List<Beoordeling> beoordelingen;
-				beoordelingen = beoordelingDao.getAlleBeoordelingenPerLid(user.getLidnr());
+				
+                                
+                                
+                                ///////
+                                
+                                
+                        
+			
+			beoordelingen = beoordelingDao.getAlleBeoordelingenPerLid(user.getLidnr(),pager.getOffset());
+                        pager.setAantalbeoordelingen(beoordelingDao.aantalBeoordelingen(user.getLidnr()));
+                        pager.setMaxPositie(pager.getAantalbeoordelingen()-5);
+                        pager.setStatusTotaalPager((int) Math.ceil(beoordelingDao.aantalBeoordelingen(user.getLidnr()) / 5.0));
+                        pager.setStatusHuidigePage((int) Math.ceil((pager.getOffset()+5) / 5.0));
+			request.setAttribute("beoordelingen", beoordelingen);
+			
+			for(int i = 0; i < beoordelingen.size(); i++){
+				Beoordeling beoordeel;
+				beoordeel =	beoordelingen.get(i);
+				
+				lidDao.enkelLidOphalen(beoordeel.getLidnr(), beoordelaar);
+				
+				beoordelaars.add(beoordelaar);
+				
+			}
+                        request.setAttribute("pager", pager);
+			request.setAttribute("beoordelaars", beoordelaars);
+
+
+                                
+                                ////////
+                                
 
 				if (beoordelingen != null) {
 					request.setAttribute("beoordelingen", beoordelingen);

@@ -51,6 +51,66 @@ public class BeoordelingDao {
 
 		return bean;
 	}
+        
+        /**
+	 * Deze methode wordt gebruikt om het aantal beoordelingen op te halen voor een bepaalde gebruiker door middel van een lid nummer.
+	 * @param lidnummer
+	 * @return Integer met het aantal beoordelingen.
+	 * @throws SQLException
+	 */
+	public int aantalBeoordelingen(int lidnr){
+		int aantal=0;
+                rs = null;
+		currentCon = ConnectionManager.getConnection();
+		PreparedStatement getBeoordelingen = null;
+		String queryString = ""
+				+ "SELECT b.*, l.* "
+				+ "FROM beoordeling as b, aankoop as a, rit as r, lid as l "
+				+ "WHERE b.aankoopnr = a.aankoopnr "
+				+ "AND a.ritnr = r.ritnr "
+				+ "AND b.lidnr = l.lidnr "
+				+ "AND r.lidnr = ?;";
+
+		try {
+			getBeoordelingen = currentCon.prepareStatement(queryString);
+			getBeoordelingen.setInt(1, lidnr);
+			rs = getBeoordelingen.executeQuery();
+
+			while (rs.next()) {
+				aantal++;
+				
+			}
+		} catch (SQLException ex) {
+			Logger.getLogger(BeoordelingDao.class
+					.getName()).log(Level.SEVERE, null, ex);
+		} finally {
+			//Doe dit altijd, als het goed gaat én wanneer het fout gaat
+			if (rs != null) {
+				try {
+					//sluit resultset af
+					rs.close();
+				} catch (SQLException ignore) {
+				}
+			}
+			if (getBeoordelingen != null) {
+				//sluit preparedStatement
+				try {
+					getBeoordelingen.close();
+				} catch (SQLException ignore) {
+				}
+			}
+			if (currentCon != null) {
+				//sluit huidige verbinding
+				try {
+					currentCon.close();
+				} catch (SQLException ignore) {
+				}
+			}
+		}
+		return aantal;
+	}
+        
+        
 
 	/**
 	 * Haal een lijst van beoordelingen per lid op
@@ -58,7 +118,7 @@ public class BeoordelingDao {
 	 * @return
 	 * @throws SQLException
 	 */
-	public List<Beoordeling> getAlleBeoordelingenPerLid(int lidnr) {
+	public List<Beoordeling> getAlleBeoordelingenPerLid(int lidnr, int offset) {
 		rs = null;
 		List<Beoordeling> beoordelingen = new ArrayList<Beoordeling>();
 		DatumConverter dc = new DatumConverter();
@@ -71,11 +131,15 @@ public class BeoordelingDao {
 				+ "AND a.ritnr = r.ritnr "
 				+ "AND b.lidnr = l.lidnr "
 				+ "AND r.lidnr = ?"
-				+ "ORDER BY b.datum DESC;";
+				+ "ORDER BY b.datum DESC LIMIT 5 OFFSET ?;";
+                
+                	
+                
 
 		try {
 			getBeoordelingen = currentCon.prepareStatement(queryString);
 			getBeoordelingen.setInt(1, lidnr);
+                        getBeoordelingen.setInt(2, offset);
 			rs = getBeoordelingen.executeQuery();
 
 			while (rs.next()) {
