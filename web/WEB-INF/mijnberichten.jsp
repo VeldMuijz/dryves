@@ -42,65 +42,72 @@
 
 
             <div class="contentPanel">      <c:choose>
-                <c:when test="${pager.statusTotaalPager !=0}"> 
-                   <p>Pagina ${pager.statusHuidigePage}  van de ${pager.statusTotaalPager}</p> </c:when>
-               
-            </c:choose> 
-    
+                    <c:when test="${pager.statusTotaalPager !=0}"> 
+                        <p>Pagina ${pager.statusHuidigePage}  van de ${pager.statusTotaalPager}</p> </c:when>
 
-				<c:choose>
-					<c:when test="${empty berichten}"> 
-						<h2>Er zijn geen berichten voor u</h2>
-						<p>Kom hier later nog eens terug</p>
-					</c:when>
-					<c:otherwise>
-
-						<c:set var="counter" value="0"/>
-						<c:forEach items="${berichten}" var="bericht">
-							<div class="rittenlijst">
-
-								<table>
-									<td width="50px;">
-										<c:choose>
-											<c:when test="${bericht.ongelezen==1}"><img src="images/envelope.png" /></c:when>
-											<c:when test="${bericht.ongelezen==0}"></c:when>
-										</c:choose>
-									</td>
-
-									<td width="200px;"><fmt:message bundle="${rb}" key="afzender" /> ${afzender[counter].vnaam} ${afzender[counter].anaam} <br/> <fmt:message bundle="${rb}" key="datum" />  ${bericht.stringDatum} ${bericht.stringTijd}</td>
-									<td width="82px;"></td>  
-									<td><button onclick="window.location = 'BerichtLezen?berichtid=${bericht.berichtid}';"><fmt:message bundle="${rb}" key="bekijkbericht" /></button></td>
-									<c:set var="counter" value="${counter + 1 }"/>
-                                                                        
-                                                                      
+                </c:choose> 
 
 
-								</table>
+                <c:choose>
+                    <c:when test="${empty berichten}"> 
+                        <h2>Er zijn geen berichten voor u</h2>
+                        <p>Kom hier later nog eens terug</p>
+                    </c:when>
+                    <c:otherwise>
+
+                        <c:set var="counter" value="0"/>
+                        <c:forEach items="${berichten}" var="bericht">
+                            <div class="rittenlijst">
+
+                                <table style="width:100%;">
+                                    <td width="50px;">
+                                        <c:choose>
+                                            <c:when test="${bericht.ongelezen==1}"><img src="images/envelope.png" /></c:when>
+                                            <c:when test="${bericht.ongelezen==0}"></c:when>
+                                        </c:choose>
+                                    </td>
+
+                                    <td width="200px;"><fmt:message bundle="${rb}" key="afzender" /> ${afzender[counter].vnaam} ${afzender[counter].anaam} 
+                                        <br /><br /><img src="images/calendar_icon.png" />  ${bericht.stringDatum} <img src="images/clock_icon.png" /> ${bericht.stringTijd}</td>
+                                    <td width="82px;"></td>  
+                                    <td style="float:right;"><button onclick="window.location = 'BerichtLezen?berichtid=${bericht.berichtid}';"><fmt:message bundle="${rb}" key="bekijkbericht" /></button></td>
+                                        <c:set var="counter" value="${counter + 1 }"/>
 
 
-							</div>
-
-						</c:forEach>
-					</c:otherwise>
-				</c:choose>
-                  
-                                  <c:choose>
-                <c:when test="${pager.aantalberichten > 5 &&  pager.maxPositie >= pager.offset}"> 
-                    <input type="button" onclick="window.location = 'MijnBerichten?offset=${pager.offset}&knop=volgende';" value="Volgende"/></c:when>
-              
-            </c:choose>
-
-                     
-                     <c:choose>
-                <c:when test="${pager.offset>=5}"> 
-                    <input type="button" onclick="window.location = 'MijnBerichten?offset=${pager.offset}&knop=vorige';" value="Vorige"/></c:when>
-               
-            </c:choose> 
-
-			</div>
-		</div>
 
 
-	</body>
+                                </table>
+
+
+                            </div>
+
+                        </c:forEach>
+                    </c:otherwise>
+                </c:choose>
+
+                <c:choose>
+                    <c:when test="${pager.aantalberichten > 5 &&  pager.maxPositie >= pager.offset}"> 
+
+                        <button onclick="window.location = 'MijnBerichten?offset=${pager.offset}&knop=volgende';" value="Volgende"><fmt:message bundle="${rb}" key="volgende" /></button
+
+                    </c:when>
+
+                </c:choose>
+
+
+                <c:choose>
+                    <c:when test="${pager.offset>=5}"> 
+
+                        <button onclick="window.location = 'MijnBerichten?offset=${pager.offset}&knop=vorige';" value="Vorige"><fmt:message bundle="${rb}" key="vorige" /></button>
+
+                    </c:when>
+
+                </c:choose> 
+
+            </div>
+        </div>
+
+
+    </body>
 </html>
 
