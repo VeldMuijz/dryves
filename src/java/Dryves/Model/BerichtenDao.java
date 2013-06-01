@@ -263,7 +263,7 @@ public class BerichtenDao {
 	 * @return Lijst van het object Berichten
 	 * @throws SQLException
 	 */
-	public List<Berichten> haalberichten(int lidnr) throws SQLException {
+	public List<Berichten> haalberichten(int lidnr) {
 		System.out.println("Lidnummer:" + lidnr);
 		currentCon = ConnectionManager.getConnection();
 		rs = null;

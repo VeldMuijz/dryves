@@ -57,7 +57,7 @@ public class BeoordelingDao {
 	 * @return
 	 * @throws SQLException
 	 */
-	public List<Beoordeling> getAlleBeoordelingenPerLid(int lidnr) throws SQLException {
+	public List<Beoordeling> getAlleBeoordelingenPerLid(int lidnr) {
 		rs = null;
 		List<Beoordeling> beoordelingen = new ArrayList<Beoordeling>();
 		DatumConverter dc = new DatumConverter();
@@ -94,7 +94,7 @@ public class BeoordelingDao {
 				beoordelingen.add(beoordeling);
 			}
 		} catch (SQLException ex) {
-			Logger.getLogger(RitDao.class.getName()).log(Level.SEVERE, null, ex);
+			Logger.getLogger(BeoordelingDao.class.getName()).log(Level.SEVERE, null, ex);
 
 		} finally {
 			if (rs != null) {
