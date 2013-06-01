@@ -43,7 +43,7 @@
 
             <div class="contentPanel">      <c:choose>
                     <c:when test="${pager.statusTotaalPager !=0}"> 
-                        <p>Pagina ${pager.statusHuidigePage}  van de ${pager.statusTotaalPager}</p> </c:when>
+                        <p>Pagina ${pager.statusHuidigePage} van ${pager.statusTotaalPager}</p> </c:when>
 
                 </c:choose> 
 
@@ -88,7 +88,7 @@
                 <c:choose>
                     <c:when test="${pager.aantalberichten > 5 &&  pager.maxPositie >= pager.offset}"> 
 
-                        <button onclick="window.location = 'MijnBerichten?offset=${pager.offset}&knop=volgende';" value="Volgende"><fmt:message bundle="${rb}" key="volgende" /></button
+                        <button style="float:right;" onclick="window.location = 'MijnBerichten?offset=${pager.offset}&knop=volgende';" value="Volgende"><fmt:message bundle="${rb}" key="volgende" /></button
 
                     </c:when>
 
