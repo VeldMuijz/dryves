@@ -49,7 +49,27 @@ public class Lid  implements java.io.Serializable {
         this.facebookid = facebookid;
     }
     
-
+/**
+ * 
+ * @param lidnr unieke identifier van een lid
+ * @param vnaam voornaam van een lid
+ * @param anaam achternaam van een lid
+ * @param geslacht geslacht van een lid
+ * @param straat straat van een lid
+ * @param huisnummer huisnummer van een lid
+ * @param reknr rekeningnummer va een lid
+ * @param telnr telefonnummer van een lid
+ * @param postcode postcode van een lid
+ * @param stad staad van een lid
+ * @param email emailadres van een lid
+ * @param wachtwoord wachtwoord van een lid
+ * @param wachtwoord2 bevestiging van het wachtwoord van een lid
+ * @param beoordeling beoordeling van een lid
+ * @param fotoUrl url voor de foto van een lid
+ * @param tvoegsel tussenvoegsel van een lid
+ * @param langnotify taalinstelling van een lid
+ * @param rol rol van een lid
+ */
 	
     public Lid(int lidnr, String vnaam, String anaam, String geslacht, String straat, String huisnummer, String reknr, String telnr, String postcode, String stad, String email, String wachtwoord, String wachtwoord2, double beoordeling, String fotoUrl, String tvoegsel, String langnotify, int rol) {
         this.lidnr = lidnr;
@@ -80,6 +100,11 @@ public class Lid  implements java.io.Serializable {
         
         
     }
+    
+    /**
+     * Functie om de gegevens van een lid te valideren
+     * @return 
+     */
 
     public boolean validate() {
         boolean bool = true;

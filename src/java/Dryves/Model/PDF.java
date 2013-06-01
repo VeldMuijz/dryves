@@ -66,6 +66,9 @@ public class PDF {
   
   }
   
+  /**
+   * Functie om PDF op te bouwen
+   */
   
   public void bouwPDF(){
   

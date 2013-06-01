@@ -39,8 +39,14 @@ Document : mijn_ritten
             </jsp:include>
 
             <div class="contentPanel">         
-
-
+                
+                <c:choose>
+                <c:when test="${pager.statusTotaalPager !=0}"> 
+                   <p>Pagina ${pager.statusHuidigePage}  van de ${pager.statusTotaalPager}</p> </c:when>
+               
+            </c:choose> 
+                
+                    
                 <c:choose>
                     <c:when test="${empty ritten}">
                         <fmt:message bundle="${rb}" key="geenritten" />
@@ -73,6 +79,18 @@ Document : mijn_ritten
                 </c:choose>
 
 
+             <c:choose>
+                <c:when test="${pager.aantalritten > 5 &&  pager.maxPositie >= pager.offset}"> 
+                    <input type="button" onclick="window.location = 'MijnRitten?offset=${pager.offset}&knop=volgende';" value="Volgende"/></c:when>
+              
+            </c:choose>
+
+                     
+                     <c:choose>
+                <c:when test="${pager.offset>=5}"> 
+                    <input type="button" onclick="window.location = 'MijnRitten?offset=${pager.offset}&knop=vorige';" value="Vorige"/></c:when>
+               
+            </c:choose> 
 			</div>
 		</div>
 

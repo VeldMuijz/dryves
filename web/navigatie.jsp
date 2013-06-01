@@ -19,7 +19,8 @@
 
 <div class="navigation">
 
-    <!--    check of er een ingelogde gebruiker is, zo ja dan toon je dit menu zonder registratie en login:-->
+    <!--    check of er een ingelogde gebruiker is via de check of er een sessie aanwezig is via een choose, when, otherwise constructie
+    . Het menu item van de gekozen pagina Zo ja dan toon je dit menu zonder registratie en login:-->
 
     <c:choose>
         <c:when test="${currentSessionUser.lidnr > 0}"> 
@@ -38,6 +39,7 @@
                 <c:out value="${currentSessionUser.vnaam}"/> <c:out value="${currentSessionUser.anaam}"/></div> 
 
             <!-- Hier wordt het actuele aantal ongelezen berichten opgehaald -->
+
             <div style="float: right; margin-right: 5px;"> 
                 <a href="MijnBerichten"> <%
                     Lid user = (Lid) session.getAttribute("currentSessionUser");

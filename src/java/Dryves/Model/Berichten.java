@@ -26,6 +26,21 @@ public class Berichten {
 
 	public Berichten() {
 	}
+        
+        /**
+         * 
+         * @param lidnr unieke identifier van een lid
+         * @param stringDatum datum van een bericht in String formaat
+         * @param datum datum van een bericht
+         * @param inhoudbericht inhoud van het bericht
+         * @param ritnr unieke identifier van een rit
+         * @param ongelezen indicatie of een bericht ongelezen is of niet
+         * @param afzender afzender van een bericht
+         * @param gelezen indicatie of een bericht gelezen is of niet
+         * @param onderwerp onderwerp van een bericht
+         * @param berichtnr unieke identifier van een bericht
+         * @param berichtid unieke identifier van een bericht
+         */
 
 	public Berichten(int lidnr, String stringDatum, Timestamp datum, String inhoudbericht, int ritnr, int ongelezen, int afzender, int gelezen, String onderwerp, int berichtnr, int berichtid) {
 		this.lidnr = lidnr;

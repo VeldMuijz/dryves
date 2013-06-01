@@ -35,6 +35,20 @@ public class Rit implements java.io.Serializable {
     public Rit() {
     }
 
+    /**
+     * 
+     * @param ritnr unieke identifier van een rit
+     * @param lidnr unieke identifier van een lid
+     * @param startpunt startpunt van een rit
+     * @param eindpunt eindpunt van een rit
+     * @param afstand totale afstand van een rit
+     * @param prijs prijs van een rit
+     * @param gekocht indicatie of een rit gekocht is
+     * @param datum datum van een rit
+     * @param zitplaatsen aantal zitplaatsen van een rit
+     * @param aangeboden indicatie of een rit is aangeboden of niet
+     */
+    
     public Rit(int ritnr, int lidnr, String startpunt, String eindpunt, double afstand, double prijs, int gekocht, Timestamp datum, int zitplaatsen, int aangeboden) {
         this.ritnr = ritnr;
         this.lidnr = lidnr;
