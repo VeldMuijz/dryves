@@ -67,13 +67,9 @@ Document : mijn_ritten
                                                 <td style="float:right;"><button onclick="window.location = 'LidBeoordelen?aankoopnr=${aankoop.aankoopnr}';"><fmt:message bundle="${rb}" key="beoordeelknop" /></button></td>
                                                 </c:when>
                                                 <c:otherwise>
-                                                <td></td>
+                                                <td style="float: right;"><fmt:message bundle="${rb}" key="albeoordeeld" /></td>
                                             </c:otherwise>
                                         </c:choose>
-
-
-
-                                     
 
                                 </table>
                             </div>
