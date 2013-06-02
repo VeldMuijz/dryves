@@ -156,7 +156,7 @@ public class Registreren extends HttpServlet {
                         ve.verstuurEmailZonderBijlage(naar, onderwerp, bericht);
                         
 			// en hier wordt de gebruiker door gelinked naar mijndryves
-			response.sendRedirect("oops.jsp"); //logged-in page  
+			response.sendRedirect("login.jsp"); //logged-in page  
 
 			}	
 		} else {

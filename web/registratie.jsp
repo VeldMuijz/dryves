@@ -190,15 +190,36 @@
                         <tr>
                             <td><input class="zoektextveld" placeholder="<fmt:message bundle="${rb}" key="e-mail" />" type="text" name="email" value="" size=25  maxlength=25></td>
                             <td><font id="emailerror" size=1 color="red"> </font></td>
-                            <td><input class="zoektextveld" placeholder="<fmt:message bundle="${rb}" key="rekeningnummer" />" type="text" name="reknr" value="" size=10  maxlength=10></td>
-                            <td><font id="reknrerror" size=1 color="red"> </font></td>
+                            <td><input class="zoektextveld" placeholder="<fmt:message bundle="${rb}" key="postcode" />" type="text" name="postcode" value="" size=5  maxlength=8></td>
+                            <td><font id="postcodeerror" size=1 color="red"> </font></td>
                         </tr>
                         <tr>
                             <td><input class="zoektextveld" placeholder="<fmt:message bundle="${rb}" key="telefoonnummer" />" type="text" name="telnr" value="" size=15  maxlength=10></td>
                             <td><font id="telnrerror" size=1 color="red"> </font></td>
                             <td>
+                                <input class="zoektextveld" placeholder="<fmt:message bundle="${rb}" key="rekeningnummer" />" type="text" name="reknr" value="" size=10  maxlength=10>
 
+                            </td>
+                            <td><font id="reknrerror" size=1 color="red"> </font></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <fieldset style="width: 198px;">
+                                    <legend><fmt:message bundle="${rb}" key="taal" /></legend>
+                                    <input type="radio" name="locale" value="nl_NL" checked> <img src="images/nl_NL.png" />
+                                    <input type="radio" name="locale" value="en_GB"> <img src="images/en_EN.png" />
+                                </fieldset>
 
+                            </td>
+                            <td></td>
+                            <td><input class="zoektextveld" type="password" name="wachtwoord" placeholder="<fmt:message bundle="${rb}" key="wachtwoord" />" size=10 value="" maxlength=30></td>
+                            <td>                                
+                                <font id="wachtwoorderror1" size=1 color="red"> </font>
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td>   
                                 <fieldset style="width: 198px;">
 
                                     <legend><fmt:message bundle="${rb}" key="geslacht" /></legend>
@@ -206,31 +227,8 @@
                                     <input type="radio" name="geslacht" value="M" checked>M 
                                     <input type="radio" name="geslacht" value="V"> V
                                 </fieldset>
-
                             </td>
                             <td></td>
-                        </tr>
-                        <tr>
-                            <td><input class="zoektextveld" placeholder="<fmt:message bundle="${rb}" key="postcode" />" type="text" name="postcode" value="" size=5  maxlength=8></td>
-                            <td><font id="postcodeerror" size=1 color="red"> </font></td>
-                            <td>                                
-                                <fieldset style="width: 198px;">
-                                    <legend><fmt:message bundle="${rb}" key="taal" /></legend>
-                                    <input type="radio" name="locale" value="nl_NL" checked> <img src="images/nl_NL.png" />
-                                    <input type="radio" name="locale" value="en_GB"> <img src="images/en_EN.png" />
-                                </fieldset></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>   
-                                <fieldset style="width: 198px;">
-                                    <legend><a id="voorwaardenlink" href="voorwaarden.jsp">Algemene voorwaarden</a></legend>
-
-                                    <input type="checkbox" name="voorwaarden"> Ik ga akkoord 
-
-                                </fieldset>
-                            </td>
-                            <td><font id="voorwaardenerror" size=1 color="red"> </font> </td>
                             <td> 
                                 <input class="zoektextveld" type="password" placeholder="<fmt:message bundle="${rb}" key="bevestigwachtwoord" />" name="wachtwoord2" size=10 value="" maxlength=30>
 
@@ -246,10 +244,15 @@
                             </td>
                             <td></td>
                             <td>
+                                <fieldset style="width: 198px;">
+                                    <legend><a id="voorwaardenlink" href="voorwaarden.jsp">Algemene voorwaarden</a></legend>
 
-                                <input class="zoektextveld" type="password" name="wachtwoord" placeholder="<fmt:message bundle="${rb}" key="wachtwoord" />" size=10 value="" maxlength=30>                                
+                                    <input type="checkbox" name="voorwaarden"> Ik ga akkoord 
+
+                                </fieldset>
+
                             </td>
-                            <td><font id="wachtwoorderror1" size=1 color="red"> </font></td>
+                            <td><font id="voorwaardenerror" size=1 color="red"> </font></td>
                         </tr>
                         <tr>
                             <td><button type="submit"><fmt:message bundle="${rb}" key="aanmelden" /></button></td>

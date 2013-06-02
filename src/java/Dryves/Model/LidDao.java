@@ -418,9 +418,12 @@ public class LidDao {
 				//Hieronder wordt de adminbean gevuld met de waarden uit de configuratietabel
 				bean.setAchtergrond(rs.getString(2));
 				bean.setRitprijs(rs.getString(3));
+                                bean.setWatisdryves(rs.getString(4));
+                                
 
 				System.out.println("Dit is de waarde uit achtergrond: " + bean.getAchtergrond());
 				System.out.println("Dit is de waarde uit ritprijs: " + bean.getRitprijs());
+                                System.out.println("Dit is de waarde uit watisdryves: " + bean.getWatisdryves());
 
 			} else {
 				System.out.println("Er zijn geen gegevens gevonden in de configuratietabel");
