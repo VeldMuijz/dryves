@@ -40,12 +40,12 @@ Document : mijn_ritten
 
 
             <div class="contentPanel">
-                 <c:choose>
-                <c:when test="${pager.statusTotaalPager !=0}"> 
-                   <p>Pagina ${pager.statusHuidigePage} van ${pager.statusTotaalPager}</p> </c:when>
-               
-            </c:choose> 
-           
+				<c:choose>
+					<c:when test="${pager.statusTotaalPager !=0}"> 
+						<p>Pagina ${pager.statusHuidigePage} van ${pager.statusTotaalPager}</p> </c:when>
+
+				</c:choose> 
+
 				<c:choose>
 					<c:when test="${empty beoordelingen}"> 
 						<fmt:message bundle="${rb}" key="geenbeoordeling" />
@@ -56,39 +56,36 @@ Document : mijn_ritten
 						<c:forEach items="${beoordelingen}" var="beoordeling">
 							<div class="rittenlijst">
 
-                                                            <table>
-																counter = ${counter}<br/>
-																beoordelingnr = ${beoordeling.beoordelingnr} <br/>
-																beoordelinglidnr =  ${beoordeling.lidnr}
-                                                                <tr><td width="200px;"><fmt:message bundle="${rb}" key="beoordeelddoor" /></td> <td>${beoordelaars[counter].vnaam} ${beoordelaars[counter].tvoegsel} ${beoordelaars[counter].anaam}</tr>
-                                                                <tr><td><fmt:message bundle="${rb}" key="beoordeeldop" /></td> <td>${beoordeling.korteDatum} ${beoordeling.korteTijd}</td></tr>
-                                                                <tr><td><fmt:message bundle="${rb}" key="gezelligheid" /></td> <td>${beoordeling.gezelligheid}</td></tr>
-                                                                <tr><td><fmt:message bundle="${rb}" key="rijstijl" /></td><td>${beoordeling.rijstijl}</td></tr>
-                                                                <tr><td><fmt:message bundle="${rb}" key="betrouwbaarheid" /></td><td>${beoordeling.betrouwbaarheid}</td> </tr>
-                                                                <tr><td><fmt:message bundle="${rb}" key="stiptheid" /></td><td>${beoordeling.stiptheid}</td></tr>
-                                                                <tr><td><fmt:message bundle="${rb}" key="opmerking" /></td><td>${beoordeling.commentaar}</td></tr>
-                                                                <tr height="20px;"><td></td></tr>
-                                                                <tr style="font-size: 20px;"><td><fmt:message bundle="${rb}" key="eindbeoordeling" /></td>
-                                                                    
- 
-                                                                  <td>
-                                                                      
-                                                                      <c:choose>
-                                                                      
-                                                                          <c:when test="${beoordeling.waardering==1}"><img src="images/ratingstar.png" /></c:when>
-                                                                          <c:when test="${beoordeling.waardering==2}"><img src="images/ratingstar.png" /> <img src="images/ratingstar.png" /></c:when>
-                                                                          <c:when test="${beoordeling.waardering==3}"><img src="images/ratingstar.png" /> <img src="images/ratingstar.png" /> <img src="images/ratingstar.png" /></c:when>
-                                                                          <c:when test="${beoordeling.waardering==4}"><img src="images/ratingstar.png" /> <img src="images/ratingstar.png" /> <img src="images/ratingstar.png" /> <img src="images/ratingstar.png" /></c:when>
-                                                                          <c:when test="${beoordeling.waardering==5}"><img src="images/ratingstar.png" /> <img src="images/ratingstar.png" /> <img src="images/ratingstar.png" /> <img src="images/ratingstar.png" /> <img src="images/ratingstar.png" /></c:when>
-                                                                  
-                                                                      </c:choose>
-                                                                      
-                                                                  </td>
-                                                                    
-                                                                    
-                                                                    
-                                                                </tr>
-                                                            </table>
+								<table>
+									<tr><td width="200px;"><fmt:message bundle="${rb}" key="beoordeelddoor" /></td> <td>${beoordelaars[counter].vnaam} ${beoordelaars[counter].tvoegsel} ${beoordelaars[counter].anaam}</tr>
+									<tr><td><fmt:message bundle="${rb}" key="beoordeeldop" /></td> <td>${beoordeling.korteDatum} ${beoordeling.korteTijd}</td></tr>
+									<tr><td><fmt:message bundle="${rb}" key="gezelligheid" /></td> <td>${beoordeling.gezelligheid}</td></tr>
+									<tr><td><fmt:message bundle="${rb}" key="rijstijl" /></td><td>${beoordeling.rijstijl}</td></tr>
+									<tr><td><fmt:message bundle="${rb}" key="betrouwbaarheid" /></td><td>${beoordeling.betrouwbaarheid}</td> </tr>
+									<tr><td><fmt:message bundle="${rb}" key="stiptheid" /></td><td>${beoordeling.stiptheid}</td></tr>
+									<tr><td><fmt:message bundle="${rb}" key="opmerking" /></td><td>${beoordeling.commentaar}</td></tr>
+									<tr height="20px;"><td></td></tr>
+									<tr style="font-size: 20px;"><td><fmt:message bundle="${rb}" key="eindbeoordeling" /></td>
+
+
+										<td>
+
+											<c:choose>
+
+												<c:when test="${beoordeling.waardering==1}"><img src="images/ratingstar.png" /></c:when>
+												<c:when test="${beoordeling.waardering==2}"><img src="images/ratingstar.png" /> <img src="images/ratingstar.png" /></c:when>
+												<c:when test="${beoordeling.waardering==3}"><img src="images/ratingstar.png" /> <img src="images/ratingstar.png" /> <img src="images/ratingstar.png" /></c:when>
+												<c:when test="${beoordeling.waardering==4}"><img src="images/ratingstar.png" /> <img src="images/ratingstar.png" /> <img src="images/ratingstar.png" /> <img src="images/ratingstar.png" /></c:when>
+												<c:when test="${beoordeling.waardering==5}"><img src="images/ratingstar.png" /> <img src="images/ratingstar.png" /> <img src="images/ratingstar.png" /> <img src="images/ratingstar.png" /> <img src="images/ratingstar.png" /></c:when>
+
+											</c:choose>
+
+										</td>
+
+
+
+									</tr>
+								</table>
 
 							</div>
 							<c:set var="counter" value="${counter + 1 }"/>
@@ -96,21 +93,21 @@ Document : mijn_ritten
 
 					</c:otherwise>
 				</c:choose>
-    <c:choose>
-                <c:when test="${pager.aantalbeoordelingen > 5 &&  pager.maxPositie >= pager.offset}"> 
-                    
-                    <button style="float:right;" onclick="window.location = 'MijnBeoordelingen?offset=${pager.offset}&knop=volgende';" value="Volgende"><fmt:message bundle="${rb}" key="volgende" /></button>
-                </c:when>
-              
-            </c:choose>
+				<c:choose>
+					<c:when test="${pager.aantalbeoordelingen > 5 &&  pager.maxPositie >= pager.offset}"> 
 
-                     
-                     <c:choose>
-                <c:when test="${pager.offset>=5}"> 
-                    <button onclick="window.location = 'MijnBeoordelingen?offset=${pager.offset}&knop=vorige';" value="Vorige"><fmt:message bundle="${rb}" key="vorige" /></button></c:when>
-               
-            </c:choose> 
-           
+						<button style="float:right;" onclick="window.location = 'MijnBeoordelingen?offset=${pager.offset}&knop=volgende';" value="Volgende"><fmt:message bundle="${rb}" key="volgende" /></button>
+					</c:when>
+
+				</c:choose>
+
+
+				<c:choose>
+					<c:when test="${pager.offset>=5}"> 
+						<button onclick="window.location = 'MijnBeoordelingen?offset=${pager.offset}&knop=vorige';" value="Vorige"><fmt:message bundle="${rb}" key="vorige" /></button></c:when>
+
+				</c:choose> 
+
             </div>
         </div>
 

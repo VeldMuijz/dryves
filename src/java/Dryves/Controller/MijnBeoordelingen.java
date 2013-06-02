@@ -86,7 +86,7 @@ public class MijnBeoordelingen extends HttpServlet {
 				pager.setMaxPositie(pager.getAantalbeoordelingen() - 5);
 				pager.setStatusTotaalPager((int) Math.ceil(beoordelingDao.aantalBeoordelingen(user.getLidnr()) / 5.0));
 				pager.setStatusHuidigePage((int) Math.ceil((pager.getOffset() + 5) / 5.0));
-				
+
 				request.setAttribute("beoordelingen", beoordelingen);
 
 				if (beoordelingen != null) {
@@ -94,22 +94,15 @@ public class MijnBeoordelingen extends HttpServlet {
 					for (int i = 0; i < beoordelingen.size(); i++) {
 						Beoordeling beoordeel;
 						beoordeel = beoordelingen.get(i);
+						beoordelaar = new Lid();
 
 						beoordelaar = lidDao.enkelLidOphalen(beoordeel.getLidnr(), beoordelaar);
-						System.out.println("beoordeel.getlidnr = " + beoordeel.getLidnr());
-						System.out.println("Vnaam is " + beoordelaar.getVnaam() + beoordelaar.getAnaam());
-						beoordelaars.add(beoordelaar);
-						System.out.println("Beoordelaars vnaam = " + beoordelaars.get(i).getVnaam());
-
+						//voeg lid toe in array beoordelaars
+						beoordelaars.add(i, beoordelaar);
 					}
 					request.setAttribute("pager", pager);
 					request.setAttribute("beoordelaars", beoordelaars);
-					for (int i = 0; i < beoordelaars.size(); i ++){
-						System.out.println("Beoordelaars invoer nummer = " + i);
-						System.out.println("Vnaam = " + beoordelaars.get(i).getVnaam());
-						System.out.println("Anaam = " + beoordelaars.get(i).getAnaam());
-						System.out.println("lidnr = " + beoordelaars.get(i).getLidnr());
-					}
+
 
 					RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/mijnbeoordelingen.jsp");
 					dispatcher.forward(request, response);
@@ -119,17 +112,16 @@ public class MijnBeoordelingen extends HttpServlet {
 					dispatcher.forward(request, response);
 				}
 
-				} else {
-					//ophalen van lid is mislukt
-					RequestDispatcher dispatcher = request.getRequestDispatcher("oops.jsp");
-					dispatcher.forward(request, response);
-				}
 			} else {
-				//niet ingelogd dus naar login pagina
-				request.getRequestDispatcher("login.jsp").forward(request, response);
+				//ophalen van lid is mislukt
+				RequestDispatcher dispatcher = request.getRequestDispatcher("oops.jsp");
+				dispatcher.forward(request, response);
 			}
+		} else {
+			//niet ingelogd dus naar login pagina
+			request.getRequestDispatcher("login.jsp").forward(request, response);
 		}
-	
+	}
 
 	/**
 	 * Handles the HTTP
