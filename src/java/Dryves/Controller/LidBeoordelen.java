@@ -52,7 +52,7 @@ public class LidBeoordelen extends HttpServlet {
 			//Haal de userbean (dit moet sessiebean worden) op uit de sessie
 			Lid user = (Lid) session.getAttribute("currentSessionUser");
 			Beoordeling sessieBeoordeling = (Beoordeling) session.getAttribute("sessieBeoordeling");
-			System.out.println("Dit gaat in sessiBeoordeling: " + request.getParameter("aankoopnr"));
+			System.out.println("Dit gaat in sessieBeoordeling: " + request.getParameter("aankoopnr"));
 			sessieBeoordeling.setAankoopnr(Integer.parseInt(request.getParameter("aankoopnr")));
 			sessieBeoordeling.setLidnr(user.getLidnr());
 
