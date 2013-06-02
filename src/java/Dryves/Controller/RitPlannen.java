@@ -90,10 +90,9 @@ public class RitPlannen extends HttpServlet {
 		String za = request.getParameter("za");
 		String zo = request.getParameter("zo");
 
-
 		//Checken of herhaling aangevinkt is, zo ja vul de dagen van de week
 		if (request.getParameter("herhaling") != null && !request.getParameter("einddatum").isEmpty()) {
-			ritDao.setEinddatum(dc.convertTimestamp(request.getParameter("einddatum"), "23:59"));
+			ritDao.setEinddatum(dc.convertUSTimestamp(request.getParameter("einddatum"), "23:59"));
 			if (ma != null && !ma.isEmpty()) {
 				ritDao.setMa(1);
 				System.out.println("ma:" + ritDao.getMa());

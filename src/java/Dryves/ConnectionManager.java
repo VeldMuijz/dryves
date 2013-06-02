@@ -33,20 +33,13 @@ import java.sql.*;
 
             try
             {   
-
-
-                System.out.println(" Defing the username");
+               // System.out.println(" Defing the username");
                 String username= "pdl6"; 
-                System.out.println(" Defing the password");
+               // System.out.println(" Defing the password");
                 String password= "h2n431ht";
-                System.out.println(" Defing the connection");
+               // System.out.println(" Defing the connection");
                 con = DriverManager.getConnection(url,username,password); 
-                System.out.println(" connection done" +con);
-
-
-
-
-
+               // System.out.println(" connection done" +con);
             }
 
             catch (SQLException ex)
