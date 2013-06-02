@@ -5,7 +5,6 @@
 package Dryves.Controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -31,12 +30,11 @@ public class MijnDryves extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-//             // Haal de huidige sessie op
+	     // Haal de huidige sessie op
 		HttpSession session = request.getSession();
 
 		if (session.getAttribute("currentSessionUser") != null) {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/mijndryves.jsp");
-			dispatcher.forward(request, response);
+			request.getRequestDispatcher("WEB-INF/mijndryves.jsp").forward(request, response);
 		} else {
 			//niet ingelogd dus naar login pagina
 			request.getRequestDispatcher("login.jsp").forward(request, response);
