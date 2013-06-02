@@ -47,11 +47,11 @@ Document : mijn_ritten
                     <br />
                 <c:choose>
                     <c:when test="${empty ritten}"> 
-                        <h2>Er zijn geen ritten gevonden</h2>
-                        <p>Probeert u alstublieft opnieuw met andere zoekcriteria</p>
+                       <h2><fmt:message bundle="${rb}" key="geenritgevonden" /></h2>
+                        <p><fmt:message bundle="${rb}" key="geenritgevondenopn" /></p>
                     </c:when>
                     <c:otherwise>
-                        <h2>Uw zoekopdracht heeft de volgende resultaten opgeleverd.</h2>
+                         <h2><fmt:message bundle="${rb}" key="zoekritgevonden" /></h2>
 
  <!-- Hier wordt de rittenlijst ingeladen -->
 
@@ -69,8 +69,8 @@ Document : mijn_ritten
                                         <td>
                                             
                                         </td>
-                                        <td style="float:right;">
-                                            Nog <b>${rit.zitplaatsen}</b> beschikbaar
+                                         <td style="float:right;">
+                                            <fmt:message bundle="${rb}" key="nog" /> <b>${rit.zitplaatsen}</b> <fmt:message bundle="${rb}" key="beschikbaar" />
                                         </td>
            
                                     </tr>
@@ -119,7 +119,7 @@ Document : mijn_ritten
 												<button onclick="window.location = 'NieuwBericht?ritnr=${rit.ritnr}&lidnr=${currentSessionUser.lidnr} ';"><fmt:message bundle="${rb}" key="berichtverzenden" /></button>
                                                 </c:when>
                                                 <c:otherwise>
-                                                    <button onclick="window.location = 'login.jsp';">Login/registreer om te bekijken</button>
+                                                    <button onclick="window.location = 'login.jsp';"><fmt:message bundle="${rb}" key="loginregistreer" /></button>
                                                     </c:otherwise>
                                                 </c:choose>
                                             
