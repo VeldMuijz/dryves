@@ -50,14 +50,21 @@
                 <fmt:message bundle="${rb}" key="hieronderbericht" />
 
                 <br /><br />
+                
+                <form action="VerstuurBericht" method="get">
 
                 <textarea placeholder="<fmt:message bundle="${rb}" key="schrijfjebericht" />" type="text" name="inhoud" rows="6" style="width:400px; padding: 6px;"></textarea>
 
                 <br /><br />
+                
+                <div class="hidden">
+                <input type="text" name="ritnr" value="${bericht.ritnr}"></input>
+                <input type="text" name="lidnr" value="${bericht.lidnr}"></input>
+                </div>
 
-                <button onclick="window.location = 'VerstuurBericht?ritnr=${bericht.ritnr}&lidnr=${bericht.lidnr}';"><fmt:message bundle="${rb}" key="berichtverzenden" /></button>
+                <button type="submit"><fmt:message bundle="${rb}" key="berichtverzenden" /></button>
 
-
+                </form>
 
             </div>
     </body>

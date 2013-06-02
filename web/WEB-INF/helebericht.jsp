@@ -79,7 +79,7 @@
 
                         <br /><br />
 
-                        <button><fmt:message bundle="${rb}" key="berichtverzenden" /></button>
+                        <button type="submit"><fmt:message bundle="${rb}" key="berichtverzenden" /></button>
 
 
                     </form>
