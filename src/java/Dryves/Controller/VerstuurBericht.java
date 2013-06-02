@@ -40,7 +40,7 @@ public class VerstuurBericht extends HttpServlet {
 			System.out.println("Bericht lidnummer: " + bericht.getLidnr());
 			bericht.setInhoud(request.getParameter("inhoud"));
 			bericht.setDatum(new Timestamp(datum.getTime()));
-			System.out.println(bericht.getInhoud());
+			System.out.println("Dit is de inhoud van het bericht: " + bericht.getInhoud());
 
 			if (berichtDao.BerichtVersturen(bericht)) {
 

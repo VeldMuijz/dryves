@@ -44,21 +44,21 @@
             <div class="contentPanel">
 
 
-						<%--    <p><fmt:message bundle="${rb}" key="datum" /> <% out.print(datum);%> </p> --%>
+                <%--    <p><fmt:message bundle="${rb}" key="datum" /> <% out.print(datum);%> </p> --%>
 
 
-						<fmt:message bundle="${rb}" key="hieronderbericht" />
+                <fmt:message bundle="${rb}" key="hieronderbericht" />
 
-						<br /><br />
+                <br /><br />
 
-						<textarea placeholder="<fmt:message bundle="${rb}" key="schrijfjebericht" />" type="text" name="inhoud" rows="6" style="width:400px; padding: 6px;"></textarea>
+                <textarea placeholder="<fmt:message bundle="${rb}" key="schrijfjebericht" />" type="text" name="inhoud" rows="6" style="width:400px; padding: 6px;"></textarea>
 
-						<br /><br />
+                <br /><br />
 
-						<button onclick="window.location = 'VerstuurBericht?ritnr=${bericht.ritnr}&lidnr=${bericht.lidnr}';"><fmt:message bundle="${rb}" key="berichtverzenden" /></button>
+                <button onclick="window.location = 'VerstuurBericht?ritnr=${bericht.ritnr}&lidnr=${bericht.lidnr}';"><fmt:message bundle="${rb}" key="berichtverzenden" /></button>
 
 
 
-			</div>
-	</body>
-		</html>
+            </div>
+    </body>
+</html>
