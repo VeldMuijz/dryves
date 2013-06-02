@@ -66,7 +66,6 @@
                                             <c:when test="${bericht.ongelezen==0}"></c:when>
                                         </c:choose>
                                     </td>
-
                                     <td width="200px;"><fmt:message bundle="${rb}" key="afzender" /> ${afzender[counter].vnaam} ${afzender[counter].anaam} 
                                         <br /><br /><img src="images/calendar_icon.png" />  ${bericht.stringDatum} <img src="images/clock_icon.png" /> ${bericht.stringTijd}</td>
                                     <td width="82px;"></td>  

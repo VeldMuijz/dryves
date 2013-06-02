@@ -75,7 +75,7 @@
                         <input type="hidden" name="naar" value="${bericht.afzender}"/>
                         <input type="hidden" name="ritnr" value="${bericht.ritnr}"/>
                         
-                        <textarea placeholder="<fmt:message bundle="${rb}" key="typhieruwbericht" />" type="text" id="beantwoorden" name="inhoud" rows="6" style="width:600px; padding:6px;"></textarea>
+                        <textarea placeholder="<fmt:message bundle="${rb}" key="typhieruwbericht" />" type="text" id="beantwoorden" maxlength="150" name="inhoud" rows="6" style="width:600px; padding:6px;"></textarea>
 
                         <br /><br />
 
