@@ -189,7 +189,7 @@
 			function redirect() {
 				window.location = 'RitNietKopen';
 			}
-					setTimeout(redirect, 30000);		
+					setTimeout(redirect, 300000);		
 		</script>
     </head>
     <body onload="initialize();">
