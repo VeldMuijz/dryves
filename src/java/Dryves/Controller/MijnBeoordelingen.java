@@ -42,100 +42,74 @@ public class MijnBeoordelingen extends HttpServlet {
 		BeoordelingDao beoordelingDao = new BeoordelingDao();
 		LidDao lidDao = new LidDao();
 		Lid beoordelaar = new Lid();
-                Pager pager= new Pager();
+		Pager pager = new Pager();
+
 		// Haal de huidige sessie op
 		HttpSession session = request.getSession();
-                
-                
-                
-                Lid user = (Lid) session.getAttribute("currentSessionUser");
-		
+		Lid user = (Lid) session.getAttribute("currentSessionUser");
+
 		user = lidDao.enkelLidOphalen(user.getLidnr(), user);
 		session.setAttribute("currentSessionUser", user);
 		pager.setOffset(0);
-		
-                int offset = 0;
-        String knop = request.getParameter("knop");
-        
-        if (request.getParameter("offset") == null) {
-            pager.setOffset(0);
 
-        } else {
+		int offset = 0;
+		String knop = request.getParameter("knop");
 
-            offset = Integer.parseInt(request.getParameter("offset"));
-        }      
-        
-        
-        if ("volgende".equals(knop)) {
-            pager.setOffset(offset + 5);
-        } else if ("vorige".equals(knop)) {
-            pager.setOffset(offset - 5);
-        }
-                
-                
-                ////
-                
-		// I
-		
-                
-                
-                ////
-                
+		if (request.getParameter("offset") == null) {
+			pager.setOffset(0);
+
+		} else {
+
+			offset = Integer.parseInt(request.getParameter("offset"));
+		}
+
+
+		if ("volgende".equals(knop)) {
+			pager.setOffset(offset + 5);
+		} else if ("vorige".equals(knop)) {
+			pager.setOffset(offset - 5);
+		}
+
+
 		if (session.getAttribute("currentSessionUser") != null) {
-			//Haal de userbean (dit moet sessiebean worden) op uit de sessie
-	
-
+			//Haal de userbean op uit de sessie
 			user = lidDao.enkelLidOphalen(user.getLidnr(), user);
 			if (user != null) {
 				session.setAttribute("currentSessionUser", user);
 
 				ArrayList<Lid> beoordelaars = new ArrayList<Lid>();
 				List<Beoordeling> beoordelingen;
-				
-                                
-                                
-                                ///////
-                                
-                                
-                        
-			
-			beoordelingen = beoordelingDao.getAlleBeoordelingenPerLid(user.getLidnr(),pager.getOffset());
-                        pager.setAantalbeoordelingen(beoordelingDao.aantalBeoordelingen(user.getLidnr()));
-                        pager.setMaxPositie(pager.getAantalbeoordelingen()-5);
-                        pager.setStatusTotaalPager((int) Math.ceil(beoordelingDao.aantalBeoordelingen(user.getLidnr()) / 5.0));
-                        pager.setStatusHuidigePage((int) Math.ceil((pager.getOffset()+5) / 5.0));
-			request.setAttribute("beoordelingen", beoordelingen);
-			
-			for(int i = 0; i < beoordelingen.size(); i++){
-				Beoordeling beoordeel;
-				beoordeel =	beoordelingen.get(i);
-				
-				lidDao.enkelLidOphalen(beoordeel.getLidnr(), beoordelaar);
-				
-				beoordelaars.add(beoordelaar);
-				
-			}
-                        request.setAttribute("pager", pager);
-			request.setAttribute("beoordelaars", beoordelaars);
 
+				beoordelingen = beoordelingDao.getAlleBeoordelingenPerLid(user.getLidnr(), pager.getOffset());
 
-                                
-                                ////////
-                                
+				pager.setAantalbeoordelingen(beoordelingDao.aantalBeoordelingen(user.getLidnr()));
+				pager.setMaxPositie(pager.getAantalbeoordelingen() - 5);
+				pager.setStatusTotaalPager((int) Math.ceil(beoordelingDao.aantalBeoordelingen(user.getLidnr()) / 5.0));
+				pager.setStatusHuidigePage((int) Math.ceil((pager.getOffset() + 5) / 5.0));
+				
+				request.setAttribute("beoordelingen", beoordelingen);
 
 				if (beoordelingen != null) {
-					request.setAttribute("beoordelingen", beoordelingen);
 
 					for (int i = 0; i < beoordelingen.size(); i++) {
 						Beoordeling beoordeel;
 						beoordeel = beoordelingen.get(i);
 
-						lidDao.enkelLidOphalen(beoordeel.getLidnr(), beoordelaar);
+						beoordelaar = lidDao.enkelLidOphalen(beoordeel.getLidnr(), beoordelaar);
+						System.out.println("beoordeel.getlidnr = " + beoordeel.getLidnr());
+						System.out.println("Vnaam is " + beoordelaar.getVnaam() + beoordelaar.getAnaam());
 						beoordelaars.add(beoordelaar);
+						System.out.println("Beoordelaars vnaam = " + beoordelaars.get(i).getVnaam());
 
 					}
-
+					request.setAttribute("pager", pager);
 					request.setAttribute("beoordelaars", beoordelaars);
+					for (int i = 0; i < beoordelaars.size(); i ++){
+						System.out.println("Beoordelaars invoer nummer = " + i);
+						System.out.println("Vnaam = " + beoordelaars.get(i).getVnaam());
+						System.out.println("Anaam = " + beoordelaars.get(i).getAnaam());
+						System.out.println("lidnr = " + beoordelaars.get(i).getLidnr());
+					}
 
 					RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/mijnbeoordelingen.jsp");
 					dispatcher.forward(request, response);
@@ -145,16 +119,17 @@ public class MijnBeoordelingen extends HttpServlet {
 					dispatcher.forward(request, response);
 				}
 
+				} else {
+					//ophalen van lid is mislukt
+					RequestDispatcher dispatcher = request.getRequestDispatcher("oops.jsp");
+					dispatcher.forward(request, response);
+				}
 			} else {
-				//ophalen van lid is mislukt
-				RequestDispatcher dispatcher = request.getRequestDispatcher("oops.jsp");
-				dispatcher.forward(request, response);
+				//niet ingelogd dus naar login pagina
+				request.getRequestDispatcher("login.jsp").forward(request, response);
 			}
-		} else {
-			//niet ingelogd dus naar login pagina
-			request.getRequestDispatcher("login.jsp").forward(request, response);
 		}
-	}
+	
 
 	/**
 	 * Handles the HTTP

@@ -52,12 +52,15 @@ Document : mijn_ritten
 					</c:when>
 					<c:otherwise>
 						<c:set var="counter" value="0"/>
-						<h2>Jouw huidige beoordeling door andere leden: ${currentSessionUser.beoordeling}</h2>
+						<h2><fmt:message bundle="${rb}" key="beoordeelddooranderen" /> ${currentSessionUser.beoordeling}</h2>
 						<c:forEach items="${beoordelingen}" var="beoordeling">
 							<div class="rittenlijst">
 
                                                             <table>
-                                                                <tr><td width="200px;"><fmt:message bundle="${rb}" key="beoordeelddoor" /></td> <td> ${beoordelaars[counter].vnaam} ${beoordelaars[counter].tvoegsel} ${beoordelaars[counter].anaam}</tr>
+																counter = ${counter}<br/>
+																beoordelingnr = ${beoordeling.beoordelingnr} <br/>
+																beoordelinglidnr =  ${beoordeling.lidnr}
+                                                                <tr><td width="200px;"><fmt:message bundle="${rb}" key="beoordeelddoor" /></td> <td>${beoordelaars[counter].vnaam} ${beoordelaars[counter].tvoegsel} ${beoordelaars[counter].anaam}</tr>
                                                                 <tr><td><fmt:message bundle="${rb}" key="beoordeeldop" /></td> <td>${beoordeling.korteDatum} ${beoordeling.korteTijd}</td></tr>
                                                                 <tr><td><fmt:message bundle="${rb}" key="gezelligheid" /></td> <td>${beoordeling.gezelligheid}</td></tr>
                                                                 <tr><td><fmt:message bundle="${rb}" key="rijstijl" /></td><td>${beoordeling.rijstijl}</td></tr>

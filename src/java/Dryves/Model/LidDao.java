@@ -467,6 +467,7 @@ public class LidDao {
 			enkelLidOphalen = currentCon.prepareStatement(queryString);
 			enkelLidOphalen.setInt(1, lidnr);
 
+			System.out.println("Query EnkelLidOphalen = " + enkelLidOphalen);
 			resultSet = enkelLidOphalen.executeQuery();
 
 		

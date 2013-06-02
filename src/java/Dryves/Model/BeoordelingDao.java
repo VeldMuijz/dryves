@@ -51,16 +51,18 @@ public class BeoordelingDao {
 
 		return bean;
 	}
-        
-        /**
-	 * Deze methode wordt gebruikt om het aantal beoordelingen op te halen voor een bepaalde gebruiker door middel van een lid nummer.
+
+	/**
+	 * Deze methode wordt gebruikt om het aantal beoordelingen op te halen voor
+	 * een bepaalde gebruiker door middel van een lid nummer.
+	 *
 	 * @param lidnummer
 	 * @return Integer met het aantal beoordelingen.
 	 * @throws SQLException
 	 */
-	public int aantalBeoordelingen(int lidnr){
-		int aantal=0;
-                rs = null;
+	public int aantalBeoordelingen(int lidnr) {
+		int aantal = 0;
+		rs = null;
 		currentCon = ConnectionManager.getConnection();
 		PreparedStatement getBeoordelingen = null;
 		String queryString = ""
@@ -78,7 +80,7 @@ public class BeoordelingDao {
 
 			while (rs.next()) {
 				aantal++;
-				
+
 			}
 		} catch (SQLException ex) {
 			Logger.getLogger(BeoordelingDao.class
@@ -109,8 +111,6 @@ public class BeoordelingDao {
 		}
 		return aantal;
 	}
-        
-        
 
 	/**
 	 * Haal een lijst van beoordelingen per lid op
@@ -130,20 +130,19 @@ public class BeoordelingDao {
 				+ "WHERE b.aankoopnr = a.aankoopnr "
 				+ "AND a.ritnr = r.ritnr "
 				+ "AND b.lidnr = l.lidnr "
-				+ "AND r.lidnr = ?"
+				+ "AND r.lidnr = ? "
 				+ "ORDER BY b.datum DESC LIMIT 5 OFFSET ?;";
-                
-                	
-                
 
 		try {
 			getBeoordelingen = currentCon.prepareStatement(queryString);
 			getBeoordelingen.setInt(1, lidnr);
-                        getBeoordelingen.setInt(2, offset);
+			getBeoordelingen.setInt(2, offset);
+			System.out.println("GetAllebeoordelingen query = " + getBeoordelingen);
 			rs = getBeoordelingen.executeQuery();
 
 			while (rs.next()) {
 				Beoordeling beoordeling = new Beoordeling();
+				beoordeling.setBeoordelingnr(rs.getInt("beoordelingnr"));
 				beoordeling.setBetrouwbaarheid(rs.getInt("betrouwbaarheid"));
 				beoordeling.setCommentaar(rs.getString("commentaar"));
 				beoordeling.setGezelligheid(rs.getInt("gezelligheid"));
@@ -162,29 +161,29 @@ public class BeoordelingDao {
 			Logger.getLogger(BeoordelingDao.class.getName()).log(Level.SEVERE, null, ex);
 
 		} finally {
-			
+
 			if (rs != null) {
 				try {
 					//sluit resultset af
 					rs.close();
 				} catch (SQLException ignore) {
 				}
-			if (getBeoordelingen != null) {
-				try {
-					getBeoordelingen.close();
-				} catch (SQLException ignore) {
+				if (getBeoordelingen != null) {
+					try {
+						getBeoordelingen.close();
+					} catch (SQLException ignore) {
+					}
+				}
+				if (currentCon != null) {
+					try {
+						currentCon.close();
+					} catch (SQLException ignore) {
+					}
 				}
 			}
-			if (currentCon != null) {
-				try {
-					currentCon.close();
-				} catch (SQLException ignore) {
-				}
-			}
-		}
 
-		return beoordelingen;
-	}
+			return beoordelingen;
+		}
 	}
 
 	/**
@@ -231,7 +230,7 @@ public class BeoordelingDao {
 			currentCon.setAutoCommit(false);
 			beoordeelLid = currentCon.prepareStatement(queryString);
 			updateBeoordelingLid = currentCon.prepareStatement(updateBeoordeling);
-			
+
 			beoordeelLid.setDouble(1, waardering);
 			beoordeelLid.setInt(2, stiptheid);
 			beoordeelLid.setInt(3, rijstijl);
