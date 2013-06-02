@@ -275,7 +275,7 @@ public class BerichtenDao {
 	public boolean beantwoordBericht(Berichten bean){
 		currentCon = ConnectionManager.getConnection();
 		PreparedStatement verstuurBericht = null;
-		String queryString = "INSERT INTO berichten  (inhoudbericht,datum,afzender,lidnr,gelezen,ritnm)"
+		String queryString = "INSERT INTO berichten  (inhoudbericht,datum,afzender,lidnr,gelezen,ritnr)"
 				+ "VALUES (?,?,?,?,?,?);";
 		try {
 

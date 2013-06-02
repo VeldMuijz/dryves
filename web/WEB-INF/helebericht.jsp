@@ -79,17 +79,18 @@
 
                         <br /><br />
 
-                        <button><fmt:message bundle="${rb}" key="berichtverzenden" /></button>
-
+                        <button type="submit"><fmt:message bundle="${rb}" key="berichtverzenden" /></button>
+                        
+                        <br /><br />
 
                     </form>
 
-                    <p><fmt:message bundle="${rb}" key="ritnummeris" /> ${bericht.ritnr}</p>
+                    <fmt:message bundle="${rb}" key="ritnummeris" /> ${bericht.ritnr}
                     <div class="hidden"><p><fmt:message bundle="${rb}" key="lidnr" /> ${bericht.lidnr} </p>
                     <p><fmt:message bundle="${rb}" key="afzender" /> ${bericht.afzender}</p> </div> 
                     
                     
-                    <p><fmt:message bundle="${rb}" key="datum" /> ${bericht.stringDatum} ${bericht.stringTijd} </p> 
+                    <p><img src="images/calendar_icon.png" /> ${bericht.stringDatum} <img src="images/clock_icon.png" /> ${bericht.stringTijd} </p> 
 
                     <p style="font-size: 12px; font-weight: bold;"><fmt:message bundle="${rb}" key="bericht" /> 
                         
