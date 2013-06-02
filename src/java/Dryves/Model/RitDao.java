@@ -130,7 +130,6 @@ public class RitDao {
 
 				try {
 
-
 					insertRit = currentCon.prepareStatement(queryString);
 
 					insertRit.setInt(1, lidnr);
