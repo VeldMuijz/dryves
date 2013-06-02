@@ -187,6 +187,11 @@ public class BeoordelingDao {
 	}
 
 	/**
+	 * Deze methode maakt een beoordeling aan die een lid doet op een aankoop. +
+	 * * In deze methode worden 3 SQL statements uitgevoerd: + * 1. Maak
+	 * beoordeling aan in de tabel beoordeling + * 2. Update de beoordeling voor
+	 * een lid in de tabel lid + * 3. Update de aankoop als beoordeeld, wanneer
+	 * deze is beoordeeld kan deze niet meer beoordeeld worden
 	 *
 	 * @param waardering waardering voor een rit
 	 * @param stiptheid stiptheid van de aanbieder van de rit
@@ -202,7 +207,9 @@ public class BeoordelingDao {
 		Date datum = new Date();
 		Timestamp timestamp = new Timestamp(datum.getTime());
 		currentCon = ConnectionManager.getConnection();
-		PreparedStatement beoordeelLid, updateBeoordelingLid;
+		PreparedStatement beoordeelLid = null;
+		PreparedStatement updateBeoordelingLid = null;
+		PreparedStatement updateAankoopBeoordeeld = null;
 		String queryString =
 				"INSERT INTO beoordeling ("
 				+ " waardering,"
@@ -224,12 +231,17 @@ public class BeoordelingDao {
 				+ "AND a.ritnr = r.ritnr "
 				+ "AND b.lidnr = l.lidnr "
 				+ "AND a.aankoopnr = ? LIMIT 1);";
+		String updateAankoopBeoordeeldQuery = "UPDATE aankoop "
+				+ "SET beoordeeld = 1 "
+				+ "WHERE aankoopnr = ? "
+				+ "AND beoordeeld < 1;";
 
 
 		try {
 			currentCon.setAutoCommit(false);
 			beoordeelLid = currentCon.prepareStatement(queryString);
 			updateBeoordelingLid = currentCon.prepareStatement(updateBeoordeling);
+			updateAankoopBeoordeeld = currentCon.prepareStatement(updateAankoopBeoordeeldQuery);
 
 			beoordeelLid.setDouble(1, waardering);
 			beoordeelLid.setInt(2, stiptheid);
@@ -244,11 +256,15 @@ public class BeoordelingDao {
 			updateBeoordelingLid.setDouble(1, waardering);
 			updateBeoordelingLid.setInt(2, aankoopnr);
 
+			updateAankoopBeoordeeld.setInt(1, aankoopnr);
+
 			System.out.println("+++++++++++++BeoordelingAanmaken+++++++++++++++\n  Query = " + beoordeelLid + "\n");
 			System.out.println("+++++++++++++LidBeoordelingUpdaten+++++++++++++++\n  Query = " + updateBeoordelingLid + "\n");
+			System.out.println("+++++++++++++UpdateAankoopBeoordeeld+++++++++++++++\n  Query = " + updateAankoopBeoordeeld + "\n");
 			//Update de gegevens
 			beoordeelLid.executeUpdate();
 			updateBeoordelingLid.executeUpdate();
+			updateAankoopBeoordeeld.executeUpdate();
 
 			//Commit de change
 			currentCon.commit();
@@ -271,7 +287,39 @@ public class BeoordelingDao {
 				} catch (SQLException ignore) {
 				}
 			}
+			//Doe dit altijd, als het goed gaat of wanneer het fout gaat
+			if (rs != null) {
+				try {
+					//sluit resultset af
+					rs.close();
+				} catch (SQLException ignore) {
+				}
+			}
+			if (beoordeelLid != null) {
+				//sluit preparedStatement
+				try {
+					beoordeelLid.close();
+				} catch (SQLException ignore) {
+				}
+
+				if (updateBeoordelingLid != null) {
+					//sluit preparedStatement
+					try {
+						updateBeoordelingLid.close();
+					} catch (SQLException ignore) {
+					}
+				}
+				if (updateAankoopBeoordeeld != null) {
+					//sluit preparedStatement
+					try {
+						updateAankoopBeoordeeld.close();
+					} catch (SQLException ignore) {
+					}
+				}
+			}
 		}
+
+
 		return true;
 	}
 }
