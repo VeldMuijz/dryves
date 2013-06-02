@@ -36,6 +36,7 @@ public class Lid  implements java.io.Serializable {
      private String Locale;
      private Locale locale;
      private int rol;
+     private String watisdryves;
 
       // Gegevens voor adminpagina
      private String achtergrond;
@@ -377,6 +378,16 @@ public class Lid  implements java.io.Serializable {
     public void setRitprijs(String ritprijs) {
         this.ritprijs = ritprijs;
     }
+
+    public String getWatisdryves() {
+        return watisdryves;
+    }
+
+    public void setWatisdryves(String watisdryves) {
+        this.watisdryves = watisdryves;
+    }
+    
+    
     
 
 
