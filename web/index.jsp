@@ -12,7 +12,6 @@
 
 <fmt:setLocale value="${currentSessionUser.localeStr}" scope="session" />
 
-
 <fmt:setBundle basename="ResourceBundles.Dryves" scope="request" var="rb" />
 <%
     // Get the session object. If the incoming connection
