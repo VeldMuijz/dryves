@@ -144,28 +144,28 @@
                     <table style="width:340px;">
                         <tr>
                             <td>
-                                <fmt:message bundle="${rb}" key="gebruikersnaam" />
+                                
                             </td>
                             <td>
-                                <input type="text" id="email" name="email" style="width:225px;"/>  
+                                <input placeholder="<fmt:message bundle="${rb}" key="gebruikersnaam" />" class="zoektextveld" type="text" id="email" name="email" style="width:201px;"/>  
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <fmt:message bundle="${rb}" key="wachtwoordlogin" />
+                                
                             </td>
-                            <td><input type="password" id="wachtwoord" name="wachtwoord" style="width:225px;" /></td>
+                            <td><input placeholder="<fmt:message bundle="${rb}" key="wachtwoordlogin" />" class="zoektextveld" type="password" id="wachtwoord" name="wachtwoord" style="width:201px;" /></td>
                         </tr>
                         <tr>
                             <td>
-                                &nbsp;
+                                
                             </td>
                         </tr>
                         <tr>
                             <td>
 
                             </td>
-                            <td><button type="submit" style="float:right;" />Login</button><button style="float:right;" type="button" onclick="window.location = 'wwvergeten.jsp'"><fmt:message bundle="${rb}" key="wwvergeten" /></button></td>
+                            <td><button type="button" onclick="window.location = 'wwvergeten.jsp'"><fmt:message bundle="${rb}" key="wwvergeten" /></button><button type="submit" />Login</button></td>
                         </tr>
                     </table>
                         
