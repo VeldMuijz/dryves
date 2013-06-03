@@ -9,14 +9,20 @@ package Dryves;
  * @author RickSpijker
  */
 import java.sql.*;
-   import java.util.*;
 
-
+	/**
+	 * Deze klasse wordt gebruikt om de database verbinding te verzorgen.
+	 * @author Rick
+	 */
    public class ConnectionManager {
 
       static Connection con;
       static String url;
-
+	  
+	  /**
+	   * Deze methode maakt een verbinding met de applicatie database
+	   * @return de connectie
+	   */
       public static Connection getConnection()
       {
 

@@ -185,11 +185,31 @@
 
 			google.maps.event.addDomListener(window, 'load', initialize);
 			
-			
-			function redirect() {
-				window.location = 'RitNietKopen';
+			// deze functie zorgt voor een pause effect
+			function sleep(milliseconds) {
+				var start = new Date().getTime();
+				for (var i = 0; i < 1e7; i++) {
+					if ((new Date().getTime() - start) > milliseconds) {
+						break;
+					}
+				}
 			}
-					setTimeout(redirect, 300000);		
+
+
+			//verhoog de zitplaats met 1 en verwijder daarmee de reservering op een rit
+			function zitplaatsverhogen() {
+
+				$.ajax({
+					type: 'GET',
+					async: false,
+					url: '/Dryves/RitBeschikbaarCheck?ritnr=${sessieRit.ritnr}'
+				});
+				sleep(1000);
+			}
+
+			window.onbeforeunload = zitplaatsverhogen;
+
+			setTimeout(zitplaatsverhogen, 30000);	
 		</script>
     </head>
     <body onload="initialize();">

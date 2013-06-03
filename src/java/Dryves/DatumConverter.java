@@ -5,7 +5,6 @@
 package Dryves;
 
 import Dryves.Controller.RitPlannen;
-import Dryves.Model.Rit;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -14,6 +13,8 @@ import java.util.logging.Logger;
 import org.joda.time.DateTime;
 
 /**
+ * Deze klasse is een klasse die gebruikt word om timestamps te maken en te
+ * bewerken.
  *
  * @author jeroen
  */
@@ -25,47 +26,12 @@ public class DatumConverter {
 	private String korteDatum;
 	private DateTime timestamp;
 
-	public String longTimeStampKorteDatum(Date datum) {
-
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSSSSS");
-		SimpleDateFormat datumFormat = new SimpleDateFormat("dd/MM/yyyy");
-
-		try {
-			System.out.println(datum);
-			datum = dateFormat.parse(datum.toString());
-			korteDatum = datumFormat.format(datum);
-
-			System.out.println("++++++++++++++DatumConverter+++++++++++++++++\n"
-					+ " Dit is datum na conversie: " + korteDatum);
-
-		} catch (ParseException ex) {
-			Logger.getLogger(RitPlannen.class.getName()).log(Level.SEVERE, null, ex);
-			System.out.println("************ Programma snapt Timestamp niet!");
-		}
-		System.out.println("kortedatum in dc: " + korteDatum);
-		return korteDatum;
-	}
-	
-	public String longTimeStampKorteTijd(Date datum) {
-
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSSSSS");
-		SimpleDateFormat tijdFormat = new SimpleDateFormat("HH:mm");
-
-		try {
-			System.out.println(datum);
-			datum = dateFormat.parse(datum.toString());
-			korteTijd = tijdFormat.format(datum);
-
-			System.out.println("++++++++++++++DatumConverter+++++++++++++++++\n"
-					+ " Dit is tijd na conversie: " + korteTijd);
-
-		} catch (ParseException ex) {
-			Logger.getLogger(RitPlannen.class.getName()).log(Level.SEVERE, null, ex);
-			System.out.println("************ Programma snapt Timestamp niet!");
-		}
-		return korteTijd;
-	}
-	
+	/**
+	 * Deze methode maakt van een timestamp een kortere datum.
+	 *
+	 * @param datum bevat een datum van het object Date
+	 * @return een string met een korte datum dd/mm/yyyy
+	 */
 	public String korteDatum(Date datum) {
 
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");
@@ -87,6 +53,12 @@ public class DatumConverter {
 		return korteDatum;
 	}
 
+	/**
+	 * Deze methode maakt van een timestamp een kortere tijd.
+	 *
+	 * @param datum bevat een datum van het object Date
+	 * @return een string met een korte tijd weergave HH:mm
+	 */
 	public String korteTijd(Date datum) {
 
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");
@@ -142,7 +114,7 @@ public class DatumConverter {
 		}
 		return timestamp;
 	}
-	
+
 	public Date getDatum() {
 		return datum;
 	}
