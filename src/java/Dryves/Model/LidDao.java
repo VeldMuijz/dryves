@@ -202,6 +202,54 @@ public class LidDao {
 
 	}
 
+        
+	public Boolean addFacebookLid(Lid lid) {
+
+		try {
+			currentCon = ConnectionManager.getConnection();
+			PreparedStatement addfacebook;
+
+			String queryString = ("INSERT INTO lid ( vnaam, anaam,geslacht,straat,postcode,stad,telnr,reknr,email, beoordeling,fotourl,tvoegsel,wachtwoord,langnotify,rol,facebookid)VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+
+			addfacebook = currentCon.prepareStatement(queryString);
+
+			addfacebook.setString(1, lid.getVnaam());
+			addfacebook.setString(2, lid.getAnaam());
+			addfacebook.setString(3, lid.getGeslacht());
+			addfacebook.setString(4, lid.getStraat());
+			addfacebook.setString(5, lid.getPostcode());
+			addfacebook.setString(6, lid.getStad());
+			addfacebook.setInt(7, Integer.parseInt(lid.getTelnr()));
+			addfacebook.setInt(8, Integer.parseInt(lid.getReknr()));
+			addfacebook.setString(9, lid.getEmail());
+			addfacebook.setInt(10,0);
+			addfacebook.setString(11, lid.getFotoUrl());
+			addfacebook.setString(12, lid.getTvoegsel());
+			addfacebook.setString(13, lid.getWachtwoord());
+			addfacebook.setString(14, lid.getLangnotify());
+			addfacebook.setInt(15, lid.getRol());
+			addfacebook.setString(16, lid.getFacebookid());
+
+			System.out.println("De query is: " + addfacebook);
+
+			addfacebook.executeUpdate();
+
+		} catch (SQLException ex) {
+			System.out.println(ex);
+			return false;
+		}
+		return true;
+	}
+
+
+        
+        
+        
+        
+        
+        
+        
+        
 	/**
 	 * Beoordeling voor een lid updaten
 	 *
@@ -594,6 +642,7 @@ public class LidDao {
 				lidfacebook.setWachtwoord(rs.getString(14));
 				lidfacebook.setLangnotify(rs.getString(15));
 				lidfacebook.setLocale(rs.getString(15));//
+                                lidfacebook.setFacebookid("facebookid");
 				lidfacebook.setWachtwoord2(rs.getString(14));
 				lidfacebook.setValid(true);
 

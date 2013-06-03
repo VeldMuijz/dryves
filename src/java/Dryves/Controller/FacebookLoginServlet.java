@@ -15,74 +15,98 @@ import javax.servlet.http.HttpSession;
  */
 public class FacebookLoginServlet extends HttpServlet {
 
-	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
 
-		//De objecten worden aangemaakt
-		Lid lid = new Lid();
-		LidDao lidDao = new LidDao();
-		HttpSession session = request.getSession();
+    }
 
-		lid.setAnaam(request.getParameter("achternaam"));
-		lid.setVnaam(request.getParameter("voornaam"));
-		lid.setFacebookid(request.getParameter("id"));
-		lid.setEmail(request.getParameter("email"));
-		lid.setLocaleStr("Facebook");
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        
+        
+        
+        //De objecten worden aangemaakt
+        Lid lid = new Lid();
+        LidDao lidDao = new LidDao();
+        HttpSession session = request.getSession();
 
-		String facebookid2 = lid.getFacebookid();
-		
-		if (session.getAttribute("currentSessionUser") != null) {
-		//Met een facebookid gaan we kijken of de huidige gebruiker al eerder een keer heeft aangemeld
-		//check of de email bestaat, zo niet dan wordt de gebruiker toegevoegd in de database
-		if (!lidDao.checkDuplicateFacebookID(facebookid2)) {
+        lid.setAnaam(request.getParameter("achternaam"));
+        lid.setVnaam(request.getParameter("voornaam"));
+        lid.setFacebookid(request.getParameter("id"));
+        lid.setEmail(request.getParameter("email"));
+        lid.setWachtwoord(request.getParameter("id"));
+        String geslacht = request.getParameter("sex");
 
 
-			//Wanneer de email niet voorkomt in de database
-			//wordt de gebruiker hier toegevoegd 
-			lidDao.vulLidDao(lid);
-			lidDao.addFacebookLid();
 
-			Lid lid2 = new Lid();
-			LidDao dao = new LidDao();
-			lid2 = dao.loginFacebook(facebookid2);
-			if (lid2 != null) {
-				//Hier maken we een neiuwe sessie voor de gebruiker
-				session = request.getSession(true);
-				session.setAttribute("currentSessionUser", lid2);
-				dao.adminLogin(lid2);
-				request.getRequestDispatcher("WEB-INF/mijndryves.jsp").forward(request, response);
-			} else {
-				//Als het fout gaat bij het inloggen met een facebook account door naar oopspagina
-				request.getRequestDispatcher("oops.jsp").forward(request, response);
-			}
 
-		} else {
-			Lid lid2 = new Lid();
+        lid.setTvoegsel("");
+        lid.setStraat("");
+        lid.setHuisnummer("");
 
-			lid2 = lidDao.loginFacebook(facebookid2);
+        lid.setPostcode("");
+        lid.setStad("");
+        lid.setTelnr("");
+        lid.setReknr("");
 
-			//Hier maken we een neiuwe sessie voor de gebruiker
-			session = request.getSession(true);
-			session.setAttribute("currentSessionUser", lid2);
-			lidDao.adminLogin(lid2);
-			request.getRequestDispatcher("WEB-INF/mijndryves.jsp").forward(request, response);
+        
+        lid.setFotoUrl("");
 
-		}
-		}else{
-			//niet ingelogd dus naar login pagina
-			request.getRequestDispatcher("login.jsp").forward(request, response);
-		}
 
-	}
 
-	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-	}
+        if (geslacht.equals("male") || geslacht.equals("man")) {
+            lid.setGeslacht("M");
+        } else if (geslacht.equals("female") || geslacht.equals("vrouw")) {
+            lid.setGeslacht("V");
+        }
 
-	@Override
-	public String getServletInfo() {
-		return "Short description";
-	}
+        lid.setLocale("nl_NL");
+        lid.setLangnotify("nl_NL");
+
+        Lid lid2 = new Lid();
+
+        String facebookid2 = lid.getFacebookid();
+
+
+        //Met een facebookid gaan we kijken of de huidige gebruiker al eerder een keer heeft aangemeld
+        //check of de email bestaat, zo niet dan wordt de gebruiker toegevoegd in de database
+        if (!lidDao.checkDuplicateFacebookID(facebookid2)) {
+
+
+            //Wanneer de email niet voorkomt in de database
+            //wordt de gebruiker hier toegevoegd 
+
+            LidDao dao = new LidDao();
+
+            session.setAttribute("facebooklid", lid);
+            dao.adminLogin(lid2);
+            request.getRequestDispatcher("registreerfacebookuser.jsp").forward(request, response);
+
+
+        } else {
+            //facebook gebruiker komt voor in onze database en wordt  hier ingelogd en krijg dan vervolgens een sessie
+
+            lid2 = lidDao.loginFacebook(facebookid2);
+
+
+                
+                //Hier maken we een neiuwe sessie voor de gebruiker
+                session = request.getSession(true);
+                session.setAttribute("currentSessionUser", lid2);
+                lidDao.adminLogin(lid2);
+                request.getRequestDispatcher("WEB-INF/mijndryves.jsp").forward(request, response);
+
+
+        }
+        
+        
+        
+    }
+
+    @Override
+    public String getServletInfo() {
+        return "Short description";
+    }
 }

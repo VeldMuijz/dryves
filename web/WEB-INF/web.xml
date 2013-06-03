@@ -84,6 +84,10 @@
         <servlet-name>NieuwBericht</servlet-name>
         <servlet-class>Dryves.Controller.NieuwBericht</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RegisFBgebruiker</servlet-name>
+        <servlet-class>Dryves.Controller.RegisFBgebruiker</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LidWijzigen</servlet-name>
         <url-pattern>/LidWijzigen</url-pattern>
@@ -187,6 +191,10 @@
     <servlet-mapping>
         <servlet-name>NieuwBericht</servlet-name>
         <url-pattern>/NieuwBericht</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RegisFBgebruiker</servlet-name>
+        <url-pattern>/RegisFBgebruiker</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>
