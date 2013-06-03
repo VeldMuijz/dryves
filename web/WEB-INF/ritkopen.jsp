@@ -211,8 +211,14 @@
 			}
 
 			window.onbeforeunload = zitplaatsverhogen;
-
-			setTimeout(zitplaatsverhogen, 300000);	
+			
+			//verwijs door naar andere pagina na het annuleren van reservering
+			function redirect(){
+			zitplaatsverhogen;
+			history.go(-1);
+			}
+			
+			setTimeout(redirect, 300000);	
 		</script>
     </head>
     <body onload="initialize();">
