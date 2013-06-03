@@ -81,6 +81,7 @@ public class DatumConverter {
 
 	/**
 	 * Maak een timestamp uit twee strings, een datum en een tijd
+	 *
 	 * @param stringdatum een string wat de datum bevat
 	 * @param stringtijd een string dat de tijd bevat
 	 * @return een timestamp in het formaat yyyy-MM-ddTHH:mm
@@ -105,9 +106,10 @@ public class DatumConverter {
 
 	/**
 	 * Maak een timestamp aan van een Amerikaanse timestamp
+	 *
 	 * @param stringdatum een string die een datum bevat in Amerikaans format
 	 * @param stringtijd een string die een tijd bevat in HH:mm format
-	 * @return een timestamp in yyyy-MM-ddTHH:mm 
+	 * @return een timestamp in yyyy-MM-ddTHH:mm
 	 */
 	public DateTime convertUSTimestamp(String stringdatum, String stringtijd) {
 
@@ -126,18 +128,25 @@ public class DatumConverter {
 		}
 		return timestamp;
 	}
-/**
- * 
- * @return 
- */
+
+	/**
+	  Deze methode geeft een ddatum terug die in deze klasse is geset
+	 *
+	 * @return datum van het datatype Date
+	 */
 	public Date getDatum() {
 		return datum;
 	}
-
+	
 	public void setDatum(Date datum) {
 		this.datum = datum;
 	}
 
+	/**
+	 * Deze methode geeft een einddatum terug die in deze klasse is geset
+	 *
+	 * @return einddatum van het datatype Date
+	 */
 	public Date getEinddatum() {
 		return einddatum;
 	}
@@ -146,6 +155,11 @@ public class DatumConverter {
 		this.einddatum = einddatum;
 	}
 
+	/**
+	 * Deze methode geeft een datum terug die in deze klasse is geset
+	 *
+	 * @return
+	 */
 	public String getStringDatum() {
 		return korteDatum;
 	}
@@ -154,6 +168,11 @@ public class DatumConverter {
 		this.korteDatum = korteDatum;
 	}
 
+	/**
+	 * Deze methode geeft een tijd terug die in deze klasse is geset
+	 *
+	 * @return string met een tijd HH:mm
+	 */
 	public String getKorteTijd() {
 		return korteTijd;
 	}
@@ -162,6 +181,11 @@ public class DatumConverter {
 		this.korteTijd = korteTijd;
 	}
 
+	/**
+	 * Deze methode geeft een datum terug die in deze klasse is geset
+	 *
+	 * @return string met een datum dd/mm/yyyy
+	 */
 	public String getKorteDatum() {
 		return korteDatum;
 	}
@@ -170,6 +194,12 @@ public class DatumConverter {
 		this.korteDatum = korteDatum;
 	}
 
+	/**
+	 * Deze methode geeft een datum (timestamp) terug die in deze klasse is
+	 * geset
+	 *
+	 * @return string met daar in een timestamp
+	 */
 	public DateTime getTimestamp() {
 		return timestamp;
 	}

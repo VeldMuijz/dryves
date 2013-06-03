@@ -56,17 +56,19 @@ public class RitBeschikbaarCheck extends HttpServlet {
 
 		String referer = request.getHeader("Referer");
 
-		//check of dit lid wel bij deze rit hoort
-		if (!ritDao.checkBeschikbaarheidRit(rit.getRitnr())) {
+		
+		if (!referer.contains("RitKopen") && !ritDao.checkBeschikbaarheidRit(rit.getRitnr())) {
 
 			RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/ritnietbeschikbaar.jsp");
 			dispatcher.forward(request, response);
 
 		} else if (!referer.contains("RitKopen") && ritDao.updateZitplaatsVerlagen(rit.getRitnr(), 1)) {
 			System.out.println("Rit is beschikbaar en kan gekocht worden, door naar RitKopen servlet");
+			System.out.println("referer = " + referer);
 			response.sendRedirect("RitKopen");
 
 		} else if (referer.contains("RitKopen") && ritDao.updateZitplaatsOphogen(rit.getRitnr(), 1)) {
+			
 		} else {
 			System.out.println("Deze rit is uitverkocht!");
 			RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/ritnietbeschikbaar.jsp");

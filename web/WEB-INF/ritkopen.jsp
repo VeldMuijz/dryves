@@ -212,7 +212,7 @@
 
 			window.onbeforeunload = zitplaatsverhogen;
 
-			setTimeout(zitplaatsverhogen, 30000);	
+			setTimeout(zitplaatsverhogen, 300000);	
 		</script>
     </head>
     <body onload="initialize();">

@@ -564,11 +564,9 @@ public class RitDao {
 		String updateQueryString = (""
 				+ "UPDATE rit "
 				+ "SET zitplaatsen = zitplaatsen + ? "
-				+ "WHERE ritnr = ? "
-				+ "AND zitplaatsen > 0;");
+				+ "WHERE ritnr = ? ");
 
 		try {
-
 
 			updateZitplaats = currentCon.prepareStatement(updateQueryString);
 
