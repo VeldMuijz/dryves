@@ -130,7 +130,7 @@ public class DatumConverter {
 	}
 
 	/**
-	  Deze methode geeft een ddatum terug die in deze klasse is geset
+	  Deze methode geeft een datum terug die in deze klasse is geset
 	 *
 	 * @return datum van het datatype Date
 	 */
@@ -138,6 +138,10 @@ public class DatumConverter {
 		return datum;
 	}
 	
+	/**
+	 * Deze methode set attribuut datum met de parameter datum
+	 * @param datum is een datum van het datatype Date
+	 */
 	public void setDatum(Date datum) {
 		this.datum = datum;
 	}
@@ -150,7 +154,11 @@ public class DatumConverter {
 	public Date getEinddatum() {
 		return einddatum;
 	}
-
+	
+	/**
+	 * Deze methode set attribuut einddatum met de parameter einddatum
+	 * @param einddatum einddatum van het object type Date
+	 */
 	public void setEinddatum(Date einddatum) {
 		this.einddatum = einddatum;
 	}
@@ -163,7 +171,11 @@ public class DatumConverter {
 	public String getStringDatum() {
 		return korteDatum;
 	}
-
+	
+	/**
+	 * Deze methode set attribute Stringdatum met de parameter korteDatum
+	 * @param korteDatum is een string wat een datum bevat
+	 */
 	public void setStringDatum(String korteDatum) {
 		this.korteDatum = korteDatum;
 	}
@@ -177,6 +189,10 @@ public class DatumConverter {
 		return korteTijd;
 	}
 
+	/**
+	 * Deze methode set attribute korteTijd met de parameter korteTijd
+	 * @param korteTijd is een string die een korteTijd bevat in formaat HH:mm
+	 */
 	public void setKorteTijd(String korteTijd) {
 		this.korteTijd = korteTijd;
 	}
@@ -189,7 +205,11 @@ public class DatumConverter {
 	public String getKorteDatum() {
 		return korteDatum;
 	}
-
+	
+	/**
+	 * Deze methode set attribute korteDatum met parameter korteDatum
+	 * @param korteDatum is een string die een korteDatum bevat dd/mm/yyyy
+	 */
 	public void setKorteDatum(String korteDatum) {
 		this.korteDatum = korteDatum;
 	}
@@ -203,7 +223,11 @@ public class DatumConverter {
 	public DateTime getTimestamp() {
 		return timestamp;
 	}
-
+	
+	/**
+	 * Deze methode set attribute Timestamp met parameter Timestamp
+	 * @param timestamp is een DateTime met een timestamp erin
+	 */
 	public void setTimestamp(DateTime timestamp) {
 		this.timestamp = timestamp;
 	}
