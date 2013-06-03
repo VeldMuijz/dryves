@@ -574,6 +574,8 @@ public class RitDao {
 
 			updateZitplaats.setInt(1, updatewaarde);
 			updateZitplaats.setInt(2, ritnr);
+			System.out.println("Query = " + updateZitplaats);
+			System.out.println("Zitplaats is niet meer gereserveerd.");
 			updateZitplaats.executeUpdate();
 
 		} catch (SQLException ex) {
@@ -629,6 +631,8 @@ public class RitDao {
 
 			updateZitplaats.setInt(1, updatewaarde);
 			updateZitplaats.setInt(2, ritnr);
+			System.out.println("Query = " + updateZitplaats);
+			System.out.println("Zitplaats is gereserveerd.");
 			updateZitplaats.executeUpdate();
 
 		} catch (SQLException ex) {

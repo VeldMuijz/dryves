@@ -103,13 +103,19 @@ public class DatumConverter {
 		return timestamp;
 	}
 
-	public DateTime convertUSTimestamp(String stringdatum, String tijd) {
+	/**
+	 * Maak een timestamp aan van een Amerikaanse timestamp
+	 * @param stringdatum een string die een datum bevat in Amerikaans format
+	 * @param stringtijd een string die een tijd bevat in HH:mm format
+	 * @return een timestamp in yyyy-MM-ddTHH:mm 
+	 */
+	public DateTime convertUSTimestamp(String stringdatum, String stringtijd) {
 
 		SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy'T'HH:mm");
 		SimpleDateFormat timestampFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
 
 		try {
-			datum = dateFormat.parse(stringdatum + 'T' + tijd);
+			datum = dateFormat.parse(stringdatum + 'T' + stringtijd);
 			timestamp = DateTime.parse(timestampFormat.format(datum));
 			System.out.println("++++++++++++++DatumConverter+++++++++++++++++\n"
 					+ " Dit is timestamp na conversie: " + timestamp);
@@ -120,7 +126,10 @@ public class DatumConverter {
 		}
 		return timestamp;
 	}
-
+/**
+ * 
+ * @return 
+ */
 	public Date getDatum() {
 		return datum;
 	}
