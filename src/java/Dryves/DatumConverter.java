@@ -79,13 +79,19 @@ public class DatumConverter {
 		return korteTijd;
 	}
 
-	public DateTime convertTimestamp(String stringdatum, String tijd) {
+	/**
+	 * Maak een timestamp uit twee strings, een datum en een tijd
+	 * @param stringdatum een string wat de datum bevat
+	 * @param stringtijd een string dat de tijd bevat
+	 * @return een timestamp in het formaat yyyy-MM-ddTHH:mm
+	 */
+	public DateTime convertTimestamp(String stringdatum, String stringtijd) {
 
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy'T'HH:mm");
 		SimpleDateFormat timestampFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
 
 		try {
-			datum = dateFormat.parse(stringdatum + 'T' + tijd);
+			datum = dateFormat.parse(stringdatum + 'T' + stringtijd);
 			timestamp = DateTime.parse(timestampFormat.format(datum));
 			System.out.println("++++++++++++++DatumConverter+++++++++++++++++\n"
 					+ " Dit is timestamp na conversie: " + timestamp);

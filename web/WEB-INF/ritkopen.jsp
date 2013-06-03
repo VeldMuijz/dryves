@@ -19,6 +19,9 @@
 		<script type="text/javascript"
 				src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAQ5JCTE_OQi2SCYXO6urNY17FW5DaOVvU&sensor=false">
 		</script>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript">
+
+		</script>
 		<script type="text/javascript">
 			var map;
 			var directionsDisplay;
