@@ -172,8 +172,8 @@
                 </form>
                             <br />
                         
-                            Nog geen lid? Klik <a href="registratie.jsp">hier</a> om u gratis te registreren<br />
-                            of login met uw Facebook account.
+                            <fmt:message bundle="${rb}" key="noggeenlid" /> <a href="registratie.jsp"><fmt:message bundle="${rb}" key="hier" /></a> <fmt:message bundle="${rb}" key="gratisregistreren" /><br />
+                            <fmt:message bundle="${rb}" key="ofloginfacebook" />
                 </div>
 
 

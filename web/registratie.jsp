@@ -245,9 +245,9 @@
                             <td></td>
                             <td>
                                 <fieldset style="width: 198px;">
-                                    <legend><a id="voorwaardenlink" href="voorwaarden.jsp">Algemene voorwaarden</a></legend>
+                                    <legend><a id="voorwaardenlink" href="voorwaarden.jsp"><fmt:message bundle="${rb}" key="algemenevoorwaarden" /></a></legend>
 
-                                    <input type="checkbox" name="voorwaarden"> Ik ga akkoord 
+                                    <input type="checkbox" name="voorwaarden"> <fmt:message bundle="${rb}" key="Akkoord" /> 
 
                                 </fieldset>
 

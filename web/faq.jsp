@@ -191,7 +191,11 @@
                             </div>
                             <h3><fmt:message bundle="${rb}" key="faqbeoordeelaankoop" /></h3>
                             <div>
-                                <fmt:message bundle="${rb}" key="faqbeoordeelaankoopshow" />
+                                <fmt:message bundle="${rb}" key="faqbeoordeelaankoopshow" />                            
+                            </div>
+                            <h3><fmt:message bundle="${rb}" key="faqbeoordeling" /></h3>
+                            <div>
+                                <fmt:message bundle="${rb}" key="faqbeoordelingshow" />
                             </div>
                             <h3><fmt:message bundle="${rb}" key="faqmijnberichten" /></h3>
                             <div>
