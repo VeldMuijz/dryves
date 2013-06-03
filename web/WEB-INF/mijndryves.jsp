@@ -54,7 +54,6 @@
             
                                                          
             
-        <img src='${currentSessionUser.getFotoUrl()}'/>
                             
             </div>
         </div>
