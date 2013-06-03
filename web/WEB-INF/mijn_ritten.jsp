@@ -42,7 +42,7 @@ Document : mijn_ritten
                 
                 <c:choose>
                 <c:when test="${pager.statusTotaalPager !=0}"> 
-                   <p>Pagina ${pager.statusHuidigePage} van ${pager.statusTotaalPager}</p> </c:when>
+                   <p><fmt:message bundle="${rb}" key="pagina" /> ${pager.statusHuidigePage} <fmt:message bundle="${rb}" key="van" /> ${pager.statusTotaalPager}</p> </c:when>
                
             </c:choose> 
                 
