@@ -189,7 +189,7 @@
 
 
 
-                <form id="v" action="FacebookLoginServlet" method="get" style="float:right">
+                <form id="v" action="FacebookLoginServlet" method="post" style="float:right">
 
                     <input type="hidden" id="idh" name="id" value="" />
                     <input type="hidden" id="naamh" name="naam" value="" />

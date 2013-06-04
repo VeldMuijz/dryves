@@ -37,34 +37,15 @@ public class FacebookLoginServlet extends HttpServlet {
         lid.setFacebookid(request.getParameter("id"));
         lid.setEmail(request.getParameter("email"));
         lid.setWachtwoord(request.getParameter("id"));
-        String geslacht = request.getParameter("sex");
-
-
-
-
-        lid.setTvoegsel("");
-        lid.setStraat("");
-        lid.setHuisnummer("");
-
-        lid.setPostcode("");
-        lid.setStad("");
-        lid.setTelnr("");
-        lid.setReknr("");
-
         
-        lid.setFotoUrl("");
-
-
-
+        String geslacht = request.getParameter("sex");
         if (geslacht.equals("male") || geslacht.equals("man")) {
             lid.setGeslacht("M");
         } else if (geslacht.equals("female") || geslacht.equals("vrouw")) {
             lid.setGeslacht("V");
         }
 
-        lid.setLocale("nl_NL");
-        lid.setLangnotify("nl_NL");
-
+        
         Lid lid2 = new Lid();
 
         String facebookid2 = lid.getFacebookid();

@@ -1,4 +1,3 @@
-
 <%-- 
     Document   : mijngegevens.jsp
     Created on : 24-mrt-2013, 19:59:48
@@ -200,18 +199,26 @@
                         <tr>
                             <td><input class="zoektextveld" type="text" name="postcode" value="${currentSessionUser.postcode}" size=5  maxlength=8></td>
                             <td><font id="postcodeerror" size=1 color="red"> </font></td>
-                            <td>                                                                   
+                            <td>  
+                                 <c:choose>
+                    <c:when test="${currentSessionUser.facebookid ==0}"> 
                                 <input class="zoektextveld" type="password" name="wachtwoord" size=10 value="${currentSessionUser.wachtwoord}" maxlength=30>
+                    </c:when>
+                     <c:when test="${currentSessionUser.facebookid !=0}"> 
+                         <input class="zoektextveld" type="hidden" name="wachtwoord" size=10 value='${currentSessionUser.facebookid}' maxlength=15>
+                    </c:when></c:choose>
 
                             </td>
                             <td></td>
                         </tr>
-                        <tr>
+                        <tr>${currentSessionUser.facebookid}
                             <td></td>
                             <td></td>
-                            <td>                        
+                            <td>   <c:choose>   <c:when test="${currentSessionUser.facebookid ==0}">                      
                                 <input class="zoektextveld" type="password" name="wachtwoord2" size=10 value="${currentSessionUser.wachtwoord}" maxlength=30>
-
+                                 </c:when><c:when test="${currentSessionUser.facebookid !=0}">   
+                                     <input class="zoektextveld" type="hidden" name="wachtwoord2" size=10 value='${currentSessionUser.wachtwoord}' maxlength=15>
+                                 </c:when> </c:choose>
                             <td></td>
                         </tr>
                         <tr>
