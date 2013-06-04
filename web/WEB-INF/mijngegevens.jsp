@@ -211,7 +211,7 @@
                             </td>
                             <td></td>
                         </tr>
-                        <tr>${currentSessionUser.facebookid}
+                        <tr>
                             <td></td>
                             <td></td>
                             <td>   <c:choose>   <c:when test="${currentSessionUser.facebookid ==null}">                      
