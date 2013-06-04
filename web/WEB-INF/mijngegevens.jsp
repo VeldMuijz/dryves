@@ -85,7 +85,7 @@
                     check = false;
                 }
                 ;
-                 if (wachtwoord === null || wachtwoord !== wachtwoord2) {
+                 if (wachtwoord === "" || wachtwoord !== wachtwoord2) {
                     document.getElementById("wachtwoorderror").innerHTML = "wachtwoorden komen niet overeen!";
                     check = false;
                 }
