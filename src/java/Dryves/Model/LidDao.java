@@ -107,7 +107,7 @@ public class LidDao {
 		// System.out.println("Query: " + zoekQuery);
 
 		try {
-			PreparedStatement pstmt = con.prepareStatement("SELECT lidnr ,vnaam,anaam,geslacht,straat,postcode, stad,telnr,reknr,email,beoordeling,fotourl,tvoegsel,wachtwoord,langnotify,rol FROM lid WHERE email = ?");
+			PreparedStatement pstmt = con.prepareStatement("SELECT lidnr ,vnaam,anaam,geslacht,straat,postcode, stad,telnr,reknr,email,beoordeling,fotourl,tvoegsel,wachtwoord,langnotify,rol,facebookid FROM lid WHERE email = ?");
 			pstmt.setString(1, email);
 			//connect to DB 
 			con = ConnectionManager.getConnection();
@@ -161,6 +161,7 @@ public class LidDao {
 					bean.setLocale(rs.getString(15));
 					bean.setWachtwoord2(wachtwoord);
 					bean.setRol(rs.getInt(16));
+                                        bean.setFacebookid(rs.getString(17));
 					bean.setValid(true);
 
 
@@ -209,7 +210,7 @@ public class LidDao {
 			currentCon = ConnectionManager.getConnection();
 			PreparedStatement addfacebook;
 
-			String queryString = ("INSERT INTO lid ( vnaam, anaam,geslacht,straat,postcode,stad,telnr,reknr,email, beoordeling,fotourl,tvoegsel,wachtwoord,langnotify,rol,facebookid)VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+			String queryString = ("INSERT INTO lid ( vnaam, anaam,geslacht,straat,postcode,stad,telnr,reknr,email, beoordeling,fotourl,tvoegsel,wachtwoord,langnotify,facebookid)VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 
 			addfacebook = currentCon.prepareStatement(queryString);
 
@@ -227,8 +228,8 @@ public class LidDao {
 			addfacebook.setString(12, lid.getTvoegsel());
 			addfacebook.setString(13, lid.getWachtwoord());
 			addfacebook.setString(14, lid.getLangnotify());
-			addfacebook.setInt(15, lid.getRol());
-			addfacebook.setString(16, lid.getFacebookid());
+			
+			addfacebook.setString(15, lid.getFacebookid());
 
 			System.out.println("De query is: " + addfacebook);
 
@@ -615,7 +616,7 @@ public class LidDao {
 
 
 		try {
-			PreparedStatement pstmt = con.prepareStatement("SELECT lidnr ,vnaam,anaam,geslacht,straat,postcode, stad,telnr,reknr,email,beoordeling,fotourl,tvoegsel,wachtwoord,langnotify FROM lid WHERE facebookid = ?");
+			PreparedStatement pstmt = con.prepareStatement("SELECT lidnr ,vnaam,anaam,geslacht,straat,postcode, stad,telnr,reknr,email,beoordeling,fotourl,tvoegsel,wachtwoord,langnotify,rol,facebookid FROM lid WHERE facebookid = ?");
 			pstmt.setString(1, facebookid);
 			//connect to DB 
 			con = ConnectionManager.getConnection();
@@ -638,11 +639,12 @@ public class LidDao {
 				lidfacebook.setEmail(rs.getString(10));
 				lidfacebook.setBeoordeling(rs.getInt(11));
 				lidfacebook.setFotoUrl(rs.getString(12));
-				lidfacebook.setTvoegsel(rs.getString(13));;
+				lidfacebook.setTvoegsel(rs.getString(13));
 				lidfacebook.setWachtwoord(rs.getString(14));
 				lidfacebook.setLangnotify(rs.getString(15));
-				lidfacebook.setLocale(rs.getString(15));//
-                                lidfacebook.setFacebookid("facebookid");
+				lidfacebook.setLocale(rs.getString(15));
+                                lidfacebook.setRol(rs.getInt("rol"));
+                                lidfacebook.setFacebookid(rs.getString("facebookid"));
 				lidfacebook.setWachtwoord2(rs.getString(14));
 				lidfacebook.setValid(true);
 

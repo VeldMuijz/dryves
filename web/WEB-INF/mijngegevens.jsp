@@ -201,10 +201,10 @@
                             <td><font id="postcodeerror" size=1 color="red"> </font></td>
                             <td>  
                                  <c:choose>
-                    <c:when test="${currentSessionUser.facebookid ==0}"> 
+                    <c:when test="${currentSessionUser.facebookid ==null}"> 
                                 <input class="zoektextveld" type="password" name="wachtwoord" size=10 value="${currentSessionUser.wachtwoord}" maxlength=30>
                     </c:when>
-                     <c:when test="${currentSessionUser.facebookid !=0}"> 
+                     <c:when test="${currentSessionUser.facebookid !=null}"> 
                          <input class="zoektextveld" type="hidden" name="wachtwoord" size=10 value='${currentSessionUser.facebookid}' maxlength=15>
                     </c:when></c:choose>
 
@@ -214,9 +214,9 @@
                         <tr>${currentSessionUser.facebookid}
                             <td></td>
                             <td></td>
-                            <td>   <c:choose>   <c:when test="${currentSessionUser.facebookid ==0}">                      
+                            <td>   <c:choose>   <c:when test="${currentSessionUser.facebookid ==null}">                      
                                 <input class="zoektextveld" type="password" name="wachtwoord2" size=10 value="${currentSessionUser.wachtwoord}" maxlength=30>
-                                 </c:when><c:when test="${currentSessionUser.facebookid !=0}">   
+                                 </c:when><c:when test="${currentSessionUser.facebookid !=null}">   
                                      <input class="zoektextveld" type="hidden" name="wachtwoord2" size=10 value='${currentSessionUser.wachtwoord}' maxlength=15>
                                  </c:when> </c:choose>
                             <td></td>
