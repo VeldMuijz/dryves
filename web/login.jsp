@@ -183,8 +183,8 @@
 
                 
                 <script src="http://connect.facebook.net/en_US/all.js"></script>
-
-                <fb:login-button autologoutlink="true" onlogin="OnRequestPermission(); VanFaceNaarP() "   >
+               
+                <fb:login-button perms="email" autologoutlink="true" onlogin="OnRequestPermission(); VanFaceNaarP() "   >
                   <fmt:message bundle="${rb}" key="loginmetfacebook" /> </fb:login-button>
 
 
