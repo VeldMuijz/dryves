@@ -85,7 +85,7 @@
                     check = false;
                 }
                 ;
-                if (wachtwoord === "" && wachtwoord !== wachtwoord2) {
+                 if (wachtwoord === null || wachtwoord !== wachtwoord2) {
                     document.getElementById("wachtwoorderror").innerHTML = "wachtwoorden komen niet overeen!";
                     check = false;
                 }
@@ -207,7 +207,7 @@
                      <c:when test="${currentSessionUser.facebookid !=null}"> 
                          <input class="zoektextveld" type="hidden" name="wachtwoord" size=10 value='${currentSessionUser.facebookid}' maxlength=15>
                     </c:when></c:choose>
-
+<font id="wachtwoorderror" size=1 color="red"> </font>  </font>
                             </td>
                             <td></td>
                         </tr>
