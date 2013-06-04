@@ -217,7 +217,7 @@
                             <td>   <c:choose>   <c:when test="${currentSessionUser.facebookid ==null}">                      
                                 <input class="zoektextveld" type="password" name="wachtwoord2" size=10 value="${currentSessionUser.wachtwoord}" maxlength=30>
                                  </c:when><c:when test="${currentSessionUser.facebookid !=null}">   
-                                     <input class="zoektextveld" type="hidden" name="wachtwoord2" size=10 value='${currentSessionUser.wachtwoord}' maxlength=15>
+                                     <input class="zoektextveld" type="hidden" name="wachtwoord2" size=10 value='${currentSessionUser.facebookid}' maxlength=15>
                                  </c:when> </c:choose>
                             <td></td>
                         </tr>
