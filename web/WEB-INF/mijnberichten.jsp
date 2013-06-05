@@ -85,15 +85,13 @@
                 </c:choose>
 
                 <c:choose>
-                    <c:when test="${pager.aantalberichten > 5 &&  pager.maxPositie >= pager.offset}"> 
+                    <c:when test="${pager.aantalberichten > 5 &&  pager.maxPositie > pager.offset}"> 
 
                         <button style="float:right;" onclick="window.location = 'MijnBerichten?offset=${pager.offset}&knop=volgende';" value="Volgende"><fmt:message bundle="${rb}" key="volgende" /></button
-
-                    </c:when>
+                    ></c:when>
 
                 </c:choose>
-
-
+            
                 <c:choose>
                     <c:when test="${pager.offset>=5}"> 
 

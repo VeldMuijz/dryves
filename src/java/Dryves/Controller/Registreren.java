@@ -161,7 +161,7 @@ public class Registreren extends HttpServlet {
 			}	
 		} else {
 			//Indien het email bestaat wordt er een melding weergegeven.
-			response.sendRedirect("oops_email_exists.jsp");
+			response.sendRedirect("oops_emailexists.jsp");
 		}
 
 	}
