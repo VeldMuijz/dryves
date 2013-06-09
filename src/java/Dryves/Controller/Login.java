@@ -41,7 +41,10 @@ public class Login extends HttpServlet {
 			throws ServletException, IOException {
 
 		try {
-
+//Maakt nieuw lid object aan en haalt de waarde uit het veld email en wachtwoord op
+//Deze worden weg gezet met een setter, vervolgens worden deze credentials mee gegeven aan de functie 
+//LidDao.login(user)                  
+                    
 			Lid user = new Lid();
 
 			user.setEmail(request.getParameter("email"));
@@ -51,16 +54,16 @@ public class Login extends HttpServlet {
 
 			if (user.isValid()) {
 
-				//Hieronder wordt bepaald of het lid admin is of niet.
+				
 
 				HttpSession session = request.getSession(true);
 				session.setAttribute("currentSessionUser", user);
 
 				LidDao dao = new LidDao();
 				dao.adminLogin(user);
-
+                                //Hieronder wordt bepaald of het lid admin is of niet.
 				if (user.getRol() == 1) {
-
+                                    //Doorsturen naar een nadere pagina inclusief met data uit het lid object.
 					request.getRequestDispatcher("WEB-INF/mijndryves.jsp").forward(request, response);
 
 				} else if (user.getRol() == 2) {
@@ -68,7 +71,7 @@ public class Login extends HttpServlet {
 
 				}
 			} else {
-
+                            //Standaard redirect zonder data.
 				System.out.println("Het inloggen is niet gelukt, probeer het opnieuw!");
 				response.sendRedirect("login.jsp"); //Retry login 
 			}

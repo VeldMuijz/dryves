@@ -107,6 +107,7 @@ public class LidDao {
 		// System.out.println("Query: " + zoekQuery);
 
 		try {
+                    //Met prepared statements voorkom je sql injecties
 			PreparedStatement pstmt = con.prepareStatement("SELECT lidnr ,vnaam,anaam,geslacht,straat,postcode, stad,telnr,reknr,email,beoordeling,fotourl,tvoegsel,wachtwoord,langnotify,rol,facebookid FROM lid WHERE email = ?");
 			pstmt.setString(1, email);
 			//connect to DB 
@@ -115,7 +116,7 @@ public class LidDao {
 
 
 
-
+                        //query wordt uigevoerd 
 			rs = pstmt.executeQuery();
 
 			//rs = stmt.executeQuery(zoekQuery);           

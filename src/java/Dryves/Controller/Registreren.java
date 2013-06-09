@@ -55,7 +55,7 @@ public class Registreren extends HttpServlet {
 
 		//De objecten worden aangemmakt
 		Lid lid = new Lid();
-		String email = request.getParameter("email");
+		String email = request.getParameter("email");                               
 		LidDao lidDao = new LidDao();
 		
 		//check of de email bestaat, zo niet dan wordt de gebruiker toegevoegd in de database

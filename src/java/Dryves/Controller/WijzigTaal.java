@@ -70,7 +70,8 @@ public class WijzigTaal extends HttpServlet {
 			session.setAttribute("currentSessionUser", user);
 
 		}
-		
+		//Referer is een verwijzing naar dezelfde pagina als waar de gebruiker op dat moment zat.
+                //in de Header zit een Referer naar je huidige pagina
 		String referer = request.getHeader("Referer"); 
          if(referer.contains("LoginServlet")){
 			 String mijnDryves = "MijnDryves";

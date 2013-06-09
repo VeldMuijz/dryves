@@ -8,9 +8,11 @@
 <%@page import="Dryves.Model.Lid"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<!--taglib is een library binnen java wat wij nu gebruiken voor resource bundles-->
 
-
+<!--locale is een computerstandaard om lokale landinstellingen te bepalen en te zetten (datum, tijd, valuta etc)-->
 <fmt:setLocale value="${locale}" />
+
 
 <fmt:setBundle basename="ResourceBundles.Dryves" scope="request" var="rb" />
 

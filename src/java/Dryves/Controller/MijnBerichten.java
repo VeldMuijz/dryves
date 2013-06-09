@@ -49,8 +49,8 @@ public class MijnBerichten extends HttpServlet {
 			Lid user = (Lid) session.getAttribute("currentSessionUser");
 			int afzenderLidnr;
 			System.out.println("berichtobject Afzender = " + berichten.getAfzender());
-
-			int offset = 0;
+                        
+			int offset = 0;//toont de eerste pagina van de berichtenlijst, we willen de eerste 5 berichten.
 			String knop = request.getParameter("knop");
 			// Haal query offset op, is deze leeg ga dan naar de eerste resultaat pagina 
 			// door offset gelijk aan 0 te zetten.
@@ -67,7 +67,8 @@ public class MijnBerichten extends HttpServlet {
 			} else if ("vorige".equals(knop)) {
 				pager.setOffset(offset - 5);
 			}
-
+                        //verschil list en arraylist is dat arraylist heeft meer nmethodes, list is een interface
+                        //arraylist is een referentie naar list.
 			List<Berichten> bericht;
 			int userid = user.getLidnr();
 			ArrayList<Lid> afzender = new ArrayList<Lid>();
@@ -88,7 +89,7 @@ public class MijnBerichten extends HttpServlet {
 
 				}
 				request.setAttribute("afzender", afzender);
-
+                                //math is een methode binnen java, ceil is (plafond) naar boven afronden.
 				pager.setAantalberichten(berichtendao.aantalBerichten(userid));
 				pager.setMaxPositie(pager.getAantalberichten() - 5);
 				pager.setStatusTotaalPager((int) Math.ceil(berichtendao.aantalBerichten(userid) / 5.0));

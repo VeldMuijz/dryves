@@ -57,7 +57,7 @@
 
 
 
-// Met deze functie vargen we toestemming en vargen we wat zijn email is.
+// Met deze functie vragen we toestemming en vragen we wat zijn email is.
                     function getEmail() {
                         FB.login(function(response) {
                             if (response.session && response.perms) {

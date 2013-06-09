@@ -330,7 +330,7 @@ public class BerichtenDao {
 				+ "FROM berichten "
 				+ "WHERE lidnr = ? "
 				+ "ORDER BY datum DESC LIMIT 5 OFFSET ?;";
-                
+                //Offset is een sql commando waarmee je een vooraf gestelde hoeveelheid resultaten kan ophalen.
             
             
 		List<Berichten> berichten = new ArrayList<Berichten>();

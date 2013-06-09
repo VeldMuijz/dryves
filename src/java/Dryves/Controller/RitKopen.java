@@ -107,6 +107,8 @@ public class RitKopen extends HttpServlet {
 		// Maak in de sessie een object rit aan met naam sessieRit
 		session.setAttribute("sessieRit", rit);
 		//Haal de userbean (dit moet sessiebean worden) op uit de sessie
+                //explictiete converter, er word een lid object aangemaakt op basis van de CurrentSession user
+                //attributen.
 		Lid lid = (Lid) session.getAttribute("currentSessionUser");
 
 		aankoop.setRitnr(Integer.parseInt(request.getParameter("ritnr")));
